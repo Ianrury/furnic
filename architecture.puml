@@ -1,0 +1,9 @@
+@startuml php_login_mvc
+
+node "PHP Login Management" {
+   node "Model" as Model
+   node "View" as View
+   node "Controller" as Controller
+}
+
+@enduml

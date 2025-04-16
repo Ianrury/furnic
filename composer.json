@@ -1,11 +1,11 @@
 {
-    "name": "programmer-zaman-now/belajar-php-mvc",
-    "description": "Belajar PHP MVC",
+    "name": "importa/furnic-ffi",
+    "description": "A PHP FFI wrapper for the Importa Furnic API",
     "type": "project",
     "authors": [
         {
-            "name": "Eko Kurniawan Khannedy",
-            "email": "echo.khannedy@gmail.com"
+            "name": "ian roery",
+            "email": "ianroeri@gmail.com"
         }
     ],
     "require": {
@@ -16,12 +16,12 @@
     },
     "autoload": {
         "psr-4": {
-            "ProgrammerZamanNow\\Belajar\\PHP\\MVC\\" : "app"
+            "Importa\\Furnic\\PHP\\FFI\\" : "app"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ProgrammerZamanNow\\Belajar\\PHP\\MVC\\" : "test"
+            "Importa\\Furnic\\PHP\\FFI\\Tests\\": "tests/"
         }
     }
 }

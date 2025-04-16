@@ -1,6 +1,6 @@
 <?php
 
-namespace ProgrammerZamanNow\Belajar\PHP\MVC;
+namespace Importa\Furnic\PHP\FFI;
 
 class Hello
 {

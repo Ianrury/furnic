@@ -1,6 +1,6 @@
 <?php
 
-namespace ProgrammerZamanNow\Belajar\PHP\MVC\Middleware;
+namespace Importa\Furnic\PHP\FFI\Middleware;
 
 interface Middleware
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace ProgrammerZamanNow\Belajar\PHP\MVC\App;
+namespace Importa\Furnic\PHP\FFI\App;
 
 class Router
 {
@@ -32,7 +32,8 @@ class Router
         $method = $_SERVER['REQUEST_METHOD'];
 
         foreach (self::$routes as $route) {
-            $pattern = "#^" . $route['path'] . "$#";
+            $pattern = "#^" . preg_quote($route['path'], '#') . "$#";
+
             if (preg_match($pattern, $path, $variables) && $method == $route['method']) {
 
                 // call middleware
