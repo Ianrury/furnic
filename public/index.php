@@ -5,6 +5,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 use Importa\Furnic\PHP\FFI\App\Router;
 use Importa\Furnic\PHP\FFI\Config\Database;
 use Importa\Furnic\PHP\FFI\Controller\HomeController;
+use Importa\Furnic\PHP\FFI\Controller\ProductController;
 use Importa\Furnic\PHP\FFI\Controller\UserController;
 
 
@@ -17,5 +18,5 @@ Router::add('POST', '/login', UserController::class, 'postLogin');
 
 Router::add('GET', '/users/register', UserController::class, 'register');
 Router::add('POST', '/users/register', UserController::class, 'postRegister');
-
+Router::add('GET', '/product', ProductController::class, 'index');
 Router::run();

@@ -372,10 +372,10 @@
                                     <div class="card-body d-flex flex-column pt-2">
                                         <!-- Product Details -->
                                         <div class="pb-2">
-                                            <h5 class="card-title fw-medium" style="font-size: 14px;">CT-IMP Matto Light
-                                                Brown</h5>
-                                            <p class="card-text mb-1" style="font-size: 12px;">Meja ruang tamu
-                                                aesthetic.</p>
+                                            <h5 class="card-title fw-medium text-truncate" style="font-size: 14px;">
+                                                CT-IMP Matto Light Brown</h5>
+                                            <p class="card-text mb-1 text-truncate" style="font-size: 12px;">Meja ruang
+                                                tamu aesthetic.</p>
                                             <div class="d-flex gap-1 align-items-center mb-2">
                                                 <i class="bi bi-star-fill text-warning" style="font-size: 12px;"></i>
                                                 <i class="bi bi-star-fill text-warning" style="font-size: 12px;"></i>
@@ -388,14 +388,22 @@
                                         </div>
 
                                         <!-- Price Section - Always at Bottom -->
-                                        <div class="mt-auto d-flex align-items-center">
-                                            <h5 class="card-title fw-bold mb-0 me-2" style="font-size: 15px;">
-                                                <sup class="fw-normal" style="font-size: 12px;">Rp</sup> 500.000
-                                            </h5>
-                                            <span class="fw-normal" style="font-size: 10px;">
-                                                <sup class="fw-normal text-danger" style="font-size: 10px;">Rp</sup>
-                                                <span class="text-danger text-decoration-line-through">600.000</span>
-                                            </span>
+                                        <div class="mt-auto">
+                                            <div class="d-flex flex-wrap align-items-baseline">
+                                                <div class="me-2">
+                                                    <span class="fw-bold" style="font-size: 15px;">
+                                                        <sup class="fw-normal" style="font-size: 12px;">Rp</sup> 500.000
+                                                    </span>
+                                                </div>
+                                                <div>
+                                                    <span class="fw-normal" style="font-size: 10px;">
+                                                        <sup class="fw-normal text-danger"
+                                                            style="font-size: 10px;">Rp</sup>
+                                                        <span
+                                                            class="text-danger text-decoration-line-through">600.000</span>
+                                                    </span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -422,10 +430,10 @@
                                     <div class="card-body d-flex flex-column pt-2">
                                         <!-- Product Details -->
                                         <div class="pb-2">
-                                            <h5 class="card-title fw-medium" style="font-size: 14px;">CT-IMP Matto Light
-                                                Brown</h5>
-                                            <p class="card-text mb-1" style="font-size: 12px;">Meja ruang tamu
-                                                aesthetic.</p>
+                                            <h5 class="card-title fw-medium text-truncate" style="font-size: 14px;">
+                                                CT-IMP Matto Light Brown</h5>
+                                            <p class="card-text mb-1 text-truncate" style="font-size: 12px;">Meja ruang
+                                                tamu aesthetic.</p>
                                             <div class="d-flex gap-1 align-items-center mb-2">
                                                 <i class="bi bi-star-fill text-warning" style="font-size: 12px;"></i>
                                                 <i class="bi bi-star-fill text-warning" style="font-size: 12px;"></i>
@@ -438,14 +446,22 @@
                                         </div>
 
                                         <!-- Price Section - Always at Bottom -->
-                                        <div class="mt-auto d-flex align-items-center">
-                                            <h5 class="card-title fw-bold mb-0 me-2" style="font-size: 15px;">
-                                                <sup class="fw-normal" style="font-size: 12px;">Rp</sup> 500.000
-                                            </h5>
-                                            <span class="fw-normal" style="font-size: 10px;">
-                                                <sup class="fw-normal text-danger" style="font-size: 10px;">Rp</sup>
-                                                <span class="text-danger text-decoration-line-through">600.000</span>
-                                            </span>
+                                        <div class="mt-auto">
+                                            <div class="d-flex flex-wrap align-items-baseline">
+                                                <div class="me-2">
+                                                    <span class="fw-bold" style="font-size: 15px;">
+                                                        <sup class="fw-normal" style="font-size: 12px;">Rp</sup> 500.000
+                                                    </span>
+                                                </div>
+                                                <div>
+                                                    <span class="fw-normal" style="font-size: 10px;">
+                                                        <sup class="fw-normal text-danger"
+                                                            style="font-size: 10px;">Rp</sup>
+                                                        <span
+                                                            class="text-danger text-decoration-line-through">600.000</span>
+                                                    </span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -472,10 +488,10 @@
                                     <div class="card-body d-flex flex-column pt-2">
                                         <!-- Product Details -->
                                         <div class="pb-2">
-                                            <h5 class="card-title fw-medium" style="font-size: 14px;">CT-IMP Matto Light
-                                                Brown</h5>
-                                            <p class="card-text mb-1" style="font-size: 12px;">Meja ruang tamu
-                                                aesthetic.</p>
+                                            <h5 class="card-title fw-medium text-truncate" style="font-size: 14px;">
+                                                CT-IMP Matto Light Brown</h5>
+                                            <p class="card-text mb-1 text-truncate" style="font-size: 12px;">Meja ruang
+                                                tamu aesthetic.</p>
                                             <div class="d-flex gap-1 align-items-center mb-2">
                                                 <i class="bi bi-star-fill text-warning" style="font-size: 12px;"></i>
                                                 <i class="bi bi-star-fill text-warning" style="font-size: 12px;"></i>
@@ -488,14 +504,22 @@
                                         </div>
 
                                         <!-- Price Section - Always at Bottom -->
-                                        <div class="mt-auto d-flex align-items-center">
-                                            <h5 class="card-title fw-bold mb-0 me-2" style="font-size: 15px;">
-                                                <sup class="fw-normal" style="font-size: 12px;">Rp</sup> 500.000
-                                            </h5>
-                                            <span class="fw-normal" style="font-size: 10px;">
-                                                <sup class="fw-normal text-danger" style="font-size: 10px;">Rp</sup>
-                                                <span class="text-danger text-decoration-line-through">600.000</span>
-                                            </span>
+                                        <div class="mt-auto">
+                                            <div class="d-flex flex-wrap align-items-baseline">
+                                                <div class="me-2">
+                                                    <span class="fw-bold" style="font-size: 15px;">
+                                                        <sup class="fw-normal" style="font-size: 12px;">Rp</sup> 500.000
+                                                    </span>
+                                                </div>
+                                                <div>
+                                                    <span class="fw-normal" style="font-size: 10px;">
+                                                        <sup class="fw-normal text-danger"
+                                                            style="font-size: 10px;">Rp</sup>
+                                                        <span
+                                                            class="text-danger text-decoration-line-through">600.000</span>
+                                                    </span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -522,10 +546,10 @@
                                     <div class="card-body d-flex flex-column pt-2">
                                         <!-- Product Details -->
                                         <div class="pb-2">
-                                            <h5 class="card-title fw-medium" style="font-size: 14px;">CT-IMP Matto Light
-                                                Brown</h5>
-                                            <p class="card-text mb-1" style="font-size: 12px;">Meja ruang tamu
-                                                aesthetic.</p>
+                                            <h5 class="card-title fw-medium text-truncate" style="font-size: 14px;">
+                                                CT-IMP Matto Light Brown</h5>
+                                            <p class="card-text mb-1 text-truncate" style="font-size: 12px;">Meja ruang
+                                                tamu aesthetic.</p>
                                             <div class="d-flex gap-1 align-items-center mb-2">
                                                 <i class="bi bi-star-fill text-warning" style="font-size: 12px;"></i>
                                                 <i class="bi bi-star-fill text-warning" style="font-size: 12px;"></i>
@@ -538,14 +562,22 @@
                                         </div>
 
                                         <!-- Price Section - Always at Bottom -->
-                                        <div class="mt-auto d-flex align-items-center">
-                                            <h5 class="card-title fw-bold mb-0 me-2" style="font-size: 15px;">
-                                                <sup class="fw-normal" style="font-size: 12px;">Rp</sup> 500.000
-                                            </h5>
-                                            <span class="fw-normal" style="font-size: 10px;">
-                                                <sup class="fw-normal text-danger" style="font-size: 10px;">Rp</sup>
-                                                <span class="text-danger text-decoration-line-through">600.000</span>
-                                            </span>
+                                        <div class="mt-auto">
+                                            <div class="d-flex flex-wrap align-items-baseline">
+                                                <div class="me-2">
+                                                    <span class="fw-bold" style="font-size: 15px;">
+                                                        <sup class="fw-normal" style="font-size: 12px;">Rp</sup> 500.000
+                                                    </span>
+                                                </div>
+                                                <div>
+                                                    <span class="fw-normal" style="font-size: 10px;">
+                                                        <sup class="fw-normal text-danger"
+                                                            style="font-size: 10px;">Rp</sup>
+                                                        <span
+                                                            class="text-danger text-decoration-line-through">600.000</span>
+                                                    </span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -572,10 +604,10 @@
                                     <div class="card-body d-flex flex-column pt-2">
                                         <!-- Product Details -->
                                         <div class="pb-2">
-                                            <h5 class="card-title fw-medium" style="font-size: 14px;">CT-IMP Matto Light
-                                                Brown</h5>
-                                            <p class="card-text mb-1" style="font-size: 12px;">Meja ruang tamu
-                                                aesthetic.</p>
+                                            <h5 class="card-title fw-medium text-truncate" style="font-size: 14px;">
+                                                CT-IMP Matto Light Brown</h5>
+                                            <p class="card-text mb-1 text-truncate" style="font-size: 12px;">Meja ruang
+                                                tamu aesthetic.</p>
                                             <div class="d-flex gap-1 align-items-center mb-2">
                                                 <i class="bi bi-star-fill text-warning" style="font-size: 12px;"></i>
                                                 <i class="bi bi-star-fill text-warning" style="font-size: 12px;"></i>
@@ -588,14 +620,22 @@
                                         </div>
 
                                         <!-- Price Section - Always at Bottom -->
-                                        <div class="mt-auto d-flex align-items-center">
-                                            <h5 class="card-title fw-bold mb-0 me-2" style="font-size: 15px;">
-                                                <sup class="fw-normal" style="font-size: 12px;">Rp</sup> 500.000
-                                            </h5>
-                                            <span class="fw-normal" style="font-size: 10px;">
-                                                <sup class="fw-normal text-danger" style="font-size: 10px;">Rp</sup>
-                                                <span class="text-danger text-decoration-line-through">600.000</span>
-                                            </span>
+                                        <div class="mt-auto">
+                                            <div class="d-flex flex-wrap align-items-baseline">
+                                                <div class="me-2">
+                                                    <span class="fw-bold" style="font-size: 15px;">
+                                                        <sup class="fw-normal" style="font-size: 12px;">Rp</sup> 500.000
+                                                    </span>
+                                                </div>
+                                                <div>
+                                                    <span class="fw-normal" style="font-size: 10px;">
+                                                        <sup class="fw-normal text-danger"
+                                                            style="font-size: 10px;">Rp</sup>
+                                                        <span
+                                                            class="text-danger text-decoration-line-through">600.000</span>
+                                                    </span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -622,10 +662,10 @@
                                     <div class="card-body d-flex flex-column pt-2">
                                         <!-- Product Details -->
                                         <div class="pb-2">
-                                            <h5 class="card-title fw-medium" style="font-size: 14px;">CT-IMP Matto Light
-                                                Brown</h5>
-                                            <p class="card-text mb-1" style="font-size: 12px;">Meja ruang tamu
-                                                aesthetic.</p>
+                                            <h5 class="card-title fw-medium text-truncate" style="font-size: 14px;">
+                                                CT-IMP Matto Light Brown</h5>
+                                            <p class="card-text mb-1 text-truncate" style="font-size: 12px;">Meja ruang
+                                                tamu aesthetic.</p>
                                             <div class="d-flex gap-1 align-items-center mb-2">
                                                 <i class="bi bi-star-fill text-warning" style="font-size: 12px;"></i>
                                                 <i class="bi bi-star-fill text-warning" style="font-size: 12px;"></i>
@@ -638,14 +678,22 @@
                                         </div>
 
                                         <!-- Price Section - Always at Bottom -->
-                                        <div class="mt-auto d-flex align-items-center">
-                                            <h5 class="card-title fw-bold mb-0 me-2" style="font-size: 15px;">
-                                                <sup class="fw-normal" style="font-size: 12px;">Rp</sup> 500.000
-                                            </h5>
-                                            <span class="fw-normal" style="font-size: 10px;">
-                                                <sup class="fw-normal text-danger" style="font-size: 10px;">Rp</sup>
-                                                <span class="text-danger text-decoration-line-through">600.000</span>
-                                            </span>
+                                        <div class="mt-auto">
+                                            <div class="d-flex flex-wrap align-items-baseline">
+                                                <div class="me-2">
+                                                    <span class="fw-bold" style="font-size: 15px;">
+                                                        <sup class="fw-normal" style="font-size: 12px;">Rp</sup> 500.000
+                                                    </span>
+                                                </div>
+                                                <div>
+                                                    <span class="fw-normal" style="font-size: 10px;">
+                                                        <sup class="fw-normal text-danger"
+                                                            style="font-size: 10px;">Rp</sup>
+                                                        <span
+                                                            class="text-danger text-decoration-line-through">600.000</span>
+                                                    </span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -672,10 +720,10 @@
                                     <div class="card-body d-flex flex-column pt-2">
                                         <!-- Product Details -->
                                         <div class="pb-2">
-                                            <h5 class="card-title fw-medium" style="font-size: 14px;">CT-IMP Matto Light
-                                                Brown</h5>
-                                            <p class="card-text mb-1" style="font-size: 12px;">Meja ruang tamu
-                                                aesthetic.</p>
+                                            <h5 class="card-title fw-medium text-truncate" style="font-size: 14px;">
+                                                CT-IMP Matto Light Brown</h5>
+                                            <p class="card-text mb-1 text-truncate" style="font-size: 12px;">Meja ruang
+                                                tamu aesthetic.</p>
                                             <div class="d-flex gap-1 align-items-center mb-2">
                                                 <i class="bi bi-star-fill text-warning" style="font-size: 12px;"></i>
                                                 <i class="bi bi-star-fill text-warning" style="font-size: 12px;"></i>
@@ -688,14 +736,22 @@
                                         </div>
 
                                         <!-- Price Section - Always at Bottom -->
-                                        <div class="mt-auto d-flex align-items-center">
-                                            <h5 class="card-title fw-bold mb-0 me-2" style="font-size: 15px;">
-                                                <sup class="fw-normal" style="font-size: 12px;">Rp</sup> 500.000
-                                            </h5>
-                                            <span class="fw-normal" style="font-size: 10px;">
-                                                <sup class="fw-normal text-danger" style="font-size: 10px;">Rp</sup>
-                                                <span class="text-danger text-decoration-line-through">600.000</span>
-                                            </span>
+                                        <div class="mt-auto">
+                                            <div class="d-flex flex-wrap align-items-baseline">
+                                                <div class="me-2">
+                                                    <span class="fw-bold" style="font-size: 15px;">
+                                                        <sup class="fw-normal" style="font-size: 12px;">Rp</sup> 500.000
+                                                    </span>
+                                                </div>
+                                                <div>
+                                                    <span class="fw-normal" style="font-size: 10px;">
+                                                        <sup class="fw-normal text-danger"
+                                                            style="font-size: 10px;">Rp</sup>
+                                                        <span
+                                                            class="text-danger text-decoration-line-through">600.000</span>
+                                                    </span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -722,10 +778,10 @@
                                     <div class="card-body d-flex flex-column pt-2">
                                         <!-- Product Details -->
                                         <div class="pb-2">
-                                            <h5 class="card-title fw-medium" style="font-size: 14px;">CT-IMP Matto Light
-                                                Brown</h5>
-                                            <p class="card-text mb-1" style="font-size: 12px;">Meja ruang tamu
-                                                aesthetic.</p>
+                                            <h5 class="card-title fw-medium text-truncate" style="font-size: 14px;">
+                                                CT-IMP Matto Light Brown</h5>
+                                            <p class="card-text mb-1 text-truncate" style="font-size: 12px;">Meja ruang
+                                                tamu aesthetic.</p>
                                             <div class="d-flex gap-1 align-items-center mb-2">
                                                 <i class="bi bi-star-fill text-warning" style="font-size: 12px;"></i>
                                                 <i class="bi bi-star-fill text-warning" style="font-size: 12px;"></i>
@@ -738,14 +794,22 @@
                                         </div>
 
                                         <!-- Price Section - Always at Bottom -->
-                                        <div class="mt-auto d-flex align-items-center">
-                                            <h5 class="card-title fw-bold mb-0 me-2" style="font-size: 15px;">
-                                                <sup class="fw-normal" style="font-size: 12px;">Rp</sup> 500.000
-                                            </h5>
-                                            <span class="fw-normal" style="font-size: 10px;">
-                                                <sup class="fw-normal text-danger" style="font-size: 10px;">Rp</sup>
-                                                <span class="text-danger text-decoration-line-through">600.000</span>
-                                            </span>
+                                        <div class="mt-auto">
+                                            <div class="d-flex flex-wrap align-items-baseline">
+                                                <div class="me-2">
+                                                    <span class="fw-bold" style="font-size: 15px;">
+                                                        <sup class="fw-normal" style="font-size: 12px;">Rp</sup> 500.000
+                                                    </span>
+                                                </div>
+                                                <div>
+                                                    <span class="fw-normal" style="font-size: 10px;">
+                                                        <sup class="fw-normal text-danger"
+                                                            style="font-size: 10px;">Rp</sup>
+                                                        <span
+                                                            class="text-danger text-decoration-line-through">600.000</span>
+                                                    </span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -755,7 +819,8 @@
                 </div>
             </div>
         </div>
-        <!-- Kategori Pilihan -->
+
+
         <div class="product-area product-area-new pt-40">
             <div class="container">
                 <div class="row">
@@ -878,10 +943,10 @@
                                     <div class="card-body d-flex flex-column pt-2">
                                         <!-- Product Details -->
                                         <div class="pb-2">
-                                            <h5 class="card-title fw-medium" style="font-size: 14px;">CT-IMP Matto Light
-                                                Brown</h5>
-                                            <p class="card-text mb-1" style="font-size: 12px;">Meja ruang tamu
-                                                aesthetic.</p>
+                                            <h5 class="card-title fw-medium text-truncate" style="font-size: 14px;">
+                                                CT-IMP Matto Light Brown</h5>
+                                            <p class="card-text mb-1 text-truncate" style="font-size: 12px;">Meja ruang
+                                                tamu aesthetic.</p>
                                             <div class="d-flex gap-1 align-items-center mb-2">
                                                 <i class="bi bi-star-fill text-warning" style="font-size: 12px;"></i>
                                                 <i class="bi bi-star-fill text-warning" style="font-size: 12px;"></i>
@@ -894,14 +959,22 @@
                                         </div>
 
                                         <!-- Price Section - Always at Bottom -->
-                                        <div class="mt-auto d-flex align-items-center">
-                                            <h5 class="card-title fw-bold mb-0 me-2" style="font-size: 15px;">
-                                                <sup class="fw-normal" style="font-size: 12px;">Rp</sup> 500.000
-                                            </h5>
-                                            <span class="fw-normal" style="font-size: 10px;">
-                                                <sup class="fw-normal text-danger" style="font-size: 10px;">Rp</sup>
-                                                <span class="text-danger text-decoration-line-through">600.000</span>
-                                            </span>
+                                        <div class="mt-auto">
+                                            <div class="d-flex flex-wrap align-items-baseline">
+                                                <div class="me-2">
+                                                    <span class="fw-bold" style="font-size: 15px;">
+                                                        <sup class="fw-normal" style="font-size: 12px;">Rp</sup> 500.000
+                                                    </span>
+                                                </div>
+                                                <div>
+                                                    <span class="fw-normal" style="font-size: 10px;">
+                                                        <sup class="fw-normal text-danger"
+                                                            style="font-size: 10px;">Rp</sup>
+                                                        <span
+                                                            class="text-danger text-decoration-line-through">600.000</span>
+                                                    </span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -928,10 +1001,10 @@
                                     <div class="card-body d-flex flex-column pt-2">
                                         <!-- Product Details -->
                                         <div class="pb-2">
-                                            <h5 class="card-title fw-medium" style="font-size: 14px;">CT-IMP Matto Light
-                                                Brown</h5>
-                                            <p class="card-text mb-1" style="font-size: 12px;">Meja ruang tamu
-                                                aesthetic.</p>
+                                            <h5 class="card-title fw-medium text-truncate" style="font-size: 14px;">
+                                                CT-IMP Matto Light Brown</h5>
+                                            <p class="card-text mb-1 text-truncate" style="font-size: 12px;">Meja ruang
+                                                tamu aesthetic.</p>
                                             <div class="d-flex gap-1 align-items-center mb-2">
                                                 <i class="bi bi-star-fill text-warning" style="font-size: 12px;"></i>
                                                 <i class="bi bi-star-fill text-warning" style="font-size: 12px;"></i>
@@ -944,14 +1017,22 @@
                                         </div>
 
                                         <!-- Price Section - Always at Bottom -->
-                                        <div class="mt-auto d-flex align-items-center">
-                                            <h5 class="card-title fw-bold mb-0 me-2" style="font-size: 15px;">
-                                                <sup class="fw-normal" style="font-size: 12px;">Rp</sup> 500.000
-                                            </h5>
-                                            <span class="fw-normal" style="font-size: 10px;">
-                                                <sup class="fw-normal text-danger" style="font-size: 10px;">Rp</sup>
-                                                <span class="text-danger text-decoration-line-through">600.000</span>
-                                            </span>
+                                        <div class="mt-auto">
+                                            <div class="d-flex flex-wrap align-items-baseline">
+                                                <div class="me-2">
+                                                    <span class="fw-bold" style="font-size: 15px;">
+                                                        <sup class="fw-normal" style="font-size: 12px;">Rp</sup> 500.000
+                                                    </span>
+                                                </div>
+                                                <div>
+                                                    <span class="fw-normal" style="font-size: 10px;">
+                                                        <sup class="fw-normal text-danger"
+                                                            style="font-size: 10px;">Rp</sup>
+                                                        <span
+                                                            class="text-danger text-decoration-line-through">600.000</span>
+                                                    </span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -978,10 +1059,10 @@
                                     <div class="card-body d-flex flex-column pt-2">
                                         <!-- Product Details -->
                                         <div class="pb-2">
-                                            <h5 class="card-title fw-medium" style="font-size: 14px;">CT-IMP Matto Light
-                                                Brown</h5>
-                                            <p class="card-text mb-1" style="font-size: 12px;">Meja ruang tamu
-                                                aesthetic.</p>
+                                            <h5 class="card-title fw-medium text-truncate" style="font-size: 14px;">
+                                                CT-IMP Matto Light Brown</h5>
+                                            <p class="card-text mb-1 text-truncate" style="font-size: 12px;">Meja ruang
+                                                tamu aesthetic.</p>
                                             <div class="d-flex gap-1 align-items-center mb-2">
                                                 <i class="bi bi-star-fill text-warning" style="font-size: 12px;"></i>
                                                 <i class="bi bi-star-fill text-warning" style="font-size: 12px;"></i>
@@ -994,14 +1075,22 @@
                                         </div>
 
                                         <!-- Price Section - Always at Bottom -->
-                                        <div class="mt-auto d-flex align-items-center">
-                                            <h5 class="card-title fw-bold mb-0 me-2" style="font-size: 15px;">
-                                                <sup class="fw-normal" style="font-size: 12px;">Rp</sup> 500.000
-                                            </h5>
-                                            <span class="fw-normal" style="font-size: 10px;">
-                                                <sup class="fw-normal text-danger" style="font-size: 10px;">Rp</sup>
-                                                <span class="text-danger text-decoration-line-through">600.000</span>
-                                            </span>
+                                        <div class="mt-auto">
+                                            <div class="d-flex flex-wrap align-items-baseline">
+                                                <div class="me-2">
+                                                    <span class="fw-bold" style="font-size: 15px;">
+                                                        <sup class="fw-normal" style="font-size: 12px;">Rp</sup> 500.000
+                                                    </span>
+                                                </div>
+                                                <div>
+                                                    <span class="fw-normal" style="font-size: 10px;">
+                                                        <sup class="fw-normal text-danger"
+                                                            style="font-size: 10px;">Rp</sup>
+                                                        <span
+                                                            class="text-danger text-decoration-line-through">600.000</span>
+                                                    </span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -1028,10 +1117,10 @@
                                     <div class="card-body d-flex flex-column pt-2">
                                         <!-- Product Details -->
                                         <div class="pb-2">
-                                            <h5 class="card-title fw-medium" style="font-size: 14px;">CT-IMP Matto Light
-                                                Brown</h5>
-                                            <p class="card-text mb-1" style="font-size: 12px;">Meja ruang tamu
-                                                aesthetic.</p>
+                                            <h5 class="card-title fw-medium text-truncate" style="font-size: 14px;">
+                                                CT-IMP Matto Light Brown</h5>
+                                            <p class="card-text mb-1 text-truncate" style="font-size: 12px;">Meja ruang
+                                                tamu aesthetic.</p>
                                             <div class="d-flex gap-1 align-items-center mb-2">
                                                 <i class="bi bi-star-fill text-warning" style="font-size: 12px;"></i>
                                                 <i class="bi bi-star-fill text-warning" style="font-size: 12px;"></i>
@@ -1044,14 +1133,22 @@
                                         </div>
 
                                         <!-- Price Section - Always at Bottom -->
-                                        <div class="mt-auto d-flex align-items-center">
-                                            <h5 class="card-title fw-bold mb-0 me-2" style="font-size: 15px;">
-                                                <sup class="fw-normal" style="font-size: 12px;">Rp</sup> 500.000
-                                            </h5>
-                                            <span class="fw-normal" style="font-size: 10px;">
-                                                <sup class="fw-normal text-danger" style="font-size: 10px;">Rp</sup>
-                                                <span class="text-danger text-decoration-line-through">600.000</span>
-                                            </span>
+                                        <div class="mt-auto">
+                                            <div class="d-flex flex-wrap align-items-baseline">
+                                                <div class="me-2">
+                                                    <span class="fw-bold" style="font-size: 15px;">
+                                                        <sup class="fw-normal" style="font-size: 12px;">Rp</sup> 500.000
+                                                    </span>
+                                                </div>
+                                                <div>
+                                                    <span class="fw-normal" style="font-size: 10px;">
+                                                        <sup class="fw-normal text-danger"
+                                                            style="font-size: 10px;">Rp</sup>
+                                                        <span
+                                                            class="text-danger text-decoration-line-through">600.000</span>
+                                                    </span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -1078,10 +1175,10 @@
                                     <div class="card-body d-flex flex-column pt-2">
                                         <!-- Product Details -->
                                         <div class="pb-2">
-                                            <h5 class="card-title fw-medium" style="font-size: 14px;">CT-IMP Matto Light
-                                                Brown</h5>
-                                            <p class="card-text mb-1" style="font-size: 12px;">Meja ruang tamu
-                                                aesthetic.</p>
+                                            <h5 class="card-title fw-medium text-truncate" style="font-size: 14px;">
+                                                CT-IMP Matto Light Brown</h5>
+                                            <p class="card-text mb-1 text-truncate" style="font-size: 12px;">Meja ruang
+                                                tamu aesthetic.</p>
                                             <div class="d-flex gap-1 align-items-center mb-2">
                                                 <i class="bi bi-star-fill text-warning" style="font-size: 12px;"></i>
                                                 <i class="bi bi-star-fill text-warning" style="font-size: 12px;"></i>
@@ -1094,14 +1191,22 @@
                                         </div>
 
                                         <!-- Price Section - Always at Bottom -->
-                                        <div class="mt-auto d-flex align-items-center">
-                                            <h5 class="card-title fw-bold mb-0 me-2" style="font-size: 15px;">
-                                                <sup class="fw-normal" style="font-size: 12px;">Rp</sup> 500.000
-                                            </h5>
-                                            <span class="fw-normal" style="font-size: 10px;">
-                                                <sup class="fw-normal text-danger" style="font-size: 10px;">Rp</sup>
-                                                <span class="text-danger text-decoration-line-through">600.000</span>
-                                            </span>
+                                        <div class="mt-auto">
+                                            <div class="d-flex flex-wrap align-items-baseline">
+                                                <div class="me-2">
+                                                    <span class="fw-bold" style="font-size: 15px;">
+                                                        <sup class="fw-normal" style="font-size: 12px;">Rp</sup> 500.000
+                                                    </span>
+                                                </div>
+                                                <div>
+                                                    <span class="fw-normal" style="font-size: 10px;">
+                                                        <sup class="fw-normal text-danger"
+                                                            style="font-size: 10px;">Rp</sup>
+                                                        <span
+                                                            class="text-danger text-decoration-line-through">600.000</span>
+                                                    </span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -1128,10 +1233,10 @@
                                     <div class="card-body d-flex flex-column pt-2">
                                         <!-- Product Details -->
                                         <div class="pb-2">
-                                            <h5 class="card-title fw-medium" style="font-size: 14px;">CT-IMP Matto Light
-                                                Brown</h5>
-                                            <p class="card-text mb-1" style="font-size: 12px;">Meja ruang tamu
-                                                aesthetic.</p>
+                                            <h5 class="card-title fw-medium text-truncate" style="font-size: 14px;">
+                                                CT-IMP Matto Light Brown</h5>
+                                            <p class="card-text mb-1 text-truncate" style="font-size: 12px;">Meja ruang
+                                                tamu aesthetic.</p>
                                             <div class="d-flex gap-1 align-items-center mb-2">
                                                 <i class="bi bi-star-fill text-warning" style="font-size: 12px;"></i>
                                                 <i class="bi bi-star-fill text-warning" style="font-size: 12px;"></i>
@@ -1144,14 +1249,22 @@
                                         </div>
 
                                         <!-- Price Section - Always at Bottom -->
-                                        <div class="mt-auto d-flex align-items-center">
-                                            <h5 class="card-title fw-bold mb-0 me-2" style="font-size: 15px;">
-                                                <sup class="fw-normal" style="font-size: 12px;">Rp</sup> 500.000
-                                            </h5>
-                                            <span class="fw-normal" style="font-size: 10px;">
-                                                <sup class="fw-normal text-danger" style="font-size: 10px;">Rp</sup>
-                                                <span class="text-danger text-decoration-line-through">600.000</span>
-                                            </span>
+                                        <div class="mt-auto">
+                                            <div class="d-flex flex-wrap align-items-baseline">
+                                                <div class="me-2">
+                                                    <span class="fw-bold" style="font-size: 15px;">
+                                                        <sup class="fw-normal" style="font-size: 12px;">Rp</sup> 500.000
+                                                    </span>
+                                                </div>
+                                                <div>
+                                                    <span class="fw-normal" style="font-size: 10px;">
+                                                        <sup class="fw-normal text-danger"
+                                                            style="font-size: 10px;">Rp</sup>
+                                                        <span
+                                                            class="text-danger text-decoration-line-through">600.000</span>
+                                                    </span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -1178,10 +1291,10 @@
                                     <div class="card-body d-flex flex-column pt-2">
                                         <!-- Product Details -->
                                         <div class="pb-2">
-                                            <h5 class="card-title fw-medium" style="font-size: 14px;">CT-IMP Matto Light
-                                                Brown</h5>
-                                            <p class="card-text mb-1" style="font-size: 12px;">Meja ruang tamu
-                                                aesthetic.</p>
+                                            <h5 class="card-title fw-medium text-truncate" style="font-size: 14px;">
+                                                CT-IMP Matto Light Brown</h5>
+                                            <p class="card-text mb-1 text-truncate" style="font-size: 12px;">Meja ruang
+                                                tamu aesthetic.</p>
                                             <div class="d-flex gap-1 align-items-center mb-2">
                                                 <i class="bi bi-star-fill text-warning" style="font-size: 12px;"></i>
                                                 <i class="bi bi-star-fill text-warning" style="font-size: 12px;"></i>
@@ -1194,14 +1307,22 @@
                                         </div>
 
                                         <!-- Price Section - Always at Bottom -->
-                                        <div class="mt-auto d-flex align-items-center">
-                                            <h5 class="card-title fw-bold mb-0 me-2" style="font-size: 15px;">
-                                                <sup class="fw-normal" style="font-size: 12px;">Rp</sup> 500.000
-                                            </h5>
-                                            <span class="fw-normal" style="font-size: 10px;">
-                                                <sup class="fw-normal text-danger" style="font-size: 10px;">Rp</sup>
-                                                <span class="text-danger text-decoration-line-through">600.000</span>
-                                            </span>
+                                        <div class="mt-auto">
+                                            <div class="d-flex flex-wrap align-items-baseline">
+                                                <div class="me-2">
+                                                    <span class="fw-bold" style="font-size: 15px;">
+                                                        <sup class="fw-normal" style="font-size: 12px;">Rp</sup> 500.000
+                                                    </span>
+                                                </div>
+                                                <div>
+                                                    <span class="fw-normal" style="font-size: 10px;">
+                                                        <sup class="fw-normal text-danger"
+                                                            style="font-size: 10px;">Rp</sup>
+                                                        <span
+                                                            class="text-danger text-decoration-line-through">600.000</span>
+                                                    </span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -1228,10 +1349,10 @@
                                     <div class="card-body d-flex flex-column pt-2">
                                         <!-- Product Details -->
                                         <div class="pb-2">
-                                            <h5 class="card-title fw-medium" style="font-size: 14px;">CT-IMP Matto Light
-                                                Brown</h5>
-                                            <p class="card-text mb-1" style="font-size: 12px;">Meja ruang tamu
-                                                aesthetic.</p>
+                                            <h5 class="card-title fw-medium text-truncate" style="font-size: 14px;">
+                                                CT-IMP Matto Light Brown</h5>
+                                            <p class="card-text mb-1 text-truncate" style="font-size: 12px;">Meja ruang
+                                                tamu aesthetic.</p>
                                             <div class="d-flex gap-1 align-items-center mb-2">
                                                 <i class="bi bi-star-fill text-warning" style="font-size: 12px;"></i>
                                                 <i class="bi bi-star-fill text-warning" style="font-size: 12px;"></i>
@@ -1244,14 +1365,22 @@
                                         </div>
 
                                         <!-- Price Section - Always at Bottom -->
-                                        <div class="mt-auto d-flex align-items-center">
-                                            <h5 class="card-title fw-bold mb-0 me-2" style="font-size: 15px;">
-                                                <sup class="fw-normal" style="font-size: 12px;">Rp</sup> 500.000
-                                            </h5>
-                                            <span class="fw-normal" style="font-size: 10px;">
-                                                <sup class="fw-normal text-danger" style="font-size: 10px;">Rp</sup>
-                                                <span class="text-danger text-decoration-line-through">600.000</span>
-                                            </span>
+                                        <div class="mt-auto">
+                                            <div class="d-flex flex-wrap align-items-baseline">
+                                                <div class="me-2">
+                                                    <span class="fw-bold" style="font-size: 15px;">
+                                                        <sup class="fw-normal" style="font-size: 12px;">Rp</sup> 500.000
+                                                    </span>
+                                                </div>
+                                                <div>
+                                                    <span class="fw-normal" style="font-size: 10px;">
+                                                        <sup class="fw-normal text-danger"
+                                                            style="font-size: 10px;">Rp</sup>
+                                                        <span
+                                                            class="text-danger text-decoration-line-through">600.000</span>
+                                                    </span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -1285,7 +1414,6 @@
                 </div>
             </div>
         </div>
-        </div>
         <!-- popular item end -->
 
         <div class="product-area product-area-new pt-40">
@@ -1299,490 +1427,235 @@
                     </div>
                 </div>
                 <div class="tab-content wow fadeInUp" data-wow-delay=".25s" id="item-tabContent">
-                    <div style="margin-left: 40px;">
-                        <ul class="d-flex justify-content-start align-items-center mb-2" style="gap: 100px;">
-                            <li class="nav-item">
-                                <a class="d-flex justify-content-center align-items-center w-100 h-100 custom-nav-link-product <?php echo (basename($_SERVER['PHP_SELF']) == 'index.php') ? 'active' : ''; ?>"
-                                    href="index.php" style="font-size: 14px;"> Living</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="d-flex justify-content-center align-items-center w-100 h-100 custom-nav-link-product <?php echo (basename($_SERVER['PHP_SELF']) == 'product.php') ? 'active' : ''; ?>"
-                                    href="product.php" style="font-size: 14px;"> Dining</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="d-flex justify-content-center align-items-center w-100 h-100 custom-nav-link-product<?php echo (basename($_SERVER['PHP_SELF']) == 'promo.php') ? 'active' : ''; ?>"
-                                    href="promo.php" style="font-size: 14px;"> Bedroom</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="d-flex justify-content-center align-items-center w-100 h-100 custom-nav-link-product <?php echo (basename($_SERVER['PHP_SELF']) == 'dekorasi.php') ? 'active' : ''; ?>"
-                                    href="dekorasi.php" style="font-size: 14px;"> Kitchen</a>
-                            </li>
-                        </ul>
-                    </div>
+                    <div class="container">
+                        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4  justify-content-center">
+                            <div class="col">
+                                <div class="card shadow-right-bottom position-relative h-100"
+                                    style="border-radius: 15px;">
+                                    <!-- Corner Ribbon -->
+                                    <div class="position-absolute"
+                                        style="top: 0; left: 0; width: 150px; height: 150px; overflow: hidden; z-index: 10;">
+                                        <div class="position-absolute text-white text-uppercase fw-bold d-flex align-items-center justify-content-center"
+                                            style="width: 200px; height: 20px; transform: rotate(-45deg) translateY(-20px) translateX(-70px); font-size: 10px; background-color: #FFFB2D;">
+                                            Sale
+                                        </div>
+                                    </div>
 
-                    <div class="tab-content wow fadeInUp" data-wow-delay=".25s" id="item-tabContent">
-                        <div class="container">
-                            <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4  justify-content-center">
-                                <div class="col">
-                                    <div class="card shadow-right-bottom position-relative h-100"
-                                        style="border-radius: 15px;">
-                                        <!-- Corner Ribbon -->
-                                        <div class="position-absolute"
-                                            style="top: 0; left: 0; width: 150px; height: 150px; overflow: hidden; z-index: 10;">
-                                            <div class="position-absolute text-white text-uppercase fw-bold d-flex align-items-center justify-content-center"
-                                                style="width: 200px; height: 20px; transform: rotate(-45deg) translateY(-20px) translateX(-70px); font-size: 10px; background-color: #2B4779;">
-                                                New Product
+                                    <!-- Product Image - Centered -->
+                                    <div class="text-center pt-3">
+                                        <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png"
+                                            class="img-fluid mx-auto" alt="Product Image"
+                                            style="max-height: 180px; max-width: 80%;">
+                                    </div>
+
+                                    <div class="card-body d-flex flex-column pt-2">
+                                        <!-- Product Details -->
+                                        <div class="pb-2">
+                                            <h5 class="card-title fw-medium text-truncate" style="font-size: 14px;">
+                                                CT-IMP Matto Light Brown</h5>
+                                            <p class="card-text mb-1 text-truncate" style="font-size: 12px;">Meja ruang
+                                                tamu aesthetic.</p>
+                                            <div class="d-flex gap-1 align-items-center mb-2">
+                                                <i class="bi bi-star-fill text-warning" style="font-size: 12px;"></i>
+                                                <i class="bi bi-star-fill text-warning" style="font-size: 12px;"></i>
+                                                <i class="bi bi-star-fill text-warning" style="font-size: 12px;"></i>
+                                                <i class="bi bi-star-fill text-warning" style="font-size: 12px;"></i>
+                                                <i class="bi bi-star-fill text-warning" style="font-size: 12px;"></i>
+                                                <small class="text-muted fst-italic ms-1" style="font-size: 10px;">300
+                                                    terjual</small>
                                             </div>
                                         </div>
 
-                                        <!-- Product Image - Centered -->
-                                        <div class="text-center pt-3">
-                                            <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png"
-                                                class="img-fluid mx-auto" alt="Product Image"
-                                                style="max-height: 180px; max-width: 80%;">
-                                        </div>
-
-                                        <div class="card-body d-flex flex-column pt-2">
-                                            <!-- Product Details -->
-                                            <div class="pb-2">
-                                                <h5 class="card-title fw-medium" style="font-size: 14px;">CT-IMP Matto
-                                                    Light
-                                                    Brown</h5>
-                                                <p class="card-text mb-1" style="font-size: 12px;">Meja ruang tamu
-                                                    aesthetic.</p>
-                                                <div class="d-flex gap-1 align-items-center mb-2">
-                                                    <i class="bi bi-star-fill text-warning"
-                                                        style="font-size: 12px;"></i>
-                                                    <i class="bi bi-star-fill text-warning"
-                                                        style="font-size: 12px;"></i>
-                                                    <i class="bi bi-star-fill text-warning"
-                                                        style="font-size: 12px;"></i>
-                                                    <i class="bi bi-star-fill text-warning"
-                                                        style="font-size: 12px;"></i>
-                                                    <i class="bi bi-star-fill text-warning"
-                                                        style="font-size: 12px;"></i>
-                                                    <small class="text-muted fst-italic ms-1"
-                                                        style="font-size: 10px;">300
-                                                        terjual</small>
+                                        <!-- Price Section - Always at Bottom -->
+                                        <div class="mt-auto">
+                                            <div class="d-flex flex-wrap align-items-baseline">
+                                                <div class="me-2">
+                                                    <span class="fw-bold" style="font-size: 15px;">
+                                                        <sup class="fw-normal" style="font-size: 12px;">Rp</sup> 500.000
+                                                    </span>
                                                 </div>
-                                            </div>
-
-                                            <!-- Price Section - Always at Bottom -->
-                                            <div class="mt-auto d-flex align-items-center">
-                                                <h5 class="card-title fw-bold mb-0 me-2" style="font-size: 15px;">
-                                                    <sup class="fw-normal" style="font-size: 12px;">Rp</sup> 500.000
-                                                </h5>
-                                                <span class="fw-normal" style="font-size: 10px;">
-                                                    <sup class="fw-normal text-danger" style="font-size: 10px;">Rp</sup>
-                                                    <span
-                                                        class="text-danger text-decoration-line-through">600.000</span>
-                                                </span>
+                                                <div>
+                                                    <span class="fw-normal" style="font-size: 10px;">
+                                                        <sup class="fw-normal text-danger"
+                                                            style="font-size: 10px;">Rp</sup>
+                                                        <span
+                                                            class="text-danger text-decoration-line-through">600.000</span>
+                                                    </span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col">
-                                    <div class="card shadow-right-bottom position-relative h-100"
-                                        style="border-radius: 15px;">
-                                        <!-- Corner Ribbon -->
-                                        <div class="position-absolute"
-                                            style="top: 0; left: 0; width: 150px; height: 150px; overflow: hidden; z-index: 10;">
-                                            <div class="position-absolute text-white text-uppercase fw-bold d-flex align-items-center justify-content-center"
-                                                style="width: 200px; height: 20px; transform: rotate(-45deg) translateY(-20px) translateX(-70px); font-size: 10px; background-color: #2B4779;">
-                                                New Product
+                            </div>
+                            <div class="col">
+                                <div class="card shadow-right-bottom position-relative h-100"
+                                    style="border-radius: 15px;">
+                                    <!-- Corner Ribbon -->
+                                    <div class="position-absolute"
+                                        style="top: 0; left: 0; width: 150px; height: 150px; overflow: hidden; z-index: 10;">
+                                        <div class="position-absolute text-white text-uppercase fw-bold d-flex align-items-center justify-content-center"
+                                            style="width: 200px; height: 20px; transform: rotate(-45deg) translateY(-20px) translateX(-70px); font-size: 10px; background-color: #FF0000;">
+                                            Out of Stock
+                                        </div>
+                                    </div>
+
+                                    <!-- Product Image - Centered -->
+                                    <div class="text-center pt-3">
+                                        <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png"
+                                            class="img-fluid mx-auto" alt="Product Image"
+                                            style="max-height: 180px; max-width: 80%;">
+                                    </div>
+
+                                    <div class="card-body d-flex flex-column pt-2">
+                                        <!-- Product Details -->
+                                        <div class="pb-2">
+                                            <h5 class="card-title fw-medium text-truncate" style="font-size: 14px;">
+                                                CT-IMP Matto Light Brown</h5>
+                                            <p class="card-text mb-1 text-truncate" style="font-size: 12px;">Meja ruang
+                                                tamu aesthetic.</p>
+                                            <div class="d-flex gap-1 align-items-center mb-2">
+                                                <i class="bi bi-star-fill text-warning" style="font-size: 12px;"></i>
+                                                <i class="bi bi-star-fill text-warning" style="font-size: 12px;"></i>
+                                                <i class="bi bi-star-fill text-warning" style="font-size: 12px;"></i>
+                                                <i class="bi bi-star-fill text-warning" style="font-size: 12px;"></i>
+                                                <i class="bi bi-star-fill text-warning" style="font-size: 12px;"></i>
+                                                <small class="text-muted fst-italic ms-1" style="font-size: 10px;">300
+                                                    terjual</small>
                                             </div>
                                         </div>
 
-                                        <!-- Product Image - Centered -->
-                                        <div class="text-center pt-3">
-                                            <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png"
-                                                class="img-fluid mx-auto" alt="Product Image"
-                                                style="max-height: 180px; max-width: 80%;">
-                                        </div>
-
-                                        <div class="card-body d-flex flex-column pt-2">
-                                            <!-- Product Details -->
-                                            <div class="pb-2">
-                                                <h5 class="card-title fw-medium" style="font-size: 14px;">CT-IMP Matto
-                                                    Light
-                                                    Brown</h5>
-                                                <p class="card-text mb-1" style="font-size: 12px;">Meja ruang tamu
-                                                    aesthetic.</p>
-                                                <div class="d-flex gap-1 align-items-center mb-2">
-                                                    <i class="bi bi-star-fill text-warning"
-                                                        style="font-size: 12px;"></i>
-                                                    <i class="bi bi-star-fill text-warning"
-                                                        style="font-size: 12px;"></i>
-                                                    <i class="bi bi-star-fill text-warning"
-                                                        style="font-size: 12px;"></i>
-                                                    <i class="bi bi-star-fill text-warning"
-                                                        style="font-size: 12px;"></i>
-                                                    <i class="bi bi-star-fill text-warning"
-                                                        style="font-size: 12px;"></i>
-                                                    <small class="text-muted fst-italic ms-1"
-                                                        style="font-size: 10px;">300
-                                                        terjual</small>
+                                        <!-- Price Section - Always at Bottom -->
+                                        <div class="mt-auto">
+                                            <div class="d-flex flex-wrap align-items-baseline">
+                                                <div class="me-2">
+                                                    <span class="fw-bold" style="font-size: 15px;">
+                                                        <sup class="fw-normal" style="font-size: 12px;">Rp</sup> 500.000
+                                                    </span>
                                                 </div>
-                                            </div>
-
-                                            <!-- Price Section - Always at Bottom -->
-                                            <div class="mt-auto d-flex align-items-center">
-                                                <h5 class="card-title fw-bold mb-0 me-2" style="font-size: 15px;">
-                                                    <sup class="fw-normal" style="font-size: 12px;">Rp</sup> 500.000
-                                                </h5>
-                                                <span class="fw-normal" style="font-size: 10px;">
-                                                    <sup class="fw-normal text-danger" style="font-size: 10px;">Rp</sup>
-                                                    <span
-                                                        class="text-danger text-decoration-line-through">600.000</span>
-                                                </span>
+                                                <div>
+                                                    <span class="fw-normal" style="font-size: 10px;">
+                                                        <sup class="fw-normal text-danger"
+                                                            style="font-size: 10px;">Rp</sup>
+                                                        <span
+                                                            class="text-danger text-decoration-line-through">600.000</span>
+                                                    </span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col">
-                                    <div class="card shadow-right-bottom position-relative h-100"
-                                        style="border-radius: 15px;">
-                                        <!-- Corner Ribbon -->
-                                        <div class="position-absolute"
-                                            style="top: 0; left: 0; width: 150px; height: 150px; overflow: hidden; z-index: 10;">
-                                            <div class="position-absolute text-white text-uppercase fw-bold d-flex align-items-center justify-content-center"
-                                                style="width: 200px; height: 20px; transform: rotate(-45deg) translateY(-20px) translateX(-70px); font-size: 10px; background-color: #2B4779;">
-                                                New Product
+                            </div>
+                            <div class="col">
+                                <div class="card shadow-right-bottom position-relative h-100"
+                                    style="border-radius: 15px;">
+                                    <!-- Corner Ribbon -->
+                                    <div class="position-absolute"
+                                        style="top: 0; left: 0; width: 150px; height: 150px; overflow: hidden; z-index: 10;">
+                                        <div class="position-absolute text-white text-uppercase fw-bold d-flex align-items-center justify-content-center"
+                                            style="width: 200px; height: 20px; transform: rotate(-45deg) translateY(-20px) translateX(-70px); font-size: 10px; background-color: #2B4779;">
+                                            New Product
+                                        </div>
+                                    </div>
+
+                                    <!-- Product Image - Centered -->
+                                    <div class="text-center pt-3">
+                                        <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png"
+                                            class="img-fluid mx-auto" alt="Product Image"
+                                            style="max-height: 180px; max-width: 80%;">
+                                    </div>
+
+                                    <div class="card-body d-flex flex-column pt-2">
+                                        <!-- Product Details -->
+                                        <div class="pb-2">
+                                            <h5 class="card-title fw-medium text-truncate" style="font-size: 14px;">
+                                                CT-IMP Matto Light Brown</h5>
+                                            <p class="card-text mb-1 text-truncate" style="font-size: 12px;">Meja ruang
+                                                tamu aesthetic.</p>
+                                            <div class="d-flex gap-1 align-items-center mb-2">
+                                                <i class="bi bi-star-fill text-warning" style="font-size: 12px;"></i>
+                                                <i class="bi bi-star-fill text-warning" style="font-size: 12px;"></i>
+                                                <i class="bi bi-star-fill text-warning" style="font-size: 12px;"></i>
+                                                <i class="bi bi-star-fill text-warning" style="font-size: 12px;"></i>
+                                                <i class="bi bi-star-fill text-warning" style="font-size: 12px;"></i>
+                                                <small class="text-muted fst-italic ms-1" style="font-size: 10px;">300
+                                                    terjual</small>
                                             </div>
                                         </div>
 
-                                        <!-- Product Image - Centered -->
-                                        <div class="text-center pt-3">
-                                            <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png"
-                                                class="img-fluid mx-auto" alt="Product Image"
-                                                style="max-height: 180px; max-width: 80%;">
-                                        </div>
-
-                                        <div class="card-body d-flex flex-column pt-2">
-                                            <!-- Product Details -->
-                                            <div class="pb-2">
-                                                <h5 class="card-title fw-medium" style="font-size: 14px;">CT-IMP Matto
-                                                    Light
-                                                    Brown</h5>
-                                                <p class="card-text mb-1" style="font-size: 12px;">Meja ruang tamu
-                                                    aesthetic.</p>
-                                                <div class="d-flex gap-1 align-items-center mb-2">
-                                                    <i class="bi bi-star-fill text-warning"
-                                                        style="font-size: 12px;"></i>
-                                                    <i class="bi bi-star-fill text-warning"
-                                                        style="font-size: 12px;"></i>
-                                                    <i class="bi bi-star-fill text-warning"
-                                                        style="font-size: 12px;"></i>
-                                                    <i class="bi bi-star-fill text-warning"
-                                                        style="font-size: 12px;"></i>
-                                                    <i class="bi bi-star-fill text-warning"
-                                                        style="font-size: 12px;"></i>
-                                                    <small class="text-muted fst-italic ms-1"
-                                                        style="font-size: 10px;">300
-                                                        terjual</small>
+                                        <!-- Price Section - Always at Bottom -->
+                                        <div class="mt-auto">
+                                            <div class="d-flex flex-wrap align-items-baseline">
+                                                <div class="me-2">
+                                                    <span class="fw-bold" style="font-size: 15px;">
+                                                        <sup class="fw-normal" style="font-size: 12px;">Rp</sup> 500.000
+                                                    </span>
                                                 </div>
-                                            </div>
-
-                                            <!-- Price Section - Always at Bottom -->
-                                            <div class="mt-auto d-flex align-items-center">
-                                                <h5 class="card-title fw-bold mb-0 me-2" style="font-size: 15px;">
-                                                    <sup class="fw-normal" style="font-size: 12px;">Rp</sup> 500.000
-                                                </h5>
-                                                <span class="fw-normal" style="font-size: 10px;">
-                                                    <sup class="fw-normal text-danger" style="font-size: 10px;">Rp</sup>
-                                                    <span
-                                                        class="text-danger text-decoration-line-through">600.000</span>
-                                                </span>
+                                                <div>
+                                                    <span class="fw-normal" style="font-size: 10px;">
+                                                        <sup class="fw-normal text-danger"
+                                                            style="font-size: 10px;">Rp</sup>
+                                                        <span
+                                                            class="text-danger text-decoration-line-through">600.000</span>
+                                                    </span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col">
-                                    <div class="card shadow-right-bottom position-relative h-100"
-                                        style="border-radius: 15px;">
-                                        <!-- Corner Ribbon -->
-                                        <div class="position-absolute"
-                                            style="top: 0; left: 0; width: 150px; height: 150px; overflow: hidden; z-index: 10;">
-                                            <div class="position-absolute text-white text-uppercase fw-bold d-flex align-items-center justify-content-center"
-                                                style="width: 200px; height: 20px; transform: rotate(-45deg) translateY(-20px) translateX(-70px); font-size: 10px; background-color: #2B4779;">
-                                                New Product
-                                            </div>
-                                        </div>
-
-                                        <!-- Product Image - Centered -->
-                                        <div class="text-center pt-3">
-                                            <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png"
-                                                class="img-fluid mx-auto" alt="Product Image"
-                                                style="max-height: 180px; max-width: 80%;">
-                                        </div>
-
-                                        <div class="card-body d-flex flex-column pt-2">
-                                            <!-- Product Details -->
-                                            <div class="pb-2">
-                                                <h5 class="card-title fw-medium" style="font-size: 14px;">CT-IMP Matto
-                                                    Light
-                                                    Brown</h5>
-                                                <p class="card-text mb-1" style="font-size: 12px;">Meja ruang tamu
-                                                    aesthetic.</p>
-                                                <div class="d-flex gap-1 align-items-center mb-2">
-                                                    <i class="bi bi-star-fill text-warning"
-                                                        style="font-size: 12px;"></i>
-                                                    <i class="bi bi-star-fill text-warning"
-                                                        style="font-size: 12px;"></i>
-                                                    <i class="bi bi-star-fill text-warning"
-                                                        style="font-size: 12px;"></i>
-                                                    <i class="bi bi-star-fill text-warning"
-                                                        style="font-size: 12px;"></i>
-                                                    <i class="bi bi-star-fill text-warning"
-                                                        style="font-size: 12px;"></i>
-                                                    <small class="text-muted fst-italic ms-1"
-                                                        style="font-size: 10px;">300
-                                                        terjual</small>
-                                                </div>
-                                            </div>
-
-                                            <!-- Price Section - Always at Bottom -->
-                                            <div class="mt-auto d-flex align-items-center">
-                                                <h5 class="card-title fw-bold mb-0 me-2" style="font-size: 15px;">
-                                                    <sup class="fw-normal" style="font-size: 12px;">Rp</sup> 500.000
-                                                </h5>
-                                                <span class="fw-normal" style="font-size: 10px;">
-                                                    <sup class="fw-normal text-danger" style="font-size: 10px;">Rp</sup>
-                                                    <span
-                                                        class="text-danger text-decoration-line-through">600.000</span>
-                                                </span>
-                                            </div>
+                            </div>
+                            <div class="col">
+                                <div class="card shadow-right-bottom position-relative h-100"
+                                    style="border-radius: 15px;">
+                                    <!-- Corner Ribbon -->
+                                    <div class="position-absolute"
+                                        style="top: 0; left: 0; width: 150px; height: 150px; overflow: hidden; z-index: 10;">
+                                        <div class="position-absolute text-white text-uppercase fw-bold d-flex align-items-center justify-content-center"
+                                            style="width: 200px; height: 20px; transform: rotate(-45deg) translateY(-20px) translateX(-70px); font-size: 10px; background-color: #FF8B2D;">
+                                            Best Seller
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col">
-                                    <div class="card shadow-right-bottom position-relative h-100"
-                                        style="border-radius: 15px;">
-                                        <!-- Corner Ribbon -->
-                                        <div class="position-absolute"
-                                            style="top: 0; left: 0; width: 150px; height: 150px; overflow: hidden; z-index: 10;">
-                                            <div class="position-absolute text-white text-uppercase fw-bold d-flex align-items-center justify-content-center"
-                                                style="width: 200px; height: 20px; transform: rotate(-45deg) translateY(-20px) translateX(-70px); font-size: 10px; background-color: #2B4779;">
-                                                New Product
-                                            </div>
-                                        </div>
 
-                                        <!-- Product Image - Centered -->
-                                        <div class="text-center pt-3">
-                                            <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png"
-                                                class="img-fluid mx-auto" alt="Product Image"
-                                                style="max-height: 180px; max-width: 80%;">
-                                        </div>
-
-                                        <div class="card-body d-flex flex-column pt-2">
-                                            <!-- Product Details -->
-                                            <div class="pb-2">
-                                                <h5 class="card-title fw-medium" style="font-size: 14px;">CT-IMP Matto
-                                                    Light
-                                                    Brown</h5>
-                                                <p class="card-text mb-1" style="font-size: 12px;">Meja ruang tamu
-                                                    aesthetic.</p>
-                                                <div class="d-flex gap-1 align-items-center mb-2">
-                                                    <i class="bi bi-star-fill text-warning"
-                                                        style="font-size: 12px;"></i>
-                                                    <i class="bi bi-star-fill text-warning"
-                                                        style="font-size: 12px;"></i>
-                                                    <i class="bi bi-star-fill text-warning"
-                                                        style="font-size: 12px;"></i>
-                                                    <i class="bi bi-star-fill text-warning"
-                                                        style="font-size: 12px;"></i>
-                                                    <i class="bi bi-star-fill text-warning"
-                                                        style="font-size: 12px;"></i>
-                                                    <small class="text-muted fst-italic ms-1"
-                                                        style="font-size: 10px;">300
-                                                        terjual</small>
-                                                </div>
-                                            </div>
-
-                                            <!-- Price Section - Always at Bottom -->
-                                            <div class="mt-auto d-flex align-items-center">
-                                                <h5 class="card-title fw-bold mb-0 me-2" style="font-size: 15px;">
-                                                    <sup class="fw-normal" style="font-size: 12px;">Rp</sup> 500.000
-                                                </h5>
-                                                <span class="fw-normal" style="font-size: 10px;">
-                                                    <sup class="fw-normal text-danger" style="font-size: 10px;">Rp</sup>
-                                                    <span
-                                                        class="text-danger text-decoration-line-through">600.000</span>
-                                                </span>
-                                            </div>
-                                        </div>
+                                    <!-- Product Image - Centered -->
+                                    <div class="text-center pt-3">
+                                        <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png"
+                                            class="img-fluid mx-auto" alt="Product Image"
+                                            style="max-height: 180px; max-width: 80%;">
                                     </div>
-                                </div>
-                                <div class="col">
-                                    <div class="card shadow-right-bottom position-relative h-100"
-                                        style="border-radius: 15px;">
-                                        <!-- Corner Ribbon -->
-                                        <div class="position-absolute"
-                                            style="top: 0; left: 0; width: 150px; height: 150px; overflow: hidden; z-index: 10;">
-                                            <div class="position-absolute text-white text-uppercase fw-bold d-flex align-items-center justify-content-center"
-                                                style="width: 200px; height: 20px; transform: rotate(-45deg) translateY(-20px) translateX(-70px); font-size: 10px; background-color: #2B4779;">
-                                                New Product
+
+                                    <div class="card-body d-flex flex-column pt-2">
+                                        <!-- Product Details -->
+                                        <div class="pb-2">
+                                            <h5 class="card-title fw-medium text-truncate" style="font-size: 14px;">
+                                                CT-IMP Matto Light Brown</h5>
+                                            <p class="card-text mb-1 text-truncate" style="font-size: 12px;">Meja ruang
+                                                tamu aesthetic.</p>
+                                            <div class="d-flex gap-1 align-items-center mb-2">
+                                                <i class="bi bi-star-fill text-warning" style="font-size: 12px;"></i>
+                                                <i class="bi bi-star-fill text-warning" style="font-size: 12px;"></i>
+                                                <i class="bi bi-star-fill text-warning" style="font-size: 12px;"></i>
+                                                <i class="bi bi-star-fill text-warning" style="font-size: 12px;"></i>
+                                                <i class="bi bi-star-fill text-warning" style="font-size: 12px;"></i>
+                                                <small class="text-muted fst-italic ms-1" style="font-size: 10px;">300
+                                                    terjual</small>
                                             </div>
                                         </div>
 
-                                        <!-- Product Image - Centered -->
-                                        <div class="text-center pt-3">
-                                            <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png"
-                                                class="img-fluid mx-auto" alt="Product Image"
-                                                style="max-height: 180px; max-width: 80%;">
-                                        </div>
-
-                                        <div class="card-body d-flex flex-column pt-2">
-                                            <!-- Product Details -->
-                                            <div class="pb-2">
-                                                <h5 class="card-title fw-medium" style="font-size: 14px;">CT-IMP Matto
-                                                    Light
-                                                    Brown</h5>
-                                                <p class="card-text mb-1" style="font-size: 12px;">Meja ruang tamu
-                                                    aesthetic.</p>
-                                                <div class="d-flex gap-1 align-items-center mb-2">
-                                                    <i class="bi bi-star-fill text-warning"
-                                                        style="font-size: 12px;"></i>
-                                                    <i class="bi bi-star-fill text-warning"
-                                                        style="font-size: 12px;"></i>
-                                                    <i class="bi bi-star-fill text-warning"
-                                                        style="font-size: 12px;"></i>
-                                                    <i class="bi bi-star-fill text-warning"
-                                                        style="font-size: 12px;"></i>
-                                                    <i class="bi bi-star-fill text-warning"
-                                                        style="font-size: 12px;"></i>
-                                                    <small class="text-muted fst-italic ms-1"
-                                                        style="font-size: 10px;">300
-                                                        terjual</small>
+                                        <!-- Price Section - Always at Bottom -->
+                                        <div class="mt-auto">
+                                            <div class="d-flex flex-wrap align-items-baseline">
+                                                <div class="me-2">
+                                                    <span class="fw-bold" style="font-size: 15px;">
+                                                        <sup class="fw-normal" style="font-size: 12px;">Rp</sup> 500.000
+                                                    </span>
                                                 </div>
-                                            </div>
-
-                                            <!-- Price Section - Always at Bottom -->
-                                            <div class="mt-auto d-flex align-items-center">
-                                                <h5 class="card-title fw-bold mb-0 me-2" style="font-size: 15px;">
-                                                    <sup class="fw-normal" style="font-size: 12px;">Rp</sup> 500.000
-                                                </h5>
-                                                <span class="fw-normal" style="font-size: 10px;">
-                                                    <sup class="fw-normal text-danger" style="font-size: 10px;">Rp</sup>
-                                                    <span
-                                                        class="text-danger text-decoration-line-through">600.000</span>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="card shadow-right-bottom position-relative h-100"
-                                        style="border-radius: 15px;">
-                                        <!-- Corner Ribbon -->
-                                        <div class="position-absolute"
-                                            style="top: 0; left: 0; width: 150px; height: 150px; overflow: hidden; z-index: 10;">
-                                            <div class="position-absolute text-white text-uppercase fw-bold d-flex align-items-center justify-content-center"
-                                                style="width: 200px; height: 20px; transform: rotate(-45deg) translateY(-20px) translateX(-70px); font-size: 10px; background-color: #2B4779;">
-                                                New Product
-                                            </div>
-                                        </div>
-
-                                        <!-- Product Image - Centered -->
-                                        <div class="text-center pt-3">
-                                            <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png"
-                                                class="img-fluid mx-auto" alt="Product Image"
-                                                style="max-height: 180px; max-width: 80%;">
-                                        </div>
-
-                                        <div class="card-body d-flex flex-column pt-2">
-                                            <!-- Product Details -->
-                                            <div class="pb-2">
-                                                <h5 class="card-title fw-medium" style="font-size: 14px;">CT-IMP Matto
-                                                    Light
-                                                    Brown</h5>
-                                                <p class="card-text mb-1" style="font-size: 12px;">Meja ruang tamu
-                                                    aesthetic.</p>
-                                                <div class="d-flex gap-1 align-items-center mb-2">
-                                                    <i class="bi bi-star-fill text-warning"
-                                                        style="font-size: 12px;"></i>
-                                                    <i class="bi bi-star-fill text-warning"
-                                                        style="font-size: 12px;"></i>
-                                                    <i class="bi bi-star-fill text-warning"
-                                                        style="font-size: 12px;"></i>
-                                                    <i class="bi bi-star-fill text-warning"
-                                                        style="font-size: 12px;"></i>
-                                                    <i class="bi bi-star-fill text-warning"
-                                                        style="font-size: 12px;"></i>
-                                                    <small class="text-muted fst-italic ms-1"
-                                                        style="font-size: 10px;">300
-                                                        terjual</small>
+                                                <div>
+                                                    <span class="fw-normal" style="font-size: 10px;">
+                                                        <sup class="fw-normal text-danger"
+                                                            style="font-size: 10px;">Rp</sup>
+                                                        <span
+                                                            class="text-danger text-decoration-line-through">600.000</span>
+                                                    </span>
                                                 </div>
-                                            </div>
-
-                                            <!-- Price Section - Always at Bottom -->
-                                            <div class="mt-auto d-flex align-items-center">
-                                                <h5 class="card-title fw-bold mb-0 me-2" style="font-size: 15px;">
-                                                    <sup class="fw-normal" style="font-size: 12px;">Rp</sup> 500.000
-                                                </h5>
-                                                <span class="fw-normal" style="font-size: 10px;">
-                                                    <sup class="fw-normal text-danger" style="font-size: 10px;">Rp</sup>
-                                                    <span
-                                                        class="text-danger text-decoration-line-through">600.000</span>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="card shadow-right-bottom position-relative h-100"
-                                        style="border-radius: 15px;">
-                                        <!-- Corner Ribbon -->
-                                        <div class="position-absolute"
-                                            style="top: 0; left: 0; width: 150px; height: 150px; overflow: hidden; z-index: 10;">
-                                            <div class="position-absolute text-white text-uppercase fw-bold d-flex align-items-center justify-content-center"
-                                                style="width: 200px; height: 20px; transform: rotate(-45deg) translateY(-20px) translateX(-70px); font-size: 10px; background-color: #2B4779;">
-                                                New Product
-                                            </div>
-                                        </div>
-
-                                        <!-- Product Image - Centered -->
-                                        <div class="text-center pt-3">
-                                            <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png"
-                                                class="img-fluid mx-auto" alt="Product Image"
-                                                style="max-height: 180px; max-width: 80%;">
-                                        </div>
-
-                                        <div class="card-body d-flex flex-column pt-2">
-                                            <!-- Product Details -->
-                                            <div class="pb-2">
-                                                <h5 class="card-title fw-medium" style="font-size: 14px;">CT-IMP Matto
-                                                    Light
-                                                    Brown</h5>
-                                                <p class="card-text mb-1" style="font-size: 12px;">Meja ruang tamu
-                                                    aesthetic.</p>
-                                                <div class="d-flex gap-1 align-items-center mb-2">
-                                                    <i class="bi bi-star-fill text-warning"
-                                                        style="font-size: 12px;"></i>
-                                                    <i class="bi bi-star-fill text-warning"
-                                                        style="font-size: 12px;"></i>
-                                                    <i class="bi bi-star-fill text-warning"
-                                                        style="font-size: 12px;"></i>
-                                                    <i class="bi bi-star-fill text-warning"
-                                                        style="font-size: 12px;"></i>
-                                                    <i class="bi bi-star-fill text-warning"
-                                                        style="font-size: 12px;"></i>
-                                                    <small class="text-muted fst-italic ms-1"
-                                                        style="font-size: 10px;">300
-                                                        terjual</small>
-                                                </div>
-                                            </div>
-
-                                            <!-- Price Section - Always at Bottom -->
-                                            <div class="mt-auto d-flex align-items-center">
-                                                <h5 class="card-title fw-bold mb-0 me-2" style="font-size: 15px;">
-                                                    <sup class="fw-normal" style="font-size: 12px;">Rp</sup> 500.000
-                                                </h5>
-                                                <span class="fw-normal" style="font-size: 10px;">
-                                                    <sup class="fw-normal text-danger" style="font-size: 10px;">Rp</sup>
-                                                    <span
-                                                        class="text-danger text-decoration-line-through">600.000</span>
-                                                </span>
                                             </div>
                                         </div>
                                     </div>
@@ -2210,6 +2083,16 @@
             // Pastikan backdrop dihapus saat menutup
             offcanvasNavbar.addEventListener('hidden.bs.offcanvas', function () {
                 document.querySelectorAll('.offcanvas-backdrop').forEach(el => el.remove());
+            });
+        });
+    </script>
+
+    <script>
+        // Add focus event to automatically open modal when clicking the search field
+        document.addEventListener('DOMContentLoaded', function () {
+            const searchModal = document.getElementById('searchModal');
+            searchModal.addEventListener('shown.bs.modal', function () {
+                searchModal.querySelector('input').focus();
             });
         });
     </script>

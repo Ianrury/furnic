@@ -1,25 +1,44 @@
+<?php
+function is_active($route)
+{
+    return trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/') === trim($route, '/') ? 'active' : '';
+}
+?>
+
 <header class="header bg-info-emphasis" style="height: 122px;">
     <!-- navbar -->
     <div class="main-navigation shadow-bottom-sm mb-4 mt-2">
         <nav class="navbar navbar-expand-lg mb-5 d-flex justify-content-between align-items-center">
             <div class="container position-relative px-0 pb-3">
-                <a class="navbar-brand" href="index.php">
+                <a class="navbar-brand" href="/">
                     <img src="assets/img/logo/Logo%20Furnice.png" style="width: 145px;" height="32" alt="logo">
                 </a>
                 <div class="mobile-menu-right">
-                    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
-                        data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar"
-                        aria-label="Toggle navigation">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </button>
+                    <div class="d-flex justify-content-between align-items-center gap-3 gap-sm-3 gap-md-4 gap-lg-5">
+                        <!-- Search Button -->
+                        <div class="search-button-container" data-bs-toggle="modal" data-bs-target="#searchModal">
+                            <div class="search-button d-flex align-items-center justify-content-center">
+                                <div class="search-icon-wrapper">
+                                    <i class="bi bi-search"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Menu Toggle Button -->
+                        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
+                            data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar"
+                            aria-label="Toggle navigation">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </button>
+                    </div>
                 </div>
 
                 <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar"
                     aria-labelledby="offcanvasNavbarLabel">
                     <div class="offcanvas-header">
-                        <a href="index.html" class="offcanvas-brand" id="offcanvasNavbarLabel">
+                        <a href="/" class="offcanvas-brand" id="offcanvasNavbarLabel">
                             <img src="assets/img/logo/Logo Furnice.png" alt="">
                         </a>
                         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -27,12 +46,13 @@
                     <div class="offcanvas-body">
                         <ul class="navbar-nav mx-5 justify-content-around flex-grow-1 text-center">
                             <li class="nav-item">
-                                <a class="d-flex justify-content-center align-items-center w-100 h-100 custom-nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'index.php') ? 'active' : ''; ?>"
-                                    href="index.php" style="font-size: 14px;"> Beranda</a>
+                                <a class="d-flex justify-content-center align-items-center w-100 h-100 custom-nav-link <?= is_active('/') ?>"
+                                    href="/" style="font-size: 14px;">Home</a>
                             </li>
+
                             <li class="nav-item">
-                                <a class="d-flex justify-content-center align-items-center w-100 h-100 custom-nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'product.php') ? 'active' : ''; ?>"
-                                    href="product.php" style="font-size: 14px;"> Product</a>
+                                <a class="d-flex justify-content-center align-items-center w-100 h-100 custom-nav-link <?= is_active('product') ?>"
+                                    href="/product" style="font-size: 14px;">Product</a>
                             </li>
                             <li class="nav-item">
                                 <a class="d-flex justify-content-center align-items-center w-100 h-100 custom-nav-link<?php echo (basename($_SERVER['PHP_SELF']) == 'promo.php') ? 'active' : ''; ?>"
@@ -56,7 +76,7 @@
                                         <div class="input-group">
                                             <input type="search" class="form-control custom-search-input"
                                                 placeholder="Cari" aria-label="Search"
-                                                style="height: 30px; font-size: 14px;">
+                                                style="height: 30px; font-size: 14px;" data-bs-toggle="modal" data-bs-target="#searchModal">
                                             <button class="btn custom-search-button" type="submit"
                                                 style="height: 30px; padding: 0 10px; display: flex; align-items: center;">
                                                 <i class="fa fa-search" style="font-size: 14px;"></i>
@@ -89,3 +109,58 @@
     </div>
     <!-- navbar end -->
 </header>
+
+<!-- Search Modal -->
+<div class="modal fade no-backdrop" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel"
+    data-bs-backdrop="false">
+    <div class="modal-dialog modal-dialog-centered w-100 m-0">
+        <div class="modal-content rounded-3 border-0">
+            <div class="modal-header border-0 pb-0">
+                <div class="search-input-wrapper w-100">
+                    <i class="bi bi-search search-input-icon"></i>
+                    <input type="text" class="form-control modal-search-input" placeholder="Cari di Furnice"
+                        autofocus>
+                </div>
+                <button type="button" class="btn-close ms-2" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body pt-2">
+                <!-- Recent Searches -->
+                <div class="search-suggestions">
+                    <div class="search-item">
+                        <i class="bi bi-graph-up search-icon"></i>
+                        <span>kulkas 2 pintu</span>
+                    </div>
+                    <div class="search-item">
+                        <i class="bi bi-graph-up search-icon"></i>
+                        <span>kipas angin dinding</span>
+                    </div>
+                    <div class="search-item">
+                        <i class="bi bi-graph-up search-icon"></i>
+                        <span>parfum pria</span>
+                    </div>
+                    <div class="search-item">
+                        <i class="bi bi-graph-up search-icon"></i>
+                        <span>cushion</span>
+                    </div>
+                    <div class="search-item">
+                        <i class="bi bi-graph-up search-icon"></i>
+                        <span>dompet pria</span>
+                    </div>
+                    <div class="search-item">
+                        <i class="bi bi-graph-up search-icon"></i>
+                        <span>minyak goreng 2l</span>
+                    </div>
+
+                    <!-- Tips Section -->
+                    <div class="search-item border-top mt-2">
+                        <i class="bi bi-lightbulb tips-icon"></i>
+                        <div class="d-flex justify-content-between w-100 align-items-center">
+                            <span>Tips & Trik Pencarian</span>
+                            <span class="text-success">Pelajari</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

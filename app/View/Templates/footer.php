@@ -1,4 +1,4 @@
-<footer class="footer-area ft-bg">
+<footer class="footer-area ft-bg mt-50">
     <div class="footer-widget">
         <div class="container">
             <div class="row footer-widget-wrapper pt-60 pb-40">
@@ -37,32 +37,39 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-2 mt-5 ms-5">
-                    <div class="footer-widget-box list">
-                        <h4 class="footer-widget-title" style="font-size: 13px;">Quick Links</h4>
-                        <ul class="footer-list" style="font-size: 11px;">
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">Delivery Info</a></li>
-                            <li><a href="#">Contact Us</a></li>
-                            <li><a href="#">Update News</a></li>
-                            <li><a href="#">Our Testimonials</a></li>
-                            <li><a href="#">Terms Of Service</a></li>
-                            <li><a href="#">Privacy policy</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-2 mt-5">
-                    <div class="footer-widget-box list">
-                        <h4 class="footer-widget-title" style="font-size: 13px;">Browse Category</h4>
-                        <ul class="footer-list" style="font-size: 11px;">
-                            <li><a href="product.php">Bedroom</a></li>
-                            <li><a href="product.php">Office</a></li>
-                            <li><a href="product.php">Living Room</a></li>
-                            <li><a href="product.php">Bathroom</a></li>
-                            <li><a href="product.php">Decoration</a></li>
-                            <li><a href="product.php">Kitchen</a></li>
-                            <li><a href="product.php">Armchair</a></li>
-                        </ul>
+                <div class="col-md-6">
+                    <div class="row"> <!-- Tambahkan ini untuk grid-nya -->
+                        <!-- Quick Links -->
+                        <div class="col-6 mt-4">
+                            <div class="footer-widget-box list">
+                                <h4 class="footer-widget-title" style="font-size: 13px;">Quick Links</h4>
+                                <ul class="footer-list" style="font-size: 11px;">
+                                    <li><a href="#">About Us</a></li>
+                                    <li><a href="#">Delivery Info</a></li>
+                                    <li><a href="#">Contact Us</a></li>
+                                    <li><a href="#">Update News</a></li>
+                                    <li><a href="#">Our Testimonials</a></li>
+                                    <li><a href="#">Terms Of Service</a></li>
+                                    <li><a href="#">Privacy policy</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Browse Category -->
+                        <div class="col-6 mt-4">
+                            <div class="footer-widget-box list">
+                                <h4 class="footer-widget-title" style="font-size: 13px;">Browse Category</h4>
+                                <ul class="footer-list" style="font-size: 11px;">
+                                    <li><a href="product.php">Bedroom</a></li>
+                                    <li><a href="product.php">Office</a></li>
+                                    <li><a href="product.php">Living Room</a></li>
+                                    <li><a href="product.php">Bathroom</a></li>
+                                    <li><a href="product.php">Decoration</a></li>
+                                    <li><a href="product.php">Kitchen</a></li>
+                                    <li><a href="product.php">Armchair</a></li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
