@@ -16,4 +16,13 @@ class ProductController
         ];
         View::render('Product/index', $model);
     }
+
+    public function detail()
+    {
+        $model = [
+            "title" => "Product Detail",
+            "content" => "Welcome to the product detail page!",
+        ];
+        View::render('Product/detail', $model);
+    }
 }

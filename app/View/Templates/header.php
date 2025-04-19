@@ -76,7 +76,7 @@ function is_active($route)
                                         <div class="input-group">
                                             <input type="search" class="form-control custom-search-input"
                                                 placeholder="Cari" aria-label="Search"
-                                                style="height: 30px; font-size: 14px;" data-bs-toggle="modal" data-bs-target="#searchModal">
+                                                style="height: 30px; font-size: 14px;">
                                             <button class="btn custom-search-button" type="submit"
                                                 style="height: 30px; padding: 0 10px; display: flex; align-items: center;">
                                                 <i class="fa fa-search" style="font-size: 14px;"></i>
@@ -113,50 +113,64 @@ function is_active($route)
 <!-- Search Modal -->
 <div class="modal fade no-backdrop" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel"
     data-bs-backdrop="false">
-    <div class="modal-dialog modal-dialog-centered w-100 m-0">
-        <div class="modal-content rounded-3 border-0">
+    <div class="modal-dialog modal-dialog-centered m-auto">
+        <div class="modal-content rounded-4 border-0">
             <div class="modal-header border-0 pb-0">
                 <div class="search-input-wrapper w-100">
                     <i class="bi bi-search search-input-icon"></i>
-                    <input type="text" class="form-control modal-search-input" placeholder="Cari di Furnice"
-                        autofocus>
+                    <input type="text" class="form-control modal-search-input" placeholder="Cari di Furnice" autofocus>
+                    <!-- <i class="bi bi-mic-fill voice-search-icon"></i> -->
                 </div>
-                <button type="button" class="btn-close ms-2" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close ms-3" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body pt-2">
+                <!-- Section Title -->
+                <div class="search-section-title mb-2 ps-2">
+                    <span class="text-muted fs-7">Pencarian Terakhir</span>
+                </div>
+
                 <!-- Recent Searches -->
                 <div class="search-suggestions">
                     <div class="search-item">
-                        <i class="bi bi-graph-up search-icon"></i>
+                        <i class="bi bi-clock-history search-icon"></i>
                         <span>kulkas 2 pintu</span>
+                        <i class="bi bi-x-lg delete-search ms-auto"></i>
                     </div>
                     <div class="search-item">
-                        <i class="bi bi-graph-up search-icon"></i>
+                        <i class="bi bi-clock-history search-icon"></i>
                         <span>kipas angin dinding</span>
+                        <i class="bi bi-x-lg delete-search ms-auto"></i>
                     </div>
                     <div class="search-item">
-                        <i class="bi bi-graph-up search-icon"></i>
+                        <i class="bi bi-clock-history search-icon"></i>
                         <span>parfum pria</span>
+                        <i class="bi bi-x-lg delete-search ms-auto"></i>
                     </div>
+
+                    <!-- Popular Searches Section -->
+                    <div class="search-section-title mt-3 mb-2 ps-2">
+                        <span class="text-muted fs-7">Pencarian Populer</span>
+                    </div>
+
                     <div class="search-item">
-                        <i class="bi bi-graph-up search-icon"></i>
+                        <i class="bi bi-graph-up-arrow search-icon trending-icon"></i>
                         <span>cushion</span>
                     </div>
                     <div class="search-item">
-                        <i class="bi bi-graph-up search-icon"></i>
+                        <i class="bi bi-graph-up-arrow search-icon trending-icon"></i>
                         <span>dompet pria</span>
                     </div>
                     <div class="search-item">
-                        <i class="bi bi-graph-up search-icon"></i>
+                        <i class="bi bi-graph-up-arrow search-icon trending-icon"></i>
                         <span>minyak goreng 2l</span>
                     </div>
 
                     <!-- Tips Section -->
-                    <div class="search-item border-top mt-2">
-                        <i class="bi bi-lightbulb tips-icon"></i>
+                    <div class="search-item mt-3 border-top pt-3">
+                        <i class="bi bi-lightbulb-fill tips-icon"></i>
                         <div class="d-flex justify-content-between w-100 align-items-center">
-                            <span>Tips & Trik Pencarian</span>
-                            <span class="text-success">Pelajari</span>
+                            <span class="ms-2">Tips & Trik Pencarian</span>
+                            <span class="text-success fw-medium">Pelajari</span>
                         </div>
                     </div>
                 </div>
