@@ -26,6 +26,7 @@ class UserRepository
         $result = $statement->fetch(\PDO::FETCH_ASSOC);
         if ($result) {
             $user = new User();
+            $user->id = $result['id'];
             $user->username = $result['username'];
             $user->email = $result['email'];
             $user->password = $result['password'];
@@ -38,5 +39,21 @@ class UserRepository
     {
         $statement = $this->connection->prepare("DELETE FROM users");
         $statement->execute();
+    }
+
+    public function userById (string $id): ?User
+    {
+        $statement = $this->connection->prepare("SELECT * FROM users WHERE id = ?");
+        $statement->execute([$id]);
+        $result = $statement->fetch(\PDO::FETCH_ASSOC);
+        if ($result) {
+            $user = new User();
+            $user->id = $result['id'];
+            $user->username = $result['username'];
+            $user->email = $result['email'];
+            $user->password = $result['password'];
+            return $user;
+        }
+        return null;
     }
 }

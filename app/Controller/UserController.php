@@ -7,19 +7,26 @@ use Importa\Furnic\PHP\FFI\Config\Database;
 use Importa\Furnic\PHP\FFI\Exception\ValidationException;
 use Importa\Furnic\PHP\FFI\Model\UserLoginRequest;
 use Importa\Furnic\PHP\FFI\Model\UserRegisterRequest;
+use Importa\Furnic\PHP\FFI\Repository\SessionRepository;
 use Importa\Furnic\PHP\FFI\Repository\UserRepository;
-use Importa\Furnic\PHP\FFI\Servis\UserService;
+use Importa\Furnic\PHP\FFI\Service\SessionService;
+use Importa\Furnic\PHP\FFI\Service\UserService;
 
 
 session_start();
 class UserController
 {
     private UserService $userService;
+    private SessionService $sessionService;
     public function __construct()
     {
         $connection = Database::getConnection();
         $userRepository = new UserRepository($connection);
         $this->userService = new UserService($userRepository);
+
+        
+        $sessionRepository = new SessionRepository($connection);
+        $this->sessionService = new SessionService($sessionRepository, $userRepository);
     }
 
     public function register()
@@ -67,6 +74,11 @@ class UserController
             "title" => "Login",
             "content" => "Welcome to the login page!",
         ];
+        $user = $this->sessionService->current();
+        if ($user != null) {
+            header('Location: /');
+            exit;
+        } 
 
         // Ambil flash message jika ada
         if (isset($_SESSION['success'])) {
@@ -84,7 +96,9 @@ class UserController
         $request->password = $_POST['password'] ?? null;
 
         try {
-            $this->userService->login($request);
+            $response = $this->userService->login($request);
+
+            $this->sessionService->create($response->user->id);
              // Simpan pesan ke dalam session
              $_SESSION['success'] = "Login success!";
             header('Location: /');
@@ -98,6 +112,13 @@ class UserController
             ];
             View::render('User/login', $model);
         }
+    }
+
+    public function logout()
+    {
+        $this->sessionService->destroy();
+        header('Location: /login');
+        exit;
     }
 
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Importa\Furnic\PHP\FFI\Test\Servis;
+namespace Importa\Furnic\PHP\FFI\Test\Service;
 
 use PHPUnit\Framework\TestCase;
 use Importa\Furnic\PHP\FFI\Config\Database;
@@ -9,7 +9,7 @@ use Importa\Furnic\PHP\FFI\Exception\ValidationException;
 use Importa\Furnic\PHP\FFI\Model\UserLoginRequest;
 use Importa\Furnic\PHP\FFI\Model\UserRegisterRequest;
 use Importa\Furnic\PHP\FFI\Repository\UserRepository;
-use Importa\Furnic\PHP\FFI\Servis\UserService;
+use Importa\Furnic\PHP\FFI\Service\UserService;
 
 class UserServisTest extends TestCase
 {

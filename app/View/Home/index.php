@@ -450,7 +450,6 @@
                 </div>
             </div>
         </div>
-        <!-- Kategori Pilihan End -->
 
         <!-- popular item -->
         <div class="product-area product-area-new pt-40">

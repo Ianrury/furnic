@@ -85,12 +85,12 @@ function is_active($route)
                                     </form>
                                 </li>
                                 <li>
-                                    <a href="#" class="list-link">
+                                    <a href="/users/logout" class="list-link">
                                         <i class="far fa-user text-dark fa-sm"></i>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" class="list-link">
+                                    <a href="" class="list-link">
                                         <i class="far fa-shopping-cart text-dark fa-sm"></i>
                                     </a>
                                 </li>

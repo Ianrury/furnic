@@ -1,6 +1,6 @@
 <?php
 
-namespace Importa\Furnic\PHP\FFI\Servis;
+namespace Importa\Furnic\PHP\FFI\Service;
 
 use Importa\Furnic\PHP\FFI\Config\Database;
 use Importa\Furnic\PHP\FFI\Domain\User;

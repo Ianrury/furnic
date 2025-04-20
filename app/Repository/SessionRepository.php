@@ -18,19 +18,23 @@ class SessionRepository
     {
         $statement = $this->connection->prepare("INSERT INTO sessions (user_id) VALUES (?)");
         $statement->execute([$session->user_id]);
+
+        // Inilah bagian yang penting
+        $session->id = (int) $this->connection->lastInsertId();
+
         return $session;
     }
 
 
     public function findId(string $id): ?Session
     {
-        $statement = $this->connection->prepare("SELECT * FROM sessions WHERE user_id = ? LIMIT 1");
+        $statement = $this->connection->prepare("SELECT * FROM sessions WHERE id = ? LIMIT 1");
         $statement->execute([$id]);
         $result = $statement->fetch(\PDO::FETCH_ASSOC);
 
         if ($result) {
             $session = new Session();
-            $session->id = $result['id']; // ini penting
+            $session->id = $result['id'];
             $session->user_id = $result['user_id'];
             return $session;
         }

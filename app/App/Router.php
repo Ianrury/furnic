@@ -7,12 +7,13 @@ class Router
 
     private static array $routes = [];
 
-    public static function add(string $method,
-                               string $path,
-                               string $controller,
-                               string $function,
-                               array  $middlewares = []): void
-    {
+    public static function add(
+        string $method,
+        string $path,
+        string $controller,
+        string $function,
+        array $middlewares = []
+    ): void {
         self::$routes[] = [
             'method' => $method,
             'path' => $path,
@@ -37,7 +38,7 @@ class Router
             if (preg_match($pattern, $path, $variables) && $method == $route['method']) {
 
                 // call middleware
-                foreach ($route['middleware'] as $middleware){
+                foreach ($route['middleware'] as $middleware) {
                     $instance = new $middleware;
                     $instance->before();
                 }
@@ -53,8 +54,14 @@ class Router
             }
         }
 
-        http_response_code(404);
-        echo 'CONTROLLER NOT FOUND';
+        // Sebelumnya:
+        // http_response_code(404);
+        // echo 'CONTROLLER NOT FOUND';
+
+        // Ganti menjadi:
+        header('Location: /not-found');
+        exit;
+
     }
 
 }
