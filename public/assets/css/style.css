@@ -9290,7 +9290,7 @@ label {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0px 0;
+  padding: 13px 0;
   color: #000;
   /* default warna hitam */
   text-decoration: none;
@@ -9303,6 +9303,7 @@ label {
 /* Saat aktif: tulisan jadi biru & garis bawah muncul */
 .custom-nav-link-product.active {
   color: #5c86b8;
+  font-weight: 700;
   /* warna biru saat aktif */
 }
 
