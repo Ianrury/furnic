@@ -95,39 +95,46 @@ function base_url($path = '')
             <div class="container py-4">
                 <div class="row g-5">
                     <!-- Product Images Column -->
-                    <div class="col-md-6">
-                        <div class="card product-card">
+                    <div class="col-md-5">
+                        <div class="card product-card-detail">
                             <!-- New Product Badge -->
-                            <div class="new-badge">
-                                <div class="new-badge-text">New Product</div>
+                            <div class="position-absolute ribbon-wrapper-detail">
+                                <div class="ribbon-detail text-white text-uppercase fw-bold text-center">
+                                    New Product
+                                </div>
                             </div>
 
                             <!-- Main Product Image -->
                             <div class="card-body text-center p-4">
-                                <img src="/api/placeholder/300/300" alt="Clover Chair" class="img-fluid">
+                                <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png" alt="Clover Chair"
+                                    class="img-fluid" width="255" height="255">
                             </div>
 
                             <!-- Thumbnails -->
-                            <div class="card-footer bg-white p-3">
+                            <div class="card-footer bg-white p-3 border-0">
                                 <div class="row g-2">
                                     <div class="col-3">
                                         <div class="thumbnail active p-1">
-                                            <img src="/api/placeholder/70/70" alt="Thumbnail 1" class="img-fluid">
+                                            <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png" alt="Thumbnail 1"
+                                                class="img-fluid" width="100" height="100">
                                         </div>
                                     </div>
                                     <div class="col-3">
                                         <div class="thumbnail p-1">
-                                            <img src="/api/placeholder/70/70" alt="Thumbnail 2" class="img-fluid">
+                                            <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png" alt="Thumbnail 2"
+                                                class="img-fluid" width="100" height="100">
                                         </div>
                                     </div>
                                     <div class="col-3">
                                         <div class="thumbnail p-1">
-                                            <img src="/api/placeholder/70/70" alt="Thumbnail 3" class="img-fluid">
+                                            <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png" alt="Thumbnail 3"
+                                                class="img-fluid" width="100" height="100">
                                         </div>
                                     </div>
                                     <div class="col-3">
                                         <div class="thumbnail p-1">
-                                            <img src="/api/placeholder/70/70" alt="Thumbnail 4" class="img-fluid">
+                                            <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png" alt="Thumbnail 4"
+                                                class="img-fluid" width="100" height="100">
                                         </div>
                                     </div>
                                 </div>
@@ -136,16 +143,16 @@ function base_url($path = '')
                     </div>
 
                     <!-- Product Details Column -->
-                    <div class="col-md-6">
-                        <h1 class="fs-5 text-dark fw-bold mb-1">Clover Chair</h1>
-                        <p class="text-dark mb-4 fw-light" >Kursi belajar anak</p>
+                    <div class="col-md-5">
+                        <h1 class="text-black fw-bold mb-1" style="font-size: 25px;">Clover Chair</h1>
+                        <p class="text-black mb-3 fw-normal" style="font-size: 14px;">Kursi belajar anak</p>
 
                         <!-- Color Options -->
                         <div class="mb-4">
-                            <p class="mb-2 fw-medium text-dark">Warna</p>
+                            <p class="mb-2 fw-normal text-black" style="font-size: 14px;">Warna</p>
                             <div class="row g-2">
                                 <div class="col-3">
-                                    <div class="color-option">Kuning</div>
+                                    <div class="color-option ">Kuning</div>
                                 </div>
                                 <div class="col-3">
                                     <div class="color-option active">Merah</div>
@@ -161,7 +168,7 @@ function base_url($path = '')
 
                         <!-- Pattern Options -->
                         <div class="mb-4">
-                            <p class="mb-2 fw-medium">Motif</p>
+                            <p class="mb-2 fw-normal text-black" style="font-size: 14px;">Motif</p>
                             <div class="row g-2">
                                 <div class="col-3">
                                     <div class="color-option">Abstrak</div>
@@ -180,32 +187,44 @@ function base_url($path = '')
 
                         <!-- Quantity Selector -->
                         <div class="mb-4">
-                            <p class="mb-2 fw-medium">Jumlah</p>
-                            <div class="d-flex align-items-center">
-                                <button class="btn btn-quantity rounded">-</button>
-                                <span class="mx-4 fs-5">3</span>
-                                <button class="btn btn-quantity rounded">+</button>
+                            <p class="mb-2 fw-normal text-black" style="font-size: 14px;">Jumlah</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="d-flex align-items-center">
+                                    <button class="btn-quantity fw-medium">
+                                        <span style="font-size: 20px;">-</span>
+                                    </button>
+                                    <span class="mx-4 fw-normal text-black" style="font-size: 14px;">3</span>
+                                    <button class="btn-quantity fw-medium">
+                                        <span style="font-size: 20px;">+</span>
+                                    </button>
+                                </div>
+                                <div>
+                                    <small class="fst-italic text-black" style="font-size: 14px;">Tersedia <span
+                                            class="text-black">100</span> pcs</small>
+                                </div>
                             </div>
                         </div>
 
                         <!-- Subtotal -->
                         <div class="d-flex justify-content-between align-items-center mb-4">
-                            <p class="mb-0 fs-5">Subtotal Pembelian:</p>
-                            <p class="mb-0 fs-5 fw-bold">Rp 300.000</p>
+                            <p class="mb-0 text-black" style="font-size: 14px;">Subtotal Pembelian:</p>
+                            <p class="mb-0 fw-bold text-black" style="font-size: 16px;">Rp 300.000</p>
                         </div>
 
                         <!-- Buy Button and Actions -->
                         <div class="mb-3">
                             <div class="row g-2 align-items-center">
-                                <div class="col">
-                                    <button class="btn btn-buy w-100 rounded fw-bold">Beli Sekarang</button>
+                                <div class="col-9">
+                                    <button class="btn btn-buy w-100 rounded-3 fw-bold" style="font-size: 14px;">Beli
+                                        Sekarang</button>
                                 </div>
-                                <div class="col-auto d-flex gap-3">
+                                <div class="col-3 d-flex justify-content-end gap-3">
                                     <div class="action-icon">
-                                        <i class="bi bi-heart"></i>
+                                        <img src="assets/img/icon/love.svg" alt="Love Icon" width="30" height="30">
+
                                     </div>
                                     <div class="action-icon">
-                                        <i class="bi bi-cart3"></i>
+                                        <img src="assets/img/icon/Group.png" alt="shop Icon" width="30" height="30">
                                     </div>
                                 </div>
                             </div>
@@ -214,6 +233,61 @@ function base_url($path = '')
                 </div>
             </div>
         </div>
+
+        <!-- detail Product -->
+        <div class="product-area product-area-new ">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 wow fadeInDown mb-0" data-wow-delay=".25s">
+                        <div class="site-heading-inline">
+                            <h2 class="site-title">Detail Product</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-content wow fadeInUp" data-wow-delay=".25s" id="item-tabContent">
+                    <div style="background-color: #f5f6fa; height: 170px" class="rounded-3">
+                        <ul class="d-flex mb-0 ms-3 pt-3" style="list-style: none; padding-left: 0; gap: 20px;">
+                            <li class="nav-item">
+                                <div class="custom-nav-link-descripsi active" data-tab="spesifikasi">Spesifikasi Product
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <div class="custom-nav-link-descripsi" data-tab="informasi">Informasi Product</div>
+                            </li>
+                        </ul>
+
+                        <div class="tab-content-scroll me-3">
+                            <div id="spesifikasi" class="tab-pane active">
+                                <div class="spec-item">
+                                    <span class="label">Material</span>
+                                    <span class="value">: Polypropylene, Metal</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span class="label">Dimensi</span>
+                                    <span class="value">: 40×36×51cm</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span class="label">Tinggi Kursi</span>
+                                    <span class="value">: 35cm</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span class="label">Warna</span>
+                                    <span class="value">: Red & Yellow</span>
+                                </div>
+                            </div>
+
+                            <div id="informasi" class="tab-pane">
+                                <p>Produk ini dirancang untuk kenyamanan dan daya tahan tinggi. Cocok digunakan di dalam
+                                    maupun luar ruangan Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ab
+                                    magnam dolor, numquam illum eveniet modi repellendus voluptatibus error sed ad,
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
         <!-- Rekomendasi Product -->
         <div class="product-area product-area-new pt-40">
             <div class="container">
@@ -256,7 +330,8 @@ function base_url($path = '')
                                                 <i class="bi bi-star-fill text-warning small-icon"></i>
                                                 <i class="bi bi-star-fill text-warning small-icon"></i>
                                                 <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <small class="text-muted fst-italic ms-1 sold-text">300 terjual</small>
+                                                <small class="text-muted fst-italic ms-1 sold-text">300
+                                                    terjual</small>
                                             </div>
                                         </div>
 
@@ -308,7 +383,8 @@ function base_url($path = '')
                                                 <i class="bi bi-star-fill text-warning small-icon"></i>
                                                 <i class="bi bi-star-fill text-warning small-icon"></i>
                                                 <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <small class="text-muted fst-italic ms-1 sold-text">300 terjual</small>
+                                                <small class="text-muted fst-italic ms-1 sold-text">300
+                                                    terjual</small>
                                             </div>
                                         </div>
 
@@ -360,7 +436,8 @@ function base_url($path = '')
                                                 <i class="bi bi-star-fill text-warning small-icon"></i>
                                                 <i class="bi bi-star-fill text-warning small-icon"></i>
                                                 <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <small class="text-muted fst-italic ms-1 sold-text">300 terjual</small>
+                                                <small class="text-muted fst-italic ms-1 sold-text">300
+                                                    terjual</small>
                                             </div>
                                         </div>
 
@@ -412,7 +489,8 @@ function base_url($path = '')
                                                 <i class="bi bi-star-fill text-warning small-icon"></i>
                                                 <i class="bi bi-star-fill text-warning small-icon"></i>
                                                 <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <small class="text-muted fst-italic ms-1 sold-text">300 terjual</small>
+                                                <small class="text-muted fst-italic ms-1 sold-text">300
+                                                    terjual</small>
                                             </div>
                                         </div>
 
@@ -440,8 +518,6 @@ function base_url($path = '')
                 </div>
             </div>
         </div>
-
-
     </main>
 
 
@@ -604,7 +680,33 @@ function base_url($path = '')
             // Reset warna tombol
             updateResetButtonState();
         });
+    </script>
+    <script>
+        // slid halaman detail
+        const tabs = document.querySelectorAll('.custom-nav-link-descripsi');
+        const panes = document.querySelectorAll('.tab-pane');
 
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Hapus class active dari semua tab
+                tabs.forEach(t => t.classList.remove('active'));
+
+                // Tambahkan class active ke tab yang diklik
+                tab.classList.add('active');
+
+                // Ambil target tab berdasarkan atribut data-tab
+                const targetId = tab.getAttribute('data-tab');
+
+                // Tampilkan hanya tab-pane yang cocok, lainnya disembunyikan
+                panes.forEach(pane => {
+                    if (pane.id === targetId) {
+                        pane.classList.add('active');
+                    } else {
+                        pane.classList.remove('active');
+                    }
+                });
+            });
+        });
     </script>
 
 </body>

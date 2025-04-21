@@ -19,7 +19,7 @@ Router::add('GET', '/', HomeController::class, 'index');
 Router::add('GET', '/login', UserController::class, 'login', [MustNotLoginMiddleware::class]);
 Router::add('POST', '/login', UserController::class, 'postLogin', [MustNotLoginMiddleware::class]);
 
-Router::add('GET', '/users/register', UserController::class, 'register', [MustNotLoginMiddleware::class]);
+Router::add('GET', '/register', UserController::class, 'register', [MustNotLoginMiddleware::class]);
 Router::add('POST', '/users/register', UserController::class, 'postRegister', [MustNotLoginMiddleware::class]);
 Router::add('GET', '/logout', UserController::class, 'logout', [MustLoginMiddleware::class]);
 Router::add('GET', '/product', ProductController::class, 'index', [MustLoginMiddleware::class]);
