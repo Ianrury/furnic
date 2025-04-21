@@ -1,9 +1,19 @@
 <?php
 function is_active($route)
 {
-    return trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/') === trim($route, '/') ? 'active' : '';
+    $current_path = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
+    $target_path = trim($route, '/');
+
+    // Khusus untuk route '/'
+    if ($target_path === '') {
+        return $current_path === '' ? 'active' : '';
+    }
+
+    // Untuk selain '/', cocokkan awal URL
+    return strpos($current_path, $target_path) === 0 ? 'active' : '';
 }
 ?>
+
 
 <header class="header bg-info-emphasis" style="height: 122px;">
     <!-- navbar -->
@@ -54,6 +64,7 @@ function is_active($route)
                                 <a class="d-flex justify-content-center align-items-center w-100 h-100 custom-nav-link <?= is_active('product') ?>"
                                     href="/product" style="font-size: 14px;">Product</a>
                             </li>
+
                             <li class="nav-item">
                                 <a class="d-flex justify-content-center align-items-center w-100 h-100 custom-nav-link<?php echo (basename($_SERVER['PHP_SELF']) == 'promo.php') ? 'active' : ''; ?>"
                                     href="promo.php" style="font-size: 14px;"> Promo</a>

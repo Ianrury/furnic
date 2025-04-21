@@ -287,6 +287,141 @@ function base_url($path = '')
             </div>
         </div>
 
+        <!-- ulasan penggan -->
+        <div class="product-area product-area-new pt-40">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 wow fadeInDown mb-0" data-wow-delay=".25s">
+                        <div class="site-heading-inline">
+                            <h2 class="site-title">Ulasan Pengguna</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-content wow fadeInUp" data-wow-delay=".25s" id="item-tabContent">
+                    <div class="row">
+                        <!-- Left grid - Ratings and photos -->
+                        <div class="col-md-4">
+                            <div class="review-grid">
+                                <h6>Foto oleh pelanggan (100)</h6>
+
+                                <div class="star-rating">
+                                    <div class="star">★★★★★</div>
+                                    <div class="star-count">200</div>
+                                </div>
+                                <div class="star-rating">
+                                    <div class="star">★★★★</div>
+                                    <div class="star-count">200</div>
+                                </div>
+                                <div class="star-rating">
+                                    <div class="star">★★★</div>
+                                    <div class="star-count">200</div>
+                                </div>
+                                <div class="star-rating">
+                                    <div class="star">★★</div>
+                                    <div class="star-count">200</div>
+                                </div>
+                                <div class="star-rating">
+                                    <div class="star">★</div>
+                                    <div class="star-count">200</div>
+                                </div>
+
+                                <div class="review-photos mt-3">
+                                    <div class="review-photo">
+                                        <img src="assets/img/product/decorasi/ruang-santai.jpg" alt="Product review">
+                                    </div>
+                                    <div class="review-photo">
+                                        <img src="assets/img/product/decorasi/ruang-santai.jpg" alt="Product review">
+                                    </div>
+                                    <div class="review-photo">
+                                        <img src="assets/img/product/decorasi/ruang-santai.jpg" alt="Product review">
+                                    </div>
+                                    <div class="review-photo">
+                                        <img src="assets/img/product/decorasi/ruang-santai.jpg" alt="Product review">
+                                    </div>
+                                    <div class="review-photo">
+                                        <img src="assets/img/product/decorasi/ruang-santai.jpg" alt="Product review">
+                                    </div>
+                                    <div class="review-photo">
+                                        <img src="assets/img/product/decorasi/ruang-santai.jpg" alt="Product review">
+                                    </div>
+                                    <div class="review-photo">
+                                        <img src="assets/img/product/decorasi/ruang-santai.jpg" alt="Product review">
+                                    </div>
+                                    <div class="review-photo">
+                                        <img src="assets/img/product/decorasi/ruang-santai.jpg" alt="Product review">
+                                    </div>
+                                    <div class="review-photo">
+                                        <img src="assets/img/product/decorasi/ruang-santai.jpg" alt="Product review">
+                                    </div>
+                                    <div class="review-photo">
+                                        <img src="assets/img/product/decorasi/ruang-santai.jpg" alt="Product review">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right grid - User reviews -->
+                        <div class="col-md-8">
+                            <!-- First review -->
+                            <div class="review-grid">
+                                <div class="username">Yolanda</div>
+                                <div class="review-text">Kursinya kokoh, warnanya lucu</div>
+                                <div class="star">★★★★★</div>
+                                <div class="date">18/04/2023</div>
+
+                                <div class="review-photos">
+                                    <div class="review-photo">
+                                        <img src="assets/img/product/decorasi/ruang-santai.jpg" alt="Product review">
+                                    </div>
+                                    <div class="review-photo">
+                                        <img src="assets/img/product/decorasi/ruang-santai.jpg" alt="Product review">
+                                    </div>
+                                    <div class="review-photo">
+                                        <img src="assets/img/product/decorasi/ruang-santai.jpg" alt="Product review">
+                                    </div>
+                                    <div class="review-photo">
+                                        <img src="assets/img/product/decorasi/ruang-santai.jpg" alt="Product review">
+                                    </div>
+                                    <div class="review-photo">
+                                        <img src="assets/img/product/decorasi/ruang-santai.jpg" alt="Product review">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Second review -->
+                            <div class="review-grid">
+                                <div class="username">Yolanda</div>
+                                <div class="review-text">kursinya bagus rekomen untuk yang mencari kursi belajar anak,
+                                    warna yang di berikan juga variatif</div>
+                                <div class="star">★★★★★</div>
+                                <div class="date">18/04/2023</div>
+
+                                <div class="review-photos">
+                                    <div class="review-photo">
+                                        <img src="assets/img/product/decorasi/ruang-santai.jpg" alt="Product review">
+                                    </div>
+                                    <div class="review-photo">
+                                        <img src="assets/img/product/decorasi/ruang-santai.jpg" alt="Product review">
+                                    </div>
+                                    <div class="review-photo">
+                                        <img src="assets/img/product/decorasi/ruang-santai.jpg" alt="Product review">
+                                    </div>
+                                    <div class="review-photo">
+                                        <img src="assets/img/product/decorasi/ruang-santai.jpg" alt="Product review">
+                                    </div>
+                                    <div class="review-photo">
+                                        <img src="assets/img/product/decorasi/ruang-santai.jpg" alt="Product review">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- See more button -->
+                            <button class="see-more-btn">Lihat Ulasan Lainnya</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- Rekomendasi Product -->
         <div class="product-area product-area-new pt-40">
@@ -466,6 +601,241 @@ function base_url($path = '')
                                     <div class="position-absolute ribbon-wrapper">
                                         <div class="ribbon text-white text-uppercase fw-bold text-center">
                                             New Product
+                                        </div>
+                                    </div>
+
+                                    <!-- Product Image -->
+                                    <div class="text-center pt-3">
+                                        <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png"
+                                            class="img-fluid product-image" alt="Product Image">
+                                    </div>
+
+                                    <div class="card-body d-flex flex-column pt-2">
+                                        <!-- Product Details -->
+                                        <div class="pb-2">
+                                            <h5 class="card-title fw-medium product-title">
+                                                CT-IMP Matto Light Brown
+                                            </h5>
+                                            <p class="card-text mb-1 text-truncate product-desc">Meja ruang tamu
+                                                aesthetic.</p>
+                                            <div class="d-flex gap-1 align-items-center mb-2">
+                                                <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                <small class="text-muted fst-italic ms-1 sold-text">300
+                                                    terjual</small>
+                                            </div>
+                                        </div>
+
+                                        <!-- Price Section -->
+                                        <div class="mt-auto">
+                                            <div class="d-flex flex-wrap align-items-baseline">
+                                                <div class="me-2">
+                                                    <span class="fw-bold price">
+                                                        <sup class="fw-normal">Rp</sup> 500.000
+                                                    </span>
+                                                </div>
+                                                <div>
+                                                    <span class="fw-normal text-danger old-price">
+                                                        <sup>Rp</sup>
+                                                        <span class="text-decoration-line-through">600.000</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Best Seller Product -->
+        <div class="product-area product-area-new pt-40">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 wow fadeInDown mb-0" data-wow-delay=".25s">
+                        <div class="site-heading-inline">
+                            <h2 class="site-title">Best Seller Product</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-content wow fadeInUp" data-wow-delay=".25s" id="item-tabContent">
+                    <div class="container">
+                        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4  justify-content-center">
+                            <div class="col">
+                                <div class="card shadow position-relative h-100 rounded-4 p-2">
+                                    <!-- Corner Ribbon -->
+                                    <div class="position-absolute ribbon-wrapper">
+                                        <div class="ribbon text-white text-uppercase fw-bold text-center"
+                                            style="background-color: #FF8B2D;">
+                                            Best Seller
+                                        </div>
+                                    </div>
+
+                                    <!-- Product Image -->
+                                    <div class="text-center pt-3">
+                                        <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png"
+                                            class="img-fluid product-image" alt="Product Image">
+                                    </div>
+
+                                    <div class="card-body d-flex flex-column pt-2">
+                                        <!-- Product Details -->
+                                        <div class="pb-2">
+                                            <h5 class="card-title fw-medium product-title">
+                                                CT-IMP Matto Light Brown
+                                            </h5>
+                                            <p class="card-text mb-1 text-truncate product-desc">Meja ruang tamu
+                                                aesthetic.</p>
+                                            <div class="d-flex gap-1 align-items-center mb-2">
+                                                <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                <small class="text-muted fst-italic ms-1 sold-text">300
+                                                    terjual</small>
+                                            </div>
+                                        </div>
+
+                                        <!-- Price Section -->
+                                        <div class="mt-auto">
+                                            <div class="d-flex flex-wrap align-items-baseline">
+                                                <div class="me-2">
+                                                    <span class="fw-bold price">
+                                                        <sup class="fw-normal">Rp</sup> 500.000
+                                                    </span>
+                                                </div>
+                                                <div>
+                                                    <span class="fw-normal text-danger old-price">
+                                                        <sup>Rp</sup>
+                                                        <span class="text-decoration-line-through">600.000</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="card shadow position-relative h-100 rounded-4 p-2">
+                                    <!-- Corner Ribbon -->
+                                    <div class="position-absolute ribbon-wrapper">
+                                        <div class="ribbon text-white text-uppercase fw-bold text-center"
+                                            style="background-color: #FF8B2D;">
+                                            Best Seller
+                                        </div>
+                                    </div>
+
+                                    <!-- Product Image -->
+                                    <div class="text-center pt-3">
+                                        <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png"
+                                            class="img-fluid product-image" alt="Product Image">
+                                    </div>
+
+                                    <div class="card-body d-flex flex-column pt-2">
+                                        <!-- Product Details -->
+                                        <div class="pb-2">
+                                            <h5 class="card-title fw-medium product-title">
+                                                CT-IMP Matto Light Brown
+                                            </h5>
+                                            <p class="card-text mb-1 text-truncate product-desc">Meja ruang tamu
+                                                aesthetic.</p>
+                                            <div class="d-flex gap-1 align-items-center mb-2">
+                                                <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                <small class="text-muted fst-italic ms-1 sold-text">300
+                                                    terjual</small>
+                                            </div>
+                                        </div>
+
+                                        <!-- Price Section -->
+                                        <div class="mt-auto">
+                                            <div class="d-flex flex-wrap align-items-baseline">
+                                                <div class="me-2">
+                                                    <span class="fw-bold price">
+                                                        <sup class="fw-normal">Rp</sup> 500.000
+                                                    </span>
+                                                </div>
+                                                <div>
+                                                    <span class="fw-normal text-danger old-price">
+                                                        <sup>Rp</sup>
+                                                        <span class="text-decoration-line-through">600.000</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="card shadow position-relative h-100 rounded-4 p-2">
+                                    <!-- Corner Ribbon -->
+                                    <div class="position-absolute ribbon-wrapper">
+                                        <div class="ribbon text-white text-uppercase fw-bold text-center"
+                                            style="background-color: #FF8B2D;">
+                                            Best Seller
+                                        </div>
+                                    </div>
+
+                                    <!-- Product Image -->
+                                    <div class="text-center pt-3">
+                                        <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png"
+                                            class="img-fluid product-image" alt="Product Image">
+                                    </div>
+
+                                    <div class="card-body d-flex flex-column pt-2">
+                                        <!-- Product Details -->
+                                        <div class="pb-2">
+                                            <h5 class="card-title fw-medium product-title">
+                                                CT-IMP Matto Light Brown
+                                            </h5>
+                                            <p class="card-text mb-1 text-truncate product-desc">Meja ruang tamu
+                                                aesthetic.</p>
+                                            <div class="d-flex gap-1 align-items-center mb-2">
+                                                <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                <small class="text-muted fst-italic ms-1 sold-text">300
+                                                    terjual</small>
+                                            </div>
+                                        </div>
+
+                                        <!-- Price Section -->
+                                        <div class="mt-auto">
+                                            <div class="d-flex flex-wrap align-items-baseline">
+                                                <div class="me-2">
+                                                    <span class="fw-bold price">
+                                                        <sup class="fw-normal">Rp</sup> 500.000
+                                                    </span>
+                                                </div>
+                                                <div>
+                                                    <span class="fw-normal text-danger old-price">
+                                                        <sup>Rp</sup>
+                                                        <span class="text-decoration-line-through">600.000</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="card shadow position-relative h-100 rounded-4 p-2">
+                                    <!-- Corner Ribbon -->
+                                    <div class="position-absolute ribbon-wrapper">
+                                        <div class="ribbon text-white text-uppercase fw-bold text-center"
+                                            style="background-color: #FF8B2D;">
+                                            Best Seller
                                         </div>
                                     </div>
 
