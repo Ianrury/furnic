@@ -76,6 +76,18 @@ function base_url($path = '')
     <?php include __DIR__ . '/../templates/header.php'; ?>
     <!-- header area end -->
 
+    <nav class="breadcrumb-nav py-2 px-3">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="#">Beranda</a></li>
+                    <li class="breadcrumb-item"><a href="#">Product</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Clover Chair</li>
+                </ol>
+            </nav>
+        </div>
+    </nav>
+
     <!-- popup search -->
     <div class="search-popup">
         <button class="close-search"><span class="far fa-times"></span></button>
@@ -91,7 +103,7 @@ function base_url($path = '')
 
     <main class="main">
         <!-- Product -->
-        <div class="product-area product-area-new pt-40">
+        <div class="product-area product-area-new">
             <div class="container py-4">
                 <div class="row g-5">
                     <!-- Product Images Column -->
@@ -302,58 +314,65 @@ function base_url($path = '')
                         <!-- Left grid - Ratings and photos -->
                         <div class="col-md-4">
                             <div class="review-grid">
-                                <h6>Foto oleh pelanggan (100)</h6>
-
-                                <div class="star-rating">
-                                    <div class="star">★★★★★</div>
-                                    <div class="star-count">200</div>
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <div>
+                                        <img src="assets/img/product/decorasi/ruang-santai.jpg" alt="foto review"
+                                            class="img-fluid rounded-3" width="250" height="250">
+                                    </div>
+                                    <div>
+                                        <div class="star-rating">
+                                            <div class="star">★★★★★</div>
+                                            <div class="star-count">200</div>
+                                        </div>
+                                        <div class="star-rating">
+                                            <div class="star">★★★★</div>
+                                            <div class="star-count">200</div>
+                                        </div>
+                                        <div class="star-rating">
+                                            <div class="star">★★★</div>
+                                            <div class="star-count">200</div>
+                                        </div>
+                                        <div class="star-rating">
+                                            <div class="star">★★</div>
+                                            <div class="star-count">200</div>
+                                        </div>
+                                        <div class="star-rating">
+                                            <div class="star">★</div>
+                                            <div class="star-count">200</div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="star-rating">
-                                    <div class="star">★★★★</div>
-                                    <div class="star-count">200</div>
-                                </div>
-                                <div class="star-rating">
-                                    <div class="star">★★★</div>
-                                    <div class="star-count">200</div>
-                                </div>
-                                <div class="star-rating">
-                                    <div class="star">★★</div>
-                                    <div class="star-count">200</div>
-                                </div>
-                                <div class="star-rating">
-                                    <div class="star">★</div>
-                                    <div class="star-count">200</div>
-                                </div>
-
-                                <div class="review-photos mt-3">
-                                    <div class="review-photo">
+                                <h6 class="text-black" style="font-size: 14px; font-weight: 400;">Foto oleh pelanggan
+                                    (100)</h6>
+                                <div class="review-photos mt-3 ">
+                                    <div class="review-photo-pelanggan">
                                         <img src="assets/img/product/decorasi/ruang-santai.jpg" alt="Product review">
                                     </div>
-                                    <div class="review-photo">
+                                    <div class="review-photo-pelanggan">
                                         <img src="assets/img/product/decorasi/ruang-santai.jpg" alt="Product review">
                                     </div>
-                                    <div class="review-photo">
+                                    <div class="review-photo-pelanggan">
                                         <img src="assets/img/product/decorasi/ruang-santai.jpg" alt="Product review">
                                     </div>
-                                    <div class="review-photo">
+                                    <div class="review-photo-pelanggan">
                                         <img src="assets/img/product/decorasi/ruang-santai.jpg" alt="Product review">
                                     </div>
-                                    <div class="review-photo">
+                                    <div class="review-photo-pelanggan">
                                         <img src="assets/img/product/decorasi/ruang-santai.jpg" alt="Product review">
                                     </div>
-                                    <div class="review-photo">
+                                    <div class="review-photo-pelanggan">
                                         <img src="assets/img/product/decorasi/ruang-santai.jpg" alt="Product review">
                                     </div>
-                                    <div class="review-photo">
+                                    <div class="review-photo-pelanggan">
                                         <img src="assets/img/product/decorasi/ruang-santai.jpg" alt="Product review">
                                     </div>
-                                    <div class="review-photo">
+                                    <div class="review-photo-pelanggan">
                                         <img src="assets/img/product/decorasi/ruang-santai.jpg" alt="Product review">
                                     </div>
-                                    <div class="review-photo">
+                                    <div class="review-photo-pelanggan">
                                         <img src="assets/img/product/decorasi/ruang-santai.jpg" alt="Product review">
                                     </div>
-                                    <div class="review-photo">
+                                    <div class="review-photo-pelanggan">
                                         <img src="assets/img/product/decorasi/ruang-santai.jpg" alt="Product review">
                                     </div>
                                 </div>
@@ -363,12 +382,10 @@ function base_url($path = '')
                         <!-- Right grid - User reviews -->
                         <div class="col-md-8">
                             <!-- First review -->
-                            <div class="review-grid">
+                            <div class="review-grid-review">
                                 <div class="username">Yolanda</div>
                                 <div class="review-text">Kursinya kokoh, warnanya lucu</div>
                                 <div class="star">★★★★★</div>
-                                <div class="date">18/04/2023</div>
-
                                 <div class="review-photos">
                                     <div class="review-photo">
                                         <img src="assets/img/product/decorasi/ruang-santai.jpg" alt="Product review">
@@ -386,16 +403,15 @@ function base_url($path = '')
                                         <img src="assets/img/product/decorasi/ruang-santai.jpg" alt="Product review">
                                     </div>
                                 </div>
+                                <div class="date">18/04/2023</div>
                             </div>
 
                             <!-- Second review -->
-                            <div class="review-grid">
+                            <div class="review-grid-review">
                                 <div class="username">Yolanda</div>
                                 <div class="review-text">kursinya bagus rekomen untuk yang mencari kursi belajar anak,
                                     warna yang di berikan juga variatif</div>
                                 <div class="star">★★★★★</div>
-                                <div class="date">18/04/2023</div>
-
                                 <div class="review-photos">
                                     <div class="review-photo">
                                         <img src="assets/img/product/decorasi/ruang-santai.jpg" alt="Product review">
@@ -413,6 +429,7 @@ function base_url($path = '')
                                         <img src="assets/img/product/decorasi/ruang-santai.jpg" alt="Product review">
                                     </div>
                                 </div>
+                                <div class="date">18/04/2023</div>
                             </div>
 
                             <!-- See more button -->
@@ -895,59 +912,6 @@ function base_url($path = '')
     <?php include __DIR__ . '/../templates/footer.php'; ?>
     <!-- footer area end -->
 
-
-    <!-- modal quick shop-->
-    <!-- <div class="modal quickview fade" id="quickview" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="quickview" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i
-                        class="far fa-xmark"></i></button>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-                            <img src="assets/img/product/04.png" alt="#">
-                        </div>
-                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-                            <div class="quickview-content">
-                                <h4 class="quickview-title">Simple Denim Chair</h4>
-                                <div class="quickview-rating">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star-half-alt"></i>
-                                    <i class="far fa-star"></i>
-                                    <span class="rating-count"> (4 Customer Reviews)</span>
-                                </div>
-                                <div class="quickview-price">
-                                    <h5><del>$860</del><span>$740</span></h5>
-                                </div>
-                                <ul class="quickview-list">
-                                    <li>Brand:<span>Ricordi</span></li>
-                                    <li>Category:<span>Living Room</span></li>
-                                    <li>Stock:<span class="stock">Available</span></li>
-                                    <li>Code:<span>789FGSA</span></li>
-                                </ul>
-                                <div class="quickview-cart">
-                                    <a href="#" class="theme-btn">Add to cart</a>
-                                </div>
-                                <div class="quickview-social">
-                                    <span>Share:</span>
-                                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                                    <a target="_blank" href="https://www.instagram.com/furnicefurnishing/"><i
-                                            class="fab fa-instagram"></i></a>
-                                    <a href="#"><i class="fab fa-pinterest-p"></i></a>
-                                    <a href="#"><i class="fab fa-instagram"></i></a>
-                                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
-    <!-- modal quick shop end -->
 
 
     <!-- js -->
