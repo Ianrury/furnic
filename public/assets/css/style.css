@@ -83,6 +83,8 @@ Table of contents
 73. Custom Hover Navnar Header
 74. Custom Detail PRODUCT
 75. Detail product
+76. Review Card
+77. breadcrumb
 =======================================================*/
 
 /*====================
@@ -9564,6 +9566,10 @@ label {
 
 /* review card */
 
+/*====================
+76. review card
+================== */
+
 .review-grid {
   background-color: #f5f6fa;
   border-radius: 8px;
@@ -9575,17 +9581,31 @@ label {
   background-color: #f5f6fa;
   border-radius: 8px;
   padding: 2px 30px;
-  margin-bottom: 17px;
+  margin-bottom: 10px;
 }
 .review-photos {
   display: flex;
   flex-wrap: wrap;
-  gap: 14px;
+  border-radius: 10px;
+  gap: 10px;
+}
+
+.review-photos-pelanggan {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.star-icon{
+  width: 15px;
+  height: 15px;
 }
 
 .review-photo-pelanggan {
-  width: 66px;
-  height: 60px;
+  width: 58px;
+  height: 50px;
   border-radius: 4px;
   overflow: hidden;
 }
@@ -9596,8 +9616,8 @@ label {
 }
 
 .review-photo {
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   border-radius: 4px;
   overflow: hidden;
 }
@@ -9608,16 +9628,18 @@ label {
 }
 .star-rating {
   display: flex;
+  margin: 5px 0;
   align-items: center;
 }
-.star {
+/* .star {
   color: #ffc107;
-  font-size: 18px;
-}
+  font-size: 15px;
+} */
 .star-count {
   color: #777;
-  font-size: 14px;
-  margin-left: 10px;
+  font-size: 12px;
+  font-style: italic;
+  margin-left: 5px;
 }
 .username {
   font-weight: bold;
@@ -9647,6 +9669,10 @@ label {
   background-color: #2b4779;
 } */
 
+/*====================
+77. breadcrumb
+================== */
+
 .breadcrumb {
   font-size: 14px;
   color: #2B4779;
@@ -9666,4 +9692,58 @@ label {
 .breadcrumb-item + .breadcrumb-item::before {
   color: #2B4779;
   content: " / ";
+}
+
+
+/* Ribbon Promo */
+
+/* .ribbon-promo {
+  position: absolute;
+  width: 200px;
+  height: 20px;
+  background-color: #FFFB2D;
+  color: #FF0000;
+  transform: rotate(-45deg) translateY(-20px) translateX(-70px);
+  font-size: 10px;
+  line-height: 20px;
+} */
+
+/* Modal review */
+
+.tab-content-scroll-review {
+  max-height: 320px;
+  overflow-y: auto;
+  padding: 10px 20px;
+  scrollbar-width: thin;
+  scrollbar-color: #1f4573 #ccc;
+}
+
+.review-grid-review-modal {
+  background-color: #f5f6fa;
+  border-radius: 8px;
+  padding: 2px 0px 2px 30px;
+  margin-bottom: 10px;
+}
+
+.review-grid-modal {
+  background-color: #f5f6fa;
+  border-radius: 8px;
+  padding: 0px 0px 0px 0px;
+  margin-bottom: 15px;
+}
+.star-rating {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.star-icon {
+  width: 15px;
+  height: 15px;
+}
+
+#resetFilter.active {
+  background-color: #1f4573 !important;
+  border-color: #1f4573 !important;
+  color: white;
 }

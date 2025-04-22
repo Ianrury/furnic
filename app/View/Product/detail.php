@@ -312,39 +312,49 @@ function base_url($path = '')
                 <div class="tab-content wow fadeInUp" data-wow-delay=".25s" id="item-tabContent">
                     <div class="row">
                         <!-- Left grid - Ratings and photos -->
-                        <div class="col-md-4">
+                        <div class="col-md-4 pe-1">
                             <div class="review-grid">
                                 <div class="d-flex justify-content-between align-items-center mb-3">
                                     <div>
                                         <img src="assets/img/product/decorasi/ruang-santai.jpg" alt="foto review"
-                                            class="img-fluid rounded-3" width="250" height="250">
+                                            class="img-fluid rounded-3" width="240" height="260">
                                     </div>
-                                    <div>
+                                    <div class="ps-2">
                                         <div class="star-rating">
-                                            <div class="star">★★★★★</div>
+                                            <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
+                                            <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
+                                            <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
+                                            <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
+                                            <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
                                             <div class="star-count">200</div>
                                         </div>
                                         <div class="star-rating">
-                                            <div class="star">★★★★</div>
+                                            <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
+                                            <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
+                                            <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
+                                            <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
                                             <div class="star-count">200</div>
                                         </div>
                                         <div class="star-rating">
-                                            <div class="star">★★★</div>
+                                            <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
+                                            <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
+                                            <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
                                             <div class="star-count">200</div>
                                         </div>
                                         <div class="star-rating">
-                                            <div class="star">★★</div>
+                                            <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
+                                            <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
                                             <div class="star-count">200</div>
                                         </div>
                                         <div class="star-rating">
-                                            <div class="star">★</div>
+                                            <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
                                             <div class="star-count">200</div>
                                         </div>
                                     </div>
                                 </div>
                                 <h6 class="text-black" style="font-size: 14px; font-weight: 400;">Foto oleh pelanggan
                                     (100)</h6>
-                                <div class="review-photos mt-3 ">
+                                <div class="review-photos-pelanggan mt-3 ">
                                     <div class="review-photo-pelanggan">
                                         <img src="assets/img/product/decorasi/ruang-santai.jpg" alt="Product review">
                                     </div>
@@ -380,12 +390,18 @@ function base_url($path = '')
                         </div>
 
                         <!-- Right grid - User reviews -->
-                        <div class="col-md-8">
+                        <div class="col-md-8 ps-1">
                             <!-- First review -->
                             <div class="review-grid-review">
                                 <div class="username">Yolanda</div>
                                 <div class="review-text">Kursinya kokoh, warnanya lucu</div>
-                                <div class="star">★★★★★</div>
+                                <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
+                                <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
+                                <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
+                                <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
+                                <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
+
+
                                 <div class="review-photos">
                                     <div class="review-photo">
                                         <img src="assets/img/product/decorasi/ruang-santai.jpg" alt="Product review">
@@ -411,7 +427,11 @@ function base_url($path = '')
                                 <div class="username">Yolanda</div>
                                 <div class="review-text">kursinya bagus rekomen untuk yang mencari kursi belajar anak,
                                     warna yang di berikan juga variatif</div>
-                                <div class="star">★★★★★</div>
+                                <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
+                                <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
+                                <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
+                                <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
+                                <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
                                 <div class="review-photos">
                                     <div class="review-photo">
                                         <img src="assets/img/product/decorasi/ruang-santai.jpg" alt="Product review">
@@ -433,13 +453,290 @@ function base_url($path = '')
                             </div>
 
                             <!-- See more button -->
-                            <button class="see-more-btn">Lihat Ulasan Lainnya</button>
+                            <button type="button" class="see-more-btn" data-bs-toggle="modal"
+                                data-bs-target="#reviewModal">Lihat Ulasan Lainnya</button>
+                            <!-- Button trigger modal -->
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
+        <!-- Modal Rview -->
+
+        <!-- Modal Structure -->
+        <div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true"
+            style="border-color: #FF8B2D;">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg"
+                style="max-width: 900px !important;">
+                <div class="modal-content rounded-4" style="border: 2px solid #D9D9D9;">
+                    <!-- Modal Header -->
+                    <div class="modal-header border-bottom-0">
+                        <h5 class="modal-title fw-bold" id="reviewModalLabel">Urutkan berdasarkan
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <!-- Modal Body -->
+                    <div class="modal-body">
+                        <!-- Reset Button -->
+                        <div class="tab-content-scroll-review me-3">
+                            <div class="row">
+                                <!-- Left grid - Ratings and photos -->
+                                <div class="col-md-3 pe-1">
+                                    <div class="review-grid-modal" style="background-color: #FFFFFF;">
+                                        <div class="col-md-3 m-0 p-0"
+                                            style="opacity: 1 !important; background-color: white;">
+                                            <div style="width: 250px;">
+                                                <h6 class="fw-bold text-dark mb-2" style="font-size: 14px;">
+                                                    Urutkan Berdasarkan</h6>
+                                                <!-- Urutkan Berdasarkan -->
+                                                <div class="mb-3">
+                                                    <button id="resetFilter" class="btn btn-secondary btn-sm mt-1"
+                                                        style="font-size: 11px; padding-right: 27px; padding-left: 27px;padding-top: 1px; padding-bottom: 1px; background-color: #D9D9D9; border: #D9D9D9;">Reset</button>
+                                                </div>
+
+                                                <hr>
+
+                                                <!-- Rekomendasi -->
+                                                <div class="mb-3">
+                                                    <h6 class="fw-bold text-dark mb-2" style="font-size: 15px;">
+                                                        Rekomendasi</h6>
+                                                    <div class="form-check custom-check">
+                                                        <input class="form-check-input" type="checkbox" value=""
+                                                            id="productTerbaru">
+                                                        <label class="form-check-label" for="productTerbaru">
+                                                            Product Terbaru
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check custom-check">
+                                                        <input class="form-check-input" type="checkbox" id="promo">
+                                                        <label class="form-check-label" for="promo">Promo</label>
+                                                    </div>
+                                                    <div class="form-check custom-check">
+                                                        <input class="form-check-input" type="checkbox" id="unggulan">
+                                                        <label class="form-check-label" for="unggulan">Product
+                                                            Unggulan</label>
+                                                    </div>
+                                                </div>
+                                                <hr>
+                                                <div class="mb-3">
+                                                    <h6 class="fw-bold text-dark mb-2" style="font-size: 15px;">
+                                                        Rating</h6>
+                                                    <div class="">
+                                                        <div class="form-check custom-check">
+                                                            <input class="form-check-input" type="checkbox" value=""
+                                                                id="productTerbaru">
+                                                            <div class="star-rating">
+                                                                <img src="assets/img/icon/star.svg" alt="start"
+                                                                    class="star-icon">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-check custom-check">
+                                                            <input class="form-check-input" type="checkbox" value=""
+                                                                id="productTerbaru">
+                                                            <div class="star-rating">
+                                                                <img src="assets/img/icon/star.svg" alt="start"
+                                                                    class="star-icon">
+                                                                <img src="assets/img/icon/star.svg" alt="start"
+                                                                    class="star-icon">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-check custom-check">
+                                                            <input class="form-check-input" type="checkbox" value=""
+                                                                id="productTerbaru">
+                                                            <div class="star-rating">
+                                                                <img src="assets/img/icon/star.svg" alt="start"
+                                                                    class="star-icon">
+                                                                <img src="assets/img/icon/star.svg" alt="start"
+                                                                    class="star-icon">
+                                                                <img src="assets/img/icon/star.svg" alt="start"
+                                                                    class="star-icon">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-check custom-check">
+                                                            <input class="form-check-input" type="checkbox" value=""
+                                                                id="productTerbaru">
+                                                            <div class="star-rating">
+                                                                <img src="assets/img/icon/star.svg" alt="start"
+                                                                    class="star-icon">
+                                                                <img src="assets/img/icon/star.svg" alt="start"
+                                                                    class="star-icon">
+                                                                <img src="assets/img/icon/star.svg" alt="start"
+                                                                    class="star-icon">
+                                                                <img src="assets/img/icon/star.svg" alt="start"
+                                                                    class="star-icon">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-check custom-check">
+                                                            <input class="form-check-input" type="checkbox" value=""
+                                                                id="productTerbaru">
+                                                            <div class="star-rating">
+                                                                <img src="assets/img/icon/star.svg" alt="start"
+                                                                    class="star-icon">
+                                                                <img src="assets/img/icon/star.svg" alt="start"
+                                                                    class="star-icon">
+                                                                <img src="assets/img/icon/star.svg" alt="start"
+                                                                    class="star-icon">
+                                                                <img src="assets/img/icon/star.svg" alt="start"
+                                                                    class="star-icon">
+                                                                <img src="assets/img/icon/star.svg" alt="start"
+                                                                    class="star-icon">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Right grid - User reviews -->
+                                <div class="col-md-9 ps-1">
+                                    <!-- First review -->
+                                    <div class="review-grid-review-modal" style="background-color: #FFFFFF;">
+                                        <div class="username">Yolanda</div>
+                                        <div class="fw-bold text-black" style="font-size: 12px;">kursinya bagus rekomen
+                                            untuk yang mencari kursi belajar
+                                            anak,
+                                            warna yang di berikan juga variatif</div>
+                                        <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
+                                        <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
+                                        <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
+                                        <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
+                                        <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
+                                        <div class="review-photos">
+                                            <div class="review-photo">
+                                                <img src="assets/img/product/decorasi/ruang-santai.jpg"
+                                                    alt="Product review">
+                                            </div>
+                                            <div class="review-photo">
+                                                <img src="assets/img/product/decorasi/ruang-santai.jpg"
+                                                    alt="Product review">
+                                            </div>
+                                            <div class="review-photo">
+                                                <img src="assets/img/product/decorasi/ruang-santai.jpg"
+                                                    alt="Product review">
+                                            </div>
+                                            <div class="review-photo">
+                                                <img src="assets/img/product/decorasi/ruang-santai.jpg"
+                                                    alt="Product review">
+                                            </div>
+                                            <div class="review-photo">
+                                                <img src="assets/img/product/decorasi/ruang-santai.jpg"
+                                                    alt="Product review">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="review-grid-review-modal" style="background-color: #FFFFFF;">
+                                        <div class="username">Yolanda</div>
+                                        <div class="fw-bold text-black" style="font-size: 12px;">kursinya bagus rekomen
+                                            untuk yang mencari kursi belajar
+                                            anak,
+                                            warna yang di berikan juga variatif</div>
+                                        <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
+                                        <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
+                                        <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
+                                        <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
+                                        <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
+                                        <div class="review-photos">
+                                            <div class="review-photo">
+                                                <img src="assets/img/product/decorasi/ruang-santai.jpg"
+                                                    alt="Product review">
+                                            </div>
+                                            <div class="review-photo">
+                                                <img src="assets/img/product/decorasi/ruang-santai.jpg"
+                                                    alt="Product review">
+                                            </div>
+                                            <div class="review-photo">
+                                                <img src="assets/img/product/decorasi/ruang-santai.jpg"
+                                                    alt="Product review">
+                                            </div>
+                                            <div class="review-photo">
+                                                <img src="assets/img/product/decorasi/ruang-santai.jpg"
+                                                    alt="Product review">
+                                            </div>
+                                            <div class="review-photo">
+                                                <img src="assets/img/product/decorasi/ruang-santai.jpg"
+                                                    alt="Product review">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="review-grid-review-modal" style="background-color: #FFFFFF;">
+                                        <div class="username">Yolanda</div>
+                                        <div class="fw-bold text-black" style="font-size: 12px;">kursinya bagus rekomen
+                                            untuk yang mencari kursi belajar
+                                            anak,
+                                            warna yang di berikan juga variatif</div>
+                                        <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
+                                        <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
+                                        <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
+                                        <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
+                                        <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
+                                        <div class="review-photos">
+                                            <div class="review-photo">
+                                                <img src="assets/img/product/decorasi/ruang-santai.jpg"
+                                                    alt="Product review">
+                                            </div>
+                                            <div class="review-photo">
+                                                <img src="assets/img/product/decorasi/ruang-santai.jpg"
+                                                    alt="Product review">
+                                            </div>
+                                            <div class="review-photo">
+                                                <img src="assets/img/product/decorasi/ruang-santai.jpg"
+                                                    alt="Product review">
+                                            </div>
+                                            <div class="review-photo">
+                                                <img src="assets/img/product/decorasi/ruang-santai.jpg"
+                                                    alt="Product review">
+                                            </div>
+                                            <div class="review-photo">
+                                                <img src="assets/img/product/decorasi/ruang-santai.jpg"
+                                                    alt="Product review">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="review-grid-review-modal" style="background-color: #FFFFFF;">
+                                        <div class="username">Yolanda</div>
+                                        <div class="fw-bold text-black" style="font-size: 12px;">kursinya bagus rekomen
+                                            untuk yang mencari kursi belajar
+                                            anak,
+                                            warna yang di berikan juga variatif</div>
+                                        <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
+                                        <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
+                                        <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
+                                        <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
+                                        <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
+                                        <div class="review-photos">
+                                            <div class="review-photo">
+                                                <img src="assets/img/product/decorasi/ruang-santai.jpg"
+                                                    alt="Product review">
+                                            </div>
+                                            <div class="review-photo">
+                                                <img src="assets/img/product/decorasi/ruang-santai.jpg"
+                                                    alt="Product review">
+                                            </div>
+                                            <div class="review-photo">
+                                                <img src="assets/img/product/decorasi/ruang-santai.jpg"
+                                                    alt="Product review">
+                                            </div>
+                                            <div class="review-photo">
+                                                <img src="assets/img/product/decorasi/ruang-santai.jpg"
+                                                    alt="Product review">
+                                            </div>
+                                            <div class="review-photo">
+                                                <img src="assets/img/product/decorasi/ruang-santai.jpg"
+                                                    alt="Product review">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- Rekomendasi Product -->
         <div class="product-area product-area-new pt-40">
             <div class="container">
@@ -917,7 +1214,7 @@ function base_url($path = '')
     <!-- js -->
 
     <!-- js end -->
-    <script data-cfasync="false" src="cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <!-- <script data-cfasync="false" src="cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script> -->
     <script src="assets/js/jquery-3.7.1.min.js"></script>
     <script src="assets/js/modernizr.min.js"></script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
@@ -935,7 +1232,7 @@ function base_url($path = '')
     <script src="assets/js/main.js"></script>
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
+    <!-- <script>
         document.addEventListener('DOMContentLoaded', function () {
             const offcanvasToggler = document.getElementById('offcanvasToggler');
             const offcanvasNavbar = document.getElementById('offcanvasNavbar');
@@ -959,62 +1256,8 @@ function base_url($path = '')
                 document.querySelectorAll('.offcanvas-backdrop').forEach(el => el.remove());
             });
         });
-    </script>
+    </script> -->
 
-    <script>
-        // Add focus event to automatically open modal when clicking the search field
-        document.addEventListener('DOMContentLoaded', function () {
-            const searchModal = document.getElementById('searchModal');
-            searchModal.addEventListener('shown.bs.modal', function () {
-                searchModal.querySelector('input').focus();
-            });
-        });
-
-
-        const resetBtn = document.getElementById('resetFilter');
-        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-        const hargaInputs = document.querySelectorAll('.harga-input');
-
-        const defaultColor = '#D9D9D9';
-        const activeColor = '#2B4779';
-
-        function updateResetButtonState() {
-            const anyChecked = Array.from(checkboxes).some(cb => cb.checked);
-            const anyHargaFilled = Array.from(hargaInputs).some(input => input.value.trim() !== '');
-
-            if (anyChecked || anyHargaFilled) {
-                resetBtn.style.backgroundColor = activeColor;
-                resetBtn.style.borderColor = activeColor;
-                resetBtn.style.color = 'white';
-            } else {
-                resetBtn.style.backgroundColor = defaultColor;
-                resetBtn.style.borderColor = defaultColor;
-                resetBtn.style.color = 'black';
-            }
-        }
-
-        // Listener untuk checkbox
-        checkboxes.forEach(cb => {
-            cb.addEventListener('change', updateResetButtonState);
-        });
-
-        // Listener untuk input harga
-        hargaInputs.forEach(input => {
-            input.addEventListener('input', updateResetButtonState);
-        });
-
-        // Reset button
-        resetBtn.addEventListener('click', function () {
-            // Uncheck semua checkbox
-            checkboxes.forEach(cb => cb.checked = false);
-
-            // Kosongkan input harga
-            hargaInputs.forEach(input => input.value = '');
-
-            // Reset warna tombol
-            updateResetButtonState();
-        });
-    </script>
     <script>
         // slid halaman detail
         const tabs = document.querySelectorAll('.custom-nav-link-descripsi');
@@ -1042,6 +1285,37 @@ function base_url($path = '')
             });
         });
     </script>
+
+    <script>
+        const filterCheckboxes = document.querySelectorAll('.form-check-input');
+        const resetButton = document.getElementById('resetFilter');
+
+        // Fungsi untuk cek apakah ada filter yang aktif
+        function checkFilters() {
+            let isAnyChecked = false;
+            filterCheckboxes.forEach(cb => {
+                if (cb.checked) isAnyChecked = true;
+            });
+
+            if (isAnyChecked) {
+                resetButton.classList.add('active');
+            } else {
+                resetButton.classList.remove('active');
+            }
+        }
+
+        // Event listener untuk semua checkbox
+        filterCheckboxes.forEach(cb => {
+            cb.addEventListener('change', checkFilters);
+        });
+
+        // Tombol Reset
+        resetButton.addEventListener('click', function () {
+            filterCheckboxes.forEach(cb => cb.checked = false);
+            resetButton.classList.remove('active');
+        });
+    </script>
+
 
 </body>
 

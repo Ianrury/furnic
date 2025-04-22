@@ -66,9 +66,10 @@ function is_active($route)
                             </li>
 
                             <li class="nav-item">
-                                <a class="d-flex justify-content-center align-items-center w-100 h-100 custom-nav-link<?php echo (basename($_SERVER['PHP_SELF']) == 'promo.php') ? 'active' : ''; ?>"
-                                    href="promo.php" style="font-size: 14px;"> Promo</a>
+                                <a class="d-flex justify-content-center align-items-center w-100 h-100 custom-nav-link <?= is_active('promo') ?>"
+                                    href="/promo" style="font-size: 14px;">Product</a>
                             </li>
+
                             <li class="nav-item">
                                 <a class="d-flex justify-content-center align-items-center w-100 h-100 custom-nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'dekorasi.php') ? 'active' : ''; ?>"
                                     href="dekorasi.php" style="font-size: 14px;"> Dekorasi</a>
