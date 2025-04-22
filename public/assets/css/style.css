@@ -9111,11 +9111,14 @@ label {
 .product-title {
   font-size: 14px;
   line-height: 1.4;
-  white-space: normal;
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 2; /* max 2 lines */
-  -webkit-box-orient: vertical;
+}
+
+.ul-categories {
+  display: flex;
+  list-style: none;
+  padding-left: 0;
+  gap: 60px;
+  margin-bottom: 0px;
 }
 
 .product-desc {
@@ -9138,11 +9141,82 @@ label {
   font-size: 10px;
 }
 
+/* Responsive - Desktop */
+@media (max-width: 2000px) {
+  .custom-nav-link-product {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    padding: 13px 0;
+    color: #000;
+    /* default warna hitam */
+    text-decoration: none;
+    width: 90px;
+    height: 2px;
+    margin: 0 !important;
+    transition: color 0.3s ease;
+  }
+
+  /* Saat aktif: tulisan jadi biru & garis bawah muncul */
+  .custom-nav-link-product.active {
+    color: #5c86b8;
+    font-weight: 700;
+    /* warna biru saat aktif */
+  }
+
+  /* Garis bawah saat aktif */
+  .custom-nav-link-product.active::after {
+    content: "";
+    position: absolute;
+    width: 120px;
+    height: 2px;
+    background-color: #5c86b8;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  /* Garis bawah hover (kalau belum aktif) */
+  .custom-nav-link-product:not(.active)::after {
+    content: "";
+    position: absolute;
+    width: 120px;
+    height: 2px;
+    background-color: #5c86b8;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%) scaleX(0);
+    /* mulai tidak terlihat */
+    transform-origin: center;
+    transition: transform 0.3s ease-in-out;
+  }
+
+  /* Saat hover: garis muncul (animasi) */
+  .custom-nav-link-product:not(.active):hover::after {
+    transform: translateX(-50%) scaleX(1);
+    /* munculkan garis */
+  }
+
+  /* Tambahan opsional: hover tulisan juga biru */
+  .custom-nav-link-product:hover {
+    color: #5c86b8;
+  }
+
+  .bodykartu {
+    padding: 8px 16px;
+  }
+
+  .ul-categories{
+    margin-left: 18px;
+  }
+}
+
 /* Responsive - Tablet */
 @media (max-width: 991.98px) {
   .product-title {
     font-size: 13px;
-    -webkit-line-clamp: 2;
   }
 
   .product-desc,
@@ -9162,6 +9236,13 @@ label {
   .ribbon {
     font-size: 9px;
   }
+  .bodykartu {
+    padding: 8px 16px;
+  }
+}
+
+.product-title {
+  font-size: 13px;
 }
 
 /* Responsive - HP */
@@ -9171,8 +9252,7 @@ label {
   }
 
   .product-title {
-    font-size: 12px;
-    -webkit-line-clamp: 2;
+    font-size: 10px;
   }
 
   .product-desc,
@@ -9182,15 +9262,115 @@ label {
   }
 
   .price {
-    font-size: 13px;
+    font-size: 9px;
   }
 
   .old-price {
     font-size: 8px;
   }
 
+
+  /* .categories {
+    width: 200px;
+    overflow-x: auto;
+    white-space: nowrap;
+  } */
+
+  .ul-categories {
+    display: flex;
+    list-style: none;
+    padding-left: 0;
+    gap: 13px;
+    margin-bottom: 0px;
+  }
+
+  .ul-categories{
+    margin-left: 5px;
+  }
+
+  .custom-nav-link-product {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 13px;
+    padding: 13px 0;
+    color: #000;
+    /* default warna hitam */
+    text-decoration: none;
+    width: 55px;
+    height: 2px;
+    margin: 0 !important;
+    transition: color 0.3s ease;
+  }
+
+  /* Saat aktif: tulisan jadi biru & garis bawah muncul */
+  .custom-nav-link-product.active {
+    color: #5c86b8;
+    font-weight: 700;
+    /* warna biru saat aktif */
+  }
+
+  /* Garis bawah saat aktif */
+  .custom-nav-link-product.active::after {
+    content: "";
+    position: absolute;
+    width: 55px;
+    height: 2px;
+    background-color: #5c86b8;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  /* Garis bawah hover (kalau belum aktif) */
+  .custom-nav-link-product:not(.active)::after {
+    content: "";
+    position: absolute;
+    width: 50px;
+    height: 2px;
+    background-color: #5c86b8;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%) scaleX(0);
+    /* mulai tidak terlihat */
+    transform-origin: center;
+    transition: transform 0.3s ease-in-out;
+  }
+
+  /* Saat hover: garis muncul (animasi) */
+  .custom-nav-link-product:not(.active):hover::after {
+    transform: translateX(-50%) scaleX(1);
+    /* munculkan garis */
+  }
+
+  /* Tambahan opsional: hover tulisan juga biru */
+  .custom-nav-link-product:hover {
+    color: #5c86b8;
+  }
+
+  .bodykartu {
+    padding: 0px 0px;
+  }
+
+  /* Ribbon */
+  .ribbon-wrapper {
+    top: 0;
+    left: 0;
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    z-index: 10;
+  }
+
   .ribbon {
-    font-size: 8px;
+    position: absolute;
+    width: 200px;
+    height: 10px;
+    background-color: #2b4779;
+    transform: rotate(-45deg) translateY(-30px) translateX(-70px);
+    font-size: 5px;
+    line-height: 10px;
   }
 }
 
@@ -9289,66 +9469,23 @@ label {
   color: #5c86b8;
 }
 
+/* @media (min-width: 768px) {
+  
+} */
 /* Link biasa */
-.custom-nav-link-product {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 13px 0;
-  color: #000;
-  /* default warna hitam */
-  text-decoration: none;
-  width: 90px;
-  height: 2px;
-  margin: 0 !important;
-  transition: color 0.3s ease;
-}
 
-/* Saat aktif: tulisan jadi biru & garis bawah muncul */
-.custom-nav-link-product.active {
-  color: #5c86b8;
-  font-weight: 700;
-  /* warna biru saat aktif */
-}
+/* @media (max-width: 767px) {
+  .custom-nav-link-product {
+    width: 4px;             
+    font-size: 10px;         
+    padding: 9px 0;          
+  }
 
-/* Garis bawah saat aktif */
-.custom-nav-link-product.active::after {
-  content: "";
-  position: absolute;
-  width: 120px;
-  height: 2px;
-  background-color: #5c86b8;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-/* Garis bawah hover (kalau belum aktif) */
-.custom-nav-link-product:not(.active)::after {
-  content: "";
-  position: absolute;
-  width: 120px;
-  height: 2px;
-  background-color: #5c86b8;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%) scaleX(0);
-  /* mulai tidak terlihat */
-  transform-origin: center;
-  transition: transform 0.3s ease-in-out;
-}
-
-/* Saat hover: garis muncul (animasi) */
-.custom-nav-link-product:not(.active):hover::after {
-  transform: translateX(-50%) scaleX(1);
-  /* munculkan garis */
-}
-
-/* Tambahan opsional: hover tulisan juga biru */
-.custom-nav-link-product:hover {
-  color: #5c86b8;
-}
+  .custom-nav-link-product.active::after,
+  .custom-nav-link-product:not(.active)::after {
+    width: 60px;              
+  }
+} */
 
 /*====================
 74. Custom Detail PRODUCT
@@ -9581,7 +9718,7 @@ label {
   background-color: #f5f6fa;
   border-radius: 8px;
   padding: 2px 30px;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 .review-photos {
   display: flex;
@@ -9598,7 +9735,7 @@ label {
   gap: 10px;
 }
 
-.star-icon{
+.star-icon {
   width: 15px;
   height: 15px;
 }
@@ -9675,25 +9812,24 @@ label {
 
 .breadcrumb {
   font-size: 14px;
-  color: #2B4779;
+  color: #2b4779;
 }
 
 .breadcrumb-item a {
-  color: #2B4779;
+  color: #2b4779;
   text-decoration: none;
 }
 
 .breadcrumb-item.active {
-  color: #2B4779;
+  color: #2b4779;
   text-decoration: underline;
   /* width: 4px; */
 }
 
 .breadcrumb-item + .breadcrumb-item::before {
-  color: #2B4779;
+  color: #2b4779;
   content: " / ";
 }
-
 
 /* Ribbon Promo */
 
@@ -9746,4 +9882,12 @@ label {
   background-color: #1f4573 !important;
   border-color: #1f4573 !important;
   color: white;
+}
+
+/* radio */
+/* Pertebal dan perjelas border checkbox */
+input[type="checkbox"].form-check-input {
+  /* width: 18px;
+  height: 18px; */
+  border: 1px solid #95a5a6 !important; /* Warna border lebih gelap */
 }

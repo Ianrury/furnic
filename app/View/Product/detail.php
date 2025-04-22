@@ -80,8 +80,8 @@ function base_url($path = '')
         <div class="container">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0">
-                    <li class="breadcrumb-item"><a href="#">Beranda</a></li>
-                    <li class="breadcrumb-item"><a href="#">Product</a></li>
+                    <li class="breadcrumb-item"><a href="/">Beranda</a></li>
+                    <li class="breadcrumb-item"><a href="/product">Product</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Clover Chair</li>
                 </ol>
             </nav>
@@ -105,7 +105,7 @@ function base_url($path = '')
         <!-- Product -->
         <div class="product-area product-area-new">
             <div class="container py-4">
-                <div class="row g-5">
+                <div class="row g-0 g-md-5">
                     <!-- Product Images Column -->
                     <div class="col-md-5">
                         <div class="card product-card-detail">
@@ -312,7 +312,7 @@ function base_url($path = '')
                 <div class="tab-content wow fadeInUp" data-wow-delay=".25s" id="item-tabContent">
                     <div class="row">
                         <!-- Left grid - Ratings and photos -->
-                        <div class="col-md-4 pe-1">
+                        <div class="col-md-4">
                             <div class="review-grid">
                                 <div class="d-flex justify-content-between align-items-center mb-3">
                                     <div>
@@ -390,7 +390,7 @@ function base_url($path = '')
                         </div>
 
                         <!-- Right grid - User reviews -->
-                        <div class="col-md-8 ps-1">
+                        <div class="col-md-8">
                             <!-- First review -->
                             <div class="review-grid-review">
                                 <div class="username">Yolanda</div>
@@ -472,7 +472,7 @@ function base_url($path = '')
                 <div class="modal-content rounded-4" style="border: 2px solid #D9D9D9;">
                     <!-- Modal Header -->
                     <div class="modal-header border-bottom-0">
-                        <h5 class="modal-title fw-bold" id="reviewModalLabel">Urutkan berdasarkan
+                        <h5 class="modal-title fw-bold" id="reviewModalLabel">
                         </h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
@@ -504,17 +504,19 @@ function base_url($path = '')
                                                         Rekomendasi</h6>
                                                     <div class="form-check custom-check">
                                                         <input class="form-check-input" type="checkbox" value=""
-                                                            id="productTerbaru">
+                                                            id="productTerbaru" style="border: 1px solid #95a5a6">
                                                         <label class="form-check-label" for="productTerbaru">
                                                             Product Terbaru
                                                         </label>
                                                     </div>
                                                     <div class="form-check custom-check">
-                                                        <input class="form-check-input" type="checkbox" id="promo">
+                                                        <input class="form-check-input" type="checkbox" id="promo"
+                                                            style="border: 1px solid #95a5a6">
                                                         <label class="form-check-label" for="promo">Promo</label>
                                                     </div>
                                                     <div class="form-check custom-check">
-                                                        <input class="form-check-input" type="checkbox" id="unggulan">
+                                                        <input class="form-check-input" type="checkbox" id="unggulan"
+                                                            style="border: 1px solid #95a5a6">
                                                         <label class="form-check-label" for="unggulan">Product
                                                             Unggulan</label>
                                                     </div>
@@ -526,7 +528,7 @@ function base_url($path = '')
                                                     <div class="">
                                                         <div class="form-check custom-check">
                                                             <input class="form-check-input" type="checkbox" value=""
-                                                                id="productTerbaru">
+                                                                id="productTerbaru" style="border: 1px solid #95a5a6">
                                                             <div class="star-rating">
                                                                 <img src="assets/img/icon/star.svg" alt="start"
                                                                     class="star-icon">
@@ -534,20 +536,8 @@ function base_url($path = '')
                                                         </div>
                                                         <div class="form-check custom-check">
                                                             <input class="form-check-input" type="checkbox" value=""
-                                                                id="productTerbaru">
+                                                                id="productTerbaru" style="border: 1px solid #95a5a6">
                                                             <div class="star-rating">
-                                                                <img src="assets/img/icon/star.svg" alt="start"
-                                                                    class="star-icon">
-                                                                <img src="assets/img/icon/star.svg" alt="start"
-                                                                    class="star-icon">
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-check custom-check">
-                                                            <input class="form-check-input" type="checkbox" value=""
-                                                                id="productTerbaru">
-                                                            <div class="star-rating">
-                                                                <img src="assets/img/icon/star.svg" alt="start"
-                                                                    class="star-icon">
                                                                 <img src="assets/img/icon/star.svg" alt="start"
                                                                     class="star-icon">
                                                                 <img src="assets/img/icon/star.svg" alt="start"
@@ -556,10 +546,8 @@ function base_url($path = '')
                                                         </div>
                                                         <div class="form-check custom-check">
                                                             <input class="form-check-input" type="checkbox" value=""
-                                                                id="productTerbaru">
+                                                                id="productTerbaru" style="border: 1px solid #95a5a6">
                                                             <div class="star-rating">
-                                                                <img src="assets/img/icon/star.svg" alt="start"
-                                                                    class="star-icon">
                                                                 <img src="assets/img/icon/star.svg" alt="start"
                                                                     class="star-icon">
                                                                 <img src="assets/img/icon/star.svg" alt="start"
@@ -570,7 +558,21 @@ function base_url($path = '')
                                                         </div>
                                                         <div class="form-check custom-check">
                                                             <input class="form-check-input" type="checkbox" value=""
-                                                                id="productTerbaru">
+                                                                id="productTerbaru" style="border: 1px solid #95a5a6">
+                                                            <div class="star-rating">
+                                                                <img src="assets/img/icon/star.svg" alt="start"
+                                                                    class="star-icon">
+                                                                <img src="assets/img/icon/star.svg" alt="start"
+                                                                    class="star-icon">
+                                                                <img src="assets/img/icon/star.svg" alt="start"
+                                                                    class="star-icon">
+                                                                <img src="assets/img/icon/star.svg" alt="start"
+                                                                    class="star-icon">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-check custom-check">
+                                                            <input class="form-check-input" type="checkbox" value=""
+                                                                id="productTerbaru" style="border: 1px solid #95a5a6">
                                                             <div class="star-rating">
                                                                 <img src="assets/img/icon/star.svg" alt="start"
                                                                     class="star-icon">
@@ -596,7 +598,7 @@ function base_url($path = '')
                                     <!-- First review -->
                                     <div class="review-grid-review-modal" style="background-color: #FFFFFF;">
                                         <div class="username">Yolanda</div>
-                                        <div class="fw-bold text-black" style="font-size: 12px;">kursinya bagus rekomen
+                                        <div class="fw-normal text-black" style="font-size: 12px;">kursinya bagus rekomen
                                             untuk yang mencari kursi belajar
                                             anak,
                                             warna yang di berikan juga variatif</div>
@@ -630,7 +632,7 @@ function base_url($path = '')
                                     </div>
                                     <div class="review-grid-review-modal" style="background-color: #FFFFFF;">
                                         <div class="username">Yolanda</div>
-                                        <div class="fw-bold text-black" style="font-size: 12px;">kursinya bagus rekomen
+                                        <div class="fw-normal text-black" style="font-size: 12px;">kursinya bagus rekomen
                                             untuk yang mencari kursi belajar
                                             anak,
                                             warna yang di berikan juga variatif</div>
@@ -664,7 +666,7 @@ function base_url($path = '')
                                     </div>
                                     <div class="review-grid-review-modal" style="background-color: #FFFFFF;">
                                         <div class="username">Yolanda</div>
-                                        <div class="fw-bold text-black" style="font-size: 12px;">kursinya bagus rekomen
+                                        <div class="fw-normal text-black" style="font-size: 12px;">kursinya bagus rekomen
                                             untuk yang mencari kursi belajar
                                             anak,
                                             warna yang di berikan juga variatif</div>
@@ -698,7 +700,7 @@ function base_url($path = '')
                                     </div>
                                     <div class="review-grid-review-modal" style="background-color: #FFFFFF;">
                                         <div class="username">Yolanda</div>
-                                        <div class="fw-bold text-black" style="font-size: 12px;">kursinya bagus rekomen
+                                        <div class="fw-normal text-black" style="font-size: 12px;">kursinya bagus rekomen
                                             untuk yang mencari kursi belajar
                                             anak,
                                             warna yang di berikan juga variatif</div>
@@ -751,11 +753,12 @@ function base_url($path = '')
                     <div class="container">
                         <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4  justify-content-center">
                             <div class="col">
-                                <div class="card shadow position-relative h-100 rounded-4 p-2">
+                                <div class="card shadow position-relative rounded-4 p-2">
                                     <!-- Corner Ribbon -->
                                     <div class="position-absolute ribbon-wrapper">
-                                        <div class="ribbon text-white text-uppercase fw-bold text-center">
-                                            New Product
+                                        <div class="ribbon text-uppercase fw-bold text-center"
+                                            style="color: #FF0000; background-color: #FFFB2D;">
+                                            Sale
                                         </div>
                                     </div>
 
@@ -764,39 +767,44 @@ function base_url($path = '')
                                         <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png"
                                             class="img-fluid product-image" alt="Product Image">
                                     </div>
-
-                                    <div class="card-body d-flex flex-column pt-2">
-                                        <!-- Product Details -->
-                                        <div class="pb-2">
-                                            <h5 class="card-title fw-medium product-title">
+                                    <div class="bodykartu">
+                                        <div class="d-flex flex-column ">
+                                            <!-- Product Details -->
+                                            <div class="">
+                                                <!-- <h5 class="">
                                                 CT-IMP Matto Light Brown
-                                            </h5>
-                                            <p class="card-text mb-1 text-truncate product-desc">Meja ruang tamu
-                                                aesthetic.</p>
-                                            <div class="d-flex gap-1 align-items-center mb-2">
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <small class="text-muted fst-italic ms-1 sold-text">300
-                                                    terjual</small>
-                                            </div>
-                                        </div>
+                                            </h5> -->
+                                                <p class="card-title text-truncate fw-medium product-title">CT-IMP Matto
+                                                    Light Brown
+                                                </p>
 
-                                        <!-- Price Section -->
-                                        <div class="mt-auto">
-                                            <div class="d-flex flex-wrap align-items-baseline">
-                                                <div class="me-2">
-                                                    <span class="fw-bold price">
-                                                        <sup class="fw-normal">Rp</sup> 500.000
-                                                    </span>
+                                                <p class="card-text text-truncate product-desc">Meja ruang tamu
+                                                    aesthetic.</p>
+                                                <div class="d-flex gap-1 align-items-center">
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <small class="text-muted fst-italic ms-1 sold-text">300
+                                                        terjual</small>
                                                 </div>
-                                                <div>
-                                                    <span class="fw-normal text-danger old-price">
-                                                        <sup>Rp</sup>
-                                                        <span class="text-decoration-line-through">600.000</span>
-                                                    </span>
+                                            </div>
+
+                                            <!-- Price Section -->
+                                            <div class="mt-auto">
+                                                <div class="d-flex flex-wrap align-items-baseline">
+                                                    <div class="me-2">
+                                                        <span class="fw-bold price">
+                                                            <sup class="fw-normal">Rp</sup> 500.000
+                                                        </span>
+                                                    </div>
+                                                    <div>
+                                                        <span class="fw-normal text-danger old-price">
+                                                            <sup>Rp</sup>
+                                                            <span class="text-decoration-line-through">600.000</span>
+                                                        </span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -804,11 +812,12 @@ function base_url($path = '')
                                 </div>
                             </div>
                             <div class="col">
-                                <div class="card shadow position-relative h-100 rounded-4 p-2">
+                                <div class="card shadow position-relative rounded-4 p-2">
                                     <!-- Corner Ribbon -->
                                     <div class="position-absolute ribbon-wrapper">
-                                        <div class="ribbon text-white text-uppercase fw-bold text-center">
-                                            New Product
+                                        <div class="ribbon text-white text-uppercase fw-bold text-center"
+                                            style="background-color: #FF0000;">
+                                            Out of Stock
                                         </div>
                                     </div>
 
@@ -817,39 +826,44 @@ function base_url($path = '')
                                         <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png"
                                             class="img-fluid product-image" alt="Product Image">
                                     </div>
-
-                                    <div class="card-body d-flex flex-column pt-2">
-                                        <!-- Product Details -->
-                                        <div class="pb-2">
-                                            <h5 class="card-title fw-medium product-title">
+                                    <div class="bodykartu">
+                                        <div class="d-flex flex-column ">
+                                            <!-- Product Details -->
+                                            <div class="">
+                                                <!-- <h5 class="">
                                                 CT-IMP Matto Light Brown
-                                            </h5>
-                                            <p class="card-text mb-1 text-truncate product-desc">Meja ruang tamu
-                                                aesthetic.</p>
-                                            <div class="d-flex gap-1 align-items-center mb-2">
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <small class="text-muted fst-italic ms-1 sold-text">300
-                                                    terjual</small>
-                                            </div>
-                                        </div>
+                                            </h5> -->
+                                                <p class="card-title text-truncate fw-medium product-title">CT-IMP Matto
+                                                    Light Brown
+                                                </p>
 
-                                        <!-- Price Section -->
-                                        <div class="mt-auto">
-                                            <div class="d-flex flex-wrap align-items-baseline">
-                                                <div class="me-2">
-                                                    <span class="fw-bold price">
-                                                        <sup class="fw-normal">Rp</sup> 500.000
-                                                    </span>
+                                                <p class="card-text text-truncate product-desc">Meja ruang tamu
+                                                    aesthetic.</p>
+                                                <div class="d-flex gap-1 align-items-center">
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <small class="text-muted fst-italic ms-1 sold-text">300
+                                                        terjual</small>
                                                 </div>
-                                                <div>
-                                                    <span class="fw-normal text-danger old-price">
-                                                        <sup>Rp</sup>
-                                                        <span class="text-decoration-line-through">600.000</span>
-                                                    </span>
+                                            </div>
+
+                                            <!-- Price Section -->
+                                            <div class="mt-auto">
+                                                <div class="d-flex flex-wrap align-items-baseline">
+                                                    <div class="me-2">
+                                                        <span class="fw-bold price">
+                                                            <sup class="fw-normal">Rp</sup> 500.000
+                                                        </span>
+                                                    </div>
+                                                    <div>
+                                                        <span class="fw-normal text-danger old-price">
+                                                            <sup>Rp</sup>
+                                                            <span class="text-decoration-line-through">600.000</span>
+                                                        </span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -857,7 +871,7 @@ function base_url($path = '')
                                 </div>
                             </div>
                             <div class="col">
-                                <div class="card shadow position-relative h-100 rounded-4 p-2">
+                                <div class="card shadow position-relative rounded-4 p-2">
                                     <!-- Corner Ribbon -->
                                     <div class="position-absolute ribbon-wrapper">
                                         <div class="ribbon text-white text-uppercase fw-bold text-center">
@@ -870,39 +884,44 @@ function base_url($path = '')
                                         <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png"
                                             class="img-fluid product-image" alt="Product Image">
                                     </div>
-
-                                    <div class="card-body d-flex flex-column pt-2">
-                                        <!-- Product Details -->
-                                        <div class="pb-2">
-                                            <h5 class="card-title fw-medium product-title">
+                                    <div class="bodykartu">
+                                        <div class="d-flex flex-column ">
+                                            <!-- Product Details -->
+                                            <div class="">
+                                                <!-- <h5 class="">
                                                 CT-IMP Matto Light Brown
-                                            </h5>
-                                            <p class="card-text mb-1 text-truncate product-desc">Meja ruang tamu
-                                                aesthetic.</p>
-                                            <div class="d-flex gap-1 align-items-center mb-2">
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <small class="text-muted fst-italic ms-1 sold-text">300
-                                                    terjual</small>
-                                            </div>
-                                        </div>
+                                            </h5> -->
+                                                <p class="card-title text-truncate fw-medium product-title">CT-IMP Matto
+                                                    Light Brown
+                                                </p>
 
-                                        <!-- Price Section -->
-                                        <div class="mt-auto">
-                                            <div class="d-flex flex-wrap align-items-baseline">
-                                                <div class="me-2">
-                                                    <span class="fw-bold price">
-                                                        <sup class="fw-normal">Rp</sup> 500.000
-                                                    </span>
+                                                <p class="card-text text-truncate product-desc">Meja ruang tamu
+                                                    aesthetic.</p>
+                                                <div class="d-flex gap-1 align-items-center">
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <small class="text-muted fst-italic ms-1 sold-text">300
+                                                        terjual</small>
                                                 </div>
-                                                <div>
-                                                    <span class="fw-normal text-danger old-price">
-                                                        <sup>Rp</sup>
-                                                        <span class="text-decoration-line-through">600.000</span>
-                                                    </span>
+                                            </div>
+
+                                            <!-- Price Section -->
+                                            <div class="mt-auto">
+                                                <div class="d-flex flex-wrap align-items-baseline">
+                                                    <div class="me-2">
+                                                        <span class="fw-bold price">
+                                                            <sup class="fw-normal">Rp</sup> 500.000
+                                                        </span>
+                                                    </div>
+                                                    <div>
+                                                        <span class="fw-normal text-danger old-price">
+                                                            <sup>Rp</sup>
+                                                            <span class="text-decoration-line-through">600.000</span>
+                                                        </span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -910,11 +929,12 @@ function base_url($path = '')
                                 </div>
                             </div>
                             <div class="col">
-                                <div class="card shadow position-relative h-100 rounded-4 p-2">
+                                <div class="card shadow position-relative rounded-4 p-2">
                                     <!-- Corner Ribbon -->
                                     <div class="position-absolute ribbon-wrapper">
-                                        <div class="ribbon text-white text-uppercase fw-bold text-center">
-                                            New Product
+                                        <div class="ribbon text-white text-uppercase fw-bold text-center"
+                                            style="background-color: #FF8B2D;">
+                                            Best Seller
                                         </div>
                                     </div>
 
@@ -923,39 +943,44 @@ function base_url($path = '')
                                         <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png"
                                             class="img-fluid product-image" alt="Product Image">
                                     </div>
-
-                                    <div class="card-body d-flex flex-column pt-2">
-                                        <!-- Product Details -->
-                                        <div class="pb-2">
-                                            <h5 class="card-title fw-medium product-title">
+                                    <div class="bodykartu">
+                                        <div class="d-flex flex-column ">
+                                            <!-- Product Details -->
+                                            <div class="">
+                                                <!-- <h5 class="">
                                                 CT-IMP Matto Light Brown
-                                            </h5>
-                                            <p class="card-text mb-1 text-truncate product-desc">Meja ruang tamu
-                                                aesthetic.</p>
-                                            <div class="d-flex gap-1 align-items-center mb-2">
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <small class="text-muted fst-italic ms-1 sold-text">300
-                                                    terjual</small>
-                                            </div>
-                                        </div>
+                                            </h5> -->
+                                                <p class="card-title text-truncate fw-medium product-title">CT-IMP Matto
+                                                    Light Brown
+                                                </p>
 
-                                        <!-- Price Section -->
-                                        <div class="mt-auto">
-                                            <div class="d-flex flex-wrap align-items-baseline">
-                                                <div class="me-2">
-                                                    <span class="fw-bold price">
-                                                        <sup class="fw-normal">Rp</sup> 500.000
-                                                    </span>
+                                                <p class="card-text text-truncate product-desc">Meja ruang tamu
+                                                    aesthetic.</p>
+                                                <div class="d-flex gap-1 align-items-center">
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <small class="text-muted fst-italic ms-1 sold-text">300
+                                                        terjual</small>
                                                 </div>
-                                                <div>
-                                                    <span class="fw-normal text-danger old-price">
-                                                        <sup>Rp</sup>
-                                                        <span class="text-decoration-line-through">600.000</span>
-                                                    </span>
+                                            </div>
+
+                                            <!-- Price Section -->
+                                            <div class="mt-auto">
+                                                <div class="d-flex flex-wrap align-items-baseline">
+                                                    <div class="me-2">
+                                                        <span class="fw-bold price">
+                                                            <sup class="fw-normal">Rp</sup> 500.000
+                                                        </span>
+                                                    </div>
+                                                    <div>
+                                                        <span class="fw-normal text-danger old-price">
+                                                            <sup>Rp</sup>
+                                                            <span class="text-decoration-line-through">600.000</span>
+                                                        </span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -982,7 +1007,7 @@ function base_url($path = '')
                     <div class="container">
                         <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4  justify-content-center">
                             <div class="col">
-                                <div class="card shadow position-relative h-100 rounded-4 p-2">
+                                <div class="card shadow position-relative rounded-4 p-2">
                                     <!-- Corner Ribbon -->
                                     <div class="position-absolute ribbon-wrapper">
                                         <div class="ribbon text-white text-uppercase fw-bold text-center"
@@ -996,39 +1021,44 @@ function base_url($path = '')
                                         <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png"
                                             class="img-fluid product-image" alt="Product Image">
                                     </div>
-
-                                    <div class="card-body d-flex flex-column pt-2">
-                                        <!-- Product Details -->
-                                        <div class="pb-2">
-                                            <h5 class="card-title fw-medium product-title">
+                                    <div class="bodykartu">
+                                        <div class="d-flex flex-column ">
+                                            <!-- Product Details -->
+                                            <div class="">
+                                                <!-- <h5 class="">
                                                 CT-IMP Matto Light Brown
-                                            </h5>
-                                            <p class="card-text mb-1 text-truncate product-desc">Meja ruang tamu
-                                                aesthetic.</p>
-                                            <div class="d-flex gap-1 align-items-center mb-2">
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <small class="text-muted fst-italic ms-1 sold-text">300
-                                                    terjual</small>
-                                            </div>
-                                        </div>
+                                            </h5> -->
+                                                <p class="card-title text-truncate fw-medium product-title">CT-IMP Matto
+                                                    Light Brown
+                                                </p>
 
-                                        <!-- Price Section -->
-                                        <div class="mt-auto">
-                                            <div class="d-flex flex-wrap align-items-baseline">
-                                                <div class="me-2">
-                                                    <span class="fw-bold price">
-                                                        <sup class="fw-normal">Rp</sup> 500.000
-                                                    </span>
+                                                <p class="card-text text-truncate product-desc">Meja ruang tamu
+                                                    aesthetic.</p>
+                                                <div class="d-flex gap-1 align-items-center">
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <small class="text-muted fst-italic ms-1 sold-text">300
+                                                        terjual</small>
                                                 </div>
-                                                <div>
-                                                    <span class="fw-normal text-danger old-price">
-                                                        <sup>Rp</sup>
-                                                        <span class="text-decoration-line-through">600.000</span>
-                                                    </span>
+                                            </div>
+
+                                            <!-- Price Section -->
+                                            <div class="mt-auto">
+                                                <div class="d-flex flex-wrap align-items-baseline">
+                                                    <div class="me-2">
+                                                        <span class="fw-bold price">
+                                                            <sup class="fw-normal">Rp</sup> 500.000
+                                                        </span>
+                                                    </div>
+                                                    <div>
+                                                        <span class="fw-normal text-danger old-price">
+                                                            <sup>Rp</sup>
+                                                            <span class="text-decoration-line-through">600.000</span>
+                                                        </span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -1036,7 +1066,7 @@ function base_url($path = '')
                                 </div>
                             </div>
                             <div class="col">
-                                <div class="card shadow position-relative h-100 rounded-4 p-2">
+                                <div class="card shadow position-relative rounded-4 p-2">
                                     <!-- Corner Ribbon -->
                                     <div class="position-absolute ribbon-wrapper">
                                         <div class="ribbon text-white text-uppercase fw-bold text-center"
@@ -1050,39 +1080,44 @@ function base_url($path = '')
                                         <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png"
                                             class="img-fluid product-image" alt="Product Image">
                                     </div>
-
-                                    <div class="card-body d-flex flex-column pt-2">
-                                        <!-- Product Details -->
-                                        <div class="pb-2">
-                                            <h5 class="card-title fw-medium product-title">
+                                    <div class="bodykartu">
+                                        <div class="d-flex flex-column ">
+                                            <!-- Product Details -->
+                                            <div class="">
+                                                <!-- <h5 class="">
                                                 CT-IMP Matto Light Brown
-                                            </h5>
-                                            <p class="card-text mb-1 text-truncate product-desc">Meja ruang tamu
-                                                aesthetic.</p>
-                                            <div class="d-flex gap-1 align-items-center mb-2">
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <small class="text-muted fst-italic ms-1 sold-text">300
-                                                    terjual</small>
-                                            </div>
-                                        </div>
+                                            </h5> -->
+                                                <p class="card-title text-truncate fw-medium product-title">CT-IMP Matto
+                                                    Light Brown
+                                                </p>
 
-                                        <!-- Price Section -->
-                                        <div class="mt-auto">
-                                            <div class="d-flex flex-wrap align-items-baseline">
-                                                <div class="me-2">
-                                                    <span class="fw-bold price">
-                                                        <sup class="fw-normal">Rp</sup> 500.000
-                                                    </span>
+                                                <p class="card-text text-truncate product-desc">Meja ruang tamu
+                                                    aesthetic.</p>
+                                                <div class="d-flex gap-1 align-items-center">
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <small class="text-muted fst-italic ms-1 sold-text">300
+                                                        terjual</small>
                                                 </div>
-                                                <div>
-                                                    <span class="fw-normal text-danger old-price">
-                                                        <sup>Rp</sup>
-                                                        <span class="text-decoration-line-through">600.000</span>
-                                                    </span>
+                                            </div>
+
+                                            <!-- Price Section -->
+                                            <div class="mt-auto">
+                                                <div class="d-flex flex-wrap align-items-baseline">
+                                                    <div class="me-2">
+                                                        <span class="fw-bold price">
+                                                            <sup class="fw-normal">Rp</sup> 500.000
+                                                        </span>
+                                                    </div>
+                                                    <div>
+                                                        <span class="fw-normal text-danger old-price">
+                                                            <sup>Rp</sup>
+                                                            <span class="text-decoration-line-through">600.000</span>
+                                                        </span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -1090,7 +1125,7 @@ function base_url($path = '')
                                 </div>
                             </div>
                             <div class="col">
-                                <div class="card shadow position-relative h-100 rounded-4 p-2">
+                                <div class="card shadow position-relative rounded-4 p-2">
                                     <!-- Corner Ribbon -->
                                     <div class="position-absolute ribbon-wrapper">
                                         <div class="ribbon text-white text-uppercase fw-bold text-center"
@@ -1104,39 +1139,44 @@ function base_url($path = '')
                                         <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png"
                                             class="img-fluid product-image" alt="Product Image">
                                     </div>
-
-                                    <div class="card-body d-flex flex-column pt-2">
-                                        <!-- Product Details -->
-                                        <div class="pb-2">
-                                            <h5 class="card-title fw-medium product-title">
+                                    <div class="bodykartu">
+                                        <div class="d-flex flex-column ">
+                                            <!-- Product Details -->
+                                            <div class="">
+                                                <!-- <h5 class="">
                                                 CT-IMP Matto Light Brown
-                                            </h5>
-                                            <p class="card-text mb-1 text-truncate product-desc">Meja ruang tamu
-                                                aesthetic.</p>
-                                            <div class="d-flex gap-1 align-items-center mb-2">
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <small class="text-muted fst-italic ms-1 sold-text">300
-                                                    terjual</small>
-                                            </div>
-                                        </div>
+                                            </h5> -->
+                                                <p class="card-title text-truncate fw-medium product-title">CT-IMP Matto
+                                                    Light Brown
+                                                </p>
 
-                                        <!-- Price Section -->
-                                        <div class="mt-auto">
-                                            <div class="d-flex flex-wrap align-items-baseline">
-                                                <div class="me-2">
-                                                    <span class="fw-bold price">
-                                                        <sup class="fw-normal">Rp</sup> 500.000
-                                                    </span>
+                                                <p class="card-text text-truncate product-desc">Meja ruang tamu
+                                                    aesthetic.</p>
+                                                <div class="d-flex gap-1 align-items-center">
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <small class="text-muted fst-italic ms-1 sold-text">300
+                                                        terjual</small>
                                                 </div>
-                                                <div>
-                                                    <span class="fw-normal text-danger old-price">
-                                                        <sup>Rp</sup>
-                                                        <span class="text-decoration-line-through">600.000</span>
-                                                    </span>
+                                            </div>
+
+                                            <!-- Price Section -->
+                                            <div class="mt-auto">
+                                                <div class="d-flex flex-wrap align-items-baseline">
+                                                    <div class="me-2">
+                                                        <span class="fw-bold price">
+                                                            <sup class="fw-normal">Rp</sup> 500.000
+                                                        </span>
+                                                    </div>
+                                                    <div>
+                                                        <span class="fw-normal text-danger old-price">
+                                                            <sup>Rp</sup>
+                                                            <span class="text-decoration-line-through">600.000</span>
+                                                        </span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -1144,7 +1184,7 @@ function base_url($path = '')
                                 </div>
                             </div>
                             <div class="col">
-                                <div class="card shadow position-relative h-100 rounded-4 p-2">
+                                <div class="card shadow position-relative rounded-4 p-2">
                                     <!-- Corner Ribbon -->
                                     <div class="position-absolute ribbon-wrapper">
                                         <div class="ribbon text-white text-uppercase fw-bold text-center"
@@ -1158,39 +1198,44 @@ function base_url($path = '')
                                         <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png"
                                             class="img-fluid product-image" alt="Product Image">
                                     </div>
-
-                                    <div class="card-body d-flex flex-column pt-2">
-                                        <!-- Product Details -->
-                                        <div class="pb-2">
-                                            <h5 class="card-title fw-medium product-title">
+                                    <div class="bodykartu">
+                                        <div class="d-flex flex-column ">
+                                            <!-- Product Details -->
+                                            <div class="">
+                                                <!-- <h5 class="">
                                                 CT-IMP Matto Light Brown
-                                            </h5>
-                                            <p class="card-text mb-1 text-truncate product-desc">Meja ruang tamu
-                                                aesthetic.</p>
-                                            <div class="d-flex gap-1 align-items-center mb-2">
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <small class="text-muted fst-italic ms-1 sold-text">300
-                                                    terjual</small>
-                                            </div>
-                                        </div>
+                                            </h5> -->
+                                                <p class="card-title text-truncate fw-medium product-title">CT-IMP Matto
+                                                    Light Brown
+                                                </p>
 
-                                        <!-- Price Section -->
-                                        <div class="mt-auto">
-                                            <div class="d-flex flex-wrap align-items-baseline">
-                                                <div class="me-2">
-                                                    <span class="fw-bold price">
-                                                        <sup class="fw-normal">Rp</sup> 500.000
-                                                    </span>
+                                                <p class="card-text text-truncate product-desc">Meja ruang tamu
+                                                    aesthetic.</p>
+                                                <div class="d-flex gap-1 align-items-center">
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <small class="text-muted fst-italic ms-1 sold-text">300
+                                                        terjual</small>
                                                 </div>
-                                                <div>
-                                                    <span class="fw-normal text-danger old-price">
-                                                        <sup>Rp</sup>
-                                                        <span class="text-decoration-line-through">600.000</span>
-                                                    </span>
+                                            </div>
+
+                                            <!-- Price Section -->
+                                            <div class="mt-auto">
+                                                <div class="d-flex flex-wrap align-items-baseline">
+                                                    <div class="me-2">
+                                                        <span class="fw-bold price">
+                                                            <sup class="fw-normal">Rp</sup> 500.000
+                                                        </span>
+                                                    </div>
+                                                    <div>
+                                                        <span class="fw-normal text-danger old-price">
+                                                            <sup>Rp</sup>
+                                                            <span class="text-decoration-line-through">600.000</span>
+                                                        </span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

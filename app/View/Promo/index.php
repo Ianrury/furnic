@@ -10,7 +10,7 @@
     <meta name="keywords" content="">
 
     <!-- title -->
-    <title>Home - PT Furnice Furnishing Indonesia</title>
+    <title><?php echo $model['title']; ?> - PT Furnice Furnishing Indonesia</title>
 
     <!-- favicon -->
     <link rel="icon" type="image/x-icon" href="assets/img/logo/favicon.png">
@@ -113,7 +113,7 @@
                         <div
                             class="row row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 justify-content-center new-product">
                             <div class="col">
-                                <div class="card shadow position-relative h-100 rounded-4 p-2">
+                                <div class="card shadow position-relative rounded-4 p-2">
                                     <!-- Corner Ribbon -->
                                     <div class="position-absolute ribbon-wrapper">
                                         <div class="ribbon text-uppercase fw-bold text-center"
@@ -127,38 +127,44 @@
                                         <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png"
                                             class="img-fluid product-image" alt="Product Image">
                                     </div>
-
-                                    <div class="card-body d-flex flex-column pt-2">
-                                        <!-- Product Details -->
-                                        <div class="pb-2">
-                                            <h5 class="card-title fw-medium product-title">
+                                    <div class="bodykartu">
+                                        <div class="d-flex flex-column ">
+                                            <!-- Product Details -->
+                                            <div class="">
+                                                <!-- <h5 class="">
                                                 CT-IMP Matto Light Brown
-                                            </h5>
-                                            <p class="card-text mb-1 text-truncate product-desc">Meja ruang tamu
-                                                aesthetic.</p>
-                                            <div class="d-flex gap-1 align-items-center mb-2">
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <small class="text-muted fst-italic ms-1 sold-text">300 terjual</small>
-                                            </div>
-                                        </div>
+                                            </h5> -->
+                                                <p class="card-title text-truncate fw-medium product-title">CT-IMP Matto
+                                                    Light Brown
+                                                </p>
 
-                                        <!-- Price Section -->
-                                        <div class="mt-auto">
-                                            <div class="d-flex flex-wrap align-items-baseline">
-                                                <div class="me-2">
-                                                    <span class="fw-bold price">
-                                                        <sup class="fw-normal">Rp</sup> 500.000
-                                                    </span>
+                                                <p class="card-text text-truncate product-desc">Meja ruang tamu
+                                                    aesthetic.</p>
+                                                <div class="d-flex gap-1 align-items-center">
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <small class="text-muted fst-italic ms-1 sold-text">300
+                                                        terjual</small>
                                                 </div>
-                                                <div>
-                                                    <span class="fw-normal text-danger old-price">
-                                                        <sup>Rp</sup>
-                                                        <span class="text-decoration-line-through">600.000</span>
-                                                    </span>
+                                            </div>
+
+                                            <!-- Price Section -->
+                                            <div class="mt-auto">
+                                                <div class="d-flex flex-wrap align-items-baseline">
+                                                    <div class="me-2">
+                                                        <span class="fw-bold price">
+                                                            <sup class="fw-normal">Rp</sup> 500.000
+                                                        </span>
+                                                    </div>
+                                                    <div>
+                                                        <span class="fw-normal text-danger old-price">
+                                                            <sup>Rp</sup>
+                                                            <span class="text-decoration-line-through">600.000</span>
+                                                        </span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -166,7 +172,7 @@
                                 </div>
                             </div>
                             <div class="col">
-                                <div class="card shadow position-relative h-100 rounded-4 p-2">
+                                <div class="card shadow position-relative rounded-4 p-2">
                                     <!-- Corner Ribbon -->
                                     <div class="position-absolute ribbon-wrapper">
                                         <div class="ribbon text-uppercase fw-bold text-center"
@@ -180,38 +186,44 @@
                                         <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png"
                                             class="img-fluid product-image" alt="Product Image">
                                     </div>
-
-                                    <div class="card-body d-flex flex-column pt-2">
-                                        <!-- Product Details -->
-                                        <div class="pb-2">
-                                            <h5 class="card-title fw-medium product-title">
+                                    <div class="bodykartu">
+                                        <div class="d-flex flex-column ">
+                                            <!-- Product Details -->
+                                            <div class="">
+                                                <!-- <h5 class="">
                                                 CT-IMP Matto Light Brown
-                                            </h5>
-                                            <p class="card-text mb-1 text-truncate product-desc">Meja ruang tamu
-                                                aesthetic.</p>
-                                            <div class="d-flex gap-1 align-items-center mb-2">
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <small class="text-muted fst-italic ms-1 sold-text">300 terjual</small>
-                                            </div>
-                                        </div>
+                                            </h5> -->
+                                                <p class="card-title text-truncate fw-medium product-title">CT-IMP Matto
+                                                    Light Brown
+                                                </p>
 
-                                        <!-- Price Section -->
-                                        <div class="mt-auto">
-                                            <div class="d-flex flex-wrap align-items-baseline">
-                                                <div class="me-2">
-                                                    <span class="fw-bold price">
-                                                        <sup class="fw-normal">Rp</sup> 500.000
-                                                    </span>
+                                                <p class="card-text text-truncate product-desc">Meja ruang tamu
+                                                    aesthetic.</p>
+                                                <div class="d-flex gap-1 align-items-center">
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <small class="text-muted fst-italic ms-1 sold-text">300
+                                                        terjual</small>
                                                 </div>
-                                                <div>
-                                                    <span class="fw-normal text-danger old-price">
-                                                        <sup>Rp</sup>
-                                                        <span class="text-decoration-line-through">600.000</span>
-                                                    </span>
+                                            </div>
+
+                                            <!-- Price Section -->
+                                            <div class="mt-auto">
+                                                <div class="d-flex flex-wrap align-items-baseline">
+                                                    <div class="me-2">
+                                                        <span class="fw-bold price">
+                                                            <sup class="fw-normal">Rp</sup> 500.000
+                                                        </span>
+                                                    </div>
+                                                    <div>
+                                                        <span class="fw-normal text-danger old-price">
+                                                            <sup>Rp</sup>
+                                                            <span class="text-decoration-line-through">600.000</span>
+                                                        </span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -219,7 +231,7 @@
                                 </div>
                             </div>
                             <div class="col">
-                                <div class="card shadow position-relative h-100 rounded-4 p-2">
+                                <div class="card shadow position-relative rounded-4 p-2">
                                     <!-- Corner Ribbon -->
                                     <div class="position-absolute ribbon-wrapper">
                                         <div class="ribbon text-uppercase fw-bold text-center"
@@ -233,38 +245,44 @@
                                         <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png"
                                             class="img-fluid product-image" alt="Product Image">
                                     </div>
-
-                                    <div class="card-body d-flex flex-column pt-2">
-                                        <!-- Product Details -->
-                                        <div class="pb-2">
-                                            <h5 class="card-title fw-medium product-title">
+                                    <div class="bodykartu">
+                                        <div class="d-flex flex-column ">
+                                            <!-- Product Details -->
+                                            <div class="">
+                                                <!-- <h5 class="">
                                                 CT-IMP Matto Light Brown
-                                            </h5>
-                                            <p class="card-text mb-1 text-truncate product-desc">Meja ruang tamu
-                                                aesthetic.</p>
-                                            <div class="d-flex gap-1 align-items-center mb-2">
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <small class="text-muted fst-italic ms-1 sold-text">300 terjual</small>
-                                            </div>
-                                        </div>
+                                            </h5> -->
+                                                <p class="card-title text-truncate fw-medium product-title">CT-IMP Matto
+                                                    Light Brown
+                                                </p>
 
-                                        <!-- Price Section -->
-                                        <div class="mt-auto">
-                                            <div class="d-flex flex-wrap align-items-baseline">
-                                                <div class="me-2">
-                                                    <span class="fw-bold price">
-                                                        <sup class="fw-normal">Rp</sup> 500.000
-                                                    </span>
+                                                <p class="card-text text-truncate product-desc">Meja ruang tamu
+                                                    aesthetic.</p>
+                                                <div class="d-flex gap-1 align-items-center">
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <small class="text-muted fst-italic ms-1 sold-text">300
+                                                        terjual</small>
                                                 </div>
-                                                <div>
-                                                    <span class="fw-normal text-danger old-price">
-                                                        <sup>Rp</sup>
-                                                        <span class="text-decoration-line-through">600.000</span>
-                                                    </span>
+                                            </div>
+
+                                            <!-- Price Section -->
+                                            <div class="mt-auto">
+                                                <div class="d-flex flex-wrap align-items-baseline">
+                                                    <div class="me-2">
+                                                        <span class="fw-bold price">
+                                                            <sup class="fw-normal">Rp</sup> 500.000
+                                                        </span>
+                                                    </div>
+                                                    <div>
+                                                        <span class="fw-normal text-danger old-price">
+                                                            <sup>Rp</sup>
+                                                            <span class="text-decoration-line-through">600.000</span>
+                                                        </span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -272,7 +290,7 @@
                                 </div>
                             </div>
                             <div class="col">
-                                <div class="card shadow position-relative h-100 rounded-4 p-2">
+                                <div class="card shadow position-relative rounded-4 p-2">
                                     <!-- Corner Ribbon -->
                                     <div class="position-absolute ribbon-wrapper">
                                         <div class="ribbon text-uppercase fw-bold text-center"
@@ -286,38 +304,44 @@
                                         <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png"
                                             class="img-fluid product-image" alt="Product Image">
                                     </div>
-
-                                    <div class="card-body d-flex flex-column pt-2">
-                                        <!-- Product Details -->
-                                        <div class="pb-2">
-                                            <h5 class="card-title fw-medium product-title">
+                                    <div class="bodykartu">
+                                        <div class="d-flex flex-column ">
+                                            <!-- Product Details -->
+                                            <div class="">
+                                                <!-- <h5 class="">
                                                 CT-IMP Matto Light Brown
-                                            </h5>
-                                            <p class="card-text mb-1 text-truncate product-desc">Meja ruang tamu
-                                                aesthetic.</p>
-                                            <div class="d-flex gap-1 align-items-center mb-2">
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <small class="text-muted fst-italic ms-1 sold-text">300 terjual</small>
-                                            </div>
-                                        </div>
+                                            </h5> -->
+                                                <p class="card-title text-truncate fw-medium product-title">CT-IMP Matto
+                                                    Light Brown
+                                                </p>
 
-                                        <!-- Price Section -->
-                                        <div class="mt-auto">
-                                            <div class="d-flex flex-wrap align-items-baseline">
-                                                <div class="me-2">
-                                                    <span class="fw-bold price">
-                                                        <sup class="fw-normal">Rp</sup> 500.000
-                                                    </span>
+                                                <p class="card-text text-truncate product-desc">Meja ruang tamu
+                                                    aesthetic.</p>
+                                                <div class="d-flex gap-1 align-items-center">
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <small class="text-muted fst-italic ms-1 sold-text">300
+                                                        terjual</small>
                                                 </div>
-                                                <div>
-                                                    <span class="fw-normal text-danger old-price">
-                                                        <sup>Rp</sup>
-                                                        <span class="text-decoration-line-through">600.000</span>
-                                                    </span>
+                                            </div>
+
+                                            <!-- Price Section -->
+                                            <div class="mt-auto">
+                                                <div class="d-flex flex-wrap align-items-baseline">
+                                                    <div class="me-2">
+                                                        <span class="fw-bold price">
+                                                            <sup class="fw-normal">Rp</sup> 500.000
+                                                        </span>
+                                                    </div>
+                                                    <div>
+                                                        <span class="fw-normal text-danger old-price">
+                                                            <sup>Rp</sup>
+                                                            <span class="text-decoration-line-through">600.000</span>
+                                                        </span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -654,7 +678,7 @@
                 oldPrice: "950.000",
                 rating: 5,
                 sold: 80,
-                 image: "assets/img/gallery/promo4.jpg",
+                image: "assets/img/gallery/promo4.jpg",
                 isNew: false
             },
             {
@@ -664,7 +688,7 @@
                 oldPrice: "500.000",
                 rating: 4,
                 sold: 110,
-                 image: "assets/img/gallery/promo4.jpg",
+                image: "assets/img/gallery/promo4.jpg",
                 isNew: true
             },
             {
@@ -674,7 +698,7 @@
                 oldPrice: "750.000",
                 rating: 5,
                 sold: 95,
-                 image: "assets/img/gallery/promo4.jpg",
+                image: "assets/img/gallery/promo4.jpg",
                 isNew: false
             },
             {
@@ -684,7 +708,7 @@
                 oldPrice: "1.100.000",
                 rating: 5,
                 sold: 70,
-                 image: "assets/img/gallery/promo4.jpg",
+                image: "assets/img/gallery/promo4.jpg",
                 isNew: true
             }
         ];

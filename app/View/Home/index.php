@@ -113,7 +113,7 @@
                         <div
                             class="row row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 justify-content-center new-product">
                             <div class="col">
-                                <div class="card shadow position-relative h-100 rounded-4 p-2">
+                                <div class="card shadow position-relative rounded-4 p-2">
                                     <!-- Corner Ribbon -->
                                     <div class="position-absolute ribbon-wrapper">
                                         <div class="ribbon text-white text-uppercase fw-bold text-center">
@@ -126,38 +126,44 @@
                                         <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png"
                                             class="img-fluid product-image" alt="Product Image">
                                     </div>
-
-                                    <div class="card-body d-flex flex-column pt-2">
-                                        <!-- Product Details -->
-                                        <div class="pb-2">
-                                            <h5 class="card-title fw-medium product-title">
+                                    <div class="bodykartu">
+                                        <div class="d-flex flex-column ">
+                                            <!-- Product Details -->
+                                            <div class="">
+                                                <!-- <h5 class="">
                                                 CT-IMP Matto Light Brown
-                                            </h5>
-                                            <p class="card-text mb-1 text-truncate product-desc">Meja ruang tamu
-                                                aesthetic.</p>
-                                            <div class="d-flex gap-1 align-items-center mb-2">
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <small class="text-muted fst-italic ms-1 sold-text">300 terjual</small>
-                                            </div>
-                                        </div>
+                                            </h5> -->
+                                                <p class="card-title text-truncate fw-medium product-title">CT-IMP Matto
+                                                    Light Brown
+                                                </p>
 
-                                        <!-- Price Section -->
-                                        <div class="mt-auto">
-                                            <div class="d-flex flex-wrap align-items-baseline">
-                                                <div class="me-2">
-                                                    <span class="fw-bold price">
-                                                        <sup class="fw-normal">Rp</sup> 500.000
-                                                    </span>
+                                                <p class="card-text text-truncate product-desc">Meja ruang tamu
+                                                    aesthetic.</p>
+                                                <div class="d-flex gap-1 align-items-center">
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <small class="text-muted fst-italic ms-1 sold-text">300
+                                                        terjual</small>
                                                 </div>
-                                                <div>
-                                                    <span class="fw-normal text-danger old-price">
-                                                        <sup>Rp</sup>
-                                                        <span class="text-decoration-line-through">600.000</span>
-                                                    </span>
+                                            </div>
+
+                                            <!-- Price Section -->
+                                            <div class="mt-auto">
+                                                <div class="d-flex flex-wrap align-items-baseline">
+                                                    <div class="me-2">
+                                                        <span class="fw-bold price">
+                                                            <sup class="fw-normal">Rp</sup> 500.000
+                                                        </span>
+                                                    </div>
+                                                    <div>
+                                                        <span class="fw-normal text-danger old-price">
+                                                            <sup>Rp</sup>
+                                                            <span class="text-decoration-line-through">600.000</span>
+                                                        </span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -165,7 +171,7 @@
                                 </div>
                             </div>
                             <div class="col">
-                                <div class="card shadow position-relative h-100 rounded-4 p-2">
+                                <div class="card shadow position-relative rounded-4 p-2">
                                     <!-- Corner Ribbon -->
                                     <div class="position-absolute ribbon-wrapper">
                                         <div class="ribbon text-white text-uppercase fw-bold text-center">
@@ -178,38 +184,44 @@
                                         <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png"
                                             class="img-fluid product-image" alt="Product Image">
                                     </div>
-
-                                    <div class="card-body d-flex flex-column pt-2">
-                                        <!-- Product Details -->
-                                        <div class="pb-2">
-                                            <h5 class="card-title fw-medium product-title">
+                                    <div class="bodykartu">
+                                        <div class="d-flex flex-column ">
+                                            <!-- Product Details -->
+                                            <div class="">
+                                                <!-- <h5 class="">
                                                 CT-IMP Matto Light Brown
-                                            </h5>
-                                            <p class="card-text mb-1 text-truncate product-desc">Meja ruang tamu
-                                                aesthetic.</p>
-                                            <div class="d-flex gap-1 align-items-center mb-2">
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <small class="text-muted fst-italic ms-1 sold-text">300 terjual</small>
-                                            </div>
-                                        </div>
+                                            </h5> -->
+                                                <p class="card-title text-truncate fw-medium product-title">CT-IMP Matto
+                                                    Light Brown
+                                                </p>
 
-                                        <!-- Price Section -->
-                                        <div class="mt-auto">
-                                            <div class="d-flex flex-wrap align-items-baseline">
-                                                <div class="me-2">
-                                                    <span class="fw-bold price">
-                                                        <sup class="fw-normal">Rp</sup> 500.000
-                                                    </span>
+                                                <p class="card-text text-truncate product-desc">Meja ruang tamu
+                                                    aesthetic.</p>
+                                                <div class="d-flex gap-1 align-items-center">
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <small class="text-muted fst-italic ms-1 sold-text">300
+                                                        terjual</small>
                                                 </div>
-                                                <div>
-                                                    <span class="fw-normal text-danger old-price">
-                                                        <sup>Rp</sup>
-                                                        <span class="text-decoration-line-through">600.000</span>
-                                                    </span>
+                                            </div>
+
+                                            <!-- Price Section -->
+                                            <div class="mt-auto">
+                                                <div class="d-flex flex-wrap align-items-baseline">
+                                                    <div class="me-2">
+                                                        <span class="fw-bold price">
+                                                            <sup class="fw-normal">Rp</sup> 500.000
+                                                        </span>
+                                                    </div>
+                                                    <div>
+                                                        <span class="fw-normal text-danger old-price">
+                                                            <sup>Rp</sup>
+                                                            <span class="text-decoration-line-through">600.000</span>
+                                                        </span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -217,7 +229,7 @@
                                 </div>
                             </div>
                             <div class="col">
-                                <div class="card shadow position-relative h-100 rounded-4 p-2">
+                                <div class="card shadow position-relative rounded-4 p-2">
                                     <!-- Corner Ribbon -->
                                     <div class="position-absolute ribbon-wrapper">
                                         <div class="ribbon text-white text-uppercase fw-bold text-center">
@@ -230,38 +242,44 @@
                                         <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png"
                                             class="img-fluid product-image" alt="Product Image">
                                     </div>
-
-                                    <div class="card-body d-flex flex-column pt-2">
-                                        <!-- Product Details -->
-                                        <div class="pb-2">
-                                            <h5 class="card-title fw-medium product-title">
+                                    <div class="bodykartu">
+                                        <div class="d-flex flex-column ">
+                                            <!-- Product Details -->
+                                            <div class="">
+                                                <!-- <h5 class="">
                                                 CT-IMP Matto Light Brown
-                                            </h5>
-                                            <p class="card-text mb-1 text-truncate product-desc">Meja ruang tamu
-                                                aesthetic.</p>
-                                            <div class="d-flex gap-1 align-items-center mb-2">
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <small class="text-muted fst-italic ms-1 sold-text">300 terjual</small>
-                                            </div>
-                                        </div>
+                                            </h5> -->
+                                                <p class="card-title text-truncate fw-medium product-title">CT-IMP Matto
+                                                    Light Brown
+                                                </p>
 
-                                        <!-- Price Section -->
-                                        <div class="mt-auto">
-                                            <div class="d-flex flex-wrap align-items-baseline">
-                                                <div class="me-2">
-                                                    <span class="fw-bold price">
-                                                        <sup class="fw-normal">Rp</sup> 500.000
-                                                    </span>
+                                                <p class="card-text text-truncate product-desc">Meja ruang tamu
+                                                    aesthetic.</p>
+                                                <div class="d-flex gap-1 align-items-center">
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <small class="text-muted fst-italic ms-1 sold-text">300
+                                                        terjual</small>
                                                 </div>
-                                                <div>
-                                                    <span class="fw-normal text-danger old-price">
-                                                        <sup>Rp</sup>
-                                                        <span class="text-decoration-line-through">600.000</span>
-                                                    </span>
+                                            </div>
+
+                                            <!-- Price Section -->
+                                            <div class="mt-auto">
+                                                <div class="d-flex flex-wrap align-items-baseline">
+                                                    <div class="me-2">
+                                                        <span class="fw-bold price">
+                                                            <sup class="fw-normal">Rp</sup> 500.000
+                                                        </span>
+                                                    </div>
+                                                    <div>
+                                                        <span class="fw-normal text-danger old-price">
+                                                            <sup>Rp</sup>
+                                                            <span class="text-decoration-line-through">600.000</span>
+                                                        </span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -269,7 +287,7 @@
                                 </div>
                             </div>
                             <div class="col">
-                                <div class="card shadow position-relative h-100 rounded-4 p-2">
+                                <div class="card shadow position-relative rounded-4 p-2">
                                     <!-- Corner Ribbon -->
                                     <div class="position-absolute ribbon-wrapper">
                                         <div class="ribbon text-white text-uppercase fw-bold text-center">
@@ -282,38 +300,44 @@
                                         <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png"
                                             class="img-fluid product-image" alt="Product Image">
                                     </div>
-
-                                    <div class="card-body d-flex flex-column pt-2">
-                                        <!-- Product Details -->
-                                        <div class="pb-2">
-                                            <h5 class="card-title fw-medium product-title">
+                                    <div class="bodykartu">
+                                        <div class="d-flex flex-column ">
+                                            <!-- Product Details -->
+                                            <div class="">
+                                                <!-- <h5 class="">
                                                 CT-IMP Matto Light Brown
-                                            </h5>
-                                            <p class="card-text mb-1 text-truncate product-desc">Meja ruang tamu
-                                                aesthetic.</p>
-                                            <div class="d-flex gap-1 align-items-center mb-2">
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                <small class="text-muted fst-italic ms-1 sold-text">300 terjual</small>
-                                            </div>
-                                        </div>
+                                            </h5> -->
+                                                <p class="card-title text-truncate fw-medium product-title">CT-IMP Matto
+                                                    Light Brown
+                                                </p>
 
-                                        <!-- Price Section -->
-                                        <div class="mt-auto">
-                                            <div class="d-flex flex-wrap align-items-baseline">
-                                                <div class="me-2">
-                                                    <span class="fw-bold price">
-                                                        <sup class="fw-normal">Rp</sup> 500.000
-                                                    </span>
+                                                <p class="card-text text-truncate product-desc">Meja ruang tamu
+                                                    aesthetic.</p>
+                                                <div class="d-flex gap-1 align-items-center">
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                    <small class="text-muted fst-italic ms-1 sold-text">300
+                                                        terjual</small>
                                                 </div>
-                                                <div>
-                                                    <span class="fw-normal text-danger old-price">
-                                                        <sup>Rp</sup>
-                                                        <span class="text-decoration-line-through">600.000</span>
-                                                    </span>
+                                            </div>
+
+                                            <!-- Price Section -->
+                                            <div class="mt-auto">
+                                                <div class="d-flex flex-wrap align-items-baseline">
+                                                    <div class="me-2">
+                                                        <span class="fw-bold price">
+                                                            <sup class="fw-normal">Rp</sup> 500.000
+                                                        </span>
+                                                    </div>
+                                                    <div>
+                                                        <span class="fw-normal text-danger old-price">
+                                                            <sup>Rp</sup>
+                                                            <span class="text-decoration-line-through">600.000</span>
+                                                        </span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -483,29 +507,33 @@
                     </div>
                 </div>
                 <div class="tab-content wow fadeInUp" data-wow-delay=".25s" id="item-tabContent">
-                    <div class="container ms-3">
+                    <div class="container">
                         <div class="row align-items-center mb-2">
-                            <div class="col d-flex justify-content-between align-items-center">
-                                <ul class="d-flex mb-0" style="list-style: none; padding-left: 0;gap: 60px;">
-                                    <li class="nav-item">
-                                        <a class="d-flex justify-content-center align-items-center custom-nav-link-product <?= is_active('/') ?>"
-                                            href="/" style="font-size: 14px;">Living</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="d-flex justify-content-center align-items-center custom-nav-link-product <?= is_active('product') ?>"
-                                            href="/product" style="font-size: 14px;">Dinning</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="d-flex justify-content-center align-items-center custom-nav-link-product<?= (basename($_SERVER['PHP_SELF']) == 'promo.php') ? ' active' : '' ?>"
-                                            href="promo.php" style="font-size: 14px;">Bedroom</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="d-flex justify-content-center align-items-center custom-nav-link-product<?= (basename($_SERVER['PHP_SELF']) == 'dekorasi.php') ? ' active' : '' ?>"
-                                            href="dekorasi.php" style="font-size: 14px;">Kitchen</a>
-                                    </li>
-                                </ul>
+                            <div class="col d-flex justify-content-between align-items-center ps-0">
+                                <!-- <div style="overflow-x: auto; white-space: nowrap;"></div> -->
+                                <div class="categories">
+                                    <ul class="d-flex mb-0 ul-categories">
+                                        <li class="nav-item">
+                                            <a class="d-flex justify-content-center align-items-center custom-nav-link-product <?= is_active('/') ?>"
+                                                href="/">Living</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="d-flex justify-content-center align-items-center custom-nav-link-product <?= is_active('product') ?>"
+                                                href="/product">Dinning</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="d-flex justify-content-center align-items-center custom-nav-link-product<?= (basename($_SERVER['PHP_SELF']) == 'promo.php') ? ' active' : '' ?>"
+                                                href="promo.php">Bedroom</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="d-flex justify-content-center align-items-center custom-nav-link-product<?= (basename($_SERVER['PHP_SELF']) == 'promo.php') ? ' active' : '' ?>"
+                                                href="kitchen">Kitchen</a>
+                                        </li>
+                                    </ul>
+                                </div>
 
-                                <a href="#" class="small d-flex align-items-center" style="font-size: 14px; color: #757f95; font-weight: 500;">
+                                <a href="#" class="small d-flex align-items-center"
+                                    style="font-size: 14px; color: #757f95; font-weight: 500;">
                                     View More <i class="fas fa-angle-double-right ms-1"></i>
                                 </a>
                             </div>
@@ -1147,15 +1175,15 @@
         // Fungsi untuk membuat card produk
         function createProductCard(product) {
             return `
-                <div class="col">
-                <div class="card shadow position-relative h-100 rounded-4 p-2">
-                    ${product.isNew ? `
-                    <!-- Corner Ribbon -->
-                    <div class="position-absolute ribbon-wrapper">
-                        <div class="ribbon text-white text-uppercase fw-bold text-center">
-                        New Product
-                        </div>
-                    </div>
+                            <div class="col">
+                                <div class="card shadow position-relative rounded-4 p-2">
+                            ${product.isNew ? `
+                            <!-- Corner Ribbon -->
+                        <div class="position-absolute ribbon-wrapper">
+                                                <div class="ribbon text-white text-uppercase fw-bold text-center">
+                                                    New Product
+                                                </div>
+                                    </div>
                     ` : ''}
 
                     <!-- Product Image -->
@@ -1163,37 +1191,43 @@
                     <img src="${product.image}" class="img-fluid product-image" alt="Product Image">
                     </div>
 
-                    <div class="card-body d-flex flex-column pt-2">
-                    <!-- Product Details -->
-                    <div class="pb-2">
-                        <h5 class="card-title fw-medium product-title">
-                        ${product.title}
-                        </h5>
-                        <p class="card-text mb-1 text-truncate product-desc">${product.description}</p>
-                        <div class="d-flex gap-1 align-items-center mb-2">
-                        ${createStarRating(product.rating)}
-                        <small class="text-muted fst-italic ms-1 sold-text">${product.sold} terjual</small>
-                        </div>
-                    </div>
+                    <div class="bodykartu">
+                            <div class="d-flex flex-column ">
+                                <!-- Product Details -->
+                                <div class="">
+                                    <!-- <h5 class="">
+                                        ${product.title}
+                                </h5> -->
+                                    <p class="card-title text-truncate fw-medium product-title">${product.description}
+                                    </p>
 
-                    <!-- Price Section -->
-                    <div class="mt-auto">
-                        <div class="d-flex flex-wrap align-items-baseline">
-                        <div class="me-2">
-                            <span class="fw-bold price">
-                            <sup class="fw-normal">Rp</sup> ${product.price}
-                            </span>
-                        </div>
-                        <div>
-                            <span class="fw-normal text-danger old-price">
-                            <sup>Rp</sup>
-                            <span class="text-decoration-line-through">${product.oldPrice}</span>
-                            </span>
-                        </div>
+                                    <p class="card-text text-truncate product-desc">Meja ruang tamu
+                                        aesthetic.</p>
+                                    <div class="d-flex gap-1 align-items-center">
+                                        ${createStarRating(product.rating)}
+                                        <small class="text-muted fst-italic ms-1 sold-text">${product.sold} terjual</small>
+                                    </div>
+                                </div>
+
+                                <!-- Price Section -->
+                                <div class="mt-auto">
+                                    <div class="d-flex flex-wrap align-items-baseline">
+                                        <div class="me-2">
+                                            <span class="fw-bold price">
+                                                <sup class="fw-normal">Rp</sup> ${product.price}
+                                            </span>
+                                        </div>
+                                        <div>
+                                            <span class="fw-normal text-danger old-price">
+                                                <sup>Rp</sup>
+                                                <span class="text-decoration-line-through">${product.oldPrice}</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    </div>
-                </div>
                 </div>
             `;
         }
@@ -1540,48 +1574,58 @@
             }).join('');
 
             return `
-        <div class="card shadow position-relative h-100 rounded-4 p-2">
-        ${product.isNew ? `
-            <div class="position-absolute ribbon-wrapper">
-            <div class="ribbon text-white text-uppercase fw-bold text-center">
-                New Product
-            </div>
-            </div>
-        ` : ''}
+                         <div class="card shadow position-relative rounded-4 p-2">
+                            ${product.isNew ? `
+                            <!-- Corner Ribbon -->
+                        <div class="position-absolute ribbon-wrapper">
+                                                <div class="ribbon text-white text-uppercase fw-bold text-center">
+                                                    New Product
+                                                </div>
+                                    </div>
+                    ` : ''}
 
-        <div class="text-center pt-3">
-            <img src="${product.image}" class="img-fluid product-image" alt="${product.title}">
-        </div>
+                    <!-- Product Image -->
+                    <div class="text-center pt-3">
+                    <img src="${product.image}" class="img-fluid product-image" alt="Product Image">
+                    </div>
 
-        <div class="card-body d-flex flex-column pt-2">
-            <div class="pb-2">
-            <h5 class="card-title fw-medium product-title">
-                ${product.title}
-            </h5>
-            <p class="card-text mb-1 text-truncate product-desc">${product.description}</p>
-            <div class="d-flex gap-1 align-items-center mb-2">
-                ${starIconsCt}
-                <small class="text-muted fst-italic ms-1 sold-text">${product.sold} terjual</small>
-            </div>
-            </div>
+                    <div class="bodykartu">
+                            <div class="d-flex flex-column ">
+                                <!-- Product Details -->
+                                <div class="">
+                                    <!-- <h5 class="">
+                                        ${product.title}
+                                </h5> -->
+                                    <p class="card-title text-truncate fw-medium product-title">${product.description}
+                                    </p>
 
-            <div class="mt-auto">
-            <div class="d-flex flex-wrap align-items-baseline">
-                <div class="me-2">
-                <span class="fw-bold price">
-                    <sup class="fw-normal">Rp</sup> ${product.price}
-                </span>
-                </div>
-                <div>
-                <span class="fw-normal text-danger old-price">
-                    <sup>Rp</sup>
-                    <span class="text-decoration-line-through">${product.oldPrice}</span>
-                </span>
-                </div>
-            </div>
-            </div>
-        </div>
-        </div>
+                                    <p class="card-text text-truncate product-desc">Meja ruang tamu
+                                        aesthetic.</p>
+                                    <div class="d-flex gap-1 align-items-center">
+                                        ${createStarRating(product.rating)}
+                                        <small class="text-muted fst-italic ms-1 sold-text">${product.sold} terjual</small>
+                                    </div>
+                                </div>
+
+                                <!-- Price Section -->
+                                <div class="mt-auto">
+                                    <div class="d-flex flex-wrap align-items-baseline">
+                                        <div class="me-2">
+                                            <span class="fw-bold price">
+                                                <sup class="fw-normal">Rp</sup> ${product.price}
+                                            </span>
+                                        </div>
+                                        <div>
+                                            <span class="fw-normal text-danger old-price">
+                                                <sup>Rp</sup>
+                                                <span class="text-decoration-line-through">${product.oldPrice}</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
     `;
         }
 

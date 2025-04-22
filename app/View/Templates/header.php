@@ -67,7 +67,7 @@ function is_active($route)
 
                             <li class="nav-item">
                                 <a class="d-flex justify-content-center align-items-center w-100 h-100 custom-nav-link <?= is_active('promo') ?>"
-                                    href="/promo" style="font-size: 14px;">Product</a>
+                                    href="/promo" style="font-size: 14px;">Promo</a>
                             </li>
 
                             <li class="nav-item">
