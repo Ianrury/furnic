@@ -155,7 +155,7 @@ function base_url($path = '')
                     </div>
 
                     <!-- Product Details Column -->
-                    <div class="col-md-5">
+                    <div class="col-md-5 product-details">
                         <h1 class="text-black fw-bold mb-1" style="font-size: 25px;">Clover Chair</h1>
                         <p class="text-black mb-3 fw-normal" style="font-size: 14px;">Kursi belajar anak</p>
 
