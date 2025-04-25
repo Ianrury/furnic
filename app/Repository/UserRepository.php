@@ -14,20 +14,27 @@ class UserRepository
 
     public function save(User $user): User
     {
-        $statement = $this->connection->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
-        $statement->execute([$user->username, $user->email, $user->password]);
+        $statement = $this->connection->prepare("INSERT INTO users (nama_user, no_telpon, email, password, jabatan_user, role_akses) VALUES (?, ?, ?, ?, ?, ?)");
+        $statement->execute([
+            $user->nama_user, 
+            $user->no_telpon, 
+            $user->email, 
+            $user->password, 
+            $user->jabatan_user, 
+            $user->role_akses
+        ]);
         return $user;
-    }   
+    }    
 
-    public function findByUsername(string $username): ?User
+    public function findByemail(string $email): ?User
     {
-        $statement = $this->connection->prepare("SELECT * FROM users WHERE username = ?");
-        $statement->execute([$username]);
+        $statement = $this->connection->prepare("SELECT * FROM users WHERE email = ?");
+        $statement->execute([$email]);
         $result = $statement->fetch(\PDO::FETCH_ASSOC);
         if ($result) {
             $user = new User();
-            $user->id = $result['id'];
-            $user->username = $result['username'];
+            $user->id_user = $result['id_user'];
+            $user->nama_user = $result['nama_user'];
             $user->email = $result['email'];
             $user->password = $result['password'];
             return $user;
@@ -48,8 +55,8 @@ class UserRepository
         $result = $statement->fetch(\PDO::FETCH_ASSOC);
         if ($result) {
             $user = new User();
-            $user->id = $result['id'];
-            $user->username = $result['username'];
+            $user->id_user = $result['id_user'];
+            $user->nama_user = $result['nama_user'];
             $user->email = $result['email'];
             $user->password = $result['password'];
             return $user;

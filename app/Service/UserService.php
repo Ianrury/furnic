@@ -26,14 +26,16 @@ class UserService
 
         try {
             Database::beginTransaction();
-            $user = $this->userRepository->findByUsername($request->username);
+            $user = $this->userRepository->findByemail($request->email);
             if ($user != null) {
                 throw new ValidationException("Username already exists");
             }
     
             $user = new User();
-            $user->username = $request->username;
+            $user->nama_user = $request->nama_user;
+            $user->no_telpon = $request->no_telpon;
             $user->email = $request->email;
+            $user->role_akses = 1;
             $user->password = password_hash($request->password, PASSWORD_BCRYPT);
             $this->userRepository->save($user);
     
@@ -50,8 +52,8 @@ class UserService
 
     public function validateUserRegisterRequest(UserRegisterRequest $request): void
     {
-        if ($request->username == null || $request->username == "") {
-            throw new ValidationException("Username is required");
+        if ($request->nama_user == null || $request->nama_user == "") {
+            throw new ValidationException("nama_user is required");
         }
         if ($request->email == null || $request->email == "") {
             throw new ValidationException("Email is required");
@@ -67,7 +69,7 @@ class UserService
     public function login (UserLoginRequest $request): UserLoginResponse {
         $this->validateUserLoginRequest($request);
 
-        $user = $this->userRepository->findByUsername($request->username);
+        $user = $this->userRepository->findByemail($request->email);
         if ($user == null) {
             throw new ValidationException("Username or password is incorrect");
         }
@@ -83,8 +85,8 @@ class UserService
 
     private function validateUserLoginRequest(UserLoginRequest $request): void
     {
-        if ($request->username == null || $request->username == "") {
-            throw new ValidationException("Username is required");
+        if ($request->email == null || $request->email == "") {
+            throw new ValidationException("Email is required");
         }
         if ($request->password == null || $request->password == "") {
             throw new ValidationException("Password is required");

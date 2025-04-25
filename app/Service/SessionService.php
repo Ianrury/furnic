@@ -20,14 +20,14 @@ class SessionService
         $this->sessionRepository = $sessionRepository;
     }
 
-    public function create(int $user_id): Session
+    public function create(int $id_user): Session
     {
         $session = new Session();
-        $session->user_id = $user_id;
+        $session->id_user = $id_user;
 
 
         $session = $this->sessionRepository->save($session);
-        setcookie(self::$COOKIE_NAME, $session->id, time() + (60 * 60 * 24 * 30), '/');
+        setcookie(self::$COOKIE_NAME, $session->id_user, time() + (60 * 60 * 24 * 30), '/');
         return $session;
     }
 
@@ -54,7 +54,7 @@ class SessionService
             return null;
         }
 
-        $user = $this->userRepository->userById($session->user_id);
+        $user = $this->userRepository->userById($session->id_user);
         if ($user == null) {
             return null;
         }

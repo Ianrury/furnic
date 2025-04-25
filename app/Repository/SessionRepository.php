@@ -16,11 +16,11 @@ class SessionRepository
 
     public function save(Session $session): Session
     {
-        $statement = $this->connection->prepare("INSERT INTO sessions (user_id) VALUES (?)");
-        $statement->execute([$session->user_id]);
+        $statement = $this->connection->prepare("INSERT INTO sessions (id_user, id_customer) VALUES (?, ?)");
+        $statement->execute([$session->id_user, $session->id_customer]);
 
         // Inilah bagian yang penting
-        $session->id = (int) $this->connection->lastInsertId();
+        $session->id_session = (int) $this->connection->lastInsertId();
 
         return $session;
     }
@@ -34,8 +34,9 @@ class SessionRepository
 
         if ($result) {
             $session = new Session();
-            $session->id = $result['id'];
-            $session->user_id = $result['user_id'];
+            $session->id_session = $result['id_session'];
+            $session->id_user = $result['id_user'];
+            $session->id_customer = $result['id_customer'];
             return $session;
         }
 

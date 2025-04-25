@@ -43,7 +43,8 @@ class UserController
     {
         // var_dump($_POST);
         $request = new UserRegisterRequest();
-        $request->username = $_POST['username'] ?? null;
+        $request->nama_user = $_POST['nama_user'] ?? null;
+        $request->no_telpon = $_POST['no_telpon'] ?? null;
         $request->email = $_POST['email'] ?? null;
         $request->password = $_POST['password'] ?? null;
 
@@ -92,27 +93,23 @@ class UserController
     public function postLogin()
     {
         $request = new UserLoginRequest(); // ✅ Ini yang benar
-        $request->username = $_POST['username'] ?? null;
+        $request->email = $_POST['email'] ?? null;
         $request->password = $_POST['password'] ?? null;
-
+    
         try {
             $response = $this->userService->login($request);
-
-            $this->sessionService->create($response->user->id);
-             // Simpan pesan ke dalam session
-             $_SESSION['success'] = "Login success!";
-            header('Location: /');
-            exit;            
+    
+            $this->sessionService->create($response->user->id_user);
+            $_SESSION['success'] = "Login success!";
+            echo json_encode(['success' => true, 'redirect' => '/']);
+            exit;
         } catch (ValidationException $exception) {
-            $model = [
-                "title" => "Login",
-                "content" => "Welcome to the login page!",
-                "error" => $exception->getMessage(),
-                "old" => $request
-            ];
-            View::render('User/login', $model);
+            // Mengirimkan JSON respons dengan error
+            echo json_encode(['error' => $exception->getMessage()]);
+            exit;
         }
     }
+    
 
     public function logout()
     {

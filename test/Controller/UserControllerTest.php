@@ -26,9 +26,7 @@ class UserControllerTest extends TestCase
         $this->assertStringContainsString("Register", $output);
     }
 
-
-
-
+    
     public function testPostRegister()
     {
         $this->assertTrue(true);

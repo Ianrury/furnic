@@ -13,7 +13,7 @@ use Importa\Furnic\PHP\FFI\Middleware\MustNotLoginMiddleware;
 use Importa\Furnic\PHP\FFI\Middleware\MustLoginMiddleware;
 
 
-Database::getConnection('production');
+Database::getConnection('test');
 
 // Controller HomeController
 Router::add('GET', '/', HomeController::class, 'index');
@@ -22,7 +22,7 @@ Router::add('GET', '/', HomeController::class, 'index');
 Router::add('GET', '/login', UserController::class, 'login', [MustNotLoginMiddleware::class]);
 Router::add('POST', '/login', UserController::class, 'postLogin', [MustNotLoginMiddleware::class]);
 Router::add('GET', '/register', UserController::class, 'register', [MustNotLoginMiddleware::class]);
-Router::add('POST', '/users/register', UserController::class, 'postRegister', [MustNotLoginMiddleware::class]);
+Router::add('POST', '/register', UserController::class, 'postRegister', [MustNotLoginMiddleware::class]);
 Router::add('GET', '/logout', UserController::class, 'logout', [MustLoginMiddleware::class]);
 
 // Controller ProductController

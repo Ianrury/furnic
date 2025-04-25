@@ -5479,120 +5479,175 @@ label {
 45. Auth css 
 ======================*/
 
-/* .login-form {
-  padding: 5px;
-  background: var(--color-white);
-  border-radius: 10px;
-  box-shadow: var(--box-shadow);
+
+.login-form{
+  /* padding-top: 10px; */
+  margin: 0 50px 90px 50px;
+}
+.login-container {
+  min-height: 100vh;
+  padding: 0;
+  overflow: hidden;
 }
 
-.login-form .login-header {
-  text-align: center;
-  padding-bottom: 20px;
-  margin-bottom: 20px;
-  border-bottom: 1px solid var(--border-info-color);
+.image-container {
+  padding: 0;
+  height: 100vh;
+  overflow: hidden;
 }
 
-.login-form .login-header img {
-  width: 200px;
-  margin-bottom: 10px;
-}
-
-.login-form .login-header h3 {
-  color: var(--theme-color);
-  margin-bottom: 5px;
-  font-weight: 800;
-}
-
-.login-form .login-header p {
-  font-size: 20px;
-}
-
-.login-form .form-group {
-  margin-bottom: 20px;
-}
-
-.login-form label {
-  color: var(--color-dark);
-  margin-bottom: 5px;
-}
-
-.login-form .form-group .form-control {
-  border: 1px solid #e8e8e8;
-  border-radius: 10px;
-  padding: 12px 18px;
-  box-shadow: none;
-  transition: 0.5s;
-}
-
-.login-form .form-group .form-control:focus {
-  border-color: var(--theme-color);
-}
-
-.login-form .form-check-input {
-  box-shadow: none;
-}
-
-.login-form .form-check-input:focus {
-  border-color: var(--theme-color);
-}
-
-.login-form .forgot-pass {
-  color: var(--theme-color);
-  transition: 0.5s;
-}
-
-.login-form .forgot-pass:hover {
-  color: var(--theme-color);
-}
-
-.login-form .theme-btn {
+.image-container img {
   width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-.login-form .theme-btn::before {
-  width: 460px;
-  height: 460px;
+.form-container {
+  /* padding: 1.5rem; Reduced from 2rem */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+  background-color: white;
+  overflow-y: auto;
 }
 
-.login-form .theme-btn i {
-  margin-right: 5px;
-}
-
-.login-form .form-check-input {
-  margin-top: 6.3px;
-}
-
-.login-form .form-check-label a {
-  color: var(--theme-color);
-  transition: 0.5s;
-} */
-
-/* .login-form .form-check-label a:hover {
-  color: var(--theme-color);
-} */
-
-.form-check-input:checked {
-  background-color: var(--theme-color);
-  border-color: var(--theme-color);
-}
-
-/* .login-form .login-footer {
-  margin-top: 25px;
-} */
-/* 
-.login-form .login-footer p {
+.login-title {
+  font-weight: 600;
   text-align: center;
-} */
+  font-size: 24px;
+  color: #000;
+}
 
-/* .login-form .login-footer p a {
-  color: var(--theme-color);
-  transition: 0.5s;
-} */
+.form-label {
+  font-weight: 500;
+  margin-bottom: 0.3rem; /* Reduced from 0.5rem */
+  color: #000;
+}
 
-/* .login-form .login-footer a:hover {
-  color: var(--theme-color);
-} */
+.form-label .required {
+  color: red;
+}
+
+.form-control {
+  padding: 0.6rem; 
+  margin-bottom: 0.7rem; 
+}
+
+.form-login{
+  border-radius: 5px;
+  border: 2px solid #757F95;
+}
+
+.form-login::placeholder {
+  color: #757F95;
+  font-size: 14px;
+}
+
+.btn-masuk {
+  background-color: #2C4B8C;
+  font-size: 16px;
+  color: white;
+  padding: 0.6rem; /* Reduced from 0.75rem */
+  border: none;
+  border-radius: 10px;
+  font-weight: 500;
+  margin-bottom: 0.7rem; /* Reduced from 1rem */
+}
+
+.btn-daftar {
+  background-color: white;
+  font-size: 16px;
+  color: #2C4B8C;
+  padding: 0.4rem; /* Reduced from 0.75rem */
+  border: 2px solid #2C4B8C;
+  border-radius: 10px;
+  font-weight: 500;
+  margin-bottom: 0.5rem; /* Reduced from 1rem */
+}
+
+.hr-tebal {
+  border: none;
+  height: 2px;
+  background-color: #C3C0C0;
+}
+
+
+.btn-google {
+  background-color: white;
+  color: black;
+  padding: 0.4rem; /* Reduced from 0.75rem */
+  border: 2px solid #2C4B8C;
+  border-radius: 10px;
+  font-weight: 500;
+  margin-bottom: 0.7rem; /* Reduced from 1rem */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-google img {
+  height: 18px; /* Reduced from 20px */
+}
+
+.help-text {
+  text-align: center;
+  font-size: 0.85rem; /* Reduced from 0.9rem */
+  color: #6c757d;
+  margin-top: 0.5rem; /* Added smaller margin */
+}
+
+.link {
+  color: #2C4B8C;
+  text-decoration: none;
+}
+
+.text-tetap{
+  padding-top: 5px;
+}
+
+.checkbox-wrapper {
+  margin-bottom: 1.2rem; /* Reduced from 1.5rem */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.checkbox-wrapper .form-check {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.5rem;
+}
+
+.mb-3 {
+  margin-bottom: 0.5rem !important; /* Override Bootstrap's margin */
+}
+
+/* Responsif tablet*/
+@media (max-width: 991px) {
+  .login-form {
+    margin: 0 20px 70px 20px;
+  }
+}
+
+
+/* Responsive HP */
+@media (max-width: 767px) {
+  .image-container {
+      display: none;
+  }
+  
+  .form-container {
+      height: 100vh;
+      padding: 1rem;
+  }
+
+  .login-form {
+    margin: 0 15px 30px 15px;
+  }
+}
 
 .social-login {
   position: relative;
@@ -10447,130 +10502,42 @@ input[type="checkbox"].form-check-input {
 }
 
 
-.login-form{
-  /* padding-top: 10px; */
-  margin: 0 10px 90px 10px;
-}
-.login-container {
-  min-height: 100vh;
-  padding: 0;
-  overflow: hidden;
-}
-
-.image-container {
-  padding: 0;
-  height: 100vh;
-  overflow: hidden;
-}
-
-.image-container img {
+/* validasi eror */
+.invalid-feedback {
+  display: none;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  margin-top: 0.25rem;
+  font-size: 80%;
+  color: #dc3545;
 }
 
-.form-container {
-  /* padding: 1.5rem; Reduced from 2rem */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  height: 100vh;
-  background-color: white;
-  overflow-y: auto;
+.is-invalid {
+  border-color: #dc3545 !important;
 }
 
-.login-title {
-  font-weight: 600;
-  text-align: center;
-  font-size: 24px;
-  color: #000;
+.is-invalid:focus {
+  border-color: #dc3545;
+  box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
 }
 
-.form-label {
-  font-weight: 500;
-  margin-bottom: 0.3rem; /* Reduced from 0.5rem */
+.d-block {
+  display: block !important;
 }
 
-.form-label .required {
-  color: red;
+.alert {
+  position: relative;
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 1rem;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
 }
 
-.form-control {
-  padding: 0.6rem; /* Reduced from 0.75rem */
-  border-radius: 5px;
-  border: 1px solid #ced4da;
-  margin-bottom: 0.7rem; /* Reduced from 1rem */
+.alert-danger {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
 }
 
-.btn-masuk {
-  background-color: #2C4B8C;
-  color: white;
-  padding: 0.6rem; /* Reduced from 0.75rem */
-  border: none;
-  border-radius: 5px;
-  font-weight: 500;
-  margin-bottom: 0.7rem; /* Reduced from 1rem */
-}
-
-.btn-daftar {
-  background-color: white;
-  color: #2C4B8C;
-  padding: 0.6rem; /* Reduced from 0.75rem */
-  border: 1px solid #2C4B8C;
-  border-radius: 5px;
-  font-weight: 500;
-  margin-bottom: 0.7rem; /* Reduced from 1rem */
-}
-
-.btn-google {
-  background-color: white;
-  color: black;
-  padding: 0.6rem; /* Reduced from 0.75rem */
-  border: 1px solid #ced4da;
-  border-radius: 5px;
-  font-weight: 500;
-  margin-bottom: 0.7rem; /* Reduced from 1rem */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.btn-google img {
-  height: 18px; /* Reduced from 20px */
-}
-
-.help-text {
-  text-align: center;
-  font-size: 0.85rem; /* Reduced from 0.9rem */
-  color: #6c757d;
-  margin-top: 0.5rem; /* Added smaller margin */
-}
-
-.link {
-  color: #2C4B8C;
-  text-decoration: none;
-}
-
-.checkbox-wrapper {
-  margin-bottom: 1.2rem; /* Reduced from 1.5rem */
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.mb-3 {
-  margin-bottom: 0.5rem !important; /* Override Bootstrap's margin */
-}
-
-/* Responsive styles */
-@media (max-width: 767px) {
-  .image-container {
-      display: none;
-  }
-  
-  .form-container {
-      height: 100vh;
-      padding: 1rem;
-  }
+.mt-3 {
+  margin-top: 1rem !important;
 }
