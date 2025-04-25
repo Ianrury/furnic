@@ -2,54 +2,116 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <title>Login Management</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-        crossorigin="anonymous"></script>
+    <!-- meta tags -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+
+    <!-- title -->
+    <title>Home - PT Furnice Furnishing Indonesia</title>
+
+    <!-- favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/img/logo/favicon.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+    <!-- css -->
+    <!-- <link rel="stylesheet" href="/app/App/assets/css/bootstrap"> -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/all-fontawesome.min.css">
+    <link rel="stylesheet" href="assets/css/animate.min.css">
+    <link rel="stylesheet" href="assets/css/magnific-popup.min.css">
+    <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="assets/css/jquery-ui.min.css">
+    <link rel="stylesheet" href="assets/css/nice-select.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto';
+        }
+
+        .product-area-new {
+            font-family: 'inter';
+        }
+    </style>
+
 </head>
 
 <body>
-    <div class="container col-xl-10 col-xxl-8 px-4 py-5">
-        <div class="row">
-            <?php if (!empty($model['error'] ?? '')): ?>
-                <div class="alert alert-danger" role="alert">
-                    <?= htmlspecialchars($model['error']) ?>
-                </div>
-            <?php endif; ?>
 
-            <?php if (!empty($model['success'] ?? '')): ?>
-                <div class="alert alert-success" role="alert">
-                    <?= htmlspecialchars($model['success']) ?>
-                </div>
-            <?php endif; ?>
-        </div>
-        <div class="row align-items-center g-lg-5 py-5">
-            <div class="col-lg-7 text-center text-lg-start">
-                <h1 class="display-4 fw-bold lh-1 mb-3">Login</h1>
-                <p class="col-lg-10 fs-4">by <a target="_blank" href="https://www.programmerzamannow.com/">
-                        <?= isset($model['content']) ? htmlspecialchars($model['content']) : '' ?>
-                    </a></p>
-            </div>
-            <div class="col-md-10 mx-auto col-lg-5">
-                <form class="p-4 p-md-5 border rounded-3 bg-light" method="post" action="/login">
-                    <div class="form-floating mb-3">
-                        <input name="username" type="text" class="form-control" id="username" placeholder="username"
-                            value="<?= htmlspecialchars($_POST["username"] ?? "") ?>" />
-                        <label for="username">Username</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                        <input name="password" type="password" class="form-control" id="password"
-                            placeholder="password" />
-                        <label for="password">Password</label>
-                    </div>
-                    <button class="w-100 btn btn-lg btn-primary" type="submit">Sign On</button>
-                </form>
-            </div>
+    <a href="https://wa.me/628119018800" class="floating" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- preloader -->
+    <div class="preloader">
+        <div class="loader-ripple">
+            <div></div>
+            <div></div>
         </div>
     </div>
+    <!-- preloader end -->
+
+    <!-- header area -->
+    <?php include __DIR__ . '/../templates/header.php'; ?>
+    <!-- header area end -->
+
+    <!-- popup search -->
+    <div class="search-popup">
+        <button class="close-search"><span class="far fa-times"></span></button>
+        <form action="#">
+            <div class="form-group">
+                <input type="search" name="search-field" class="form-control" placeholder="Search Here..." required="">
+                <button type="submit"><i class="far fa-search"></i></button>
+            </div>
+        </form>
+    </div>
+    <!-- popup search end -->
+
+
+    <main class="main">
+        <!-- hero slider end -->
+        <!-- <div class="product-area product-area-new">
+            <div class="container">
+
+            </div>
+        </div> -->
+
+        
+    </main>
+
+    <!-- js -->
+    <script data-cfasync="false" src="cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script src="assets/js/jquery-3.7.1.min.js"></script>
+    <script src="assets/js/modernizr.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="assets/js/imagesloaded.pkgd.min.js"></script> -->
+    <script src="assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="assets/js/isotope.pkgd.min.js"></script>
+    <script src="assets/js/jquery.appear.min.js"></script>
+    <script src="assets/js/jquery.easing.min.js"></script>
+    <script src="assets/js/owl.carousel.min.js"></script>
+    <script src="assets/js/counter-up.js"></script>
+    <script src="assets/js/jquery-ui.min.js"></script>
+    <script src="assets/js/jquery.nice-select.min.js"></script>
+    <script src="assets/js/countdown.min.js"></script>
+    <script src="assets/js/wow.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
 
 </html>

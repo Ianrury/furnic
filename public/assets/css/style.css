@@ -989,9 +989,9 @@ label {
   margin-right: 0;
 }
 
-.navbar-brand img {
+/* .navbar-brand img {
   width: 180px;
-}
+} */
 
 .navbar .dropdown-toggle::after {
   display: inline-block;
@@ -1302,8 +1302,12 @@ label {
   }
 
   .navbar.fixed-top .navbar-brand img {
-    width: 130px;
+    width: 160px;
+    padding-right: 20px;
+
   }
+
+  
 
   .nav-right {
     margin-left: 15px !important;
@@ -9476,11 +9480,12 @@ label {
 
   .ribbon {
     position: absolute;
+    padding-top: 3px;
     width: 200px;
-    height: 10px;
+    height: 15px;
     background-color: #2b4779;
     transform: rotate(-45deg) translateY(-30px) translateX(-70px);
-    font-size: 5px;
+    font-size: 8px;
     line-height: 10px;
   }
 
@@ -10020,6 +10025,43 @@ input[type="checkbox"].form-check-input {
   .product-area {
     padding-top: 20px;
   }
+
+  .navbar-brand img {
+    width: 160px;
+    padding-right: 20px;
+  }
+
+  .buy-btn {
+    background-color: #2C4B8C;
+    color: white;
+    border: none;
+    font-size: 12px;
+    border-radius: 5px;
+    padding: 5px 0;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+  }
+
+  .buy-btn:hover {
+      background-color: #1e3a70;
+      color: white;
+  }
+
+  .cart-btn {
+      border: 1px solid #2C4B8C;
+      color: #2C4B8C;
+      background-color: white;
+      font-size: 12px;
+      border-radius: 5px;
+      padding: 5px 0;
+      font-weight: 500;
+      transition: all 0.3s ease;
+  }
+
+  .cart-btn:hover {
+      background-color: #f8f9fa;
+      color: #2C4B8C;
+  }
 }
 
 /* Responsive - Tablet */
@@ -10032,6 +10074,38 @@ input[type="checkbox"].form-check-input {
     font-size: 22px;
     right: 15px;
     bottom: 12px;
+  }
+
+  .buy-btn {
+    background-color: #2C4B8C;
+    color: white;
+    border: none;
+    font-size: 12px;
+    border-radius: 5px;
+    padding: 5px 0;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+  }
+
+  .buy-btn:hover {
+      background-color: #1e3a70;
+      color: white;
+  }
+
+  .cart-btn {
+      border: 1px solid #2C4B8C;
+      color: #2C4B8C;
+      background-color: white;
+      font-size: 12px;
+      border-radius: 5px;
+      padding: 5px 0;
+      font-weight: 500;
+      transition: all 0.3s ease;
+  }
+
+  .cart-btn:hover {
+      background-color: #f8f9fa;
+      color: #2C4B8C;
   }
 
   .hero-slider .owl-nav button {
@@ -10061,8 +10135,50 @@ input[type="checkbox"].form-check-input {
 
 /* Responsive - HP */
 @media (max-width: 767.98px) {
+
+  .buy-btn {
+    background-color: #2C4B8C;
+    color: white;
+    border: none;
+    font-size: 8px;
+    border-radius: 5px;
+    padding: 5px 0;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+  }
+
+  .buy-btn:hover {
+      background-color: #1e3a70;
+      color: white;
+  }
+
+  .cart-btn {
+      border: 1px solid #2C4B8C;
+      color: #2C4B8C;
+      background-color: white;
+      font-size: 8px;
+      border-radius: 5px;
+      padding: 5px 0;
+      font-weight: 500;
+      transition: all 0.3s ease;
+  }
+
+  .cart-btn:hover {
+      background-color: #f8f9fa;
+      color: #2C4B8C;
+  }
+
   .newsletter-content {
     text-align: center;
+  }
+
+  .tombol-beli{
+    background-color: #2B4779;
+    color: white;
+    font-size: 14px;
+    font-weight: 300;
+    border: none;
+    padding: 0px;
   }
 
   .newsletter-content h3 {

@@ -75,11 +75,20 @@
     <!-- header area end -->
 
     <nav class="breadcrumb-nav">
+        <!-- <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="/">Beranda</a></li>
+                    <li class="breadcrumb-item active" aria-current="page"><a href="/product/wishlist">Wishlist Product</a></li>
+                </ol>
+            </nav>
+        </div> -->
         <div class="container">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0">
                     <li class="breadcrumb-item"><a href="/">Beranda</a></li>
-                    <li class="breadcrumb-item active"><a href="/product/wishlist">Wishlist Product</a></li>
+                    <!-- <li class="breadcrumb-item"><a href="/product">Product</a></li> -->
+                    <li class="breadcrumb-item active" aria-current="page">Wishlist Product</li>
                 </ol>
             </nav>
         </div>
@@ -344,7 +353,7 @@
     <script src="assets/js/jquery-3.7.1.min.js"></script>
     <script src="assets/js/modernizr.min.js"></script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/imagesloaded.pkgd.min.js"></script>
+    <!-- <script src="assets/js/imagesloaded.pkgd.min.js"></script> -->
     <script src="assets/js/jquery.magnific-popup.min.js"></script>
     <script src="assets/js/isotope.pkgd.min.js"></script>
     <script src="assets/js/jquery.appear.min.js"></script>
@@ -678,6 +687,14 @@
                                         </div>
                                     </div>
                                 </div>
+                                    <div class="row g-2">
+                                                <div class="col-6">
+                                                    <button class="btn buy-btn w-100">Beli</button>
+                                                </div>
+                                                <div class="col-6">
+                                                    <button class="btn cart-btn w-100">+ Keranjang</button>
+                                                </div>
+                                            </div>
                             </div>
                         </div>
                     </div>

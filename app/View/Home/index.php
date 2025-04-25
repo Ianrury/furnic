@@ -110,7 +110,7 @@
                 </div>
                 <div class="tab-content wow fadeInUp" data-wow-delay=".25s" id="item-tabContent">
                     <div class="container">
-                        <div class="row flex-nowrap overflow-auto g-4 pb-3 new-product">
+                        <div class="row">
                             <div class="col-6 col-md-4 col-lg-3">
                                 <div class="card shadow position-relative rounded-4 p-2">
                                     <!-- Corner Ribbon -->

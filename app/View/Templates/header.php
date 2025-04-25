@@ -54,9 +54,9 @@ function is_active($route)
                         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                     </div>
                     <div class="offcanvas-body">
-                        <ul class="navbar-nav mx-5 justify-content-around flex-grow-1 text-center">
+                        <ul class="navbar-nav mx-auto justify-content-around flex-grow-1 text-center">
                             <li class="nav-item">
-                                <a class="d-flex justify-content-center align-items-center w-100 h-100 custom-nav-link <?= is_active('/') ?>"
+                                <a class="d-flex justify-content-center home-link align-items-center w-100 h-100 custom-nav-link <?= is_active('/') ?>"
                                     href="/" style="font-size: 14px;">Home</a>
                             </li>
 
