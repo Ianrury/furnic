@@ -85,8 +85,8 @@
     <main class="main">
 
         <!-- hero slider -->
-        <div class="hero-section hs-1">
-            <div class="container">
+        <div class="hero-section mt-3 hs-1">
+            <div class="container ">
                 <div class="hero-slider owl-carousel owl-theme">
                     <div class="hero-single" style="padding: 0;">
                         <img src="assets/img/hero/slider1.jpg" alt="">

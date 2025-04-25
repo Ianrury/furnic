@@ -50,7 +50,7 @@
 
 </head>
 
-<body>
+<body style="overflow: hidden;">
 
     <a href="https://wa.me/628119018800" class="floating" target="_blank">
         <i class="fab fa-whatsapp"></i>
@@ -69,28 +69,65 @@
     <?php include __DIR__ . '/../templates/header.php'; ?>
     <!-- header area end -->
 
-    <!-- popup search -->
-    <div class="search-popup">
-        <button class="close-search"><span class="far fa-times"></span></button>
-        <form action="#">
-            <div class="form-group">
-                <input type="search" name="search-field" class="form-control" placeholder="Search Here..." required="">
-                <button type="submit"><i class="far fa-search"></i></button>
-            </div>
-        </form>
-    </div>
-    <!-- popup search end -->
+
 
 
     <main class="main">
-        <!-- hero slider end -->
-        <!-- <div class="product-area product-area-new">
-            <div class="container">
-
+    <div class="container-fluid login-container">
+        <div class="row">
+            <!-- Image Section (hidden on mobile) -->
+            <div class="col-md-7 image-container">
+                <img src="assets/img/login/foto-login.PNG" alt="Woman with child on sofa with laptop">
             </div>
-        </div> -->
-
-        
+            
+            <!-- Login Form Section -->
+            <div class="col-12 col-md-5 form-container">
+                <div class="login-form">
+                    <h3 class="login-title">MASUK</h3>
+                    
+                    <form>
+                        <!-- Email Field -->
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email <span class="required">*</span></label>
+                            <input type="email" class="form-control" id="email" placeholder="Masukkan Email">
+                        </div>
+                        
+                        <!-- Password Field -->
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="password" placeholder="Masukkan Password">
+                        </div>
+                        
+                        <!-- Remember Me Checkbox -->
+                        <div class="checkbox-wrapper">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="remember">
+                                <label class="form-check-label" for="remember">Tetap Login</label>
+                            </div>
+                            <a href="#" class="link">Lupa kata sandi?</a>
+                        </div>
+                        
+                        <!-- Login Button -->
+                        <button type="submit" class="btn btn-masuk w-100">MASUK</button>
+                        
+                        <!-- Register Button -->
+                        <button type="button" class="btn btn-daftar w-100">DAFTAR</button>
+                        
+                        <!-- Google Login Button -->
+                        <button type="button" class="btn btn-google w-100">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" alt="Google logo">
+                            Continue with Google
+                        </button>
+                        
+                        <!-- Help Text -->
+                        <div class="help-text">
+                            Butuh bantuan? Kunjungi <a href="#" class="link">FAQ kami</a> atau <a href="#" class="link">hubungi kami</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     </main>
 
     <!-- js -->
@@ -98,7 +135,7 @@
     <script src="assets/js/jquery-3.7.1.min.js"></script>
     <script src="assets/js/modernizr.min.js"></script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
-    <!-- <script src="assets/js/imagesloaded.pkgd.min.js"></script> -->
+    <script src="assets/js/imagesloaded.pkgd.min.js"></script>
     <script src="assets/js/jquery.magnific-popup.min.js"></script>
     <script src="assets/js/isotope.pkgd.min.js"></script>
     <script src="assets/js/jquery.appear.min.js"></script>

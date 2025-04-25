@@ -17,8 +17,8 @@ function is_active($route)
 
 <header class="header bg-info-emphasis">
     <!-- navbar -->
-    <div class="main-navigation shadow-bottom-sm mb-4 mt-2">
-        <nav class="navbar navbar-expand-lg mb-2 d-flex justify-content-between align-items-center">
+    <div class="main-navigation shadow-bottom-sm  mt-2">
+        <nav class="navbar navbar-expand-lg  d-flex justify-content-between align-items-center">
             <div class="container position-relative px-0">
                 <a class="navbar-brand" href="/">
                     <img src="assets/img/logo/Logo%20Furnice.png" alt="logo">

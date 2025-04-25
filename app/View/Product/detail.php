@@ -76,7 +76,7 @@ function base_url($path = '')
     <?php include __DIR__ . '/../templates/header.php'; ?>
     <!-- header area end -->
 
-    <nav class="breadcrumb-nav">
+    <nav class="breadcrumb-nav mt-3">
         <div class="container">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0">
