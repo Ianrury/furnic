@@ -26,11 +26,15 @@ Router::add('POST', '/users/register', UserController::class, 'postRegister', [M
 Router::add('GET', '/logout', UserController::class, 'logout', [MustLoginMiddleware::class]);
 
 // Controller ProductController
-Router::add('GET', '/product', ProductController::class, 'index', [MustLoginMiddleware::class]);
+Router::add('GET', '/product', ProductController::class, 'index');
 Router::add('GET', '/product/detail', ProductController::class, 'detail');
+Router::add('GET', '/product/hasil', ProductController::class, 'pencarian');
+Router::add('GET', '/product/wishlist', ProductController::class, 'wishlist');
+
+
 
 // Controller PromoController
-Router::add('GET', '/promo', PromoController::class, 'index', [MustLoginMiddleware::class]);
+Router::add('GET', '/promo', PromoController::class, 'index');
 
 Router::add('GET', '/not-found', NotFoundController::class, 'index');
 Router::run();

@@ -15,13 +15,13 @@ function is_active($route)
 ?>
 
 
-<header class="header bg-info-emphasis" style="height: 122px;">
+<header class="header bg-info-emphasis">
     <!-- navbar -->
     <div class="main-navigation shadow-bottom-sm mb-4 mt-2">
-        <nav class="navbar navbar-expand-lg mb-5 d-flex justify-content-between align-items-center">
-            <div class="container position-relative px-0 pb-3">
+        <nav class="navbar navbar-expand-lg mb-2 d-flex justify-content-between align-items-center">
+            <div class="container position-relative px-0">
                 <a class="navbar-brand" href="/">
-                    <img src="assets/img/logo/Logo%20Furnice.png" style="width: 145px;" height="32" alt="logo">
+                    <img src="assets/img/logo/Logo%20Furnice.png" alt="logo">
                 </a>
                 <div class="mobile-menu-right">
                     <div class="d-flex justify-content-between align-items-center gap-3 gap-sm-3 gap-md-4 gap-lg-5">
@@ -29,7 +29,7 @@ function is_active($route)
                         <div class="search-button-container" data-bs-toggle="modal" data-bs-target="#searchModal">
                             <div class="search-button d-flex align-items-center justify-content-center">
                                 <div class="search-icon-wrapper">
-                                    <i class="bi bi-search"></i>
+                                    <i class="fa fa-search"></i>
                                 </div>
                             </div>
                         </div>
@@ -84,9 +84,9 @@ function is_active($route)
                         <div class="nav-right">
                             <ul class="nav-right-list">
                                 <li class="me-3">
-                                    <form class="d-flex" role="search">
+                                    <form class="d-flex" action="/product/hasil" role="search">
                                         <div class="input-group">
-                                            <input type="search" class="form-control custom-search-input"
+                                            <input type="search" name="search" class="form-control custom-search-input"
                                                 placeholder="Cari" aria-label="Search"
                                                 style="height: 30px; font-size: 14px;">
                                             <button class="btn custom-search-button" type="submit"
@@ -130,7 +130,10 @@ function is_active($route)
             <div class="modal-header border-0 pb-0">
                 <div class="search-input-wrapper w-100">
                     <i class="bi bi-search search-input-icon"></i>
-                    <input type="text" class="form-control modal-search-input" placeholder="Cari di Furnice" autofocus>
+                    <form action="/product/hasil" method="get">
+                        <input type="text" class="form-control modal-search-input" name="search"
+                            placeholder="Cari di Furnice" autofocus>
+                    </form>
                     <!-- <i class="bi bi-mic-fill voice-search-icon"></i> -->
                 </div>
                 <button type="button" class="btn-close ms-3" data-bs-dismiss="modal" aria-label="Close"></button>

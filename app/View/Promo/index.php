@@ -98,14 +98,14 @@
             </div>
         </div>
         <!-- hero slider end -->
-        <div class="product-area product-area-new pt-40">
+        <div class="product-area product-area-new">
             <div class="container">
                 <div class="row">
-                    <div class="col-12 wow fadeInDown mb-0" data-wow-delay=".25s">
+                    <div class="col-12 wow fadeInDown mb-0 d-flex justify-content-between" data-wow-delay=".25s">
                         <div class="site-heading-inline">
                             <h2 class="site-title">Promo Terbaru</h2>
-                            <a href="#" class="small">View More <i class="fas fa-angle-double-right"></i></a>
                         </div>
+                        <a href="#" class="small view-more">View More <i class="fas fa-angle-double-right"></i></a>
                     </div>
                 </div>
                 <div class="tab-content wow fadeInUp" data-wow-delay=".25s" id="item-tabContent">
@@ -363,7 +363,7 @@
         </div>
 
         <!-- popular item -->
-        <div class="product-area product-area-new pt-40">
+        <div class="product-area product-area-new">
             <div class="container">
                 <div class="row">
                     <div class="col-12 wow fadeInDown mb-0" data-wow-delay=".25s">
@@ -386,8 +386,8 @@
         <!-- newsletter area -->
         <div class="newsletter-area pt-40">
             <div>
-                <div class="container wow fadeInUp rounded-4" data-wow-delay=".25s" style="background-color: #2B4779;">
-                    <div class="newsletter-wrap">
+                <div class="container wow fadeInUp rounded-4" data-wow-delay=".25s">
+                    <div class="newsletter-wrap" style="background-color: #2B4779;">
                         <div class="row">
                             <div class="col-lg-6 mx-auto">
                                 <div class="newsletter-content">

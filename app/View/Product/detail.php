@@ -76,7 +76,7 @@ function base_url($path = '')
     <?php include __DIR__ . '/../templates/header.php'; ?>
     <!-- header area end -->
 
-    <nav class="breadcrumb-nav py-2 px-3">
+    <nav class="breadcrumb-nav">
         <div class="container">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0">
@@ -104,7 +104,7 @@ function base_url($path = '')
     <main class="main">
         <!-- Product -->
         <div class="product-area product-area-new">
-            <div class="container py-4">
+            <div class="container">
                 <div class="row g-0 g-md-5">
                     <!-- Product Images Column -->
                     <div class="col-md-5">
@@ -300,7 +300,7 @@ function base_url($path = '')
         </div>
 
         <!-- ulasan penggan -->
-        <div class="product-area product-area-new pt-40">
+        <div class="product-area product-area-new">
             <div class="container">
                 <div class="row">
                     <div class="col-12 wow fadeInDown mb-0" data-wow-delay=".25s">
@@ -317,75 +317,112 @@ function base_url($path = '')
                                 <div class="d-flex justify-content-between align-items-center mb-3">
                                     <div>
                                         <img src="assets/img/product/decorasi/ruang-santai.jpg" alt="foto review"
-                                            class="img-fluid rounded-3" width="240" height="260">
+                                            class="img-fluid foto-review rounded-3" width="240" height="260">
                                     </div>
                                     <div class="ps-2">
                                         <div class="star-rating">
-                                            <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
-                                            <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
-                                            <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
-                                            <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
-                                            <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
+                                            <img src="assets/img/icon/star.svg" alt="start" class="star-icon-review">
+                                            <img src="assets/img/icon/star.svg" alt="start" class="star-icon-review">
+                                            <img src="assets/img/icon/star.svg" alt="start" class="star-icon-review">
+                                            <img src="assets/img/icon/star.svg" alt="start" class="star-icon-review">
+                                            <img src="assets/img/icon/star.svg" alt="start" class="star-icon-review">
                                             <div class="star-count">200</div>
                                         </div>
                                         <div class="star-rating">
-                                            <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
-                                            <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
-                                            <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
-                                            <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
+                                            <img src="assets/img/icon/star.svg" alt="start" class="star-icon-review">
+                                            <img src="assets/img/icon/star.svg" alt="start" class="star-icon-review">
+                                            <img src="assets/img/icon/star.svg" alt="start" class="star-icon-review">
+                                            <img src="assets/img/icon/star.svg" alt="start" class="star-icon-review">
                                             <div class="star-count">200</div>
                                         </div>
                                         <div class="star-rating">
-                                            <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
-                                            <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
-                                            <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
+                                            <img src="assets/img/icon/star.svg" alt="start" class="star-icon-review">
+                                            <img src="assets/img/icon/star.svg" alt="start" class="star-icon-review">
+                                            <img src="assets/img/icon/star.svg" alt="start" class="star-icon-review">
                                             <div class="star-count">200</div>
                                         </div>
                                         <div class="star-rating">
-                                            <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
-                                            <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
+                                            <img src="assets/img/icon/star.svg" alt="start" class="star-icon-review">
+                                            <img src="assets/img/icon/star.svg" alt="start" class="star-icon-review">
                                             <div class="star-count">200</div>
                                         </div>
                                         <div class="star-rating">
-                                            <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
+                                            <img src="assets/img/icon/star.svg" alt="start" class="star-icon-review">
                                             <div class="star-count">200</div>
                                         </div>
                                     </div>
                                 </div>
                                 <h6 class="text-black" style="font-size: 14px; font-weight: 400;">Foto oleh pelanggan
                                     (100)</h6>
-                                <div class="review-photos-pelanggan mt-3 ">
-                                    <div class="review-photo-pelanggan">
-                                        <img src="assets/img/product/decorasi/ruang-santai.jpg" alt="Product review">
-                                    </div>
-                                    <div class="review-photo-pelanggan">
-                                        <img src="assets/img/product/decorasi/ruang-santai.jpg" alt="Product review">
-                                    </div>
-                                    <div class="review-photo-pelanggan">
-                                        <img src="assets/img/product/decorasi/ruang-santai.jpg" alt="Product review">
-                                    </div>
-                                    <div class="review-photo-pelanggan">
-                                        <img src="assets/img/product/decorasi/ruang-santai.jpg" alt="Product review">
-                                    </div>
-                                    <div class="review-photo-pelanggan">
-                                        <img src="assets/img/product/decorasi/ruang-santai.jpg" alt="Product review">
-                                    </div>
-                                    <div class="review-photo-pelanggan">
-                                        <img src="assets/img/product/decorasi/ruang-santai.jpg" alt="Product review">
-                                    </div>
-                                    <div class="review-photo-pelanggan">
-                                        <img src="assets/img/product/decorasi/ruang-santai.jpg" alt="Product review">
-                                    </div>
-                                    <div class="review-photo-pelanggan">
-                                        <img src="assets/img/product/decorasi/ruang-santai.jpg" alt="Product review">
-                                    </div>
-                                    <div class="review-photo-pelanggan">
-                                        <img src="assets/img/product/decorasi/ruang-santai.jpg" alt="Product review">
-                                    </div>
-                                    <div class="review-photo-pelanggan">
-                                        <img src="assets/img/product/decorasi/ruang-santai.jpg" alt="Product review">
+                                <div class="container mt-3">
+                                    <div class="row g-2 justify-content-start">
+                                        <div class="col-2 review-photo-pelanggan">
+                                            <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png" class="rounded-3"
+                                                alt="Product review">
+                                        </div>
+                                        <div class="col-2 review-photo-pelanggan">
+                                            <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png" class="rounded-3"
+                                                alt="Product review">
+                                        </div>
+                                        <div class="col-2 review-photo-pelanggan">
+                                            <img src="assets/img/product/decorasi/ruang-santai.jpg" class="rounded-3"
+                                                alt="Product review">
+                                        </div>
+                                        <div class="col-2 review-photo-pelanggan">
+                                            <img src="assets/img/product/decorasi/ruang-santai.jpg" class="rounded-3"
+                                                alt="Product review">
+                                        </div>
+                                        <div class="col-2 review-photo-pelanggan">
+                                            <img src="assets/img/product/decorasi/ruang-santai.jpg" class="rounded-3"
+                                                alt="Product review">
+                                        </div>
+                                        <div class="col-2 review-photo-pelanggan">
+                                            <img src="assets/img/product/decorasi/ruang-santai.jpg" class="rounded-3"
+                                                alt="Product review">
+                                        </div>
+                                        <div class="col-2 review-photo-pelanggan">
+                                            <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png" class="rounded-3"
+                                                alt="Product review">
+                                        </div>
+                                        <div class="col-2 review-photo-pelanggan">
+                                            <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png" class="rounded-3"
+                                                alt="Product review">
+                                        </div>
+                                        <div class="col-2 review-photo-pelanggan">
+                                            <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png" class="rounded-3"
+                                                alt="Product review">
+                                        </div>
+                                        <div class="col-2 review-photo-pelanggan">
+                                            <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png" class="rounded-3"
+                                                alt="Product review">
+                                        </div>
+                                        <div class="col-2 review-photo-pelanggan">
+                                            <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png" class="rounded-3"
+                                                alt="Product review">
+                                        </div>
+                                        <div class="col-2 review-photo-pelanggan">
+                                            <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png" class="rounded-3"
+                                                alt="Product review">
+                                        </div>
+                                        <div class="col-2 review-photo-pelanggan">
+                                            <img src="assets/img/product/decorasi/ruang-santai.jpg" class="rounded-3"
+                                                alt="Product review">
+                                        </div>
+                                        <div class="col-2 review-photo-pelanggan">
+                                            <img src="assets/img/product/decorasi/ruang-santai.jpg" class="rounded-3"
+                                                alt="Product review">
+                                        </div>
+                                        <div class="col-2 review-photo-pelanggan">
+                                            <img src="assets/img/product/decorasi/ruang-santai.jpg" class="rounded-3"
+                                                alt="Product review">
+                                        </div>
+                                        <div class="col-2 review-photo-pelanggan">
+                                            <img src="assets/img/product/decorasi/ruang-santai.jpg" class="rounded-3"
+                                                alt="Product review">
+                                        </div>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
 
@@ -468,8 +505,8 @@ function base_url($path = '')
         <div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true"
             style="border-color: #FF8B2D;">
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg"
-                style="max-width: 900px !important;">
-                <div class="modal-content rounded-4" style="border: 2px solid #D9D9D9;">
+                style="max-width: 900px !important; max-height: 80vh !important;">
+                <div class="modal-content rounded-4" style="border: 2px solid #D9D9D9; height: 600px;">
                     <!-- Modal Header -->
                     <div class="modal-header border-bottom-0">
                         <h5 class="modal-title fw-bold" id="reviewModalLabel">
@@ -480,7 +517,7 @@ function base_url($path = '')
                     <!-- Modal Body -->
                     <div class="modal-body">
                         <!-- Reset Button -->
-                        <div class="tab-content-scroll-review me-3">
+                        <div class="tab-content-scroll-review">
                             <div class="row">
                                 <!-- Left grid - Ratings and photos -->
                                 <div class="col-md-3 pe-1">
@@ -502,23 +539,42 @@ function base_url($path = '')
                                                 <div class="mb-3">
                                                     <h6 class="fw-bold text-dark mb-2" style="font-size: 15px;">
                                                         Rekomendasi</h6>
-                                                    <div class="form-check custom-check">
-                                                        <input class="form-check-input" type="checkbox" value=""
-                                                            id="productTerbaru" style="border: 1px solid #95a5a6">
-                                                        <label class="form-check-label" for="productTerbaru">
-                                                            Product Terbaru
-                                                        </label>
+                                                    <div class="filter-checkbox d-none d-md-block">
+                                                        <div class="form-check custom-check">
+                                                            <input class="form-check-input" type="checkbox" value=""
+                                                                id="productTerbaru" style="border: 1px solid #95a5a6">
+                                                            <label class="form-check-label" for="productTerbaru">
+                                                                Ulasan Terbaru
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check custom-check">
+                                                            <input class="form-check-input" type="checkbox" id="promo"
+                                                                style="border: 1px solid #95a5a6">
+                                                            <label class="form-check-label" for="promo">Rating
+                                                                Tertinggi</label>
+                                                        </div>
+                                                        <div class="form-check custom-check">
+                                                            <input class="form-check-input" type="checkbox"
+                                                                id="unggulan" style="border: 1px solid #95a5a6">
+                                                            <label class="form-check-label" for="unggulan">Rating
+                                                                terendah</label>
+                                                        </div>
                                                     </div>
-                                                    <div class="form-check custom-check">
-                                                        <input class="form-check-input" type="checkbox" id="promo"
-                                                            style="border: 1px solid #95a5a6">
-                                                        <label class="form-check-label" for="promo">Promo</label>
-                                                    </div>
-                                                    <div class="form-check custom-check">
-                                                        <input class="form-check-input" type="checkbox" id="unggulan"
-                                                            style="border: 1px solid #95a5a6">
-                                                        <label class="form-check-label" for="unggulan">Product
-                                                            Unggulan</label>
+                                                    <div class="dropdown small-dropdown d-block d-md-none">
+                                                        <button class="btn btn-secondary dropdown-toggle" type="button"
+                                                            id="dropdownMenu2" data-bs-toggle="dropdown"
+                                                            aria-haspopup="true" aria-expanded="false">
+                                                            Rekomendasi
+                                                        </button>
+                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                                            <button class="dropdown-item" type="button">Semua</button>
+                                                            <button class="dropdown-item" type="button">Ulasan
+                                                                Terbaru</button>
+                                                            <button class="dropdown-item" type="button">Rating
+                                                                Tertinggi</button>
+                                                            <button class="dropdown-item" type="button">Rating
+                                                                terendah</button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <hr>
@@ -598,7 +654,8 @@ function base_url($path = '')
                                     <!-- First review -->
                                     <div class="review-grid-review-modal" style="background-color: #FFFFFF;">
                                         <div class="username">Yolanda</div>
-                                        <div class="fw-normal text-black" style="font-size: 12px;">kursinya bagus rekomen
+                                        <div class="fw-normal text-black" style="font-size: 12px;">kursinya bagus
+                                            rekomen
                                             untuk yang mencari kursi belajar
                                             anak,
                                             warna yang di berikan juga variatif</div>
@@ -632,7 +689,8 @@ function base_url($path = '')
                                     </div>
                                     <div class="review-grid-review-modal" style="background-color: #FFFFFF;">
                                         <div class="username">Yolanda</div>
-                                        <div class="fw-normal text-black" style="font-size: 12px;">kursinya bagus rekomen
+                                        <div class="fw-normal text-black" style="font-size: 12px;">kursinya bagus
+                                            rekomen
                                             untuk yang mencari kursi belajar
                                             anak,
                                             warna yang di berikan juga variatif</div>
@@ -666,7 +724,8 @@ function base_url($path = '')
                                     </div>
                                     <div class="review-grid-review-modal" style="background-color: #FFFFFF;">
                                         <div class="username">Yolanda</div>
-                                        <div class="fw-normal text-black" style="font-size: 12px;">kursinya bagus rekomen
+                                        <div class="fw-normal text-black" style="font-size: 12px;">kursinya bagus
+                                            rekomen
                                             untuk yang mencari kursi belajar
                                             anak,
                                             warna yang di berikan juga variatif</div>
@@ -700,7 +759,8 @@ function base_url($path = '')
                                     </div>
                                     <div class="review-grid-review-modal" style="background-color: #FFFFFF;">
                                         <div class="username">Yolanda</div>
-                                        <div class="fw-normal text-black" style="font-size: 12px;">kursinya bagus rekomen
+                                        <div class="fw-normal text-black" style="font-size: 12px;">kursinya bagus
+                                            rekomen
                                             untuk yang mencari kursi belajar
                                             anak,
                                             warna yang di berikan juga variatif</div>
@@ -740,7 +800,7 @@ function base_url($path = '')
             </div>
         </div>
         <!-- Rekomendasi Product -->
-        <div class="product-area product-area-new pt-40">
+        <div class="product-area product-area-new">
             <div class="container">
                 <div class="row">
                     <div class="col-12 wow fadeInDown mb-0" data-wow-delay=".25s">
@@ -994,7 +1054,7 @@ function base_url($path = '')
         </div>
 
         <!-- Best Seller Product -->
-        <div class="product-area product-area-new pt-40">
+        <div class="product-area product-area-new">
             <div class="container">
                 <div class="row">
                     <div class="col-12 wow fadeInDown mb-0" data-wow-delay=".25s">
@@ -1358,6 +1418,31 @@ function base_url($path = '')
         resetButton.addEventListener('click', function () {
             filterCheckboxes.forEach(cb => cb.checked = false);
             resetButton.classList.remove('active');
+        });
+    </script>
+
+    <script>
+        // Tunggu sampai dokumen siap
+        document.addEventListener('DOMContentLoaded', function () {
+            // Ambil elemen dropdown button dan semua item dropdown
+            const dropdownButton = document.getElementById('dropdownMenu2');
+            const dropdownItems = document.querySelectorAll('.dropdown-menu .dropdown-item');
+
+            // Set default ke "Ulasan Terbaru"
+            dropdownButton.textContent = "Ulasan Terbaru";
+
+            // Tambahkan event listener untuk setiap item dropdown
+            dropdownItems.forEach(item => {
+                item.addEventListener('click', function () {
+                    // Ubah teks tombol dropdown menjadi teks dari item yang diklik
+                    dropdownButton.textContent = this.textContent.trim();
+                });
+
+                // Tandai item "Ulasan Terbaru" sebagai aktif secara default
+                if (item.textContent.trim() === "Ulasan Terbaru") {
+                    item.classList.add('active');
+                }
+            });
         });
     </script>
 

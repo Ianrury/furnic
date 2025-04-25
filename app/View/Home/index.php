@@ -98,21 +98,20 @@
             </div>
         </div>
         <!-- hero slider end -->
-        <div class="product-area product-area-new pt-40">
+        <div class="product-area product-area-new">
             <div class="container">
                 <div class="row">
-                    <div class="col-12 wow fadeInDown mb-0" data-wow-delay=".25s">
+                    <div class="col-12 wow fadeInDown mb-0 d-flex justify-content-between" data-wow-delay=".25s">
                         <div class="site-heading-inline">
                             <h2 class="site-title">Produk Terbaru</h2>
-                            <a href="#" class="small">View More <i class="fas fa-angle-double-right"></i></a>
                         </div>
+                        <a href="#" class="small view-more">View More <i class="fas fa-angle-double-right"></i></a>
                     </div>
                 </div>
                 <div class="tab-content wow fadeInUp" data-wow-delay=".25s" id="item-tabContent">
                     <div class="container">
-                        <div
-                            class="row row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 justify-content-center new-product">
-                            <div class="col">
+                        <div class="row flex-nowrap overflow-auto g-4 pb-3 new-product">
+                            <div class="col-6 col-md-4 col-lg-3">
                                 <div class="card shadow position-relative rounded-4 p-2">
                                     <!-- Corner Ribbon -->
                                     <div class="position-absolute ribbon-wrapper">
@@ -170,7 +169,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col">
+                            <div class="col-6 col-md-4 col-lg-3">
                                 <div class="card shadow position-relative rounded-4 p-2">
                                     <!-- Corner Ribbon -->
                                     <div class="position-absolute ribbon-wrapper">
@@ -228,7 +227,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col">
+                            <div class="col-6 col-md-4 col-lg-3">
                                 <div class="card shadow position-relative rounded-4 p-2">
                                     <!-- Corner Ribbon -->
                                     <div class="position-absolute ribbon-wrapper">
@@ -286,7 +285,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col">
+                            <div class="col-6 col-md-4 col-lg-3">
                                 <div class="card shadow position-relative rounded-4 p-2">
                                     <!-- Corner Ribbon -->
                                     <div class="position-absolute ribbon-wrapper">
@@ -351,14 +350,14 @@
         </div>
 
 
-        <div class="product-area product-area-new pt-40">
+        <div class="product-area product-area-new">
             <div class="container">
                 <div class="row">
-                    <div class="col-12 wow fadeInDown mb-0" data-wow-delay=".25s">
+                    <div class="col-12 wow fadeInDown mb-0 d-flex justify-content-between" data-wow-delay=".25s">
                         <div class="site-heading-inline">
-                            <h2 class="site-title">Dekorasi Product</h2>
-                            <a href="#" class="small">View More <i class="fas fa-angle-double-right"></i></a>
+                            <h2 class="site-title">Decorasi Terbaru</h2>
                         </div>
+                        <a href="#" class="small view-more">View More <i class="fas fa-angle-double-right"></i></a>
                     </div>
                 </div>
                 <div class="container-fluid">
@@ -476,19 +475,19 @@
         </div>
 
         <!-- popular item -->
-        <div class="product-area product-area-new pt-40">
+        <div class="product-area product-area-new">
             <div class="container">
                 <div class="row">
-                    <div class="col-12 wow fadeInDown mb-0" data-wow-delay=".25s">
+                    <div class="col-12 wow fadeInDown mb-0 d-flex justify-content-between" data-wow-delay=".25s">
                         <div class="site-heading-inline">
-                            <h2 class="site-title">Product</h2>
-                            <a href="#" class="small">View More <i class="fas fa-angle-double-right"></i></a>
+                            <h2 class="site-title">Produk Terbaru</h2>
                         </div>
+                        <a href="#" class="small view-more">View More <i class="fas fa-angle-double-right"></i></a>
                     </div>
                 </div>
                 <div class="tab-content wow fadeInUp" data-wow-delay=".25s" id="item-tabContent">
                     <div class="container" id="product-pagination-container">
-                        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4  justify-content-center">
+                        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4  justify-content-start">
 
                         </div>
                     </div>
@@ -497,7 +496,7 @@
         </div>
         <!-- popular item end -->
 
-        <div class="product-area product-area-new pt-40">
+        <div class="product-area product-area-new">
             <div class="container">
                 <div class="row">
                     <div class="col-12 wow fadeInDown mb-0" data-wow-delay=".25s">
@@ -531,18 +530,15 @@
                                         </li>
                                     </ul>
                                 </div>
-
-                                <a href="#" class="small d-flex align-items-center"
-                                    style="font-size: 14px; color: #757f95; font-weight: 500;">
-                                    View More <i class="fas fa-angle-double-right ms-1"></i>
-                                </a>
+                                <a href="#" class="small view-more">View More <i
+                                        class="fas fa-angle-double-right"></i></a>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="tab-content wow fadeInUp" data-wow-delay=".25s" id="item-tabContent">
                     <div class="container category-product">
-                        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4  justify-content-center">
+                        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4  justify-content-start">
 
                         </div>
                     </div>
@@ -552,7 +548,7 @@
 
 
         <!-- choose-area -->
-        <div class="product-area product-area-new pt-40">
+        <div class="product-area product-area-new">
             <div class="container">
                 <div class="row">
                     <div class="col-12 wow fadeInDown" data-wow-delay=".25s">
@@ -610,12 +606,11 @@
             </div>
         </div>
 
-        <!-- choose-area end-->
         <!-- newsletter area -->
         <div class="newsletter-area pt-40">
             <div>
-                <div class="container wow fadeInUp rounded-4" data-wow-delay=".25s" style="background-color: #2B4779;">
-                    <div class="newsletter-wrap">
+                <div class="container wow fadeInUp rounded-4" data-wow-delay=".25s">
+                    <div class="newsletter-wrap" style="background-color: #2B4779;">
                         <div class="row">
                             <div class="col-lg-6 mx-auto">
                                 <div class="newsletter-content">
@@ -636,104 +631,6 @@
                 </div>
             </div>
         </div>
-        <!-- newsletter area end -->
-        <!-- contact us -->
-        <!-- <div class="contact-area pb-80">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12 wow fadeInDown" data-wow-delay=".25s">
-                        <div class="site-heading-inline item-tab">
-                            <h2 class="site-title">Contact</h2>
-                        </div>
-                    </div>
-                </div>
-                <div class="contact-wrapper">
-                    <div class="row">
-                        <div class="col-lg-5">
-                            <div class="contact-content">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="contact-info">
-                                            <div class="contact-info-icon">
-                                                <i class="fal fa-map-location-dot"></i>
-                                            </div>
-                                            <div class="contact-info-content">
-                                                <h5>Office Address</h5>
-                                                <p>Alam Sutera, Jl. Lingkar arat No 15, Kel Panunggangan Timur, Kec
-                                                    Pinang, Tangerang, banten</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="contact-info">
-                                            <div class="contact-info-icon">
-                                                <i class="fal fa-headset"></i>
-                                            </div>
-                                            <div class="contact-info-content">
-                                                <h5>Call Us</h5>
-                                                <p>0811-9018-800</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="contact-info">
-                                            <div class="contact-info-icon">
-                                                <i class="fal fa-envelopes"></i>
-                                            </div>
-                                            <div class="contact-info-content">
-                                                <h5>Email Us</h5>
-                                                <p><a href="#">furnicefurnishing.alamsutera@gmail.com</a></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-7">
-                            <div class="contact-form">
-                                <div class="contact-form-header">
-                                    <h2>Get In Touch</h2>
-                                    <p>It is a long established fact that a reader will be distracted by the
-                                        readable
-                                        content of a page words which even slightly when looking at its layout. </p>
-                                </div>
-                                <form method="post" action="/fameo/assets/php/contact.php" id="contact-form">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <input type="text" class="form-control" name="name"
-                                                    placeholder="Your Name" required="">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <input type="email" class="form-control" name="email"
-                                                    placeholder="Your Email" required="">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" name="subject"
-                                            placeholder="Your Subject" required="">
-                                    </div>
-                                    <div class="form-group">
-                                        <textarea name="message" cols="30" rows="4" class="form-control"
-                                            placeholder="Write Your Message"></textarea>
-                                    </div>
-                                    <button type="submit" class="theme-btn">Send
-                                        Message <i class="far fa-paper-plane"></i></button>
-                                    <div class="col-md-12 my-3">
-                                        <div class="form-messege text-success"></div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-        <!-- contact us end -->
-
         <!-- about area -->
         <div class="about-area mt-60 pb-4">
             <div class="container">
@@ -745,7 +642,7 @@
                                 <img class="img-2" src="assets/img/about/02.jpg" alt="">
                                 <img class="img-3" src="assets/img/about/03.jpg" alt="">
                             </div>
-                            <div class="about-experience">
+                            <div class="about-experience" hidden>
                                 <div class="about-experience-icon">
                                     <img src="assets/img/icon/experience.svg" alt="">
                                 </div>
@@ -766,7 +663,7 @@
                                     Furnice Furnishing
                                 </h2>
                             </div>
-                            <p>
+                            <p class="paragraf-tagline">
                                 Furnice Furnishing merupakan perusahaan yang bergerak dalam bisnis untuk memenuhi
                                 kebutuhan Furniture dan Home Accesories modern yang dinamis dan terus berkembang.
                                 Mengusung tagline “Always Nice”, Furnice berkembang dengan mengutamakan pelayanan
@@ -788,7 +685,7 @@
             </div>
         </div>
         <!-- about area end -->
-        <div class="product-area product-area-new pt-40">
+        <div class="product-area product-area-new">
             <div class="container">
                 <div class="row">
                     <div class="col-12 wow fadeInDown mb-0" data-wow-delay=".25s">
@@ -1541,17 +1438,66 @@
         // Style untuk animasi dan transisi
         const styleCt = document.createElement('style');
         styleCt.textContent = `
-    .category-product .row {
-        transition: transform 0.5s ease, opacity 0.5s ease;
+       .category-product .row {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 15px;
+        scrollbar-width: thin;
+        scrollbar-color: #ccc #f9f9f9;
+    }
+    
+    .category-product .row::-webkit-scrollbar {
+        height: 4px;
+    }
+    
+    .category-product .row::-webkit-scrollbar-track {
+        background: #f9f9f9;
+        border-radius: 10px;
+    }
+    
+    .category-product .row::-webkit-scrollbar-thumb {
+        background: #ccc;
+        border-radius: 10px;
+    }
+    
+    .category-product .row::-webkit-scrollbar-thumb:hover {
+        background: #999;
+    }
+    
+    .category-product .col {
+        flex: 0 0 auto;
+        width: auto;
+        max-width: none;
+        transition: all 0.5s ease-in-out;
+    }
+    
+    /* Maintain responsive widths while keeping nowrap */
+    @media (max-width: 767.98px) {
+        .category-product .col {
+            width: 50%; /* For 2 columns on smallest screens */
+        }
+    }
+    
+    @media (min-width: 768px) and (max-width: 991.98px) {
+        .category-product .col {
+            width: 33.333%; /* For 3 columns on medium screens */
+        }
+    }
+    
+    @media (min-width: 992px) {
+        .category-product .col {
+            width: 25%; /* For 4 columns on large screens */
+        }
     }
     
     .slide-out-ct {
         transform: translateX(-30px);
         opacity: 0;
+        transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s ease;
     }
     
     .slide-in-ct {
-        animation: slideFromRightCt 0.5s ease-out forwards;
+        animation: slideFromRightCt 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
     }
     
     @keyframes slideFromRightCt {
@@ -1559,73 +1505,71 @@
             transform: translateX(30px);
             opacity: 0;
         }
+        50% {
+            opacity: 0.5;
+        }
         100% {
             transform: translateX(0);
             opacity: 1;
         }
+    }
+    
+    /* Add some padding to the last card to make sure it's fully visible when scrolled */
+    .category-product .col:last-child {
+        padding-right: 15px;
     }
 `;
         document.head.appendChild(styleCt);
 
         // Fungsi untuk membuat kartu produk dengan desain yang sama
         function createProductCardCt(product) {
-            const starIconsCt = Array(5).fill('').map((_, index) => {
-                return `<i class="bi bi-star-fill text-warning small-icon"></i>`;
-            }).join('');
-
             return `
-                         <div class="card shadow position-relative rounded-4 p-2">
-                            ${product.isNew ? `
-                            <!-- Corner Ribbon -->
-                        <div class="position-absolute ribbon-wrapper">
-                                                <div class="ribbon text-white text-uppercase fw-bold text-center">
-                                                    New Product
-                                                </div>
-                                    </div>
-                    ` : ''}
+        <div class="card shadow position-relative rounded-4 p-2">
+            ${product.isNew ? `
+            <!-- Corner Ribbon -->
+            <div class="position-absolute ribbon-wrapper">
+                <div class="ribbon text-white text-uppercase fw-bold text-center">
+                    New Product
+                </div>
+            </div>
+            ` : ''}
 
-                    <!-- Product Image -->
-                    <div class="text-center pt-3">
-                    <img src="${product.image}" class="img-fluid product-image" alt="Product Image">
+            <!-- Product Image -->
+            <div class="text-center pt-3">
+                <img src="${product.image}" class="img-fluid product-image" alt="Product Image">
+            </div>
+
+            <div class="bodykartu">
+                <div class="d-flex flex-column">
+                    <!-- Product Details -->
+                    <div class="">
+                        <p class="card-title text-truncate fw-medium product-title">${product.description}</p>
+                        <p class="card-text text-truncate product-desc">Meja ruang tamu aesthetic.</p>
+                        <div class="d-flex gap-1 align-items-center">
+                            ${createStarRating(product.rating)}
+                            <small class="text-muted fst-italic ms-1 sold-text">${product.sold} terjual</small>
+                        </div>
                     </div>
 
-                    <div class="bodykartu">
-                            <div class="d-flex flex-column ">
-                                <!-- Product Details -->
-                                <div class="">
-                                    <!-- <h5 class="">
-                                        ${product.title}
-                                </h5> -->
-                                    <p class="card-title text-truncate fw-medium product-title">${product.description}
-                                    </p>
-
-                                    <p class="card-text text-truncate product-desc">Meja ruang tamu
-                                        aesthetic.</p>
-                                    <div class="d-flex gap-1 align-items-center">
-                                        ${createStarRating(product.rating)}
-                                        <small class="text-muted fst-italic ms-1 sold-text">${product.sold} terjual</small>
-                                    </div>
-                                </div>
-
-                                <!-- Price Section -->
-                                <div class="mt-auto">
-                                    <div class="d-flex flex-wrap align-items-baseline">
-                                        <div class="me-2">
-                                            <span class="fw-bold price">
-                                                <sup class="fw-normal">Rp</sup> ${product.price}
-                                            </span>
-                                        </div>
-                                        <div>
-                                            <span class="fw-normal text-danger old-price">
-                                                <sup>Rp</sup>
-                                                <span class="text-decoration-line-through">${product.oldPrice}</span>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
+                    <!-- Price Section -->
+                    <div class="mt-auto">
+                        <div class="d-flex flex-wrap align-items-baseline">
+                            <div class="me-2">
+                                <span class="fw-bold price">
+                                    <sup class="fw-normal">Rp</sup> ${product.price}
+                                </span>
+                            </div>
+                            <div>
+                                <span class="fw-normal text-danger old-price">
+                                    <sup>Rp</sup>
+                                    <span class="text-decoration-line-through">${product.oldPrice}</span>
+                                </span>
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
     `;
         }
 
@@ -1657,6 +1601,9 @@
                 setTimeout(() => {
                     productContainerCt.classList.remove('slide-in-ct');
                 }, 500);
+
+                // Add optional auto-scroll functionality
+                initAutoScroll();
             }, 300); // Tunggu sebentar untuk efek slide out
         }
 
@@ -1711,6 +1658,84 @@
             });
         }
 
+        // Optional: Add auto-scrolling functionality
+        function initAutoScroll() {
+            const scrollContainer = document.querySelector('.category-product .row');
+            if (!scrollContainer) return;
+
+            let scrollPosition = 0;
+            let scrollDirection = 1; // 1 for right, -1 for left
+            const scrollSpeed = 6000; // Lebih lambat - 6 detik antara scrolls
+            const scrollStep = 1; // Jumlah langkah untuk scrolling
+            const scrollInterval = 20; // Waktu antara langkah (ms)
+            const scrollAmount = 2; // Jumlah px per langkah - lebih kecil untuk pergerakan lebih halus
+
+            let scrollIntervalId = null;
+
+            function smoothScroll() {
+                let steps = 0;
+                const maxSteps = 100; // Jumlah maksimum langkah untuk animasi
+
+                // Hentikan interval sebelumnya jika ada
+                if (scrollIntervalId) {
+                    clearInterval(scrollIntervalId);
+                }
+
+                scrollIntervalId = setInterval(() => {
+                    // Calculate max scroll position
+                    const maxScroll = scrollContainer.scrollWidth - scrollContainer.clientWidth;
+
+                    // Tambahkan jumlah scrolling sedikit demi sedikit
+                    scrollContainer.scrollLeft += scrollAmount * scrollDirection;
+                    scrollPosition = scrollContainer.scrollLeft;
+
+                    steps++;
+
+                    // Change direction if we hit a boundary
+                    if (scrollPosition >= maxScroll || scrollPosition <= 0) {
+                        if (scrollPosition >= maxScroll) {
+                            scrollDirection = -1;
+                        } else if (scrollPosition <= 0) {
+                            scrollDirection = 1;
+                        }
+
+                        // Hentikan interval saat ini dan jadwalkan yang berikutnya
+                        clearInterval(scrollIntervalId);
+                        window.scrollTimeout = setTimeout(smoothScroll, scrollSpeed);
+                    }
+
+                    // Jika mencapai jumlah langkah maksimum, berhenti dan jadwalkan berikutnya
+                    if (steps >= maxSteps) {
+                        clearInterval(scrollIntervalId);
+                        window.scrollTimeout = setTimeout(smoothScroll, scrollSpeed / 2);
+                    }
+                }, scrollInterval);
+            }
+
+            // Start auto-scrolling after a delay
+            window.scrollTimeout = setTimeout(smoothScroll, 3000);
+
+            // Pause scrolling on user interaction
+            scrollContainer.addEventListener('mouseenter', function () {
+                clearInterval(scrollIntervalId);
+                clearTimeout(window.scrollTimeout);
+            });
+
+            scrollContainer.addEventListener('mouseleave', function () {
+                window.scrollTimeout = setTimeout(smoothScroll, 1000);
+            });
+
+            // Handle touch events for mobile
+            scrollContainer.addEventListener('touchstart', function () {
+                clearInterval(scrollIntervalId);
+                clearTimeout(window.scrollTimeout);
+            });
+
+            scrollContainer.addEventListener('touchend', function () {
+                window.scrollTimeout = setTimeout(smoothScroll, 1000);
+            });
+        }
+
         // Initialize when DOM is loaded
         document.addEventListener('DOMContentLoaded', function () {
             initCategoryNavigationCt();
@@ -1722,6 +1747,52 @@
                 const initialCategoryCt = initialCategoryLinkCt.textContent.trim();
                 displayProductsCt(initialCategoryCt.toLowerCase());
             }
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const scrollContainer = document.querySelector('.row.flex-nowrap');
+            let scrollPosition = 0;
+            const cardWidth = scrollContainer.querySelector('.col-6').offsetWidth;
+            const scrollSpeed = 21000; // ms between scrolls
+
+            function autoScroll() {
+                if (scrollPosition >= scrollContainer.scrollWidth - scrollContainer.clientWidth) {
+                    // Reset to beginning when reaching the end
+                    scrollPosition = 0;
+                } else {
+                    // Move by one card width
+                    scrollPosition += cardWidth + 16; // 16px accounts for gutter
+                }
+
+                scrollContainer.scrollTo({
+                    left: scrollPosition,
+                    behavior: 'smooth'
+                });
+
+                setTimeout(autoScroll, scrollSpeed);
+            }
+
+            // Start the auto-scrolling after 3 seconds
+            setTimeout(autoScroll, 3000);
+
+            // Pause scrolling when user interacts with the container
+            scrollContainer.addEventListener('mouseenter', function () {
+                clearTimeout(window.scrollTimeout);
+            });
+
+            scrollContainer.addEventListener('mouseleave', function () {
+                window.scrollTimeout = setTimeout(autoScroll, scrollSpeed);
+            });
+
+            // Handle touch events for mobile
+            scrollContainer.addEventListener('touchstart', function () {
+                clearTimeout(window.scrollTimeout);
+            });
+
+            scrollContainer.addEventListener('touchend', function () {
+                window.scrollTimeout = setTimeout(autoScroll, scrollSpeed);
+            });
         });
     </script>
 </body>

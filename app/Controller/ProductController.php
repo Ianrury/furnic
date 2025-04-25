@@ -25,4 +25,22 @@ class ProductController
         ];
         View::render('Product/detail', $model);
     }
+
+    public function pencarian()
+    {
+        $model = [
+            "title" => "Product Pencarian",
+            "content" => "Welcome to the product pencarian page!",
+        ];
+        View::render('Product/pencarian', $model);
+    }
+
+    public function wishlist()
+    {
+        $model = [
+            "title" => "Product Wishlist",
+            "content" => "Welcome to the product wishlist page!",
+        ];
+        View::render('Product/wishlist', $model);
+    }
 }

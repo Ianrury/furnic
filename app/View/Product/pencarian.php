@@ -1,3 +1,7 @@
+<?php
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,6 +15,7 @@
 
     <!-- title -->
     <title><?php echo $model['title']; ?> - PT Furnice Furnishing Indonesia</title>
+    <base href="/">
 
     <!-- favicon -->
     <link rel="icon" type="image/x-icon" href="assets/img/logo/favicon.png">
@@ -188,7 +193,7 @@
                             <!-- Sidebar Filter -->
                             <div class="col-md-3 m-0 p-0" style="opacity: 1 !important; background-color: white;">
                                 <p class="fw-semibold text-dark" style="font-size: 14px;">Urutkan berdasarkan</p>
-                                
+
                                 <div class=" " style="width: 250px;">
                                     <!-- Urutkan Berdasarkan -->
                                     <div class="mb-3">
@@ -314,6 +319,7 @@
 
                             <!-- Produk Grid -->
                             <div class="col-md-9">
+                                <h2 class="site-hasil">Hasil Pencarian</h2>
                                 <div class="row row-cols-2 row-cols-md-2 row-cols-lg-3 g-4" id="product-list">
                                     <!-- Ulangi card produk -->
 
