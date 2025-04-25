@@ -1,0 +1,27 @@
+{
+    "name": "importa/furnic-ffi",
+    "description": "A PHP FFI wrapper for the Importa Furnic API",
+    "type": "project",
+    "authors": [
+        {
+            "name": "ian roery",
+            "email": "ianroeri@gmail.com"
+        }
+    ],
+    "require": {
+        "php" : ">=8"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "9.5.8"
+    },
+    "autoload": {
+        "psr-4": {
+            "Importa\\Furnic\\PHP\\FFI\\" : "app"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Importa\\Furnic\\PHP\\FFI\\Tests\\": "tests/"
+        }
+    }
+}
