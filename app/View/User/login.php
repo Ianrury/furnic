@@ -82,54 +82,72 @@
             
             <!-- Login Form Section -->
             <div class="col-12 col-md-5 form-container">
-                <div class="login-form">
-                    <h3 class="login-title">MASUK</h3>
-                    
-                    <form action="/login" method="post">
-                        <!-- Email Field -->
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email <span class="required">*</span></label>
-                            <input type="email" class="form-control form-login" id="email" name="email" placeholder="Masukkan Email">
+                <div class="wrapper">
+                    <div class="login-form">
+                            <h3 class="login-title">MASUK</h3>
+                            
+                            <form id="loginForm"  method="post">
+                                <!-- Email Field -->
+                                <div class=""  style="margin: auto 5px;">
+                                    <label for="email" class="form-label">Email <span class="required">*</span></label>
+                                    <input type="email" class="form-control form-login" id="email" name="email" placeholder="Masukkan Email">
+                                </div>
+                                
+                                <!-- Password Field -->
+                                <div class=""  style="margin: auto 5px;">
+                                    <label for="password" class="form-label">Password</label>
+                                    <input type="password" class="form-control form-login" id="password" name="password" placeholder="Masukkan Password" style="margin-bottom: 0px;">
+                                </div>
+                                <div class="d-flex justify-content-end">
+                                    <p><a href="#" style="font-size: 10px;">Lupa Kata Sandi?</a></p>
+                                </div>
+                                
+                                <!-- Remember Me Checkbox -->
+                                <div class="checkbox-wrapper">
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" id="remember">
+                                        <label class="form-check-label text-tetap text-black" for="remember" style="font-size: 14px;">Tetap Login</label>
+                                    </div>
+                                </div>
+                                
+                                <!-- Login Button -->
+                                <button type="submit" class="btn btn-masuk w-100">MASUK</button>
+                                
+                                <!-- Register Button -->
+                                <button type="button" class="btn btn-daftar w-100">
+                                <a href="/register">REGISTER</a>
+                                </button>
+                                <hr class="hr-tebal">
+                                <!-- Google Login Button -->
+                                <button type="button" class="btn btn-google w-100">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" alt="Google logo">
+                                    Continue with Google
+                                </button>
+                                
+                                <!-- Help Text -->
+                                <div class="help-text">
+                                    Butuh bantuan? Kunjungi <a href="#" class="link">FAQ kami</a> atau <a href="#" class="link">hubungi kami</a>
+                                </div>
+                            </form>
                         </div>
-                        
-                        <!-- Password Field -->
-                        <div class="mb-3">
-                            <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control form-login" id="password" name="password" placeholder="Masukkan Password" style="margin-bottom: 0px;">
-                        </div>
-                        
-                        <!-- Remember Me Checkbox -->
-                        <div class="checkbox-wrapper">
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="remember">
-                                <label class="form-check-label text-tetap text-black" for="remember" style="font-size: 14px;">Tetap Login</label>
-                            </div>
-                            <p><a href="#" style="font-size: 12px;">Lupa Kata Sandi?</a></p>
-                        </div>
-                        
-                        <!-- Login Button -->
-                        <button type="submit" class="btn btn-masuk w-100">MASUK</button>
-                        
-                        <!-- Register Button -->
-                        <button type="button" class="btn btn-daftar w-100">
-                        <a href="/register">REGISTER</a>
-                        </button>
-                        <hr class="hr-tebal">
-                        <!-- Google Login Button -->
-                        <button type="button" class="btn btn-google w-100">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" alt="Google logo">
-                            Continue with Google
-                        </button>
-                        
-                        <!-- Help Text -->
-                        <div class="help-text">
-                            Butuh bantuan? Kunjungi <a href="#" class="link">FAQ kami</a> atau <a href="#" class="link">hubungi kami</a>
-                        </div>
-                    </form>
+                    </div>
+                </div>
+            </div>
+         </div>
+
+         <div id="toastContainer" class="position-fixed top-0 end-0 p-3" style="z-index: 9999;">
+            <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                <img src="..." class="rounded me-2" alt="...">
+                <strong class="me-auto">Bootstrap</strong>
+                    <small>11 mins ago</small>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                <div class="toast-body">
+                Hello, world! This is a toast message.
                 </div>
             </div>
         </div>
-    </div>
     </main>
 
     <!-- js -->
@@ -152,118 +170,75 @@
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-          const loginForm = document.querySelector('form[action="/login"]');
-    
-        loginForm.addEventListener('submit', function(e) {
+        $('#loginForm').on('submit', function (e) {
             e.preventDefault();
-            
-            // Clear previous error messages
-            clearErrorMessages();
-            
-            // Get form inputs
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            const remember = document.getElementById('remember').checked ? 1 : 0;
-            
-            // Validate form inputs
-            let isValid = true;
-            
-            if (!email) {
-                showErrorMessage('email', 'Email tidak boleh kosong');
-                isValid = false;
-            } else if (!isValidEmail(email)) {
-                showErrorMessage('email', 'Format email tidak valid');
-                isValid = false;
-            }
-            
-            if (!password) {
-                showErrorMessage('password', 'Password tidak boleh kosong');
-                isValid = false;
-            }
-            
-            if (!isValid) {
-                return false;
-            }
-            
-            // Send Ajax request
-            const xhr = new XMLHttpRequest();
-            xhr.open('POST', '/login', true);
-            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-            xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-            
-            xhr.onload = function() {
-                if (xhr.status >= 200 && xhr.status < 300) {
-                    try {
-                        const response = JSON.parse(xhr.responseText);
 
-                        if (response.success) {
-                            // Redirect on success
-                            window.location.href = response.redirect || '/';
-                        } else if (response.error) {
-                            // Tampilkan pesan error
-                            showGeneralError(response.error);
-                        }
-                    } catch (e) {
-                        // Jika respons bukan JSON atau ada kesalahan lainnya
-                        console.log('Error parsing response:', e);
-                        showGeneralError('Terjadi kesalahan pada server. Silakan coba lagi nanti.');
+            // Reset error
+            $('.invalid-feedback').text('');
+            $('.form-control').removeClass('is-invalid');
+
+
+            $.ajax({
+                url: '/login',
+                type: 'POST',
+                data: $(this).serialize(),
+                dataType: 'json',
+                success: function (response) {
+                    if (response.success) {
+                        showToast(response.message, 'success');
+                        setTimeout(() => {
+                            window.location.href = "/login";
+                        }, 100);
                     }
-                } else {
-                    showGeneralError('Terjadi kesalahan pada server. Silakan coba lagi nanti.');
+                },
+                error: function (xhr) {
+                    if (xhr.status === 422) {
+                        const res = JSON.parse(xhr.responseText);
+                        const message = res.message;
+
+                        // Deteksi field
+                        if (message.toLowerCase().includes('email')) {
+                            $('#email').addClass('is-invalid');
+                            $('#error-email').text(message);
+                        } else if (message.toLowerCase().includes('password')) {
+                            $('#password').addClass('is-invalid');
+                            $('#error-password').text(message);
+                        }
+
+                        // Tampilkan toast juga
+                        showToast(message, 'danger');
+                    } else {
+                        showToast('Terjadi kesalahan server. Silakan coba lagi.', 'danger');
+                    }
                 }
-            };     
-            xhr.onerror = function() {
-                showGeneralError('Gagal terhubung ke server. Periksa koneksi internet Anda.');
-            };
-            
-            // Prepare data
-            const data = 'email=' + encodeURIComponent(email) + 
-                        '&password=' + encodeURIComponent(password) +
-                        '&remember=' + encodeURIComponent(remember);
-            
-            xhr.send(data);
-        });
-        
-        // Helper functions
-        function showErrorMessage(inputId, message) {
-            const inputElement = document.getElementById(inputId);
-            const errorElement = document.createElement('div');
-            errorElement.className = 'invalid-feedback d-block';
-            errorElement.textContent = message;
-            
-            inputElement.classList.add('is-invalid');
-            inputElement.parentNode.appendChild(errorElement);
-        }
-        
-        function showGeneralError(message) {
-            const errorAlert = document.createElement('div');
-            errorAlert.className = 'alert alert-danger mt-3';
-            errorAlert.textContent = message;
-            
-            // Insert at the top of the form
-            loginForm.prepend(errorAlert);
-        }
-        
-        function clearErrorMessages() {
-            // Remove all error messages
-            const errorMessages = document.querySelectorAll('.invalid-feedback, .alert-danger');
-            errorMessages.forEach(function(element) {
-                element.remove();
             });
-            
-            // Remove invalid class from inputs
-            const invalidInputs = document.querySelectorAll('.is-invalid');
-            invalidInputs.forEach(function(input) {
-                input.classList.remove('is-invalid');
-            });
-        }
-        
-        function isValidEmail(email) {
-            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return re.test(email);
-            }
         });
+
+        // === TOAST FUNCTION ===
+        function showToast(message, type = 'danger') {
+            const toastId = 'toast-' + Date.now();
+            const toastHtml = `
+                <div id="${toastId}" class="toast align-items-center text-bg-${type} border-0 shadow" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
+                    <div class="d-flex">
+                        <div class="toast-body">${message}</div>
+                        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                </div>`;
+
+            const $toast = $(toastHtml);
+            $('#toastContainer').append($toast);
+
+            // Tunda sedikit biar toast masuk DOM dulu
+            setTimeout(() => {
+                const toast = new bootstrap.Toast(document.getElementById(toastId));
+                toast.show();
+
+                document.getElementById(toastId).addEventListener('hidden.bs.toast', function () {
+                    $(this).remove();
+                });
+            }, 10);
+        }
+
     </script>
 </body>
 

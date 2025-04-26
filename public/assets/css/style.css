@@ -5480,10 +5480,26 @@ label {
 ======================*/
 
 
-.login-form{
-  /* padding-top: 10px; */
-  margin: 0 50px 90px 50px;
+.wrapper {
+  display: flex;
+  justify-content: center;
 }
+
+.login-form {
+  width: 100%;
+  max-width: 400px; /* supaya formnya ga kegedean */
+  margin: 50px auto 110px auto;
+  overflow-y: auto;
+}
+
+.register-form {
+  width: 100%;
+  max-width: 400px; /* supaya formnya ga kegedean */
+  margin: 100px  34px;
+  overflow-y: auto;
+}
+
+
 .login-container {
   min-height: 100vh;
   padding: 0;
@@ -5514,6 +5530,7 @@ label {
 
 .login-title {
   font-weight: 600;
+  margin-bottom: 1rem;
   text-align: center;
   font-size: 24px;
   color: #000;
@@ -5521,6 +5538,7 @@ label {
 
 .form-label {
   font-weight: 500;
+  font-size: 14px;
   margin-bottom: 0.3rem; /* Reduced from 0.5rem */
   color: #000;
 }
@@ -5529,23 +5547,36 @@ label {
   color: red;
 }
 
-.form-control {
+/* .form-control {
   padding: 0.6rem; 
   margin-bottom: 0.7rem; 
-}
+} */
 
 .form-login{
   border-radius: 5px;
+  color: #585a5e;
   border: 2px solid #757F95;
+  margin-bottom: 3px;
+  padding: 18px 10px;
+  font-size: 14px;
 }
+
+
 
 .form-login::placeholder {
   color: #757F95;
   font-size: 14px;
 }
+.country-code-input{
+  width: 50px;
+}
 
+.country-code-input::placeholder{
+  color: #757F95;
+  font-size: 14px;
+}
 .btn-masuk {
-  background-color: #2C4B8C;
+  background-color: #2B4779;
   font-size: 16px;
   color: white;
   padding: 0.6rem; /* Reduced from 0.75rem */
@@ -5553,6 +5584,11 @@ label {
   border-radius: 10px;
   font-weight: 500;
   margin-bottom: 0.7rem; /* Reduced from 1rem */
+}
+
+.btn-masuk:hover {
+  background-color: #243d75;
+  color: white;
 }
 
 .btn-daftar {
@@ -5569,7 +5605,7 @@ label {
 .hr-tebal {
   border: none;
   height: 2px;
-  background-color: #C3C0C0;
+  background-color: #7e7a7a;
 }
 
 

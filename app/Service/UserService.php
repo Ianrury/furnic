@@ -28,7 +28,7 @@ class UserService
             Database::beginTransaction();
             $user = $this->userRepository->findByemail($request->email);
             if ($user != null) {
-                throw new ValidationException("Username already exists");
+                throw new ValidationException("Email Sudah Terdaftar");
             }
     
             $user = new User();
@@ -36,6 +36,7 @@ class UserService
             $user->no_telpon = $request->no_telpon;
             $user->email = $request->email;
             $user->role_akses = 1;
+            $user->jabatan_user = "Admin";
             $user->password = password_hash($request->password, PASSWORD_BCRYPT);
             $this->userRepository->save($user);
     
@@ -53,16 +54,16 @@ class UserService
     public function validateUserRegisterRequest(UserRegisterRequest $request): void
     {
         if ($request->nama_user == null || $request->nama_user == "") {
-            throw new ValidationException("nama_user is required");
+            throw new ValidationException("Nama User Wajib Diisi");
         }
         if ($request->email == null || $request->email == "") {
-            throw new ValidationException("Email is required");
+            throw new ValidationException("Email Wajib Diisi");
         }
         if ($request->password == null || $request->password == "") {
-            throw new ValidationException("Password is required");
+            throw new ValidationException("Password Wajib Diisi");
         }
         if (strlen($request->password) < 8) {
-            throw new ValidationException("Password must be at least 8 characters long");
+            throw new ValidationException("Password minimal 8 karakter");
         }
     }
 

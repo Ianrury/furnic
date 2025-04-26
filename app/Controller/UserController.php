@@ -41,34 +41,48 @@ class UserController
 
     public function postRegister()
     {
-        // var_dump($_POST);
+        header('Content-Type: application/json');
+    
         $request = new UserRegisterRequest();
         $request->nama_user = $_POST['nama_user'] ?? null;
         $request->no_telpon = $_POST['no_telpon'] ?? null;
         $request->email = $_POST['email'] ?? null;
         $request->password = $_POST['password'] ?? null;
-
+    
         try {
-            $this->userService->register($request);
-
-            // Simpan pesan ke dalam session
-            $_SESSION['success'] = "Register success!";
-
-            // Redirect ke halaman login
-            header('Location: /login');
+            $response = $this->userService->register($request);
+    
+            // Pindahkan http_response_code SEBELUM echo
+            http_response_code(200);
+            echo json_encode([
+                "success" => true,
+                "message" => "Registrasi berhasil!",
+                "data" => [
+                    "id" => $response->user->id_user,
+                    "nama_user" => $response->user->nama_user,
+                    "email" => $response->user->email
+                ]
+            ]);
             exit;
         } catch (ValidationException $exception) {
-            $model = [
-                "title" => "Register",
-                "content" => "Welcome to the register page!",
-                "error" => $exception->getMessage(),
-                "old" => $request
-            ];
-            View::render('User/register', $model);
+            http_response_code(422);
+            echo json_encode([
+                "success" => false,
+                "message" => $exception->getMessage()
+            ]);
+            exit;
+        } catch (\Exception $e) {
+            // Ganti catch kedua dari ValidationException jadi Exception umum
+            http_response_code(500);
+            echo json_encode([
+                "success" => false,
+                "message" => $e->getMessage()
+            ]);
+            exit;
         }
-
     }
-
+    
+    
     public function login()
     {
         $model = [
@@ -92,23 +106,34 @@ class UserController
 
     public function postLogin()
     {
-        $request = new UserLoginRequest(); // ✅ Ini yang benar
+        $request = new UserLoginRequest();
         $request->email = $_POST['email'] ?? null;
         $request->password = $_POST['password'] ?? null;
+    
+        header('Content-Type: application/json');
     
         try {
             $response = $this->userService->login($request);
     
             $this->sessionService->create($response->user->id_user);
             $_SESSION['success'] = "Login success!";
-            echo json_encode(['success' => true, 'redirect' => '/']);
+            
+            echo json_encode([
+                'success' => true,
+                'message' => 'Login berhasil!',
+                'redirect' => '/'
+            ]);
             exit;
         } catch (ValidationException $exception) {
-            // Mengirimkan JSON respons dengan error
-            echo json_encode(['error' => $exception->getMessage()]);
+            http_response_code(422); // supaya bisa ditangani AJAX sebagai 422
+            echo json_encode([
+                'success' => false,
+                'message' => $exception->getMessage()
+            ]);
             exit;
         }
     }
+    
     
 
     public function logout()
