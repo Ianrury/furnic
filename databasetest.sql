@@ -1,4 +1,4 @@
--- Active: 1745583296991@@127.0.0.1@3306@php_login_test
+-- Active: 1727836521955@@127.0.0.1@3306@php_login_test
 
 -- Active: 1745562774050@@192.168.1.238@9356@web-furnice
 
@@ -7,7 +7,9 @@ CREATE TABLE users (
     token VARCHAR(50),
     nama_user VARCHAR(50),
     password VARCHAR(100),
+    no_telpon VARCHAR(20),
     jabatan_user VARCHAR(50),
+    email VARCHAR(100),
     role_akses INT
 );
 
@@ -29,7 +31,7 @@ CREATE TABLE kategori (
 );
 
 CREATE TABLE product (
-    id_sku INT PRIMARY KEY AUTO_INCREMENT,
+    id_product INT PRIMARY KEY AUTO_INCREMENT,
     nama_product VARCHAR(100),
     id_kategori INT,
     uom VARCHAR(10),
@@ -44,51 +46,48 @@ CREATE TABLE product (
 
 CREATE TABLE pricelist (
     id_pricelist INT PRIMARY KEY AUTO_INCREMENT,
-    id_sku INT,
+    id_product INT,
     harga INT,
-    FOREIGN KEY (id_sku) REFERENCES product(id_sku)
+    FOREIGN KEY (id_product) REFERENCES product(id_product)
 );
 
 CREATE TABLE promo (
     id_promo INT PRIMARY KEY AUTO_INCREMENT,
-    id_sku INT,
+    id_product INT,
     nama_promo VARCHAR(100),
     jenis_promo VARCHAR(100),
     total_promo DECIMAL(10,2),
     start_date DATE,
     end_date DATE,
-    FOREIGN KEY (id_sku) REFERENCES product(id_sku)
+    FOREIGN KEY (id_product) REFERENCES product(id_product)
 );
 
 CREATE TABLE pesanan (
     id_pesanan INT PRIMARY KEY AUTO_INCREMENT,
     id_customer INT,
-    id_sku INT,
+    id_product INT,
     id_pricelist INT,
     id_promo INT,
     qty INT,
-    total_harga DECIMAL(10,2),
+    total_harga INT,
     tanggal_pesanan DATETIME,
     FOREIGN KEY (id_customer) REFERENCES customer(id_customer),
-    FOREIGN KEY (id_sku) REFERENCES product(id_sku),
+    FOREIGN KEY (id_product) REFERENCES product(id_product),
     FOREIGN KEY (id_pricelist) REFERENCES pricelist(id_pricelist),
     FOREIGN KEY (id_promo) REFERENCES promo(id_promo)
 );
 
 CREATE TABLE session (
     id_session INT PRIMARY KEY AUTO_INCREMENT,
-    id_user INT,
-    id_customer INT,
-    FOREIGN KEY (id_user) REFERENCES users(id_user),
-    FOREIGN KEY (id_customer) REFERENCES customer(id_customer)
+    id_user INT
 );
 
 CREATE TABLE review (
     id_review INT PRIMARY KEY AUTO_INCREMENT,
     id_customer INT,
-    id_sku INT,
+    id_product INT,
     rating INT,
     comment VARCHAR(255),
     FOREIGN KEY (id_customer) REFERENCES customer(id_customer),
-    FOREIGN KEY (id_sku) REFERENCES product(id_sku)
+    FOREIGN KEY (id_product) REFERENCES product(id_product)
 );

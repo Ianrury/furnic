@@ -1,4 +1,4 @@
--- Active: 1745583296991@@127.0.0.1@3306@php_login_test
+-- Active: 1727836521955@@127.0.0.1@3306@php_login_test
 -- Active: 1745562774050@@192.168.1.238@9356@web-furnice
 
 -- DML
@@ -34,11 +34,4 @@ VALUES
 
 
 -- DDL
-ALTER TABLE pesanan
-MODIFY COLUMN total_harga INT;
 
-ALTER TABLE users
-ADD email VARCHAR(100);
-
-ALTER TABLE users
-ADD no_telpon VARCHAR(20);

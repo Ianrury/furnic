@@ -21,6 +21,8 @@ class MustNotLoginMiddleware implements Middleware
     public function before(): void
     {
         $user = $this->sessionService->current();
+        // var_dump($user);
+        // exit;
         if ($user != null) {
             $previous = $_SERVER['HTTP_REFERER'] ?? '/';
             header("Location: $previous");

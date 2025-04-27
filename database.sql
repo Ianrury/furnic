@@ -73,12 +73,11 @@ CREATE TABLE pesanan (
     FOREIGN KEY (id_promo) REFERENCES promo(id_promo)
 );
 
+DROP TABLE session;
+
 CREATE TABLE session (
     id_session INT PRIMARY KEY AUTO_INCREMENT,
     id_user INT,
-    id_customer INT,
-    FOREIGN KEY (id_user) REFERENCES users(id_user),
-    FOREIGN KEY (id_customer) REFERENCES customer(id_customer)
 );
 
 CREATE TABLE review (

@@ -213,7 +213,7 @@
                         // Redirect ke /login
                         setTimeout(() => {
                             window.location.href = "/login";
-                        }, 1000);
+                        }, 2000);
                     } else {
                         // Handle jika success = false
                         showToast(response.message || 'Terjadi kesalahan.', 'danger');

@@ -51,6 +51,9 @@ class UserController
     
         try {
             $response = $this->userService->register($request);
+            
+            // var_dump($response);
+            // exit;
     
             // Pindahkan http_response_code SEBELUM echo
             http_response_code(200);
@@ -114,8 +117,11 @@ class UserController
     
         try {
             $response = $this->userService->login($request);
+            
     
-            $this->sessionService->create($response->user->id_user);
+            $token = $this->sessionService->create($response->user->id_user);
+            // var_dump($token);
+            // exit;
             $_SESSION['success'] = "Login success!";
             
             echo json_encode([

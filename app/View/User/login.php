@@ -187,8 +187,8 @@
                     if (response.success) {
                         showToast(response.message, 'success');
                         setTimeout(() => {
-                            window.location.href = "/login";
-                        }, 100);
+                            window.location.href = "/";
+                        }, 2000);
                     }
                 },
                 error: function (xhr) {

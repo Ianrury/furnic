@@ -24,12 +24,12 @@ class SessionService
     {
         $session = new Session();
         $session->id_user = $id_user;
-
-
+    
         $session = $this->sessionRepository->save($session);
-        setcookie(self::$COOKIE_NAME, $session->id_user, time() + (60 * 60 * 24 * 30), '/');
+        setcookie(self::$COOKIE_NAME, $session->id_session, time() + (60 * 60 * 24 * 30), '/');
         return $session;
     }
+    
 
     public function destroy()
     {
