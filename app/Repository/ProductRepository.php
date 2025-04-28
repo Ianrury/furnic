@@ -58,6 +58,39 @@ class ProductRepository
         return $products;
     }
 
+    public function productTerbaru(): array
+    {
+        $statement = $this->connection->query("SELECT * FROM product ORDER BY created_at DESC LIMIT 4");
+        $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
+    
+        $products = [];
+        foreach ($rows as $row) {
+            $products[] = $this->mapRowToProduct($row);
+        }
+    
+        return $products;
+    }
+
+    public function produkKategory()
+    {
+        $statement = $this->connection->query("
+            SELECT 
+                kategori.id_kategori,
+                kategori.nama AS nama_kategori,
+                product.id_product,
+                product.nama_product,
+                product.foto,
+                product.deskripsi,
+                product.qty
+            FROM kategori
+            LEFT JOIN product ON product.id_kategori = kategori.id_kategori
+            ORDER BY kategori.nama ASC, product.nama_product ASC
+        ");
+        
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
+
     public function productById(string $id): ?Product
     {
         $statement = $this->connection->prepare("SELECT * FROM product WHERE id_product = :id");

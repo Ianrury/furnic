@@ -1,4 +1,4 @@
--- Active: 1727836521955@@127.0.0.1@3306@php_login_test
+-- Active: 1745583296991@@127.0.0.1@3306@php_login_test
 -- Active: 1745562774050@@192.168.1.238@9356@web-furnice
 
 -- DML
@@ -8,9 +8,8 @@ VALUES
 ('xyz789token', 'User Dua', 'user123', 'Staff Operasional', 2);
 
 INSERT INTO kategori (id_parent_kategori, nama) VALUES
-(NULL, 'Living Room'),
-(NULL, 'Bedroom'),
-(NULL, 'Kitchen');
+(NULL, 'Dinning');
+
 
 
 INSERT INTO product 

@@ -5,6 +5,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 use Importa\Furnic\PHP\FFI\App\Router;
 use Importa\Furnic\PHP\FFI\Config\Database;
 use Importa\Furnic\PHP\FFI\Controller\HomeController;
+use Importa\Furnic\PHP\FFI\Controller\KeranjangController;
 use Importa\Furnic\PHP\FFI\Controller\NotFoundController;
 use Importa\Furnic\PHP\FFI\Controller\ProductController;
 use Importa\Furnic\PHP\FFI\Controller\PromoController;
@@ -30,6 +31,9 @@ Router::add('GET', '/product', ProductController::class, 'index');
 Router::add('GET', '/product/detail', ProductController::class, 'detail');
 Router::add('GET', '/product/hasil', ProductController::class, 'pencarian');
 Router::add('GET', '/product/wishlist', ProductController::class, 'wishlist');
+
+// Contooller kerangjang 
+Router::add('GET', '/keranjang', KeranjangController::class, 'index');
 
 
 

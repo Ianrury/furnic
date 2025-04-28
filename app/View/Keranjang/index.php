@@ -1,3 +1,7 @@
+<?php
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,6 +15,7 @@
 
     <!-- title -->
     <title><?php echo $model['title']; ?> - PT Furnice Furnishing Indonesia</title>
+    <base href="/">
 
     <!-- favicon -->
     <link rel="icon" type="image/x-icon" href="assets/img/logo/favicon.png">
@@ -69,6 +74,25 @@
     <?php include __DIR__ . '/../templates/header.php'; ?>
     <!-- header area end -->
 
+    <nav class="breadcrumb-nav mt-3">
+        <!-- <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="/">Beranda</a></li>
+                    <li class="breadcrumb-item active" aria-current="page"><a href="/product/wishlist">Wishlist Product</a></li>
+                </ol>
+            </nav>
+        </div> -->
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="/">Beranda</a></li>
+                    <!-- <li class="breadcrumb-item"><a href="/product">Product</a></li> -->
+                    <li class="breadcrumb-item active" aria-current="page">Keranjang</li>
+                </ol>
+            </nav>
+        </div>
+    </nav>
     <!-- popup search -->
     <div class="search-popup">
         <button class="close-search"><span class="far fa-times"></span></button>
@@ -84,244 +108,346 @@
 
     <main class="main">
 
-        <!-- hero slider -->
-        <div class="hero-section mt-3 hs-1">
-            <div class="container ">
-                <div class="hero-slider owl-carousel owl-theme">
-                    <div class="hero-single" style="padding: 0;">
-                        <img src="assets/img/hero/slider1.jpg" alt="">
-                    </div>
-                    <div class="hero-single" style="padding: 0;">
-                        <img src="assets/img/hero/slider2.jpg" alt="">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Dekorasi Pilihan -->
         <div class="product-area product-area-new">
             <div class="container">
                 <div class="row">
                     <div class="col-12 wow fadeInDown mb-0" data-wow-delay=".25s">
                         <div class="site-heading-inline">
-                            <h2 class="site-title">Dekorasi Product</h2>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="container-fluid">
-                    <div class="tab-content wow fadeInUp" data-wow-delay=".25s" id="item-tabContent">
-                        <div class="row row-cols-1 row-cols-md-4 g-3">
-                            <!-- Card: Kamar Tidur -->
-                            <div class="col">
-                                <div class="card h-100 border-0 overflow-hidden rounded-2 position-relative"
-                                    style="height: 300px;">
-                                    <img src="assets/img/product/decorasi/kamar-tidur.jpg" class="w-100 h-100"
-                                        style="object-fit: cover;" alt="Kamar Tidur">
-                                    <div class="position-absolute top-0 start-0 m-2">
-                                        <span class="badge bg-white text-dark py-2 px-3 fw-medium rounded-2 shadow-sm">
-                                            Kamar Tidur
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Card: Ruang Tamu -->
-                            <div class="col">
-                                <div class="card h-100 border-0 overflow-hidden rounded-2 position-relative"
-                                    style="height: 300px;">
-                                    <img src="assets/img/product/decorasi/ruang-tamu.jpg" class="w-100 h-100"
-                                        style="object-fit: cover;" alt="Ruang Tamu">
-                                    <div class="position-absolute top-0 start-0 m-2">
-                                        <span class="badge bg-white text-dark py-2 px-3 fw-medium rounded-2 shadow-sm">
-                                            Ruang Tamu
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Card: Kantor -->
-                            <div class="col">
-                                <div class="card h-100 border-0 overflow-hidden rounded-2 position-relative"
-                                    style="height: 300px;">
-                                    <img src="assets/img/product/decorasi/kantor.jpg" class="w-100 h-100"
-                                        style="object-fit: cover;" alt="Kantor">
-                                    <div class="position-absolute top-0 start-0 m-2">
-                                        <span class="badge bg-white text-dark py-2 px-3 fw-medium rounded-2 shadow-sm">
-                                            Kantor
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Card: Ruang Santai -->
-                            <div class="col">
-                                <div class="card h-100 border-0 overflow-hidden rounded-2 position-relative"
-                                    style="height: 300px;">
-                                    <img src="assets/img/product/decorasi/ruang-santai.jpg" class="w-100 h-100"
-                                        style="object-fit: cover;" alt="Ruang Santai">
-                                    <div class="position-absolute top-0 start-0 m-2">
-                                        <span class="badge bg-white text-dark py-2 px-3 fw-medium rounded-2 shadow-sm">
-                                            Ruang Santai
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-        <!-- Product -->
-        <div class="product-area product-area-new">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12 wow fadeInDown mb-0" data-wow-delay=".25s">
-                        <div class="site-heading-inline">
-                            <h2 class="site-title">Produk </h2>
+                            <h2 class="site-title">Keranjang Belanja</h2>
                         </div>
                     </div>
                 </div>
                 <div class="tab-content wow fadeInUp" data-wow-delay=".25s" id="item-tabContent">
                     <div class="container">
                         <div class="row">
-                            <!-- Sidebar Filter -->
-                            <div class="col-md-3 m-0 p-0" style="opacity: 1 !important; background-color: white;">
-                                <p class="fw-semibold text-dark" style="font-size: 14px;">Urutkan berdasarkan</p>
-                                
-                                <div class=" " style="width: 250px;">
-                                    <!-- Urutkan Berdasarkan -->
-                                    <div class="mb-3">
-                                        <button id="resetFilter" class="btn btn-secondary btn-sm mt-1"
-                                            style="font-size: 11px; padding-right: 27px; padding-left: 27px;padding-top: 1px; padding-bottom: 1px; background-color: #D9D9D9; border: #D9D9D9;">Reset</button>
-                                    </div>
-
-                                    <hr>
-
-                                    <!-- Rekomendasi -->
-                                    <div class="mb-3">
-                                        <h6 class="fw-bold text-dark mb-2" style="font-size: 15px;">Rekomendasi</h6>
-                                        <div class="form-check custom-check">
-                                            <input class="form-check-input" type="checkbox" value=""
-                                                id="productTerbaru">
-                                            <label class="form-check-label" for="productTerbaru">
-                                                Product Terbaru
-                                            </label>
+                            <!-- List Produk -->
+                            <div class="col-md-8">
+                                <div class="d-flex flex-column gap-3">
+                                    <!-- Mulai looping produk di sini -->
+                                    <div class="d-flex gap-3 align-items-start">
+                                        <div class="rounded-2 ms-4">
+                                            <input class="form-check-input" type="checkbox" id="homeware">
                                         </div>
-                                        <div class="form-check custom-check">
-                                            <input class="form-check-input" type="checkbox" id="promo">
-                                            <label class="form-check-label" for="promo">Promo</label>
-                                        </div>
-                                        <div class="form-check custom-check">
-                                            <input class="form-check-input" type="checkbox" id="unggulan">
-                                            <label class="form-check-label" for="unggulan">Product Unggulan</label>
-                                        </div>
-                                    </div>
-
-                                    <hr>
-
-                                    <!-- Kategori -->
-                                    <div class="mb-3">
-                                        <h6 class="fw-bold text-dark mb-2" style="font-size: 15px;">Kategori</h6>
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <div class="form-check custom-check">
-                                                    <input class="form-check-input" type="checkbox" id="bedroom">
-                                                    <label class="form-check-label" for="bedroom">Bedroom</label>
+                                        <div class="w-100 p-3 d-flex align-items-center justify-content-between rounded-4" style="border: 1px solid #D9D9D9;">
+                                            <div class="d-flex gap-3 align-items-center">
+                                                <div class="card shadow position-relative rounded-4 p-2">
+                                                    <!-- Corner Ribbon -->
+                                                    <div class="position-absolute ribbon-wrapper-keranjang">
+                                                        <div class="ribbon-keranjang text-white text-uppercase fw-bold text-center">
+                                                            New Product
+                                                        </div>
+                                                    </div>
+                                                    <!-- Product Image -->
+                                                    <div class="text-center pt-3">
+                                                        <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png" class="img-fluid product-image-keranjang" alt="Product Image">
+                                                    </div>
                                                 </div>
-                                                <div class="form-check custom-check">
-                                                    <input class="form-check-input" type="checkbox" id="business">
-                                                    <label class="form-check-label" for="business">Business Table &
-                                                        Chair</label>
-                                                </div>
-                                                <div class="form-check custom-check">
-                                                    <input class="form-check-input" type="checkbox" id="dining">
-                                                    <label class="form-check-label" for="dining">Dining</label>
-                                                </div>
-                                                <div class="form-check custom-check">
-                                                    <input class="form-check-input" type="checkbox" id="home_deco">
-                                                    <label class="form-check-label" for="home_deco">Home
-                                                        Decoration</label>
-                                                </div>
-                                                <div class="form-check custom-check">
-                                                    <input class="form-check-input" type="checkbox" id="homeware">
-                                                    <label class="form-check-label" for="homeware">Homeware</label>
-                                                </div>
-                                                <div class="form-check custom-check">
-                                                    <input class="form-check-input" type="checkbox" id="textile">
-                                                    <label class="form-check-label" for="textile">Home Textile</label>
+                                                <div>
+                                                    <h5 class="title-keranjang">Zulu Chair White</h5>
+                                                    <p class="name-keranjang">one set meja & kursi</p>
+                                                    <ul class="list-unstyled m-0 p-0">
+                                                        <li class="motif-keranjang">
+                                                            <span class="label-keranjang">Warna</span> : <span class="value-keranjang">Putih</span>
+                                                        </li>
+                                                        <li class="motif-keranjang">
+                                                            <span class="label-keranjang">Motif</span> : <span class="value-keranjang">Polos</span>
+                                                        </li>
+                                                    </ul>
+                                                    <div class="d-flex flex-wrap align-items-baseline">
+                                                        <div class="me-2">
+                                                            <span class="fw-bold title-keranjang">
+                                                                <sup class="fw-normal">Rp</sup> 500.000
+                                                            </span>
+                                                        </div>
+                                                        <div>
+                                                            <span class="fw-normal text-danger old-price">
+                                                                <sup>Rp</sup>
+                                                                <span class="text-decoration-line-through">600.000</span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="col-6">
-                                                <div class="form-check custom-check">
-                                                    <input class="form-check-input" type="checkbox" id="kids">
-                                                    <label class="form-check-label" for="kids">Kids & Teens</label>
-                                                </div>
-                                                <div class="form-check custom-check">
-                                                    <input class="form-check-input" type="checkbox" id="kitchen">
-                                                    <label class="form-check-label" for="kitchen">Kitchen</label>
-                                                </div>
-                                                <div class="form-check custom-check">
-                                                    <input class="form-check-input" type="checkbox" id="living">
-                                                    <label class="form-check-label" for="living">Living</label>
-                                                </div>
-                                                <div class="form-check custom-check">
-                                                    <input class="form-check-input" type="checkbox" id="mattress">
-                                                    <label class="form-check-label" for="mattress">Mattress</label>
-                                                </div>
-                                                <div class="form-check custom-check">
-                                                    <input class="form-check-input" type="checkbox" id="office">
-                                                    <label class="form-check-label" for="office">Office</label>
-                                                </div>
-                                                <div class="form-check custom-check">
-                                                    <input class="form-check-input" type="checkbox" id="rugs">
-                                                    <label class="form-check-label" for="rugs">Rugs & Mats</label>
-                                                </div>
-                                                <div class="form-check custom-check">
-                                                    <input class="form-check-input" type="checkbox" id="storage">
-                                                    <label class="form-check-label" for="storage">Storage</label>
-                                                </div>
+                                            <!-- Quantity -->
+                                            <div class="d-flex align-items-center">
+                                                <button class="btn-quantity fw-medium">
+                                                    <span style="font-size: 20px;">-</span>
+                                                </button>
+                                                <span class="mx-4 fw-normal text-black" style="font-size: 14px;">3</span>
+                                                <button class="btn-quantity fw-medium">
+                                                    <span style="font-size: 20px;">+</span>
+                                                </button>
+                                            </div>
+                                            <!-- Harga total per item -->
+                                            <div>
+                                                <span class="fw-bold title-keranjang">
+                                                    <sup class="fw-normal">Rp</sup> 1.500.000
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
-
-                                    <hr>
-
-                                    <!-- Harga -->
-                                    <div class="mb-3">
-                                        <h6 class="fw-bold text-dark mb-2" style="font-size: 15px;">Kategori</h6>
-                                        <div class="input-group input-group-sm mb-3">
-                                            <span class="input-group-text fw-bold" id="inputGroup-sizing-sm"
-                                                style="font-size: 10px; background-color: #D9D9D9;">Rp</span>
-                                            <input type="text" class="form-control harga-input"
-                                                placeholder="Masukkan harga minimum" aria-label="Sizing example input"
-                                                aria-describedby="inputGroup-sizing-sm"
-                                                onfocus="this.classList.add('focused')"
-                                                onblur="if(!this.value) this.classList.remove('focused')">
+                                    <!-- Selesai 1 produk -->
+                                    <div class="d-flex gap-3 align-items-start">
+                                        <div class="rounded-2 ms-4">
+                                            <input class="form-check-input" type="checkbox" id="homeware">
                                         </div>
-                                        <div class="input-group input-group-sm mb-3">
-                                            <span class="input-group-text fw-bold" id="inputGroup-sizing-sm"
-                                                style="font-size: 10px; background-color: #D9D9D9;">Rp</span>
-                                            <input type="text" class="form-control harga-input"
-                                                placeholder="Masukkan harga maximum" aria-label="Sizing example input"
-                                                aria-describedby="inputGroup-sizing-sm"
-                                                onfocus="this.classList.add('focused')"
-                                                onblur="if(!this.value) this.classList.remove('focused')">
+                                        <div class="w-100 p-3 d-flex align-items-center justify-content-between rounded-4" style="border: 1px solid #D9D9D9;">
+                                            <div class="d-flex gap-3 align-items-center">
+                                                <div class="card shadow position-relative rounded-4 p-2">
+                                                    <!-- Corner Ribbon -->
+                                                    <div class="position-absolute ribbon-wrapper-keranjang">
+                                                        <div class="ribbon-keranjang text-white text-uppercase fw-bold text-center">
+                                                            New Product
+                                                        </div>
+                                                    </div>
+                                                    <!-- Product Image -->
+                                                    <div class="text-center pt-3">
+                                                        <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png" class="img-fluid product-image-keranjang" alt="Product Image">
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <h5 class="title-keranjang">Zulu Chair White</h5>
+                                                    <p class="name-keranjang">one set meja & kursi</p>
+                                                    <ul class="list-unstyled m-0 p-0">
+                                                        <li class="motif-keranjang">
+                                                            <span class="label-keranjang">Warna</span> : <span class="value-keranjang">Putih</span>
+                                                        </li>
+                                                        <li class="motif-keranjang">
+                                                            <span class="label-keranjang">Motif</span> : <span class="value-keranjang">Polos</span>
+                                                        </li>
+                                                    </ul>
+                                                    <div class="d-flex flex-wrap align-items-baseline">
+                                                        <div class="me-2">
+                                                            <span class="fw-bold title-keranjang">
+                                                                <sup class="fw-normal">Rp</sup> 500.000
+                                                            </span>
+                                                        </div>
+                                                        <div>
+                                                            <span class="fw-normal text-danger old-price">
+                                                                <sup>Rp</sup>
+                                                                <span class="text-decoration-line-through">600.000</span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Quantity -->
+                                            <div class="d-flex align-items-center">
+                                                <button class="btn-quantity fw-medium">
+                                                    <span style="font-size: 20px;">-</span>
+                                                </button>
+                                                <span class="mx-4 fw-normal text-black" style="font-size: 14px;">3</span>
+                                                <button class="btn-quantity fw-medium">
+                                                    <span style="font-size: 20px;">+</span>
+                                                </button>
+                                            </div>
+                                            <!-- Harga total per item -->
+                                            <div>
+                                                <span class="fw-bold title-keranjang">
+                                                    <sup class="fw-normal">Rp</sup> 1.500.000
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex gap-3 align-items-start">
+                                        <div class="rounded-2 ms-4">
+                                            <input class="form-check-input" type="checkbox" id="homeware">
+                                        </div>
+                                        <div class="w-100 p-3 d-flex align-items-center justify-content-between rounded-4" style="border: 1px solid #D9D9D9;">
+                                            <div class="d-flex gap-3 align-items-center">
+                                                <div class="card shadow position-relative rounded-4 p-2">
+                                                    <!-- Corner Ribbon -->
+                                                    <div class="position-absolute ribbon-wrapper-keranjang">
+                                                        <div class="ribbon-keranjang text-white text-uppercase fw-bold text-center">
+                                                            New Product
+                                                        </div>
+                                                    </div>
+                                                    <!-- Product Image -->
+                                                    <div class="text-center pt-3">
+                                                        <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png" class="img-fluid product-image-keranjang" alt="Product Image">
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <h5 class="title-keranjang">Zulu Chair White</h5>
+                                                    <p class="name-keranjang">one set meja & kursi</p>
+                                                    <ul class="list-unstyled m-0 p-0">
+                                                        <li class="motif-keranjang">
+                                                            <span class="label-keranjang">Warna</span> : <span class="value-keranjang">Putih</span>
+                                                        </li>
+                                                        <li class="motif-keranjang">
+                                                            <span class="label-keranjang">Motif</span> : <span class="value-keranjang">Polos</span>
+                                                        </li>
+                                                    </ul>
+                                                    <div class="d-flex flex-wrap align-items-baseline">
+                                                        <div class="me-2">
+                                                            <span class="fw-bold title-keranjang">
+                                                                <sup class="fw-normal">Rp</sup> 500.000
+                                                            </span>
+                                                        </div>
+                                                        <div>
+                                                            <span class="fw-normal text-danger old-price">
+                                                                <sup>Rp</sup>
+                                                                <span class="text-decoration-line-through">600.000</span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Quantity -->
+                                            <div class="d-flex align-items-center">
+                                                <button class="btn-quantity fw-medium">
+                                                    <span style="font-size: 20px;">-</span>
+                                                </button>
+                                                <span class="mx-4 fw-normal text-black" style="font-size: 14px;">3</span>
+                                                <button class="btn-quantity fw-medium">
+                                                    <span style="font-size: 20px;">+</span>
+                                                </button>
+                                            </div>
+                                            <!-- Harga total per item -->
+                                            <div>
+                                                <span class="fw-bold title-keranjang">
+                                                    <sup class="fw-normal">Rp</sup> 1.500.000
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex gap-3 align-items-start">
+                                        <div class="rounded-2 ms-4">
+                                            <input class="form-check-input" type="checkbox" id="homeware">
+                                        </div>
+                                        <div class="w-100 p-3 d-flex align-items-center justify-content-between rounded-4" style="border: 1px solid #D9D9D9;">
+                                            <div class="d-flex gap-3 align-items-center">
+                                                <div class="card shadow position-relative rounded-4 p-2">
+                                                    <!-- Corner Ribbon -->
+                                                    <div class="position-absolute ribbon-wrapper-keranjang">
+                                                        <div class="ribbon-keranjang text-white text-uppercase fw-bold text-center">
+                                                            New Product
+                                                        </div>
+                                                    </div>
+                                                    <!-- Product Image -->
+                                                    <div class="text-center pt-3">
+                                                        <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png" class="img-fluid product-image-keranjang" alt="Product Image">
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <h5 class="title-keranjang">Zulu Chair White</h5>
+                                                    <p class="name-keranjang">one set meja & kursi</p>
+                                                    <ul class="list-unstyled m-0 p-0">
+                                                        <li class="motif-keranjang">
+                                                            <span class="label-keranjang">Warna</span> : <span class="value-keranjang">Putih</span>
+                                                        </li>
+                                                        <li class="motif-keranjang">
+                                                            <span class="label-keranjang">Motif</span> : <span class="value-keranjang">Polos</span>
+                                                        </li>
+                                                    </ul>
+                                                    <div class="d-flex flex-wrap align-items-baseline">
+                                                        <div class="me-2">
+                                                            <span class="fw-bold title-keranjang">
+                                                                <sup class="fw-normal">Rp</sup> 500.000
+                                                            </span>
+                                                        </div>
+                                                        <div>
+                                                            <span class="fw-normal text-danger old-price">
+                                                                <sup>Rp</sup>
+                                                                <span class="text-decoration-line-through">600.000</span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Quantity -->
+                                            <div class="d-flex align-items-center">
+                                                <button class="btn-quantity fw-medium">
+                                                    <span style="font-size: 20px;">-</span>
+                                                </button>
+                                                <span class="mx-4 fw-normal text-black" style="font-size: 14px;">3</span>
+                                                <button class="btn-quantity fw-medium">
+                                                    <span style="font-size: 20px;">+</span>
+                                                </button>
+                                            </div>
+                                            <!-- Harga total per item -->
+                                            <div>
+                                                <span class="fw-bold title-keranjang">
+                                                    <sup class="fw-normal">Rp</sup> 1.500.000
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Produk Grid -->
-                            <div class="col-md-9">
-                                <div class="row row-cols-2 row-cols-md-2 row-cols-lg-3 g-4" id="product-list">
-                                    <!-- Ulangi card produk -->
-
-                                    <!-- Akhir satu produk -->
+                            <!-- Detail Pembayaran -->
+                            <div class="col-md-4">
+                                <div class="rounded-4 p-3 box-shadow-keranjang align-self-start" style="border: 1px solid #D9D9D9;">
+                                    <div>
+                                        <h4 class="fw-bold pembayaran">Detail Pembayaran</h4>
+                                    </div>
+                                    <div class="row align-items-center mt-3">
+                                        <div class="col">
+                                            <p class="mb-0 text-start subtotal-pembayaran">Subtotal Harga</p>
+                                        </div>
+                                        <div class="col">
+                                            <span class="fw-bold title-keranjang mb-0 text-start">
+                                                <sup class="fw-normal">Rp</sup> 1.500.000
+                                            </span>
+                                        </div>
+                                        <p class="font-italic fw-normal" style="font-size: 11px; color: #FF0000;">
+                                            Harga di atas belum termasuk potongan promo
+                                        </p>
+                                    </div>
+                                    <div class="row align-items-center mt-3">
+                                        <div class="col">
+                                            <p class="mb-0 text-start subtotal-pembayaran">Diskon Product</p>
+                                        </div>
+                                        <div class="col">
+                                            <span class="fw-bold title-keranjang mb-0 text-start" style="color: #FF0000">
+                                                <sup class="fw-normal">Rp</sup> 300.000
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="my-3">
+                                        <hr class="border-dark border-1 opacity-100">
+                                    </div>
+                                    <div class="row align-items-center">
+                                        <div class="col">
+                                            <p class="mb-0 text-start pembayaran">Total Pembayaran</p>
+                                        </div>
+                                        <div class="col">
+                                            <span class="fw-bold title-keranjang mb-0 text-start">
+                                                <sup class="fw-normal">Rp</sup> 1.200.000
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3">
+                                        <button class="btn btn-buy w-100 rounded-3 fw-bold" style="font-size: 14px;">Beli
+                                            Sekarang</button>
+                                    </div>
                                 </div>
-                                <div class="container mt-4">
-                                    <div class="d-flex justify-content-center pagination-container"
-                                        id="pagination-container">
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+        <div class="newsletter-area product-area">
+            <div>
+                <div class="container wow fadeInUp rounded-4" data-wow-delay=".25s">
+                    <div class="newsletter-wrap" style="background-color: #2B4779;">
+                        <div class="row">
+                            <div class="col-lg-6 mx-auto">
+                                <div class="newsletter-content">
+                                    <h3>Get <span>20%</span> Off Discount Coupon</h3>
+                                    <p>By Subscribe Our Newsletter</p>
+                                    <div class="subscribe-form">
+                                        <form action="#">
+                                            <input type="email" class="form-control" placeholder="Your Email Address">
+                                            <button class="theme-btn" type="submit">
+                                                Klaim Voucher <i class="far fa-paper-plane"></i>
+                                            </button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -330,7 +456,7 @@
                 </div>
             </div>
         </div>
-        <!-- Rekomendasi Product -->
+
         <div class="product-area product-area-new">
             <div class="container">
                 <div class="row">
@@ -580,14 +706,67 @@
                 </div>
             </div>
         </div>
-
-
     </main>
 
 
     <!-- footer area -->
     <?php include __DIR__ . '/../templates/footer.php'; ?>
     <!-- footer area end -->
+
+
+    <!-- modal quick shop-->
+    <!-- <div class="modal quickview fade" id="quickview" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="quickview" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i
+                        class="far fa-xmark"></i></button>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                            <img src="assets/img/product/04.png" alt="#">
+                        </div>
+                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                            <div class="quickview-content">
+                                <h4 class="quickview-title">Simple Denim Chair</h4>
+                                <div class="quickview-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                    <i class="far fa-star"></i>
+                                    <span class="rating-count"> (4 Customer Reviews)</span>
+                                </div>
+                                <div class="quickview-price">
+                                    <h5><del>$860</del><span>$740</span></h5>
+                                </div>
+                                <ul class="quickview-list">
+                                    <li>Brand:<span>Ricordi</span></li>
+                                    <li>Category:<span>Living Room</span></li>
+                                    <li>Stock:<span class="stock">Available</span></li>
+                                    <li>Code:<span>789FGSA</span></li>
+                                </ul>
+                                <div class="quickview-cart">
+                                    <a href="#" class="theme-btn">Add to cart</a>
+                                </div>
+                                <div class="quickview-social">
+                                    <span>Share:</span>
+                                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                    <a target="_blank" href="https://www.instagram.com/furnicefurnishing/"><i
+                                            class="fab fa-instagram"></i></a>
+                                    <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                                    <a href="#"><i class="fab fa-instagram"></i></a>
+                                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <!-- modal quick shop end -->
+
 
     <!-- js -->
     <?php include __DIR__ . '/../Scripts/script.php'; ?>
@@ -596,7 +775,7 @@
     <script src="assets/js/jquery-3.7.1.min.js"></script>
     <script src="assets/js/modernizr.min.js"></script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/imagesloaded.pkgd.min.js"></script>
+    <!-- <script src="assets/js/imagesloaded.pkgd.min.js"></script> -->
     <script src="assets/js/jquery.magnific-popup.min.js"></script>
     <script src="assets/js/isotope.pkgd.min.js"></script>
     <script src="assets/js/jquery.appear.min.js"></script>
@@ -611,17 +790,17 @@
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             const offcanvasToggler = document.getElementById('offcanvasToggler');
             const offcanvasNavbar = document.getElementById('offcanvasNavbar');
 
             // Mencegah pembuatan backdrop
-            offcanvasNavbar.addEventListener('show.bs.offcanvas', function () {
+            offcanvasNavbar.addEventListener('show.bs.offcanvas', function() {
                 document.querySelectorAll('.offcanvas-backdrop').forEach(el => el.remove());
             });
 
             // Alternatif: nonaktifkan backdrop sepenuhnya
-            offcanvasNavbar.addEventListener('shown.bs.offcanvas', function () {
+            offcanvasNavbar.addEventListener('shown.bs.offcanvas', function() {
                 const backdrops = document.querySelectorAll('.offcanvas-backdrop');
                 backdrops.forEach(backdrop => {
                     backdrop.classList.remove('show');
@@ -630,7 +809,7 @@
             });
 
             // Pastikan backdrop dihapus saat menutup
-            offcanvasNavbar.addEventListener('hidden.bs.offcanvas', function () {
+            offcanvasNavbar.addEventListener('hidden.bs.offcanvas', function() {
                 document.querySelectorAll('.offcanvas-backdrop').forEach(el => el.remove());
             });
         });
@@ -638,9 +817,9 @@
 
     <script>
         // Add focus event to automatically open modal when clicking the search field
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             const searchModal = document.getElementById('searchModal');
-            searchModal.addEventListener('shown.bs.modal', function () {
+            searchModal.addEventListener('shown.bs.modal', function() {
                 searchModal.querySelector('input').focus();
             });
         });
@@ -679,7 +858,7 @@
         });
 
         // Reset button
-        resetBtn.addEventListener('click', function () {
+        resetBtn.addEventListener('click', function() {
             // Uncheck semua checkbox
             checkboxes.forEach(cb => cb.checked = false);
 
@@ -691,8 +870,7 @@
         });
 
         // Data produk (untuk contoh)
-        const products = [
-            {
+        const products = [{
                 title: "CT-IMP Matto Light Brown",
                 description: "Meja ruang tamu aesthetic.",
                 price: "500.000",
@@ -930,6 +1108,14 @@
                                         </div>
                                     </div>
                                 </div>
+                                    <div class="row g-2">
+                                                <div class="col-6">
+                                                    <button class="btn buy-btn w-100">Beli</button>
+                                                </div>
+                                                <div class="col-6">
+                                                    <button class="btn cart-btn w-100">+ Keranjang</button>
+                                                </div>
+                                            </div>
                             </div>
                         </div>
                     </div>
@@ -1025,7 +1211,7 @@
             // Tambahkan event listener untuk pagination
             const pageLinks = paginationContainer.querySelectorAll('.page-link');
             pageLinks.forEach(link => {
-                link.addEventListener('click', function (e) {
+                link.addEventListener('click', function(e) {
                     e.preventDefault();
                     const pageData = this.getAttribute('data-page');
 
@@ -1040,7 +1226,9 @@
                     displayProducts();
 
                     // Scroll dengan smooth ke bagian atas produk
-                    productContainer.scrollIntoView({ behavior: 'smooth' });
+                    productContainer.scrollIntoView({
+                        behavior: 'smooth'
+                    });
                 });
             });
         }
@@ -1120,7 +1308,7 @@
         }
 
         // Jalankan ketika DOM sudah siap
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             // Tambahkan styles untuk pagination
             addPaginationStyles();
 
@@ -1134,7 +1322,7 @@
             displayProducts();
 
             // Update saat ukuran layar berubah
-            window.addEventListener('resize', function () {
+            window.addEventListener('resize', function() {
                 const newProductsPerPage = setProductsPerPage();
 
                 // Hanya update jika jumlah produk per halaman berubah
@@ -1153,11 +1341,10 @@
 
 
         // filter data
-
     </script>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             const scrollContainer = document.querySelector('.row.flex-nowrap');
             let scrollPosition = 0;
             const cardWidth = scrollContainer.querySelector('.col-6').offsetWidth;
@@ -1184,20 +1371,20 @@
             setTimeout(autoScroll, 3000);
 
             // Pause scrolling when user interacts with the container
-            scrollContainer.addEventListener('mouseenter', function () {
+            scrollContainer.addEventListener('mouseenter', function() {
                 clearTimeout(window.scrollTimeout);
             });
 
-            scrollContainer.addEventListener('mouseleave', function () {
+            scrollContainer.addEventListener('mouseleave', function() {
                 window.scrollTimeout = setTimeout(autoScroll, scrollSpeed);
             });
 
             // Handle touch events for mobile
-            scrollContainer.addEventListener('touchstart', function () {
+            scrollContainer.addEventListener('touchstart', function() {
                 clearTimeout(window.scrollTimeout);
             });
 
-            scrollContainer.addEventListener('touchend', function () {
+            scrollContainer.addEventListener('touchend', function() {
                 window.scrollTimeout = setTimeout(autoScroll, scrollSpeed);
             });
         });

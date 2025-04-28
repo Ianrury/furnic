@@ -102,7 +102,7 @@ function is_active($route)
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="" class="list-link">
+                                    <a href="/keranjang" class="list-link">
                                         <i class="far fa-shopping-cart text-dark fa-sm"></i>
                                     </a>
                                 </li>

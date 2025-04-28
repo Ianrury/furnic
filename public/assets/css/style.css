@@ -9152,10 +9152,6 @@ label {
 }
 
 /* Font Sizes & Text Styling */
-.product-title {
-  font-size: 14px;
-  line-height: 1.4;
-}
 
 .ul-categories {
   display: flex;
@@ -9185,9 +9181,7 @@ label {
   font-size: 10px;
 }
 
-.product-title {
-  font-size: 13px;
-}
+
 
 .site-hasil{
   font-size: 20px;
@@ -9220,6 +9214,12 @@ label {
     color: #5c86b8;
     font-weight: 700;
     /* warna biru saat aktif */
+  }
+
+  .product-title {
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 1.4;
   }
 
   /* Garis bawah saat aktif */
@@ -9571,13 +9571,13 @@ label {
 
   .ribbon {
     position: absolute;
-    padding-top: 3px;
+    padding-top: 1px;
     width: 200px;
-    height: 15px;
+    height: 1px;
     background-color: #2b4779;
     transform: rotate(-45deg) translateY(-30px) translateX(-70px);
-    font-size: 8px;
-    line-height: 10px;
+    font-size: 3px;
+    line-height: 6px;
   }
 
   .product-details {
@@ -9807,7 +9807,7 @@ label {
 /* This helps with vertical alignment of text characters */
 .btn-quantity span {
   display: block;
-  margin-top: -2px; /* Fine-tune vertical position */
+  margin-bottom: 3px; 
 }
 
 .btn-buy {
@@ -10577,3 +10577,108 @@ input[type="checkbox"].form-check-input {
 .mt-3 {
   margin-top: 1rem !important;
 }
+
+
+/* keranjang */
+
+.product-image-keranjang {
+  max-height: 150px;
+  max-width: 80%;
+}
+
+/* Ribbon */
+.ribbon-wrapper-keranjang {
+  top: 0;
+  left: 0;
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+  z-index: 10;
+}
+
+.ribbon-keranjang {
+  position: absolute;
+  width: 150px;
+  height: 18px;
+  background-color: #2b4779;
+  transform: rotate(-45deg) translateY(-20px) translateX(-50px);
+  font-size: 8px;
+  line-height: 20px;
+}
+
+
+@media (max-width: 561px) {
+  .product-image {
+    max-height: 180px;
+    max-width: 80%;
+  }
+  
+  /* Ribbon */
+  .ribbon-wrapper {
+    top: 0;
+    left: 0;
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    z-index: 10;
+  }
+  
+  .ribbon {
+    position: absolute;
+    width: 200px;
+    height: 20px;
+    background-color: #2b4779;
+    transform: rotate(-45deg) translateY(-20px) translateX(-70px);
+    font-size: 10px;
+    line-height: 20px;
+  }
+}
+
+.title-keranjang{
+  font-size: 15px;
+  font-weight: bold;
+  color: #000000;
+}
+
+.pembayaran{
+  font-size: 14px;
+  font-weight: bold;
+  color: #000000;
+}
+
+.name-keranjang{
+  font-size: 12px;
+  font-weight: 400;
+  color: #000000;
+}
+
+.motif-keranjang {
+  display: flex;
+  align-items: center;
+}
+
+.label-keranjang {
+  font-weight: bold;
+  color: #000000;
+  font-size: 12px;
+  width: 80px; /* kasih lebar supaya teks rata rapi */
+}
+
+.value-keranjang {
+  margin-left: 7px;
+  color: #000000;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+
+.subtotal-pembayaran{
+  font-size: 13px;
+  color: #000000;
+  font-weight: 400;
+}
+
+.box-shadow-keranjang {
+    box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.1);
+}
+
