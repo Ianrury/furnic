@@ -37,15 +37,20 @@ class HomeController
         // Mengambil produk terbaru
         $produk = $this->productServiser->ProductTerbaru();
         $produkkategory = $this->productServiser->produkKategory();
-    
+        $getData = $this->productServiser->getData();
+
         // Ambil array produk dari response
         $produkTerbaru = $produk->products;
-    
-        var_dump($produkkategory);
-        exit;
-        // Render view
+
+        // echo '<pre>';
+        // var_dump($getData);
+        // echo '</pre>';
+        // exit;
+
         $model = [
-            "terbaru" => $produkTerbaru,  // Kirim array produk terbaru ke view
+            "terbaru" => $produkTerbaru,
+            "kategori" => $produkkategory, // Kirim data kategori langsung
+            "FullProduck" => $getData,
             "title" => "Home",
             "content" => "Welcome to the home page!",
             "success" => $_SESSION['success'] ?? null,

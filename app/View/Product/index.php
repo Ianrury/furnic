@@ -188,7 +188,7 @@
                             <!-- Sidebar Filter -->
                             <div class="col-md-3 m-0 p-0" style="opacity: 1 !important; background-color: white;">
                                 <p class="fw-semibold text-dark" style="font-size: 14px;">Urutkan berdasarkan</p>
-                                
+
                                 <div class=" " style="width: 250px;">
                                     <!-- Urutkan Berdasarkan -->
                                     <div class="mb-3">
@@ -343,243 +343,72 @@
                 <div class="tab-content wow fadeInUp" data-wow-delay=".25s" id="item-tabContent">
                     <div class="container">
                         <div class="row flex-nowrap overflow-auto g-4 pb-3">
-                            <div class="col-6 col-md-4 col-lg-3">
-                                <div class="card shadow position-relative rounded-4 p-2">
-                                    <!-- Corner Ribbon -->
-                                    <div class="position-absolute ribbon-wrapper">
-                                        <div class="ribbon text-white text-uppercase fw-bold text-center">
-                                            New Product
-                                        </div>
-                                    </div>
-
-                                    <!-- Product Image -->
-                                    <div class="text-center pt-3">
-                                        <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png"
-                                            class="img-fluid product-image" alt="Product Image">
-                                    </div>
-                                    <div class="bodykartu">
-                                        <div class="d-flex flex-column ">
-                                            <!-- Product Details -->
-                                            <div class="">
-                                                <!-- <h5 class="">
-                                                CT-IMP Matto Light Brown
-                                            </h5> -->
-                                                <p class="card-title text-truncate fw-medium product-title">CT-IMP Matto
-                                                    Light Brown
-                                                </p>
-
-                                                <p class="card-text text-truncate product-desc">Meja ruang tamu
-                                                    aesthetic.</p>
-                                                <div class="d-flex gap-1 align-items-center">
-                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                    <small class="text-muted fst-italic ms-1 sold-text">300
-                                                        terjual</small>
+                            <?php if (!empty($model['produk'])): ?>
+                                <?php foreach ($model['produk'] as $product): ?>
+                                    <div class="col-6 col-md-4 col-lg-3">
+                                        <div class="card shadow position-relative rounded-4 p-2">
+                                            <!-- Corner Ribbon -->
+                                            <div class="position-absolute ribbon-wrapper">
+                                                <div class="ribbon text-white text-uppercase fw-bold text-center">
+                                                    New Product
                                                 </div>
                                             </div>
 
-                                            <!-- Price Section -->
-                                            <div class="mt-auto">
-                                                <div class="d-flex flex-wrap align-items-baseline">
-                                                    <div class="me-2">
-                                                        <span class="fw-bold price">
-                                                            <sup class="fw-normal">Rp</sup> 500.000
-                                                        </span>
-                                                    </div>
-                                                    <div>
-                                                        <span class="fw-normal text-danger old-price">
-                                                            <sup>Rp</sup>
-                                                            <span class="text-decoration-line-through">600.000</span>
-                                                        </span>
-                                                    </div>
-                                                </div>
+                                            <!-- Product Image -->
+                                            <div class="text-center pt-3">
+                                                <img src="assets/img/product/kursi/<?= htmlspecialchars($product['foto']) ?>"
+                                                    class="img-fluid product-image" alt="Product Image">
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-6 col-md-4 col-lg-3">
-                                <div class="card shadow position-relative rounded-4 p-2">
-                                    <!-- Corner Ribbon -->
-                                    <div class="position-absolute ribbon-wrapper">
-                                        <div class="ribbon text-white text-uppercase fw-bold text-center">
-                                            New Product
-                                        </div>
-                                    </div>
-
-                                    <!-- Product Image -->
-                                    <div class="text-center pt-3">
-                                        <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png"
-                                            class="img-fluid product-image" alt="Product Image">
-                                    </div>
-                                    <div class="bodykartu">
-                                        <div class="d-flex flex-column ">
-                                            <!-- Product Details -->
-                                            <div class="">
-                                                <!-- <h5 class="">
-                                                CT-IMP Matto Light Brown
-                                            </h5> -->
-                                                <p class="card-title text-truncate fw-medium product-title">CT-IMP Matto
-                                                    Light Brown
-                                                </p>
-
-                                                <p class="card-text text-truncate product-desc">Meja ruang tamu
-                                                    aesthetic.</p>
-                                                <div class="d-flex gap-1 align-items-center">
-                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                    <small class="text-muted fst-italic ms-1 sold-text">300
-                                                        terjual</small>
-                                                </div>
-                                            </div>
-
-                                            <!-- Price Section -->
-                                            <div class="mt-auto">
-                                                <div class="d-flex flex-wrap align-items-baseline">
-                                                    <div class="me-2">
-                                                        <span class="fw-bold price">
-                                                            <sup class="fw-normal">Rp</sup> 500.000
-                                                        </span>
+                                            <div class="bodykartu">
+                                                <div class="d-flex flex-column">
+                                                    <div class="">
+                                                        <p class="card-title text-truncate product-title">
+                                                            <?= htmlspecialchars($product['nama_product']) ?>
+                                                        </p>
+                                                        <p class="card-text text-truncate product-desc">
+                                                            <?= htmlspecialchars($product['deskripsi']) ?>
+                                                        </p>
+                                                        <div class="d-flex gap-1 align-items-center">
+                                                            <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                            <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                            <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                            <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                            <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                            <small
+                                                                class="text-muted fst-italic ms-1 sold-text"><?= $product['qty'] ?>
+                                                                terjual</small>
+                                                        </div>
                                                     </div>
-                                                    <div>
-                                                        <span class="fw-normal text-danger old-price">
-                                                            <sup>Rp</sup>
-                                                            <span class="text-decoration-line-through">600.000</span>
-                                                        </span>
+
+                                                    <div class="mt-auto">
+                                                        <div class="d-flex flex-wrap align-items-baseline">
+                                                            <div class="me-2">
+                                                                <span class="fw-bold price">
+                                                                    <sup class="fw-normal">Rp</sup>
+                                                                    <?= number_format($product['qty'] * 100000, 0, ',', '.') ?>
+                                                                </span>
+                                                            </div>
+                                                            <div>
+                                                                <span class="fw-normal text-danger old-price">
+                                                                    <sup>Rp</sup>
+                                                                    <span class="text-decoration-line-through">600.000</span>
+                                                                </span>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col-6 col-md-4 col-lg-3">
-                                <div class="card shadow position-relative rounded-4 p-2">
-                                    <!-- Corner Ribbon -->
-                                    <div class="position-absolute ribbon-wrapper">
-                                        <div class="ribbon text-white text-uppercase fw-bold text-center">
-                                            New Product
-                                        </div>
-                                    </div>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <p>Tidak ada produk terbaru yang tersedia.</p>
+                            <?php endif; ?>
 
-                                    <!-- Product Image -->
-                                    <div class="text-center pt-3">
-                                        <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png"
-                                            class="img-fluid product-image" alt="Product Image">
-                                    </div>
-                                    <div class="bodykartu">
-                                        <div class="d-flex flex-column ">
-                                            <!-- Product Details -->
-                                            <div class="">
-                                                <!-- <h5 class="">
-                                                CT-IMP Matto Light Brown
-                                            </h5> -->
-                                                <p class="card-title text-truncate fw-medium product-title">CT-IMP Matto
-                                                    Light Brown
-                                                </p>
-
-                                                <p class="card-text text-truncate product-desc">Meja ruang tamu
-                                                    aesthetic.</p>
-                                                <div class="d-flex gap-1 align-items-center">
-                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                    <small class="text-muted fst-italic ms-1 sold-text">300
-                                                        terjual</small>
-                                                </div>
-                                            </div>
-
-                                            <!-- Price Section -->
-                                            <div class="mt-auto">
-                                                <div class="d-flex flex-wrap align-items-baseline">
-                                                    <div class="me-2">
-                                                        <span class="fw-bold price">
-                                                            <sup class="fw-normal">Rp</sup> 500.000
-                                                        </span>
-                                                    </div>
-                                                    <div>
-                                                        <span class="fw-normal text-danger old-price">
-                                                            <sup>Rp</sup>
-                                                            <span class="text-decoration-line-through">600.000</span>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-6 col-md-4 col-lg-3">
-                                <div class="card shadow position-relative rounded-4 p-2">
-                                    <!-- Corner Ribbon -->
-                                    <div class="position-absolute ribbon-wrapper">
-                                        <div class="ribbon text-white text-uppercase fw-bold text-center">
-                                            New Product
-                                        </div>
-                                    </div>
-
-                                    <!-- Product Image -->
-                                    <div class="text-center pt-3">
-                                        <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png"
-                                            class="img-fluid product-image" alt="Product Image">
-                                    </div>
-                                    <div class="bodykartu">
-                                        <div class="d-flex flex-column ">
-                                            <!-- Product Details -->
-                                            <div class="">
-                                                <!-- <h5 class="">
-                                                CT-IMP Matto Light Brown
-                                            </h5> -->
-                                                <p class="card-title text-truncate fw-medium product-title">CT-IMP Matto
-                                                    Light Brown
-                                                </p>
-
-                                                <p class="card-text text-truncate product-desc">Meja ruang tamu
-                                                    aesthetic.</p>
-                                                <div class="d-flex gap-1 align-items-center">
-                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                    <small class="text-muted fst-italic ms-1 sold-text">300
-                                                        terjual</small>
-                                                </div>
-                                            </div>
-
-                                            <!-- Price Section -->
-                                            <div class="mt-auto">
-                                                <div class="d-flex flex-wrap align-items-baseline">
-                                                    <div class="me-2">
-                                                        <span class="fw-bold price">
-                                                            <sup class="fw-normal">Rp</sup> 500.000
-                                                        </span>
-                                                    </div>
-                                                    <div>
-                                                        <span class="fw-normal text-danger old-price">
-                                                            <sup>Rp</sup>
-                                                            <span class="text-decoration-line-through">600.000</span>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
 
     </main>
@@ -691,168 +520,18 @@
         });
 
         // Data produk (untuk contoh)
-        const products = [
-            {
-                title: "CT-IMP Matto Light Brown",
-                description: "Meja ruang tamu aesthetic.",
-                price: "500.000",
-                oldPrice: "600.000",
-                rating: 5,
-                sold: 300,
-                image: "assets/img/product/kursi/ZULU CHAIR WHITE.png",
-                isNew: true
-            },
-            {
-                title: "Scandinavian Coffee Table",
-                description: "Meja kopi minimalis modern.",
-                price: "450.000",
-                oldPrice: "550.000",
-                rating: 4,
-                sold: 250,
-                image: "assets/img/product/kursi/ZULU CHAIR WHITE.png",
-                isNew: false
-            },
-            {
-                title: "Woody Chair Classic",
-                description: "Kursi kayu dengan bantalan nyaman.",
-                price: "350.000",
-                oldPrice: "400.000",
-                rating: 5,
-                sold: 420,
-                image: "assets/img/product/kursi/ZULU CHAIR WHITE.png",
-                isNew: true
-            },
-            {
-                title: "Sofa Corner Premium",
-                description: "Sofa sudut untuk ruang keluarga.",
-                price: "2.500.000",
-                oldPrice: "3.000.000",
-                rating: 5,
-                sold: 150,
-                image: "assets/img/product/kursi/ZULU CHAIR WHITE.png",
-                isNew: false
-            },
-            {
-                title: "Minimalist Side Table",
-                description: "Meja samping dengan laci.",
-                price: "275.000",
-                oldPrice: "325.000",
-                rating: 4,
-                sold: 180,
-                image: "assets/img/product/kursi/ZULU CHAIR WHITE.png",
-                isNew: false
-            },
-            {
-                title: "Dining Chair White",
-                description: "Kursi makan putih elegan.",
-                price: "225.000",
-                oldPrice: "300.000",
-                rating: 4,
-                sold: 320,
-                image: "assets/img/product/kursi/ZULU CHAIR WHITE.png",
-                isNew: true
-            },
-            {
-                title: "Rattan Accent Chair",
-                description: "Kursi rotan untuk ruang tamu.",
-                price: "450.000",
-                oldPrice: "550.000",
-                rating: 5,
-                sold: 200,
-                image: "assets/img/product/kursi/ZULU CHAIR WHITE.png",
-                isNew: false
-            },
-            {
-                title: "Modern TV Cabinet",
-                description: "Kabinet TV dengan penyimpanan.",
-                price: "1.200.000",
-                oldPrice: "1.500.000",
-                rating: 5,
-                sold: 120,
-                image: "assets/img/product/kursi/ZULU CHAIR WHITE.png",
-                isNew: true
-            },
-            {
-                title: "Storage Ottoman",
-                description: "Ottoman dengan penyimpanan.",
-                price: "350.000",
-                oldPrice: "400.000",
-                rating: 4,
-                sold: 180,
-                image: "assets/img/product/kursi/ZULU CHAIR WHITE.png",
-                isNew: false
-            },
-            {
-                title: "Round Dining Table",
-                description: "Meja makan bulat untuk 4 orang.",
-                price: "750.000",
-                oldPrice: "900.000",
-                rating: 5,
-                sold: 90,
-                image: "assets/img/product/kursi/ZULU CHAIR WHITE.png",
-                isNew: true
-            },
-            {
-                title: "Bedside Table Oak",
-                description: "Meja samping tempat tidur kayu oak.",
-                price: "320.000",
-                oldPrice: "380.000",
-                rating: 4,
-                sold: 220,
-                image: "assets/img/product/kursi/ZULU CHAIR WHITE.png",
-                isNew: false
-            },
-            {
-                title: "Bar Stool Black",
-                description: "Kursi bar hitam tinggi.",
-                price: "280.000",
-                oldPrice: "350.000",
-                rating: 4,
-                sold: 150,
-                image: "assets/img/product/kursi/ZULU CHAIR WHITE.png",
-                isNew: true
-            },
-            {
-                title: "Office Desk White",
-                description: "Meja kerja putih dengan laci.",
-                price: "850.000",
-                oldPrice: "950.000",
-                rating: 5,
-                sold: 80,
-                image: "assets/img/product/kursi/ZULU CHAIR WHITE.png",
-                isNew: false
-            },
-            {
-                title: "Bathroom Cabinet",
-                description: "Kabinet kamar mandi dengan cermin.",
-                price: "420.000",
-                oldPrice: "500.000",
-                rating: 4,
-                sold: 110,
-                image: "assets/img/product/kursi/ZULU CHAIR WHITE.png",
-                isNew: true
-            },
-            {
-                title: "Bookshelf Modern",
-                description: "Rak buku minimalis modern.",
-                price: "650.000",
-                oldPrice: "750.000",
-                rating: 5,
-                sold: 95,
-                image: "assets/img/product/kursi/ZULU CHAR WHITE.png",
-                isNew: false
-            },
-            {
-                title: "Kitchen Island Small",
-                description: "Pulau dapur kecil dengan penyimpanan.",
-                price: "900.000",
-                oldPrice: "1.100.000",
-                rating: 5,
-                sold: 70,
-                image: "assets/img/product/kursi/ZULU CHAIR WHITE.png",
-                isNew: true
-            }
-        ];
+        const products = <?= json_encode($model["dummi"]); ?>.map(product => ({
+            title: product.nama_product,             // Sesuaikan dengan nama kolom produk di PHP
+            description: product.deskripsi ?? "Deskripsi tidak tersedia", // Deskripsi produk
+            price: product.harga !== null && product.harga !== undefined ? `Rp ${product.harga.toLocaleString()}` : "Rp 0", // Pastikan harga valid
+            oldPrice: product.harga ? `Rp ${product.harga + 100000}` : "Rp 0", // Harga lama, asumsikan harga lama = harga produk + 100.000
+            rating: 4,  // Anda bisa menentukan rating atau mengambilnya dari data produk jika ada
+            sold: 50,   // Anda bisa mengubah ini sesuai dengan data yang ada
+            image: `assets/img/product/kursi/${product.foto}`,  // Gambar produk
+            isNew: true  // Anda bisa menambahkan logika untuk menentukan apakah produk baru atau tidak
+        }));
+
+
 
         // Variabel untuk pagination
         let currentPage = 1;
@@ -903,7 +582,7 @@
                                     <!-- <h5 class="">
                                         ${product.title}
                                 </h5> -->
-                                    <p class="card-title text-truncate fw-medium product-title">${product.description}
+                                    <p class="card-title text-truncate  product-title">${product.description}
                                     </p>
 
                                     <p class="card-text text-truncate product-desc">Meja ruang tamu

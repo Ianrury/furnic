@@ -1,4 +1,4 @@
--- Active: 1745583296991@@127.0.0.1@3306@php_login_test
+-- Active: 1727836521955@@127.0.0.1@3306@php_login_test
 
 -- Active: 1745562774050@@192.168.1.238@9356@web-furnice
 
@@ -51,6 +51,22 @@ CREATE TABLE product (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
+
+
+CREATE TABLE detail_product (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    foto_kanan VARCHAR(255),
+    foto_kiri VARCHAR(255),
+    foto_depan VARCHAR(255),
+    id_product INT,
+    foto_belakang VARCHAR(255),
+    warna VARCHAR(100),
+    motif VARCHAR(100),
+     FOREIGN KEY (id_product) REFERENCES product(id_product),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
 
 CREATE TABLE pricelist (
     id_pricelist INT PRIMARY KEY AUTO_INCREMENT,

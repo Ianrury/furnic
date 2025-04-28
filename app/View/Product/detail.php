@@ -312,9 +312,9 @@ function base_url($path = '')
                 <div class="tab-content wow fadeInUp" data-wow-delay=".25s" id="item-tabContent">
                     <div class="row">
                         <!-- Left grid - Ratings and photos -->
-                        <div class="col-md-4">
+                        <div class="col-12 col-lg-4">
                             <div class="review-grid">
-                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                <div class="d-flex justify-content-start align-items-center mb-3">
                                     <div>
                                         <img src="assets/img/product/decorasi/ruang-santai.jpg" alt="foto review"
                                             class="img-fluid foto-review rounded-3" width="240" height="260">
@@ -355,79 +355,85 @@ function base_url($path = '')
                                 <h6 class="text-black" style="font-size: 14px; font-weight: 400;">Foto oleh pelanggan
                                     (100)</h6>
                                 <div class="container mt-3">
-                                    <div class="row g-2 justify-content-start">
-                                        <div class="col-2 review-photo-pelanggan">
-                                            <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png" class="rounded-3"
-                                                alt="Product review">
+                                    <div class="review-photos-container" id="reviewPhotos">
+                                        <div class="row gap-2 justify-content-start visible-photos">
+                                            <!-- Foto 1-9 yang langsung terlihat -->
+                                            <div class="col-2 review-photo-pelanggan">
+                                                <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png"
+                                                    class="rounded-3" alt="Product review 1">
+                                            </div>
+                                            <div class="col-2 review-photo-pelanggan">
+                                                <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png"
+                                                    class="rounded-3" alt="Product review 2">
+                                            </div>
+                                            <div class="col-2 review-photo-pelanggan">
+                                                <img src="assets/img/product/decorasi/ruang-santai.jpg"
+                                                    class="rounded-3" alt="Product review 3">
+                                            </div>
+                                            <div class="col-2 review-photo-pelanggan">
+                                                <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png"
+                                                    class="rounded-3" alt="Product review 4">
+                                            </div>
+                                            <div class="col-2 review-photo-pelanggan">
+                                                <img src="assets/img/product/decorasi/ruang-santai.jpg"
+                                                    class="rounded-3" alt="Product review 5">
+                                            </div>
+                                            <div class="col-2 review-photo-pelanggan">
+                                                <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png"
+                                                    class="rounded-3" alt="Product review 6">
+                                            </div>
+                                            <div class="col-2 review-photo-pelanggan">
+                                                <img src="assets/img/product/decorasi/ruang-santai.jpg"
+                                                    class="rounded-3" alt="Product review 7">
+                                            </div>
+                                            <div class="col-2 review-photo-pelanggan">
+                                                <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png"
+                                                    class="rounded-3" alt="Product review 8">
+                                            </div>
+                                            <div class="col-2 review-photo-pelanggan">
+                                                <img src="assets/img/product/decorasi/ruang-santai.jpg"
+                                                    class="rounded-3" alt="Product review 9">
+                                            </div>
+
+                                            <!-- Foto ke-10 dengan overlay -->
+                                            <div class="col-2 review-photo-pelanggan" id="lastVisiblePhoto">
+                                                <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png"
+                                                    class="rounded-3" alt="Product review 10">
+                                                <div class="more-photos-overlay" data-bs-toggle="modal"
+                                                    data-bs-target="#reviewModal">+5</div>
+                                            </div>
                                         </div>
-                                        <div class="col-2 review-photo-pelanggan">
-                                            <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png" class="rounded-3"
-                                                alt="Product review">
-                                        </div>
-                                        <div class="col-2 review-photo-pelanggan">
-                                            <img src="assets/img/product/decorasi/ruang-santai.jpg" class="rounded-3"
-                                                alt="Product review">
-                                        </div>
-                                        <div class="col-2 review-photo-pelanggan">
-                                            <img src="assets/img/product/decorasi/ruang-santai.jpg" class="rounded-3"
-                                                alt="Product review">
-                                        </div>
-                                        <div class="col-2 review-photo-pelanggan">
-                                            <img src="assets/img/product/decorasi/ruang-santai.jpg" class="rounded-3"
-                                                alt="Product review">
-                                        </div>
-                                        <div class="col-2 review-photo-pelanggan">
-                                            <img src="assets/img/product/decorasi/ruang-santai.jpg" class="rounded-3"
-                                                alt="Product review">
-                                        </div>
-                                        <div class="col-2 review-photo-pelanggan">
-                                            <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png" class="rounded-3"
-                                                alt="Product review">
-                                        </div>
-                                        <div class="col-2 review-photo-pelanggan">
-                                            <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png" class="rounded-3"
-                                                alt="Product review">
-                                        </div>
-                                        <div class="col-2 review-photo-pelanggan">
-                                            <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png" class="rounded-3"
-                                                alt="Product review">
-                                        </div>
-                                        <div class="col-2 review-photo-pelanggan">
-                                            <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png" class="rounded-3"
-                                                alt="Product review">
-                                        </div>
-                                        <div class="col-2 review-photo-pelanggan">
-                                            <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png" class="rounded-3"
-                                                alt="Product review">
-                                        </div>
-                                        <div class="col-2 review-photo-pelanggan">
-                                            <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png" class="rounded-3"
-                                                alt="Product review">
-                                        </div>
-                                        <div class="col-2 review-photo-pelanggan">
-                                            <img src="assets/img/product/decorasi/ruang-santai.jpg" class="rounded-3"
-                                                alt="Product review">
-                                        </div>
-                                        <div class="col-2 review-photo-pelanggan">
-                                            <img src="assets/img/product/decorasi/ruang-santai.jpg" class="rounded-3"
-                                                alt="Product review">
-                                        </div>
-                                        <div class="col-2 review-photo-pelanggan">
-                                            <img src="assets/img/product/decorasi/ruang-santai.jpg" class="rounded-3"
-                                                alt="Product review">
-                                        </div>
-                                        <div class="col-2 review-photo-pelanggan">
-                                            <img src="assets/img/product/decorasi/ruang-santai.jpg" class="rounded-3"
-                                                alt="Product review">
+
+                                        <!-- Foto tersembunyi (hidden) -->
+                                        <div class="row g-2 justify-content-start hidden-photos">
+                                            <div class="col-2 review-photo-pelanggan">
+                                                <img src="assets/img/product/decorasi/ruang-santai.jpg"
+                                                    class="rounded-3" alt="Product review 11">
+                                            </div>
+                                            <div class="col-2 review-photo-pelanggan">
+                                                <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png"
+                                                    class="rounded-3" alt="Product review 12">
+                                            </div>
+                                            <div class="col-2 review-photo-pelanggan">
+                                                <img src="assets/img/product/decorasi/ruang-santai.jpg"
+                                                    class="rounded-3" alt="Product review 13">
+                                            </div>
+                                            <div class="col-2 review-photo-pelanggan">
+                                                <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png"
+                                                    class="rounded-3" alt="Product review 14">
+                                            </div>
+                                            <div class="col-2 review-photo-pelanggan">
+                                                <img src="assets/img/product/decorasi/ruang-santai.jpg"
+                                                    class="rounded-3" alt="Product review 15">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
 
                         <!-- Right grid - User reviews -->
-                        <div class="col-md-8">
+                        <div class="col-12 col-lg-8">
                             <!-- First review -->
                             <div class="review-grid-review">
                                 <div class="username">Yolanda</div>
@@ -560,7 +566,7 @@ function base_url($path = '')
                                                                 terendah</label>
                                                         </div>
                                                     </div>
-                                                    <div class="dropdown small-dropdown d-block d-md-none">
+                                                    <div class="dropdown small-dropdown my-dropdown">
                                                         <button class="btn btn-secondary dropdown-toggle" type="button"
                                                             id="dropdownMenu2" data-bs-toggle="dropdown"
                                                             aria-haspopup="true" aria-expanded="false">
@@ -576,6 +582,7 @@ function base_url($path = '')
                                                                 terendah</button>
                                                         </div>
                                                     </div>
+
                                                 </div>
                                                 <hr>
                                                 <div class="mb-3">
@@ -1065,245 +1072,77 @@ function base_url($path = '')
                 </div>
                 <div class="tab-content wow fadeInUp" data-wow-delay=".25s" id="item-tabContent">
                     <div class="container">
-                        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4  justify-content-center">
-                            <div class="col">
-                                <div class="card shadow position-relative rounded-4 p-2">
-                                    <!-- Corner Ribbon -->
-                                    <div class="position-absolute ribbon-wrapper">
-                                        <div class="ribbon text-white text-uppercase fw-bold text-center"
-                                            style="background-color: #FF8B2D;">
-                                            Best Seller
-                                        </div>
-                                    </div>
-
-                                    <!-- Product Image -->
-                                    <div class="text-center pt-3">
-                                        <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png"
-                                            class="img-fluid product-image" alt="Product Image">
-                                    </div>
-                                    <div class="bodykartu">
-                                        <div class="d-flex flex-column ">
-                                            <!-- Product Details -->
-                                            <div class="">
-                                                <!-- <h5 class="">
-                                                CT-IMP Matto Light Brown
-                                            </h5> -->
-                                                <p class="card-title text-truncate fw-medium product-title">CT-IMP Matto
-                                                    Light Brown
-                                                </p>
-
-                                                <p class="card-text text-truncate product-desc">Meja ruang tamu
-                                                    aesthetic.</p>
-                                                <div class="d-flex gap-1 align-items-center">
-                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                    <small class="text-muted fst-italic ms-1 sold-text">300
-                                                        terjual</small>
-                                                </div>
-                                            </div>
-
-                                            <!-- Price Section -->
-                                            <div class="mt-auto">
-                                                <div class="d-flex flex-wrap align-items-baseline">
-                                                    <div class="me-2">
-                                                        <span class="fw-bold price">
-                                                            <sup class="fw-normal">Rp</sup> 500.000
-                                                        </span>
-                                                    </div>
-                                                    <div>
-                                                        <span class="fw-normal text-danger old-price">
-                                                            <sup>Rp</sup>
-                                                            <span class="text-decoration-line-through">600.000</span>
-                                                        </span>
-                                                    </div>
-                                                </div>
+                        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4 justify-content-center">
+                            <?php foreach ($model['bestseller'] as $product): ?>
+                                <div class="col">
+                                    <div class="card shadow position-relative rounded-4 p-2">
+                                        <!-- Corner Ribbon -->
+                                        <div class="position-absolute ribbon-wrapper">
+                                            <div class="ribbon text-white text-uppercase fw-bold text-center"
+                                                style="background-color: #FF8B2D;">
+                                                Best Seller
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="card shadow position-relative rounded-4 p-2">
-                                    <!-- Corner Ribbon -->
-                                    <div class="position-absolute ribbon-wrapper">
-                                        <div class="ribbon text-white text-uppercase fw-bold text-center"
-                                            style="background-color: #FF8B2D;">
-                                            Best Seller
+
+                                        <!-- Product Image -->
+                                        <div class="text-center pt-3">
+                                            <img src="assets/img/product/kursi/<?= $product['foto']; ?>"
+                                                class="img-fluid product-image" alt="Product Image">
                                         </div>
-                                    </div>
-
-                                    <!-- Product Image -->
-                                    <div class="text-center pt-3">
-                                        <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png"
-                                            class="img-fluid product-image" alt="Product Image">
-                                    </div>
-                                    <div class="bodykartu">
-                                        <div class="d-flex flex-column ">
-                                            <!-- Product Details -->
-                                            <div class="">
-                                                <!-- <h5 class="">
-                                                CT-IMP Matto Light Brown
-                                            </h5> -->
-                                                <p class="card-title text-truncate fw-medium product-title">CT-IMP Matto
-                                                    Light Brown
-                                                </p>
-
-                                                <p class="card-text text-truncate product-desc">Meja ruang tamu
-                                                    aesthetic.</p>
-                                                <div class="d-flex gap-1 align-items-center">
-                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                    <small class="text-muted fst-italic ms-1 sold-text">300
-                                                        terjual</small>
-                                                </div>
-                                            </div>
-
-                                            <!-- Price Section -->
-                                            <div class="mt-auto">
-                                                <div class="d-flex flex-wrap align-items-baseline">
-                                                    <div class="me-2">
-                                                        <span class="fw-bold price">
-                                                            <sup class="fw-normal">Rp</sup> 500.000
-                                                        </span>
+                                        <div class="bodykartu">
+                                            <div class="d-flex flex-column">
+                                                <!-- Product Details -->
+                                                <div class="">
+                                                    <p class="card-title text-truncate fw-medium product-title">
+                                                        <?= $product['nama_product']; ?>
+                                                    </p>
+                                                    <p class="card-text text-truncate product-desc">
+                                                        <?= $product['deskripsi']; ?>
+                                                    </p>
+                                                    <div class="d-flex gap-1 align-items-center">
+                                                        <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                        <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                        <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                        <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                        <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                        <small
+                                                            class="text-muted fst-italic ms-1 sold-text"><?= $product['beli']; ?>
+                                                            terjual</small>
                                                     </div>
-                                                    <div>
-                                                        <span class="fw-normal text-danger old-price">
-                                                            <sup>Rp</sup>
-                                                            <span class="text-decoration-line-through">600.000</span>
-                                                        </span>
+                                                </div>
+
+                                                <!-- Price Section -->
+                                                <div class="mt-auto">
+                                                    <div class="d-flex flex-wrap align-items-baseline">
+                                                        <div class="me-2">
+                                                            <?php if ($product['harga'] !== NULL): ?>
+                                                                <span class="fw-bold price">
+                                                                    <sup class="fw-normal">Rp</sup>
+                                                                    <?= number_format($product['harga'], 0, ',', '.'); ?>
+                                                                </span>
+                                                            <?php else: ?>
+                                                                <span class="fw-bold price">Harga Belum Tersedia</span>
+                                                            <?php endif; ?>
+                                                        </div>
+                                                        <div>
+                                                            <?php if ($product['harga'] !== NULL): ?>
+                                                                <span class="fw-normal text-danger old-price">
+                                                                    <sup>Rp</sup>
+                                                                    <span
+                                                                        class="text-decoration-line-through"><?= number_format($product['harga'] * 1.25, 0, ',', '.'); ?></span>
+                                                                </span>
+                                                            <?php endif; ?>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col">
-                                <div class="card shadow position-relative rounded-4 p-2">
-                                    <!-- Corner Ribbon -->
-                                    <div class="position-absolute ribbon-wrapper">
-                                        <div class="ribbon text-white text-uppercase fw-bold text-center"
-                                            style="background-color: #FF8B2D;">
-                                            Best Seller
-                                        </div>
-                                    </div>
-
-                                    <!-- Product Image -->
-                                    <div class="text-center pt-3">
-                                        <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png"
-                                            class="img-fluid product-image" alt="Product Image">
-                                    </div>
-                                    <div class="bodykartu">
-                                        <div class="d-flex flex-column ">
-                                            <!-- Product Details -->
-                                            <div class="">
-                                                <!-- <h5 class="">
-                                                CT-IMP Matto Light Brown
-                                            </h5> -->
-                                                <p class="card-title text-truncate fw-medium product-title">CT-IMP Matto
-                                                    Light Brown
-                                                </p>
-
-                                                <p class="card-text text-truncate product-desc">Meja ruang tamu
-                                                    aesthetic.</p>
-                                                <div class="d-flex gap-1 align-items-center">
-                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                    <small class="text-muted fst-italic ms-1 sold-text">300
-                                                        terjual</small>
-                                                </div>
-                                            </div>
-
-                                            <!-- Price Section -->
-                                            <div class="mt-auto">
-                                                <div class="d-flex flex-wrap align-items-baseline">
-                                                    <div class="me-2">
-                                                        <span class="fw-bold price">
-                                                            <sup class="fw-normal">Rp</sup> 500.000
-                                                        </span>
-                                                    </div>
-                                                    <div>
-                                                        <span class="fw-normal text-danger old-price">
-                                                            <sup>Rp</sup>
-                                                            <span class="text-decoration-line-through">600.000</span>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="card shadow position-relative rounded-4 p-2">
-                                    <!-- Corner Ribbon -->
-                                    <div class="position-absolute ribbon-wrapper">
-                                        <div class="ribbon text-white text-uppercase fw-bold text-center"
-                                            style="background-color: #FF8B2D;">
-                                            Best Seller
-                                        </div>
-                                    </div>
-
-                                    <!-- Product Image -->
-                                    <div class="text-center pt-3">
-                                        <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png"
-                                            class="img-fluid product-image" alt="Product Image">
-                                    </div>
-                                    <div class="bodykartu">
-                                        <div class="d-flex flex-column ">
-                                            <!-- Product Details -->
-                                            <div class="">
-                                                <!-- <h5 class="">
-                                                CT-IMP Matto Light Brown
-                                            </h5> -->
-                                                <p class="card-title text-truncate fw-medium product-title">CT-IMP Matto
-                                                    Light Brown
-                                                </p>
-
-                                                <p class="card-text text-truncate product-desc">Meja ruang tamu
-                                                    aesthetic.</p>
-                                                <div class="d-flex gap-1 align-items-center">
-                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                    <small class="text-muted fst-italic ms-1 sold-text">300
-                                                        terjual</small>
-                                                </div>
-                                            </div>
-
-                                            <!-- Price Section -->
-                                            <div class="mt-auto">
-                                                <div class="d-flex flex-wrap align-items-baseline">
-                                                    <div class="me-2">
-                                                        <span class="fw-bold price">
-                                                            <sup class="fw-normal">Rp</sup> 500.000
-                                                        </span>
-                                                    </div>
-                                                    <div>
-                                                        <span class="fw-normal text-danger old-price">
-                                                            <sup>Rp</sup>
-                                                            <span class="text-decoration-line-through">600.000</span>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <?php endforeach; ?>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -1442,6 +1281,23 @@ function base_url($path = '')
                 if (item.textContent.trim() === "Ulasan Terbaru") {
                     item.classList.add('active');
                 }
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const morePhotosBtn = document.getElementById('morePhotosBtn');
+            const reviewPhotosContainer = document.getElementById('reviewPhotos');
+
+            // Jumlah foto yang tersembunyi
+            const hiddenPhotosCount = document.querySelectorAll('.hidden-photos .review-photo-pelanggan').length;
+
+            // Update teks pada overlay sesuai jumlah foto yang tersembunyi
+            morePhotosBtn.textContent = '+' + hiddenPhotosCount;
+
+            // Ketika overlay diklik, tampilkan semua foto tersembunyi
+            morePhotosBtn.addEventListener('click', function () {
+                reviewPhotosContainer.classList.toggle('expanded');
             });
         });
     </script>

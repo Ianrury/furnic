@@ -1304,10 +1304,7 @@ label {
   .navbar.fixed-top .navbar-brand img {
     width: 160px;
     padding-right: 20px;
-
   }
-
-  
 
   .nav-right {
     margin-left: 15px !important;
@@ -5479,7 +5476,6 @@ label {
 45. Auth css 
 ======================*/
 
-
 .wrapper {
   display: flex;
   justify-content: center;
@@ -5495,10 +5491,9 @@ label {
 .register-form {
   width: 100%;
   max-width: 400px; /* supaya formnya ga kegedean */
-  margin: 100px  34px;
+  margin: 100px 34px;
   overflow-y: auto;
 }
-
 
 .login-container {
   min-height: 100vh;
@@ -5552,31 +5547,29 @@ label {
   margin-bottom: 0.7rem; 
 } */
 
-.form-login{
+.form-login {
   border-radius: 5px;
   color: #585a5e;
-  border: 2px solid #757F95;
+  border: 2px solid #757f95;
   margin-bottom: 3px;
   padding: 18px 10px;
   font-size: 14px;
 }
 
-
-
 .form-login::placeholder {
-  color: #757F95;
+  color: #757f95;
   font-size: 14px;
 }
-.country-code-input{
+.country-code-input {
   width: 50px;
 }
 
-.country-code-input::placeholder{
-  color: #757F95;
+.country-code-input::placeholder {
+  color: #757f95;
   font-size: 14px;
 }
 .btn-masuk {
-  background-color: #2B4779;
+  background-color: #2b4779;
   font-size: 16px;
   color: white;
   padding: 0.6rem; /* Reduced from 0.75rem */
@@ -5594,9 +5587,9 @@ label {
 .btn-daftar {
   background-color: white;
   font-size: 16px;
-  color: #2C4B8C;
+  color: #2c4b8c;
   padding: 0.4rem; /* Reduced from 0.75rem */
-  border: 2px solid #2C4B8C;
+  border: 2px solid #2c4b8c;
   border-radius: 10px;
   font-weight: 500;
   margin-bottom: 0.5rem; /* Reduced from 1rem */
@@ -5608,12 +5601,11 @@ label {
   background-color: #7e7a7a;
 }
 
-
 .btn-google {
   background-color: white;
   color: black;
   padding: 0.4rem; /* Reduced from 0.75rem */
-  border: 2px solid #2C4B8C;
+  border: 2px solid #2c4b8c;
   border-radius: 10px;
   font-weight: 500;
   margin-bottom: 0.7rem; /* Reduced from 1rem */
@@ -5635,11 +5627,11 @@ label {
 }
 
 .link {
-  color: #2C4B8C;
+  color: #2c4b8c;
   text-decoration: none;
 }
 
-.text-tetap{
+.text-tetap {
   padding-top: 5px;
 }
 
@@ -5668,16 +5660,15 @@ label {
   }
 }
 
-
 /* Responsive HP */
 @media (max-width: 767px) {
   .image-container {
-      display: none;
+    display: none;
   }
-  
+
   .form-container {
-      height: 100vh;
-      padding: 1rem;
+    height: 100vh;
+    padding: 1rem;
   }
 
   .login-form {
@@ -9173,17 +9164,11 @@ label {
   font-size: 10px;
 }
 
-.price {
-  font-size: 15px;
-}
-
 .old-price {
   font-size: 10px;
 }
 
-
-
-.site-hasil{
+.site-hasil {
   font-size: 20px;
   font-weight: bold;
   line-height: 1.4;
@@ -9220,6 +9205,14 @@ label {
     font-size: 16px;
     font-weight: bold;
     line-height: 1.4;
+  }
+
+  .price {
+    font-size: 14px;
+  }
+
+  .old-price {
+    font-size: 9px;
   }
 
   /* Garis bawah saat aktif */
@@ -9271,8 +9264,7 @@ label {
   .star-rating {
     display: flex;
     align-items: center;
-    gap: 1px;
-    margin-top: 7px;
+    gap: 2px;
   }
 
   .star-icon {
@@ -9306,11 +9298,11 @@ label {
     font-style: italic;
     margin-left: 5px;
     padding-right: 15px;
-    margin-top: 2px;
+    margin-top: 13px;
   }
 
   .star-icon-review {
-    margin-top: 4px;
+    margin-top: 12px;
     width: 15px;
     height: 15px;
   }
@@ -9319,7 +9311,6 @@ label {
     margin: 0px 3px;
   }
 
-  
   .view-more {
     font-size: 12px;
     margin-top: 25px;
@@ -9330,7 +9321,6 @@ label {
     padding-top: 10px;
   }
 }
-
 
 /* Responsive - Tablet */
 @media (max-width: 991.98px) {
@@ -9367,8 +9357,6 @@ label {
     display: flex;
     align-items: center;
     gap: 3px;
-    margin-top: 0px;
-
   }
 
   .star-count {
@@ -9377,10 +9365,9 @@ label {
   }
 
   .star-icon-review {
-    margin-top: 8px;
-    margin-left: 5px;
-    width: 20px;
-    height: 20px;
+    margin-top: 6px;
+    width: 15px;
+    height: 15px;
   }
   .review-photo-pelanggan {
     width: 58px;
@@ -9397,8 +9384,6 @@ label {
     display: block;
   }
 
-
-
   .review-photo-pelanggan {
     width: 58px;
     height: 50px;
@@ -9413,7 +9398,14 @@ label {
     display: block;
   }
 
-  
+  .price {
+    font-size: 11px;
+  }
+
+  .old-price {
+    font-size: 9px;
+  }
+
   .view-more {
     font-size: 12px;
     margin-top: 20px;
@@ -9476,8 +9468,7 @@ label {
   }
 
   .star-icon-review {
-    margin-top: 4px;
-    margin-left: 5px;
+    margin-top: 6px;
     width: 15px;
     height: 15px;
   }
@@ -9807,7 +9798,7 @@ label {
 /* This helps with vertical alignment of text characters */
 .btn-quantity span {
   display: block;
-  margin-bottom: 3px; 
+  margin-bottom: 3px;
 }
 
 .btn-buy {
@@ -10123,7 +10114,7 @@ input[type="checkbox"].form-check-input {
   }
 
   .buy-btn {
-    background-color: #2C4B8C;
+    background-color: #2c4b8c;
     color: white;
     border: none;
     font-size: 12px;
@@ -10134,31 +10125,39 @@ input[type="checkbox"].form-check-input {
   }
 
   .buy-btn:hover {
-      background-color: #1e3a70;
-      color: white;
+    background-color: #1e3a70;
+    color: white;
   }
 
   .cart-btn {
-      border: 1px solid #2C4B8C;
-      color: #2C4B8C;
-      background-color: white;
-      font-size: 12px;
-      border-radius: 5px;
-      padding: 5px 0;
-      font-weight: 500;
-      transition: all 0.3s ease;
+    border: 1px solid #2c4b8c;
+    color: #2c4b8c;
+    background-color: white;
+    font-size: 12px;
+    border-radius: 5px;
+    padding: 5px 0;
+    font-weight: 500;
+    transition: all 0.3s ease;
   }
 
   .cart-btn:hover {
-      background-color: #f8f9fa;
-      color: #2C4B8C;
+    background-color: #f8f9fa;
+    color: #2c4b8c;
   }
+
+  .small-dropdown {
+    display: none !important;
+  }
+}
+
+.small-dropdown {
+  display: none !important;
 }
 
 /* Responsive - Tablet */
 @media (max-width: 991.98px) {
   .small-dropdown {
-    display: none;
+    display: none !important;
   }
 
   .hero-slider .owl-nav {
@@ -10168,7 +10167,7 @@ input[type="checkbox"].form-check-input {
   }
 
   .buy-btn {
-    background-color: #2C4B8C;
+    background-color: #2c4b8c;
     color: white;
     border: none;
     font-size: 12px;
@@ -10179,24 +10178,24 @@ input[type="checkbox"].form-check-input {
   }
 
   .buy-btn:hover {
-      background-color: #1e3a70;
-      color: white;
+    background-color: #1e3a70;
+    color: white;
   }
 
   .cart-btn {
-      border: 1px solid #2C4B8C;
-      color: #2C4B8C;
-      background-color: white;
-      font-size: 12px;
-      border-radius: 5px;
-      padding: 5px 0;
-      font-weight: 500;
-      transition: all 0.3s ease;
+    border: 1px solid #2c4b8c;
+    color: #2c4b8c;
+    background-color: white;
+    font-size: 12px;
+    border-radius: 5px;
+    padding: 5px 0;
+    font-weight: 500;
+    transition: all 0.3s ease;
   }
 
   .cart-btn:hover {
-      background-color: #f8f9fa;
-      color: #2C4B8C;
+    background-color: #f8f9fa;
+    color: #2c4b8c;
   }
 
   .hero-slider .owl-nav button {
@@ -10226,9 +10225,8 @@ input[type="checkbox"].form-check-input {
 
 /* Responsive - HP */
 @media (max-width: 767.98px) {
-
   .buy-btn {
-    background-color: #2C4B8C;
+    background-color: #2c4b8c;
     color: white;
     border: none;
     font-size: 8px;
@@ -10239,32 +10237,32 @@ input[type="checkbox"].form-check-input {
   }
 
   .buy-btn:hover {
-      background-color: #1e3a70;
-      color: white;
+    background-color: #1e3a70;
+    color: white;
   }
 
   .cart-btn {
-      border: 1px solid #2C4B8C;
-      color: #2C4B8C;
-      background-color: white;
-      font-size: 8px;
-      border-radius: 5px;
-      padding: 5px 0;
-      font-weight: 500;
-      transition: all 0.3s ease;
+    border: 1px solid #2c4b8c;
+    color: #2c4b8c;
+    background-color: white;
+    font-size: 8px;
+    border-radius: 5px;
+    padding: 5px 0;
+    font-weight: 500;
+    transition: all 0.3s ease;
   }
 
   .cart-btn:hover {
-      background-color: #f8f9fa;
-      color: #2C4B8C;
+    background-color: #f8f9fa;
+    color: #2c4b8c;
   }
 
   .newsletter-content {
     text-align: center;
   }
 
-  .tombol-beli{
-    background-color: #2B4779;
+  .tombol-beli {
+    background-color: #2b4779;
     color: white;
     font-size: 14px;
     font-weight: 300;
@@ -10537,7 +10535,6 @@ input[type="checkbox"].form-check-input {
   }
 }
 
-
 /* validasi eror */
 .invalid-feedback {
   display: none;
@@ -10578,7 +10575,6 @@ input[type="checkbox"].form-check-input {
   margin-top: 1rem !important;
 }
 
-
 /* keranjang */
 
 .product-image-keranjang {
@@ -10606,13 +10602,12 @@ input[type="checkbox"].form-check-input {
   line-height: 20px;
 }
 
-
 @media (max-width: 561px) {
   .product-image {
     max-height: 180px;
     max-width: 80%;
   }
-  
+
   /* Ribbon */
   .ribbon-wrapper {
     top: 0;
@@ -10622,7 +10617,7 @@ input[type="checkbox"].form-check-input {
     overflow: hidden;
     z-index: 10;
   }
-  
+
   .ribbon {
     position: absolute;
     width: 200px;
@@ -10634,19 +10629,19 @@ input[type="checkbox"].form-check-input {
   }
 }
 
-.title-keranjang{
+.title-keranjang {
   font-size: 15px;
   font-weight: bold;
   color: #000000;
 }
 
-.pembayaran{
+.pembayaran {
   font-size: 14px;
   font-weight: bold;
   color: #000000;
 }
 
-.name-keranjang{
+.name-keranjang {
   font-size: 12px;
   font-weight: 400;
   color: #000000;
@@ -10671,14 +10666,59 @@ input[type="checkbox"].form-check-input {
   font-weight: 400;
 }
 
-
-.subtotal-pembayaran{
+.subtotal-pembayaran {
   font-size: 13px;
   color: #000000;
   font-weight: 400;
 }
 
 .box-shadow-keranjang {
-    box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.1);
 }
 
+/* .review-photo-pelanggan {
+  position: relative;
+}
+
+.review-photo-pelanggan img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  aspect-ratio: 1/1;
+} */
+
+.more-photos-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.hidden-photos {
+  display: none;
+}
+
+.review-photos-container.expanded .hidden-photos {
+  display: flex;
+}
+
+.review-photos-container.expanded .more-photos-overlay {
+  display: none;
+}
+
+/* Sembunyikan di ukuran layar besar */
+@media (min-width: 768px) {
+  .my-dropdown {
+    display: none;
+  }
+}

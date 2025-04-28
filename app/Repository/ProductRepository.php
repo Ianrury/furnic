@@ -71,17 +71,19 @@ class ProductRepository
         return $products;
     }
 
+    public function productRekomendasi ()
+    {
+        $statement = $this->connection->query("SELECT * FROM product ORDER BY created_at ASC LIMIT 4");
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public function produkKategory()
     {
         $statement = $this->connection->query("
             SELECT 
                 kategori.id_kategori,
                 kategori.nama AS nama_kategori,
-                product.id_product,
-                product.nama_product,
-                product.foto,
-                product.deskripsi,
-                product.qty
+                product.*
             FROM kategori
             LEFT JOIN product ON product.id_kategori = kategori.id_kategori
             ORDER BY kategori.nama ASC, product.nama_product ASC
@@ -89,6 +91,39 @@ class ProductRepository
         
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function productalldummi()
+    {
+        $statement = $this->connection->query("SELECT * FROM product LIMIT 20");
+        $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        $products = [];
+        foreach ($rows as $row) {
+            $products[] = $this->mapRowToProduct($row);
+        }
+    
+        return $products;
+    }
+
+    public function productDiskon() 
+    {
+        $statement = $this->connection->query("SELECT * FROM product WHERE diskon > 0 LIMIT 4");
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+
+    public function bestseller()
+    {
+        // Membuat query untuk mengambil 4 produk dengan jumlah pembelian terbanyak
+        $statement = $this->connection->query("SELECT * FROM product ORDER BY beli DESC LIMIT 4");
+    
+        // Mengambil hasil query
+        $bestsellers = $statement->fetchAll(PDO::FETCH_ASSOC);
+    
+        // Mengembalikan hasil ke view atau controller yang sesuai
+        return $bestsellers;
+    }
+    
     
 
     public function productById(string $id): ?Product
@@ -116,7 +151,10 @@ class ProductRepository
         $product->nama_product = $row['nama_product'];
         $product->id_kategori = (int) $row['id_kategori'];
         $product->uom = $row['uom'];
+        $product->harga = (int) $row['harga'];
+        $product->beli = (int) $row['beli'];
         $product->qty = (int) $row['qty'];
+        $product->diskon = $row['diskon'];
         $product->nama_vendor = $row['nama_vendor'];
         $product->foto = $row['foto'];
         $product->deskripsi = $row['deskripsi'];

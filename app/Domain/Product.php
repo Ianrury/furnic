@@ -9,6 +9,9 @@ class Product
     public int $id_kategori;
     public string $uom;
     public int $qty;
+    public int $harga;
+    public int $beli;
+    public string $diskon;
     public string $nama_vendor;
     public string $foto;
     public string $deskripsi;

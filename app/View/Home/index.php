@@ -27,6 +27,8 @@
     <link rel="stylesheet" href="assets/css/jquery-ui.min.css">
     <link rel="stylesheet" href="assets/css/nice-select.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
@@ -124,20 +126,27 @@
 
                                             <!-- Product Image -->
                                             <div class="text-center pt-3">
-                                                <img src="assets/img/product/kursi/<?= htmlspecialchars($product->foto) ?>" class="img-fluid product-image" alt="Product Image">
+                                                <img src="assets/img/product/kursi/<?= htmlspecialchars($product->foto) ?>"
+                                                    class="img-fluid product-image" alt="Product Image">
                                             </div>
                                             <div class="bodykartu">
                                                 <div class="d-flex flex-column">
                                                     <div class="">
-                                                        <p class="card-title text-truncate product-title"><?= htmlspecialchars($product->nama_product) ?></p>
-                                                        <p class="card-text text-truncate product-desc"><?= htmlspecialchars($product->deskripsi) ?></p>
+                                                        <p class="card-title text-truncate product-title">
+                                                            <?= htmlspecialchars($product->nama_product) ?>
+                                                        </p>
+                                                        <p class="card-text text-truncate product-desc">
+                                                            <?= htmlspecialchars($product->deskripsi) ?>
+                                                        </p>
                                                         <div class="d-flex gap-1 align-items-center">
                                                             <i class="bi bi-star-fill text-warning small-icon"></i>
                                                             <i class="bi bi-star-fill text-warning small-icon"></i>
                                                             <i class="bi bi-star-fill text-warning small-icon"></i>
                                                             <i class="bi bi-star-fill text-warning small-icon"></i>
                                                             <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                            <small class="text-muted fst-italic ms-1 sold-text"><?= $product->qty ?> terjual</small>
+                                                            <small
+                                                                class="text-muted fst-italic ms-1 sold-text"><?= $product->qty ?>
+                                                                terjual</small>
                                                         </div>
                                                     </div>
 
@@ -145,7 +154,8 @@
                                                         <div class="d-flex flex-wrap align-items-baseline">
                                                             <div class="me-2">
                                                                 <span class="fw-bold price">
-                                                                    <sup class="fw-normal">Rp</sup> <?= number_format($product->qty * 100000, 0, ',', '.') ?>
+                                                                    <sup class="fw-normal">Rp</sup>
+                                                                    <?= number_format($product->qty * 100000, 0, ',', '.') ?>
                                                                 </span>
                                                             </div>
                                                             <div>
@@ -301,7 +311,7 @@
                 <div class="row">
                     <div class="col-12 wow fadeInDown mb-0 d-flex justify-content-between" data-wow-delay=".25s">
                         <div class="site-heading-inline">
-                            <h2 class="site-title">Produk Terbaru</h2>
+                            <h2 class="site-title">Produk</h2>
                         </div>
                         <a href="#" class="small view-more">View More <i class="fas fa-angle-double-right"></i></a>
                     </div>
@@ -334,20 +344,20 @@
                                 <div class="categories">
                                     <ul class="d-flex mb-0 ul-categories">
                                         <li class="nav-item">
-                                            <a class="d-flex justify-content-center align-items-center custom-nav-link-product <?= is_active('/') ?>"
-                                                href="/">Living</a>
+                                            <a class="d-flex justify-content-center align-items-center custom-nav-link-product"
+                                                data-category="living" href="javascript:void(0)">Living</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="d-flex justify-content-center align-items-center custom-nav-link-product <?= is_active('product') ?>"
-                                                href="/product">Dinning</a>
+                                            <a class="d-flex justify-content-center align-items-center custom-nav-link-product"
+                                                data-category="dinning" href="javascript:void(0)">Dinning</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="d-flex justify-content-center align-items-center custom-nav-link-product<?= (basename($_SERVER['PHP_SELF']) == 'promo.php') ? ' active' : '' ?>"
-                                                href="promo.php">Bedroom</a>
+                                            <a class="d-flex justify-content-center align-items-center custom-nav-link-product"
+                                                data-category="bedroom" href="javascript:void(0)">Bedroom</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="d-flex justify-content-center align-items-center custom-nav-link-product<?= (basename($_SERVER['PHP_SELF']) == 'promo.php') ? ' active' : '' ?>"
-                                                href="kitchen">Kitchen</a>
+                                            <a class="d-flex justify-content-center align-items-center custom-nav-link-product"
+                                                data-category="kitchen" href="javascript:void(0)">Kitchen</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -359,7 +369,8 @@
                 </div>
                 <div class="tab-content wow fadeInUp" data-wow-delay=".25s" id="item-tabContent">
                     <div class="container category-product">
-                        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4  justify-content-start">
+                        <div id="product-container"
+                            class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4  justify-content-start">
 
                         </div>
                     </div>
@@ -663,17 +674,17 @@
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const offcanvasToggler = document.getElementById('offcanvasToggler');
             const offcanvasNavbar = document.getElementById('offcanvasNavbar');
 
             // Mencegah pembuatan backdrop
-            offcanvasNavbar.addEventListener('show.bs.offcanvas', function() {
+            offcanvasNavbar.addEventListener('show.bs.offcanvas', function () {
                 document.querySelectorAll('.offcanvas-backdrop').forEach(el => el.remove());
             });
 
             // Alternatif: nonaktifkan backdrop sepenuhnya
-            offcanvasNavbar.addEventListener('shown.bs.offcanvas', function() {
+            offcanvasNavbar.addEventListener('shown.bs.offcanvas', function () {
                 const backdrops = document.querySelectorAll('.offcanvas-backdrop');
                 backdrops.forEach(backdrop => {
                     backdrop.classList.remove('show');
@@ -682,16 +693,16 @@
             });
 
             // Pastikan backdrop dihapus saat menutup
-            offcanvasNavbar.addEventListener('hidden.bs.offcanvas', function() {
+            offcanvasNavbar.addEventListener('hidden.bs.offcanvas', function () {
                 document.querySelectorAll('.offcanvas-backdrop').forEach(el => el.remove());
             });
         });
 
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const hotspots = document.querySelectorAll('.hotspot-dot');
 
             hotspots.forEach(hotspot => {
-                hotspot.addEventListener('mouseenter', function() {
+                hotspot.addEventListener('mouseenter', function () {
                     // Store the tooltip element
                     const tooltip = this.querySelector('.hotspot-tooltip');
 
@@ -714,175 +725,25 @@
         });
 
         // Add focus event to automatically open modal when clicking the search field
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const searchModal = document.getElementById('searchModal');
-            searchModal.addEventListener('shown.bs.modal', function() {
+            searchModal.addEventListener('shown.bs.modal', function () {
                 searchModal.querySelector('input').focus();
             });
         });
 
         // Data produk (untuk contoh)
-        const products = [{
-                title: "CT-IMP Matto Light Brown",
-                description: "Meja ruang tamu aesthetic.",
-                price: "500.000",
-                oldPrice: "600.000",
-                rating: 5,
-                sold: 300,
-                image: "assets/img/product/kursi/ZULU CHAIR WHITE.png",
-                isNew: true
-            },
-            {
-                title: "Scandinavian Coffee Table",
-                description: "Meja kopi minimalis modern.",
-                price: "450.000",
-                oldPrice: "550.000",
-                rating: 4,
-                sold: 250,
-                image: "assets/img/product/kursi/ZULU CHAIR WHITE.png",
-                isNew: false
-            },
-            {
-                title: "Woody Chair Classic",
-                description: "Kursi kayu dengan bantalan nyaman.",
-                price: "350.000",
-                oldPrice: "400.000",
-                rating: 5,
-                sold: 420,
-                image: "assets/img/product/kursi/ZULU CHAIR WHITE.png",
-                isNew: true
-            },
-            {
-                title: "Sofa Corner Premium",
-                description: "Sofa sudut untuk ruang keluarga.",
-                price: "2.500.000",
-                oldPrice: "3.000.000",
-                rating: 5,
-                sold: 150,
-                image: "assets/img/product/kursi/ZULU CHAIR WHITE.png",
-                isNew: false
-            },
-            {
-                title: "Minimalist Side Table",
-                description: "Meja samping dengan laci.",
-                price: "275.000",
-                oldPrice: "325.000",
-                rating: 4,
-                sold: 180,
-                image: "assets/img/product/kursi/ZULU CHAIR WHITE.png",
-                isNew: false
-            },
-            {
-                title: "Dining Chair White",
-                description: "Kursi makan putih elegan.",
-                price: "225.000",
-                oldPrice: "300.000",
-                rating: 4,
-                sold: 320,
-                image: "assets/img/product/kursi/ZULU CHAIR WHITE.png",
-                isNew: true
-            },
-            {
-                title: "Rattan Accent Chair",
-                description: "Kursi rotan untuk ruang tamu.",
-                price: "450.000",
-                oldPrice: "550.000",
-                rating: 5,
-                sold: 200,
-                image: "assets/img/product/kursi/ZULU CHAIR WHITE.png",
-                isNew: false
-            },
-            {
-                title: "Modern TV Cabinet",
-                description: "Kabinet TV dengan penyimpanan.",
-                price: "1.200.000",
-                oldPrice: "1.500.000",
-                rating: 5,
-                sold: 120,
-                image: "assets/img/product/kursi/ZULU CHAIR WHITE.png",
-                isNew: true
-            },
-            {
-                title: "Storage Ottoman",
-                description: "Ottoman dengan penyimpanan.",
-                price: "350.000",
-                oldPrice: "400.000",
-                rating: 4,
-                sold: 180,
-                image: "assets/img/product/kursi/ZULU CHAIR WHITE.png",
-                isNew: false
-            },
-            {
-                title: "Round Dining Table",
-                description: "Meja makan bulat untuk 4 orang.",
-                price: "750.000",
-                oldPrice: "900.000",
-                rating: 5,
-                sold: 90,
-                image: "assets/img/product/kursi/ZULU CHAIR WHITE.png",
-                isNew: true
-            },
-            {
-                title: "Bedside Table Oak",
-                description: "Meja samping tempat tidur kayu oak.",
-                price: "320.000",
-                oldPrice: "380.000",
-                rating: 4,
-                sold: 220,
-                image: "assets/img/product/kursi/ZULU CHAIR WHITE.png",
-                isNew: false
-            },
-            {
-                title: "Bar Stool Black",
-                description: "Kursi bar hitam tinggi.",
-                price: "280.000",
-                oldPrice: "350.000",
-                rating: 4,
-                sold: 150,
-                image: "assets/img/product/kursi/ZULU CHAIR WHITE.png",
-                isNew: true
-            },
-            {
-                title: "Office Desk White",
-                description: "Meja kerja putih dengan laci.",
-                price: "850.000",
-                oldPrice: "950.000",
-                rating: 5,
-                sold: 80,
-                image: "assets/img/product/kursi/ZULU CHAIR WHITE.png",
-                isNew: false
-            },
-            {
-                title: "Bathroom Cabinet",
-                description: "Kabinet kamar mandi dengan cermin.",
-                price: "420.000",
-                oldPrice: "500.000",
-                rating: 4,
-                sold: 110,
-                image: "assets/img/product/kursi/ZULU CHAIR WHITE.png",
-                isNew: true
-            },
-            {
-                title: "Bookshelf Modern",
-                description: "Rak buku minimalis modern.",
-                price: "650.000",
-                oldPrice: "750.000",
-                rating: 5,
-                sold: 95,
-                image: "assets/img/product/kursi/ZULU CHAIR WHITE.png",
-                isNew: false
-            },
-            {
-                title: "Kitchen Island Small",
-                description: "Pulau dapur kecil dengan penyimpanan.",
-                price: "900.000",
-                oldPrice: "1.100.000",
-                rating: 5,
-                sold: 70,
-                image: "assets/img/product/kursi/ZULU CHAIR WHITE.png",
-                isNew: true
-            }
-        ];
+        const products = <?= json_encode($model["kategori"]); ?>.map(product => ({
+            title: product.nama_product,             // Sesuaikan dengan nama kolom produk di PHP
+            description: product.deskripsi ?? "Deskripsi tidak tersedia", // Deskripsi produk
+            price: product.harga !== null && product.harga !== undefined ? `Rp ${product.harga.toLocaleString()}` : "Rp 0", // Pastikan harga valid
+            oldPrice: product.harga ? `Rp ${product.harga + 100000}` : "Rp 0", // Harga lama, asumsikan harga lama = harga produk + 100.000
+            rating: 4,  // Anda bisa menentukan rating atau mengambilnya dari data produk jika ada
+            sold: 50,   // Anda bisa mengubah ini sesuai dengan data yang ada
+            image: `assets/img/product/kursi/${product.foto}`,  // Gambar produk
+            isNew: true  // Anda bisa menambahkan logika untuk menentukan apakah produk baru atau tidak
+        }));
+
 
         // Variabel untuk pagination
         let currentPage = 1;
@@ -915,7 +776,7 @@
                                     <!-- <h5 class="">
                                         ${product.title}
                                 </h5> -->
-                                    <p class="card-title text-truncate fw-medium product-title">${product.description}
+                                    <p class="card-title text-truncate  product-title">${product.description}
                                     </p>
 
                                     <p class="card-text text-truncate product-desc">Meja ruang tamu
@@ -1022,7 +883,7 @@
             // Tambahkan event listener untuk pagination
             const pageLinks = paginationContainer.querySelectorAll('.page-link');
             pageLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
+                link.addEventListener('click', function (e) {
                     e.preventDefault();
                     const pageData = this.getAttribute('data-page');
 
@@ -1045,7 +906,7 @@
         }
 
         // Jalankan ketika DOM sudah siap
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // Gunakan selector yang lebih spesifik
             const productContainer = document.querySelector('#product-pagination-container .row');
 
@@ -1066,509 +927,180 @@
         });
 
 
-        //categoty product
-
-        // Data dummy untuk produk berdasarkan kategori
-        const productsct = {
-            'living': [{
-                    id: 1,
-                    title: 'CT-IMP Matto Light Brown',
-                    description: 'Meja ruang tamu aesthetic.',
-                    image: 'assets/img/product/kursi/ZULU CHAIR WHITE.png',
-                    price: '500.000',
-                    oldPrice: '600.000',
-                    rating: 5,
-                    sold: 300,
-                    isNew: true
-                },
-                {
-                    id: 2,
-                    title: 'Sofa Minimalis Cream',
-                    description: 'Sofa 3 seater untuk ruang tamu modern.',
-                    image: 'assets/img/product/kursi/ZULU CHAIR WHITE.png',
-                    price: '3.500.000',
-                    oldPrice: '4.200.000',
-                    rating: 4,
-                    sold: 120,
-                    isNew: false
-                },
-                {
-                    id: 3,
-                    title: 'Coffee Table Oak',
-                    description: 'Meja kopi kayu oak premium.',
-                    image: 'assets/img/product/kursi/ZULU CHAIR WHITE.png',
-                    price: '1.200.000',
-                    oldPrice: '1.500.000',
-                    rating: 5,
-                    sold: 210,
-                    isNew: true
-                },
-                {
-                    id: 4,
-                    title: 'Floor Lamp Scandinavian',
-                    description: 'Lampu lantai bergaya skandinavia.',
-                    image: 'assets/img/product/kursi/ZULU CHAIR WHITE.png',
-                    price: '750.000',
-                    oldPrice: '900.000',
-                    rating: 4,
-                    sold: 85,
-                    isNew: false
-                },
-            ],
-            'dinning': [{
-                    id: 5,
-                    title: 'Dining Table Round Marble',
-                    description: 'Meja makan bulat dengan top marmer.',
-                    image: 'assets/img/product/kursi/ZULU CHAIR WHITE.png',
-                    price: '4.500.000',
-                    oldPrice: '5.200.000',
-                    rating: 5,
-                    sold: 75,
-                    isNew: true
-                },
-                {
-                    id: 6,
-                    title: 'Dining Chair Velvet',
-                    description: 'Kursi makan berbahan velvet mewah.',
-                    image: 'assets/img/product/kursi/ZULU CHAIR WHITE.png',
-                    price: '850.000',
-                    oldPrice: '1.000.000',
-                    rating: 4,
-                    sold: 180,
-                    isNew: false
-                },
-                {
-                    id: 7,
-                    title: 'Buffet Cabinet Wood',
-                    description: 'Kabinet buffet untuk ruang makan.',
-                    image: 'assets/img/product/kursi/ZULU CHAIR WHITE.png',
-                    price: '3.200.000',
-                    oldPrice: '3.800.000',
-                    rating: 5,
-                    sold: 45,
-                    isNew: true
-                },
-                {
-                    id: 8,
-                    title: 'Pendant Lamp Dining',
-                    description: 'Lampu gantung untuk ruang makan.',
-                    image: 'assets/img/product/kursi/ZULU CHAIR WHITE.png',
-                    price: '950.000',
-                    oldPrice: '1.200.000',
-                    rating: 4,
-                    sold: 110,
-                    isNew: false
-                }
-            ],
-            'bedroom': [{
-                    id: 9,
-                    title: 'Bed Frame Queen Size',
-                    description: 'Rangka tempat tidur queen size.',
-                    image: 'assets/img/product/kursi/ZULU CHAIR WHITE.png',
-                    price: '5.500.000',
-                    oldPrice: '6.200.000',
-                    rating: 5,
-                    sold: 65,
-                    isNew: true
-                },
-                {
-                    id: 10,
-                    title: 'Bedside Table Oak',
-                    description: 'Meja samping tempat tidur dari kayu oak.',
-                    image: 'assets/img/product/kursi/ZULU CHAIR WHITE.png',
-                    price: '850.000',
-                    oldPrice: '1.050.000',
-                    rating: 5,
-                    sold: 150,
-                    isNew: false
-                },
-                {
-                    id: 11,
-                    title: 'Wardrobe Sliding Door',
-                    description: 'Lemari pakaian dengan pintu geser.',
-                    image: 'assets/img/product/kursi/ZULU CHAIR WHITE.png',
-                    price: '4.200.000',
-                    oldPrice: '5.000.000',
-                    rating: 4,
-                    sold: 40,
-                    isNew: true
-                },
-                {
-                    id: 12,
-                    title: 'Vanity Table White',
-                    description: 'Meja rias putih dengan cermin.',
-                    image: 'assets/img/product/kursi/ZULU CHAIR WHITE.png',
-                    price: '1.800.000',
-                    oldPrice: '2.300.000',
-                    rating: 5,
-                    sold: 95,
-                    isNew: false
-                }
-            ],
-            'kitchen': [{
-                    id: 13,
-                    title: 'Kitchen Island Marble',
-                    description: 'Pulau dapur dengan top marmer.',
-                    image: 'assets/img/product/kursi/ZULU CHAIR WHITE.png',
-                    price: '7.500.000',
-                    oldPrice: '8.900.000',
-                    rating: 5,
-                    sold: 25,
-                    isNew: true
-                },
-                {
-                    id: 14,
-                    title: 'Bar Stool Metal',
-                    description: 'Kursi bar berbahan metal modern.',
-                    image: 'assets/img/product/kursi/ZULU CHAIR WHITE.png',
-                    price: '750.000',
-                    oldPrice: '900.000',
-                    rating: 4,
-                    sold: 120,
-                    isNew: false
-                },
-                {
-                    id: 15,
-                    title: 'Kitchen Cabinet Set',
-                    description: 'Set kabinet dapur modular.',
-                    image: 'assets/img/product/kursi/ZULU CHAIR WHITE.png',
-                    price: '12.500.000',
-                    oldPrice: '15.000.000',
-                    rating: 5,
-                    sold: 15,
-                    isNew: true
-                },
-                {
-                    id: 16,
-                    title: 'Cooking Utensil Holder',
-                    description: 'Tempat penyimpanan alat masak.',
-                    image: 'assets/img/product/kursi/ZULU CHAIR WHITE.png',
-                    price: '350.000',
-                    oldPrice: '450.000',
-                    rating: 4,
-                    sold: 200,
-                    isNew: false
-                }
-            ]
-        };
-
-
-        // Style untuk animasi dan transisi
-        const styleCt = document.createElement('style');
-        styleCt.textContent = `
-       .category-product .row {
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        padding-bottom: 15px;
-        scrollbar-width: thin;
-        scrollbar-color: #ccc #f9f9f9;
-    }
-    
-    .category-product .row::-webkit-scrollbar {
-        height: 4px;
-    }
-    
-    .category-product .row::-webkit-scrollbar-track {
-        background: #f9f9f9;
-        border-radius: 10px;
-    }
-    
-    .category-product .row::-webkit-scrollbar-thumb {
-        background: #ccc;
-        border-radius: 10px;
-    }
-    
-    .category-product .row::-webkit-scrollbar-thumb:hover {
-        background: #999;
-    }
-    
-    .category-product .col {
-        flex: 0 0 auto;
-        width: auto;
-        max-width: none;
-        transition: all 0.5s ease-in-out;
-    }
-    
-    /* Maintain responsive widths while keeping nowrap */
-    @media (max-width: 767.98px) {
-        .category-product .col {
-            width: 50%; /* For 2 columns on smallest screens */
-        }
-    }
-    
-    @media (min-width: 768px) and (max-width: 991.98px) {
-        .category-product .col {
-            width: 33.333%; /* For 3 columns on medium screens */
-        }
-    }
-    
-    @media (min-width: 992px) {
-        .category-product .col {
-            width: 25%; /* For 4 columns on large screens */
-        }
-    }
-    
-    .slide-out-ct {
-        transform: translateX(-30px);
-        opacity: 0;
-        transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s ease;
-    }
-    
-    .slide-in-ct {
-        animation: slideFromRightCt 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-    }
-    
-    @keyframes slideFromRightCt {
-        0% {
-            transform: translateX(30px);
-            opacity: 0;
-        }
-        50% {
-            opacity: 0.5;
-        }
-        100% {
-            transform: translateX(0);
-            opacity: 1;
-        }
-    }
-    
-    /* Add some padding to the last card to make sure it's fully visible when scrolled */
-    .category-product .col:last-child {
-        padding-right: 15px;
-    }
-`;
-        document.head.appendChild(styleCt);
-
-        // Fungsi untuk membuat kartu produk dengan desain yang sama
-        function createProductCardCt(product) {
-            return `
-        <div class="card shadow position-relative rounded-4 p-2">
-            ${product.isNew ? `
-            <!-- Corner Ribbon -->
-            <div class="position-absolute ribbon-wrapper">
-                <div class="ribbon text-white text-uppercase fw-bold text-center">
-                    New Product
+        //categoty produc
+    </script>
+    <!-- HTML Structure -->
+    <div class="container">
+        <div class="row">
+            <div class="col-12 wow fadeInDown mb-0" data-wow-delay=".25s">
+                <div class="site-heading-inline">
+                    <h2 class="site-title">Kategori Produk</h2>
                 </div>
             </div>
-            ` : ''}
-
-            <!-- Product Image -->
-            <div class="text-center pt-3">
-                <img src="${product.image}" class="img-fluid product-image" alt="Product Image">
-            </div>
-
-            <div class="bodykartu">
-                <div class="d-flex flex-column">
-                    <!-- Product Details -->
-                    <div class="">
-                        <p class="card-title text-truncate fw-medium product-title">${product.description}</p>
-                        <p class="card-text text-truncate product-desc">Meja ruang tamu aesthetic.</p>
-                        <div class="d-flex gap-1 align-items-center">
-                            ${createStarRating(product.rating)}
-                            <small class="text-muted fst-italic ms-1 sold-text">${product.sold} terjual</small>
+        </div>
+        <div class="tab-content wow fadeInUp" data-wow-delay=".25s" id="item-tabContent">
+            <div class="container">
+                <div class="row align-items-center mb-2">
+                    <div class="col d-flex justify-content-between align-items-center ps-0">
+                        <div class="categories">
+                            <ul class="d-flex mb-0 ul-categories">
+                                <li class="nav-item">
+                                    <a class="d-flex justify-content-center align-items-center custom-nav-link-product"
+                                        data-category="living" href="javascript:void(0)">Living</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="d-flex justify-content-center align-items-center custom-nav-link-product"
+                                        data-category="dinning" href="javascript:void(0)">Dinning</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="d-flex justify-content-center align-items-center custom-nav-link-product"
+                                        data-category="bedroom" href="javascript:void(0)">Bedroom</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="d-flex justify-content-center align-items-center custom-nav-link-product"
+                                        data-category="kitchen" href="javascript:void(0)">Kitchen</a>
+                                </li>
+                            </ul>
                         </div>
-                    </div>
-
-                    <!-- Price Section -->
-                    <div class="mt-auto">
-                        <div class="d-flex flex-wrap align-items-baseline">
-                            <div class="me-2">
-                                <span class="fw-bold price">
-                                    <sup class="fw-normal">Rp</sup> ${product.price}
-                                </span>
-                            </div>
-                            <div>
-                                <span class="fw-normal text-danger old-price">
-                                    <sup>Rp</sup>
-                                    <span class="text-decoration-line-through">${product.oldPrice}</span>
-                                </span>
-                            </div>
-                        </div>
+                        <a href="#" class="small view-more">View More <i class="fas fa-angle-double-right"></i></a>
                     </div>
                 </div>
             </div>
         </div>
-    `;
-        }
+        <div class="tab-content wow fadeInUp" data-wow-delay=".25s" id="item-tabContent">
+            <div class="container category-product">
+                <div id="product-container"
+                    class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4 justify-content-start">
+                </div>
+            </div>
+        </div>
+    </div>
 
-        // Fungsi untuk menampilkan produk dengan animasi
-        function displayProductsCt(category) {
-            const productContainerCt = document.querySelector('.category-product .row');
-            const productDataCt = productsct[category.toLowerCase()] || productsct['living'];
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Data produk dari PHP (contoh)
+            const productkategori = <?= json_encode($model["kategori"]); ?>;
 
-            // Animasi slide out
-            productContainerCt.classList.add('slide-out-ct');
+            // Mapping kategori berdasarkan nama_kategori
+            function mapCategory(name) {
+                const lowercaseName = name.toLowerCase();
+                if (lowercaseName.includes('living')) return 'living';
+                if (lowercaseName.includes('dinning')) return 'dinning';
+                if (lowercaseName.includes('bedroom')) return 'bedroom';
+                if (lowercaseName.includes('kitchen')) return 'kitchen';
+                return 'other';
+            }
 
-            setTimeout(() => {
-                // Bersihkan container
-                productContainerCt.innerHTML = '';
+            // Fungsi membuat rating dummy
+            function createStarRating(rating) {
+                let stars = '';
+                for (let i = 0; i < 5; i++) {
+                    stars += `<i class="bi ${i < rating ? 'bi-star-fill' : 'bi-star'} text-warning"></i>`;
+                }
+                return stars;
+            }
 
-                // Tambahkan produk-produk baru
-                productDataCt.forEach(product => {
-                    const colCt = document.createElement('div');
-                    colCt.className = 'col';
-                    colCt.innerHTML = createProductCardCt(product);
-                    productContainerCt.appendChild(colCt);
-                });
+            // Fungsi men-generate card produk
+            function createProductCard(product) {
+                return `
+                <div class="col animate__animated animate__fadeInRight">
+                    <div class="card shadow position-relative rounded-4 p-2">
+                        ${product.isNew ? `
+                        <div class="position-absolute ribbon-wrapper">
+                            <div class="ribbon text-white text-uppercase fw-bold text-center">New Product</div>
+                        </div>` : ''}
 
-                // Animasi slide in
-                productContainerCt.classList.remove('slide-out-ct');
-                productContainerCt.classList.add('slide-in-ct');
+                        <div class="text-center pt-3">
+                            <img src="assets/img/product/kursi/${product.foto}" class="img-fluid product-image" alt="${product.nama_product}">
+                        </div>
 
-                // Hapus kelas animasi setelah selesai
+                        <div class="bodykartu">
+                            <div class="d-flex flex-column">
+                                <div class="">
+                                    <p class="card-title text-truncate  product-title">${product.nama_product}</p>
+                                    <p class="card-text text-truncate product-desc">${product.deskripsi ?? 'Deskripsi tidak tersedia'}</p>
+                                    <div class="d-flex gap-1 align-items-center">
+                                        ${createStarRating(product.rating || 4)}
+                                        <small class="text-muted fst-italic ms-1 sold-text">${product.sold || 50} terjual</small>
+                                    </div>
+                                </div>
+
+                                <div class="mt-auto">
+                                    <div class="d-flex flex-wrap align-items-baseline">
+                                        <div class="me-2">
+                                            <span class="fw-bold price">
+                                                <sup class="fw-normal">Rp</sup> ${product.harga ?? 0}
+                                            </span>
+                                        </div>
+                                        <div>
+                                            <span class="fw-normal text-danger old-price">
+                                                <sup>Rp</sup>
+                                                <span class="text-decoration-line-through">${product.oldPrice ?? (product.harga ? product.harga + 100000 : 100000)}</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            }
+
+            // Fungsi render produk
+            function renderProducts(category) {
+                const container = document.getElementById('product-container');
+                container.classList.remove('animate__fadeInRight');
+                container.classList.add('animate__fadeOutLeft');
+
                 setTimeout(() => {
-                    productContainerCt.classList.remove('slide-in-ct');
-                }, 500);
+                    container.innerHTML = '';
 
-                // Add optional auto-scroll functionality
-                initAutoScroll();
-            }, 300); // Tunggu sebentar untuk efek slide out
-        }
+                    const filtered = productkategori.filter(p => mapCategory(p.nama_kategori) === category);
 
-        // Fungsi untuk menginisialisasi navigasi kategori
-        function initCategoryNavigationCt() {
-            const navLinksCt = document.querySelectorAll('.custom-nav-link-product');
-            let currentCategoryCt = 'living'; // Default kategori
+                    if (filtered.length === 0) {
+                        container.innerHTML = '<div class="col-12 text-center">Tidak ada produk.</div>';
+                    } else {
+                        filtered.forEach(product => {
+                            container.innerHTML += createProductCard(product);
+                        });
+                    }
 
-            // Set kategori awal berdasarkan URL saat ini
-            const pathCt = window.location.pathname;
-            if (pathCt.includes('product')) {
-                currentCategoryCt = 'dinning';
-            } else if (pathCt.includes('promo.php')) {
-                currentCategoryCt = 'bedroom';
-            } else if (pathCt.includes('dekorasi.php')) {
-                currentCategoryCt = 'kitchen';
+                    container.classList.remove('animate__fadeOutLeft');
+                    container.classList.add('animate__fadeInRight');
+                }, 400);
             }
 
-            // Tampilkan produk dari kategori awal
-            displayProductsCt(currentCategoryCt);
-
-            // Tambahkan event listener untuk setiap link kategori
-            navLinksCt.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault(); // Cegah navigasi default
-
-                    // Hapus kelas active dari semua link
-                    navLinksCt.forEach(navLink => {
-                        navLink.classList.remove('active');
-                    });
-
-                    // Tambahkan kelas active ke link yang diklik
-                    this.classList.add('active');
-
-                    // Dapatkan kategori dari teks link
-                    const categoryCt = this.textContent.trim();
-
-                    // Update tampilan produk hanya jika kategori berubah
-                    if (categoryCt.toLowerCase() !== currentCategoryCt) {
-                        currentCategoryCt = categoryCt.toLowerCase();
-                        displayProductsCt(currentCategoryCt);
+            // Menambahkan kelas 'active' ke kategori yang diklik
+            function setActiveCategory(category) {
+                document.querySelectorAll('.custom-nav-link-product').forEach(link => {
+                    if (link.dataset.category === category) {
+                        link.classList.add('active');
+                    } else {
+                        link.classList.remove('active');
                     }
                 });
-            });
-
-            // Set kelas active pada link kategori saat ini
-            navLinksCt.forEach(link => {
-                const linkCategoryCt = link.textContent.trim().toLowerCase();
-                if (linkCategoryCt === currentCategoryCt) {
-                    link.classList.add('active');
-                }
-            });
-        }
-
-        // Optional: Add auto-scrolling functionality
-        function initAutoScroll() {
-            const scrollContainer = document.querySelector('.category-product .row');
-            if (!scrollContainer) return;
-
-            let scrollPosition = 0;
-            let scrollDirection = 1; // 1 for right, -1 for left
-            const scrollSpeed = 6000; // Lebih lambat - 6 detik antara scrolls
-            const scrollStep = 1; // Jumlah langkah untuk scrolling
-            const scrollInterval = 20; // Waktu antara langkah (ms)
-            const scrollAmount = 2; // Jumlah px per langkah - lebih kecil untuk pergerakan lebih halus
-
-            let scrollIntervalId = null;
-
-            function smoothScroll() {
-                let steps = 0;
-                const maxSteps = 100; // Jumlah maksimum langkah untuk animasi
-
-                // Hentikan interval sebelumnya jika ada
-                if (scrollIntervalId) {
-                    clearInterval(scrollIntervalId);
-                }
-
-                scrollIntervalId = setInterval(() => {
-                    // Calculate max scroll position
-                    const maxScroll = scrollContainer.scrollWidth - scrollContainer.clientWidth;
-
-                    // Tambahkan jumlah scrolling sedikit demi sedikit
-                    scrollContainer.scrollLeft += scrollAmount * scrollDirection;
-                    scrollPosition = scrollContainer.scrollLeft;
-
-                    steps++;
-
-                    // Change direction if we hit a boundary
-                    if (scrollPosition >= maxScroll || scrollPosition <= 0) {
-                        if (scrollPosition >= maxScroll) {
-                            scrollDirection = -1;
-                        } else if (scrollPosition <= 0) {
-                            scrollDirection = 1;
-                        }
-
-                        // Hentikan interval saat ini dan jadwalkan yang berikutnya
-                        clearInterval(scrollIntervalId);
-                        window.scrollTimeout = setTimeout(smoothScroll, scrollSpeed);
-                    }
-
-                    // Jika mencapai jumlah langkah maksimum, berhenti dan jadwalkan berikutnya
-                    if (steps >= maxSteps) {
-                        clearInterval(scrollIntervalId);
-                        window.scrollTimeout = setTimeout(smoothScroll, scrollSpeed / 2);
-                    }
-                }, scrollInterval);
             }
 
-            // Start auto-scrolling after a delay
-            window.scrollTimeout = setTimeout(smoothScroll, 3000);
+            // Menampilkan produk kategori 'living' secara default
+            renderProducts('living');
+            setActiveCategory('living'); // Menandai kategori 'living' sebagai aktif secara default
 
-            // Pause scrolling on user interaction
-            scrollContainer.addEventListener('mouseenter', function() {
-                clearInterval(scrollIntervalId);
-                clearTimeout(window.scrollTimeout);
+            // Event klik kategori
+            document.querySelectorAll('.custom-nav-link-product').forEach(link => {
+                link.addEventListener('click', function () {
+                    const category = this.dataset.category;
+                    renderProducts(category);
+                    setActiveCategory(category); // Menandai kategori yang diklik sebagai aktif
+                });
             });
-
-            scrollContainer.addEventListener('mouseleave', function() {
-                window.scrollTimeout = setTimeout(smoothScroll, 1000);
-            });
-
-            // Handle touch events for mobile
-            scrollContainer.addEventListener('touchstart', function() {
-                clearInterval(scrollIntervalId);
-                clearTimeout(window.scrollTimeout);
-            });
-
-            scrollContainer.addEventListener('touchend', function() {
-                window.scrollTimeout = setTimeout(smoothScroll, 1000);
-            });
-        }
-
-        // Initialize when DOM is loaded
-        document.addEventListener('DOMContentLoaded', function() {
-            initCategoryNavigationCt();
-
-            // Untuk keperluan demo di halaman statis
-            const initialCategoryLinkCt = document.querySelector('.custom-nav-link-product');
-            if (initialCategoryLinkCt) {
-                initialCategoryLinkCt.classList.add('active');
-                const initialCategoryCt = initialCategoryLinkCt.textContent.trim();
-                displayProductsCt(initialCategoryCt.toLowerCase());
-            }
         });
     </script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
+
+
+    <!-- <script>
+        document.addEventListener('DOMContentLoaded', function () {
             const scrollContainer = document.querySelector('.row.flex-nowrap');
             let scrollPosition = 0;
             const cardWidth = scrollContainer.querySelector('.col-6').offsetWidth;
@@ -1595,24 +1127,24 @@
             setTimeout(autoScroll, 3000);
 
             // Pause scrolling when user interacts with the container
-            scrollContainer.addEventListener('mouseenter', function() {
+            scrollContainer.addEventListener('mouseenter', function () {
                 clearTimeout(window.scrollTimeout);
             });
 
-            scrollContainer.addEventListener('mouseleave', function() {
+            scrollContainer.addEventListener('mouseleave', function () {
                 window.scrollTimeout = setTimeout(autoScroll, scrollSpeed);
             });
 
             // Handle touch events for mobile
-            scrollContainer.addEventListener('touchstart', function() {
+            scrollContainer.addEventListener('touchstart', function () {
                 clearTimeout(window.scrollTimeout);
             });
 
-            scrollContainer.addEventListener('touchend', function() {
+            scrollContainer.addEventListener('touchend', function () {
                 window.scrollTimeout = setTimeout(autoScroll, scrollSpeed);
             });
         });
-    </script>
+    </script> -->
 </body>
 
 </html>

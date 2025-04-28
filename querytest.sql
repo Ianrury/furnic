@@ -1,4 +1,4 @@
--- Active: 1745583296991@@127.0.0.1@3306@php_login_test
+-- Active: 1727836521955@@127.0.0.1@3306@php_login_test
 -- Active: 1745562774050@@192.168.1.238@9356@web-furnice
 
 -- DML
@@ -8,29 +8,42 @@ VALUES
 ('xyz789token', 'User Dua', 'user123', 'Staff Operasional', 2);
 
 INSERT INTO kategori (id_parent_kategori, nama) VALUES
+(NULL, 'Living'),
+(NULL, 'Bedroom'),
+(NULL, 'Kitchen'),
 (NULL, 'Dinning');
+
+
+ALTER TABLE product
+ADD COLUMN beli INT;
+
+
+ALTER TABLE product
+ADD COLUMN diskon VARCHAR(20);
 
 
 
 INSERT INTO product 
 (nama_product, id_kategori, uom, qty, nama_vendor, foto, deskripsi, spesifikasi, tipe_product)
 VALUES
-('Sofa Minimalis', 1, 'pcs', 10, 'Vendor A', 'sofa.jpg', 'Sofa nyaman untuk ruang tamu', 'Material: Kayu, Busa, Kain', 'Furniture'),
-('Meja TV Kayu', 1, 'pcs', 5, 'Vendor B', 'meja_tv.jpg', 'Meja TV dari kayu jati', 'Ukuran: 120x40x50 cm', 'Furniture'),
-('Rak Dinding', 1, 'pcs', 20, 'Vendor A', 'rak.jpg', 'Rak tempel dinding minimalis', 'Material: MDF', 'Dekorasi'),
-('Tempat Tidur Queen', 2, 'pcs', 7, 'Vendor C', 'bed.jpg', 'Ranjang queen size nyaman', 'Ukuran: 160x200 cm', 'Furniture'),
-('Lemari Pakaian 3 Pintu', 2, 'pcs', 4, 'Vendor D', 'lemari.jpg', 'Lemari besar untuk kamar tidur', 'Material: Kayu solid', 'Furniture'),
-('Meja Rias', 2, 'pcs', 8, 'Vendor B', 'meja_rias.jpg', 'Meja rias dengan cermin bulat', 'Desain elegan modern', 'Furniture'),
-('Meja Makan 4 Kursi', 3, 'set', 6, 'Vendor A', 'meja_makan.jpg', 'Meja makan untuk keluarga kecil', 'Material: Kayu solid', 'Furniture'),
-('Kabinet Dapur', 3, 'pcs', 3, 'Vendor E', 'kabinet.jpg', 'Kabinet atas dan bawah dapur', 'Material: Plywood + HPL', 'Kitchen Set'),
-('Rak Bumbu', 3, 'pcs', 15, 'Vendor A', 'rak_bumbu.jpg', 'Rak kecil untuk bumbu dapur', 'Ukuran: 30x10x15 cm', 'Aksesoris Dapur'),
-('Kursi Tamu Kayu', 1, 'pcs', 12, 'Vendor F', 'kursi_tamu.jpg', 'Kursi klasik untuk tamu', 'Material: Kayu jati', 'Furniture'),
-('Matras Tidur', 2, 'pcs', 10, 'Vendor G', 'matras.jpg', 'Matras empuk dan nyaman', 'Ukuran: 180x200 cm', 'Kasur'),
-('Gorden Jendela', 1, 'pcs', 18, 'Vendor H', 'gorden.jpg', 'Gorden polos warna netral', 'Bahan: Polyester', 'Dekorasi'),
-('Dispenser Dapur', 3, 'pcs', 9, 'Vendor I', 'dispenser.jpg', 'Dispenser air minum stainless', '3 Galon Kapasitas', 'Peralatan'),
-('Lemari Dapur Gantung', 3, 'pcs', 4, 'Vendor J', 'lemari_gantung.jpg', 'Lemari gantung dapur atas', 'Panjang: 120 cm', 'Kitchen Set'),
-('Cermin Hias', 2, 'pcs', 14, 'Vendor A', 'cermin.jpg', 'Cermin bundar untuk kamar tidur', 'Diameter: 50 cm', 'Dekorasi');
+('Sofa Minimalis', 7, 'pcs', 10, 'Vendor A', 'sofa.jpg', 'Sofa nyaman untuk ruang tamu', 'Material: Kayu, Busa, Kain', 'Furniture'),
+('Meja TV Kayu', 8, 'pcs', 5, 'Vendor B', 'meja_tv.jpg', 'Meja TV dari kayu jati', 'Ukuran: 120x40x50 cm', 'Furniture'),
+('Rak Dinding', 9, 'pcs', 20, 'Vendor A', 'rak.jpg', 'Rak tempel dinding minimalis', 'Material: MDF', 'Dekorasi'),
+('Tempat Tidur Queen', 10, 'pcs', 7, 'Vendor C', 'bed.jpg', 'Ranjang queen size nyaman', 'Ukuran: 160x200 cm', 'Furniture'),
+('Lemari Pakaian 3 Pintu', 10, 'pcs', 4, 'Vendor D', 'lemari.jpg', 'Lemari besar untuk kamar tidur', 'Material: Kayu solid', 'Furniture'),
+('Meja Rias', 9, 'pcs', 8, 'Vendor B', 'meja_rias.jpg', 'Meja rias dengan cermin bulat', 'Desain elegan modern', 'Furniture'),
+('Meja Makan 4 Kursi', 8, 'set', 6, 'Vendor A', 'meja_makan.jpg', 'Meja makan untuk keluarga kecil', 'Material: Kayu solid', 'Furniture'),
+('Kabinet Dapur', 7, 'pcs', 3, 'Vendor E', 'kabinet.jpg', 'Kabinet atas dan bawah dapur', 'Material: Plywood + HPL', 'Kitchen Set'),
+('Rak Bumbu', 7, 'pcs', 15, 'Vendor A', 'rak_bumbu.jpg', 'Rak kecil untuk bumbu dapur', 'Ukuran: 30x10x15 cm', 'Aksesoris Dapur'),
+('Kursi Tamu Kayu', 8, 'pcs', 12, 'Vendor F', 'kursi_tamu.jpg', 'Kursi klasik untuk tamu', 'Material: Kayu jati', 'Furniture'),
+('Matras Tidur', 9, 'pcs', 10, 'Vendor G', 'matras.jpg', 'Matras empuk dan nyaman', 'Ukuran: 180x200 cm', 'Kasur'),
+('Gorden Jendela', 10, 'pcs', 18, 'Vendor H', 'gorden.jpg', 'Gorden polos warna netral', 'Bahan: Polyester', 'Dekorasi'),
+('Dispenser Dapur', 7, 'pcs', 9, 'Vendor I', 'dispenser.jpg', 'Dispenser air minum stainless', '3 Galon Kapasitas', 'Peralatan'),
+('Lemari Dapur Gantung', 9, 'pcs', 4, 'Vendor J', 'lemari_gantung.jpg', 'Lemari gantung dapur atas', 'Panjang: 120 cm', 'Kitchen Set'),
+('Cermin Hias', 10, 'pcs', 14, 'Vendor A', 'cermin.jpg', 'Cermin bundar untuk kamar tidur', 'Diameter: 50 cm', 'Dekorasi');
 
 
--- DDL
+ALTER TABLE product
+ADD COLUMN harga INT AFTER qty;
+
 

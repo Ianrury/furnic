@@ -44,21 +44,54 @@ class ProductServis
         return $products;
     }
 
+    public function bestSeller()
+    {
+        $products = $this->productRepository->bestseller();
+
+        
+        return $products;
+    }
+
 
     /**
      * Mengambil semua data produk.
      *
-     * @return ProductResponse
+     * @return array
      */
-    public function getData(): ProductResponse
+    public function getData()   
     {
         $products = $this->productRepository->products();
 
-        $response = new ProductResponse();
-        // $response->products = $products;
-
-        return $response;
+        return $products;
     }
+
+        /**
+     * Mengambil semua data produk.
+     *
+     * @return array
+     */
+
+     public function getProductsRekomendasi()   
+    {
+        $products = $this->productRepository->productRekomendasi();
+
+        return $products;
+    }
+
+            /**
+     * Mengambil semua data dummi.
+     *
+     * @return array
+     */
+
+
+    public function productdummi()   
+    {
+        $product = $this->productRepository->productalldummi();
+
+        return $product;
+    }
+
 
     /**
      * Menyimpan produk baru
