@@ -118,7 +118,8 @@ function base_url($path = '')
 
                             <!-- Main Product Image -->
                             <div class="card-body text-center p-4">
-                                <img id="main-product-image" src="" alt="Main Product" class="img-fluid" width="255" height="255">
+                                <img id="main-product-image" src="" alt="Main Product" class="img-fluid" width="255"
+                                    height="255">
                             </div>
 
                             <!-- Thumbnail Images -->
@@ -134,8 +135,12 @@ function base_url($path = '')
 
                     <!-- Product Details Column -->
                     <div class="col-md-5 product-details">
-                        <h1 class="text-black fw-bold mb-1" style="font-size: 25px;"> <?= htmlspecialchars($model['detail']['nama_product']) ?></h1>
-                        <p class="text-black mb-3 fw-normal" style="font-size: 14px;"><?= htmlspecialchars($model['detail']['deskripsi']) ?></p>
+                        <h1 class="text-black fw-bold mb-1" style="font-size: 25px;">
+                            <?= htmlspecialchars($model['detail']['nama_product']) ?>
+                        </h1>
+                        <p class="text-black mb-3 fw-normal" style="font-size: 14px;">
+                            <?= htmlspecialchars($model['detail']['deskripsi']) ?>
+                        </p>
 
                         <div class="mb-4">
                             <p class="mb-2 fw-normal text-black" style="font-size: 14px;">Warna</p>
@@ -144,7 +149,7 @@ function base_url($path = '')
                                 // Looping untuk menampilkan warna berdasarkan data 'details'
                                 foreach ($model['detail']['details'] as $index => $detail) {
                                     $warna = $detail['warna']; // Ambil warna dari detail produk
-
+                                
                                     // Cek apakah ada motif dengan qty > 0
                                     $isActive = false;
                                     foreach ($detail['motifs'] as $motif) {
@@ -155,9 +160,10 @@ function base_url($path = '')
                                     }
                                     // Tentukan kelas active jika motif memiliki qty > 0 dan warna pertama
                                     $activeClass = $isActive && $index === 0 ? 'active' : ''; // Default aktifkan warna pertama
-                                ?>
+                                    ?>
                                     <div class="col-3">
-                                        <div class="color-option <?= $activeClass ?>" data-index="<?= $index ?>" onclick="setActiveWarna(<?= $index ?>)">
+                                        <div class="color-option <?= $activeClass ?>" data-index="<?= $index ?>"
+                                            onclick="setActiveWarna(<?= $index ?>)">
                                             <?= htmlspecialchars($warna) ?>
                                         </div>
                                     </div>
@@ -173,16 +179,15 @@ function base_url($path = '')
                                 <?php
                                 // Loop untuk menampilkan motif berdasarkan warna pertama yang aktif
                                 foreach ($model['detail']['details'][0]['motifs'] as $motif) {
-                                ?>
+                                    ?>
                                     <div class="col-3">
                                         <div class="color-option motif-option"
                                             data-motif="<?= htmlspecialchars($motif['motif']) ?>"
-                                            data-qty="<?= $motif['qty'] ?>"
-                                            onclick="setActiveMotif(this)">
+                                            data-qty="<?= $motif['qty'] ?>" onclick="setActiveMotif(this)">
                                             <?= htmlspecialchars($motif['motif']) ?>
                                         </div>
                                     </div>
-                                <?php
+                                    <?php
                                 }
                                 ?>
                             </div>
@@ -200,13 +205,15 @@ function base_url($path = '')
                                     <button class="btn-quantity fw-medium" onclick="changeQty(-1)">
                                         <span style="font-size: 20px;">-</span>
                                     </button>
-                                    <span id="jumlah-beli" class="mx-4 fw-normal text-black" style="font-size: 14px;">1</span>
+                                    <span id="jumlah-beli" class="mx-4 fw-normal text-black"
+                                        style="font-size: 14px;">1</span>
                                     <button id="btn-tambah" class="btn-quantity fw-medium" onclick="changeQty(1)">
                                         <span style="font-size: 20px;">+</span>
                                     </button>
                                 </div>
                                 <div>
-                                    <small id="stock" class="fst-italic text-black" style="font-size: 14px;">Tersedia <span class="text-black">0</span> pcs</small>
+                                    <small id="stock" class="fst-italic text-black" style="font-size: 14px;">Tersedia
+                                        <span class="text-black">0</span> pcs</small>
                                 </div>
                             </div>
                         </div>
@@ -227,9 +234,9 @@ function base_url($path = '')
                                         Sekarang</button>
                                 </div>
                                 <div class="col-3 d-flex justify-content-end gap-3">
-                                    <div class="action-icon">
-                                        <img src="assets/img/icon/love.svg" alt="Love Icon" width="30" height="30">
-
+                                    <div class="action-icon" id="wishlistBtn">
+                                        <img id="wishlistIcon" src="assets/img/icon/love.svg" alt="Love Icon" width="30"
+                                            height="30">
                                     </div>
                                     <div class="action-icon">
                                         <img src="assets/img/icon/Group.png" alt="shop Icon" width="30" height="30">
@@ -1143,6 +1150,21 @@ function base_url($path = '')
             </div>
         </div>
         <input type="text" value="<?= htmlspecialchars($model['detail']['id_product']) ?>" id="id_product" hidden>
+
+        <div id="toastContainer" class="position-fixed top-0 end-0 p-3" style="z-index: 9999;">
+            <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                    <img src="assets/img/icon/love_wislist.svg" width="30" height="30" class="rounded me-2" alt="...">
+                    <strong class="me-auto">Info</strong>
+                    <small>Just now</small>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body">
+                    Hello, world! This is a toast message.
+                </div>
+            </div>
+        </div>
+
     </main>
 
 
@@ -1251,7 +1273,7 @@ function base_url($path = '')
         });
 
         // Tombol Reset
-        resetButton.addEventListener('click', function() {
+        resetButton.addEventListener('click', function () {
             filterCheckboxes.forEach(cb => cb.checked = false);
             resetButton.classList.remove('active');
         });
@@ -1259,7 +1281,7 @@ function base_url($path = '')
 
     <script>
         // Tunggu sampai dokumen siap
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // Ambil elemen dropdown button dan semua item dropdown
             const dropdownButton = document.getElementById('dropdownMenu2');
             const dropdownItems = document.querySelectorAll('.dropdown-menu .dropdown-item');
@@ -1269,7 +1291,7 @@ function base_url($path = '')
 
             // Tambahkan event listener untuk setiap item dropdown
             dropdownItems.forEach(item => {
-                item.addEventListener('click', function() {
+                item.addEventListener('click', function () {
                     // Ubah teks tombol dropdown menjadi teks dari item yang diklik
                     dropdownButton.textContent = this.textContent.trim();
                 });
@@ -1282,7 +1304,7 @@ function base_url($path = '')
         });
     </script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const morePhotosBtn = document.getElementById('morePhotosBtn');
             const reviewPhotosContainer = document.getElementById('reviewPhotos');
 
@@ -1293,7 +1315,7 @@ function base_url($path = '')
             morePhotosBtn.textContent = '+' + hiddenPhotosCount;
 
             // Ketika overlay diklik, tampilkan semua foto tersembunyi
-            morePhotosBtn.addEventListener('click', function() {
+            morePhotosBtn.addEventListener('click', function () {
                 reviewPhotosContainer.classList.toggle('expanded');
             });
         });
@@ -1439,7 +1461,7 @@ function base_url($path = '')
             event.target.parentElement.classList.add('active');
         }
 
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             let details = <?= json_encode($model['detail']['details']) ?>;
 
             for (let i = 0; i < details.length; i++) {
@@ -1447,6 +1469,73 @@ function base_url($path = '')
                 if (hasStock) {
                     setActiveWarna(i);
                     break;
+                }
+            }
+        });
+    </script>
+
+    <script>
+        document.getElementById('wishlistBtn').addEventListener('click', function () {
+            var productId = document.getElementById('id_product').value;
+
+            fetch(`/product/create/wishlist/${productId}`)
+                .then(response => response.json())
+                .then(data => {
+                    showToast(data.message, data.status === 'success' ? 'success' : 'danger');
+
+                    // Ganti ikon jika berhasil atau batalkan wishlist
+                    const icon = document.getElementById('wishlistIcon');
+                    if (data.status === 'success' && data.wishlisted) {
+                        icon.src = 'assets/img/icon/love_wislist.svg';
+                    } else {
+                        icon.src = 'assets/img/icon/love.svg';
+                    }
+                })
+                .catch(error => {
+                    showToast('Terjadi kesalahan saat mengirim permintaan.', 'danger');
+                });
+        });
+
+        function showToast(message, type) {
+            const toastEl = document.getElementById('liveToast');
+            const toastBody = toastEl.querySelector('.toast-body');
+            const toastHeader = toastEl.querySelector('.me-auto');
+
+            toastBody.innerText = message;
+            toastHeader.innerText = type === 'success' ? 'Berhasil' : 'Gagal';
+
+            const bsToast = new bootstrap.Toast(toastEl);
+            bsToast.show();
+        }
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var productId = document.getElementById('id_product').value;
+
+            fetch(`/product/create/cekwishlist/${productId}`)
+                .then(response => response.json())
+                .then(data => {
+                    const icon = document.getElementById('wishlistIcon');
+                    if (data.status === 'success' && data.wishlisted) {
+                        icon.src = 'assets/img/icon/love_wislist.svg';
+                    } else {
+                        icon.src = 'assets/img/icon/love.svg';
+                    }
+                })
+                .catch(error => {
+                    console.error('Gagal cek wishlist:', error);
+                });
+        });
+    </script>
+
+    <script>
+        document.addEventListener('click', function (e) {
+            const card = e.target.closest('.product-card');
+            if (card) {
+                const productId = card.getAttribute('data-id');
+                if (productId) {
+                    window.location.href = `/product/detail/${productId}`;
                 }
             }
         });

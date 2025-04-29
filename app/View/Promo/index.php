@@ -114,7 +114,8 @@
                             <?php if (!empty($model['product'])): ?>
                                 <?php foreach ($model['product'] as $product): ?>
                                     <div class="col">
-                                        <div class="card shadow position-relative rounded-4 p-2">
+                                        <div class="card shadow position-relative rounded-4 p-2 product-card"
+                                            data-id="<?= $product['id_product'] ?>" style="cursor:pointer;">
                                             <!-- Corner Ribbon -->
                                             <div class="position-absolute ribbon-wrapper">
                                                 <div class="ribbon text-uppercase fw-bold text-center"
@@ -132,10 +133,12 @@
                                                 <div class="d-flex flex-column">
                                                     <!-- Product Details -->
                                                     <div>
-                                                        <p class="card-title text-truncate fw-medium product-title">
-                                                            <?= htmlspecialchars($product['nama_product']) ?></p>
+                                                        <p class="card-title text-truncate  product-title">
+                                                            <?= htmlspecialchars($product['nama_product']) ?>
+                                                        </p>
                                                         <p class="card-text text-truncate product-desc">
-                                                            <?= htmlspecialchars($product['deskripsi']) ?></p>
+                                                            <?= htmlspecialchars($product['deskripsi']) ?>
+                                                        </p>
                                                         <div class="d-flex gap-1 align-items-center">
                                                             <i class="bi bi-star-fill text-warning small-icon"></i>
                                                             <i class="bi bi-star-fill text-warning small-icon"></i>
@@ -671,6 +674,18 @@
         });
 
         //categoty product
+    </script>
+
+    <script>
+        document.addEventListener('click', function (e) {
+            const card = e.target.closest('.product-card');
+            if (card) {
+                const productId = card.getAttribute('data-id');
+                if (productId) {
+                    window.location.href = `/product/detail/${productId}`;
+                }
+            }
+        });
     </script>
 </body>
 

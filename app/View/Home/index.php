@@ -112,11 +112,11 @@
                 </div>
                 <div class="tab-content wow fadeInUp" data-wow-delay=".25s" id="item-tabContent">
                     <div class="container">
-                        <div class="row g-4">
+                    <div class="row g-4">
                             <?php if (!empty($model['terbaru'])): ?>
                                 <?php foreach ($model['terbaru'] as $product): ?>
                                     <div class="col-6 col-md-4 col-lg-3">
-                                        <div class="card shadow position-relative rounded-4 p-2">
+                                        <div class="card shadow position-relative rounded-4 p-2 product-card" data-id="<?= ($product->id_product) ?>" style="cursor:pointer;">
                                             <!-- Corner Ribbon -->
                                             <div class="position-absolute ribbon-wrapper">
                                                 <div class="ribbon text-white text-uppercase fw-bold text-center">
@@ -734,6 +734,7 @@
 
         // Data produk (untuk contoh)
         const products = <?= json_encode($model["kategori"]); ?>.map(product => ({
+            id: product.id_product,
             title: product.nama_product,             // Sesuaikan dengan nama kolom produk di PHP
             description: product.deskripsi ?? "Deskripsi tidak tersedia", // Deskripsi produk
             price: product.harga !== null && product.harga !== undefined ? `Rp ${product.harga.toLocaleString()}` : "Rp 0", // Pastikan harga valid
@@ -753,8 +754,8 @@
         // Fungsi untuk membuat card produk
         function createProductCard(product) {
             return `
-                            <div class="col">
-                                <div class="card shadow position-relative rounded-4 p-2">
+                                 <div class="col">
+                                <div class="card shadow position-relative rounded-4 p-2 product-card" data-id="${product.id}" style="cursor:pointer;">
                             ${product.isNew ? `
                             <!-- Corner Ribbon -->
                         <div class="position-absolute ribbon-wrapper">
@@ -776,10 +777,11 @@
                                     <!-- <h5 class="">
                                         ${product.title}
                                 </h5> -->
-                                    <p class="card-title text-truncate  product-title">${product.description}
+                                    <p class="card-title text-truncate  product-title">
+                                    ${product.title}
                                     </p>
 
-                                    <p class="card-text text-truncate product-desc">Meja ruang tamu
+                                    <p class="card-text text-truncate product-desc">${product.description}
                                         aesthetic.</p>
                                     <div class="d-flex gap-1 align-items-center">
                                         ${createStarRating(product.rating)}
@@ -807,7 +809,7 @@
                         </div>
                     </div>
                 </div>
-            `;
+  `;
         }
 
         // Fungsi untuk membuat rating bintang
@@ -1005,7 +1007,7 @@
             function createProductCard(product) {
                 return `
                 <div class="col animate__animated animate__fadeInRight">
-                    <div class="card shadow position-relative rounded-4 p-2">
+                    <div class="card shadow position-relative rounded-4 p-2 product-card" data-id="${product.id_product}" style="cursor:pointer;">
                         ${product.isNew ? `
                         <div class="position-absolute ribbon-wrapper">
                             <div class="ribbon text-white text-uppercase fw-bold text-center">New Product</div>
@@ -1097,6 +1099,19 @@
             });
         });
     </script>
+
+    <script>
+        document.addEventListener('click', function (e) {
+            const card = e.target.closest('.product-card');
+            if (card) {
+                const productId = card.getAttribute('data-id');
+                if (productId) {
+                    window.location.href = `/product/detail/${productId}`;
+                }
+            }
+        });
+    </script>
+
 
 
     <!-- <script>

@@ -448,168 +448,17 @@
         });
 
         // Data produk (untuk contoh)
-        const products = [
-            {
-                title: "CT-IMP Matto Light Brown",
-                description: "Meja ruang tamu aesthetic.",
-                price: "500.000",
-                oldPrice: "600.000",
-                rating: 5,
-                sold: 300,
-                image: "assets/img/product/kursi/ZULU CHAIR WHITE.png",
-                isNew: true
-            },
-            {
-                title: "Scandinavian Coffee Table",
-                description: "Meja kopi minimalis modern.",
-                price: "450.000",
-                oldPrice: "550.000",
-                rating: 4,
-                sold: 250,
-                image: "assets/img/product/kursi/ZULU CHAIR WHITE.png",
-                isNew: false
-            },
-            {
-                title: "Woody Chair Classic",
-                description: "Kursi kayu dengan bantalan nyaman.",
-                price: "350.000",
-                oldPrice: "400.000",
-                rating: 5,
-                sold: 420,
-                image: "assets/img/product/kursi/ZULU CHAIR WHITE.png",
-                isNew: true
-            },
-            {
-                title: "Sofa Corner Premium",
-                description: "Sofa sudut untuk ruang keluarga.",
-                price: "2.500.000",
-                oldPrice: "3.000.000",
-                rating: 5,
-                sold: 150,
-                image: "assets/img/product/kursi/ZULU CHAIR WHITE.png",
-                isNew: false
-            },
-            {
-                title: "Minimalist Side Table",
-                description: "Meja samping dengan laci.",
-                price: "275.000",
-                oldPrice: "325.000",
-                rating: 4,
-                sold: 180,
-                image: "assets/img/product/kursi/ZULU CHAIR WHITE.png",
-                isNew: false
-            },
-            {
-                title: "Dining Chair White",
-                description: "Kursi makan putih elegan.",
-                price: "225.000",
-                oldPrice: "300.000",
-                rating: 4,
-                sold: 320,
-                image: "assets/img/product/kursi/ZULU CHAIR WHITE.png",
-                isNew: true
-            },
-            {
-                title: "Rattan Accent Chair",
-                description: "Kursi rotan untuk ruang tamu.",
-                price: "450.000",
-                oldPrice: "550.000",
-                rating: 5,
-                sold: 200,
-                image: "assets/img/product/kursi/ZULU CHAIR WHITE.png",
-                isNew: false
-            },
-            {
-                title: "Modern TV Cabinet",
-                description: "Kabinet TV dengan penyimpanan.",
-                price: "1.200.000",
-                oldPrice: "1.500.000",
-                rating: 5,
-                sold: 120,
-                image: "assets/img/product/kursi/ZULU CHAIR WHITE.png",
-                isNew: true
-            },
-            {
-                title: "Storage Ottoman",
-                description: "Ottoman dengan penyimpanan.",
-                price: "350.000",
-                oldPrice: "400.000",
-                rating: 4,
-                sold: 180,
-                image: "assets/img/product/kursi/ZULU CHAIR WHITE.png",
-                isNew: false
-            },
-            {
-                title: "Round Dining Table",
-                description: "Meja makan bulat untuk 4 orang.",
-                price: "750.000",
-                oldPrice: "900.000",
-                rating: 5,
-                sold: 90,
-                image: "assets/img/product/kursi/ZULU CHAIR WHITE.png",
-                isNew: true
-            },
-            {
-                title: "Bedside Table Oak",
-                description: "Meja samping tempat tidur kayu oak.",
-                price: "320.000",
-                oldPrice: "380.000",
-                rating: 4,
-                sold: 220,
-                image: "assets/img/product/kursi/ZULU CHAIR WHITE.png",
-                isNew: false
-            },
-            {
-                title: "Bar Stool Black",
-                description: "Kursi bar hitam tinggi.",
-                price: "280.000",
-                oldPrice: "350.000",
-                rating: 4,
-                sold: 150,
-                image: "assets/img/product/kursi/ZULU CHAIR WHITE.png",
-                isNew: true
-            },
-            {
-                title: "Office Desk White",
-                description: "Meja kerja putih dengan laci.",
-                price: "850.000",
-                oldPrice: "950.000",
-                rating: 5,
-                sold: 80,
-                image: "assets/img/product/kursi/ZULU CHAIR WHITE.png",
-                isNew: false
-            },
-            {
-                title: "Bathroom Cabinet",
-                description: "Kabinet kamar mandi dengan cermin.",
-                price: "420.000",
-                oldPrice: "500.000",
-                rating: 4,
-                sold: 110,
-                image: "assets/img/product/kursi/ZULU CHAIR WHITE.png",
-                isNew: true
-            },
-            {
-                title: "Bookshelf Modern",
-                description: "Rak buku minimalis modern.",
-                price: "650.000",
-                oldPrice: "750.000",
-                rating: 5,
-                sold: 95,
-                image: "assets/img/product/kursi/ZULU CHAR WHITE.png",
-                isNew: false
-            },
-            {
-                title: "Kitchen Island Small",
-                description: "Pulau dapur kecil dengan penyimpanan.",
-                price: "900.000",
-                oldPrice: "1.100.000",
-                rating: 5,
-                sold: 70,
-                image: "assets/img/product/kursi/ZULU CHAIR WHITE.png",
-                isNew: true
-            }
-        ];
+        const products = <?= json_encode($model["product"]); ?>.map(product => ({
+            id: product.id_product,
+            title: product.nama_product,             // Sesuaikan dengan nama kolom produk di PHP
+            description: product.deskripsi ?? "Deskripsi tidak tersedia", // Deskripsi produk
+            price: product.harga !== null && product.harga !== undefined ? `Rp ${product.harga.toLocaleString()}` : "Rp 0", // Pastikan harga valid
+            oldPrice: product.harga ? `Rp ${product.harga + 100000}` : "Rp 0", // Harga lama, asumsikan harga lama = harga produk + 100.000
+            rating: 4,  // Anda bisa menentukan rating atau mengambilnya dari data produk jika ada
+            sold: product.beli,   // Anda bisa mengubah ini sesuai dengan data yang ada
+            image: `assets/img/product/${product.foto}`,  // Gambar produk
+            isNew: true  // Anda bisa menambahkan logika untuk menentukan apakah produk baru atau tidak
+        }));
 
         // Variabel untuk pagination
         let currentPage = 1;
@@ -638,7 +487,7 @@
         function createProductCard(product) {
             return `
                              <div class="col">
-                                <div class="card shadow position-relative rounded-4 p-2">
+                                <div class="card shadow position-relative rounded-4 p-2 product-card" data-id="${product.id}" style="cursor:pointer;">
                             ${product.isNew ? `
                             <!-- Corner Ribbon -->
                         <div class="position-absolute ribbon-wrapper">
@@ -965,6 +814,17 @@
             scrollContainer.addEventListener('touchend', function () {
                 window.scrollTimeout = setTimeout(autoScroll, scrollSpeed);
             });
+        });
+    </script>
+    <script>
+        document.addEventListener('click', function (e) {
+            const card = e.target.closest('.product-card');
+            if (card) {
+                const productId = card.getAttribute('data-id');
+                if (productId) {
+                    window.location.href = `/product/detail/${productId}`;
+                }
+            }
         });
     </script>
 

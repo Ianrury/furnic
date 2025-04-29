@@ -218,7 +218,33 @@ class ProductRepository
         }
     }
 
+    public function isWishlist($id_product, $id_customer)
+    {
+        $statement = $this->connection->prepare(
+            "SELECT * FROM wishlist WHERE id_customer = ? AND id_product = ?"
+        );
+        $statement->execute([$id_customer, $id_product]);
+        return $statement->fetch(PDO::FETCH_ASSOC);
+    }
 
+    public function deleteWishlist($id_product, $id_customer)
+    {
+        $statement =  $this->connection->prepare(
+            "DELETE FROM wishlist WHERE id_customer = ? AND id_product = ?"
+        );
+        $statement->execute([$id_customer, $id_product]);
+        return $statement->rowCount() > 0; // akan mengembalikan true jika berhasil menghapus
+    }
+    
+
+    public function productWislist($id_customer)
+    {
+        $statement = $this->connection->prepare(
+            "SELECT product.* FROM product INNER JOIN wishlist ON product.id_product = wishlist.id_product WHERE wishlist.id_customer = ?"
+        );
+        $statement->execute([$id_customer]);
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
 
     public function bestseller()
     {

@@ -36,7 +36,8 @@ Router::add('GET', '/product/wishlist', ProductController::class, 'wishlist');
 Router::add('GET', '/keranjang', KeranjangController::class, 'index');
 
 // Wislist Product
-Router::add('GET', '/product/wishlist/{id}', ProductController::class, 'Createwishlist');
+Router::add('GET', '/product/create/wishlist/{id}', ProductController::class, 'Createwishlist');
+Router::add('GET', '/product/create/cekwishlist/{id}', ProductController::class, 'cekWishlist');
 
 
 // Controller PromoController

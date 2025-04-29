@@ -346,7 +346,8 @@
                             <?php if (!empty($model['produk'])): ?>
                                 <?php foreach ($model['produk'] as $product): ?>
                                     <div class="col-6 col-md-4 col-lg-3">
-                                        <div class="card shadow position-relative rounded-4 p-2">
+                                        <div class="card shadow position-relative rounded-4 p-2 product-card" data-id="<?= $product['id_product'] ?>"
+                                        style="cursor:pointer;">
                                             <!-- Corner Ribbon -->
                                             <div class="position-absolute ribbon-wrapper">
                                                 <div class="ribbon text-white text-uppercase fw-bold text-center">
@@ -521,6 +522,7 @@
 
         // Data produk (untuk contoh)
         const products = <?= json_encode($model["dummi"]); ?>.map(product => ({
+            id: product.id_product,
             title: product.nama_product,             // Sesuaikan dengan nama kolom produk di PHP
             description: product.deskripsi ?? "Deskripsi tidak tersedia", // Deskripsi produk
             price: product.harga !== null && product.harga !== undefined ? `Rp ${product.harga.toLocaleString()}` : "Rp 0", // Pastikan harga valid
@@ -560,7 +562,7 @@
         function createProductCard(product) {
             return `
                              <div class="col">
-                                <div class="card shadow position-relative rounded-4 p-2">
+                                <div class="card shadow position-relative rounded-4 p-2 product-card" data-id="${product.id}" style="cursor:pointer;">
                             ${product.isNew ? `
                             <!-- Corner Ribbon -->
                         <div class="position-absolute ribbon-wrapper">
@@ -879,6 +881,18 @@
             scrollContainer.addEventListener('touchend', function () {
                 window.scrollTimeout = setTimeout(autoScroll, scrollSpeed);
             });
+        });
+    </script>
+
+    <script>
+        document.addEventListener('click', function (e) {
+            const card = e.target.closest('.product-card');
+            if (card) {
+                const productId = card.getAttribute('data-id');
+                if (productId) {
+                    window.location.href = `/product/detail/${productId}`;
+                }
+            }
         });
     </script>
 

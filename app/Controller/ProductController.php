@@ -27,10 +27,11 @@ class ProductController
         $userRepository = new UserRepository($connection);
 
         $this->productServiser = new ProductServis($productRepository);
-        $this->wishlistServiser = new WislistServis($sessionRepository, $userRepository);
-
-        // Jangan lupa set productRepository ke WislistServis
-        // $this->serviceServiser->productRepository = $productRepository;
+        $this->wishlistServiser = new WislistServis(
+            $sessionRepository,
+            $userRepository,
+            $productRepository // ← Tambahkan ini juga
+        );
     }
 
 
@@ -87,29 +88,73 @@ class ProductController
 
     public function wishlist()
     {
+        $prduct = $this->wishlistServiser->productWislist();
+
+        // echo '<pre>';
+        // var_dump($prduct);
+        // echo '</pre>';
+        // exit;
+
         $model = [
             "title" => "Product Wishlist",
+            "product" => $prduct,
             "content" => "Welcome to the product wishlist page!",
         ];
         View::render('Product/wishlist', $model);
     }
 
-    public function Createwishlist($id_product)
+    public function cekWishlist($id)
+    {
+        $alreadyWishlisted = $this->wishlistServiser->isWishliste($id);
+
+        header('Content-Type: application/json');
+        echo json_encode([
+            'status' => 'success',
+            'wishlisted' => $alreadyWishlisted,
+        ]);
+    }
+
+
+    public function Createwishlist($id)
     {
         header('Content-Type: application/json');
 
-        $result = $this->wishlistServiser->createwislist($id_product);
 
-        if ($result) {
+
+        // Cek apakah produk sudah ada di wishlist
+        $alreadyWishlisted = $this->wishlistServiser->isWishliste($id);
+
+        if ($alreadyWishlisted) {
+            // Jika sudah ada, hapus dari wishlist
+            $this->wishlistServiser->removeWishlist($id);
             echo json_encode([
                 'status' => 'success',
-                'message' => 'Produk berhasil ditambahkan ke wishlist'
+                'message' => 'Produk dihapus dari wishlist',
+                'wishlisted' => false
             ]);
         } else {
-            echo json_encode([
-                'status' => 'error',
-                'message' => 'Gagal menambahkan produk ke wishlist'
-            ]);
+            // Tambahkan ke wishlist
+            $result = $this->wishlistServiser->createwislist($id);
+
+            // echo '<pre>';
+            // var_dump($result);
+            // echo '</pre>';
+            // exit;
+
+            if ($result) {
+                echo json_encode([
+                    'status' => 'success',
+                    'message' => 'Produk berhasil ditambahkan ke wishlist',
+                    'wishlisted' => true
+                ]);
+            } else {
+                echo json_encode([
+                    'status' => 'error',
+                    'message' => 'Gagal menambahkan produk ke wishlist',
+                    'wishlisted' => false
+                ]);
+            }
         }
     }
+
 }

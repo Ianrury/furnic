@@ -1,4 +1,4 @@
--- Active: 1745583296991@@127.0.0.1@3306@php_login_test
+-- Active: 1727836521955@@127.0.0.1@3306@php_login_test
 -- Active: 1745562774050@@192.168.1.238@9356@web-furnice
 
 -- DML
@@ -45,20 +45,20 @@ VALUES
 INSERT INTO product 
 (nama_product, id_kategori, uom, qty, nama_vendor, foto, deskripsi, spesifikasi, tipe_product)
 VALUES
-('Kursi Kantor', 1, 'Unit', 10, 'Vendor A', 'sofa.jpg', 'Kursi Kantor Nyaman untuk kantor', 'Material: Kayu, Busa, Kain', 'Furniture')
+('Kursi Kantor', 10, 'Unit', 10, 'Vendor A', 'sofa.jpg', 'Kursi Kantor Nyaman untuk kantor', 'Material: Kayu, Busa, Kain', 'Furniture')
 
 
 
 -- Insert ke detail_product
 INSERT INTO detail_product (id_sku, id_product, warna)
 VALUES 
-('SKU001', 30, 'Kuning');
+('SKU001', 93, 'Kuning');
 
 -- Insert ke motif_produk (motif = 'Polos')
 INSERT INTO motif_produk (id_product, id_detail_product, qty, motif, foto_kanan, foto_kiri, foto_depan, foto_belakang)
 VALUES 
-(30, 5, 20, 'Polos', 'UT M03 2.png', 'UT M03 1.png', 'UT M01 3.png', 'UT M01 2.png'),
-(30, 5, 0, 'Kurep', 'UT M03 2.png', 'UT M03 1.png', 'UT M01 3.png', 'UT M01 2.png');
+(93, 1, 20, 'Polos', 'UT M03 2.png', 'UT M03 1.png', 'UT M01 3.png', 'UT M01 2.png'),
+(93, 1, 0, 'Kurep', 'UT M03 2.png', 'UT M03 1.png', 'UT M01 3.png', 'UT M01 2.png');
 
 
 
