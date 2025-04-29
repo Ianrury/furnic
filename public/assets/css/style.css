@@ -9298,11 +9298,11 @@ label {
     font-style: italic;
     margin-left: 5px;
     padding-right: 15px;
-    margin-top: 13px;
+    margin-top: 3px;
   }
 
   .star-icon-review {
-    margin-top: 12px;
+    margin-top: 0px;
     width: 15px;
     height: 15px;
   }

@@ -107,11 +107,10 @@ function is_active($route)
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" class="list-link">
+                                    <a href="/product/wishlist" class="list-link">
                                         <i class="far fa-heart text-dark fa-sm"></i>
                                     </a>
                                 </li>
-
                             </ul>
                         </div>
                     </div>

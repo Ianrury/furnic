@@ -11,15 +11,15 @@ class ProductRepository
 
     public function __construct(PDO $connection)
     {
-/*************  ✨ Windsurf Command ⭐  *************/
-    /**
-     * Save a product
-     *
-     * @param Product $product
-     *
-     * @return Product
-     */
-/*******  323ea9fa-26b2-4ab2-938a-dd8afb307308  *******/        $this->connection = $connection;
+        /*************  ✨ Windsurf Command ⭐  *************/
+        /**
+         * Save a product
+         *
+         * @param Product $product
+         *
+         * @return Product
+         */
+        /*******  323ea9fa-26b2-4ab2-938a-dd8afb307308  *******/        $this->connection = $connection;
     }
 
     public function save(Product $product): Product
@@ -58,20 +58,112 @@ class ProductRepository
         return $products;
     }
 
+    public function detailProduct(int $id)
+    {
+        $statement = $this->connection->prepare(
+            "
+            SELECT 
+                p.id_product,
+                p.nama_product,
+                p.uom,
+                p.harga,
+                p.nama_vendor,
+                p.qty as product_qty,
+                p.foto AS product_foto,
+                p.deskripsi,
+                p.spesifikasi,
+                p.tipe_product,
+                dp.id AS id_detail_product,
+                dp.id_sku,
+                dp.warna,
+                mp.id AS id_motif_produk,
+                mp.motif,
+                mp.foto_kanan,
+                mp.qty,
+                mp.foto_kiri,
+                mp.foto_depan,
+                mp.foto_belakang
+            FROM 
+                product p
+            LEFT JOIN 
+                detail_product dp ON dp.id_product = p.id_product
+            LEFT JOIN 
+                motif_produk mp ON mp.id_detail_product = dp.id
+            WHERE 
+                p.id_product = ?
+            "
+        );
+        $statement->execute([$id]);
+        $results = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        // Jika ada hasilnya, pisahkan detail produk dan motif produk
+        if ($results) {
+            // Ambil data produk (produk hanya 1)
+            $product = [
+                'id_product' => $results[0]['id_product'],
+                'nama_product' => $results[0]['nama_product'],
+                'uom' => $results[0]['uom'],
+                'harga'=> $results[0]['harga'],
+                'product_qty'=> $results[0]['product_qty'],
+                'nama_vendor' => $results[0]['nama_vendor'],
+                'product_foto' => $results[0]['product_foto'],
+                'deskripsi' => $results[0]['deskripsi'],
+                'spesifikasi' => $results[0]['spesifikasi'],
+                'tipe_product' => $results[0]['tipe_product'],
+            ];
+
+            // Kelompokkan detail produk berdasarkan id_detail_product
+            $details = [];
+            foreach ($results as $row) {
+                $id_detail_product = $row['id_detail_product'];
+
+                // Jika detail produk belum ada, buatkan array untuknya
+                if (!isset($details[$id_detail_product])) {
+                    $details[$id_detail_product] = [
+                        'id_detail_product' => $id_detail_product,
+                        'id_sku' => $row['id_sku'],
+                        'warna' => $row['warna'],
+                        'motifs' => [] // Array untuk menyimpan motif terkait
+                    ];
+                }
+
+                // Masukkan motif ke dalam array motifs di detail produk yang sesuai
+                $details[$id_detail_product]['motifs'][] = [
+                    'id_motif_produk' => $row['id_motif_produk'],
+                    'motif' => $row['motif'],
+                    'foto_kanan' => $row['foto_kanan'],
+                    'qty' => $row['qty'],
+                    'foto_kiri' => $row['foto_kiri'],
+                    'foto_depan' => $row['foto_depan'],
+                    'foto_belakang' => $row['foto_belakang']
+                ];
+            }
+
+            // Menambahkan array detail produk ke dalam product
+            $product['details'] = array_values($details); // Menjaga struktur yang rapi
+
+            return $product;
+        }
+
+        return null; // Jika tidak ada produk ditemukan
+    }
+
+
+
     public function productTerbaru(): array
     {
         $statement = $this->connection->query("SELECT * FROM product ORDER BY created_at DESC LIMIT 4");
         $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
-    
+
         $products = [];
         foreach ($rows as $row) {
             $products[] = $this->mapRowToProduct($row);
         }
-    
+
         return $products;
     }
 
-    public function productRekomendasi ()
+    public function productRekomendasi()
     {
         $statement = $this->connection->query("SELECT * FROM product ORDER BY created_at ASC LIMIT 4");
         return $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -88,7 +180,7 @@ class ProductRepository
             LEFT JOIN product ON product.id_kategori = kategori.id_kategori
             ORDER BY kategori.nama ASC, product.nama_product ASC
         ");
-        
+
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
@@ -101,11 +193,11 @@ class ProductRepository
         foreach ($rows as $row) {
             $products[] = $this->mapRowToProduct($row);
         }
-    
+
         return $products;
     }
 
-    public function productDiskon() 
+    public function productDiskon()
     {
         $statement = $this->connection->query("SELECT * FROM product WHERE diskon > 0 LIMIT 4");
         return $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -116,15 +208,15 @@ class ProductRepository
     {
         // Membuat query untuk mengambil 4 produk dengan jumlah pembelian terbanyak
         $statement = $this->connection->query("SELECT * FROM product ORDER BY beli DESC LIMIT 4");
-    
+
         // Mengambil hasil query
         $bestsellers = $statement->fetchAll(PDO::FETCH_ASSOC);
-    
+
         // Mengembalikan hasil ke view atau controller yang sesuai
         return $bestsellers;
     }
-    
-    
+
+
 
     public function productById(string $id): ?Product
     {

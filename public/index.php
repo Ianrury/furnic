@@ -28,7 +28,7 @@ Router::add('GET', '/logout', UserController::class, 'logout', [MustLoginMiddlew
 
 // Controller ProductController
 Router::add('GET', '/product', ProductController::class, 'index');
-Router::add('GET', '/product/detail', ProductController::class, 'detail');
+Router::add('GET', '/product/detail/{id}', ProductController::class, 'detail');
 Router::add('GET', '/product/hasil', ProductController::class, 'pencarian');
 Router::add('GET', '/product/wishlist', ProductController::class, 'wishlist');
 

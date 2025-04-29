@@ -47,20 +47,22 @@ class ProductController
     }
 
 
-    public function detail()
+    public function detail($id)
     {
 
         $bestseller = $this->productServiser->bestSeller();
+        $detail = $this->productServiser->getDetail($id);
+
+        // echo '<pre>';
+        // var_dump($detail);
+        // echo '</pre>';
+        // exit;
         $model = [
             "bestseller" => $bestseller,
+            "detail" => $detail,
             "title" => "Product Detail",
             "content" => "Welcome to the product detail page!",
         ];
-
-        //        echo '<pre>';
-        // var_dump($bestseller);
-        // echo '</pre>';
-        // exit;
         View::render('Product/detail', $model);
     }
 

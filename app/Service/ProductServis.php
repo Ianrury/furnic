@@ -124,10 +124,11 @@ class ProductServis
      * Mengambil detail produk berdasarkan id_product
      *
      * @param int $id_product
-     * @return Product|null
+     * @return array|null
      */
-    public function getDetail(int $id_product): ?Product
+    public function getDetail(int $id_product)
     {
-        return $this->productRepository->productById((string) $id_product);
+        $product = $this->productRepository->detailProduct($id_product);
+        return $product;
     }
 }

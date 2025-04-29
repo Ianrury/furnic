@@ -118,110 +118,106 @@ function base_url($path = '')
 
                             <!-- Main Product Image -->
                             <div class="card-body text-center p-4">
-                                <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png" alt="Clover Chair"
-                                    class="img-fluid" width="255" height="255">
+                                <img id="main-product-image" src="" alt="Main Product" class="img-fluid" width="255" height="255">
                             </div>
 
-                            <!-- Thumbnails -->
+                            <!-- Thumbnail Images -->
                             <div class="card-footer bg-white p-3 border-0">
-                                <div class="row g-2">
-                                    <div class="col-3">
-                                        <div class="thumbnail active p-1">
-                                            <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png" alt="Thumbnail 1"
-                                                class="img-fluid" width="100" height="100">
-                                        </div>
-                                    </div>
-                                    <div class="col-3">
-                                        <div class="thumbnail p-1">
-                                            <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png" alt="Thumbnail 2"
-                                                class="img-fluid" width="100" height="100">
-                                        </div>
-                                    </div>
-                                    <div class="col-3">
-                                        <div class="thumbnail p-1">
-                                            <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png" alt="Thumbnail 3"
-                                                class="img-fluid" width="100" height="100">
-                                        </div>
-                                    </div>
-                                    <div class="col-3">
-                                        <div class="thumbnail p-1">
-                                            <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png" alt="Thumbnail 4"
-                                                class="img-fluid" width="100" height="100">
-                                        </div>
-                                    </div>
+                                <div class="row g-2" id="thumbnail-container">
+                                    <!-- Thumbnails akan di-generate di sini -->
                                 </div>
                             </div>
+
+
                         </div>
                     </div>
 
                     <!-- Product Details Column -->
                     <div class="col-md-5 product-details">
-                        <h1 class="text-black fw-bold mb-1" style="font-size: 25px;">Clover Chair</h1>
-                        <p class="text-black mb-3 fw-normal" style="font-size: 14px;">Kursi belajar anak</p>
+                        <h1 class="text-black fw-bold mb-1" style="font-size: 25px;"> <?= htmlspecialchars($model['detail']['nama_product']) ?></h1>
+                        <p class="text-black mb-3 fw-normal" style="font-size: 14px;"><?= htmlspecialchars($model['detail']['deskripsi']) ?></p>
 
-                        <!-- Color Options -->
                         <div class="mb-4">
                             <p class="mb-2 fw-normal text-black" style="font-size: 14px;">Warna</p>
-                            <div class="row g-2">
-                                <div class="col-3">
-                                    <div class="color-option ">Kuning</div>
-                                </div>
-                                <div class="col-3">
-                                    <div class="color-option active">Merah</div>
-                                </div>
-                                <div class="col-3">
-                                    <div class="color-option">Hijau</div>
-                                </div>
-                                <div class="col-3">
-                                    <div class="color-option">Biru</div>
-                                </div>
+                            <div class="row g-2" id="warna-container">
+                                <?php
+                                // Looping untuk menampilkan warna berdasarkan data 'details'
+                                foreach ($model['detail']['details'] as $index => $detail) {
+                                    $warna = $detail['warna']; // Ambil warna dari detail produk
+
+                                    // Cek apakah ada motif dengan qty > 0
+                                    $isActive = false;
+                                    foreach ($detail['motifs'] as $motif) {
+                                        if ($motif['qty'] > 0) {
+                                            $isActive = true;
+                                            break;
+                                        }
+                                    }
+                                    // Tentukan kelas active jika motif memiliki qty > 0 dan warna pertama
+                                    $activeClass = $isActive && $index === 0 ? 'active' : ''; // Default aktifkan warna pertama
+                                ?>
+                                    <div class="col-3">
+                                        <div class="color-option <?= $activeClass ?>" data-index="<?= $index ?>" onclick="setActiveWarna(<?= $index ?>)">
+                                            <?= htmlspecialchars($warna) ?>
+                                        </div>
+                                    </div>
+                                <?php } ?>
                             </div>
                         </div>
+
 
                         <!-- Pattern Options -->
                         <div class="mb-4">
                             <p class="mb-2 fw-normal text-black" style="font-size: 14px;">Motif</p>
-                            <div class="row g-2">
-                                <div class="col-3">
-                                    <div class="color-option">Abstrak</div>
-                                </div>
-                                <div class="col-3">
-                                    <div class="color-option">Polkadot</div>
-                                </div>
-                                <div class="col-3">
-                                    <div class="color-option">Polos</div>
-                                </div>
-                                <div class="col-3">
-                                    <div class="color-option">Leopard</div>
-                                </div>
+                            <div class="row g-2" id="motif-container">
+                                <?php
+                                // Loop untuk menampilkan motif berdasarkan warna pertama yang aktif
+                                foreach ($model['detail']['details'][0]['motifs'] as $motif) {
+                                ?>
+                                    <div class="col-3">
+                                        <div class="color-option motif-option"
+                                            data-motif="<?= htmlspecialchars($motif['motif']) ?>"
+                                            data-qty="<?= $motif['qty'] ?>"
+                                            onclick="setActiveMotif(this)">
+                                            <?= htmlspecialchars($motif['motif']) ?>
+                                        </div>
+                                    </div>
+                                <?php
+                                }
+                                ?>
                             </div>
                         </div>
+
+
+
+
 
                         <!-- Quantity Selector -->
                         <div class="mb-4">
                             <p class="mb-2 fw-normal text-black" style="font-size: 14px;">Jumlah</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="d-flex align-items-center">
-                                    <button class="btn-quantity fw-medium">
+                                    <button class="btn-quantity fw-medium" onclick="changeQty(-1)">
                                         <span style="font-size: 20px;">-</span>
                                     </button>
-                                    <span class="mx-4 fw-normal text-black" style="font-size: 14px;">3</span>
-                                    <button class="btn-quantity fw-medium">
+                                    <span id="jumlah-beli" class="mx-4 fw-normal text-black" style="font-size: 14px;">1</span>
+                                    <button id="btn-tambah" class="btn-quantity fw-medium" onclick="changeQty(1)">
                                         <span style="font-size: 20px;">+</span>
                                     </button>
                                 </div>
                                 <div>
-                                    <small class="fst-italic text-black" style="font-size: 14px;">Tersedia <span
-                                            class="text-black">100</span> pcs</small>
+                                    <small id="stock" class="fst-italic text-black" style="font-size: 14px;">Tersedia <span class="text-black">0</span> pcs</small>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Subtotal -->
                         <div class="d-flex justify-content-between align-items-center mb-4">
                             <p class="mb-0 text-black" style="font-size: 14px;">Subtotal Pembelian:</p>
-                            <p class="mb-0 fw-bold text-black" style="font-size: 16px;">Rp 300.000</p>
+                            <p class="mb-0 fw-bold text-black" style="font-size: 16px;" id="subtotal-text">
+                                Rp <?= number_format($model['detail']['harga'], 0, ',', '.') ?>
+                            </p>
                         </div>
+
 
                         <!-- Buy Button and Actions -->
                         <div class="mb-3">
@@ -1254,7 +1250,7 @@ function base_url($path = '')
         });
 
         // Tombol Reset
-        resetButton.addEventListener('click', function () {
+        resetButton.addEventListener('click', function() {
             filterCheckboxes.forEach(cb => cb.checked = false);
             resetButton.classList.remove('active');
         });
@@ -1262,7 +1258,7 @@ function base_url($path = '')
 
     <script>
         // Tunggu sampai dokumen siap
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             // Ambil elemen dropdown button dan semua item dropdown
             const dropdownButton = document.getElementById('dropdownMenu2');
             const dropdownItems = document.querySelectorAll('.dropdown-menu .dropdown-item');
@@ -1272,7 +1268,7 @@ function base_url($path = '')
 
             // Tambahkan event listener untuk setiap item dropdown
             dropdownItems.forEach(item => {
-                item.addEventListener('click', function () {
+                item.addEventListener('click', function() {
                     // Ubah teks tombol dropdown menjadi teks dari item yang diklik
                     dropdownButton.textContent = this.textContent.trim();
                 });
@@ -1285,7 +1281,7 @@ function base_url($path = '')
         });
     </script>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             const morePhotosBtn = document.getElementById('morePhotosBtn');
             const reviewPhotosContainer = document.getElementById('reviewPhotos');
 
@@ -1296,11 +1292,167 @@ function base_url($path = '')
             morePhotosBtn.textContent = '+' + hiddenPhotosCount;
 
             // Ketika overlay diklik, tampilkan semua foto tersembunyi
-            morePhotosBtn.addEventListener('click', function () {
+            morePhotosBtn.addEventListener('click', function() {
                 reviewPhotosContainer.classList.toggle('expanded');
             });
         });
     </script>
+
+    <script>
+        let currentHarga = <?= $model['detail']['harga'] ?>;
+        let maxQty = 0;
+        let currentMotif = null; // ⬅️ tambahan: motif aktif sekarang
+
+        function formatRupiah(number) {
+            return new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                minimumFractionDigits: 0
+            }).format(number);
+        }
+
+        function setActiveWarna(index) {
+            document.querySelectorAll('.color-option').forEach(e => e.classList.remove('active'));
+            document.querySelectorAll('.color-option')[index].classList.add('active');
+
+            document.getElementById('jumlah-beli').innerText = '1';
+            updateMotifs(index);
+            updateSubtotal();
+        }
+
+        function updateMotifs(index) {
+            let motifContainer = document.getElementById('motif-container');
+            motifContainer.innerHTML = '';
+
+            let details = <?= json_encode($model['detail']['details']) ?>;
+            let selectedDetail = details[index];
+
+            let totalQty = 0;
+            selectedDetail['motifs'].forEach(motif => totalQty += motif.qty);
+            maxQty = totalQty;
+            document.getElementById('stock').innerHTML = `Tersedia <span class="text-black">${totalQty}</span> pcs`;
+
+            let firstPolosElement = null;
+            let firstAvailableMotif = null;
+
+            selectedDetail['motifs'].forEach(motif => {
+                let div = document.createElement('div');
+                div.classList.add('col-3');
+                div.innerHTML = `
+            <div class="color-option motif-option" 
+                data-motif='${JSON.stringify(motif)}'
+                data-qty="${motif.qty}" 
+                onclick="setActiveMotif(this)">
+                ${motif.motif}
+            </div>`;
+                motifContainer.appendChild(div);
+
+                if (motif.motif.toLowerCase() === 'polos') {
+                    firstPolosElement = div.querySelector('.motif-option');
+                }
+                if (!firstAvailableMotif && motif.qty > 0) {
+                    firstAvailableMotif = div.querySelector('.motif-option');
+                }
+            });
+
+            if (firstPolosElement) {
+                setActiveMotif(firstPolosElement);
+                document.getElementById('btn-tambah').disabled = false;
+            } else if (firstAvailableMotif) {
+                setActiveMotif(firstAvailableMotif);
+                document.getElementById('btn-tambah').disabled = false;
+            } else {
+                document.getElementById('btn-tambah').disabled = true;
+            }
+        }
+
+        function setActiveMotif(element) {
+            document.querySelectorAll('.motif-option').forEach(e => e.classList.remove('active'));
+            element.classList.add('active');
+
+            let motifData = JSON.parse(element.getAttribute('data-motif'));
+            currentMotif = motifData;
+
+            let qty = parseInt(element.getAttribute('data-qty'));
+            maxQty = qty;
+            document.getElementById('stock').innerHTML = `Tersedia <span class="text-black">${qty}</span> pcs`;
+
+            document.getElementById('jumlah-beli').innerText = '1';
+            updateSubtotal();
+            updateMainAndThumbnailImage();
+        }
+
+        function changeQty(change) {
+            let jumlahElem = document.getElementById('jumlah-beli');
+            let currentQty = parseInt(jumlahElem.innerText);
+            let newQty = currentQty + change;
+
+            if (newQty < 1) return;
+            if (newQty > maxQty) return;
+
+            jumlahElem.innerText = newQty;
+            updateSubtotal();
+        }
+
+        function updateSubtotal() {
+            let qty = parseInt(document.getElementById('jumlah-beli').innerText);
+            let subtotal = qty * currentHarga;
+            document.getElementById('subtotal-text').innerText = formatRupiah(subtotal);
+        }
+
+        function updateMainAndThumbnailImage() {
+            if (!currentMotif) return;
+
+            // Update gambar utama
+            document.getElementById('main-product-image').src = "assets/img/product/" + currentMotif.foto_kanan;
+
+            // Update thumbnails
+            let thumbnailContainer = document.getElementById('thumbnail-container');
+            thumbnailContainer.innerHTML = `
+            <div class="col-3">
+                <div class="thumbnail active p-1">
+                    <img src="assets/img/product/${currentMotif.foto_kanan}" alt="Thumbnail Kanan" class="img-fluid" width="100" height="100" onclick="changeMainImage('${currentMotif.foto_kanan}')">
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="thumbnail p-1">
+                    <img src="assets/img/product/${currentMotif.foto_kiri}" alt="Thumbnail Kiri" class="img-fluid" width="100" height="100" onclick="changeMainImage('${currentMotif.foto_kiri}')">
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="thumbnail p-1">
+                    <img src="assets/img/product/${currentMotif.foto_depan}" alt="Thumbnail Depan" class="img-fluid" width="100" height="100" onclick="changeMainImage('${currentMotif.foto_depan}')">
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="thumbnail p-1">
+                    <img src="assets/img/product/${currentMotif.foto_belakang}" alt="Thumbnail Belakang" class="img-fluid" width="100" height="100" onclick="changeMainImage('${currentMotif.foto_belakang}')">
+                </div>
+            </div>
+        `;
+        }
+
+        function changeMainImage(filename) {
+            document.getElementById('main-product-image').src = "assets/img/product/" + filename;
+            document.querySelectorAll('.thumbnail').forEach(e => e.classList.remove('active'));
+            event.target.parentElement.classList.add('active');
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            let details = <?= json_encode($model['detail']['details']) ?>;
+
+            for (let i = 0; i < details.length; i++) {
+                let hasStock = details[i].motifs.some(motif => motif.qty > 0);
+                if (hasStock) {
+                    setActiveWarna(i);
+                    break;
+                }
+            }
+        });
+    </script>
+
+
+
 
 
 </body>

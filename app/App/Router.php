@@ -33,11 +33,16 @@ class Router
         $method = $_SERVER['REQUEST_METHOD'];
 
         foreach (self::$routes as $route) {
-            $pattern = "#^" . preg_quote($route['path'], '#') . "$#";
+            $routePath = rtrim($route['path'], '/');
+            $currentPath = rtrim($path, '/');
 
-            if (preg_match($pattern, $path, $variables) && $method == $route['method']) {
+            // Ubah {id} atau {apapun} menjadi regex wildcard
+            $pattern = preg_replace('#\{[^}]+\}#', '([^/]+)', $routePath);
+            $pattern = "#^" . $pattern . "$#";
 
-                // call middleware
+            if (preg_match($pattern, $currentPath, $variables) && $method == $route['method']) {
+
+                // Jalankan middleware
                 foreach ($route['middleware'] as $middleware) {
                     $instance = new $middleware;
                     $instance->before();
@@ -45,23 +50,16 @@ class Router
 
                 $function = $route['function'];
                 $controller = new $route['controller'];
-                // $controller->$function();
 
-                array_shift($variables);
+                array_shift($variables); // Buang hasil match pertama (full match)
                 call_user_func_array([$controller, $function], $variables);
 
                 return;
             }
         }
 
-        // Sebelumnya:
-        // http_response_code(404);
-        // echo 'CONTROLLER NOT FOUND';
-
-        // Ganti menjadi:
+        // Redirect ke not-found kalau tidak ada route yang cocok
         header('Location: /not-found');
         exit;
-
     }
-
 }
