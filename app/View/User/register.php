@@ -89,8 +89,8 @@
                             <form id="formRegister" method="post">
 
                                 <div class="" style="margin: auto 5px;">
-                                        <label for="nama_user" class="form-label">Nama Lengkap</label>
-                                        <input type="text" class="form-control form-login" id="nama_user" name="nama_user" placeholder="Masukkan Nama Lengkap">
+                                        <label for="nama" class="form-label">Nama Lengkap</label>
+                                        <input type="text" class="form-control form-login" id="nama_user" name="nama" placeholder="Masukkan Nama Lengkap">
                                 </div>
 
                                 <div class="" style="margin: auto 5px;">
@@ -99,16 +99,16 @@
                                 </div>
 
                                 <div class="" style="margin: auto 5px;">
-                                    <label for="no_telpon" class="form-label">Nomor Telepon</label>
+                                    <label for="no_hp" class="form-label">Nomor Telepon</label>
                                         <div class="d-flex gap-1">
                                             <input type="text" class="form-control form-login country-code-input" id="country_code" name="country_code" placeholder="+62" readonly>
-                                            <input type="text" class="form-control form-login phone-input" id="no_telpon" name="no_telpon" placeholder="Masukkan Password">
+                                            <input type="text" class="form-control form-login phone-input" id="no_telpon" name="no_hp" placeholder="Masukkan No Telepon">
                                         </div>
                                 </div>
 
                                 <div class="" style="margin: auto 5px;">
-                                    <label for="password" class="form-label">Password</label>
-                                    <input type="password" class="form-control form-login" id="password" name="password" placeholder="Masukkan Password">
+                                    <label for="kata_sandi" class="form-label">Password</label>
+                                    <input type="password" class="form-control form-login" id="password" name="kata_sandi" placeholder="Masukkan Password">
                                 </div>
 
                                 <div class="" style="margin: auto 5px;">

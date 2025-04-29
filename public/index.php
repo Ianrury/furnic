@@ -35,6 +35,8 @@ Router::add('GET', '/product/wishlist', ProductController::class, 'wishlist');
 // Contooller kerangjang 
 Router::add('GET', '/keranjang', KeranjangController::class, 'index');
 
+// Wislist Product
+Router::add('GET', '/product/wishlist/{id}', ProductController::class, 'Createwishlist');
 
 
 // Controller PromoController

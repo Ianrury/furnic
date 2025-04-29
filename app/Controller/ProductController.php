@@ -10,19 +10,29 @@ use Importa\Furnic\PHP\FFI\Repository\SessionRepository;
 use Importa\Furnic\PHP\FFI\Repository\UserRepository;
 use Importa\Furnic\PHP\FFI\Service\ProductServis;
 use Importa\Furnic\PHP\FFI\Service\SessionService;
+use Importa\Furnic\PHP\FFI\Service\WislistServis;
 
 class ProductController
 {
     public ProductServis $productServiser;
+    public WislistServis $wishlistServiser;
+
 
     public function __construct()
     {
-        // Inisialisasi koneksi database
         $connection = Database::getConnection();
 
-        $productRepository = new ProductRepository($connection);  // Inisialisasi ProductRepository
-        $this->productServiser = new ProductServis($productRepository);  // Inisialisasi ProductServis dengan ProductRepository
+        $productRepository = new ProductRepository($connection);
+        $sessionRepository = new SessionRepository($connection);
+        $userRepository = new UserRepository($connection);
+
+        $this->productServiser = new ProductServis($productRepository);
+        $this->wishlistServiser = new WislistServis($sessionRepository, $userRepository);
+
+        // Jangan lupa set productRepository ke WislistServis
+        // $this->serviceServiser->productRepository = $productRepository;
     }
+
 
     public function index()
     {
@@ -82,5 +92,24 @@ class ProductController
             "content" => "Welcome to the product wishlist page!",
         ];
         View::render('Product/wishlist', $model);
+    }
+
+    public function Createwishlist($id_product)
+    {
+        header('Content-Type: application/json');
+
+        $result = $this->wishlistServiser->createwislist($id_product);
+
+        if ($result) {
+            echo json_encode([
+                'status' => 'success',
+                'message' => 'Produk berhasil ditambahkan ke wishlist'
+            ]);
+        } else {
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'Gagal menambahkan produk ke wishlist'
+            ]);
+        }
     }
 }

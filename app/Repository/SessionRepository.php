@@ -16,16 +16,17 @@ class SessionRepository
 
     public function save(Session $session): Session
     {
-        $statement = $this->connection->prepare("INSERT INTO session (id_user) VALUES (?, ?)");
+        $statement = $this->connection->prepare("INSERT INTO session (id_user) VALUES (?)");
         $statement->execute([
-            $session->id_user, 
+            $session->id_user,
         ]);
-    
+
         $session->id_session = (int) $this->connection->lastInsertId();
-    
+
         return $session;
     }
-    
+
+
 
 
     public function findId(string $id): ?Session

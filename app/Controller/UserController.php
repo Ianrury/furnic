@@ -4,7 +4,10 @@ namespace Importa\Furnic\PHP\FFI\Controller;
 
 use Importa\Furnic\PHP\FFI\App\View;
 use Importa\Furnic\PHP\FFI\Config\Database;
+use Importa\Furnic\PHP\FFI\Domain\Customer;
 use Importa\Furnic\PHP\FFI\Exception\ValidationException;
+use Importa\Furnic\PHP\FFI\Model\CustomerLoginRequest;
+use Importa\Furnic\PHP\FFI\Model\CustomerRegisterRequest;
 use Importa\Furnic\PHP\FFI\Model\UserLoginRequest;
 use Importa\Furnic\PHP\FFI\Model\UserRegisterRequest;
 use Importa\Furnic\PHP\FFI\Repository\SessionRepository;
@@ -34,7 +37,6 @@ class UserController
         $model = [
             "title" => "Register",
             "content" => "Welcome to the register page!",
-            // "error" => "aduh eror",
         ];
         View::render('User/register', $model);
     }
@@ -43,17 +45,15 @@ class UserController
     {
         header('Content-Type: application/json');
     
-        $request = new UserRegisterRequest();
-        $request->nama_user = $_POST['nama_user'] ?? null;
-        $request->no_telpon = $_POST['no_telpon'] ?? null;
+        $request = new CustomerRegisterRequest();
+        $request->nama = $_POST['nama'] ?? null;
+        $request->no_hp = $_POST['no_hp'] ?? null;
         $request->email = $_POST['email'] ?? null;
-        $request->password = $_POST['password'] ?? null;
+        $request->kata_sandi = $_POST['kata_sandi'] ?? null;
     
         try {
-            $response = $this->userService->register($request);
+            $response = $this->userService->registerCustomer($request);
             
-            // var_dump($response);
-            // exit;
     
             // Pindahkan http_response_code SEBELUM echo
             http_response_code(200);
@@ -61,9 +61,9 @@ class UserController
                 "success" => true,
                 "message" => "Registrasi berhasil!",
                 "data" => [
-                    "id" => $response->user->id_user,
-                    "nama_user" => $response->user->nama_user,
-                    "email" => $response->user->email
+                    "id" => $response->customer->id_customer,
+                    "nama_user" => $response->customer->nama,
+                    "email" => $response->customer->email
                 ]
             ]);
             exit;
@@ -109,9 +109,9 @@ class UserController
 
     public function postLogin()
     {
-        $request = new UserLoginRequest();
+        $request = new CustomerLoginRequest();
         $request->email = $_POST['email'] ?? null;
-        $request->password = $_POST['password'] ?? null;
+        $request->kata_sandi = $_POST['password'] ?? null;
     
         header('Content-Type: application/json');
     
@@ -119,7 +119,7 @@ class UserController
             $response = $this->userService->login($request);
             
     
-            $token = $this->sessionService->create($response->user->id_user);
+            $this->sessionService->create($response->customer->id_customer);
             // var_dump($token);
             // exit;
             $_SESSION['success'] = "Login success!";

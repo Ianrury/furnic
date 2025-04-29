@@ -103,8 +103,8 @@ class ProductRepository
                 'id_product' => $results[0]['id_product'],
                 'nama_product' => $results[0]['nama_product'],
                 'uom' => $results[0]['uom'],
-                'harga'=> $results[0]['harga'],
-                'product_qty'=> $results[0]['product_qty'],
+                'harga' => $results[0]['harga'],
+                'product_qty' => $results[0]['product_qty'],
                 'nama_vendor' => $results[0]['nama_vendor'],
                 'product_foto' => $results[0]['product_foto'],
                 'deskripsi' => $results[0]['deskripsi'],
@@ -202,6 +202,22 @@ class ProductRepository
         $statement = $this->connection->query("SELECT * FROM product WHERE diskon > 0 LIMIT 4");
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function Wislist($id_product, $id_customer)
+    {
+        try {
+            $statement = $this->connection->prepare(
+                "INSERT INTO wishlist (id_customer, id_product) VALUES (?, ?)"
+            );
+            $result = $statement->execute([$id_customer, $id_product]);
+
+            return $result === true; // kembalikan true jika berhasil
+        } catch (\PDOException $e) {
+            // opsional: log error atau kembalikan false
+            return false;
+        }
+    }
+
 
 
     public function bestseller()

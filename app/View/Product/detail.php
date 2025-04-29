@@ -1142,6 +1142,7 @@ function base_url($path = '')
                 </div>
             </div>
         </div>
+        <input type="text" value="<?= htmlspecialchars($model['detail']['id_product']) ?>" id="id_product" hidden>
     </main>
 
 

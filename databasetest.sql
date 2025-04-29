@@ -138,3 +138,24 @@ CREATE TABLE review (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
+
+
+CREATE TABLE wishlist (
+    id_customer INT,
+    id_product INT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id_customer, id_product),
+    FOREIGN KEY (id_customer) REFERENCES customer(id_customer),
+    FOREIGN KEY (id_product) REFERENCES product(id_product)
+);
+
+CREATE TABLE cart (
+    id_cart INT PRIMARY KEY AUTO_INCREMENT,
+    id_customer INT,
+    id_product INT,
+    qty INT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_customer) REFERENCES customer(id_customer),
+    FOREIGN KEY (id_product) REFERENCES product(id_product)
+);

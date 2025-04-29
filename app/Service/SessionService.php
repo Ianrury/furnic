@@ -2,6 +2,7 @@
 
 namespace Importa\Furnic\PHP\FFI\Service;
 
+use Importa\Furnic\PHP\FFI\Domain\Customer;
 use Importa\Furnic\PHP\FFI\Domain\Session;
 use Importa\Furnic\PHP\FFI\Domain\User;
 use Importa\Furnic\PHP\FFI\Repository\SessionRepository;
@@ -40,7 +41,7 @@ class SessionService
         }
     }
 
-    public function current(): ?User
+    public function current(): ?Customer
     {
         $sessionId = $_COOKIE[self::$COOKIE_NAME] ?? null;
 
