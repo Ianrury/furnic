@@ -931,52 +931,6 @@
 
         //categoty produc
     </script>
-    <!-- HTML Structure -->
-    <div class="container">
-        <div class="row">
-            <div class="col-12 wow fadeInDown mb-0" data-wow-delay=".25s">
-                <div class="site-heading-inline">
-                    <h2 class="site-title">Kategori Produk</h2>
-                </div>
-            </div>
-        </div>
-        <div class="tab-content wow fadeInUp" data-wow-delay=".25s" id="item-tabContent">
-            <div class="container">
-                <div class="row align-items-center mb-2">
-                    <div class="col d-flex justify-content-between align-items-center ps-0">
-                        <div class="categories">
-                            <ul class="d-flex mb-0 ul-categories">
-                                <li class="nav-item">
-                                    <a class="d-flex justify-content-center align-items-center custom-nav-link-product"
-                                        data-category="living" href="javascript:void(0)">Living</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="d-flex justify-content-center align-items-center custom-nav-link-product"
-                                        data-category="dinning" href="javascript:void(0)">Dinning</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="d-flex justify-content-center align-items-center custom-nav-link-product"
-                                        data-category="bedroom" href="javascript:void(0)">Bedroom</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="d-flex justify-content-center align-items-center custom-nav-link-product"
-                                        data-category="kitchen" href="javascript:void(0)">Kitchen</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <a href="#" class="small view-more">View More <i class="fas fa-angle-double-right"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="tab-content wow fadeInUp" data-wow-delay=".25s" id="item-tabContent">
-            <div class="container category-product">
-                <div id="product-container"
-                    class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4 justify-content-start">
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- JavaScript -->
     <script>

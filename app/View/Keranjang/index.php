@@ -1,5 +1,8 @@
 <?php
-
+function base_url($path = '')
+{
+    return '/' . ltrim($path, '/');
+}
 ?>
 
 <!DOCTYPE html>
@@ -122,257 +125,157 @@
                         <div class="row">
                             <!-- List Produk -->
                             <div class="col-md-8">
+                                <!-- <div class="rounded-2 ms-4 d-flex justify-content-between mb-3">
+                                    <div>
+                                        <div>
+                                            <input class="form-check-input item-checkbox"
+                                                type="checkbox" id="checkAll">
+                                        </div>
+                                        <div class="ms-3">
+                                            <p style="font-size: 14px;">Pilih Semua</p>
+                                        </div>
+                                    </div>
+                                    <div id="deleteSelectedContainer" class="d-none" >
+                                        <p id="btnDeleteSelected" style="font-size: 14px; color: #ff3838; cursor: pointer;">Hapus</p>
+                                    </div>
+                                </div> -->
                                 <div class="d-flex flex-column gap-3">
                                     <!-- Mulai looping produk di sini -->
-                                    <div class="d-flex gap-3 align-items-start">
-                                        <div class="rounded-2 ms-4">
-                                            <input class="form-check-input" type="checkbox" id="homeware">
-                                        </div>
-                                        <div class="w-100 p-3 d-flex align-items-center justify-content-between rounded-4" style="border: 1px solid #D9D9D9;">
-                                            <div class="d-flex gap-3 align-items-center">
-                                                <div class="card shadow position-relative rounded-4 p-2">
-                                                    <!-- Corner Ribbon -->
-                                                    <div class="position-absolute ribbon-wrapper-keranjang">
-                                                        <div class="ribbon-keranjang text-white text-uppercase fw-bold text-center">
-                                                            New Product
+                                    <?php foreach ($model['data'] as $item): ?>
+                                        <div class="d-flex gap-3 align-items-start">
+                                            <div class="rounded-2 ms-4">
+                                                <input class="form-check-input item-checkbox"
+                                                    type="checkbox"
+                                                    id="checkbox-<?= $item['id_cart'] ?>"
+                                                    data-id="<?= $item['id_cart'] ?>"
+                                                    data-price="<?= $item['harga'] ?>"
+                                                    data-discount="<?= $item['diskon'] ?>">
+
+                                            </div>
+                                            <div class="w-100 p-3 d-flex align-items-center justify-content-between rounded-4" style="border: 1px solid #D9D9D9;">
+                                                <div class="d-flex gap-3 align-items-center">
+                                                    <div class="card shadow position-relative rounded-4 p-2">
+                                                        <!-- Corner Ribbon -->
+                                                        <div class="position-absolute ribbon-wrapper-keranjang">
+                                                            <div class="ribbon-keranjang text-white text-uppercase fw-bold text-center">
+                                                                New Product
+                                                            </div>
+                                                        </div>
+                                                        <!-- Product Image -->
+                                                        <div class="text-center pt-3">
+                                                            <img src="assets/img/product/<?= htmlspecialchars($item['foto']) ?>" class="img-fluid product-image-keranjang" alt="Product Image">
                                                         </div>
                                                     </div>
-                                                    <!-- Product Image -->
-                                                    <div class="text-center pt-3">
-                                                        <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png" class="img-fluid product-image-keranjang" alt="Product Image">
+                                                    <div>
+                                                        <h5 class="title-keranjang"><?= htmlspecialchars($item['nama_product']) ?></h5>
+                                                        <p class="name-keranjang"> <?= htmlspecialchars($item['deskripsi']) ?></p>
+                                                        <ul class="list-unstyled m-0 p-0">
+                                                            <li class="motif-keranjang">
+                                                                <span class="label-keranjang">Warna</span> : <span class="value-keranjang"><?= htmlspecialchars($item['warna']) ?></span>
+                                                            </li>
+                                                            <li class="motif-keranjang">
+                                                                <span class="label-keranjang">Motif</span> : <span class="value-keranjang"><?= htmlspecialchars($item['motif']) ?></span>
+                                                            </li>
+                                                        </ul>
+                                                        <div class="d-flex flex-wrap align-items-baseline">
+                                                            <div class="me-2">
+                                                                <span class="fw-bold title-keranjang">
+                                                                    <?php
+                                                                    $harga_normal = $item['harga']; // harga normal dari database
+                                                                    $diskon = $item['diskon']; // diskon dari database, bisa null atau 0
+
+                                                                    // Jika diskon ada (lebih dari 0), hitung harga setelah diskon
+                                                                    if ($diskon > 0):
+                                                                        // Menghitung nominal diskon
+                                                                        $nominal_diskon = ($diskon / 100) * $harga_normal;
+                                                                        // Menghitung harga setelah diskon
+                                                                        $harga_setelah_diskon = $harga_normal - $nominal_diskon;
+                                                                    else:
+                                                                        // Jika tidak ada diskon, harga tetap harga normal
+                                                                        $harga_setelah_diskon = $harga_normal;
+                                                                    endif;
+                                                                    ?>
+
+                                                                    <sup class="fw-normal">Rp</sup> <?= number_format($harga_setelah_diskon, 0, ',', '.') ?>
+
+                                                                </span>
+                                                            </div>
+                                                            <div>
+                                                                <?php
+                                                                $harga_normal = $item['harga']; // harga normal dari database
+                                                                $diskon = $item['diskon']; // diskon dari database, bisa null atau 0
+
+                                                                // Jika diskon ada (lebih dari 0), tampilkan harga lama dengan diskon
+                                                                if ($diskon > 0):
+                                                                    // Menghitung nominal diskon
+                                                                    $nominal_diskon = ($diskon / 100) * $harga_normal;
+                                                                ?>
+                                                                    <div>
+                                                                        <span class="fw-normal text-danger old-price">
+                                                                            <sup>Rp</sup>
+                                                                            <span class="text-decoration-line-through"><?= number_format($nominal_diskon, 0, ',', '.') ?></span>
+
+                                                                        </span>
+                                                                    </div>
+                                                                <?php
+                                                                endif;
+                                                                ?>
+
+
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
+                                                <!-- Quantity -->
+                                                <div class="d-flex align-items-center">
+                                                    <button class="btn-quantity increase-qty" data-id="<?= $item['id_cart'] ?>">
+                                                        <span style="font-size: 20px;">+</span>
+                                                    </button>
+                                                    <span class="mx-4 fw-normal text-black" style="font-size: 14px;"
+                                                        id="qty-<?= $item['id_cart'] ?>"
+                                                        data-max="<?= $item['qty_motif'] ?>"
+                                                        data-price="<?= ($item['diskon'] > 0) ? ($item['harga'] - ($item['diskon'] / 100 * $item['harga'])) : $item['harga'] ?>">
+                                                        <?= ($item['qty_cart'] > $item['qty_motif']) ? $item['qty_motif'] : $item['qty_cart'] ?>
+                                                    </span>
+
+
+                                                    <button class="btn-quantity decrease-qty" data-id="<?= $item['id_cart'] ?>">
+                                                        <span style="font-size: 20px;">-</span>
+                                                    </button>
+
+                                                </div>
+                                                <!-- Harga total per item -->
                                                 <div>
-                                                    <h5 class="title-keranjang">Zulu Chair White</h5>
-                                                    <p class="name-keranjang">one set meja & kursi</p>
-                                                    <ul class="list-unstyled m-0 p-0">
-                                                        <li class="motif-keranjang">
-                                                            <span class="label-keranjang">Warna</span> : <span class="value-keranjang">Putih</span>
-                                                        </li>
-                                                        <li class="motif-keranjang">
-                                                            <span class="label-keranjang">Motif</span> : <span class="value-keranjang">Polos</span>
-                                                        </li>
-                                                    </ul>
-                                                    <div class="d-flex flex-wrap align-items-baseline">
-                                                        <div class="me-2">
-                                                            <span class="fw-bold title-keranjang">
-                                                                <sup class="fw-normal">Rp</sup> 500.000
-                                                            </span>
-                                                        </div>
-                                                        <div>
-                                                            <span class="fw-normal text-danger old-price">
-                                                                <sup>Rp</sup>
-                                                                <span class="text-decoration-line-through">600.000</span>
-                                                            </span>
-                                                        </div>
-                                                    </div>
+                                                    <?php
+                                                    // Menghitung qty yang valid (tidak melebihi qty_motif)
+                                                    $qty = ($item['qty_cart'] > $item['qty_motif']) ? $item['qty_motif'] : $item['qty_cart'];
+
+                                                    // Menghitung harga setelah diskon (jika ada)
+                                                    $harga_normal = $item['harga']; // Harga normal dari database
+                                                    $diskon = $item['diskon']; // Diskon dari database
+
+                                                    // Jika diskon ada, hitung harga setelah diskon
+                                                    if ($diskon > 0) {
+                                                        $nominal_diskon = ($diskon / 100) * $harga_normal; // Nominal diskon
+                                                        $harga_setelah_diskon = $harga_normal - $nominal_diskon; // Harga setelah diskon
+                                                    } else {
+                                                        $harga_setelah_diskon = $harga_normal; // Tidak ada diskon, gunakan harga normal
+                                                    }
+
+                                                    // Hitung total harga
+                                                    $total = $qty * $harga_setelah_diskon;
+                                                    ?>
+                                                    <span id="total-<?= $item['id_cart'] ?>" class="fw-bold title-keranjang total-produk-detail">
+                                                        <sup class="fw-normal">Rp</sup> <?= number_format($total, 0, ',', '.') ?>
+                                                    </span>
+
+
                                                 </div>
                                             </div>
-                                            <!-- Quantity -->
-                                            <div class="d-flex align-items-center">
-                                                <button class="btn-quantity fw-medium">
-                                                    <span style="font-size: 20px;">-</span>
-                                                </button>
-                                                <span class="mx-4 fw-normal text-black" style="font-size: 14px;">3</span>
-                                                <button class="btn-quantity fw-medium">
-                                                    <span style="font-size: 20px;">+</span>
-                                                </button>
-                                            </div>
-                                            <!-- Harga total per item -->
-                                            <div>
-                                                <span class="fw-bold title-keranjang">
-                                                    <sup class="fw-normal">Rp</sup> 1.500.000
-                                                </span>
-                                            </div>
                                         </div>
-                                    </div>
+                                    <?php endforeach; ?>
+
                                     <!-- Selesai 1 produk -->
-                                    <div class="d-flex gap-3 align-items-start">
-                                        <div class="rounded-2 ms-4">
-                                            <input class="form-check-input" type="checkbox" id="homeware">
-                                        </div>
-                                        <div class="w-100 p-3 d-flex align-items-center justify-content-between rounded-4" style="border: 1px solid #D9D9D9;">
-                                            <div class="d-flex gap-3 align-items-center">
-                                                <div class="card shadow position-relative rounded-4 p-2">
-                                                    <!-- Corner Ribbon -->
-                                                    <div class="position-absolute ribbon-wrapper-keranjang">
-                                                        <div class="ribbon-keranjang text-white text-uppercase fw-bold text-center">
-                                                            New Product
-                                                        </div>
-                                                    </div>
-                                                    <!-- Product Image -->
-                                                    <div class="text-center pt-3">
-                                                        <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png" class="img-fluid product-image-keranjang" alt="Product Image">
-                                                    </div>
-                                                </div>
-                                                <div>
-                                                    <h5 class="title-keranjang">Zulu Chair White</h5>
-                                                    <p class="name-keranjang">one set meja & kursi</p>
-                                                    <ul class="list-unstyled m-0 p-0">
-                                                        <li class="motif-keranjang">
-                                                            <span class="label-keranjang">Warna</span> : <span class="value-keranjang">Putih</span>
-                                                        </li>
-                                                        <li class="motif-keranjang">
-                                                            <span class="label-keranjang">Motif</span> : <span class="value-keranjang">Polos</span>
-                                                        </li>
-                                                    </ul>
-                                                    <div class="d-flex flex-wrap align-items-baseline">
-                                                        <div class="me-2">
-                                                            <span class="fw-bold title-keranjang">
-                                                                <sup class="fw-normal">Rp</sup> 500.000
-                                                            </span>
-                                                        </div>
-                                                        <div>
-                                                            <span class="fw-normal text-danger old-price">
-                                                                <sup>Rp</sup>
-                                                                <span class="text-decoration-line-through">600.000</span>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- Quantity -->
-                                            <div class="d-flex align-items-center">
-                                                <button class="btn-quantity fw-medium">
-                                                    <span style="font-size: 20px;">-</span>
-                                                </button>
-                                                <span class="mx-4 fw-normal text-black" style="font-size: 14px;">3</span>
-                                                <button class="btn-quantity fw-medium">
-                                                    <span style="font-size: 20px;">+</span>
-                                                </button>
-                                            </div>
-                                            <!-- Harga total per item -->
-                                            <div>
-                                                <span class="fw-bold title-keranjang">
-                                                    <sup class="fw-normal">Rp</sup> 1.500.000
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex gap-3 align-items-start">
-                                        <div class="rounded-2 ms-4">
-                                            <input class="form-check-input" type="checkbox" id="homeware">
-                                        </div>
-                                        <div class="w-100 p-3 d-flex align-items-center justify-content-between rounded-4" style="border: 1px solid #D9D9D9;">
-                                            <div class="d-flex gap-3 align-items-center">
-                                                <div class="card shadow position-relative rounded-4 p-2">
-                                                    <!-- Corner Ribbon -->
-                                                    <div class="position-absolute ribbon-wrapper-keranjang">
-                                                        <div class="ribbon-keranjang text-white text-uppercase fw-bold text-center">
-                                                            New Product
-                                                        </div>
-                                                    </div>
-                                                    <!-- Product Image -->
-                                                    <div class="text-center pt-3">
-                                                        <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png" class="img-fluid product-image-keranjang" alt="Product Image">
-                                                    </div>
-                                                </div>
-                                                <div>
-                                                    <h5 class="title-keranjang">Zulu Chair White</h5>
-                                                    <p class="name-keranjang">one set meja & kursi</p>
-                                                    <ul class="list-unstyled m-0 p-0">
-                                                        <li class="motif-keranjang">
-                                                            <span class="label-keranjang">Warna</span> : <span class="value-keranjang">Putih</span>
-                                                        </li>
-                                                        <li class="motif-keranjang">
-                                                            <span class="label-keranjang">Motif</span> : <span class="value-keranjang">Polos</span>
-                                                        </li>
-                                                    </ul>
-                                                    <div class="d-flex flex-wrap align-items-baseline">
-                                                        <div class="me-2">
-                                                            <span class="fw-bold title-keranjang">
-                                                                <sup class="fw-normal">Rp</sup> 500.000
-                                                            </span>
-                                                        </div>
-                                                        <div>
-                                                            <span class="fw-normal text-danger old-price">
-                                                                <sup>Rp</sup>
-                                                                <span class="text-decoration-line-through">600.000</span>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- Quantity -->
-                                            <div class="d-flex align-items-center">
-                                                <button class="btn-quantity fw-medium">
-                                                    <span style="font-size: 20px;">-</span>
-                                                </button>
-                                                <span class="mx-4 fw-normal text-black" style="font-size: 14px;">3</span>
-                                                <button class="btn-quantity fw-medium">
-                                                    <span style="font-size: 20px;">+</span>
-                                                </button>
-                                            </div>
-                                            <!-- Harga total per item -->
-                                            <div>
-                                                <span class="fw-bold title-keranjang">
-                                                    <sup class="fw-normal">Rp</sup> 1.500.000
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex gap-3 align-items-start">
-                                        <div class="rounded-2 ms-4">
-                                            <input class="form-check-input" type="checkbox" id="homeware">
-                                        </div>
-                                        <div class="w-100 p-3 d-flex align-items-center justify-content-between rounded-4" style="border: 1px solid #D9D9D9;">
-                                            <div class="d-flex gap-3 align-items-center">
-                                                <div class="card shadow position-relative rounded-4 p-2">
-                                                    <!-- Corner Ribbon -->
-                                                    <div class="position-absolute ribbon-wrapper-keranjang">
-                                                        <div class="ribbon-keranjang text-white text-uppercase fw-bold text-center">
-                                                            New Product
-                                                        </div>
-                                                    </div>
-                                                    <!-- Product Image -->
-                                                    <div class="text-center pt-3">
-                                                        <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png" class="img-fluid product-image-keranjang" alt="Product Image">
-                                                    </div>
-                                                </div>
-                                                <div>
-                                                    <h5 class="title-keranjang">Zulu Chair White</h5>
-                                                    <p class="name-keranjang">one set meja & kursi</p>
-                                                    <ul class="list-unstyled m-0 p-0">
-                                                        <li class="motif-keranjang">
-                                                            <span class="label-keranjang">Warna</span> : <span class="value-keranjang">Putih</span>
-                                                        </li>
-                                                        <li class="motif-keranjang">
-                                                            <span class="label-keranjang">Motif</span> : <span class="value-keranjang">Polos</span>
-                                                        </li>
-                                                    </ul>
-                                                    <div class="d-flex flex-wrap align-items-baseline">
-                                                        <div class="me-2">
-                                                            <span class="fw-bold title-keranjang">
-                                                                <sup class="fw-normal">Rp</sup> 500.000
-                                                            </span>
-                                                        </div>
-                                                        <div>
-                                                            <span class="fw-normal text-danger old-price">
-                                                                <sup>Rp</sup>
-                                                                <span class="text-decoration-line-through">600.000</span>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- Quantity -->
-                                            <div class="d-flex align-items-center">
-                                                <button class="btn-quantity fw-medium">
-                                                    <span style="font-size: 20px;">-</span>
-                                                </button>
-                                                <span class="mx-4 fw-normal text-black" style="font-size: 14px;">3</span>
-                                                <button class="btn-quantity fw-medium">
-                                                    <span style="font-size: 20px;">+</span>
-                                                </button>
-                                            </div>
-                                            <!-- Harga total per item -->
-                                            <div>
-                                                <span class="fw-bold title-keranjang">
-                                                    <sup class="fw-normal">Rp</sup> 1.500.000
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
 
@@ -387,8 +290,9 @@
                                             <p class="mb-0 text-start subtotal-pembayaran">Subtotal Harga</p>
                                         </div>
                                         <div class="col">
-                                            <span class="fw-bold title-keranjang mb-0 text-start">
-                                                <sup class="fw-normal">Rp</sup> 1.500.000
+                                            <!-- Subtotal Harga -->
+                                            <span id="subtotal-harga" class="fw-bold title-keranjang mb-0 text-start">
+                                                <sup class="fw-normal">Rp</sup> 0
                                             </span>
                                         </div>
                                         <p class="font-italic fw-normal" style="font-size: 11px; color: #FF0000;">
@@ -400,8 +304,8 @@
                                             <p class="mb-0 text-start subtotal-pembayaran">Diskon Product</p>
                                         </div>
                                         <div class="col">
-                                            <span class="fw-bold title-keranjang mb-0 text-start" style="color: #FF0000">
-                                                <sup class="fw-normal">Rp</sup> 300.000
+                                            <span id="diskon-produk" class="fw-bold title-keranjang mb-0 text-start" style="color: #FF0000">
+                                                <sup class="fw-normal">Rp</sup> 0
                                             </span>
                                         </div>
                                     </div>
@@ -413,8 +317,8 @@
                                             <p class="mb-0 text-start pembayaran">Total Pembayaran</p>
                                         </div>
                                         <div class="col">
-                                            <span class="fw-bold title-keranjang mb-0 text-start">
-                                                <sup class="fw-normal">Rp</sup> 1.200.000
+                                            <span id="total-pembayaran" class="fw-bold title-keranjang mb-0 text-start">
+                                                <sup class="fw-normal">Rp</sup> 0
                                             </span>
                                         </div>
                                     </div>
@@ -706,67 +610,13 @@
                 </div>
             </div>
         </div>
+        <div id="toastContainer" class="position-fixed top-0 end-0 p-3" style="z-index: 9999;"></div>
     </main>
 
 
     <!-- footer area -->
     <?php include __DIR__ . '/../templates/footer.php'; ?>
     <!-- footer area end -->
-
-
-    <!-- modal quick shop-->
-    <!-- <div class="modal quickview fade" id="quickview" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="quickview" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i
-                        class="far fa-xmark"></i></button>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-                            <img src="assets/img/product/04.png" alt="#">
-                        </div>
-                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-                            <div class="quickview-content">
-                                <h4 class="quickview-title">Simple Denim Chair</h4>
-                                <div class="quickview-rating">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star-half-alt"></i>
-                                    <i class="far fa-star"></i>
-                                    <span class="rating-count"> (4 Customer Reviews)</span>
-                                </div>
-                                <div class="quickview-price">
-                                    <h5><del>$860</del><span>$740</span></h5>
-                                </div>
-                                <ul class="quickview-list">
-                                    <li>Brand:<span>Ricordi</span></li>
-                                    <li>Category:<span>Living Room</span></li>
-                                    <li>Stock:<span class="stock">Available</span></li>
-                                    <li>Code:<span>789FGSA</span></li>
-                                </ul>
-                                <div class="quickview-cart">
-                                    <a href="#" class="theme-btn">Add to cart</a>
-                                </div>
-                                <div class="quickview-social">
-                                    <span>Share:</span>
-                                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                                    <a target="_blank" href="https://www.instagram.com/furnicefurnishing/"><i
-                                            class="fab fa-instagram"></i></a>
-                                    <a href="#"><i class="fab fa-pinterest-p"></i></a>
-                                    <a href="#"><i class="fab fa-instagram"></i></a>
-                                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
-    <!-- modal quick shop end -->
-
 
     <!-- js -->
     <?php include __DIR__ . '/../Scripts/script.php'; ?>
@@ -815,580 +665,164 @@
         });
     </script>
 
-    <script>
-        // Add focus event to automatically open modal when clicking the search field
+    <!-- <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const searchModal = document.getElementById('searchModal');
-            searchModal.addEventListener('shown.bs.modal', function() {
-                searchModal.querySelector('input').focus();
+            // Tambah qty
+            document.querySelectorAll("[id^='increase-']").forEach(button => {
+                button.addEventListener('click', function() {
+                    const id_cart = this.id.split('-')[1];
+                    const qtyElement = document.getElementById('qty-' + id_cart);
+                    const maxQty = parseInt(qtyElement.getAttribute('data-max'));
+                    let currentQty = parseInt(qtyElement.innerText);
+
+                    if (currentQty < maxQty) {
+                        qtyElement.innerText = currentQty + 1;
+                        updateTotal(id_cart);
+                    } else {
+                        showToast('Jumlah produk sudah mencapai batas maksimum', 'danger');
+                    }
+                });
             });
-        });
 
+            // Kurang qty
+            document.querySelectorAll("[id^='decrease-']").forEach(button => {
+                button.addEventListener('click', function() {
+                    const id_cart = this.id.split('-')[1];
+                    const qtyElement = document.getElementById('qty-' + id_cart);
+                    let currentQty = parseInt(qtyElement.innerText);
 
-        const resetBtn = document.getElementById('resetFilter');
-        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-        const hargaInputs = document.querySelectorAll('.harga-input');
+                    if (currentQty > 1) {
+                        qtyElement.innerText = currentQty - 1;
+                        updateTotal(id_cart);
+                    }
+                });
+            });
 
-        const defaultColor = '#D9D9D9';
-        const activeColor = '#2B4779';
+            // Update total berdasarkan ID
+            function updateTotal(id_cart) {
+                const qty = parseInt(document.getElementById('qty-' + id_cart).innerText);
+                const price = parseFloat(document.getElementById('qty-' + id_cart).getAttribute('data-price'));
 
-        function updateResetButtonState() {
-            const anyChecked = Array.from(checkboxes).some(cb => cb.checked);
-            const anyHargaFilled = Array.from(hargaInputs).some(input => input.value.trim() !== '');
+                const total = qty * price;
 
-            if (anyChecked || anyHargaFilled) {
-                resetBtn.style.backgroundColor = activeColor;
-                resetBtn.style.borderColor = activeColor;
-                resetBtn.style.color = 'white';
-            } else {
-                resetBtn.style.backgroundColor = defaultColor;
-                resetBtn.style.borderColor = defaultColor;
-                resetBtn.style.color = 'black';
+                document.querySelector(`#total-${id_cart}`).innerHTML =
+                    '<sup class="fw-normal">Rp </sup>' + new Intl.NumberFormat('id-ID').format(total);
             }
-        }
 
-        // Listener untuk checkbox
-        checkboxes.forEach(cb => {
-            cb.addEventListener('change', updateResetButtonState);
-        });
-
-        // Listener untuk input harga
-        hargaInputs.forEach(input => {
-            input.addEventListener('input', updateResetButtonState);
-        });
-
-        // Reset button
-        resetBtn.addEventListener('click', function() {
-            // Uncheck semua checkbox
-            checkboxes.forEach(cb => cb.checked = false);
-
-            // Kosongkan input harga
-            hargaInputs.forEach(input => input.value = '');
-
-            // Reset warna tombol
-            updateResetButtonState();
-        });
-
-        // Data produk (untuk contoh)
-        const products = [{
-                title: "CT-IMP Matto Light Brown",
-                description: "Meja ruang tamu aesthetic.",
-                price: "500.000",
-                oldPrice: "600.000",
-                rating: 5,
-                sold: 300,
-                image: "assets/img/product/kursi/ZULU CHAIR WHITE.png",
-                isNew: true
-            },
-            {
-                title: "Scandinavian Coffee Table",
-                description: "Meja kopi minimalis modern.",
-                price: "450.000",
-                oldPrice: "550.000",
-                rating: 4,
-                sold: 250,
-                image: "assets/img/product/kursi/ZULU CHAIR WHITE.png",
-                isNew: false
-            },
-            {
-                title: "Woody Chair Classic",
-                description: "Kursi kayu dengan bantalan nyaman.",
-                price: "350.000",
-                oldPrice: "400.000",
-                rating: 5,
-                sold: 420,
-                image: "assets/img/product/kursi/ZULU CHAIR WHITE.png",
-                isNew: true
-            },
-            {
-                title: "Sofa Corner Premium",
-                description: "Sofa sudut untuk ruang keluarga.",
-                price: "2.500.000",
-                oldPrice: "3.000.000",
-                rating: 5,
-                sold: 150,
-                image: "assets/img/product/kursi/ZULU CHAIR WHITE.png",
-                isNew: false
-            },
-            {
-                title: "Minimalist Side Table",
-                description: "Meja samping dengan laci.",
-                price: "275.000",
-                oldPrice: "325.000",
-                rating: 4,
-                sold: 180,
-                image: "assets/img/product/kursi/ZULU CHAIR WHITE.png",
-                isNew: false
-            },
-            {
-                title: "Dining Chair White",
-                description: "Kursi makan putih elegan.",
-                price: "225.000",
-                oldPrice: "300.000",
-                rating: 4,
-                sold: 320,
-                image: "assets/img/product/kursi/ZULU CHAIR WHITE.png",
-                isNew: true
-            },
-            {
-                title: "Rattan Accent Chair",
-                description: "Kursi rotan untuk ruang tamu.",
-                price: "450.000",
-                oldPrice: "550.000",
-                rating: 5,
-                sold: 200,
-                image: "assets/img/product/kursi/ZULU CHAIR WHITE.png",
-                isNew: false
-            },
-            {
-                title: "Modern TV Cabinet",
-                description: "Kabinet TV dengan penyimpanan.",
-                price: "1.200.000",
-                oldPrice: "1.500.000",
-                rating: 5,
-                sold: 120,
-                image: "assets/img/product/kursi/ZULU CHAIR WHITE.png",
-                isNew: true
-            },
-            {
-                title: "Storage Ottoman",
-                description: "Ottoman dengan penyimpanan.",
-                price: "350.000",
-                oldPrice: "400.000",
-                rating: 4,
-                sold: 180,
-                image: "assets/img/product/kursi/ZULU CHAIR WHITE.png",
-                isNew: false
-            },
-            {
-                title: "Round Dining Table",
-                description: "Meja makan bulat untuk 4 orang.",
-                price: "750.000",
-                oldPrice: "900.000",
-                rating: 5,
-                sold: 90,
-                image: "assets/img/product/kursi/ZULU CHAIR WHITE.png",
-                isNew: true
-            },
-            {
-                title: "Bedside Table Oak",
-                description: "Meja samping tempat tidur kayu oak.",
-                price: "320.000",
-                oldPrice: "380.000",
-                rating: 4,
-                sold: 220,
-                image: "assets/img/product/kursi/ZULU CHAIR WHITE.png",
-                isNew: false
-            },
-            {
-                title: "Bar Stool Black",
-                description: "Kursi bar hitam tinggi.",
-                price: "280.000",
-                oldPrice: "350.000",
-                rating: 4,
-                sold: 150,
-                image: "assets/img/product/kursi/ZULU CHAIR WHITE.png",
-                isNew: true
-            },
-            {
-                title: "Office Desk White",
-                description: "Meja kerja putih dengan laci.",
-                price: "850.000",
-                oldPrice: "950.000",
-                rating: 5,
-                sold: 80,
-                image: "assets/img/product/kursi/ZULU CHAIR WHITE.png",
-                isNew: false
-            },
-            {
-                title: "Bathroom Cabinet",
-                description: "Kabinet kamar mandi dengan cermin.",
-                price: "420.000",
-                oldPrice: "500.000",
-                rating: 4,
-                sold: 110,
-                image: "assets/img/product/kursi/ZULU CHAIR WHITE.png",
-                isNew: true
-            },
-            {
-                title: "Bookshelf Modern",
-                description: "Rak buku minimalis modern.",
-                price: "650.000",
-                oldPrice: "750.000",
-                rating: 5,
-                sold: 95,
-                image: "assets/img/product/kursi/ZULU CHAR WHITE.png",
-                isNew: false
-            },
-            {
-                title: "Kitchen Island Small",
-                description: "Pulau dapur kecil dengan penyimpanan.",
-                price: "900.000",
-                oldPrice: "1.100.000",
-                rating: 5,
-                sold: 70,
-                image: "assets/img/product/kursi/ZULU CHAIR WHITE.png",
-                isNew: true
-            }
-        ];
-
-        // Variabel untuk pagination
-        let currentPage = 1;
-        let productsPerPage = 12; // Default, akan berubah berdasarkan viewport
-
-        // Fungsi untuk menentukan jumlah produk per halaman berdasarkan ukuran layar
-        function setProductsPerPage() {
-            if (window.innerWidth >= 992) { // Laptop (lg)
-                // 3 produk per baris, 4 baris = 12 produk
-                return 12;
-            } else if (window.innerWidth >= 768) { // Tablet (md)
-                // 2 produk per baris, 4 baris = 8 produk
-                return 8;
-            } else {
-                // 2 produk per baris, 4 baris = 8 produk untuk mobile
-                return 8;
-            }
-        }
-
-        // Hitung total halaman
-        function calculateTotalPages() {
-            return Math.ceil(products.length / productsPerPage);
-        }
-
-        // Fungsi untuk membuat card produk
-        function createProductCard(product) {
-            return `
-                             <div class="col">
-                                <div class="card shadow position-relative rounded-4 p-2">
-                            ${product.isNew ? `
-                            <!-- Corner Ribbon -->
-                        <div class="position-absolute ribbon-wrapper">
-                                                <div class="ribbon text-white text-uppercase fw-bold text-center">
-                                                    New Product
-                                                </div>
-                                    </div>
-                    ` : ''}
-
-                    <!-- Product Image -->
-                    <div class="text-center pt-3">
-                    <img src="${product.image}" class="img-fluid product-image" alt="Product Image">
-                    </div>
-
-                    <div class="bodykartu">
-                            <div class="d-flex flex-column ">
-                                <!-- Product Details -->
-                                <div class="">
-                                    <!-- <h5 class="">
-                                        ${product.title}
-                                </h5> -->
-                                    <p class="card-title text-truncate fw-medium product-title">${product.description}
-                                    </p>
-
-                                    <p class="card-text text-truncate product-desc">Meja ruang tamu
-                                        aesthetic.</p>
-                                    <div class="d-flex gap-1 align-items-center">
-                                        ${createStarRating(product.rating)}
-                                        <small class="text-muted fst-italic ms-1 sold-text">${product.sold} terjual</small>
-                                    </div>
-                                </div>
-
-                                <!-- Price Section -->
-                                <div class="mt-auto">
-                                    <div class="d-flex flex-wrap align-items-baseline">
-                                        <div class="me-2">
-                                            <span class="fw-bold price">
-                                                <sup class="fw-normal">Rp</sup> ${product.price}
-                                            </span>
-                                        </div>
-                                        <div>
-                                            <span class="fw-normal text-danger old-price">
-                                                <sup>Rp</sup>
-                                                <span class="text-decoration-line-through">${product.oldPrice}</span>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                    <div class="row g-2">
-                                                <div class="col-6">
-                                                    <button class="btn buy-btn w-100">Beli</button>
-                                                </div>
-                                                <div class="col-6">
-                                                    <button class="btn cart-btn w-100">+ Keranjang</button>
-                                                </div>
-                                            </div>
-                            </div>
-                        </div>
+            // Toast
+            function showToast(message, type) {
+                let toastHTML = `
+                <div class="toast align-items-center text-bg-${type} border-0 shadow" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="3000">
+                    <div class="d-flex">
+                        <div class="toast-body">${message}</div>
+                        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
                     </div>
                 </div>
-  `;
-        }
-
-        // Fungsi untuk membuat rating bintang
-        function createStarRating(rating) {
-            let stars = '';
-            for (let i = 0; i < 5; i++) {
-                if (i < rating) {
-                    stars += '<i class="bi bi-star-fill text-warning small-icon"></i>';
-                } else {
-                    stars += '<i class="bi bi-star text-warning small-icon"></i>';
-                }
+            `;
+                document.getElementById('toastContainer').insertAdjacentHTML('beforeend', toastHTML);
+                new bootstrap.Toast(document.querySelector('.toast:last-child')).show();
             }
-            return stars;
-        }
-
-        // Fungsi untuk membuat pagination
-        function createPagination() {
-            const totalPages = calculateTotalPages();
-            let paginationHTML = `
-    <nav aria-label="Page navigation">
-      <ul class="pagination">
-        <li class="page-item ${currentPage === 1 ? 'disabled' : ''}">
-          <a class="page-link" href="#" aria-label="Previous" data-page="prev">
-            <span class="double-arrow">&laquo;</span>
-          </a>
-        </li>
-  `;
-
-            // Menentukan range halaman yang ditampilkan (maksimal 5)
-            let startPage = Math.max(1, currentPage - 2);
-            let endPage = Math.min(totalPages, startPage + 4);
-
-            // Jika kurang dari 5 halaman untuk ditampilkan di akhir, sesuaikan startPage
-            if (endPage - startPage < 4) {
-                startPage = Math.max(1, endPage - 4);
-            }
-
-            // Tambahkan class untuk container scroll jika total halaman > 5
-            const scrollClass = totalPages > 5 ? 'pagination-scroll' : '';
-
-            // Tambahkan halaman ke pagination
-            for (let i = startPage; i <= endPage; i++) {
-                paginationHTML += `
-      <li class="page-item ${currentPage === i ? 'active' : ''}">
-        <a class="page-link" href="#" data-page="${i}">${i}</a>
-      </li>
-    `;
-            }
-
-            paginationHTML += `
-        <li class="page-item ${currentPage === totalPages ? 'disabled' : ''}">
-          <a class="page-link" href="#" aria-label="Next" data-page="next">
-            <span class="double-arrow-right">&raquo;</span>
-          </a>
-        </li>
-      </ul>
-    </nav>
-  `;
-
-            return paginationHTML;
-        }
-
-        // Fungsi untuk menampilkan produk pada halaman tertentu
-        function displayProducts() {
-            // Gunakan selector yang spesifik dengan ID untuk produk container
-            const productContainer = document.querySelector('#product-list');
-            const paginationContainer = document.querySelector('#pagination-container');
-
-            if (!productContainer || !paginationContainer) return;
-
-            // Hitung produk untuk halaman saat ini
-            const startIndex = (currentPage - 1) * productsPerPage;
-            const endIndex = Math.min(startIndex + productsPerPage, products.length);
-            const currentProducts = products.slice(startIndex, endIndex);
-
-            // Buat HTML untuk produk
-            let productsHTML = '';
-            currentProducts.forEach(product => {
-                productsHTML += createProductCard(product);
-            });
-
-            // Tampilkan produk
-            productContainer.innerHTML = productsHTML;
-
-            // Tampilkan pagination
-            paginationContainer.innerHTML = createPagination();
-
-            // Tambahkan event listener untuk pagination
-            const pageLinks = paginationContainer.querySelectorAll('.page-link');
-            pageLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const pageData = this.getAttribute('data-page');
-
-                    if (pageData === 'prev') {
-                        if (currentPage > 1) currentPage--;
-                    } else if (pageData === 'next') {
-                        if (currentPage < calculateTotalPages()) currentPage++;
-                    } else {
-                        currentPage = parseInt(pageData);
-                    }
-
-                    displayProducts();
-
-                    // Scroll dengan smooth ke bagian atas produk
-                    productContainer.scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                });
-            });
-        }
-
-        // CSS untuk pagination scroll
-        function addPaginationStyles() {
-            if (!document.getElementById('pagination-styles')) {
-                const style = document.createElement('style');
-                style.id = 'pagination-styles';
-                style.textContent = `
-      .pagination-container {
-        overflow-x: auto;
-        padding-bottom: 5px;
-      }
-      
-      .pagination-container::-webkit-scrollbar {
-        height: 5px;
-      }
-      
-      .pagination-container::-webkit-scrollbar-track {
-        background: #f1f1f1;
-        border-radius: 5px;
-      }
-      
-      .pagination-container::-webkit-scrollbar-thumb {
-        background: #ccc;
-        border-radius: 5px;
-      }
-      
-      .pagination-container::-webkit-scrollbar-thumb:hover {
-        background: #aaa;
-      }
-      
-      .pagination {
-        flex-wrap: nowrap;
-        margin-bottom: 0;
-      }
-      
-      @media (max-width: 576px) {
-        .pagination .page-link {
-          padding: 0.25rem 0.5rem;
-          font-size: 0.875rem;
-        }
-      }
-    `;
-                document.head.appendChild(style);
-            }
-        }
-
-        // Persiapkan struktur HTML untuk produk dan pagination jika belum ada
-        function prepareHTML() {
-            // Temukan container yang sesuai atau buat jika belum ada
-            let mainContainer = document.querySelector('#products-with-pagination');
-
-            if (!mainContainer) {
-                // Jika tidak ada, buat container utama
-                mainContainer = document.createElement('div');
-                mainContainer.id = 'products-with-pagination';
-                document.body.appendChild(mainContainer);
-
-                // Buat container untuk produk
-                const productSection = document.createElement('div');
-                productSection.className = 'container';
-                productSection.innerHTML = `
-      <div id="product-list" class="row row-cols-2 row-cols-md-2 row-cols-lg-3 g-4"></div>
-    `;
-                mainContainer.appendChild(productSection);
-
-                // Buat container untuk pagination
-                const paginationContainer = document.createElement('div');
-                paginationContainer.className = 'container mt-4';
-                paginationContainer.innerHTML = `
-      <div id="pagination-container" class="d-flex justify-content-center pagination-container"></div>
-    `;
-                mainContainer.appendChild(paginationContainer);
-            }
-        }
-
-        // Jalankan ketika DOM sudah siap
-        document.addEventListener('DOMContentLoaded', function() {
-            // Tambahkan styles untuk pagination
-            addPaginationStyles();
-
-            // Persiapkan HTML jika diperlukan
-            prepareHTML();
-
-            // Set produk per halaman berdasarkan ukuran layar
-            productsPerPage = setProductsPerPage();
-
-            // Tampilkan produk dan pagination
-            displayProducts();
-
-            // Update saat ukuran layar berubah
-            window.addEventListener('resize', function() {
-                const newProductsPerPage = setProductsPerPage();
-
-                // Hanya update jika jumlah produk per halaman berubah
-                if (newProductsPerPage !== productsPerPage) {
-                    productsPerPage = newProductsPerPage;
-
-                    // Jika halaman saat ini melebihi total halaman baru
-                    if (currentPage > calculateTotalPages()) {
-                        currentPage = calculateTotalPages();
-                    }
-
-                    displayProducts();
-                }
-            });
         });
-
-
-        // filter data
-    </script>
+    </script> -->
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const scrollContainer = document.querySelector('.row.flex-nowrap');
-            let scrollPosition = 0;
-            const cardWidth = scrollContainer.querySelector('.col-6').offsetWidth;
-            const scrollSpeed = 5000; // ms between scrolls
-
-            function autoScroll() {
-                if (scrollPosition >= scrollContainer.scrollWidth - scrollContainer.clientWidth) {
-                    // Reset to beginning when reaching the end
-                    scrollPosition = 0;
-                } else {
-                    // Move by one card width
-                    scrollPosition += cardWidth + 16; // 16px accounts for gutter
-                }
-
-                scrollContainer.scrollTo({
-                    left: scrollPosition,
-                    behavior: 'smooth'
-                });
-
-                setTimeout(autoScroll, scrollSpeed);
+        document.addEventListener("DOMContentLoaded", function() {
+            function formatRupiah(angka) {
+                return angka.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
             }
 
-            // Start the auto-scrolling after 3 seconds
-            setTimeout(autoScroll, 3000);
+            function showToast(message, type = 'success') {
+                let toastHTML = `
+                <div class="toast align-items-center text-bg-${type} border-0 shadow" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="3000">
+                    <div class="d-flex">
+                        <div class="toast-body">${message}</div>
+                        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                </div>
+            `;
+                document.getElementById('toastContainer').insertAdjacentHTML('beforeend', toastHTML);
+                new bootstrap.Toast(document.querySelector('.toast:last-child')).show();
+            }
 
-            // Pause scrolling when user interacts with the container
-            scrollContainer.addEventListener('mouseenter', function() {
-                clearTimeout(window.scrollTimeout);
+            function updateTotalPembayaran() {
+                let subtotal = 0;
+                let totalDiskon = 0;
+                let total = 0;
+
+                document.querySelectorAll('.item-checkbox').forEach(function(checkbox) {
+                    const id = checkbox.dataset.id;
+                    const harga = parseInt(checkbox.dataset.price);
+                    const diskonPersen = parseFloat(checkbox.dataset.discount);
+                    const qty = parseInt(document.getElementById('qty-' + id).textContent);
+                    const diskonNominal = (diskonPersen / 100) * harga;
+                    const hargaSetelahDiskon = harga - diskonNominal;
+
+                    // Jika produk dicentang, hitung dan tampilkan totalnya
+                    if (checkbox.checked) {
+                        subtotal += harga * qty;
+                        totalDiskon += diskonNominal * qty;
+                        total += hargaSetelahDiskon * qty;
+
+                        const elTotalProduk = document.getElementById('total-' + id);
+                        if (elTotalProduk) {
+                            elTotalProduk.innerHTML = `<sup class="fw-normal">Rp</sup> ${formatRupiah(hargaSetelahDiskon * qty)}`;
+                        }
+                    } else {
+                        // Jika tidak dicentang, kembalikan tampilan harga asli
+                        const elTotalProduk = document.getElementById('total-' + id);
+                        if (elTotalProduk) {
+                            elTotalProduk.innerHTML = `<sup class="fw-normal">Rp</sup> ${formatRupiah(harga * qty)}`;
+                        }
+                    }
+                });
+
+                document.getElementById('subtotal-harga').innerHTML = '<sup class="fw-normal">Rp</sup> ' + formatRupiah(subtotal);
+                document.getElementById('diskon-produk').innerHTML = '<sup class="fw-normal">Rp</sup> ' + formatRupiah(totalDiskon);
+                document.getElementById('total-pembayaran').innerHTML = '<sup class="fw-normal">Rp</sup> ' + formatRupiah(total);
+            }
+
+
+            document.querySelectorAll('.item-checkbox').forEach(function(checkbox) {
+                checkbox.addEventListener('change', function() {
+                    updateTotalPembayaran();
+                });
             });
 
-            scrollContainer.addEventListener('mouseleave', function() {
-                window.scrollTimeout = setTimeout(autoScroll, scrollSpeed);
+            document.querySelectorAll('.increase-qty').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    const id = btn.dataset.id;
+                    const qtyEl = document.getElementById('qty-' + id);
+                    let qty = parseInt(qtyEl.textContent);
+                    const max = parseInt(qtyEl.dataset.max);
+
+                    if (qty < max) {
+                        qty++;
+                        qtyEl.textContent = qty;
+                        updateTotalPembayaran();
+                    } else {
+                        showToast('Jumlah maksimal tercapai', 'warning');
+                    }
+                });
             });
 
-            // Handle touch events for mobile
-            scrollContainer.addEventListener('touchstart', function() {
-                clearTimeout(window.scrollTimeout);
-            });
+            document.querySelectorAll('.decrease-qty').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    const id = btn.dataset.id;
+                    const qtyEl = document.getElementById('qty-' + id);
+                    let qty = parseInt(qtyEl.textContent);
 
-            scrollContainer.addEventListener('touchend', function() {
-                window.scrollTimeout = setTimeout(autoScroll, scrollSpeed);
+                    if (qty > 1) {
+                        qty--;
+                        qtyEl.textContent = qty;
+                        updateTotalPembayaran();
+                    } else {
+                        showToast('Jumlah minimal adalah 1', 'warning');
+                    }
+                });
             });
         });
     </script>
+
 
 </body>
 

@@ -1,4 +1,4 @@
--- Active: 1727836521955@@127.0.0.1@3306@php_login_test
+-- Active: 1745583296991@@127.0.0.1@3306@php_login_test
 -- Active: 1745562774050@@192.168.1.238@9356@web-furnice
 
 -- DML
@@ -67,3 +67,9 @@ ADD COLUMN harga INT AFTER qty;
 
 
 
+ALTER TABLE cart ADD id_detail_product INT, ADD id_motif_produk INT,
+ADD FOREIGN KEY (id_detail_product) REFERENCES detail_product(id),
+ADD FOREIGN KEY (id_motif_produk) REFERENCES motif_produk(id);
+
+
+SHOW CREATE TABLE cart;

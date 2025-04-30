@@ -10722,3 +10722,15 @@ input[type="checkbox"].form-check-input {
     display: none;
   }
 }
+
+
+.checkbox-input-all{
+  width: 16px;
+  height: 16px;
+  font-size: 12px;
+  border: 1px solid #95a5a6 !important;
+  border-color: var(--theme-color);
+  background-color: #2b4779;
+  border-color: #2b4779;
+
+}

@@ -16,6 +16,8 @@ class ProductController
 {
     public ProductServis $productServiser;
     public WislistServis $wishlistServiser;
+    public static string $COOKIE_NAME = 'X-FURNIC-SESSION';
+    private \PDO $connection;
 
 
     public function __construct()
@@ -25,6 +27,7 @@ class ProductController
         $productRepository = new ProductRepository($connection);
         $sessionRepository = new SessionRepository($connection);
         $userRepository = new UserRepository($connection);
+        $this->connection = $connection;
 
         $this->productServiser = new ProductServis($productRepository);
         $this->wishlistServiser = new WislistServis(
@@ -156,5 +159,4 @@ class ProductController
             }
         }
     }
-
 }
