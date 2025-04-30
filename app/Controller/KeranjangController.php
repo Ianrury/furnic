@@ -167,14 +167,24 @@ class KeranjangController
     {
         header('Content-Type: application/json');
 
-        $ids = $_POST["id"] ?? [];
+        // Ambil dan decode id_cart dari POST
+        $idsRaw = $_POST["product_ids"] ?? '[]';
+        $ids = json_decode($idsRaw, true); // Decode dari JSON string ke array PHP
+
+        // Debug (opsional)
+        // error_log(print_r($ids, true)); 
+        // var_dump($ids);
+
+        // Ambil session ID dari cookie
         $sessionId = $_COOKIE[self::$COOKIE_NAME] ?? null;
 
+        // Validasi awal
         if (!$sessionId || !is_array($ids) || empty($ids)) {
             echo json_encode(['status' => 'error', 'message' => 'Permintaan tidak valid']);
             return;
         }
 
+        // Ambil id_user dari session
         $statement = $this->connection->prepare("SELECT id_user FROM session WHERE id_session = ? LIMIT 1");
         $statement->execute([$sessionId]);
         $session = $statement->fetch(\PDO::FETCH_ASSOC);
@@ -186,19 +196,26 @@ class KeranjangController
 
         $id_customer = $session['id_user'];
 
-        $placeholders = implode(',', array_fill(0, count($ids), '?'));
-        $params = array_merge([$id_customer], $ids);
+        // Loop dan hapus setiap item berdasarkan id_cart
+        foreach ($ids as $id_cart) {
+            if (!is_numeric($id_cart)) {
+                echo json_encode(['status' => 'error', 'message' => 'ID cart tidak valid']);
+                return;
+            }
 
-        $sql = "DELETE FROM cart WHERE id_customer = ? AND id_product IN ($placeholders)";
-        $delete = $this->connection->prepare($sql);
-        $success = $delete->execute($params);
+            // Hapus berdasarkan id_cart dan id_customer untuk keamanan
+            $delete = $this->connection->prepare("DELETE FROM cart WHERE id_cart = ? AND id_customer = ?");
+            $success = $delete->execute([$id_cart, $id_customer]);
 
-        if (!$success) {
-            $error = $delete->errorInfo();
-            echo json_encode(['status' => 'error', 'message' => 'Gagal menghapus', 'error' => $error]);
-            return;
+            if (!$success) {
+                $error = $delete->errorInfo();
+                echo json_encode(['status' => 'error', 'message' => 'Gagal menghapus item', 'error' => $error]);
+                return;
+            }
         }
 
-        echo json_encode(['status' => 'success', 'message' => 'Produk berhasil dihapus']);
+        echo json_encode(['success' => true, 'message' => 'Item berhasil dihapus dari keranjang']);
     }
+
+
 }

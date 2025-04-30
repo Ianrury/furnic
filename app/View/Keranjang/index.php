@@ -125,56 +125,64 @@ function base_url($path = '')
                         <div class="row">
                             <!-- List Produk -->
                             <div class="col-md-8">
-                                <!-- <div class="rounded-2 ms-4 d-flex justify-content-between mb-3">
+                                <div class="rounded-2 ms-4 d-flex justify-content-between mb-3">
                                     <div>
                                         <div>
-                                            <input class="form-check-input item-checkbox"
-                                                type="checkbox" id="checkAll">
+                                            <input class="form-check-input item-checkbox" type="checkbox" id="checkAll">
                                         </div>
                                         <div class="ms-3">
                                             <p style="font-size: 14px;">Pilih Semua</p>
                                         </div>
                                     </div>
-                                    <div id="deleteSelectedContainer" class="d-none" >
-                                        <p id="btnDeleteSelected" style="font-size: 14px; color: #ff3838; cursor: pointer;">Hapus</p>
+                                    <div id="deleteSelectedContainer" class="d-none">
+                                        <p id="btnDeleteSelected"
+                                            style="font-size: 14px; color: #ff3838; cursor: pointer;">Hapus</p>
                                     </div>
-                                </div> -->
+                                </div>
                                 <div class="d-flex flex-column gap-3">
                                     <!-- Mulai looping produk di sini -->
                                     <?php foreach ($model['data'] as $item): ?>
                                         <div class="d-flex gap-3 align-items-start">
                                             <div class="rounded-2 ms-4">
-                                                <input class="form-check-input item-checkbox"
-                                                    type="checkbox"
-                                                    id="checkbox-<?= $item['id_cart'] ?>"
-                                                    data-id="<?= $item['id_cart'] ?>"
+                                                <input class="form-check-input item-checkbox" type="checkbox"
+                                                    id="checkbox-<?= $item['id_cart'] ?>" data-id="<?= $item['id_cart'] ?>"
                                                     data-price="<?= $item['harga'] ?>"
                                                     data-discount="<?= $item['diskon'] ?>">
 
                                             </div>
-                                            <div class="w-100 p-3 d-flex align-items-center justify-content-between rounded-4" style="border: 1px solid #D9D9D9;">
+                                            <div class="w-100 p-3 d-flex align-items-center justify-content-between rounded-4"
+                                                style="border: 1px solid #D9D9D9;">
                                                 <div class="d-flex gap-3 align-items-center">
                                                     <div class="card shadow position-relative rounded-4 p-2">
                                                         <!-- Corner Ribbon -->
                                                         <div class="position-absolute ribbon-wrapper-keranjang">
-                                                            <div class="ribbon-keranjang text-white text-uppercase fw-bold text-center">
+                                                            <div
+                                                                class="ribbon-keranjang text-white text-uppercase fw-bold text-center">
                                                                 New Product
                                                             </div>
                                                         </div>
                                                         <!-- Product Image -->
                                                         <div class="text-center pt-3">
-                                                            <img src="assets/img/product/<?= htmlspecialchars($item['foto']) ?>" class="img-fluid product-image-keranjang" alt="Product Image">
+                                                            <img src="assets/img/product/<?= htmlspecialchars($item['foto']) ?>"
+                                                                class="img-fluid product-image-keranjang"
+                                                                alt="Product Image">
                                                         </div>
                                                     </div>
                                                     <div>
-                                                        <h5 class="title-keranjang"><?= htmlspecialchars($item['nama_product']) ?></h5>
-                                                        <p class="name-keranjang"> <?= htmlspecialchars($item['deskripsi']) ?></p>
+                                                        <h5 class="title-keranjang">
+                                                            <?= htmlspecialchars($item['nama_product']) ?>
+                                                        </h5>
+                                                        <p class="name-keranjang">
+                                                            <?= htmlspecialchars($item['deskripsi']) ?>
+                                                        </p>
                                                         <ul class="list-unstyled m-0 p-0">
                                                             <li class="motif-keranjang">
-                                                                <span class="label-keranjang">Warna</span> : <span class="value-keranjang"><?= htmlspecialchars($item['warna']) ?></span>
+                                                                <span class="label-keranjang">Warna</span> : <span
+                                                                    class="value-keranjang"><?= htmlspecialchars($item['warna']) ?></span>
                                                             </li>
                                                             <li class="motif-keranjang">
-                                                                <span class="label-keranjang">Motif</span> : <span class="value-keranjang"><?= htmlspecialchars($item['motif']) ?></span>
+                                                                <span class="label-keranjang">Motif</span> : <span
+                                                                    class="value-keranjang"><?= htmlspecialchars($item['motif']) ?></span>
                                                             </li>
                                                         </ul>
                                                         <div class="d-flex flex-wrap align-items-baseline">
@@ -183,7 +191,7 @@ function base_url($path = '')
                                                                     <?php
                                                                     $harga_normal = $item['harga']; // harga normal dari database
                                                                     $diskon = $item['diskon']; // diskon dari database, bisa null atau 0
-
+                                                                
                                                                     // Jika diskon ada (lebih dari 0), hitung harga setelah diskon
                                                                     if ($diskon > 0):
                                                                         // Menghitung nominal diskon
@@ -196,7 +204,8 @@ function base_url($path = '')
                                                                     endif;
                                                                     ?>
 
-                                                                    <sup class="fw-normal">Rp</sup> <?= number_format($harga_setelah_diskon, 0, ',', '.') ?>
+                                                                    <sup class="fw-normal">Rp</sup>
+                                                                    <?= number_format($harga_setelah_diskon, 0, ',', '.') ?>
 
                                                                 </span>
                                                             </div>
@@ -204,20 +213,21 @@ function base_url($path = '')
                                                                 <?php
                                                                 $harga_normal = $item['harga']; // harga normal dari database
                                                                 $diskon = $item['diskon']; // diskon dari database, bisa null atau 0
-
+                                                            
                                                                 // Jika diskon ada (lebih dari 0), tampilkan harga lama dengan diskon
                                                                 if ($diskon > 0):
                                                                     // Menghitung nominal diskon
                                                                     $nominal_diskon = ($diskon / 100) * $harga_normal;
-                                                                ?>
+                                                                    ?>
                                                                     <div>
                                                                         <span class="fw-normal text-danger old-price">
                                                                             <sup>Rp</sup>
-                                                                            <span class="text-decoration-line-through"><?= number_format($nominal_diskon, 0, ',', '.') ?></span>
+                                                                            <span
+                                                                                class="text-decoration-line-through"><?= number_format($nominal_diskon, 0, ',', '.') ?></span>
 
                                                                         </span>
                                                                     </div>
-                                                                <?php
+                                                                    <?php
                                                                 endif;
                                                                 ?>
 
@@ -228,8 +238,9 @@ function base_url($path = '')
                                                 </div>
                                                 <!-- Quantity -->
                                                 <div class="d-flex align-items-center">
-                                                    <button class="btn-quantity increase-qty" data-id="<?= $item['id_cart'] ?>">
-                                                        <span style="font-size: 20px;">+</span>
+                                                    <button class="btn-quantity decrease-qty"
+                                                        data-id="<?= $item['id_cart'] ?>">
+                                                        <span style="font-size: 20px;">-</span>
                                                     </button>
                                                     <span class="mx-4 fw-normal text-black" style="font-size: 14px;"
                                                         id="qty-<?= $item['id_cart'] ?>"
@@ -237,10 +248,9 @@ function base_url($path = '')
                                                         data-price="<?= ($item['diskon'] > 0) ? ($item['harga'] - ($item['diskon'] / 100 * $item['harga'])) : $item['harga'] ?>">
                                                         <?= ($item['qty_cart'] > $item['qty_motif']) ? $item['qty_motif'] : $item['qty_cart'] ?>
                                                     </span>
-
-
-                                                    <button class="btn-quantity decrease-qty" data-id="<?= $item['id_cart'] ?>">
-                                                        <span style="font-size: 20px;">-</span>
+                                                    <button class="btn-quantity increase-qty"
+                                                        data-id="<?= $item['id_cart'] ?>">
+                                                        <span style="font-size: 20px;">+</span>
                                                     </button>
 
                                                 </div>
@@ -253,7 +263,7 @@ function base_url($path = '')
                                                     // Menghitung harga setelah diskon (jika ada)
                                                     $harga_normal = $item['harga']; // Harga normal dari database
                                                     $diskon = $item['diskon']; // Diskon dari database
-
+                                                
                                                     // Jika diskon ada, hitung harga setelah diskon
                                                     if ($diskon > 0) {
                                                         $nominal_diskon = ($diskon / 100) * $harga_normal; // Nominal diskon
@@ -265,8 +275,10 @@ function base_url($path = '')
                                                     // Hitung total harga
                                                     $total = $qty * $harga_setelah_diskon;
                                                     ?>
-                                                    <span id="total-<?= $item['id_cart'] ?>" class="fw-bold title-keranjang total-produk-detail">
-                                                        <sup class="fw-normal">Rp</sup> <?= number_format($total, 0, ',', '.') ?>
+                                                    <span id="total-<?= $item['id_cart'] ?>"
+                                                        class="fw-bold title-keranjang total-produk-detail">
+                                                        <sup class="fw-normal">Rp</sup>
+                                                        <?= number_format($total, 0, ',', '.') ?>
                                                     </span>
 
 
@@ -281,7 +293,8 @@ function base_url($path = '')
 
                             <!-- Detail Pembayaran -->
                             <div class="col-md-4">
-                                <div class="rounded-4 p-3 box-shadow-keranjang align-self-start" style="border: 1px solid #D9D9D9;">
+                                <div class="rounded-4 p-3 box-shadow-keranjang align-self-start"
+                                    style="border: 1px solid #D9D9D9;">
                                     <div>
                                         <h4 class="fw-bold pembayaran">Detail Pembayaran</h4>
                                     </div>
@@ -304,7 +317,8 @@ function base_url($path = '')
                                             <p class="mb-0 text-start subtotal-pembayaran">Diskon Product</p>
                                         </div>
                                         <div class="col">
-                                            <span id="diskon-produk" class="fw-bold title-keranjang mb-0 text-start" style="color: #FF0000">
+                                            <span id="diskon-produk" class="fw-bold title-keranjang mb-0 text-start"
+                                                style="color: #FF0000">
                                                 <sup class="fw-normal">Rp</sup> 0
                                             </span>
                                         </div>
@@ -323,7 +337,8 @@ function base_url($path = '')
                                         </div>
                                     </div>
                                     <div class="mt-3">
-                                        <button class="btn btn-buy w-100 rounded-3 fw-bold" style="font-size: 14px;">Beli
+                                        <button class="btn btn-buy w-100 rounded-3 fw-bold"
+                                            style="font-size: 14px;">Beli
                                             Sekarang</button>
                                     </div>
                                 </div>
@@ -640,17 +655,17 @@ function base_url($path = '')
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const offcanvasToggler = document.getElementById('offcanvasToggler');
             const offcanvasNavbar = document.getElementById('offcanvasNavbar');
 
             // Mencegah pembuatan backdrop
-            offcanvasNavbar.addEventListener('show.bs.offcanvas', function() {
+            offcanvasNavbar.addEventListener('show.bs.offcanvas', function () {
                 document.querySelectorAll('.offcanvas-backdrop').forEach(el => el.remove());
             });
 
             // Alternatif: nonaktifkan backdrop sepenuhnya
-            offcanvasNavbar.addEventListener('shown.bs.offcanvas', function() {
+            offcanvasNavbar.addEventListener('shown.bs.offcanvas', function () {
                 const backdrops = document.querySelectorAll('.offcanvas-backdrop');
                 backdrops.forEach(backdrop => {
                     backdrop.classList.remove('show');
@@ -659,7 +674,7 @@ function base_url($path = '')
             });
 
             // Pastikan backdrop dihapus saat menutup
-            offcanvasNavbar.addEventListener('hidden.bs.offcanvas', function() {
+            offcanvasNavbar.addEventListener('hidden.bs.offcanvas', function () {
                 document.querySelectorAll('.offcanvas-backdrop').forEach(el => el.remove());
             });
         });
@@ -726,30 +741,39 @@ function base_url($path = '')
     </script> -->
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
+            // Variable to store selected product IDs
+            let selectedProductIds = [];
+
+            // Format currency in Rupiah
             function formatRupiah(angka) {
                 return angka.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
             }
 
+            // Show toast notification
             function showToast(message, type = 'success') {
                 let toastHTML = `
-                <div class="toast align-items-center text-bg-${type} border-0 shadow" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="3000">
-                    <div class="d-flex">
-                        <div class="toast-body">${message}</div>
-                        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-                    </div>
+            <div class="toast align-items-center text-bg-${type} border-0 shadow" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="3000">
+                <div class="d-flex">
+                    <div class="toast-body">${message}</div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
                 </div>
-            `;
+            </div>
+        `;
                 document.getElementById('toastContainer').insertAdjacentHTML('beforeend', toastHTML);
                 new bootstrap.Toast(document.querySelector('.toast:last-child')).show();
             }
 
+            // Calculate and update the total payment
             function updateTotalPembayaran() {
                 let subtotal = 0;
                 let totalDiskon = 0;
                 let total = 0;
+                selectedProductIds = []; // Reset selected products
 
-                document.querySelectorAll('.item-checkbox').forEach(function(checkbox) {
+                document.querySelectorAll('.item-checkbox').forEach(function (checkbox) {
+                    if (checkbox.id === 'checkAll') return; // Skip the "Select All" checkbox
+
                     const id = checkbox.dataset.id;
                     const harga = parseInt(checkbox.dataset.price);
                     const diskonPersen = parseFloat(checkbox.dataset.discount);
@@ -757,39 +781,78 @@ function base_url($path = '')
                     const diskonNominal = (diskonPersen / 100) * harga;
                     const hargaSetelahDiskon = harga - diskonNominal;
 
-                    // Jika produk dicentang, hitung dan tampilkan totalnya
+                    // If product is checked, calculate and display its total
                     if (checkbox.checked) {
                         subtotal += harga * qty;
                         totalDiskon += diskonNominal * qty;
                         total += hargaSetelahDiskon * qty;
+                        selectedProductIds.push(id); // Add ID to selected products array
 
                         const elTotalProduk = document.getElementById('total-' + id);
                         if (elTotalProduk) {
                             elTotalProduk.innerHTML = `<sup class="fw-normal">Rp</sup> ${formatRupiah(hargaSetelahDiskon * qty)}`;
                         }
                     } else {
-                        // Jika tidak dicentang, kembalikan tampilan harga asli
+                        // If not checked, show original price
                         const elTotalProduk = document.getElementById('total-' + id);
                         if (elTotalProduk) {
-                            elTotalProduk.innerHTML = `<sup class="fw-normal">Rp</sup> ${formatRupiah(harga * qty)}`;
+                            elTotalProduk.innerHTML = `<sup class="fw-normal">Rp</sup> ${formatRupiah(hargaSetelahDiskon * qty)}`;
                         }
                     }
                 });
 
+                // Update totals in the summary section
                 document.getElementById('subtotal-harga').innerHTML = '<sup class="fw-normal">Rp</sup> ' + formatRupiah(subtotal);
                 document.getElementById('diskon-produk').innerHTML = '<sup class="fw-normal">Rp</sup> ' + formatRupiah(totalDiskon);
                 document.getElementById('total-pembayaran').innerHTML = '<sup class="fw-normal">Rp</sup> ' + formatRupiah(total);
+
+                // Show or hide delete button based on selections
+                toggleDeleteButton();
             }
 
+            // Toggle visibility of delete button
+            function toggleDeleteButton() {
+                const deleteContainer = document.getElementById('deleteSelectedContainer');
+                if (selectedProductIds.length > 0) {
+                    deleteContainer.classList.remove('d-none');
+                } else {
+                    deleteContainer.classList.add('d-none');
+                }
+            }
 
-            document.querySelectorAll('.item-checkbox').forEach(function(checkbox) {
-                checkbox.addEventListener('change', function() {
+            // Handle "Select All" checkbox
+            const checkAllBox = document.getElementById('checkAll');
+            if (checkAllBox) {
+                checkAllBox.addEventListener('change', function () {
+                    const isChecked = this.checked;
+                    document.querySelectorAll('.item-checkbox').forEach(function (checkbox) {
+                        if (checkbox.id !== 'checkAll') {
+                            checkbox.checked = isChecked;
+                        }
+                    });
                     updateTotalPembayaran();
                 });
+            }
+
+            // Handle individual checkboxes
+            document.querySelectorAll('.item-checkbox').forEach(function (checkbox) {
+                if (checkbox.id !== 'checkAll') {
+                    checkbox.addEventListener('change', function () {
+                        updateTotalPembayaran();
+
+                        // Update "Select All" checkbox state
+                        const allChecked = Array.from(document.querySelectorAll('.item-checkbox:not(#checkAll)')).every(box => box.checked);
+                        const checkAllBox = document.getElementById('checkAll');
+                        if (checkAllBox) {
+                            checkAllBox.checked = allChecked;
+                        }
+                    });
+                }
             });
 
-            document.querySelectorAll('.increase-qty').forEach(function(btn) {
-                btn.addEventListener('click', function() {
+            // Handle quantity increase buttons
+            document.querySelectorAll('.increase-qty').forEach(function (btn) {
+                btn.addEventListener('click', function () {
                     const id = btn.dataset.id;
                     const qtyEl = document.getElementById('qty-' + id);
                     let qty = parseInt(qtyEl.textContent);
@@ -805,8 +868,9 @@ function base_url($path = '')
                 });
             });
 
-            document.querySelectorAll('.decrease-qty').forEach(function(btn) {
-                btn.addEventListener('click', function() {
+            // Handle quantity decrease buttons
+            document.querySelectorAll('.decrease-qty').forEach(function (btn) {
+                btn.addEventListener('click', function () {
                     const id = btn.dataset.id;
                     const qtyEl = document.getElementById('qty-' + id);
                     let qty = parseInt(qtyEl.textContent);
@@ -820,6 +884,86 @@ function base_url($path = '')
                     }
                 });
             });
+
+            // Handle delete selected products
+            const btnDeleteSelected = document.getElementById('btnDeleteSelected');
+            if (btnDeleteSelected) {
+                btnDeleteSelected.addEventListener('click', function () {
+                    if (selectedProductIds.length > 0) {
+                        // Langsung panggil deleteSelectedProducts() tanpa konfirmasi
+                        deleteSelectedProducts();
+                    }
+                });
+            }
+
+
+            // Delete selected products via AJAX
+            function deleteSelectedProducts() {
+                // Create form data for AJAX request
+                const formData = new FormData();
+                formData.append('product_ids', JSON.stringify(selectedProductIds));
+
+                fetch('/deletekeranjang', {
+                    method: 'POST',
+                    body: formData
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            // Apply fade-out animation to deleted items
+                            selectedProductIds.forEach(id => {
+                                const productElement = document.getElementById('checkbox-' + id).closest('.d-flex.gap-3.align-items-start');
+                                if (productElement) {
+                                    // Apply animation
+                                    productElement.style.transition = 'opacity 0.5s ease';
+                                    productElement.style.opacity = '0';
+
+                                    // Remove element after animation completes
+                                    setTimeout(() => {
+                                        productElement.remove();
+
+                                        // Update UI elements if cart is now empty
+                                        const remainingProducts = document.querySelectorAll('.item-checkbox:not(#checkAll)');
+                                        if (remainingProducts.length === 0) {
+                                            // If no products left, display empty cart message or redirect
+                                            const cartContainer = document.querySelector('.cart-container');
+                                            if (cartContainer) {
+                                                cartContainer.innerHTML = `
+                                        <div class="text-center py-5">
+                                            <h4>Keranjang belanja Anda kosong</h4>
+                                            <p>Silakan tambahkan produk ke keranjang</p>
+                                            <a href="/products" class="btn btn-primary mt-3">Belanja Sekarang</a>
+                                        </div>
+                                    `;
+                                            }
+                                        }
+                                    }, 500);
+                                }
+                            });
+
+                            // Reset selected products
+                            selectedProductIds = [];
+                            toggleDeleteButton();
+
+                            // Update total payment after deletion
+                            setTimeout(() => {
+                                updateTotalPembayaran();
+                            }, 600);
+
+                            // Show success message
+                            showToast('Produk berhasil dihapus dari keranjang', 'success');
+                        } else {
+                            showToast('Gagal menghapus produk: ' + (data.message || 'Terjadi kesalahan'), 'danger');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        showToast('Terjadi kesalahan saat menghapus produk', 'danger');
+                    });
+            }
+
+            // Initialize the UI state
+            updateTotalPembayaran();
         });
     </script>
 

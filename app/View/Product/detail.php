@@ -149,7 +149,7 @@ function base_url($path = '')
                                 // Looping untuk menampilkan warna berdasarkan data 'details'
                                 foreach ($model['detail']['details'] as $index => $detail) {
                                     $warna = $detail['warna']; // Ambil warna dari detail produk
-
+                                
                                     // Cek apakah ada motif dengan qty > 0
                                     $isActive = false;
                                     foreach ($detail['motifs'] as $motif) {
@@ -160,7 +160,7 @@ function base_url($path = '')
                                     }
                                     // Tentukan kelas active jika motif memiliki qty > 0 dan warna pertama
                                     $activeClass = $isActive && $index === 0 ? 'active' : ''; // Default aktifkan warna pertama
-                                ?>
+                                    ?>
                                     <div class="col-3">
                                         <div class="color-option <?= $activeClass ?>" data-index="<?= $index ?>"
                                             onclick="setActiveWarna(<?= $index ?>)">
@@ -179,7 +179,7 @@ function base_url($path = '')
                                 <?php
                                 // Loop untuk menampilkan motif berdasarkan warna pertama yang aktif
                                 foreach ($model['detail']['details'][0]['motifs'] as $motif) {
-                                ?>
+                                    ?>
                                     <div class="col-3">
                                         <div class="color-option motif-option"
                                             data-motif="<?= htmlspecialchars($motif['motif']) ?>"
@@ -187,7 +187,7 @@ function base_url($path = '')
                                             <?= htmlspecialchars($motif['motif']) ?>
                                         </div>
                                     </div>
-                                <?php
+                                    <?php
                                 }
                                 ?>
                             </div>
@@ -1278,7 +1278,7 @@ function base_url($path = '')
         });
 
         // Tombol Reset
-        resetButton.addEventListener('click', function() {
+        resetButton.addEventListener('click', function () {
             filterCheckboxes.forEach(cb => cb.checked = false);
             resetButton.classList.remove('active');
         });
@@ -1286,7 +1286,7 @@ function base_url($path = '')
 
     <script>
         // Tunggu sampai dokumen siap
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // Ambil elemen dropdown button dan semua item dropdown
             const dropdownButton = document.getElementById('dropdownMenu2');
             const dropdownItems = document.querySelectorAll('.dropdown-menu .dropdown-item');
@@ -1296,7 +1296,7 @@ function base_url($path = '')
 
             // Tambahkan event listener untuk setiap item dropdown
             dropdownItems.forEach(item => {
-                item.addEventListener('click', function() {
+                item.addEventListener('click', function () {
                     // Ubah teks tombol dropdown menjadi teks dari item yang diklik
                     dropdownButton.textContent = this.textContent.trim();
                 });
@@ -1309,7 +1309,7 @@ function base_url($path = '')
         });
     </script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const morePhotosBtn = document.getElementById('morePhotosBtn');
             const reviewPhotosContainer = document.getElementById('reviewPhotos');
 
@@ -1320,7 +1320,7 @@ function base_url($path = '')
             morePhotosBtn.textContent = '+' + hiddenPhotosCount;
 
             // Ketika overlay diklik, tampilkan semua foto tersembunyi
-            morePhotosBtn.addEventListener('click', function() {
+            morePhotosBtn.addEventListener('click', function () {
                 reviewPhotosContainer.classList.toggle('expanded');
             });
         });
@@ -1474,7 +1474,7 @@ function base_url($path = '')
             event.target.parentElement.classList.add('active');
         }
 
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             let details = <?= json_encode($model['detail']['details']) ?>;
 
             for (let i = 0; i < details.length; i++) {
@@ -1488,7 +1488,7 @@ function base_url($path = '')
     </script>
 
     <script>
-        document.getElementById('wishlistBtn').addEventListener('click', function() {
+        document.getElementById('wishlistBtn').addEventListener('click', function () {
             var productId = document.getElementById('id_product').value;
 
             fetch(`/product/create/wishlist/${productId}`)
@@ -1529,6 +1529,21 @@ function base_url($path = '')
             const idDetailProduct = document.getElementById('id_detail_product').value;
             const idMotifProduk = document.getElementById('id_motif_produk').value;
 
+            // Ambil stok yang tersedia dari DOM
+            const stockAvailable = parseInt(document.querySelector('#stock span').innerText) || 0;
+
+            // Validasi jika produk tidak tersedia (stok 0)
+            if (stockAvailable === 0) {
+                showToast('Produk tidak tersedia', 'danger');
+                return; // Jangan lanjutkan jika produk tidak tersedia
+            }
+
+            // Validasi jika qty lebih besar dari stok yang tersedia
+            if (qty > stockAvailable) {
+                showToast(`Jumlah yang ingin dibeli melebihi stok yang tersedia. Stok tersedia: ${stockAvailable} pcs`, 'danger');
+                return; // Jangan lanjutkan jika qty lebih banyak dari stok
+            }
+
             const formData = new FormData();
             formData.append('id', idProduct);
             formData.append('qty', qty);
@@ -1536,9 +1551,9 @@ function base_url($path = '')
             formData.append('id_motif_produk', idMotifProduk);
 
             fetch('/keranjang', {
-                    method: 'POST',
-                    body: formData
-                })
+                method: 'POST',
+                body: formData
+            })
                 .then(response => response.json())
                 .then(data => {
                     showToast(data.message, data.status === 'success' ? 'success' : 'danger');
@@ -1546,27 +1561,28 @@ function base_url($path = '')
                 .catch(() => {
                     showToast('Terjadi kesalahan. Coba lagi.', 'danger');
                 });
-        }
+            }
 
-        function showToast(message, type = 'success') {
-            const toastId = `toast-${Date.now()}`;
-            const toastHTML = `
-        <div id="${toastId}" class="toast align-items-center text-bg-${type} border-0 shadow" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="3000">
-            <div class="d-flex">
-                <div class="toast-body">${message}</div>
-                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div>
-        </div>`;
+            function showToast(message, type = 'success') {
+                    const toastId = `toast-${Date.now()}`;
+                    const toastHTML = `
+            <div id="${toastId}" class="toast align-items-center text-bg-${type} border-0 shadow" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="3000">
+                <div class="d-flex">
+                    <div class="toast-body">${message}</div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+            </div>`;
             const container = document.getElementById('toastContainer');
             container.insertAdjacentHTML('beforeend', toastHTML);
             const toastElement = new bootstrap.Toast(document.getElementById(toastId));
             toastElement.show();
         }
+
     </script>
 
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             var productId = document.getElementById('id_product').value;
 
             fetch(`/product/create/cekwishlist/${productId}`)
@@ -1586,7 +1602,7 @@ function base_url($path = '')
     </script>
 
     <script>
-        document.addEventListener('click', function(e) {
+        document.addEventListener('click', function (e) {
             const card = e.target.closest('.product-card');
             if (card) {
                 const productId = card.getAttribute('data-id');

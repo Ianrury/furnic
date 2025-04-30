@@ -286,6 +286,7 @@
         </div>
     </main>
 
+    <div id="toastContainer" class="position-fixed top-0 end-0 p-3" style="z-index: 9999;"></div>
 
     <!-- footer area -->
     <?php include __DIR__ . '/../templates/footer.php'; ?>
@@ -509,11 +510,10 @@
                                     <!-- <h5 class="">
                                         ${product.title}
                                 </h5> -->
-                                    <p class="card-title text-truncate fw-medium product-title">${product.description}
+                                    <p class="card-title text-truncate  product-title"> ${product.title}
                                     </p>
 
-                                    <p class="card-text text-truncate product-desc">Meja ruang tamu
-                                        aesthetic.</p>
+                                    <p class="card-text text-truncate product-desc">${product.description}</p>
                                     <div class="d-flex gap-1 align-items-center">
                                         ${createStarRating(product.rating)}
                                         <small class="text-muted fst-italic ms-1 sold-text">${product.sold} terjual</small>
@@ -541,7 +541,7 @@
                                                     <button class="btn buy-btn w-100">Beli</button>
                                                 </div>
                                                 <div class="col-6">
-                                                    <button class="btn cart-btn w-100">+ Keranjang</button>
+                                                    <button class="btn cart-btn w-100" onclick="masukkanKeranjang()">+ Keranjang</button>
                                                 </div>
                                             </div>
                             </div>
@@ -826,6 +826,64 @@
                 }
             }
         });
+    </script>
+
+    <script>
+        function masukkanKeranjang() {
+            const idProduct = document.getElementById('id_product').value;
+            const qty = parseInt(document.getElementById('jumlah-beli').innerText) || 1;
+            const idDetailProduct = document.getElementById('id_detail_product').value;
+            const idMotifProduk = document.getElementById('id_motif_produk').value;
+
+            // Ambil stok yang tersedia dari DOM
+            const stockAvailable = parseInt(document.querySelector('#stock span').innerText) || 0;
+
+            // Validasi jika produk tidak tersedia (stok 0)
+            if (stockAvailable === 0) {
+                showToast('Produk tidak tersedia', 'danger');
+                return; // Jangan lanjutkan jika produk tidak tersedia
+            }
+
+            // Validasi jika qty lebih besar dari stok yang tersedia
+            if (qty > stockAvailable) {
+                showToast(`Jumlah yang ingin dibeli melebihi stok yang tersedia. Stok tersedia: ${stockAvailable} pcs`, 'danger');
+                return; // Jangan lanjutkan jika qty lebih banyak dari stok
+            }
+
+            const formData = new FormData();
+            formData.append('id', idProduct);
+            formData.append('qty', qty);
+            formData.append('id_detail_product', idDetailProduct);
+            formData.append('id_motif_produk', idMotifProduk);
+
+            fetch('/keranjang', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    showToast(data.message, data.status === 'success' ? 'success' : 'danger');
+                })
+                .catch(() => {
+                    showToast('Terjadi kesalahan. Coba lagi.', 'danger');
+                });
+        }
+
+        function showToast(message, type = 'success') {
+            const toastId = `toast-${Date.now()}`;
+            const toastHTML = `
+            <div id="${toastId}" class="toast align-items-center text-bg-${type} border-0 shadow" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="3000">
+                <div class="d-flex">
+                    <div class="toast-body">${message}</div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+            </div>`;
+            const container = document.getElementById('toastContainer');
+            container.insertAdjacentHTML('beforeend', toastHTML);
+            const toastElement = new bootstrap.Toast(document.getElementById(toastId));
+            toastElement.show();
+        }
+
     </script>
 
 </body>
