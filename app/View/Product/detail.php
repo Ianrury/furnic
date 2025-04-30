@@ -273,7 +273,20 @@ function base_url($path = '')
 
                         <div class="tab-content-scroll me-3">
                             <div id="spesifikasi" class="tab-pane active">
-                                <div class="spec-item">
+                                <?php
+                                // Misalnya, $model['detail']['spesifikasi'] berisi JSON
+                                $spesifikasi = json_decode($model['detail']['spesifikasi'], true);
+
+                                foreach ($spesifikasi as $key => $value) {
+                                    echo '<div class="spec-item">';
+                                    echo '<span class="label">' . htmlspecialchars($key) . '</span>';
+                                    echo '<span class="value">: ' . htmlspecialchars($value) . '</span>';
+                                    echo '</div>';
+                                }
+                                ?>
+
+
+                                <!-- <div class="spec-item">
                                     <span class="label">Material</span>
                                     <span class="value">: Polypropylene, Metal</span>
                                 </div>
@@ -288,13 +301,11 @@ function base_url($path = '')
                                 <div class="spec-item">
                                     <span class="label">Warna</span>
                                     <span class="value">: Red & Yellow</span>
-                                </div>
+                                </div> -->
                             </div>
 
                             <div id="informasi" class="tab-pane">
-                                <p>Produk ini dirancang untuk kenyamanan dan daya tahan tinggi. Cocok digunakan di dalam
-                                    maupun luar ruangan Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ab
-                                    magnam dolor, numquam illum eveniet modi repellendus voluptatibus error sed ad,
+                                <p><?= htmlspecialchars($model['detail']['informasi_product']) ?></p>
                             </div>
                         </div>
                     </div>
@@ -1561,11 +1572,11 @@ function base_url($path = '')
                 .catch(() => {
                     showToast('Terjadi kesalahan. Coba lagi.', 'danger');
                 });
-            }
+        }
 
-            function showToast(message, type = 'success') {
-                    const toastId = `toast-${Date.now()}`;
-                    const toastHTML = `
+        function showToast(message, type = 'success') {
+            const toastId = `toast-${Date.now()}`;
+            const toastHTML = `
             <div id="${toastId}" class="toast align-items-center text-bg-${type} border-0 shadow" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="3000">
                 <div class="d-flex">
                     <div class="toast-body">${message}</div>

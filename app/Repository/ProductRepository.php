@@ -19,7 +19,8 @@ class ProductRepository
          *
          * @return Product
          */
-        /*******  323ea9fa-26b2-4ab2-938a-dd8afb307308  *******/        $this->connection = $connection;
+        /*******  323ea9fa-26b2-4ab2-938a-dd8afb307308  *******/
+        $this->connection = $connection;
     }
 
     public function save(Product $product): Product
@@ -67,6 +68,7 @@ class ProductRepository
                 p.nama_product,
                 p.uom,
                 p.harga,
+                p.informasi_product,
                 p.nama_vendor,
                 p.qty as product_qty,
                 p.foto AS product_foto,
@@ -103,6 +105,7 @@ class ProductRepository
                 'id_product' => $results[0]['id_product'],
                 'nama_product' => $results[0]['nama_product'],
                 'uom' => $results[0]['uom'],
+                'informasi_product' => $results[0]['informasi_product'],
                 'harga' => $results[0]['harga'],
                 'product_qty' => $results[0]['product_qty'],
                 'nama_vendor' => $results[0]['nama_vendor'],
@@ -229,13 +232,13 @@ class ProductRepository
 
     public function deleteWishlist($id_product, $id_customer)
     {
-        $statement =  $this->connection->prepare(
+        $statement = $this->connection->prepare(
             "DELETE FROM wishlist WHERE id_customer = ? AND id_product = ?"
         );
         $statement->execute([$id_customer, $id_product]);
         return $statement->rowCount() > 0; // akan mengembalikan true jika berhasil menghapus
     }
-    
+
 
     public function productWislist($id_customer)
     {

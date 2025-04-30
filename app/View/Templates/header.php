@@ -54,7 +54,7 @@ function is_active($route)
                         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                     </div>
                     <div class="offcanvas-body">
-                        <ul class="navbar-nav mx-auto justify-content-around flex-grow-1 text-center">
+                        <ul class="navbar-nav mx-4 justify-content-around flex-grow-1 text-center">
                             <li class="nav-item">
                                 <a class="d-flex justify-content-center home-link align-items-center w-100 h-100 custom-nav-link <?= is_active('/') ?>"
                                     href="/" style="font-size: 14px;">Home</a>
@@ -70,10 +70,6 @@ function is_active($route)
                                     href="/promo" style="font-size: 14px;">Promo</a>
                             </li>
 
-                            <li class="nav-item">
-                                <a class="d-flex justify-content-center align-items-center w-100 h-100 custom-nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'dekorasi.php') ? 'active' : ''; ?>"
-                                    href="dekorasi.php" style="font-size: 14px;"> Dekorasi</a>
-                            </li>
                             <li class="nav-item">
                                 <a class="d-flex justify-content-center align-items-center w-100 h-100 custom-nav-link<?php echo (basename($_SERVER['PHP_SELF']) == 'lokasi_store.php') ? 'active' : ''; ?>"
                                     href="lokasi_store.php" style="font-size: 14px;"> Lokasi Store</a>

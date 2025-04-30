@@ -91,7 +91,7 @@ function base_url($path = '')
                 <ol class="breadcrumb mb-0">
                     <li class="breadcrumb-item"><a href="/">Beranda</a></li>
                     <!-- <li class="breadcrumb-item"><a href="/product">Product</a></li> -->
-                    <li class="breadcrumb-item active" aria-current="page">Keranjang</li>
+                    <li class="breadcrumb-item active" aria-current="page">Pesanan</li>
                 </ol>
             </nav>
         </div>
@@ -116,43 +116,49 @@ function base_url($path = '')
                 <div class="row">
                     <div class="col-12 wow fadeInDown mb-0" data-wow-delay=".25s">
                         <div class="site-heading-inline">
-                            <h2 class="site-title">Keranjang Belanja</h2>
+                            <h2 class="site-title">Pesanan Belanja</h2>
                         </div>
                     </div>
                 </div>
                 <div class="tab-content wow fadeInUp" data-wow-delay=".25s" id="item-tabContent">
                     <div class="container">
-                        <div class="row">
+                        <div class="row g-3">
                             <!-- List Produk -->
-                            <div class="col-md-8">
-                                <div class="rounded-2 ms-4 d-flex justify-content-between mb-3">
-                                    <div>
-                                        <div>
-                                            <input class="form-check-input item-checkbox" type="checkbox" id="checkAll">
-                                        </div>
-                                        <div class="ms-3">
-                                            <p style="font-size: 14px;">Pilih Semua</p>
-                                        </div>
-                                    </div>
-                                    <div id="deleteSelectedContainer" class="d-none">
-                                        <p id="btnDeleteSelected"
-                                            style="font-size: 14px; color: #ff3838; cursor: pointer;">Hapus</p>
-                                    </div>
+                            <div class="col-lg-8 ps-0">
+                                <div class="custom-col rounded-4" style="border: 1px solid #D9D9D9;">
+                                    <h4>List Produk</h4>
+                                    <p>Konten untuk list produk Anda</p>
                                 </div>
+                            </div>
+
+                            <!-- Detail Pembayaran -->
+                            <div class="col-lg-4 pe-0">
+                                <div class="custom-col rounded-4" style="border: 1px solid #D9D9D9;">
+                                    <h4>Detail Pembayaran</h4>
+                                    <p>Konten untuk detail pembayaran</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-2">
+                            <!-- List Produk -->
+                            <div class="col-12 px-0">
                                 <div class="d-flex flex-column gap-3">
                                     <!-- Mulai looping produk di sini -->
-                                    <?php foreach ($model['data'] as $item): ?>
-                                        <div class="d-flex gap-3 align-items-start">
-                                            <div class="rounded-2 ms-4">
-                                                <input class="form-check-input item-checkbox" type="checkbox"
-                                                    id="checkbox-<?= $item['id_cart'] ?>" data-id="<?= $item['id_cart'] ?>"
-                                                    data-price="<?= $item['harga'] ?>"
-                                                    data-discount="<?= $item['diskon'] ?>">
-
+                                    <div class="rounded-4" style="border: 1px solid #D9D9D9;">
+                                        <!-- Header Row -->
+                                        <div class="w-100 p-3 d-flex align-items-center">
+                                            <div style="width: 50%; padding-left: 15px;" class="text-header">Product
                                             </div>
-                                            <div class="w-100 p-3 d-flex align-items-center justify-content-between rounded-4"
-                                                style="border: 1px solid #D9D9D9;">
-                                                <div class="d-flex gap-3 align-items-center">
+                                            <div style="width: 15%; text-align: center;" class="text-header">Qty</div>
+                                            <div style="width: 15%; text-align: center;" class="text-header">Harga</div>
+                                            <div style="width: 20%; text-align: center;" class="text-header">Total</div>
+                                        </div>
+
+                                        <?php foreach ($model['data'] as $item): ?>
+                                            <div class="w-100 p-3 pt-0 d-flex align-items-center">
+                                                <!-- Product Column -->
+                                                <div style="width: 50%;" class="d-flex gap-3 align-items-center">
                                                     <div class="card shadow position-relative rounded-4 p-2">
                                                         <!-- Corner Ribbon -->
                                                         <div class="position-absolute ribbon-wrapper-keranjang">
@@ -206,7 +212,6 @@ function base_url($path = '')
 
                                                                     <sup class="fw-normal">Rp</sup>
                                                                     <?= number_format($harga_setelah_diskon, 0, ',', '.') ?>
-
                                                                 </span>
                                                             </div>
                                                             <div>
@@ -222,40 +227,52 @@ function base_url($path = '')
                                                                     <div>
                                                                         <span class="fw-normal text-danger old-price">
                                                                             <sup>Rp</sup>
-                                                                            <span
-                                                                                class="text-decoration-line-through"><?= number_format($nominal_diskon, 0, ',', '.') ?></span>
-
+                                                                            <span class="text-decoration-line-through">
+                                                                                <?= number_format($nominal_diskon, 0, ',', '.') ?>
+                                                                            </span>
                                                                         </span>
                                                                     </div>
                                                                     <?php
                                                                 endif;
                                                                 ?>
-
-
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <!-- Quantity -->
-                                                <div class="d-flex align-items-center">
-                                                    <button class="btn-quantity decrease-qty"
-                                                        data-id="<?= $item['id_cart'] ?>">
-                                                        <span style="font-size: 20px;">-</span>
-                                                    </button>
-                                                    <span class="mx-4 fw-normal text-black" style="font-size: 14px;"
+
+                                                <!-- Quantity Column -->
+                                                <div style="width: 15%; text-align: center;">
+                                                    <span class="fw-normal text-black" style="font-size: 14px;"
                                                         id="qty-<?= $item['id_cart'] ?>"
                                                         data-max="<?= $item['qty_motif'] ?>"
                                                         data-price="<?= ($item['diskon'] > 0) ? ($item['harga'] - ($item['diskon'] / 100 * $item['harga'])) : $item['harga'] ?>">
                                                         <?= ($item['qty_cart'] > $item['qty_motif']) ? $item['qty_motif'] : $item['qty_cart'] ?>
                                                     </span>
-                                                    <button class="btn-quantity increase-qty"
-                                                        data-id="<?= $item['id_cart'] ?>">
-                                                        <span style="font-size: 20px;">+</span>
-                                                    </button>
-
                                                 </div>
-                                                <!-- Harga total per item -->
-                                                <div>
+
+                                                <!-- Price Column -->
+                                                <div style="width: 15%; text-align: center;">
+                                                    <?php
+                                                    // Menghitung harga setelah diskon (jika ada)
+                                                    $harga_normal = $item['harga']; // Harga normal dari database
+                                                    $diskon = $item['diskon']; // Diskon dari database
+                                                
+                                                    // Jika diskon ada, hitung harga setelah diskon
+                                                    if ($diskon > 0) {
+                                                        $nominal_diskon = ($diskon / 100) * $harga_normal; // Nominal diskon
+                                                        $harga_setelah_diskon = $harga_normal - $nominal_diskon; // Harga setelah diskon
+                                                    } else {
+                                                        $harga_setelah_diskon = $harga_normal; // Tidak ada diskon, gunakan harga normal
+                                                    }
+                                                    ?>
+                                                    <span class="fw-bold title-keranjang">
+                                                        <sup class="fw-normal">Rp</sup>
+                                                        <?= number_format($harga_setelah_diskon, 0, ',', '.') ?>
+                                                    </span>
+                                                </div>
+
+                                                <!-- Total Column -->
+                                                <div style="width: 20%; text-align: center;">
                                                     <?php
                                                     // Menghitung qty yang valid (tidak melebihi qty_motif)
                                                     $qty = ($item['qty_cart'] > $item['qty_motif']) ? $item['qty_motif'] : $item['qty_cart'];
@@ -280,80 +297,13 @@ function base_url($path = '')
                                                         <sup class="fw-normal">Rp</sup>
                                                         <?= number_format($total, 0, ',', '.') ?>
                                                     </span>
-
-
                                                 </div>
                                             </div>
-                                        </div>
-                                    <?php endforeach; ?>
+                                        <?php endforeach; ?>
+                                    </div>
+
 
                                     <!-- Selesai 1 produk -->
-                                </div>
-                            </div>
-
-                            <!-- Detail Pembayaran -->
-                            <div class="col-md-4">
-                                <div class="rounded-2 ms-4 d-flex justify-content-between mb-3" style="opacity: 0;">
-                                    <div>
-                                        <div>
-                                            <input class="form-check-input item-checkbox" type="checkbox" id="checkAll">
-                                        </div>
-                                        <div class="ms-3">
-                                            <p style="font-size: 14px;">Pilih Semua</p>
-                                        </div>
-                                    </div>
-                                    <div id="deleteSelectedContainer" class="d-none">
-                                    </div>
-                                </div>
-
-                                <div class="rounded-4 p-3 box-shadow-keranjang align-self-start"
-                                    style="border: 1px solid #D9D9D9;">
-                                    <div>
-                                        <h4 class="fw-bold pembayaran">Detail Pembayaran</h4>
-                                    </div>
-                                    <div class="row align-items-center mt-3">
-                                        <div class="col">
-                                            <p class="mb-0 text-start subtotal-pembayaran">Subtotal Harga</p>
-                                        </div>
-                                        <div class="col">
-                                            <!-- Subtotal Harga -->
-                                            <span id="subtotal-harga" class="fw-bold title-keranjang mb-0 text-start">
-                                                <sup class="fw-normal">Rp</sup> 0
-                                            </span>
-                                        </div>
-                                        <p class="font-italic fw-normal" style="font-size: 11px; color: #FF0000;">
-                                            Harga di atas belum termasuk potongan promo
-                                        </p>
-                                    </div>
-                                    <div class="row align-items-center mt-3">
-                                        <div class="col">
-                                            <p class="mb-0 text-start subtotal-pembayaran">Diskon Product</p>
-                                        </div>
-                                        <div class="col">
-                                            <span id="diskon-produk" class="fw-bold title-keranjang mb-0 text-start"
-                                                style="color: #FF0000">
-                                                <sup class="fw-normal">Rp</sup> 0
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="my-3">
-                                        <hr class="border-dark border-1 opacity-100">
-                                    </div>
-                                    <div class="row align-items-center">
-                                        <div class="col">
-                                            <p class="mb-0 text-start pembayaran">Total Pembayaran</p>
-                                        </div>
-                                        <div class="col">
-                                            <span id="total-pembayaran" class="fw-bold title-keranjang mb-0 text-start">
-                                                <sup class="fw-normal">Rp</sup> 0
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="mt-3">
-                                        <button class="btn btn-buy w-100 rounded-3 fw-bold"
-                                            style="font-size: 14px;">Beli
-                                            Sekarang</button>
-                                    </div>
                                 </div>
                             </div>
                         </div>

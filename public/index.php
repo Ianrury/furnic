@@ -7,6 +7,7 @@ use Importa\Furnic\PHP\FFI\Config\Database;
 use Importa\Furnic\PHP\FFI\Controller\HomeController;
 use Importa\Furnic\PHP\FFI\Controller\KeranjangController;
 use Importa\Furnic\PHP\FFI\Controller\NotFoundController;
+use Importa\Furnic\PHP\FFI\Controller\PesananController;
 use Importa\Furnic\PHP\FFI\Controller\ProductController;
 use Importa\Furnic\PHP\FFI\Controller\PromoController;
 use Importa\Furnic\PHP\FFI\Controller\UserController;
@@ -37,6 +38,8 @@ Router::add('GET', '/keranjang', KeranjangController::class, 'index');
 Router::add('POST', '/keranjang', KeranjangController::class, 'createKeranjang');
 Router::add('POST', '/deletekeranjang', KeranjangController::class, 'deleteKeranjang');
 
+// Controller PesananController
+Router::add('GET', '/pesanan', PesananController::class, 'index');
 
 // Wislist Product
 Router::add('GET', '/product/create/wishlist/{id}', ProductController::class, 'Createwishlist');

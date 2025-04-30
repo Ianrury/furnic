@@ -73,3 +73,20 @@ ADD FOREIGN KEY (id_motif_produk) REFERENCES motif_produk(id);
 
 
 SHOW CREATE TABLE cart;
+
+-- query tanggal 30 april 2025
+ALTER TABLE product
+ADD COLUMN informasi_product TEXT;
+
+ALTER TABLE product
+DROP COLUMN spesifikasi,
+ADD COLUMN spesifikasi JSON;
+
+UPDATE product
+SET spesifikasi = JSON_OBJECT(
+    'Material', 'Polypropylene, Metal',
+    'Dimensi', '40×36×51cm',
+    'Tinggi Kursi', '35cm',
+    'Warna', 'Red & Yellow'
+)
+WHERE id_product = 93;

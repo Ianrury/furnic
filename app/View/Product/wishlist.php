@@ -488,7 +488,7 @@
         function createProductCard(product) {
             return `
                              <div class="col">
-                                <div class="card shadow position-relative rounded-4 p-2 product-card" data-id="${product.id}" style="cursor:pointer;">
+                                <div class="card shadow position-relative rounded-4 p-2">
                             ${product.isNew ? `
                             <!-- Corner Ribbon -->
                         <div class="position-absolute ribbon-wrapper">
@@ -500,7 +500,7 @@
 
                     <!-- Product Image -->
                     <div class="text-center pt-3">
-                    <img src="${product.image}" class="img-fluid product-image" alt="Product Image">
+                    <img src="${product.image}" class="img-fluid product-image product-card" data-id="${product.id}" style="cursor:pointer;" alt="Product Image">
                     </div>
 
                     <div class="bodykartu">
@@ -541,7 +541,7 @@
                                                     <button class="btn buy-btn w-100">Beli</button>
                                                 </div>
                                                 <div class="col-6">
-                                                    <button class="btn cart-btn w-100" onclick="masukkanKeranjang()">+ Keranjang</button>
+                                                    <button class="btn cart-btn w-100 product-card" data-id="${product.id}" style="cursor:pointer;">+ Keranjang</button>
                                                 </div>
                                             </div>
                             </div>
@@ -826,64 +826,6 @@
                 }
             }
         });
-    </script>
-
-    <script>
-        function masukkanKeranjang() {
-            const idProduct = document.getElementById('id_product').value;
-            const qty = parseInt(document.getElementById('jumlah-beli').innerText) || 1;
-            const idDetailProduct = document.getElementById('id_detail_product').value;
-            const idMotifProduk = document.getElementById('id_motif_produk').value;
-
-            // Ambil stok yang tersedia dari DOM
-            const stockAvailable = parseInt(document.querySelector('#stock span').innerText) || 0;
-
-            // Validasi jika produk tidak tersedia (stok 0)
-            if (stockAvailable === 0) {
-                showToast('Produk tidak tersedia', 'danger');
-                return; // Jangan lanjutkan jika produk tidak tersedia
-            }
-
-            // Validasi jika qty lebih besar dari stok yang tersedia
-            if (qty > stockAvailable) {
-                showToast(`Jumlah yang ingin dibeli melebihi stok yang tersedia. Stok tersedia: ${stockAvailable} pcs`, 'danger');
-                return; // Jangan lanjutkan jika qty lebih banyak dari stok
-            }
-
-            const formData = new FormData();
-            formData.append('id', idProduct);
-            formData.append('qty', qty);
-            formData.append('id_detail_product', idDetailProduct);
-            formData.append('id_motif_produk', idMotifProduk);
-
-            fetch('/keranjang', {
-                method: 'POST',
-                body: formData
-            })
-                .then(response => response.json())
-                .then(data => {
-                    showToast(data.message, data.status === 'success' ? 'success' : 'danger');
-                })
-                .catch(() => {
-                    showToast('Terjadi kesalahan. Coba lagi.', 'danger');
-                });
-        }
-
-        function showToast(message, type = 'success') {
-            const toastId = `toast-${Date.now()}`;
-            const toastHTML = `
-            <div id="${toastId}" class="toast align-items-center text-bg-${type} border-0 shadow" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="3000">
-                <div class="d-flex">
-                    <div class="toast-body">${message}</div>
-                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-                </div>
-            </div>`;
-            const container = document.getElementById('toastContainer');
-            container.insertAdjacentHTML('beforeend', toastHTML);
-            const toastElement = new bootstrap.Toast(document.getElementById(toastId));
-            toastElement.show();
-        }
-
     </script>
 
 </body>
