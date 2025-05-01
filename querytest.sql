@@ -90,3 +90,22 @@ SET spesifikasi = JSON_OBJECT(
     'Warna', 'Red & Yellow'
 )
 WHERE id_product = 93;
+
+-- query tanggal 1 mei 2025
+ALTER TABLE promo
+DROP FOREIGN KEY promo_ibfk_1,  -- nama FK mungkin berbeda tergantung DBMS, bisa diganti
+DROP COLUMN id_product;
+
+ALTER TABLE product
+ADD COLUMN id_promo INT,
+ADD CONSTRAINT fk_product_promo FOREIGN KEY (id_promo) REFERENCES promo(id_promo);
+
+
+ALTER TABLE product
+DROP COLUMN diskon;
+
+
+INSERT INTO promo (nama_promo, jenis_promo, total_promo, start_date, end_date)
+VALUES
+('Promo Diskon Lebaran', 'Diskon', 10.00, '2025-05-10', '2025-05-20'),
+('Promo Akhir Pekan', 'Cashback', 20.00, '2025-05-10', '2025-05-20');

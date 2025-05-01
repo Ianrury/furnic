@@ -113,31 +113,64 @@
                         <div class="row row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 new-product">
                             <?php if (!empty($model['product'])): ?>
                                 <?php foreach ($model['product'] as $product): ?>
-                                    <div class="col">
+                                    <div class="col-6 col-md-4 col-lg-3">
                                         <div class="card shadow position-relative rounded-4 p-2 product-card"
-                                            data-id="<?= $product['id_product'] ?>" style="cursor:pointer;">
+                                            data-id="<?= ($product['id_product']) ?>" style="cursor:pointer;">
+                                            <?php
+                                            $ribbon = null;
+                                            $bgColor = '';
+                                            $textColor = '';
+
+                                            $qty = $product['qty'];
+                                            $promoPersen = (float) ($product['total_promo'] ?? 0);
+                                            $createdAt = new DateTime($product['created_at']);
+                                            $today = new DateTime();
+                                            $diffDays = $createdAt->diff($today)->days;
+
+                                            // Logika ribbon
+                                            if ($qty <= 0) {
+                                                $ribbon = 'Out of Stock';
+                                                $bgColor = '#FF0000';
+                                                $textColor = '#FFFFFF';
+                                            } elseif (!empty($topBestSellerIds) && in_array($product['id_product'], $topBestSellerIds)) {
+                                                $ribbon = 'Best Seller';
+                                                $bgColor = '#FF8B2D';
+                                                $textColor = '#FFFFFF';
+                                            } elseif ($promoPersen > 0) {
+                                                $ribbon = 'Sale';
+                                                $bgColor = '#FFFB2D';
+                                                $textColor = '#FF0000';
+                                            } elseif ($diffDays <= 7) {
+                                                $ribbon = 'New Product';
+                                                $bgColor = '#2B4779';
+                                                $textColor = '#FFFFFF';
+                                            }
+                                            ?>
+
                                             <!-- Corner Ribbon -->
-                                            <div class="position-absolute ribbon-wrapper">
-                                                <div class="ribbon text-uppercase fw-bold text-center"
-                                                    style="color: #FF0000;background-color: #FFFB2D;">
-                                                    Sale
+                                            <?php if ($ribbon): ?>
+                                                <div class="position-absolute ribbon-wrapper">
+                                                    <div class="ribbon text-uppercase fw-bold text-center"
+                                                        style="background-color: <?= $bgColor ?>; color: <?= $textColor ?>;">
+                                                        <?= htmlspecialchars($ribbon) ?>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            <?php endif; ?>
+
 
                                             <!-- Product Image -->
                                             <div class="text-center pt-3">
-                                                <img src="assets/img/product/kursi/<?= htmlspecialchars($product['foto']) ?>"
+                                                <img src="assets/img/product/<?= htmlspecialchars($product['foto'] ?? '') ?>"
                                                     class="img-fluid product-image" alt="Product Image">
                                             </div>
                                             <div class="bodykartu">
                                                 <div class="d-flex flex-column">
-                                                    <!-- Product Details -->
-                                                    <div>
-                                                        <p class="card-title text-truncate  product-title">
-                                                            <?= htmlspecialchars($product['nama_product']) ?>
+                                                    <div class="">
+                                                        <p class="card-title text-truncate product-title">
+                                                            <?= htmlspecialchars($product['nama_product'] ?? 'Nama produk tidak tersedia') ?>
                                                         </p>
                                                         <p class="card-text text-truncate product-desc">
-                                                            <?= htmlspecialchars($product['deskripsi']) ?>
+                                                            <?= htmlspecialchars($product['deskripsi'] ?? 'Deskripsi tidak tersedia') ?>
                                                         </p>
                                                         <div class="d-flex gap-1 align-items-center">
                                                             <i class="bi bi-star-fill text-warning small-icon"></i>
@@ -146,28 +179,43 @@
                                                             <i class="bi bi-star-fill text-warning small-icon"></i>
                                                             <i class="bi bi-star-fill text-warning small-icon"></i>
                                                             <small
-                                                                class="text-muted fst-italic ms-1 sold-text"><?= $product['qty'] ?>
+                                                                class="text-muted fst-italic ms-1 sold-text"><?= $product['beli'] ?? 0 ?>
                                                                 terjual</small>
                                                         </div>
                                                     </div>
 
-                                                    <!-- Price Section -->
                                                     <div class="mt-auto">
+                                                        <?php
+                                                        // Harga produk dan total_promo (diskon) yang ada di data produk
+                                                        $harga = $product['harga']; // Harga produk
+                                                        $total_promo = $product['total_promo']; // Diskon dalam persen
+                                                
+                                                        // Hitung diskon nominal
+                                                        $diskon_nominal = ($total_promo > 0) ? ($harga * ($total_promo / 100)) : 0;
+                                                        $harga_setelah_diskon = $harga - $diskon_nominal; // Harga setelah diskon
+                                                        ?>
+
                                                         <div class="d-flex flex-wrap align-items-baseline">
                                                             <div class="me-2">
+                                                                <!-- Menampilkan harga setelah diskon -->
                                                                 <span class="fw-bold price">
                                                                     <sup class="fw-normal">Rp</sup>
-                                                                    <?= number_format($product['harga'] ?? 0, 0, ',', '.') ?>
+                                                                    <?= number_format($harga_setelah_diskon, 0, ',', '.') ?>
                                                                 </span>
                                                             </div>
-                                                            <div>
-                                                                <span class="fw-normal text-danger old-price">
-                                                                    <sup>Rp</sup>
-                                                                    <span
-                                                                        class="text-decoration-line-through"><?= number_format(($product['harga'] ?? 0) + 100000, 0, ',', '.') ?></span>
-                                                                </span>
-                                                            </div>
+
+                                                            <!-- Jika ada diskon, tampilkan harga lama yang digariskan -->
+                                                            <?php if ($diskon_nominal > 0): ?>
+                                                                <div>
+                                                                    <span class="fw-normal text-danger old-price">
+                                                                        <sup>Rp</sup>
+                                                                        <span
+                                                                            class="text-decoration-line-through"><?= number_format($harga, 0, ',', '.') ?></span>
+                                                                    </span>
+                                                                </div>
+                                                            <?php endif; ?>
                                                         </div>
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -175,7 +223,7 @@
                                     </div>
                                 <?php endforeach; ?>
                             <?php else: ?>
-                                <p class="text-center">Promo tidak tersedia.</p>
+                                <p>Tidak ada produk terbaru yang tersedia.</p>
                             <?php endif; ?>
                         </div>
                     </div>

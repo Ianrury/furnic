@@ -38,16 +38,18 @@ class HomeController
         $produk = $this->productServiser->ProductTerbaru();
         $produkkategory = $this->productServiser->produkKategory();
         $getData = $this->productServiser->getData();
+        $category = $this->productServiser->getCategory();
 
         // Ambil array produk dari response
-        $produkTerbaru = $produk->products;
+        $produkTerbaru = $produk;
 
         // echo '<pre>';
-        // var_dump($getData);
+        // var_dump($category);
         // echo '</pre>';
         // exit;
 
         $model = [
+            "category" => $category,
             "terbaru" => $produkTerbaru,
             "kategori" => $produkkategory, // Kirim data kategori langsung
             "FullProduck" => $getData,

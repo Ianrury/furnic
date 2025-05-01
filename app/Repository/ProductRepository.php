@@ -48,15 +48,26 @@ class ProductRepository
 
     public function products(): array
     {
-        $statement = $this->connection->query("SELECT * FROM product");
+        $query = "
+        SELECT 
+            p.*, 
+            pr.nama_promo, 
+            pr.jenis_promo, 
+            pr.total_promo, 
+            pr.start_date, 
+            pr.end_date
+        FROM product p
+        LEFT JOIN promo pr 
+            ON p.id_promo = pr.id_promo 
+            AND pr.start_date <= CURDATE() 
+            AND pr.end_date >= CURDATE()
+        ORDER BY p.created_at DESC 
+    ";
+
+        $statement = $this->connection->query($query);
         $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-        $products = [];
-        foreach ($rows as $row) {
-            $products[] = $this->mapRowToProduct($row);
-        }
-
-        return $products;
+        return $rows;
     }
 
     public function detailProduct(int $id)
@@ -155,33 +166,83 @@ class ProductRepository
 
     public function productTerbaru(): array
     {
-        $statement = $this->connection->query("SELECT * FROM product ORDER BY created_at DESC LIMIT 4");
+        $query = "
+            SELECT 
+                p.*, 
+                pr.nama_promo, 
+                pr.jenis_promo, 
+                pr.total_promo, 
+                pr.start_date, 
+                pr.end_date
+            FROM product p
+            LEFT JOIN promo pr 
+                ON p.id_promo = pr.id_promo 
+                AND pr.start_date <= CURDATE() 
+                AND pr.end_date >= CURDATE()
+            ORDER BY p.created_at DESC 
+            LIMIT 4
+        ";
+
+        $statement = $this->connection->query($query);
         $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-        $products = [];
-        foreach ($rows as $row) {
-            $products[] = $this->mapRowToProduct($row);
-        }
-
-        return $products;
+        return $rows;
     }
 
-    public function productRekomendasi()
+    public function Category()
     {
-        $statement = $this->connection->query("SELECT * FROM product ORDER BY created_at ASC LIMIT 4");
+        $statement = $this->connection->query("SELECT * FROM kategori ORDER BY nama DESC");
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function produkKategory()
+
+
+    public function productRekomendasi()
     {
         $statement = $this->connection->query("
             SELECT 
-                kategori.id_kategori,
-                kategori.nama AS nama_kategori,
-                product.*
-            FROM kategori
-            LEFT JOIN product ON product.id_kategori = kategori.id_kategori
-            ORDER BY kategori.nama ASC, product.nama_product ASC
+                p.*, 
+                pr.nama_promo, 
+                pr.jenis_promo, 
+                pr.total_promo, 
+                pr.start_date, 
+                pr.end_date
+            FROM product p
+            LEFT JOIN promo pr 
+                ON p.id_promo = pr.id_promo 
+                AND pr.start_date <= CURDATE() 
+                AND pr.end_date >= CURDATE()
+            WHERE p.qty > 0
+            ORDER BY RAND()
+            LIMIT 4
+        ");
+
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+
+    public function produkKategory()
+    {
+
+
+        $statement = $this->connection->query("
+           SELECT 
+    k.id_kategori,
+    k.nama AS nama_kategori,
+    p.*,
+    pr.nama_promo, 
+    pr.jenis_promo, 
+    pr.total_promo, 
+    pr.start_date, 
+    pr.end_date
+FROM kategori k
+LEFT JOIN product p ON p.id_kategori = k.id_kategori
+LEFT JOIN promo pr 
+    ON p.id_promo = pr.id_promo 
+    AND pr.start_date <= CURDATE() 
+    AND pr.end_date >= CURDATE()
+ORDER BY p.created_at DESC;
+
         ");
 
         return $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -189,22 +250,50 @@ class ProductRepository
 
     public function productalldummi()
     {
-        $statement = $this->connection->query("SELECT * FROM product LIMIT 20");
+        $query = "
+        SELECT 
+            p.*, 
+            pr.nama_promo, 
+            pr.jenis_promo, 
+            pr.total_promo, 
+            pr.start_date, 
+            pr.end_date
+        FROM product p
+        LEFT JOIN promo pr 
+            ON p.id_promo = pr.id_promo 
+            AND pr.start_date <= CURDATE() 
+            AND pr.end_date >= CURDATE()
+        ORDER BY p.created_at DESC 
+    ";
+
+        $statement = $this->connection->query($query);
         $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-        $products = [];
-        foreach ($rows as $row) {
-            $products[] = $this->mapRowToProduct($row);
-        }
-
-        return $products;
+        return $rows;
     }
 
     public function productDiskon()
     {
-        $statement = $this->connection->query("SELECT * FROM product WHERE diskon > 0 LIMIT 4");
+        $statement = $this->connection->query("  
+            SELECT 
+                p.*, 
+                pr.nama_promo, 
+                pr.jenis_promo, 
+                pr.total_promo, 
+                pr.start_date, 
+                pr.end_date
+            FROM product p
+            LEFT JOIN promo pr 
+                ON p.id_promo = pr.id_promo 
+                AND pr.start_date <= CURDATE() 
+                AND pr.end_date >= CURDATE()
+            WHERE pr.id_promo IS NOT NULL
+            ORDER BY pr.start_date DESC 
+            LIMIT 4
+        ");
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
+
 
     public function Wislist($id_product, $id_customer)
     {
@@ -251,14 +340,57 @@ class ProductRepository
 
     public function bestseller()
     {
+
         // Membuat query untuk mengambil 4 produk dengan jumlah pembelian terbanyak
-        $statement = $this->connection->query("SELECT * FROM product ORDER BY beli DESC LIMIT 4");
+        $statement = $this->connection->query("SELECT 
+                p.*, 
+                pr.nama_promo, 
+                pr.jenis_promo, 
+                pr.total_promo, 
+                pr.start_date, 
+                pr.end_date,
+                p.beli AS total_pembelian
+            FROM product p
+            LEFT JOIN promo pr 
+                ON p.id_promo = pr.id_promo 
+                AND pr.start_date <= CURDATE() 
+                AND pr.end_date >= CURDATE()
+            ORDER BY p.beli DESC
+            LIMIT 4;
+            ");
 
         // Mengambil hasil query
         $bestsellers = $statement->fetchAll(PDO::FETCH_ASSOC);
 
         // Mengembalikan hasil ke view atau controller yang sesuai
         return $bestsellers;
+    }
+
+    public function ExpensifProduct()
+    {
+        // Membuat query untuk mengambil 4 produk dengan harga tertinggi
+        $statement = $this->connection->query("SELECT 
+                p.*, 
+                pr.nama_promo, 
+                pr.jenis_promo, 
+                pr.total_promo, 
+                pr.start_date, 
+                pr.end_date,
+                p.harga AS harga_tertinggi
+            FROM product p
+            LEFT JOIN promo pr 
+                ON p.id_promo = pr.id_promo 
+                AND pr.start_date <= CURDATE() 
+                AND pr.end_date >= CURDATE()
+            ORDER BY p.harga DESC
+            LIMIT 4;
+            ");
+
+        // Mengambil hasil query
+        $expensif = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        // Mengembalikan hasil ke view atau controller yang sesuai
+        return $expensif;
     }
 
 
@@ -291,11 +423,11 @@ class ProductRepository
         $product->harga = (int) $row['harga'];
         $product->beli = (int) $row['beli'];
         $product->qty = (int) $row['qty'];
-        $product->diskon = $row['diskon'];
+        $product->id_promo = $row['id_promo'];
         $product->nama_vendor = $row['nama_vendor'];
         $product->foto = $row['foto'];
         $product->deskripsi = $row['deskripsi'];
-        $product->spesifikasi = $row['spesifikasi'];
+        $product->spesifikasi = json_encode($row['spesifikasi'] ?? []);
         $product->tipe_product = $row['tipe_product'];
 
         return $product;

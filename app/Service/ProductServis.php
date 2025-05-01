@@ -20,18 +20,22 @@ class ProductServis
         /**
      * Mengambil semua data produk terbaru.
      *
-     * @return ProductResponse
+     * @return 
      */
-    public function ProductTerbaru(): ProductResponse
+    public function ProductTerbaru()
     {
         $products = $this->productRepository->productTerbaru(); // Mengambil 4 produk terbaru
 
-        $response = new ProductResponse();
-        $response->products = $products; // Menambahkan array produk terbaru ke response
-
-        return $response;
+        return $products;
     }
 
+
+    public function getCategory()
+    {
+        $category = $this->productRepository->Category(); // Mengambil semua kategori produk
+
+        return $category;
+    }
     /**
      * Mengambil semua data produk kategoty
      *
@@ -49,6 +53,12 @@ class ProductServis
         $products = $this->productRepository->bestseller();
 
         
+        return $products;
+    }
+
+    public function GetProductExpensif()
+    {
+        $products = $this->productRepository->ExpensifProduct();
         return $products;
     }
 

@@ -36,17 +36,33 @@ CREATE TABLE kategori (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
+CREATE TABLE promo (
+    id_promo INT PRIMARY KEY AUTO_INCREMENT,
+    nama_promo VARCHAR(100),
+    jenis_promo VARCHAR(100),
+    total_promo DECIMAL(10,2),
+    start_date DATE,
+    end_date DATE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+
 CREATE TABLE product (
     id_product INT PRIMARY KEY AUTO_INCREMENT,
     nama_product VARCHAR(100),
     id_kategori INT,
     uom VARCHAR(10),
     qty INT,
+    harga INT,
+    id_promo INT,
+    beli INT,
     nama_vendor VARCHAR(100),
     foto VARCHAR(255),
     deskripsi TEXT,
     spesifikasi TEXT,
     tipe_product VARCHAR(50),
+    FOREIGN KEY (id_promo) REFERENCES promo(id_promo),
     FOREIGN KEY (id_kategori) REFERENCES kategori(id_kategori),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
@@ -90,18 +106,6 @@ CREATE TABLE pricelist (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
-CREATE TABLE promo (
-    id_promo INT PRIMARY KEY AUTO_INCREMENT,
-    id_product INT,
-    nama_promo VARCHAR(100),
-    jenis_promo VARCHAR(100),
-    total_promo DECIMAL(10,2),
-    start_date DATE,
-    end_date DATE,
-    FOREIGN KEY (id_product) REFERENCES product(id_product),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-);
 
 CREATE TABLE pesanan (
     id_pesanan INT PRIMARY KEY AUTO_INCREMENT,

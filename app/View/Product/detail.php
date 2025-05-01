@@ -833,241 +833,120 @@ function base_url($path = '')
                 <div class="tab-content wow fadeInUp" data-wow-delay=".25s" id="item-tabContent">
                     <div class="container">
                         <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4  justify-content-center">
-                            <div class="col">
-                                <div class="card shadow position-relative rounded-4 p-2">
-                                    <!-- Corner Ribbon -->
-                                    <div class="position-absolute ribbon-wrapper">
-                                        <div class="ribbon text-uppercase fw-bold text-center"
-                                            style="color: #FF0000; background-color: #FFFB2D;">
-                                            Sale
-                                        </div>
-                                    </div>
+                            <?php if (!empty($model['expensif'])): ?>
+                                <?php foreach ($model['expensif'] as $product): ?>
+                                    <div class="col-6 col-md-4 col-lg-3">
+                                        <div class="card shadow position-relative rounded-4 p-2 product-card"
+                                            data-id="<?= ($product['id_product']) ?>" style="cursor:pointer;">
+                                            <?php
+                                            $ribbon = null;
+                                            $bgColor = '';
+                                            $textColor = '';
 
-                                    <!-- Product Image -->
-                                    <div class="text-center pt-3">
-                                        <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png"
-                                            class="img-fluid product-image" alt="Product Image">
-                                    </div>
-                                    <div class="bodykartu">
-                                        <div class="d-flex flex-column ">
-                                            <!-- Product Details -->
-                                            <div class="">
-                                                <!-- <h5 class="">
-                                                CT-IMP Matto Light Brown
-                                            </h5> -->
-                                                <p class="card-title text-truncate fw-medium product-title">CT-IMP Matto
-                                                    Light Brown
-                                                </p>
+                                            $qty = $product['qty'];
+                                            $promoPersen = (float) ($product['total_promo'] ?? 0);
+                                            $createdAt = new DateTime($product['created_at']);
+                                            $today = new DateTime();
+                                            $diffDays = $createdAt->diff($today)->days;
 
-                                                <p class="card-text text-truncate product-desc">Meja ruang tamu
-                                                    aesthetic.</p>
-                                                <div class="d-flex gap-1 align-items-center">
-                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                    <small class="text-muted fst-italic ms-1 sold-text">300
-                                                        terjual</small>
-                                                </div>
-                                            </div>
+                                            // Logika ribbon
+                                            if ($qty <= 0) {
+                                                $ribbon = 'Out of Stock';
+                                                $bgColor = '#FF0000';
+                                                $textColor = '#FFFFFF';
+                                            } elseif (!empty($topBestSellerIds) && in_array($product['id_product'], $topBestSellerIds)) {
+                                                $ribbon = 'Best Seller';
+                                                $bgColor = '#FF8B2D';
+                                                $textColor = '#FFFFFF';
+                                            } elseif ($promoPersen > 0) {
+                                                $ribbon = 'Sale';
+                                                $bgColor = '#FFFB2D';
+                                                $textColor = '#FF0000';
+                                            } elseif ($diffDays <= 7) {
+                                                $ribbon = 'New Product';
+                                                $bgColor = '#2B4779';
+                                                $textColor = '#FFFFFF';
+                                            }
+                                            ?>
 
-                                            <!-- Price Section -->
-                                            <div class="mt-auto">
-                                                <div class="d-flex flex-wrap align-items-baseline">
-                                                    <div class="me-2">
-                                                        <span class="fw-bold price">
-                                                            <sup class="fw-normal">Rp</sup> 500.000
-                                                        </span>
-                                                    </div>
-                                                    <div>
-                                                        <span class="fw-normal text-danger old-price">
-                                                            <sup>Rp</sup>
-                                                            <span class="text-decoration-line-through">600.000</span>
-                                                        </span>
+                                            <!-- Corner Ribbon -->
+                                            <?php if ($ribbon): ?>
+                                                <div class="position-absolute ribbon-wrapper">
+                                                    <div class="ribbon text-uppercase fw-bold text-center"
+                                                        style="background-color: <?= $bgColor ?>; color: <?= $textColor ?>;">
+                                                        <?= htmlspecialchars($ribbon) ?>
                                                     </div>
                                                 </div>
+                                            <?php endif; ?>
+
+
+                                            <!-- Product Image -->
+                                            <div class="text-center pt-3">
+                                                <img src="assets/img/product/<?= htmlspecialchars($product['foto'] ?? '') ?>"
+                                                    class="img-fluid product-image" alt="Product Image">
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="card shadow position-relative rounded-4 p-2">
-                                    <!-- Corner Ribbon -->
-                                    <div class="position-absolute ribbon-wrapper">
-                                        <div class="ribbon text-white text-uppercase fw-bold text-center"
-                                            style="background-color: #FF0000;">
-                                            Out of Stock
-                                        </div>
-                                    </div>
-
-                                    <!-- Product Image -->
-                                    <div class="text-center pt-3">
-                                        <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png"
-                                            class="img-fluid product-image" alt="Product Image">
-                                    </div>
-                                    <div class="bodykartu">
-                                        <div class="d-flex flex-column ">
-                                            <!-- Product Details -->
-                                            <div class="">
-                                                <!-- <h5 class="">
-                                                CT-IMP Matto Light Brown
-                                            </h5> -->
-                                                <p class="card-title text-truncate fw-medium product-title">CT-IMP Matto
-                                                    Light Brown
-                                                </p>
-
-                                                <p class="card-text text-truncate product-desc">Meja ruang tamu
-                                                    aesthetic.</p>
-                                                <div class="d-flex gap-1 align-items-center">
-                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                    <small class="text-muted fst-italic ms-1 sold-text">300
-                                                        terjual</small>
-                                                </div>
-                                            </div>
-
-                                            <!-- Price Section -->
-                                            <div class="mt-auto">
-                                                <div class="d-flex flex-wrap align-items-baseline">
-                                                    <div class="me-2">
-                                                        <span class="fw-bold price">
-                                                            <sup class="fw-normal">Rp</sup> 500.000
-                                                        </span>
+                                            <div class="bodykartu">
+                                                <div class="d-flex flex-column">
+                                                    <div class="">
+                                                        <p class="card-title text-truncate product-title">
+                                                            <?= htmlspecialchars($product['nama_product'] ?? 'Nama produk tidak tersedia') ?>
+                                                        </p>
+                                                        <p class="card-text text-truncate product-desc">
+                                                            <?= htmlspecialchars($product['deskripsi'] ?? 'Deskripsi tidak tersedia') ?>
+                                                        </p>
+                                                        <div class="d-flex gap-1 align-items-center">
+                                                            <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                            <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                            <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                            <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                            <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                            <small
+                                                                class="text-muted fst-italic ms-1 sold-text"><?= $product['beli'] ?? 0 ?>
+                                                                terjual</small>
+                                                        </div>
                                                     </div>
-                                                    <div>
-                                                        <span class="fw-normal text-danger old-price">
-                                                            <sup>Rp</sup>
-                                                            <span class="text-decoration-line-through">600.000</span>
-                                                        </span>
+
+                                                    <div class="mt-auto">
+                                                        <?php
+                                                        // Harga produk dan total_promo (diskon) yang ada di data produk
+                                                        $harga = $product['harga']; // Harga produk
+                                                        $total_promo = $product['total_promo']; // Diskon dalam persen
+                                                
+                                                        // Hitung diskon nominal
+                                                        $diskon_nominal = ($total_promo > 0) ? ($harga * ($total_promo / 100)) : 0;
+                                                        $harga_setelah_diskon = $harga - $diskon_nominal; // Harga setelah diskon
+                                                        ?>
+
+                                                        <div class="d-flex flex-wrap align-items-baseline">
+                                                            <div class="me-2">
+                                                                <!-- Menampilkan harga setelah diskon -->
+                                                                <span class="fw-bold price">
+                                                                    <sup class="fw-normal">Rp</sup>
+                                                                    <?= number_format($harga_setelah_diskon, 0, ',', '.') ?>
+                                                                </span>
+                                                            </div>
+
+                                                            <!-- Jika ada diskon, tampilkan harga lama yang digariskan -->
+                                                            <?php if ($diskon_nominal > 0): ?>
+                                                                <div>
+                                                                    <span class="fw-normal text-danger old-price">
+                                                                        <sup>Rp</sup>
+                                                                        <span
+                                                                            class="text-decoration-line-through"><?= number_format($harga, 0, ',', '.') ?></span>
+                                                                    </span>
+                                                                </div>
+                                                            <?php endif; ?>
+                                                        </div>
+
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="card shadow position-relative rounded-4 p-2">
-                                    <!-- Corner Ribbon -->
-                                    <div class="position-absolute ribbon-wrapper">
-                                        <div class="ribbon text-white text-uppercase fw-bold text-center">
-                                            New Product
-                                        </div>
-                                    </div>
-
-                                    <!-- Product Image -->
-                                    <div class="text-center pt-3">
-                                        <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png"
-                                            class="img-fluid product-image" alt="Product Image">
-                                    </div>
-                                    <div class="bodykartu">
-                                        <div class="d-flex flex-column ">
-                                            <!-- Product Details -->
-                                            <div class="">
-                                                <!-- <h5 class="">
-                                                CT-IMP Matto Light Brown
-                                            </h5> -->
-                                                <p class="card-title text-truncate fw-medium product-title">CT-IMP Matto
-                                                    Light Brown
-                                                </p>
-
-                                                <p class="card-text text-truncate product-desc">Meja ruang tamu
-                                                    aesthetic.</p>
-                                                <div class="d-flex gap-1 align-items-center">
-                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                    <small class="text-muted fst-italic ms-1 sold-text">300
-                                                        terjual</small>
-                                                </div>
-                                            </div>
-
-                                            <!-- Price Section -->
-                                            <div class="mt-auto">
-                                                <div class="d-flex flex-wrap align-items-baseline">
-                                                    <div class="me-2">
-                                                        <span class="fw-bold price">
-                                                            <sup class="fw-normal">Rp</sup> 500.000
-                                                        </span>
-                                                    </div>
-                                                    <div>
-                                                        <span class="fw-normal text-danger old-price">
-                                                            <sup>Rp</sup>
-                                                            <span class="text-decoration-line-through">600.000</span>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="card shadow position-relative rounded-4 p-2">
-                                    <!-- Corner Ribbon -->
-                                    <div class="position-absolute ribbon-wrapper">
-                                        <div class="ribbon text-white text-uppercase fw-bold text-center"
-                                            style="background-color: #FF8B2D;">
-                                            Best Seller
-                                        </div>
-                                    </div>
-
-                                    <!-- Product Image -->
-                                    <div class="text-center pt-3">
-                                        <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png"
-                                            class="img-fluid product-image" alt="Product Image">
-                                    </div>
-                                    <div class="bodykartu">
-                                        <div class="d-flex flex-column ">
-                                            <!-- Product Details -->
-                                            <div class="">
-                                                <!-- <h5 class="">
-                                                CT-IMP Matto Light Brown
-                                            </h5> -->
-                                                <p class="card-title text-truncate fw-medium product-title">CT-IMP Matto
-                                                    Light Brown
-                                                </p>
-
-                                                <p class="card-text text-truncate product-desc">Meja ruang tamu
-                                                    aesthetic.</p>
-                                                <div class="d-flex gap-1 align-items-center">
-                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                    <small class="text-muted fst-italic ms-1 sold-text">300
-                                                        terjual</small>
-                                                </div>
-                                            </div>
-
-                                            <!-- Price Section -->
-                                            <div class="mt-auto">
-                                                <div class="d-flex flex-wrap align-items-baseline">
-                                                    <div class="me-2">
-                                                        <span class="fw-bold price">
-                                                            <sup class="fw-normal">Rp</sup> 500.000
-                                                        </span>
-                                                    </div>
-                                                    <div>
-                                                        <span class="fw-normal text-danger old-price">
-                                                            <sup>Rp</sup>
-                                                            <span class="text-decoration-line-through">600.000</span>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <p>Tidak ada produk terbaru yang tersedia.</p>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
@@ -1087,73 +966,84 @@ function base_url($path = '')
                 <div class="tab-content wow fadeInUp" data-wow-delay=".25s" id="item-tabContent">
                     <div class="container">
                         <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4 justify-content-center">
-                            <?php foreach ($model['bestseller'] as $product): ?>
-                                <div class="col">
-                                    <div class="card shadow position-relative rounded-4 p-2">
-                                        <!-- Corner Ribbon -->
-                                        <div class="position-absolute ribbon-wrapper">
-                                            <div class="ribbon text-white text-uppercase fw-bold text-center"
-                                                style="background-color: #FF8B2D;">
-                                                Best Seller
-                                            </div>
-                                        </div>
-
-                                        <!-- Product Image -->
-                                        <div class="text-center pt-3">
-                                            <img src="assets/img/product/kursi/<?= $product['foto']; ?>"
-                                                class="img-fluid product-image" alt="Product Image">
-                                        </div>
-                                        <div class="bodykartu">
-                                            <div class="d-flex flex-column">
-                                                <!-- Product Details -->
-                                                <div class="">
-                                                    <p class="card-title text-truncate fw-medium product-title">
-                                                        <?= $product['nama_product']; ?>
-                                                    </p>
-                                                    <p class="card-text text-truncate product-desc">
-                                                        <?= $product['deskripsi']; ?>
-                                                    </p>
-                                                    <div class="d-flex gap-1 align-items-center">
-                                                        <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                        <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                        <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                        <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                        <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                        <small
-                                                            class="text-muted fst-italic ms-1 sold-text"><?= $product['beli']; ?>
-                                                            terjual</small>
-                                                    </div>
+                            <?php if (!empty($model['bestseller'])): ?>
+                                <?php foreach ($model['bestseller'] as $product): ?>
+                                    <div class="col-6 col-md-4 col-lg-3">
+                                        <div class="card shadow position-relative rounded-4 p-2 product-card"
+                                            data-id="<?= ($product['id_product']) ?>" style="cursor:pointer;">
+                                            <div class="position-absolute ribbon-wrapper">
+                                                <div class="ribbon text-uppercase fw-bold text-center"
+                                                    style="background-color: #FF8B2D; color: #FFFFFF;">
+                                                    Best Seller
                                                 </div>
+                                            </div>
+                                            <!-- Product Image -->
+                                            <div class="text-center pt-3">
+                                                <img src="assets/img/product/<?= htmlspecialchars($product['foto'] ?? '') ?>"
+                                                    class="img-fluid product-image" alt="Product Image">
+                                            </div>
+                                            <div class="bodykartu">
+                                                <div class="d-flex flex-column">
+                                                    <div class="">
+                                                        <p class="card-title text-truncate product-title">
+                                                            <?= htmlspecialchars($product['nama_product'] ?? 'Nama produk tidak tersedia') ?>
+                                                        </p>
+                                                        <p class="card-text text-truncate product-desc">
+                                                            <?= htmlspecialchars($product['deskripsi'] ?? 'Deskripsi tidak tersedia') ?>
+                                                        </p>
+                                                        <div class="d-flex gap-1 align-items-center">
+                                                            <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                            <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                            <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                            <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                            <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                            <small
+                                                                class="text-muted fst-italic ms-1 sold-text"><?= $product['beli'] ?? 0 ?>
+                                                                terjual</small>
+                                                        </div>
+                                                    </div>
 
-                                                <!-- Price Section -->
-                                                <div class="mt-auto">
-                                                    <div class="d-flex flex-wrap align-items-baseline">
-                                                        <div class="me-2">
-                                                            <?php if ($product['harga'] !== NULL): ?>
+                                                    <div class="mt-auto">
+                                                        <?php
+                                                        // Harga produk dan total_promo (diskon) yang ada di data produk
+                                                        $harga = $product['harga']; // Harga produk
+                                                        $total_promo = $product['total_promo']; // Diskon dalam persen
+                                                
+                                                        // Hitung diskon nominal
+                                                        $diskon_nominal = ($total_promo > 0) ? ($harga * ($total_promo / 100)) : 0;
+                                                        $harga_setelah_diskon = $harga - $diskon_nominal; // Harga setelah diskon
+                                                        ?>
+
+                                                        <div class="d-flex flex-wrap align-items-baseline">
+                                                            <div class="me-2">
+                                                                <!-- Menampilkan harga setelah diskon -->
                                                                 <span class="fw-bold price">
                                                                     <sup class="fw-normal">Rp</sup>
-                                                                    <?= number_format($product['harga'], 0, ',', '.'); ?>
+                                                                    <?= number_format($harga_setelah_diskon, 0, ',', '.') ?>
                                                                 </span>
-                                                            <?php else: ?>
-                                                                <span class="fw-bold price">Harga Belum Tersedia</span>
+                                                            </div>
+
+                                                            <!-- Jika ada diskon, tampilkan harga lama yang digariskan -->
+                                                            <?php if ($diskon_nominal > 0): ?>
+                                                                <div>
+                                                                    <span class="fw-normal text-danger old-price">
+                                                                        <sup>Rp</sup>
+                                                                        <span
+                                                                            class="text-decoration-line-through"><?= number_format($harga, 0, ',', '.') ?></span>
+                                                                    </span>
+                                                                </div>
                                                             <?php endif; ?>
                                                         </div>
-                                                        <div>
-                                                            <?php if ($product['harga'] !== NULL): ?>
-                                                                <span class="fw-normal text-danger old-price">
-                                                                    <sup>Rp</sup>
-                                                                    <span
-                                                                        class="text-decoration-line-through"><?= number_format($product['harga'] * 1.25, 0, ',', '.'); ?></span>
-                                                                </span>
-                                                            <?php endif; ?>
-                                                        </div>
+
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            <?php endforeach; ?>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <p>Tidak ada produk terbaru yang tersedia.</p>
+                            <?php endif; ?>
                         </div>
                     </div>
 
