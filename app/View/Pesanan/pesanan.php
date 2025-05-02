@@ -131,11 +131,12 @@ function base_url($path = '')
                                             <h4 class="text-black text-header-informasi">Alamat Pengirim</h4>
                                         </div>
                                         <div class="text-alamat-rumah my-2">
-                                            <p id="display_detail"><?= ucfirst($model['user']['detail']) ?></p>
-                                            <p id="display_nama"><?= $model['user']['nama'] ?></p>
-                                            <p id="display_hp"><?= $model['user']['no_hp'] ?></p>
-                                            <p id="display_alamat"><?= $model['user']['alamat'] ?></p>
-                                            <p id="display_email" class="d-none"><?= $model['user']['email'] ?></p>
+                                            <p id="display_detail"><?= ucfirst($model['user']['detail'] ?? '') ?></p>
+                                            <p id="display_nama"><?= $model['user']['nama'] ?? '' ?></p>
+                                            <p id="display_hp"><?= $model['user']['no_hp'] ?? '' ?></p>
+                                            <p id="display_alamat"><?= $model['user']['alamat'] ?? '' ?></p>
+                                            <p id="display_email" class="d-none"><?= $model['user']['email'] ?? '' ?></p>
+
                                             <!-- untuk keperluan update -->
                                         </div>
                                         <div>
@@ -259,7 +260,7 @@ function base_url($path = '')
                                                                     <?php
                                                                     $harga_normal = $item['harga']; // harga normal dari database
                                                                     $diskon = $item['diskon']; // diskon dari database, bisa null atau 0
-                                                                
+
                                                                     // Jika diskon ada (lebih dari 0), hitung harga setelah diskon
                                                                     if ($diskon > 0):
                                                                         // Menghitung nominal diskon
@@ -280,12 +281,12 @@ function base_url($path = '')
                                                                 <?php
                                                                 $harga_normal = $item['harga']; // harga normal dari database
                                                                 $diskon = $item['diskon']; // diskon dari database, bisa null atau 0
-                                                            
+
                                                                 // Jika diskon ada (lebih dari 0), tampilkan harga lama dengan diskon
                                                                 if ($diskon > 0):
                                                                     // Menghitung nominal diskon
                                                                     $nominal_diskon = ($diskon / 100) * $harga_normal;
-                                                                    ?>
+                                                                ?>
                                                                     <div>
                                                                         <span class="fw-normal text-danger old-price">
                                                                             <sup>Rp</sup>
@@ -294,7 +295,7 @@ function base_url($path = '')
                                                                             </span>
                                                                         </span>
                                                                     </div>
-                                                                    <?php
+                                                                <?php
                                                                 endif;
                                                                 ?>
                                                             </div>
@@ -318,7 +319,7 @@ function base_url($path = '')
                                                     // Menghitung harga setelah diskon (jika ada)
                                                     $harga_normal = $item['harga']; // Harga normal dari database
                                                     $diskon = $item['diskon']; // Diskon dari database
-                                                
+
                                                     // Jika diskon ada, hitung harga setelah diskon
                                                     if ($diskon > 0) {
                                                         $nominal_diskon = ($diskon / 100) * $harga_normal; // Nominal diskon
@@ -342,7 +343,7 @@ function base_url($path = '')
                                                     // Menghitung harga setelah diskon (jika ada)
                                                     $harga_normal = $item['harga']; // Harga normal dari database
                                                     $diskon = $item['diskon']; // Diskon dari database
-                                                
+
                                                     // Jika diskon ada, hitung harga setelah diskon
                                                     if ($diskon > 0) {
                                                         $nominal_diskon = ($diskon / 100) * $harga_normal; // Nominal diskon
@@ -534,21 +535,20 @@ function base_url($path = '')
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-
-        $('#myModal').on('shown.bs.modal', function () {
+        $('#myModal').on('shown.bs.modal', function() {
             $('#myInput').trigger('focus')
         })
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             const offcanvasToggler = document.getElementById('offcanvasToggler');
             const offcanvasNavbar = document.getElementById('offcanvasNavbar');
 
             // Mencegah pembuatan backdrop
-            offcanvasNavbar.addEventListener('show.bs.offcanvas', function () {
+            offcanvasNavbar.addEventListener('show.bs.offcanvas', function() {
                 document.querySelectorAll('.offcanvas-backdrop').forEach(el => el.remove());
             });
 
             // Alternatif: nonaktifkan backdrop sepenuhnya
-            offcanvasNavbar.addEventListener('shown.bs.offcanvas', function () {
+            offcanvasNavbar.addEventListener('shown.bs.offcanvas', function() {
                 const backdrops = document.querySelectorAll('.offcanvas-backdrop');
                 backdrops.forEach(backdrop => {
                     backdrop.classList.remove('show');
@@ -557,7 +557,7 @@ function base_url($path = '')
             });
 
             // Pastikan backdrop dihapus saat menutup
-            offcanvasNavbar.addEventListener('hidden.bs.offcanvas', function () {
+            offcanvasNavbar.addEventListener('hidden.bs.offcanvas', function() {
                 document.querySelectorAll('.offcanvas-backdrop').forEach(el => el.remove());
             });
         });
@@ -652,7 +652,7 @@ function base_url($path = '')
     </script>
 
     <script>
-        document.getElementById('formBayar').addEventListener('submit', function (e) {
+        document.getElementById('formBayar').addEventListener('submit', function(e) {
             const idToko = document.getElementById('id_toko').value;
             const idPengiriman = document.getElementById('id_pengiriman').value;
 
@@ -679,12 +679,10 @@ function base_url($path = '')
             const toastElement = new bootstrap.Toast(document.getElementById(toastId));
             toastElement.show();
         }
-
-
     </script>
 
     <script>
-        $('#formEditUser').on('submit', function (e) {
+        $('#formEditUser').on('submit', function(e) {
             e.preventDefault();
 
             const nama = $('#nama_user').val().trim();
@@ -709,7 +707,7 @@ function base_url($path = '')
                 url: '/user/update',
                 method: 'POST',
                 data: formData,
-                success: function (response) {
+                success: function(response) {
                     try {
                         const res = JSON.parse(response);
                         if (res.status === 'success') {
@@ -739,17 +737,17 @@ function base_url($path = '')
                         showToast('Terjadi kesalahan pada server.', 'danger');
                     }
                 },
-                error: function () {
+                error: function() {
                     showToast('Gagal terhubung ke server.', 'danger');
                 }
             });
 
-            
+
         });
 
         const input = document.getElementById('no_telpon');
         // Batasi hanya angka
-        input.addEventListener('input', function () {
+        input.addEventListener('input', function() {
             this.value = this.value.replace(/\D/g, ''); // hapus karakter non-angka
         });
     </script>

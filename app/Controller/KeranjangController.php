@@ -9,7 +9,7 @@ use Importa\Furnic\PHP\FFI\Repository\SessionRepository;
 use Importa\Furnic\PHP\FFI\Repository\UserRepository;
 use Importa\Furnic\PHP\FFI\Service\ProductServis;
 use Importa\Furnic\PHP\FFI\Service\WislistServis;
-
+session_start();
 class KeranjangController
 {
 
