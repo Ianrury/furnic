@@ -62,6 +62,18 @@ class ProductServis
         return $products;
     }
 
+    public function getAllToko()
+    {
+        $products = $this->productRepository->getAllToko();
+        return $products;
+    }
+
+    public function GetPengiriman()
+    {
+        $products = $this->productRepository->getJenisPengiriman();
+
+        return $products;
+    }
 
     /**
      * Mengambil semua data produk.

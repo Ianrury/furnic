@@ -368,8 +368,18 @@ ORDER BY p.created_at DESC;
 
     public function ExpensifProduct()
     {
-        // Membuat query untuk mengambil 4 produk dengan harga tertinggi
-        $statement = $this->connection->query("SELECT 
+        // Ambil top 3 produk best seller berdasarkan pembelian terbanyak
+        $bestSellerStmt = $this->connection->query("
+            SELECT id_product 
+            FROM product 
+            ORDER BY beli DESC 
+            LIMIT 3
+        ");
+        $bestSellers = $bestSellerStmt->fetchAll(PDO::FETCH_COLUMN);
+
+        // Ambil 4 produk dengan harga tertinggi beserta promo jika ada
+        $statement = $this->connection->query("
+            SELECT 
                 p.*, 
                 pr.nama_promo, 
                 pr.jenis_promo, 
@@ -383,14 +393,33 @@ ORDER BY p.created_at DESC;
                 AND pr.start_date <= CURDATE() 
                 AND pr.end_date >= CURDATE()
             ORDER BY p.harga DESC
-            LIMIT 4;
-            ");
+            LIMIT 4
+        ");
+        $expensiveProducts = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-        // Mengambil hasil query
-        $expensif = $statement->fetchAll(PDO::FETCH_ASSOC);
+        // Tandai jika produk termasuk top best seller
+        foreach ($expensiveProducts as &$product) {
+            $product['topBestSeller'] = in_array($product['id_product'], $bestSellers);
+        }
 
-        // Mengembalikan hasil ke view atau controller yang sesuai
-        return $expensif;
+        return $expensiveProducts;
+    }
+
+
+    public function getJenisPengiriman()
+    {
+        $statement = $this->connection->query("SELECT *, (harga - diskon) AS harga_setelah_diskon FROM jenis_pengiriman");
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
+
+
+    public function getAllToko()
+    {
+        $statement = $this->connection->prepare("SELECT * FROM toko ORDER BY nama ASC");
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
 

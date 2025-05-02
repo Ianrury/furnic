@@ -109,3 +109,32 @@ INSERT INTO promo (nama_promo, jenis_promo, total_promo, start_date, end_date)
 VALUES
 ('Promo Diskon Lebaran', 'Diskon', 10.00, '2025-05-10', '2025-05-20'),
 ('Promo Akhir Pekan', 'Cashback', 20.00, '2025-05-10', '2025-05-20');
+
+
+INSERT INTO jenis_pengiriman (nama, diskon, harga) VALUES
+('Reguler', 0, 20000),
+('Express', 5000, 40000),
+('Same Day', 10000, 60000);
+
+
+INSERT INTO toko (nama, alamat) VALUES
+('Toko Sinar Baru', 'Jl. Melati No. 12, Desa Sukamaju, Kec. Sukatani, Kab. Bandung'),
+('Toko Makmur Sentosa', 'Jl. Kenanga No. 45, Kel. Kebon Jeruk, Kec. Bojong, Kota Tasikmalaya'),
+('Toko Serba Ada', 'Jl. Anggrek No. 3, Desa Margahayu, Kec. Cibiru, Kab. Garut'),
+('Toko Laris Manis', 'Jl. Mawar No. 77, Kel. Cibadak, Kec. Antapani, Kota Bandung'),
+('Toko Grosir Murah', 'Jl. Teratai No. 5, Desa Cileunyi, Kec. Rancaekek, Kab. Bandung');
+
+ALTER TABLE customer
+ADD COLUMN detail VARCHAR(30) AFTER alamat;
+
+ALTER TABLE customer
+MODIFY COLUMN alamat TEXT;
+
+ALTER TABLE pesanan
+ADD COLUMN status VARCHAR(50) DEFAULT 'waiting' AFTER tanggal_pesanan;
+
+ALTER TABLE pesanan
+ADD COLUMN id_detail_product INT AFTER id_product,
+ADD COLUMN id_motif_produk INT AFTER id_detail_product,
+ADD CONSTRAINT fk_detail_product FOREIGN KEY (id_detail_product) REFERENCES detail_product(id),
+ADD CONSTRAINT fk_motif_produk FOREIGN KEY (id_motif_produk) REFERENCES motif_produk(id);

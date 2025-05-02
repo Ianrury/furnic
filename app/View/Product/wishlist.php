@@ -178,65 +178,23 @@
                                     <div class="mb-3">
                                         <h6 class="fw-bold text-dark mb-2" style="font-size: 15px;">Kategori</h6>
                                         <div class="row">
-                                            <div class="col-6">
-                                                <div class="form-check custom-check">
-                                                    <input class="form-check-input" type="checkbox" id="bedroom">
-                                                    <label class="form-check-label" for="bedroom">Bedroom</label>
-                                                </div>
-                                                <div class="form-check custom-check">
-                                                    <input class="form-check-input" type="checkbox" id="business">
-                                                    <label class="form-check-label" for="business">Business Table &
-                                                        Chair</label>
-                                                </div>
-                                                <div class="form-check custom-check">
-                                                    <input class="form-check-input" type="checkbox" id="dining">
-                                                    <label class="form-check-label" for="dining">Dining</label>
-                                                </div>
-                                                <div class="form-check custom-check">
-                                                    <input class="form-check-input" type="checkbox" id="home_deco">
-                                                    <label class="form-check-label" for="home_deco">Home
-                                                        Decoration</label>
-                                                </div>
-                                                <div class="form-check custom-check">
-                                                    <input class="form-check-input" type="checkbox" id="homeware">
-                                                    <label class="form-check-label" for="homeware">Homeware</label>
-                                                </div>
-                                                <div class="form-check custom-check">
-                                                    <input class="form-check-input" type="checkbox" id="textile">
-                                                    <label class="form-check-label" for="textile">Home Textile</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-6">
-                                                <div class="form-check custom-check">
-                                                    <input class="form-check-input" type="checkbox" id="kids">
-                                                    <label class="form-check-label" for="kids">Kids & Teens</label>
-                                                </div>
-                                                <div class="form-check custom-check">
-                                                    <input class="form-check-input" type="checkbox" id="kitchen">
-                                                    <label class="form-check-label" for="kitchen">Kitchen</label>
-                                                </div>
-                                                <div class="form-check custom-check">
-                                                    <input class="form-check-input" type="checkbox" id="living">
-                                                    <label class="form-check-label" for="living">Living</label>
-                                                </div>
-                                                <div class="form-check custom-check">
-                                                    <input class="form-check-input" type="checkbox" id="mattress">
-                                                    <label class="form-check-label" for="mattress">Mattress</label>
-                                                </div>
-                                                <div class="form-check custom-check">
-                                                    <input class="form-check-input" type="checkbox" id="office">
-                                                    <label class="form-check-label" for="office">Office</label>
-                                                </div>
-                                                <div class="form-check custom-check">
-                                                    <input class="form-check-input" type="checkbox" id="rugs">
-                                                    <label class="form-check-label" for="rugs">Rugs & Mats</label>
-                                                </div>
-                                                <div class="form-check custom-check">
-                                                    <input class="form-check-input" type="checkbox" id="storage">
-                                                    <label class="form-check-label" for="storage">Storage</label>
-                                                </div>
-                                            </div>
+                                            <?php foreach (array_chunk($model['category'], 2) as $chunk): ?>
+                                                <?php foreach ($chunk as $cat): ?>
+                                                    <div class="col-6">
+                                                        <div class="form-check custom-check">
+                                                            <input class="form-check-input" type="checkbox"
+                                                                id="<?= strtolower($cat['nama']); ?>" name="kategori[]"
+                                                                value="<?= $cat['id_kategori']; ?>">
+                                                            <label class="form-check-label"
+                                                                for="<?= strtolower($cat['nama']); ?>">
+                                                                <?= htmlspecialchars($cat['nama']); ?>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                <?php endforeach; ?>
+                                            <?php endforeach; ?>
                                         </div>
+
                                     </div>
 
                                     <hr>
@@ -245,34 +203,34 @@
                                     <div class="mb-3">
                                         <h6 class="fw-bold text-dark mb-2" style="font-size: 15px;">Kategori</h6>
                                         <div class="input-group input-group-sm mb-3">
-                                            <span class="input-group-text fw-bold" id="inputGroup-sizing-sm"
+                                            <span class="input-group-text fw-bold"
                                                 style="font-size: 10px; background-color: #D9D9D9;">Rp</span>
-                                            <input type="text" class="form-control harga-input"
-                                                placeholder="Masukkan harga minimum" aria-label="Sizing example input"
-                                                aria-describedby="inputGroup-sizing-sm"
-                                                onfocus="this.classList.add('focused')"
-                                                onblur="if(!this.value) this.classList.remove('focused')">
+                                            <input type="text" class="form-control harga-input text-black"
+                                                name="harga_min" id="harga_min" placeholder="Masukkan harga minimum">
                                         </div>
                                         <div class="input-group input-group-sm mb-3">
-                                            <span class="input-group-text fw-bold" id="inputGroup-sizing-sm"
+                                            <span class="input-group-text fw-bold"
                                                 style="font-size: 10px; background-color: #D9D9D9;">Rp</span>
-                                            <input type="text" class="form-control harga-input"
-                                                placeholder="Masukkan harga maximum" aria-label="Sizing example input"
-                                                aria-describedby="inputGroup-sizing-sm"
-                                                onfocus="this.classList.add('focused')"
-                                                onblur="if(!this.value) this.classList.remove('focused')">
+                                            <input type="text" class="form-control harga-input text-black"
+                                                name="harga_max" id="harga_max" placeholder="Masukkan harga maksimum">
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
 
                             <!-- Produk Grid -->
                             <div class="col-md-9">
-                                <div class="row row-cols-2 row-cols-md-2 row-cols-lg-3 g-4" id="product-list">
-                                    <!-- Ulangi card produk -->
-
-                                    <!-- Akhir satu produk -->
+                                <div id="loading-spinner" class="text-center mb-3" style="display: none;">
+                                    <div class="spinner-border text-primary" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
                                 </div>
+
+                                <div class="row row-cols-2 row-cols-md-2 row-cols-lg-3 g-4" id="product-list">
+                                    <!-- Produk akan dimuat di sini -->
+                                </div>
+
                                 <div class="container mt-4">
                                     <div class="d-flex justify-content-center pagination-container"
                                         id="pagination-container">
@@ -407,6 +365,8 @@
         const resetBtn = document.getElementById('resetFilter');
         const checkboxes = document.querySelectorAll('input[type="checkbox"]');
         const hargaInputs = document.querySelectorAll('.harga-input');
+        const productList = document.getElementById('product-list');
+        const spinner = document.getElementById('loading-spinner');
 
         const defaultColor = '#D9D9D9';
         const activeColor = '#2B4779';
@@ -426,40 +386,136 @@
             }
         }
 
-        // Listener untuk checkbox
-        checkboxes.forEach(cb => {
-            cb.addEventListener('change', updateResetButtonState);
+        function formatRupiah(angka) {
+            return angka.replace(/\D/g, '')
+                .replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+        }
+
+        document.querySelectorAll('.harga-input').forEach(input => {
+            input.addEventListener('input', function () {
+                const cleaned = this.value.replace(/\./g, '');
+                this.value = formatRupiah(cleaned);
+                debounceApplyFilter(); // Trigger filter setelah delay
+            });
         });
 
-        // Listener untuk input harga
+        // Debounce: tunggu 500ms setelah user berhenti mengetik
+        let debounceTimeout;
+        function debounceApplyFilter() {
+            clearTimeout(debounceTimeout);
+            debounceTimeout = setTimeout(applyFilter, 500);
+        }
+
+        function applyFilter() {
+            spinner.style.display = 'block';
+            productList.innerHTML = '';
+
+            const formData = new FormData();
+
+            checkboxes.forEach(cb => {
+                if (cb.checked) {
+                    formData.append(cb.name || cb.id, cb.value || 'on');
+                }
+            });
+
+            // Ambil harga min & max (hapus titik-nya)
+            const hargaMin = document.getElementById('harga_min').value.replace(/\./g, '');
+            const hargaMax = document.getElementById('harga_max').value.replace(/\./g, '');
+
+            if (hargaMin) formData.append('harga_min', hargaMin);
+            if (hargaMax) formData.append('harga_max', hargaMax);
+
+            fetch('/filter/wislist', {
+                method: 'POST',
+                body: formData
+            }).then(res => res.json())
+                .then(data => {
+                    const paginationContainer = document.querySelector('#pagination-container');
+                    paginationContainer.innerHTML = '';
+                    spinner.style.display = 'none';
+                    productList.innerHTML = data.html;
+                }).catch(err => {
+                    spinner.style.display = 'none';
+                    document.querySelector('#pagination-container').innerHTML = '';
+                    alert("Gagal memuat produk.");
+                    console.error(err);
+                });
+        }
+
+        // Event listener checkbox & harga
+        checkboxes.forEach(cb => {
+            cb.addEventListener('change', () => {
+                updateResetButtonState();
+                applyFilter();
+            });
+        });
+
         hargaInputs.forEach(input => {
-            input.addEventListener('input', updateResetButtonState);
+            input.addEventListener('input', () => {
+                updateResetButtonState();
+                applyFilter(); // Bisa disesuaikan jika nanti ada filter harga
+            });
         });
 
         // Reset button
         resetBtn.addEventListener('click', function () {
-            // Uncheck semua checkbox
             checkboxes.forEach(cb => cb.checked = false);
-
-            // Kosongkan input harga
             hargaInputs.forEach(input => input.value = '');
-
-            // Reset warna tombol
             updateResetButtonState();
+            applyFilter();
         });
 
-        // Data produk (untuk contoh)
-        const products = <?= json_encode($model["product"]); ?>.map(product => ({
-            id: product.id_product,
-            title: product.nama_product,             // Sesuaikan dengan nama kolom produk di PHP
-            description: product.deskripsi ?? "Deskripsi tidak tersedia", // Deskripsi produk
-            price: product.harga !== null && product.harga !== undefined ? `Rp ${product.harga.toLocaleString()}` : "Rp 0", // Pastikan harga valid
-            oldPrice: product.harga ? `Rp ${product.harga + 100000}` : "Rp 0", // Harga lama, asumsikan harga lama = harga produk + 100.000
-            rating: 4,  // Anda bisa menentukan rating atau mengambilnya dari data produk jika ada
-            sold: product.beli,   // Anda bisa mengubah ini sesuai dengan data yang ada
-            image: `assets/img/product/${product.foto}`,  // Gambar produk
-            isNew: true  // Anda bisa menambahkan logika untuk menentukan apakah produk baru atau tidak
-        }));
+
+        const allProductsRaw = <?= json_encode($model["product"]); ?>;
+
+        // Ambil 3 ID produk dengan pembelian terbanyak
+        const topBestSellerIds = allProductsRaw
+            .filter(p => p.qty > 0) // hanya yang stoknya masih ada
+            .sort((a, b) => b.beli - a.beli)
+            .slice(0, 3)
+            .map(p => p.id_product);
+
+        const products = allProductsRaw.map(product => {
+            const harga = Number(product.harga) || 0;
+            const promoPersen = Number(product.total_promo) || 0;
+
+            const potongan = Math.round(harga * (promoPersen / 100));
+            const hargaSetelahDiskon = harga - potongan;
+
+            const createdDate = new Date(product.created_at);
+            const today = new Date();
+            const diffTime = Math.abs(today - createdDate);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+            let ribbon = null;
+            if (diffDays <= 7) {
+                ribbon = { text: 'New Product', bg: '#2B4779', color: '#FFFFFF' };
+            }
+            if (product.qty <= 0) {
+                ribbon = { text: 'Out of Stock', bg: '#FF0000', color: '#FFFFFF' };
+            } else if (topBestSellerIds.includes(product.id_product)) {
+                ribbon = { text: 'Best Seller', bg: '#FF8B2D', color: '#FFFFFF' };
+            } else if (promoPersen > 0) {
+                ribbon = { text: 'Sale', bg: '#FFFB2D', color: '#FF0000' };
+            }
+
+            return {
+                id: product.id_product,
+                title: product.nama_product,
+                description: product.deskripsi ?? "Deskripsi tidak tersedia",
+                price: hargaSetelahDiskon.toLocaleString('id-ID'),
+                oldPrice: harga.toLocaleString('id-ID'),
+                potongan: potongan.toLocaleString('id-ID'),
+                promo: promoPersen,
+                rating: product.rating ?? 4,
+                sold: product.beli,
+                stock: product.stock,
+                image: `assets/img/product/${product.foto}`,
+                created_at: product.created_at,
+                ribbon
+            };
+        });
+
 
         // Variabel untuk pagination
         let currentPage = 1;
@@ -487,56 +543,48 @@
         // Fungsi untuk membuat card produk
         function createProductCard(product) {
             return `
-                             <div class="col">
-                                <div class="card shadow position-relative rounded-4 p-2">
-                            ${product.isNew ? `
-                            <!-- Corner Ribbon -->
-                        <div class="position-absolute ribbon-wrapper">
-                                                <div class="ribbon text-white text-uppercase fw-bold text-center">
-                                                    New Product
-                                                </div>
-                                    </div>
-                    ` : ''}
+        <div class="col">
+            <div class="card shadow position-relative rounded-4 p-2 product-card" data-id="${product.id}" style="cursor:pointer;">
 
-                    <!-- Product Image -->
-                    <div class="text-center pt-3">
-                    <img src="${product.image}" class="img-fluid product-image product-card" data-id="${product.id}" style="cursor:pointer;" alt="Product Image">
-                    </div>
+                ${product.ribbon ? `
+                    <div class="position-absolute ribbon-wrapper">
+                        <div class="ribbon text-uppercase fw-bold text-center"
+                             style="background-color: ${product.ribbon.bg}; color: ${product.ribbon.color};">
+                            ${product.ribbon.text}
+                        </div>
+                    </div>` : ''
+                }
 
-                    <div class="bodykartu">
-                            <div class="d-flex flex-column ">
-                                <!-- Product Details -->
-                                <div class="">
-                                    <!-- <h5 class="">
-                                        ${product.title}
-                                </h5> -->
-                                    <p class="card-title text-truncate  product-title"> ${product.title}
-                                    </p>
+                <div class="text-center pt-3">
+                    <img src="${product.image}" class="img-fluid product-image" alt="Product Image">
+                </div>
 
-                                    <p class="card-text text-truncate product-desc">${product.description}</p>
-                                    <div class="d-flex gap-1 align-items-center">
-                                        ${createStarRating(product.rating)}
-                                        <small class="text-muted fst-italic ms-1 sold-text">${product.sold} terjual</small>
-                                    </div>
+                <div class="bodykartu">
+                    <div class="d-flex flex-column">
+                        <p class="card-title text-truncate product-title">${product.title}</p>
+                        <p class="card-text text-truncate product-desc">${product.description}</p>
+                        <div class="d-flex gap-1 align-items-center">
+                            ${createStarRating(product.rating)}
+                            <small class="text-muted fst-italic ms-1 sold-text">${product.sold} terjual</small>
+                        </div>
+
+                        <div class="mt-auto">
+                            <div class="d-flex flex-wrap align-items-baseline">
+                                <div class="me-2">
+                                    <span class="fw-bold price">
+                                        <sup class="fw-normal">Rp</sup> ${product.price}
+                                    </span>
                                 </div>
-
-                                <!-- Price Section -->
-                                <div class="mt-auto">
-                                    <div class="d-flex flex-wrap align-items-baseline">
-                                        <div class="me-2">
-                                            <span class="fw-bold price">
-                                                <sup class="fw-normal">Rp</sup> ${product.price}
-                                            </span>
-                                        </div>
-                                        <div>
-                                            <span class="fw-normal text-danger old-price">
-                                                <sup>Rp</sup>
-                                                <span class="text-decoration-line-through">${product.oldPrice}</span>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                    <div class="row g-2">
+                                ${product.promo > 0 ? `
+                                <div>
+                                    <span class="fw-normal text-danger old-price">
+                                        <sup>Rp</sup>
+                                        <span class="text-decoration-line-through">${product.oldPrice}</span>
+                                    </span>
+                                </div>` : ''}
+                            </div>
+                        </div>
+                          <div class="row g-2">
                                                 <div class="col-6">
                                                     <button class="btn buy-btn w-100">Beli</button>
                                                 </div>
@@ -544,11 +592,11 @@
                                                     <button class="btn cart-btn w-100 product-card" data-id="${product.id}" style="cursor:pointer;">+ Keranjang</button>
                                                 </div>
                                             </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
-  `;
+            </div>
+        </div>
+    `;
         }
 
         // Fungsi untuk membuat rating bintang
@@ -816,6 +864,7 @@
             });
         });
     </script>
+
     <script>
         document.addEventListener('click', function (e) {
             const card = e.target.closest('.product-card');

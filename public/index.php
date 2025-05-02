@@ -26,6 +26,9 @@ Router::add('POST', '/login', UserController::class, 'postLogin', [MustNotLoginM
 Router::add('GET', '/register', UserController::class, 'register', [MustNotLoginMiddleware::class]);
 Router::add('POST', '/register', UserController::class, 'postRegister', [MustNotLoginMiddleware::class]);
 Router::add('GET', '/logout', UserController::class, 'logout', [MustLoginMiddleware::class]);
+Router::add('POST', '/user/edit', UserController::class, 'EditUser', [MustLoginMiddleware::class]);
+Router::add('POST', '/user/update', UserController::class, 'UpdateUser', [MustLoginMiddleware::class]);
+
 
 // Controller ProductController
 Router::add('GET', '/product', ProductController::class, 'index');
@@ -33,6 +36,10 @@ Router::add('GET', '/product/detail/{id}', ProductController::class, 'detail');
 Router::add('GET', '/product/hasil', ProductController::class, 'pencarian');
 Router::add('GET', '/product/wishlist', ProductController::class, 'wishlist');
 Router::add('POST', '/filter', ProductController::class, 'filterProduct');
+Router::add('POST', '/filter/wislist', ProductController::class, 'filterProductWislist');
+Router::add('POST', '/filter/pencarian', ProductController::class, 'filterProductPencaian');
+
+
 
 // Contooller kerangjang 
 Router::add('GET', '/keranjang', KeranjangController::class, 'index');

@@ -131,14 +131,16 @@ function base_url($path = '')
                                             <h4 class="text-black text-header-informasi">Alamat Pengirim</h4>
                                         </div>
                                         <div class="text-alamat-rumah my-2">
-                                            <p>Rumah</p>
-                                            <p>Ian Roery</p>
-                                            <p>0812729293292</p>
-                                            <p>Jl Godean Km 5 Rt 3 Rw 20, Modinan, Banyuraden, Kec. Gamping, Kabupaten
-                                                Sleman, Daerah Istimewa Yogyakarta 55293</p>
+                                            <p id="display_detail"><?= ucfirst($model['user']['detail']) ?></p>
+                                            <p id="display_nama"><?= $model['user']['nama'] ?></p>
+                                            <p id="display_hp"><?= $model['user']['no_hp'] ?></p>
+                                            <p id="display_alamat"><?= $model['user']['alamat'] ?></p>
+                                            <p id="display_email" class="d-none"><?= $model['user']['email'] ?></p>
+                                            <!-- untuk keperluan update -->
                                         </div>
                                         <div>
-                                            <button class="button-edit">Edit Alamat</button>
+                                            <button class="button-edit" data-bs-toggle="modal"
+                                                data-bs-target="#editAlamatModal">Edit Alamat</button>
                                         </div>
                                     </div>
                                 </div>
@@ -163,38 +165,35 @@ function base_url($path = '')
                                                 </div>
                                             </div>
 
+
                                             <!-- Container untuk konten dinamis -->
                                             <div class="pt-3 px-2" id="pengiriman-content">
                                                 <!-- Default aktif: Antar ke Alamat -->
                                                 <h6 class="text-black header-pilih-jasa">Pilih jasa Pengiriman</h6>
-                                                <div
-                                                    class="d-flex justify-content-between align-items-center w-100 mt-2">
-                                                    <div class="d-flex align-items-center gap-2">
-                                                        <input type="checkbox" id="flexCheckDefault">
-                                                        <div class="text-detail-jasa">Reguler (2 - 5 hari)</div>
-                                                    </div>
-                                                    <div class="d-flex align-items-center gap-3">
-                                                        <div class="text-danger old-price fw-normal">
-                                                            <sup>Rp</sup><span
-                                                                class="text-decoration-line-through">30.000</span>
+                                                <?php foreach ($model['jenisPengiriman'] as $pengiriman): ?>
+                                                    <div
+                                                        class="d-flex justify-content-between align-items-center w-100 mt-2">
+                                                        <div class="d-flex align-items-center gap-2">
+                                                            <input type="checkbox" id="pengiriman_<?= $pengiriman['id'] ?>"
+                                                                name="jenis_pengiriman" value="<?= $pengiriman['id'] ?>">
+                                                            <div class="text-detail-jasa">
+                                                                <?= htmlspecialchars($pengiriman['nama']) ?>
+                                                            </div>
                                                         </div>
-                                                        <div class="text-nominal text-black">gratis</div>
-                                                    </div>
-                                                </div>
-                                                <div
-                                                    class="d-flex justify-content-between align-items-center w-100 mt-2">
-                                                    <div class="d-flex align-items-center gap-2">
-                                                        <input type="checkbox" id="flexCheckDefault">
-                                                        <div class="text-detail-jasa">Reguler (2 - 5 hari)</div>
-                                                    </div>
-                                                    <div class="d-flex align-items-center gap-3">
-                                                        <div class="text-danger old-price fw-normal">
-                                                            <sup>Rp</sup><span
-                                                                class="text-decoration-line-through">30.000</span>
+                                                        <div class="d-flex align-items-center gap-3">
+                                                            <?php if ($pengiriman['diskon'] > 0): ?>
+                                                                <div class="text-danger old-price fw-normal">
+                                                                    <sup>Rp</sup><span
+                                                                        class="text-decoration-line-through"><?= number_format($pengiriman['harga'], 0, ',', '.') ?></span>
+                                                                </div>
+                                                            <?php endif; ?>
+                                                            <div class="text-nominal text-black">
+                                                                <?= $pengiriman['harga_setelah_diskon'] == 0 ? 'gratis' : 'Rp ' . number_format($pengiriman['harga_setelah_diskon'], 0, ',', '.') ?>
+                                                            </div>
                                                         </div>
-                                                        <div class="text-nominal text-black">gratis</div>
                                                     </div>
-                                                </div>
+                                                <?php endforeach; ?>
+
                                             </div>
                                         </div>
                                     </div>
@@ -383,31 +382,45 @@ function base_url($path = '')
                                                             Rincian Pembayaran</h1>
                                                         <div class="order-summary">
                                                             <div class="summary-label">Subtotal Harga</div>
-                                                            <div class="summary-value"><span
-                                                                    class="currency-symbol">Rp</span> 108.000.000</div>
+                                                            <div class="summary-value">
+                                                                <span class="currency-symbol">Rp</span>
+                                                                <?= number_format($model['subtotal'], 0, ',', '.') ?>
+                                                            </div>
 
                                                             <div class="summary-label">Total Diskon</div>
-                                                            <div class="summary-value"><span
-                                                                    class="currency-symbol">Rp</span> 8.000.000</div>
+                                                            <div class="summary-value">
+                                                                <span class="currency-symbol">Rp</span>
+                                                                <?= number_format($model['total_diskon'], 0, ',', '.') ?>
+                                                            </div>
 
                                                             <div class="summary-label">Total Ongkir</div>
                                                             <div class="summary-value"><span
-                                                                    class="currency-symbol">Rp</span> 500.000</div>
+                                                                    class="currency-symbol">Rp</span> <span
+                                                                    id="total-ongkir">0</span></div>
                                                         </div>
                                                         <hr class="hr-tebal" style="margin-top: 10px;">
                                                         <div class="order-summary" style="font-weight: bold;">
                                                             <div class="summary-label">Total Pembayaran</div>
                                                             <div class="summary-value"><span
-                                                                    class="currency-symbol">Rp</span> 500.000</div>
+                                                                    class="currency-symbol">Rp</span> <span
+                                                                    id="total-pembayaran">
+                                                                    <?= number_format($model['total_pembayaran'], 0, ',', '.') ?></span>
+                                                            </div>
                                                         </div>
 
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="px-4 mb-3">
-                                            <button class="btn btn-buy w-100 rounded-3 fw-bold w-100"
-                                                style="font-size: 14px;">Bayar</button>
+                                        <div class="px-4 mb-3 pt-2">
+                                            <form id="formBayar" method="post">
+                                                <input type="text" id="id_toko" value="" hidden>
+                                                <!-- <input type="text" id="id_warna" value="" hidden>
+                                                <input type="text" id="id_motif" value="" hidden> -->
+                                                <input type="text" id="id_pengiriman" value="" hidden>
+                                                <button type="submit" class="btn btn-buy w-100 rounded-3 fw-bold"
+                                                    style="font-size: 14px;">Bayar</button>
+                                            </form>
                                         </div>
 
 
@@ -418,6 +431,75 @@ function base_url($path = '')
                         </div>
 
 
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div class="modal fade bd-example-modal-lg" id="editAlamatModal" tabindex="-1" role="dialog"
+                aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        ...
+                    </div>
+                </div>
+            </div> -->
+
+            <div class="modal fade bd-example-modal-lg" id="editAlamatModal" tabindex="-1" role="dialog"
+                aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title text-black" id="exampleModalLabel">Edit Alamat</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="formEditUser" method="post">
+                                <input type="text" id="id_user" name="id_user"
+                                    value="<?= $model['user']['id_customer'] ?>" hidden>
+                                <div class="" style="margin: auto 5px;">
+                                    <label for="nama" class="form-label">Nama Lengkap <span
+                                            class="required">*</span></label>
+                                    <input type="text" class="form-control form-login" id="nama_user" name="nama"
+                                        placeholder="Masukkan Nama Lengkap" value="<?= $model['user']['nama'] ?>">
+                                </div>
+
+                                <div class="" style="margin: auto 5px;">
+                                    <label for="detail" class="form-label">Detail<span class="required">*</span></label>
+                                    <input type="text" class="form-control form-login" id="detail" name="detail"
+                                        placeholder="Masukkan detail Lengkap" value="<?= $model['user']['detail'] ?>">
+                                </div>
+
+                                <div class="" style="margin: auto 5px;" hidden>
+                                    <label for="email" class="form-label">Email <span class="required">*</span></label>
+                                    <input type="email" class="form-control form-login" id="email" name="email"
+                                        placeholder="Masukkan Email" value="<?= $model['user']['email'] ?? '' ?>">
+
+                                </div>
+
+                                <div class="" style="margin: auto 5px;">
+                                    <label for="no_hp" class="form-label">Nomor Telepon <span
+                                            class="required">*</span></label>
+                                    <div class="d-flex gap-1">
+                                        <input type="text" class="form-control form-login country-code-input"
+                                            id="country_code" name="country_code" placeholder="+62" readonly>
+                                        <input type="text" class="form-control form-login phone-input" id="no_telpon"
+                                            name="no_hp" placeholder="Masukkan No Telepon"
+                                            value="<?= $model['user']['no_hp'] ?>">
+                                    </div>
+                                </div>
+
+                                <div class="" style="margin: auto 5px;">
+                                    <label for="Alamat" class="form-label">Alamat Lengkap <span
+                                            class="required">*</span></label>
+                                    <textarea class="form-control form-login p-1" id="Alamat" name="alamat" rows="3"
+                                        placeholder="Masukkan Alamat"><?= $model['user']['alamat'] ?? '' ?></textarea>
+
+                                </div>
+                                <button type="submit" class="btn btn-masuk mt-2 w-100">Submit</button>
+                                <!-- Login Button -->
+                            </form>
+
+                        </div>
                     </div>
                 </div>
             </div>
@@ -452,6 +534,10 @@ function base_url($path = '')
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
+
+        $('#myModal').on('shown.bs.modal', function () {
+            $('#myInput').trigger('focus')
+        })
         document.addEventListener('DOMContentLoaded', function () {
             const offcanvasToggler = document.getElementById('offcanvasToggler');
             const offcanvasNavbar = document.getElementById('offcanvasNavbar');
@@ -479,63 +565,194 @@ function base_url($path = '')
 
     <!-- Script -->
     <script>
+        const tokoList = <?php echo json_encode($model['toko']); ?>;
+        const jenisPengiriman = <?php echo json_encode($model['jenisPengiriman']); ?>;
         const btnAntar = document.getElementById('btn-antar');
         const btnAmbil = document.getElementById('btn-ambil');
         const content = document.getElementById('pengiriman-content');
+        const idTokoInput = document.getElementById('id_toko');
+        const idPengirimanInput = document.getElementById('id_pengiriman');
+        const ongkirEl = document.getElementById('total-ongkir');
+        const totalPembayaranEl = document.getElementById('total-pembayaran');
+        const baseTotal = <?= $model['subtotal'] - $model['total_diskon'] ?>;
 
-        // Fungsi render konten
+        function formatRupiah(angka) {
+            return new Intl.NumberFormat('id-ID').format(angka);
+        }
+
         function renderContent(type) {
             if (type === 'antar') {
-                content.innerHTML = `
-        <h6 class="text-black header-pilih-jasa">Pilih jasa Pengiriman</h6>
-        <div class="d-flex justify-content-between align-items-center w-100 mt-2">
-          <div class="d-flex align-items-center gap-2">
-            <input type="checkbox" id="flexCheckDefault">
-            <div class="text-detail-jasa">Reguler (2 - 5 hari)</div>
-          </div>
-          <div class="d-flex align-items-center gap-3">
-            <div class="text-danger old-price fw-normal">
-              <sup>Rp</sup><span class="text-decoration-line-through">30.000</span>
-            </div>
-            <div class="text-nominal text-black">gratis</div>
-          </div>
-        </div>`;
+                let html = `<h6 class="text-black header-pilih-jasa">Pilih jasa Pengiriman</h6>`;
+                jenisPengiriman.forEach(p => {
+                    const harga = parseInt(p.harga_setelah_diskon);
+                    html += `
+                    <div class="d-flex justify-content-between align-items-center w-100 mt-2">
+                        <div class="d-flex align-items-center gap-2">
+                            <input type="radio" name="jenis_pengiriman" value="${p.id}" data-harga="${harga}" onchange="selectPengiriman(this)">
+                            <div class="text-detail-jasa">${p.nama}</div>
+                        </div>
+                        <div class="d-flex align-items-center gap-3">
+                            ${p.diskon > 0 ? `<div class="text-danger old-price fw-normal"><sup>Rp</sup><span class="text-decoration-line-through">${formatRupiah(p.harga)}</span></div>` : ''}
+                            <div class="text-nominal text-black">${harga === 0 ? 'gratis' : 'Rp ' + formatRupiah(harga)}</div>
+                        </div>
+                    </div>`;
+                });
+                content.innerHTML = html;
             } else {
-                content.innerHTML = `
-        <h6 class="text-black header-pilih-jasa">Pilih jasa Pengiriman</h6>
-        <div class="d-flex align-items-start gap-2 w-100 mt-2">
-          <input type="checkbox" id="flexCheckDefault" style="margin-top: 4px;">
-          <div class="d-flex flex-column">
-            <div class="text-detail-jasa">Furnic Jogja</div>
-            <div class="text-detail-jasa">Jln magelang km3 Lorem ipsum dolor sit amet consectetur.</div>
-          </div>
-        </div>
-         <div class="d-flex align-items-start gap-2 w-100 mt-2">
-          <input type="checkbox" id="flexCheckDefault" style="margin-top: 4px;">
-          <div class="d-flex flex-column">
-            <div class="text-detail-jasa">Furnic Jogja</div>
-            <div class="text-detail-jasa">Jln magelang km3 Lorem ipsum dolor sit amet consectetur.</div>
-          </div>
-        </div>
-        `;
+                let html = `<h6 class="text-black header-pilih-jasa">Pilih Lokasi Pengambilan</h6>`;
+                tokoList.forEach(toko => {
+                    html += `
+                    <div class="d-flex align-items-start gap-2 w-100 mt-2">
+                        <input type="radio" name="lokasi_toko" value="${toko.id}" onchange="selectToko(this)" style="margin-top: 4px;">
+                        <div class="d-flex flex-column">
+                            <div class="text-detail-jasa">${toko.nama}</div>
+                            <div class="text-detail-jasa">${toko.alamat}</div>
+                        </div>
+                    </div>`;
+                });
+                content.innerHTML = html;
             }
         }
 
-        // Event click
+        function selectPengiriman(el) {
+            const harga = parseInt(el.dataset.harga);
+            idPengirimanInput.value = el.value;
+            ongkirEl.innerText = formatRupiah(harga);
+            totalPembayaranEl.innerText = formatRupiah(baseTotal + harga);
+        }
+
+        function selectToko(el) {
+            idTokoInput.value = el.value;
+            ongkirEl.innerText = '0';
+            totalPembayaranEl.innerText = formatRupiah(baseTotal);
+        }
+
         btnAntar.addEventListener('click', () => {
             renderContent('antar');
             btnAntar.classList.add('active');
             btnAmbil.classList.remove('active');
+            idTokoInput.value = '';
+            idPengirimanInput.value = '';
+            ongkirEl.innerText = '0';
+            totalPembayaranEl.innerText = formatRupiah(baseTotal);
         });
 
         btnAmbil.addEventListener('click', () => {
             renderContent('ambil');
             btnAmbil.classList.add('active');
             btnAntar.classList.remove('active');
+            idTokoInput.value = '';
+            idPengirimanInput.value = '';
+            ongkirEl.innerText = '0';
+            totalPembayaranEl.innerText = formatRupiah(baseTotal);
         });
+
+        // Render default antar saat load
+        renderContent('antar');
     </script>
 
+    <script>
+        document.getElementById('formBayar').addEventListener('submit', function (e) {
+            const idToko = document.getElementById('id_toko').value;
+            const idPengiriman = document.getElementById('id_pengiriman').value;
 
+            if (!idToko && !idPengiriman) {
+                e.preventDefault();
+                showToast('Pilih toko atau jenis pengiriman terlebih dahulu', 'danger');
+            }
+        });
+
+        function showToast(message, type = 'danger') {
+            const toastId = 'toast-' + Date.now();
+            const toastHTML = `
+        <div id="${toastId}" class="toast align-items-center text-bg-${type} border-0 shadow" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="3000">
+            <div class="d-flex">
+                <div class="toast-body">${message}</div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    `;
+
+            const toastContainer = document.getElementById('toastContainer');
+            toastContainer.insertAdjacentHTML('beforeend', toastHTML);
+
+            const toastElement = new bootstrap.Toast(document.getElementById(toastId));
+            toastElement.show();
+        }
+
+
+    </script>
+
+    <script>
+        $('#formEditUser').on('submit', function (e) {
+            e.preventDefault();
+
+            const nama = $('#nama_user').val().trim();
+            const email = $('#email').val().trim();
+            const no_hp = $('#no_telpon').val().trim();
+            const alamat = $('#Alamat').val().trim();
+            const detail = $('#detail').val().trim();
+
+            if (!nama || !email || !no_hp || !alamat || !detail) {
+                showToast('Semua field wajib diisi.', 'danger');
+                return;
+            }
+
+            if (!/^8[0-9]{7,12}$/.test(no_hp)) {
+                showToast('Nomor HP harus dimulai dengan angka 8 dan berisi 8-13 digit.', 'danger');
+                return;
+            }
+
+            const formData = $(this).serialize();
+
+            $.ajax({
+                url: '/user/update',
+                method: 'POST',
+                data: formData,
+                success: function (response) {
+                    try {
+                        const res = JSON.parse(response);
+                        if (res.status === 'success') {
+                            // Ambil data dari form
+                            const nama = $('#nama_user').val();
+                            const email = $('#email').val();
+                            const no_hp = $('#no_telpon').val();
+                            const alamat = $('#Alamat').val();
+                            const detail = $('#detail').val();
+
+
+                            $('#editAlamatModal').modal('hide');
+                            // $('#formEditUser')[0].reset();
+                            showToast(res.message, 'success');
+
+                            // Update tampilan data di luar modal
+                            $('#display_nama').text(nama);
+                            $('#display_email').text(email);
+                            $('#display_hp').text('+62' + no_hp.replace(/^0+/, '')); // hapus 0 di depan
+                            $('#display_alamat').text(alamat);
+                            $('#display_detail').text(detail);
+                        } else {
+                            showToast(res.message || 'Gagal update.', 'danger');
+                        }
+                    } catch (err) {
+                        console.error(err);
+                        showToast('Terjadi kesalahan pada server.', 'danger');
+                    }
+                },
+                error: function () {
+                    showToast('Gagal terhubung ke server.', 'danger');
+                }
+            });
+
+            
+        });
+
+        const input = document.getElementById('no_telpon');
+        // Batasi hanya angka
+        input.addEventListener('input', function () {
+            this.value = this.value.replace(/\D/g, ''); // hapus karakter non-angka
+        });
+    </script>
 </body>
 
 </html>

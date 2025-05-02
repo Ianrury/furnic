@@ -251,14 +251,14 @@
                                         <div class="input-group input-group-sm mb-3">
                                             <span class="input-group-text fw-bold"
                                                 style="font-size: 10px; background-color: #D9D9D9;">Rp</span>
-                                            <input type="text" class="form-control harga-input text-black" name="harga_min"
-                                                id="harga_min" placeholder="Masukkan harga minimum">
+                                            <input type="text" class="form-control harga-input text-black"
+                                                name="harga_min" id="harga_min" placeholder="Masukkan harga minimum">
                                         </div>
                                         <div class="input-group input-group-sm mb-3">
                                             <span class="input-group-text fw-bold"
                                                 style="font-size: 10px; background-color: #D9D9D9;">Rp</span>
-                                            <input type="text" class="form-control harga-input text-black" name="harga_max"
-                                                id="harga_max" placeholder="Masukkan harga maksimum">
+                                            <input type="text" class="form-control harga-input text-black"
+                                                name="harga_max" id="harga_max" placeholder="Masukkan harga maksimum">
                                         </div>
 
                                     </div>
@@ -419,6 +419,7 @@
                     </div>
                 </div>
             </div>
+        </div>
 
 
     </main>
