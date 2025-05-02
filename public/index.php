@@ -42,9 +42,11 @@ Router::add('POST', '/filter/pencarian', ProductController::class, 'filterProduc
 
 
 // Contooller kerangjang 
-Router::add('GET', '/keranjang', KeranjangController::class, 'index');
+Router::add('GET', '/keranjang', KeranjangController::class, 'index', [MustLoginMiddleware::class]);
 Router::add('POST', '/keranjang', KeranjangController::class, 'createKeranjang');
-Router::add('POST', '/deletekeranjang', KeranjangController::class, 'deleteKeranjang');
+Router::add('POST', '/deletekeranjang', KeranjangController::class, 'deleteKeranjang'); 
+Router::add('POST', '/cekquantity', KeranjangController::class, 'cekQuantity'); 
+
 
 // Controller PesananController
 Router::add('GET', '/pesanan', PesananController::class, 'index');

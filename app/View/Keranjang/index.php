@@ -191,7 +191,7 @@ function base_url($path = '')
                                                                     <?php
                                                                     $harga_normal = $item['harga']; // harga normal dari database
                                                                     $diskon = $item['diskon']; // diskon dari database, bisa null atau 0
-                                                                
+
                                                                     // Jika diskon ada (lebih dari 0), hitung harga setelah diskon
                                                                     if ($diskon > 0):
                                                                         // Menghitung nominal diskon
@@ -213,12 +213,12 @@ function base_url($path = '')
                                                                 <?php
                                                                 $harga_normal = $item['harga']; // harga normal dari database
                                                                 $diskon = $item['diskon']; // diskon dari database, bisa null atau 0
-                                                            
+
                                                                 // Jika diskon ada (lebih dari 0), tampilkan harga lama dengan diskon
                                                                 if ($diskon > 0):
                                                                     // Menghitung nominal diskon
                                                                     $nominal_diskon = ($diskon / 100) * $harga_normal;
-                                                                    ?>
+                                                                ?>
                                                                     <div>
                                                                         <span class="fw-normal text-danger old-price">
                                                                             <sup>Rp</sup>
@@ -227,7 +227,7 @@ function base_url($path = '')
 
                                                                         </span>
                                                                     </div>
-                                                                    <?php
+                                                                <?php
                                                                 endif;
                                                                 ?>
 
@@ -263,7 +263,7 @@ function base_url($path = '')
                                                     // Menghitung harga setelah diskon (jika ada)
                                                     $harga_normal = $item['harga']; // Harga normal dari database
                                                     $diskon = $item['diskon']; // Diskon dari database
-                                                
+
                                                     // Jika diskon ada, hitung harga setelah diskon
                                                     if ($diskon > 0) {
                                                         $nominal_diskon = ($diskon / 100) * $harga_normal; // Nominal diskon
@@ -350,8 +350,8 @@ function base_url($path = '')
                                         </div>
                                     </div>
                                     <div class="mt-3">
-                                        <button class="btn btn-buy w-100 rounded-3 fw-bold"
-                                            style="font-size: 14px;">Buat Pesanan</button>
+                                        <button class="btn btn-buy w-100 rounded-3 fw-bold" id="btnbuatpesanan" style="font-size: 14px;">Buat Pesanan</button>
+
                                     </div>
                                 </div>
                             </div>
@@ -401,118 +401,118 @@ function base_url($path = '')
                     <div class="container">
                         <div class="row flex-nowrap overflow-auto g-4 pb-3">
                             <?php if (!empty($model['expensif'])): ?>
-                                    <?php foreach ($model['expensif'] as $product): ?>
-                                            <div class="col-6 col-md-4 col-lg-3">
-                                                <div class="card shadow position-relative rounded-4 p-2 product-card"
-                                                    data-id="<?= ($product['id_product']) ?>" style="cursor:pointer;">
-                                                    <?php
-                                                    $ribbon = null;
-                                                    $bgColor = '';
-                                                    $textColor = '';
+                                <?php foreach ($model['expensif'] as $product): ?>
+                                    <div class="col-6 col-md-4 col-lg-3">
+                                        <div class="card shadow position-relative rounded-4 p-2 product-card"
+                                            data-id="<?= ($product['id_product']) ?>" style="cursor:pointer;">
+                                            <?php
+                                            $ribbon = null;
+                                            $bgColor = '';
+                                            $textColor = '';
 
-                                                    $qty = $product['qty'];
-                                                    $promoPersen = (float) ($product['total_promo'] ?? 0);
-                                                    $createdAt = new DateTime($product['created_at']);
-                                                    $today = new DateTime();
-                                                    $diffDays = $createdAt->diff($today)->days;
+                                            $qty = $product['qty'];
+                                            $promoPersen = (float) ($product['total_promo'] ?? 0);
+                                            $createdAt = new DateTime($product['created_at']);
+                                            $today = new DateTime();
+                                            $diffDays = $createdAt->diff($today)->days;
 
-                                                    // Logika ribbon
-                                                    if ($qty <= 0) {
-                                                        $ribbon = 'Out of Stock';
-                                                        $bgColor = '#FF0000';
-                                                        $textColor = '#FFFFFF';
-                                                    } elseif (!empty($product['topBestSeller']) && $product['topBestSeller'] === true) {
-                                                        $ribbon = 'Best Seller';
-                                                        $bgColor = '#FF8B2D';
-                                                        $textColor = '#FFFFFF';
-                                                    } elseif ($promoPersen > 0) {
-                                                        $ribbon = 'Sale';
-                                                        $bgColor = '#FFFB2D';
-                                                        $textColor = '#FF0000';
-                                                    } elseif ($diffDays <= 7) {
-                                                        $ribbon = 'New Product';
-                                                        $bgColor = '#2B4779';
-                                                        $textColor = '#FFFFFF';
-                                                    }
-                                                    ?>
+                                            // Logika ribbon
+                                            if ($qty <= 0) {
+                                                $ribbon = 'Out of Stock';
+                                                $bgColor = '#FF0000';
+                                                $textColor = '#FFFFFF';
+                                            } elseif (!empty($product['topBestSeller']) && $product['topBestSeller'] === true) {
+                                                $ribbon = 'Best Seller';
+                                                $bgColor = '#FF8B2D';
+                                                $textColor = '#FFFFFF';
+                                            } elseif ($promoPersen > 0) {
+                                                $ribbon = 'Sale';
+                                                $bgColor = '#FFFB2D';
+                                                $textColor = '#FF0000';
+                                            } elseif ($diffDays <= 7) {
+                                                $ribbon = 'New Product';
+                                                $bgColor = '#2B4779';
+                                                $textColor = '#FFFFFF';
+                                            }
+                                            ?>
 
-                                                    <!-- Corner Ribbon -->
-                                                    <?php if ($ribbon): ?>
-                                                            <div class="position-absolute ribbon-wrapper">
-                                                                <div class="ribbon text-uppercase fw-bold text-center"
-                                                                    style="background-color: <?= $bgColor ?>; color: <?= $textColor ?>;">
-                                                                    <?= htmlspecialchars($ribbon) ?>
-                                                                </div>
-                                                            </div>
-                                                    <?php endif; ?>
-
-
-                                                    <!-- Product Image -->
-                                                    <div class="text-center pt-3">
-                                                        <img src="assets/img/product/<?= htmlspecialchars($product['foto'] ?? '') ?>"
-                                                            class="img-fluid product-image" alt="Product Image">
+                                            <!-- Corner Ribbon -->
+                                            <?php if ($ribbon): ?>
+                                                <div class="position-absolute ribbon-wrapper">
+                                                    <div class="ribbon text-uppercase fw-bold text-center"
+                                                        style="background-color: <?= $bgColor ?>; color: <?= $textColor ?>;">
+                                                        <?= htmlspecialchars($ribbon) ?>
                                                     </div>
-                                                    <div class="bodykartu">
-                                                        <div class="d-flex flex-column">
-                                                            <div class="">
-                                                                <p class="card-title text-truncate product-title">
-                                                                    <?= htmlspecialchars($product['nama_product'] ?? 'Nama produk tidak tersedia') ?>
-                                                                </p>
-                                                                <p class="card-text text-truncate product-desc">
-                                                                    <?= htmlspecialchars($product['deskripsi'] ?? 'Deskripsi tidak tersedia') ?>
-                                                                </p>
-                                                                <div class="d-flex gap-1 align-items-center">
-                                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                                    <i class="bi bi-star-fill text-warning small-icon"></i>
-                                                                    <small
-                                                                        class="text-muted fst-italic ms-1 sold-text"><?= $product['beli'] ?? 0 ?>
-                                                                        terjual</small>
-                                                                </div>
-                                                            </div>
+                                                </div>
+                                            <?php endif; ?>
 
-                                                            <div class="mt-auto">
-                                                                <?php
-                                                                // Harga produk dan total_promo (diskon) yang ada di data produk
-                                                                $harga = $product['harga']; // Harga produk
-                                                                $total_promo = $product['total_promo']; // Diskon dalam persen
-                                                        
-                                                                // Hitung diskon nominal
-                                                                $diskon_nominal = ($total_promo > 0) ? ($harga * ($total_promo / 100)) : 0;
-                                                                $harga_setelah_diskon = $harga - $diskon_nominal; // Harga setelah diskon
-                                                                ?>
 
-                                                                <div class="d-flex flex-wrap align-items-baseline">
-                                                                    <div class="me-2">
-                                                                        <!-- Menampilkan harga setelah diskon -->
-                                                                        <span class="fw-bold price">
-                                                                            <sup class="fw-normal">Rp</sup>
-                                                                            <?= number_format($harga_setelah_diskon, 0, ',', '.') ?>
-                                                                        </span>
-                                                                    </div>
-
-                                                                    <!-- Jika ada diskon, tampilkan harga lama yang digariskan -->
-                                                                    <?php if ($diskon_nominal > 0): ?>
-                                                                            <div>
-                                                                                <span class="fw-normal text-danger old-price">
-                                                                                    <sup>Rp</sup>
-                                                                                    <span
-                                                                                        class="text-decoration-line-through"><?= number_format($harga, 0, ',', '.') ?></span>
-                                                                                </span>
-                                                                            </div>
-                                                                    <?php endif; ?>
-                                                                </div>
-
-                                                            </div>
+                                            <!-- Product Image -->
+                                            <div class="text-center pt-3">
+                                                <img src="assets/img/product/<?= htmlspecialchars($product['foto'] ?? '') ?>"
+                                                    class="img-fluid product-image" alt="Product Image">
+                                            </div>
+                                            <div class="bodykartu">
+                                                <div class="d-flex flex-column">
+                                                    <div class="">
+                                                        <p class="card-title text-truncate product-title">
+                                                            <?= htmlspecialchars($product['nama_product'] ?? 'Nama produk tidak tersedia') ?>
+                                                        </p>
+                                                        <p class="card-text text-truncate product-desc">
+                                                            <?= htmlspecialchars($product['deskripsi'] ?? 'Deskripsi tidak tersedia') ?>
+                                                        </p>
+                                                        <div class="d-flex gap-1 align-items-center">
+                                                            <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                            <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                            <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                            <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                            <i class="bi bi-star-fill text-warning small-icon"></i>
+                                                            <small
+                                                                class="text-muted fst-italic ms-1 sold-text"><?= $product['beli'] ?? 0 ?>
+                                                                terjual</small>
                                                         </div>
+                                                    </div>
+
+                                                    <div class="mt-auto">
+                                                        <?php
+                                                        // Harga produk dan total_promo (diskon) yang ada di data produk
+                                                        $harga = $product['harga']; // Harga produk
+                                                        $total_promo = $product['total_promo']; // Diskon dalam persen
+
+                                                        // Hitung diskon nominal
+                                                        $diskon_nominal = ($total_promo > 0) ? ($harga * ($total_promo / 100)) : 0;
+                                                        $harga_setelah_diskon = $harga - $diskon_nominal; // Harga setelah diskon
+                                                        ?>
+
+                                                        <div class="d-flex flex-wrap align-items-baseline">
+                                                            <div class="me-2">
+                                                                <!-- Menampilkan harga setelah diskon -->
+                                                                <span class="fw-bold price">
+                                                                    <sup class="fw-normal">Rp</sup>
+                                                                    <?= number_format($harga_setelah_diskon, 0, ',', '.') ?>
+                                                                </span>
+                                                            </div>
+
+                                                            <!-- Jika ada diskon, tampilkan harga lama yang digariskan -->
+                                                            <?php if ($diskon_nominal > 0): ?>
+                                                                <div>
+                                                                    <span class="fw-normal text-danger old-price">
+                                                                        <sup>Rp</sup>
+                                                                        <span
+                                                                            class="text-decoration-line-through"><?= number_format($harga, 0, ',', '.') ?></span>
+                                                                    </span>
+                                                                </div>
+                                                            <?php endif; ?>
+                                                        </div>
+
                                                     </div>
                                                 </div>
                                             </div>
-                                    <?php endforeach; ?>
+                                        </div>
+                                    </div>
+                                <?php endforeach; ?>
                             <?php else: ?>
-                                    <p>Tidak ada produk terbaru yang tersedia.</p>
+                                <p>Tidak ada produk terbaru yang tersedia.</p>
                             <?php endif; ?>
                         </div>
                     </div>
@@ -549,17 +549,17 @@ function base_url($path = '')
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             const offcanvasToggler = document.getElementById('offcanvasToggler');
             const offcanvasNavbar = document.getElementById('offcanvasNavbar');
 
             // Mencegah pembuatan backdrop
-            offcanvasNavbar.addEventListener('show.bs.offcanvas', function () {
+            offcanvasNavbar.addEventListener('show.bs.offcanvas', function() {
                 document.querySelectorAll('.offcanvas-backdrop').forEach(el => el.remove());
             });
 
             // Alternatif: nonaktifkan backdrop sepenuhnya
-            offcanvasNavbar.addEventListener('shown.bs.offcanvas', function () {
+            offcanvasNavbar.addEventListener('shown.bs.offcanvas', function() {
                 const backdrops = document.querySelectorAll('.offcanvas-backdrop');
                 backdrops.forEach(backdrop => {
                     backdrop.classList.remove('show');
@@ -568,14 +568,14 @@ function base_url($path = '')
             });
 
             // Pastikan backdrop dihapus saat menutup
-            offcanvasNavbar.addEventListener('hidden.bs.offcanvas', function () {
+            offcanvasNavbar.addEventListener('hidden.bs.offcanvas', function() {
                 document.querySelectorAll('.offcanvas-backdrop').forEach(el => el.remove());
             });
         });
     </script>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function() {
             // Variable to store selected product IDs
             let selectedProductIds = [];
 
@@ -605,7 +605,7 @@ function base_url($path = '')
                 let total = 0;
                 selectedProductIds = []; // Reset selected products
 
-                document.querySelectorAll('.item-checkbox').forEach(function (checkbox) {
+                document.querySelectorAll('.item-checkbox').forEach(function(checkbox) {
                     if (checkbox.id === 'checkAll') return; // Skip the "Select All" checkbox
 
                     const id = checkbox.dataset.id;
@@ -657,9 +657,9 @@ function base_url($path = '')
             // Handle "Select All" checkbox
             const checkAllBox = document.getElementById('checkAll');
             if (checkAllBox) {
-                checkAllBox.addEventListener('change', function () {
+                checkAllBox.addEventListener('change', function() {
                     const isChecked = this.checked;
-                    document.querySelectorAll('.item-checkbox').forEach(function (checkbox) {
+                    document.querySelectorAll('.item-checkbox').forEach(function(checkbox) {
                         if (checkbox.id !== 'checkAll') {
                             checkbox.checked = isChecked;
                         }
@@ -669,9 +669,9 @@ function base_url($path = '')
             }
 
             // Handle individual checkboxes
-            document.querySelectorAll('.item-checkbox').forEach(function (checkbox) {
+            document.querySelectorAll('.item-checkbox').forEach(function(checkbox) {
                 if (checkbox.id !== 'checkAll') {
-                    checkbox.addEventListener('change', function () {
+                    checkbox.addEventListener('change', function() {
                         updateTotalPembayaran();
 
                         // Update "Select All" checkbox state
@@ -685,8 +685,8 @@ function base_url($path = '')
             });
 
             // Handle quantity increase buttons
-            document.querySelectorAll('.increase-qty').forEach(function (btn) {
-                btn.addEventListener('click', function () {
+            document.querySelectorAll('.increase-qty').forEach(function(btn) {
+                btn.addEventListener('click', function() {
                     const id = btn.dataset.id;
                     const qtyEl = document.getElementById('qty-' + id);
                     let qty = parseInt(qtyEl.textContent);
@@ -703,8 +703,8 @@ function base_url($path = '')
             });
 
             // Handle quantity decrease buttons
-            document.querySelectorAll('.decrease-qty').forEach(function (btn) {
-                btn.addEventListener('click', function () {
+            document.querySelectorAll('.decrease-qty').forEach(function(btn) {
+                btn.addEventListener('click', function() {
                     const id = btn.dataset.id;
                     const qtyEl = document.getElementById('qty-' + id);
                     let qty = parseInt(qtyEl.textContent);
@@ -722,13 +722,39 @@ function base_url($path = '')
             // Handle delete selected products
             const btnDeleteSelected = document.getElementById('btnDeleteSelected');
             if (btnDeleteSelected) {
-                btnDeleteSelected.addEventListener('click', function () {
+                btnDeleteSelected.addEventListener('click', function() {
                     if (selectedProductIds.length > 0) {
                         // Langsung panggil deleteSelectedProducts() tanpa konfirmasi
                         deleteSelectedProducts();
                     }
                 });
             }
+
+            document.getElementById('btnbuatpesanan').addEventListener('click', function() {
+                const formData = new FormData();
+                formData.append('product_ids', JSON.stringify(selectedProductIds)); // ini berisi id_cart
+
+                if (!selectedProductIds.length) {
+                    showToast('Pilih produk terlebih dahulu', 'danger');
+                    return;
+                }
+
+                fetch('/cekquantity', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === 'success') {
+                            window.location.href = '/pesanan';
+                        } else {
+                            showToast(data.message, 'danger');
+                        }
+                    })
+                    .catch(error => {
+                        showToast('Terjadi kesalahan saat memproses.', 'danger');
+                    });
+            });
 
 
             // Delete selected products via AJAX
@@ -738,9 +764,9 @@ function base_url($path = '')
                 formData.append('product_ids', JSON.stringify(selectedProductIds));
 
                 fetch('/deletekeranjang', {
-                    method: 'POST',
-                    body: formData
-                })
+                        method: 'POST',
+                        body: formData
+                    })
                     .then(response => response.json())
                     .then(data => {
                         if (data.success) {

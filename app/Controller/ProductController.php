@@ -525,7 +525,9 @@ class ProductController
             $filterUnggulan = isset($_POST['unggulan']); // Cek jika request adalah produk unggulan
             $hargaMin = $_POST['harga_min'] ?? null;
             $hargaMax = $_POST['harga_max'] ?? null;
-
+            $search = isset($_POST['search']) ? $_POST['search'] : null;
+    
+    
             // Query untuk mengambil 3 produk dengan penjualan terbanyak jika filter unggulan aktif
             $bestSellerQuery = "
                 SELECT id_product
@@ -533,11 +535,11 @@ class ProductController
                 ORDER BY beli DESC
                 LIMIT 3
             ";
-
+    
             $bestSellerStmt = $this->connection->prepare($bestSellerQuery);
             $bestSellerStmt->execute();
             $topBestSellerIds = $bestSellerStmt->fetchAll(PDO::FETCH_COLUMN);
-
+    
             // Query utama untuk mengambil produk berdasarkan filter
             $query = "
                 SELECT 
@@ -557,62 +559,68 @@ class ProductController
                     ON p.id_kategori = k.id_kategori
                 WHERE 1
             ";
-
+    
             // Menyimpan parameter untuk query yang disiapkan
             $params = [];
-
+    
+            // Filter berdasarkan pencarian (search)
+            if ($search !== null && !empty(trim($search))) {
+                $query .= " AND p.nama_product LIKE ?";
+                $params[] = '%' . $search . '%';
+            }
+    
             // Filter berdasarkan kategori
             if (!empty($kategoriIds)) {
                 $placeholders = implode(',', array_fill(0, count($kategoriIds), '?'));
                 $query .= " AND p.id_kategori IN ($placeholders)";
                 $params = array_merge($params, $kategoriIds);
             }
-
+    
             // Filter berdasarkan promo
             if ($filterPromo) {
                 $query .= " AND p.id_promo IS NOT NULL";
             }
-
+    
             // Filter harga minimum
             if ($hargaMin !== null && is_numeric($hargaMin)) {
                 $query .= " AND p.harga >= ?";
                 $params[] = $hargaMin;
             }
-
+    
             // Filter harga maksimum
             if ($hargaMax !== null && is_numeric($hargaMax)) {
                 $query .= " AND p.harga <= ?";
                 $params[] = $hargaMax;
             }
-
+    
             // Filter untuk produk terbaru (7 hari terakhir)
             if ($productTerbaru) {
                 $query .= " AND p.created_at >= CURDATE() - INTERVAL 7 DAY";
                 $query .= " AND (p.id_promo IS NULL OR pr.start_date > CURDATE() OR pr.end_date < CURDATE())";
             }
-
+    
             // Filter produk unggulan (best sellers)
             if ($filterUnggulan) {
                 $query .= " AND p.id_product IN (" . implode(',', $topBestSellerIds) . ")";
             }
-
+    
             // Mengurutkan produk berdasarkan tanggal dibuat
             $query .= " ORDER BY p.created_at DESC";
-
+    
             // Menjalankan query dan menyiapkan parameter
             $statement = $this->connection->prepare($query);
             $statement->execute($params);
-
+    
             // Ambil hasil query
             $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
-
+    
             // Mengembalikan hasil dalam format JSON
             echo json_encode([
                 'status' => 'success',
                 'message' => 'Data berhasil diambil',
                 'data' => $rows,
             ]);
-
+    
         } catch (Exception $e) {
             // Tangani kesalahan dan kembalikan respons error
             http_response_code(500);
@@ -672,7 +680,20 @@ class ProductController
     public function Createwishlist($id)
     {
         header('Content-Type: application/json');
+        $sessionId = $_COOKIE[self::$COOKIE_NAME] ?? null;
+        if (!$sessionId) {
+            echo json_encode(['status' => 'error', 'message' => 'Silakan login terlebih dahulu']);
+            return;
+        }
 
+        $statement = $this->connection->prepare("SELECT id_user FROM session WHERE id_session = ? LIMIT 1");
+        $statement->execute([$sessionId]);
+        $session = $statement->fetch(\PDO::FETCH_ASSOC);
+
+        if (!$session || !isset($session['id_user'])) {
+            echo json_encode(['status' => 'error', 'message' => 'Sesi tidak valid, silakan login ulang']);
+            return;
+        }
 
 
         // Cek apakah produk sudah ada di wishlist

@@ -119,6 +119,69 @@ class KeranjangController
         View::render('Keranjang/index', $model);
     }
 
+    public function cekQuantity()
+    {
+        $sessionId = $_COOKIE[self::$COOKIE_NAME] ?? null;
+
+        if (!$sessionId) {
+            echo json_encode(['status' => 'error', 'message' => 'Silakan login terlebih dahulu']);
+            return;
+        }
+
+        if (empty($_POST['product_ids'])) {
+            echo json_encode(['status' => 'error', 'message' => 'Tidak ada produk yang dipilih']);
+            return;
+        }
+
+        $cartIds = json_decode($_POST['product_ids'], true); // array of id_cart
+        $notAvailable = [];
+
+        foreach ($cartIds as $idCart) {
+            // Ambil data cart: id_product, id_detail_product, id_motif_produk, qty
+            $stmt = $this->connection->prepare("
+                SELECT 
+                    c.qty AS qty_cart,
+                    c.id_product,
+                    c.id_detail_product,
+                    c.id_motif_produk,
+                    p.nama_product,
+                    m.qty AS qty_motif
+                FROM cart c
+                JOIN product p ON c.id_product = p.id_product
+                JOIN motif_produk m ON m.id = c.id_motif_produk
+                WHERE c.id_cart = ?
+            ");
+            $stmt->execute([$idCart]);
+            $row = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+            if (!$row) {
+                $notAvailable[] = "Data keranjang ID $idCart tidak ditemukan";
+                continue;
+            }
+
+            $qtyCart = (int) $row['qty_cart'];
+            $qtyMotif = (int) $row['qty_motif'];
+
+            if ($qtyCart > $qtyMotif) {
+                $notAvailable[] = $row['nama_product'] . ' (Stok tidak cukup)';
+            }
+        }
+
+        if (!empty($notAvailable)) {
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'Produk gagal diproses: ' . implode(', ', $notAvailable)
+            ]);
+            return;
+        }
+
+        // Simpan ke session jika semua valid
+        $_SESSION['selected_cart_ids'] = $cartIds;
+
+        echo json_encode(['status' => 'success']);
+    }
+
+
     public function createKeranjang()
     {
         header('Content-Type: application/json');
@@ -227,6 +290,4 @@ class KeranjangController
 
         echo json_encode(['success' => true, 'message' => 'Item berhasil dihapus dari keranjang']);
     }
-
-
 }
