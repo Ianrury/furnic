@@ -99,7 +99,7 @@
                                     <input type="password" class="form-control form-login" id="password" name="password" placeholder="Masukkan Password" style="margin-bottom: 0px;">
                                 </div>
                                 <div class="d-flex justify-content-end">
-                                    <p><a href="#" style="font-size: 10px;">Lupa Kata Sandi?</a></p>
+                                    <p><a href="/forgot-password" style="font-size: 10px;">Lupa Kata Sandi?</a></p>
                                 </div>
                                 
                                 <!-- Remember Me Checkbox -->

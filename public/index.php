@@ -28,6 +28,15 @@ Router::add('POST', '/register', UserController::class, 'postRegister', [MustNot
 Router::add('GET', '/logout', UserController::class, 'logout', [MustLoginMiddleware::class]);
 Router::add('POST', '/user/edit', UserController::class, 'EditUser', [MustLoginMiddleware::class]);
 Router::add('POST', '/user/update', UserController::class, 'UpdateUser', [MustLoginMiddleware::class]);
+Router::add('GET', '/reset-password', UserController::class, 'ubahsandi');
+Router::add('POST', '/reset-password', UserController::class, 'ubahsandiPost');
+Router::add('GET', '/forgot-password', UserController::class, 'forgotPassword');
+Router::add('POST', '/forgot-password', UserController::class, 'postForgotPassword');
+
+Router::add('GET', '/profile', UserController::class, 'profile');
+
+
+
 
 
 // Controller ProductController
@@ -41,15 +50,25 @@ Router::add('POST', '/filter/pencarian', ProductController::class, 'filterProduc
 
 
 
+Router::add('GET', '/lokasi', ProductController::class, 'lokasi');
+
+Router::add('GET', '/pesanan/detail', ProductController::class, 'card_pesanan');
+
+
+
 // Contooller kerangjang 
 Router::add('GET', '/keranjang', KeranjangController::class, 'index', [MustLoginMiddleware::class]);
 Router::add('POST', '/keranjang', KeranjangController::class, 'createKeranjang');
 Router::add('POST', '/deletekeranjang', KeranjangController::class, 'deleteKeranjang'); 
 Router::add('POST', '/cekquantity', KeranjangController::class, 'cekQuantity'); 
-
+Router::add('POST', '/pleskeranjang', KeranjangController::class, 'PlesQtyKeranjang');
+Router::add('POST', '/minuskeranjang', KeranjangController::class, 'MinusQtyKeranjang');
 
 // Controller PesananController
 Router::add('GET', '/pesanan', PesananController::class, 'index');
+Router::add('POST', '/pesanan', PesananController::class, 'createPesanan');
+Router::add('GET', '/pembayaran', PesananController::class, 'pembayaran');
+
 
 // Wislist Product
 Router::add('GET', '/product/create/wishlist/{id}', ProductController::class, 'Createwishlist');

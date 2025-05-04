@@ -9,7 +9,7 @@ use Importa\Furnic\PHP\FFI\Repository\SessionRepository;
 use Importa\Furnic\PHP\FFI\Repository\UserRepository;
 use Importa\Furnic\PHP\FFI\Service\ProductServis;
 use Importa\Furnic\PHP\FFI\Service\WislistServis;
-session_start();
+
 class KeranjangController
 {
 
@@ -121,6 +121,12 @@ class KeranjangController
 
     public function cekQuantity()
     {
+        // Start the session if not already started
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        header('Content-Type: application/json');
         $sessionId = $_COOKIE[self::$COOKIE_NAME] ?? null;
 
         if (!$sessionId) {
@@ -175,10 +181,125 @@ class KeranjangController
             return;
         }
 
+        // Cek dan hapus session sebelumnya jika ada
+        if (isset($_SESSION['selected_cart_ids'])) {
+            // Log data session lama sebelum dihapus (untuk debugging)
+            error_log('Session lama dihapus: ' . json_encode($_SESSION['selected_cart_ids']));
+
+            // Hapus session selected_cart_ids yang lama
+            unset($_SESSION['selected_cart_ids']);
+        }
+
         // Simpan ke session jika semua valid
         $_SESSION['selected_cart_ids'] = $cartIds;
 
-        echo json_encode(['status' => 'success']);
+        // Log data session baru yang disimpan
+        error_log('Session baru disimpan: ' . json_encode($_SESSION['selected_cart_ids']));
+
+        echo json_encode([
+            'status' => 'success',
+            'message' => 'Produk berhasil dipilih'
+        ]);
+    }
+
+    public function PlesQtyKeranjang()
+    {
+        header('Content-Type: application/json');
+
+        $sessionId = $_COOKIE[self::$COOKIE_NAME] ?? null;
+        $cartIds = json_decode($_POST['product_ids'], true); // array of id_cart
+
+        if (!$sessionId) {
+            echo json_encode(['status' => 'error', 'message' => 'Silakan login terlebih dahulu']);
+            return;
+        }
+
+        if (empty($cartIds)) {
+            echo json_encode(['status' => 'error', 'message' => 'Tidak ada produk yang dipilih']);
+            return;
+        }
+
+        // Ambil id_user dari session
+        $statement = $this->connection->prepare("SELECT id_user FROM session WHERE id_session = ? LIMIT 1");
+        $statement->execute([$sessionId]);
+        $session = $statement->fetch(\PDO::FETCH_ASSOC);
+
+        if (!$session || !isset($session['id_user'])) {
+            echo json_encode(['status' => 'error', 'message' => 'Sesi tidak valid']);
+            return;
+        }
+
+        $id_customer = $session['id_user'];
+
+        // Loop dan update setiap item berdasarkan id_cart
+        foreach ($cartIds as $id_cart) {
+            if (!is_numeric($id_cart)) {
+                echo json_encode(['status' => 'error', 'message' => 'ID cart tidak valid']);
+                return;
+            }
+
+            // Update berdasarkan id_cart dan id_customer untuk keamanan
+            $update = $this->connection->prepare("UPDATE cart SET qty = qty + 1 WHERE id_cart = ? AND id_customer = ?");
+            $success = $update->execute([$id_cart, $id_customer]);
+
+            if (!$success) {
+                $error = $update->errorInfo();
+                echo json_encode(['status' => 'error', 'message' => 'Gagal mengupdate item', 'error' => $error]);
+                return;
+            }
+        }
+
+        echo json_encode(['success' => true, 'message' => 'Item berhasil diperbarui di keranjang']);
+    }
+
+    public function MinusQtyKeranjang()
+    {
+        header('Content-Type: application/json');
+
+        $sessionId = $_COOKIE[self::$COOKIE_NAME] ?? null;
+        $cartIds = json_decode($_POST['product_ids'], true); // array of id_cart
+
+        if (!$sessionId) {
+            echo json_encode(['status' => 'error', 'message' => 'Silakan login terlebih dahulu']);
+            return;
+        }
+
+        if (empty($cartIds)) {
+            echo json_encode(['status' => 'error', 'message' => 'Tidak ada produk yang dipilih']);
+            return;
+        }
+
+        // Ambil id_user dari session
+        $statement = $this->connection->prepare("SELECT id_user FROM session WHERE id_session = ? LIMIT 1");
+        $statement->execute([$sessionId]);
+        $session = $statement->fetch(\PDO::FETCH_ASSOC);
+
+        if (!$session || !isset($session['id_user'])) {
+            echo json_encode(['status' => 'error', 'message' => 'Sesi tidak valid']);
+            return;
+        }
+
+        $id_customer = $session['id_user'];
+
+        // Loop dan update setiap item berdasarkan id_cart
+        foreach ($cartIds as $id_cart) {
+            if (!is_numeric($id_cart)) {
+                echo json_encode(['status' => 'error', 'message' => 'ID cart tidak valid']);
+                return;
+            }
+
+            // Update berdasarkan id_cart dan id_customer untuk keamanan
+            $update = $this->connection->prepare("UPDATE cart SET qty = qty - 1 WHERE id_cart = ? AND id_customer = ?");
+            $success = $update->execute([$id_cart, $id_customer]);
+
+            if (!$success) {
+                $error = $update->errorInfo();
+                echo json_encode(['status' => 'error', 'message' => 'Gagal mengupdate item', 'error' => $error]);
+                return;
+            }
+        }
+
+        echo json_encode(['success' => true, 'message' => 'Item berhasil diperbarui di keranjang']);
     }
 
 

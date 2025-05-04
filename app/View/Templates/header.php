@@ -71,8 +71,13 @@ function is_active($route)
                             </li>
 
                             <li class="nav-item">
-                                <a class="d-flex justify-content-center align-items-center w-100 h-100 custom-nav-link<?php echo (basename($_SERVER['PHP_SELF']) == 'lokasi_store.php') ? 'active' : ''; ?>"
-                                    href="lokasi_store.php" style="font-size: 14px;"> Lokasi Store</a>
+                                <a class="d-flex justify-content-center align-items-center w-100 h-100 custom-nav-link <?= is_active('pesanan') ?>"
+                                    href="/pesanan/detail" style="font-size: 14px;">Pesanan</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="d-flex justify-content-center align-items-center w-100 h-100 custom-nav-link <?= is_active('lokasi') ?>"
+                                    href="/lokasi" style="font-size: 14px;">Lokasi Store</a>
                             </li>
                         </ul>
 
@@ -92,21 +97,43 @@ function is_active($route)
                                         </div>
                                     </form>
                                 </li>
-                                <li>
-                                    <a href="/users/logout" class="list-link">
+
+                                <li class="me-2">
+                                    <a href="#" class="nav-link d-flex align-items-center justify-content-center"
+                                        role="button" data-bs-toggle="dropdown" aria-expanded="false"
+                                        style="font-size: 20px;">
                                         <i class="far fa-user text-dark fa-sm"></i>
                                     </a>
+
+                                    <!-- Dropdown Menu -->
+                                    <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0 custom-dropdown">
+                                        <li>
+                                            <a class="dropdown-item d-flex align-items-center gap-2" href="/profile">
+                                                <i class="fas fa-user-circle text-primary"></i> Profile
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item d-flex align-items-center gap-2"
+                                                href="/pesanan/detail">
+                                                <i class="fas fa-box text-success"></i> Pesanan
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </li>
-                                <li>
-                                    <a href="/keranjang" class="list-link">
+
+                                <li style="position: relative;">
+                                    <a href="/keranjang" class="list-link position-relative">
                                         <i class="far fa-shopping-cart text-dark fa-sm"></i>
+                                        <span id="cart-badge">3</span>
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="/product/wishlist" class="list-link">
+                                <li style="position: relative;">
+                                    <a href="/product/wishlist" class="list-link position-relative">
                                         <i class="far fa-heart text-dark fa-sm"></i>
+                                        <span id="wishlist-badge">7</span>
                                     </a>
                                 </li>
+
                             </ul>
                         </div>
                     </div>

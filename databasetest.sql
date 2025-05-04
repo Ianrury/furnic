@@ -116,10 +116,18 @@ CREATE TABLE pesanan (
     qty INT,
     total_harga INT,
     tanggal_pesanan DATETIME,
+    done_payment DATETIME,
+    limit_payment DATETIME,
+    status_pembayaran VARCHAR(50),
+    foto_pembayaran VARCHAR(100),
+    id_jenis_pengiriman INT AFTER id_promo,
+    id_toko INT AFTER id_jenis_pengiriman,
     FOREIGN KEY (id_customer) REFERENCES customer(id_customer),
     FOREIGN KEY (id_product) REFERENCES product(id_product),
     FOREIGN KEY (id_pricelist) REFERENCES pricelist(id_pricelist),
     FOREIGN KEY (id_promo) REFERENCES promo(id_promo),
+    FOREIGN KEY (id_jenis_pengiriman) REFERENCES jenis_pengiriman(id),
+      FOREIGN KEY (id_toko) REFERENCES toko(id),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );

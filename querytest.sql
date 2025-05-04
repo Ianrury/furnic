@@ -1,4 +1,4 @@
--- Active: 1745583296991@@127.0.0.1@3306@php_login_test
+-- Active: 1727836521955@@127.0.0.1@3306@php_login_test
 -- Active: 1745562774050@@192.168.1.238@9356@web-furnice
 
 -- DML
@@ -138,3 +138,27 @@ ADD COLUMN id_detail_product INT AFTER id_product,
 ADD COLUMN id_motif_produk INT AFTER id_detail_product,
 ADD CONSTRAINT fk_detail_product FOREIGN KEY (id_detail_product) REFERENCES detail_product(id),
 ADD CONSTRAINT fk_motif_produk FOREIGN KEY (id_motif_produk) REFERENCES motif_produk(id);
+
+
+ALTER TABLE pesanan
+ADD COLUMN done_payment DATETIME,
+ADD COLUMN limit_payment DATETIME,
+ADD COLUMN status_pembayaran VARCHAR(50),
+ADD COLUMN foto_pembayaran VARCHAR(100);
+
+ALTER TABLE pesanan
+ADD COLUMN id_jenis_pengiriman INT AFTER id_promo,
+ADD COLUMN id_toko INT AFTER id_jenis_pengiriman;
+
+ALTER TABLE pesanan
+MODIFY COLUMN id_toko INT NULL,
+MODIFY COLUMN id_jenis_pengiriman INT NULL;
+
+
+ALTER TABLE pesanan
+ADD CONSTRAINT fk_pesanan_jenis_pengiriman
+    FOREIGN KEY (id_jenis_pengiriman) REFERENCES jenis_pengiriman(id),
+ADD CONSTRAINT fk_pesanan_toko
+    FOREIGN KEY (id_toko) REFERENCES toko(id);
+
+ALTER TABLE customer ADD COLUMN reset_token VARCHAR(255) DEFAULT NULL;

@@ -191,7 +191,7 @@ function base_url($path = '')
                                                                     <?php
                                                                     $harga_normal = $item['harga']; // harga normal dari database
                                                                     $diskon = $item['diskon']; // diskon dari database, bisa null atau 0
-
+                                                                
                                                                     // Jika diskon ada (lebih dari 0), hitung harga setelah diskon
                                                                     if ($diskon > 0):
                                                                         // Menghitung nominal diskon
@@ -213,12 +213,12 @@ function base_url($path = '')
                                                                 <?php
                                                                 $harga_normal = $item['harga']; // harga normal dari database
                                                                 $diskon = $item['diskon']; // diskon dari database, bisa null atau 0
-
+                                                            
                                                                 // Jika diskon ada (lebih dari 0), tampilkan harga lama dengan diskon
                                                                 if ($diskon > 0):
                                                                     // Menghitung nominal diskon
                                                                     $nominal_diskon = ($diskon / 100) * $harga_normal;
-                                                                ?>
+                                                                    ?>
                                                                     <div>
                                                                         <span class="fw-normal text-danger old-price">
                                                                             <sup>Rp</sup>
@@ -227,7 +227,7 @@ function base_url($path = '')
 
                                                                         </span>
                                                                     </div>
-                                                                <?php
+                                                                    <?php
                                                                 endif;
                                                                 ?>
 
@@ -263,7 +263,7 @@ function base_url($path = '')
                                                     // Menghitung harga setelah diskon (jika ada)
                                                     $harga_normal = $item['harga']; // Harga normal dari database
                                                     $diskon = $item['diskon']; // Diskon dari database
-
+                                                
                                                     // Jika diskon ada, hitung harga setelah diskon
                                                     if ($diskon > 0) {
                                                         $nominal_diskon = ($diskon / 100) * $harga_normal; // Nominal diskon
@@ -350,7 +350,8 @@ function base_url($path = '')
                                         </div>
                                     </div>
                                     <div class="mt-3">
-                                        <button class="btn btn-buy w-100 rounded-3 fw-bold" id="btnbuatpesanan" style="font-size: 14px;">Buat Pesanan</button>
+                                        <button class="btn btn-buy w-100 rounded-3 fw-bold" id="btnbuatpesanan"
+                                            style="font-size: 14px;">Buat Pesanan</button>
 
                                     </div>
                                 </div>
@@ -478,7 +479,7 @@ function base_url($path = '')
                                                         // Harga produk dan total_promo (diskon) yang ada di data produk
                                                         $harga = $product['harga']; // Harga produk
                                                         $total_promo = $product['total_promo']; // Diskon dalam persen
-
+                                                
                                                         // Hitung diskon nominal
                                                         $diskon_nominal = ($total_promo > 0) ? ($harga * ($total_promo / 100)) : 0;
                                                         $harga_setelah_diskon = $harga - $diskon_nominal; // Harga setelah diskon
@@ -549,17 +550,17 @@ function base_url($path = '')
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const offcanvasToggler = document.getElementById('offcanvasToggler');
             const offcanvasNavbar = document.getElementById('offcanvasNavbar');
 
             // Mencegah pembuatan backdrop
-            offcanvasNavbar.addEventListener('show.bs.offcanvas', function() {
+            offcanvasNavbar.addEventListener('show.bs.offcanvas', function () {
                 document.querySelectorAll('.offcanvas-backdrop').forEach(el => el.remove());
             });
 
             // Alternatif: nonaktifkan backdrop sepenuhnya
-            offcanvasNavbar.addEventListener('shown.bs.offcanvas', function() {
+            offcanvasNavbar.addEventListener('shown.bs.offcanvas', function () {
                 const backdrops = document.querySelectorAll('.offcanvas-backdrop');
                 backdrops.forEach(backdrop => {
                     backdrop.classList.remove('show');
@@ -568,14 +569,14 @@ function base_url($path = '')
             });
 
             // Pastikan backdrop dihapus saat menutup
-            offcanvasNavbar.addEventListener('hidden.bs.offcanvas', function() {
+            offcanvasNavbar.addEventListener('hidden.bs.offcanvas', function () {
                 document.querySelectorAll('.offcanvas-backdrop').forEach(el => el.remove());
             });
         });
     </script>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             // Variable to store selected product IDs
             let selectedProductIds = [];
 
@@ -605,7 +606,7 @@ function base_url($path = '')
                 let total = 0;
                 selectedProductIds = []; // Reset selected products
 
-                document.querySelectorAll('.item-checkbox').forEach(function(checkbox) {
+                document.querySelectorAll('.item-checkbox').forEach(function (checkbox) {
                     if (checkbox.id === 'checkAll') return; // Skip the "Select All" checkbox
 
                     const id = checkbox.dataset.id;
@@ -657,9 +658,9 @@ function base_url($path = '')
             // Handle "Select All" checkbox
             const checkAllBox = document.getElementById('checkAll');
             if (checkAllBox) {
-                checkAllBox.addEventListener('change', function() {
+                checkAllBox.addEventListener('change', function () {
                     const isChecked = this.checked;
-                    document.querySelectorAll('.item-checkbox').forEach(function(checkbox) {
+                    document.querySelectorAll('.item-checkbox').forEach(function (checkbox) {
                         if (checkbox.id !== 'checkAll') {
                             checkbox.checked = isChecked;
                         }
@@ -669,9 +670,9 @@ function base_url($path = '')
             }
 
             // Handle individual checkboxes
-            document.querySelectorAll('.item-checkbox').forEach(function(checkbox) {
+            document.querySelectorAll('.item-checkbox').forEach(function (checkbox) {
                 if (checkbox.id !== 'checkAll') {
-                    checkbox.addEventListener('change', function() {
+                    checkbox.addEventListener('change', function () {
                         updateTotalPembayaran();
 
                         // Update "Select All" checkbox state
@@ -685,17 +686,16 @@ function base_url($path = '')
             });
 
             // Handle quantity increase buttons
-            document.querySelectorAll('.increase-qty').forEach(function(btn) {
-                btn.addEventListener('click', function() {
+            document.querySelectorAll('.increase-qty').forEach(function (btn) {
+                btn.addEventListener('click', function () {
                     const id = btn.dataset.id;
                     const qtyEl = document.getElementById('qty-' + id);
                     let qty = parseInt(qtyEl.textContent);
                     const max = parseInt(qtyEl.dataset.max);
 
                     if (qty < max) {
-                        qty++;
-                        qtyEl.textContent = qty;
-                        updateTotalPembayaran();
+                        // Send AJAX request to increase quantity
+                        updateCartQuantity(id, 'increase');
                     } else {
                         showToast('Jumlah maksimal tercapai', 'warning');
                     }
@@ -703,26 +703,62 @@ function base_url($path = '')
             });
 
             // Handle quantity decrease buttons
-            document.querySelectorAll('.decrease-qty').forEach(function(btn) {
-                btn.addEventListener('click', function() {
+            document.querySelectorAll('.decrease-qty').forEach(function (btn) {
+                btn.addEventListener('click', function () {
                     const id = btn.dataset.id;
                     const qtyEl = document.getElementById('qty-' + id);
                     let qty = parseInt(qtyEl.textContent);
 
                     if (qty > 1) {
-                        qty--;
-                        qtyEl.textContent = qty;
-                        updateTotalPembayaran();
+                        // Send AJAX request to decrease quantity
+                        updateCartQuantity(id, 'decrease');
                     } else {
                         showToast('Jumlah minimal adalah 1', 'warning');
                     }
                 });
             });
 
+            // Function to update cart quantity via AJAX
+            function updateCartQuantity(cartId, action) {
+                const formData = new FormData();
+                formData.append('product_ids', JSON.stringify([cartId])); // Send as array for consistency
+
+                const url = action === 'increase' ? '/pleskeranjang' : '/minuskeranjang';
+
+                fetch(url, {
+                    method: 'POST',
+                    body: formData
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            // Update quantity display
+                            const qtyEl = document.getElementById('qty-' + cartId);
+                            let currentQty = parseInt(qtyEl.textContent);
+
+                            if (action === 'increase') {
+                                qtyEl.textContent = currentQty + 1;
+                            } else {
+                                qtyEl.textContent = currentQty - 1;
+                            }
+
+                            // Update totals
+                            updateTotalPembayaran();
+                            showToast('Jumlah berhasil diperbarui', 'success');
+                        } else {
+                            showToast(data.message || 'Gagal memperbarui jumlah', 'danger');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        showToast('Terjadi kesalahan saat memperbarui jumlah', 'danger');
+                    });
+            }
+
             // Handle delete selected products
             const btnDeleteSelected = document.getElementById('btnDeleteSelected');
             if (btnDeleteSelected) {
-                btnDeleteSelected.addEventListener('click', function() {
+                btnDeleteSelected.addEventListener('click', function () {
                     if (selectedProductIds.length > 0) {
                         // Langsung panggil deleteSelectedProducts() tanpa konfirmasi
                         deleteSelectedProducts();
@@ -730,7 +766,7 @@ function base_url($path = '')
                 });
             }
 
-            document.getElementById('btnbuatpesanan').addEventListener('click', function() {
+            document.getElementById('btnbuatpesanan').addEventListener('click', function () {
                 const formData = new FormData();
                 formData.append('product_ids', JSON.stringify(selectedProductIds)); // ini berisi id_cart
 
@@ -740,9 +776,9 @@ function base_url($path = '')
                 }
 
                 fetch('/cekquantity', {
-                        method: 'POST',
-                        body: formData
-                    })
+                    method: 'POST',
+                    body: formData
+                })
                     .then(response => response.json())
                     .then(data => {
                         if (data.status === 'success') {
@@ -756,7 +792,6 @@ function base_url($path = '')
                     });
             });
 
-
             // Delete selected products via AJAX
             function deleteSelectedProducts() {
                 // Create form data for AJAX request
@@ -764,9 +799,9 @@ function base_url($path = '')
                 formData.append('product_ids', JSON.stringify(selectedProductIds));
 
                 fetch('/deletekeranjang', {
-                        method: 'POST',
-                        body: formData
-                    })
+                    method: 'POST',
+                    body: formData
+                })
                     .then(response => response.json())
                     .then(data => {
                         if (data.success) {

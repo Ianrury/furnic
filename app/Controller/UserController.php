@@ -14,6 +14,7 @@ use Importa\Furnic\PHP\FFI\Repository\SessionRepository;
 use Importa\Furnic\PHP\FFI\Repository\UserRepository;
 use Importa\Furnic\PHP\FFI\Service\SessionService;
 use Importa\Furnic\PHP\FFI\Service\UserService;
+use Importa\Furnic\PHP\FFI\App\Email;
 
 
 session_start();
@@ -227,6 +228,14 @@ class UserController
         }
     }
 
+    public function Ubahsandi()
+    {
+        $model = [
+            "title" => "Ubah Sandi",
+            "content" => "Welcome to the ubah sandi page!",
+        ];
+        View::render('User/ubahsandi', $model);
+    }
 
 
     public function logout()
@@ -236,4 +245,210 @@ class UserController
         exit;
     }
 
+    public function forgotPassword()
+    {
+        $model = [
+            "title" => "Lupa Sandi",
+            "content" => "Welcome to the forgot password page!",
+        ];
+        View::render('User/forgot-password', $model);
+    }
+
+    public function postForgotPassword()
+    {
+        $request = $_POST['email'] ?? null;
+
+        header('Content-Type: application/json');
+
+        if (empty($request)) {
+            echo json_encode(['success' => false, 'message' => 'Email tidak boleh kosong!']);
+            exit;
+        }
+
+        try {
+            $stmt = $this->connection->prepare("SELECT * FROM customer WHERE email = ? LIMIT 1");
+            $stmt->execute([$request]);
+            $user = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+            if (!$user) {
+                echo json_encode(['success' => false, 'message' => 'Email tidak terdaftar!']);
+                exit;
+            }
+
+            // Generate token
+            $token = bin2hex(random_bytes(32));
+
+            // Simpan token ke database
+            $update = $this->connection->prepare("UPDATE customer SET reset_token = ? WHERE email = ?");
+            $update->execute([$token, $request]);
+
+            $resetLink = "http://localhost:8080/reset-password?token=" . $token;
+
+            $judulEmail = "Furnic Importa - Password Reset Request";
+            $isiEmail = '
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Password Reset</title>
+                <style>
+                    body {
+                        font-family: Arial, sans-serif;
+                        line-height: 1.6;
+                        color: #333333;
+                        max-width: 600px;
+                        margin: 0 auto;
+                        padding: 20px;
+                    }
+                    .container {
+                        border: 1px solid #dddddd;
+                        border-radius: 5px;
+                        padding: 25px;
+                    }
+                    .header {
+                        border-bottom: 1px solid #eeeeee;
+                        padding-bottom: 15px;
+                        margin-bottom: 20px;
+                    }
+                    .button {
+                        display: inline-block;
+                        background-color: #0066cc;
+                        color: white !important;
+                        text-decoration: none;
+                        padding: 10px 20px;
+                        border-radius: 5px;
+                        margin: 20px 0;
+                    }
+                    .footer {
+                        margin-top: 30px;
+                        padding-top: 15px;
+                        border-top: 1px solid #eeeeee;
+                        font-size: 12px;
+                        color: #777777;
+                    }
+                </style>
+            </head>
+            <body>
+                <div class="container">
+                    <div class="header">
+                        <h2>Password Reset Request</h2>
+                    </div>
+                    
+                    <p>Dear Customer,</p>
+                    
+                    <p>We received a request to reset the password for your account. To complete this process, please click on the button below:</p>
+                    
+                     <p><a href="' . $resetLink . '" style="padding:10px 20px; background:#0066cc; color:#fff; text-decoration:none; text-align: center;">Reset Password</a></p>
+                    
+                    <p>This link will direct you to a secure page where you can create a new password for your account. For security reasons, this link will expire in 24 hours.</p>
+                    
+                    <p>If you did not request this password reset, please disregard this email. No changes will be made to your account.</p>
+                    
+                    <p><strong>Need help?</strong> If you\'re experiencing any issues with resetting your password, please contact our customer support team.</p>
+                    
+                    <p>Thank you for choosing our service.</p>
+                    
+                    <p>Best regards,<br>
+                    Customer Support Team<br>
+                    Importa Furnic</p>
+                    
+                    <div class="footer">
+                        <p>This is an automated message, please do not reply directly to this email.</p>
+                        <p>The information contained in this email is confidential and may be privileged. If you are not the intended recipient, please notify us immediately.</p>
+                    </div>
+                </div>
+            </body>
+            </html>
+            ';
+
+            $emailSent = Email::send($request, $judulEmail, $isiEmail);
+
+            if (!$emailSent) {
+                echo json_encode(['success' => false, 'message' => 'Gagal mengirim email!']);
+                exit;
+            }
+
+            echo json_encode(['success' => true, 'message' => 'Link reset password telah dikirim ke email Anda.']);
+        } catch (ValidationException $e) {
+            echo json_encode(['success' => false, 'message' => 'Terjadi kesalahan: ' . $e->getMessage()]);
+        }
+    }
+    public function ubahsandiPost()
+    {
+        $token = $_POST['token'] ?? null;
+        $newPassword = $_POST['password'] ?? null;
+
+        header('Content-Type: application/json');
+
+        if (empty($token) || empty($newPassword)) {
+            echo json_encode(['success' => false, 'message' => 'Token dan password baru wajib diisi.']);
+            exit;
+        }
+
+        // Validasi kekuatan password
+        if (strlen($newPassword) < 8) {
+            echo json_encode(['success' => false, 'message' => 'Password minimal terdiri dari 8 karakter.']);
+            exit;
+        }
+
+        if (!preg_match('/[A-Z]/', $newPassword)) {
+            echo json_encode(['success' => false, 'message' => 'Password harus mengandung minimal 1 huruf kapital.']);
+            exit;
+        }
+
+        if (!preg_match('/[0-9]/', $newPassword)) {
+            echo json_encode(['success' => false, 'message' => 'Password harus mengandung minimal 1 angka.']);
+            exit;
+        }
+
+        try {
+            // Verifikasi token reset
+            $stmt = $this->connection->prepare("SELECT * FROM customer WHERE reset_token = ? LIMIT 1");
+            $stmt->execute([$token]);
+            $user = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+            if (!$user) {
+                echo json_encode(['success' => false, 'message' => 'Token tidak valid atau sudah digunakan.']);
+                exit;
+            }
+
+            // Periksa apakah token sudah kadaluarsa (opsional, jika Anda menyimpan waktu kadaluarsa token)
+            // if (isset($user['reset_token_expires']) && strtotime($user['reset_token_expires']) < time()) {
+            //     echo json_encode(['success' => false, 'message' => 'Token reset password sudah kadaluarsa. Silakan minta reset password baru.']);
+            //     exit;
+            // }
+
+            // Hash password baru
+            $hashed = password_hash($newPassword, PASSWORD_BCRYPT);
+
+            // Update password dan hapus token reset
+            $update = $this->connection->prepare("UPDATE customer SET kata_sandi = ?, reset_token = NULL WHERE id_customer = ?");
+            $update->execute([$hashed, $user['id_customer']]);
+
+
+            // Kirim respons sukses
+            echo json_encode([
+                'success' => true,
+                'message' => 'Password berhasil direset! Silakan login dengan password baru Anda.',
+                'redirect' => '/login'
+            ]);
+
+        } catch (ValidationException $e) {
+            http_response_code(422);
+            echo json_encode(['success' => false, 'message' => 'Terjadi kesalahan: ' . $e->getMessage()]);
+        } catch (\Exception $e) {
+            http_response_code(500);
+            echo json_encode(['success' => false, 'message' => 'Terjadi kesalahan sistem. Silakan coba lagi nanti.']);
+        }
+    }
+
+    public function profile()
+    {
+        $model = [
+            "title" => "profile",
+            "content" => "Welcome to the ubah sandi page!",
+        ];
+        View::render('User/profile', $model);
+    }
 }

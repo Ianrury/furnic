@@ -135,7 +135,8 @@ function base_url($path = '')
                                             <p id="display_nama"><?= $model['user']['nama'] ?? '' ?></p>
                                             <p id="display_hp"><?= $model['user']['no_hp'] ?? '' ?></p>
                                             <p id="display_alamat"><?= $model['user']['alamat'] ?? '' ?></p>
-                                            <p id="display_email" class="d-none"><?= $model['user']['email'] ?? '' ?></p>
+                                            <p id="display_email" class="d-none"><?= $model['user']['email'] ?? '' ?>
+                                            </p>
 
                                             <!-- untuk keperluan update -->
                                         </div>
@@ -260,7 +261,7 @@ function base_url($path = '')
                                                                     <?php
                                                                     $harga_normal = $item['harga']; // harga normal dari database
                                                                     $diskon = $item['diskon']; // diskon dari database, bisa null atau 0
-
+                                                                
                                                                     // Jika diskon ada (lebih dari 0), hitung harga setelah diskon
                                                                     if ($diskon > 0):
                                                                         // Menghitung nominal diskon
@@ -281,12 +282,12 @@ function base_url($path = '')
                                                                 <?php
                                                                 $harga_normal = $item['harga']; // harga normal dari database
                                                                 $diskon = $item['diskon']; // diskon dari database, bisa null atau 0
-
+                                                            
                                                                 // Jika diskon ada (lebih dari 0), tampilkan harga lama dengan diskon
                                                                 if ($diskon > 0):
                                                                     // Menghitung nominal diskon
                                                                     $nominal_diskon = ($diskon / 100) * $harga_normal;
-                                                                ?>
+                                                                    ?>
                                                                     <div>
                                                                         <span class="fw-normal text-danger old-price">
                                                                             <sup>Rp</sup>
@@ -295,7 +296,7 @@ function base_url($path = '')
                                                                             </span>
                                                                         </span>
                                                                     </div>
-                                                                <?php
+                                                                    <?php
                                                                 endif;
                                                                 ?>
                                                             </div>
@@ -319,7 +320,7 @@ function base_url($path = '')
                                                     // Menghitung harga setelah diskon (jika ada)
                                                     $harga_normal = $item['harga']; // Harga normal dari database
                                                     $diskon = $item['diskon']; // Diskon dari database
-
+                                                
                                                     // Jika diskon ada, hitung harga setelah diskon
                                                     if ($diskon > 0) {
                                                         $nominal_diskon = ($diskon / 100) * $harga_normal; // Nominal diskon
@@ -343,7 +344,7 @@ function base_url($path = '')
                                                     // Menghitung harga setelah diskon (jika ada)
                                                     $harga_normal = $item['harga']; // Harga normal dari database
                                                     $diskon = $item['diskon']; // Diskon dari database
-
+                                                
                                                     // Jika diskon ada, hitung harga setelah diskon
                                                     if ($diskon > 0) {
                                                         $nominal_diskon = ($diskon / 100) * $harga_normal; // Nominal diskon
@@ -535,20 +536,20 @@ function base_url($path = '')
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        $('#myModal').on('shown.bs.modal', function() {
+        $('#myModal').on('shown.bs.modal', function () {
             $('#myInput').trigger('focus')
         })
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const offcanvasToggler = document.getElementById('offcanvasToggler');
             const offcanvasNavbar = document.getElementById('offcanvasNavbar');
 
             // Mencegah pembuatan backdrop
-            offcanvasNavbar.addEventListener('show.bs.offcanvas', function() {
+            offcanvasNavbar.addEventListener('show.bs.offcanvas', function () {
                 document.querySelectorAll('.offcanvas-backdrop').forEach(el => el.remove());
             });
 
             // Alternatif: nonaktifkan backdrop sepenuhnya
-            offcanvasNavbar.addEventListener('shown.bs.offcanvas', function() {
+            offcanvasNavbar.addEventListener('shown.bs.offcanvas', function () {
                 const backdrops = document.querySelectorAll('.offcanvas-backdrop');
                 backdrops.forEach(backdrop => {
                     backdrop.classList.remove('show');
@@ -557,7 +558,7 @@ function base_url($path = '')
             });
 
             // Pastikan backdrop dihapus saat menutup
-            offcanvasNavbar.addEventListener('hidden.bs.offcanvas', function() {
+            offcanvasNavbar.addEventListener('hidden.bs.offcanvas', function () {
                 document.querySelectorAll('.offcanvas-backdrop').forEach(el => el.remove());
             });
         });
@@ -652,37 +653,89 @@ function base_url($path = '')
     </script>
 
     <script>
-        document.getElementById('formBayar').addEventListener('submit', function(e) {
-            const idToko = document.getElementById('id_toko').value;
-            const idPengiriman = document.getElementById('id_pengiriman').value;
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('formBayar').addEventListener('submit', function (e) {
+                e.preventDefault(); // Mencegah form submit default
 
-            if (!idToko && !idPengiriman) {
-                e.preventDefault();
-                showToast('Pilih toko atau jenis pengiriman terlebih dahulu', 'danger');
+                const nama = $('#nama_user').val().trim();
+                const email = $('#email').val().trim();
+                const no_hp = $('#no_telpon').val().trim();
+                const alamat = $('#Alamat').val().trim();
+                const detail = $('#detail').val().trim();
+                // Ambil data dari form
+
+                if (!nama || !email || !no_hp || !alamat || !detail) {
+                    showToast('Silahkan lengkapi data diri anda terlebih dahulu', 'danger');
+                    $('#editAlamatModal').modal('show');
+                    return;
+                }
+
+                const idToko = document.getElementById('id_toko').value;
+                const idPengiriman = document.getElementById('id_pengiriman').value;
+
+                // Validasi
+                if (!idToko && !idPengiriman) {
+                    showToast('Pilih toko atau jenis pengiriman terlebih dahulu', 'danger');
+                    return;
+                }
+
+                // Buat FormData object
+                const formData = new FormData();
+                formData.append('id_toko', idToko);
+                formData.append('id_pengiriman', idPengiriman);
+
+                // Kirim data ke server
+                fetch('/pesanan', {
+                    method: 'POST',
+                    body: formData
+                })
+                    .then(response => response.json())  // Mengonversi response ke format JSON
+                    .then(data => {
+                        if (data.status === 'success') {
+                            showToast(data.message || 'Pesanan berhasil dibuat', 'success');
+                            setTimeout(() => {
+                                window.location.href = data.redirect || '/pembayaran';  // Redirect setelah sukses
+                            }, 1500);
+                        } else {
+                            // Cek jika perlu redirect ke halaman keranjang
+                            if (data.message === 'Return to keranjang') {
+                                showToast('Keranjang kosong, silakan pilih produk terlebih dahulu', 'danger');
+                                setTimeout(() => {
+                                    window.location.href = '/keranjang';
+                                }, 1500);
+                            } else {
+                                showToast(data.message || 'Terjadi kesalahan', 'danger');
+                            }
+                        }
+                    })
+                    .catch(error => {
+                        showToast('Terjadi kesalahan dalam mengirim data', 'danger');
+                        console.error('Error:', error);
+                    });
+            });
+
+            function showToast(message, type = 'danger') {
+                const toastId = 'toast-' + Date.now();
+                const toastHTML = `
+                <div id="${toastId}" class="toast align-items-center text-bg-${type} border-0 shadow" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="3000">
+                    <div class="d-flex">
+                        <div class="toast-body">${message}</div>
+                        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                </div>
+            `;
+
+                const toastContainer = document.getElementById('toastContainer');
+                toastContainer.insertAdjacentHTML('beforeend', toastHTML);
+
+                const toastElement = new bootstrap.Toast(document.getElementById(toastId));
+                toastElement.show();
             }
         });
-
-        function showToast(message, type = 'danger') {
-            const toastId = 'toast-' + Date.now();
-            const toastHTML = `
-        <div id="${toastId}" class="toast align-items-center text-bg-${type} border-0 shadow" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="3000">
-            <div class="d-flex">
-                <div class="toast-body">${message}</div>
-                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div>
-        </div>
-    `;
-
-            const toastContainer = document.getElementById('toastContainer');
-            toastContainer.insertAdjacentHTML('beforeend', toastHTML);
-
-            const toastElement = new bootstrap.Toast(document.getElementById(toastId));
-            toastElement.show();
-        }
     </script>
 
     <script>
-        $('#formEditUser').on('submit', function(e) {
+        $('#formEditUser').on('submit', function (e) {
             e.preventDefault();
 
             const nama = $('#nama_user').val().trim();
@@ -707,11 +760,12 @@ function base_url($path = '')
                 url: '/user/update',
                 method: 'POST',
                 data: formData,
-                success: function(response) {
+                success: function (response) {
                     try {
                         const res = JSON.parse(response);
                         if (res.status === 'success') {
                             // Ambil data dari form
+                            console.log(res);
                             const nama = $('#nama_user').val();
                             const email = $('#email').val();
                             const no_hp = $('#no_telpon').val();
@@ -737,7 +791,7 @@ function base_url($path = '')
                         showToast('Terjadi kesalahan pada server.', 'danger');
                     }
                 },
-                error: function() {
+                error: function () {
                     showToast('Gagal terhubung ke server.', 'danger');
                 }
             });
@@ -747,9 +801,27 @@ function base_url($path = '')
 
         const input = document.getElementById('no_telpon');
         // Batasi hanya angka
-        input.addEventListener('input', function() {
+        input.addEventListener('input', function () {
             this.value = this.value.replace(/\D/g, ''); // hapus karakter non-angka
         });
+
+        function showToast(message, type = 'danger') {
+            const toastId = 'toast-' + Date.now();
+            const toastHTML = `
+                <div id="${toastId}" class="toast align-items-center text-bg-${type} border-0 shadow" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="3000">
+                    <div class="d-flex">
+                        <div class="toast-body">${message}</div>
+                        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                </div>
+            `;
+
+            const toastContainer = document.getElementById('toastContainer');
+            toastContainer.insertAdjacentHTML('beforeend', toastHTML);
+
+            const toastElement = new bootstrap.Toast(document.getElementById(toastId));
+            toastElement.show();
+        }
     </script>
 </body>
 

@@ -731,4 +731,22 @@ class ProductController
             }
         }
     }
+
+    public function lokasi()
+    {
+        $model = [
+            "title" => "Product Lokasi",
+            "content" => "Welcome to the product lokasi page!",
+        ];
+        View::render('Lokasi/lokasi', $model);
+    }
+
+    public function card_pesanan()
+    {
+        $model = [
+            "title" => "Product Card Pesanan",
+            "content" => "Welcome to the product card pesanan page!",
+        ];
+        View::render('Pesanan/contoh-pesanan', $model);
+    }
 }
