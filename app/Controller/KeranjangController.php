@@ -190,6 +190,15 @@ class KeranjangController
             unset($_SESSION['selected_cart_ids']);
         }
 
+        // Cek dan hapus session sebelumnya jika ada
+        if (isset($_SESSION['product'])) {
+            // Log data session lama sebelum dihapus (untuk debugging)
+            error_log('Session lama dihapus: ' . json_encode($_SESSION['product']));
+
+            // Hapus session product yang lama
+            unset($_SESSION['product']);
+        }
+
         // Simpan ke session jika semua valid
         $_SESSION['selected_cart_ids'] = $cartIds;
 
@@ -201,6 +210,148 @@ class KeranjangController
             'message' => 'Produk berhasil dipilih'
         ]);
     }
+
+    public function createPesanan()
+    {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        header('Content-Type: application/json');
+
+        $id_product = $_POST["id"] ?? null;
+        $qty = isset($_POST["qty"]) ? (int) $_POST["qty"] : 1;
+        $sessionId = $_COOKIE[self::$COOKIE_NAME] ?? null;
+        $id_detail_product = $_POST["id_detail_product"] ?? null;
+        $id_motif_produk = $_POST["id_motif_produk"] ?? null;
+
+        // var_dump($id_product, $qty, $sessionId, $id_detail_product, $id_motif_produk);
+
+        if (!$sessionId || !$id_product || !$id_detail_product || !$id_motif_produk) {
+            echo json_encode(['status' => 'error', 'message' => 'Data tidak lengkap atau belum login']);
+            return;
+        }
+
+        // Ambil data user dari sesi
+        $statement = $this->connection->prepare("SELECT id_user FROM session WHERE id_session = ? LIMIT 1");
+        $statement->execute([$sessionId]);
+        $session = $statement->fetch(\PDO::FETCH_ASSOC);
+
+        if (!$session || !isset($session['id_user'])) {
+            echo json_encode(['status' => 'error', 'message' => 'Sesi tidak valid, silakan login ulang']);
+            return;
+        }
+
+        $id_customer = $session['id_user'];
+
+        // 1. Cek stok motif awal
+        $cekMotif = $this->connection->prepare("SELECT * FROM motif_produk WHERE id = ? AND qty >= ?");
+        $cekMotif->execute([$id_motif_produk, $qty]);
+        $rowMotif = $cekMotif->fetch(\PDO::FETCH_ASSOC);
+
+        // Jika stok motif tidak cukup, cari alternatif motif
+        if (!$rowMotif) {
+            $getWarna = $this->connection->prepare("SELECT warna FROM detail_product WHERE id = ?");
+            $getWarna->execute([$id_detail_product]);
+            $detail = $getWarna->fetch(\PDO::FETCH_ASSOC);
+
+            if (!$detail) {
+                echo json_encode(['status' => 'error', 'message' => 'Detail produk tidak ditemukan']);
+                return;
+            }
+
+            $warna = $detail['warna'];
+
+            // a. Cek motif lain dengan detail_product sama
+            $stmt1 = $this->connection->prepare("SELECT * FROM motif_produk WHERE id_detail_product = ? AND qty >= ? LIMIT 1");
+            $stmt1->execute([$id_detail_product, $qty]);
+            $rowMotif = $stmt1->fetch(\PDO::FETCH_ASSOC);
+
+            // b. Cek motif lain dengan warna yang sama
+            if (!$rowMotif) {
+                $stmt2 = $this->connection->prepare("
+                    SELECT mp.* FROM motif_produk mp
+                    JOIN detail_product dp ON mp.id_detail_product = dp.id
+                    WHERE dp.id_product = ? AND dp.warna = ? AND mp.qty >= ? LIMIT 1
+                ");
+                $stmt2->execute([$id_product, $warna, $qty]);
+                $rowMotif = $stmt2->fetch(\PDO::FETCH_ASSOC);
+            }
+
+            // c. Cek semua motif lain dalam produk
+            if (!$rowMotif) {
+                $stmt3 = $this->connection->prepare("
+                    SELECT mp.* FROM motif_produk mp
+                    JOIN detail_product dp ON mp.id_detail_product = dp.id
+                    WHERE dp.id_product = ? AND mp.qty >= ? LIMIT 1
+                ");
+                $stmt3->execute([$id_product, $qty]);
+                $rowMotif = $stmt3->fetch(\PDO::FETCH_ASSOC);
+            }
+
+            // d. Jika semua gagal
+            if (!$rowMotif) {
+                echo json_encode(['status' => 'error', 'message' => 'Stok pada produk ini kosong']);
+                return;
+            }
+
+            // Update dengan motif alternatif
+            $id_detail_product = $rowMotif['id_detail_product'];
+            $id_motif_produk = $rowMotif['id'];
+        }
+
+        // Cek ulang detail_product
+        $cekDetailProduct = $this->connection->prepare("SELECT * FROM detail_product WHERE id = ?");
+        $cekDetailProduct->execute([$id_detail_product]);
+        $row = $cekDetailProduct->fetch(\PDO::FETCH_ASSOC);
+
+        if (!$row) {
+            echo json_encode(['status' => 'error', 'message' => 'Barang tidak ada di produk']);
+            return;
+        }
+
+        // Validasi stok utama
+        $cekQty = $this->connection->prepare("SELECT * FROM product WHERE id_product = ? AND qty >= ?");
+        $cekQty->execute([$id_product, $qty]);
+        $row = $cekQty->fetch(\PDO::FETCH_ASSOC);
+
+        if (!$row) {
+            echo json_encode(['status' => 'error', 'message' => 'Stok tidak cukup']);
+            return;
+        }
+
+
+        // Cek dan hapus session sebelumnya jika ada
+        if (isset($_SESSION['selected_cart_ids'])) {
+            // Log data session lama sebelum dihapus (untuk debugging)
+            error_log('Session lama dihapus: ' . json_encode($_SESSION['selected_cart_ids']));
+
+            // Hapus session selected_cart_ids yang lama
+            unset($_SESSION['selected_cart_ids']);
+        }
+
+        // Simpan ke tabel cart
+        $insert = $this->connection->prepare("
+                INSERT INTO cart (id_customer, id_product, id_detail_product, id_motif_produk, qty)
+                VALUES (?, ?, ?, ?, ?)
+            ");
+        $insert->execute([$id_customer, $id_product, $id_detail_product, $id_motif_produk, $qty]);
+
+        $id_cart = $this->connection->lastInsertId();
+
+        // Simpan ID cart ke session
+        $_SESSION['selected_cart_ids'] = [
+            $id_cart
+        ];
+
+        // Output sukses
+        echo json_encode([
+            'status' => 'success',
+            'message' => 'Produk berhasil dipilih untuk checkout',
+            'id_cart' => $id_cart
+        ]);
+    }
+
 
     public function PlesQtyKeranjang()
     {

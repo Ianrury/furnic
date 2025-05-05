@@ -75,7 +75,7 @@ class ProductController
         $detail = $this->productServiser->getDetail($id);
 
         // echo '<pre>';
-        // var_dump($bestseller);
+        // var_dump($detail);
         // echo '</pre>';
         // exit;
         $model = [

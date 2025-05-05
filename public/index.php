@@ -63,10 +63,12 @@ Router::add('POST', '/deletekeranjang', KeranjangController::class, 'deleteKeran
 Router::add('POST', '/cekquantity', KeranjangController::class, 'cekQuantity'); 
 Router::add('POST', '/pleskeranjang', KeranjangController::class, 'PlesQtyKeranjang');
 Router::add('POST', '/minuskeranjang', KeranjangController::class, 'MinusQtyKeranjang');
+Router::add('POST', '/createPesanan', KeranjangController::class, 'createPesanan');
 
 // Controller PesananController
 Router::add('GET', '/pesanan', PesananController::class, 'index');
 Router::add('POST', '/pesanan', PesananController::class, 'createPesanan');
+
 Router::add('GET', '/pembayaran', PesananController::class, 'pembayaran');
 
 

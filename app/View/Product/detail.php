@@ -230,7 +230,8 @@ function base_url($path = '')
                         <div class="mb-3">
                             <div class="row g-2 align-items-center">
                                 <div class="col-9">
-                                    <button class="btn btn-buy w-100 rounded-3 fw-bold" style="font-size: 14px;">Beli
+                                    <button class="btn btn-buy w-100 rounded-3 fw-bold" id="btnbeli"
+                                        style="font-size: 14px;">Beli
                                         Sekarang</button>
                                 </div>
                                 <div class="col-3 d-flex justify-content-end gap-3">
@@ -1101,7 +1102,7 @@ function base_url($path = '')
     <script src="assets/js/main.js"></script>
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- <script>
+    <script>
         document.addEventListener('DOMContentLoaded', function () {
             const offcanvasToggler = document.getElementById('offcanvasToggler');
             const offcanvasNavbar = document.getElementById('offcanvasNavbar');
@@ -1125,7 +1126,7 @@ function base_url($path = '')
                 document.querySelectorAll('.offcanvas-backdrop').forEach(el => el.remove());
             });
         });
-    </script> -->
+    </script>
 
     <script>
         // slid halaman detail
@@ -1512,9 +1513,45 @@ function base_url($path = '')
                 }
             }
         });
+
+        document.getElementById('btnbeli').addEventListener('click', function (e) {
+            e.preventDefault();
+
+            const id_product = document.getElementById('id_product').value;
+            const id_detail_product = document.getElementById('id_detail_product').value;
+            const id_motif_produk = document.getElementById('id_motif_produk').value;
+            const qty = parseInt(document.getElementById('jumlah-beli').innerText);
+
+            fetch('/createPesanan', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: new URLSearchParams({
+                    id: id_product,
+                    id_detail_product: id_detail_product,
+                    id_motif_produk: id_motif_produk,
+                    qty: qty
+                })
+            })
+                .then(response => response.json())
+                .then(result => {
+                    if (result.status === 'success') {
+                        showToast(result.message, 'success');
+                        setTimeout(() => {
+                            window.location.href = '/pesanan';
+                        }, 1500); // tunggu 1.5 detik biar user sempat lihat toast-nya
+                    } else {
+                        showToast(result.message, 'danger'); // warna merah untuk error
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    showToast('Terjadi kesalahan. Coba lagi nanti.', 'danger');
+                });
+        });
+
     </script>
-
-
 
 
 

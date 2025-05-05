@@ -694,9 +694,10 @@ function base_url($path = '')
                         if (data.status === 'success') {
                             showToast(data.message || 'Pesanan berhasil dibuat', 'success');
                             setTimeout(() => {
-                                window.location.href = data.redirect || '/pembayaran';  // Redirect setelah sukses
+                                window.location.href = data.redirect_url || '/pembayaran';
                             }, 1500);
-                        } else {
+                        }
+                        else {
                             // Cek jika perlu redirect ke halaman keranjang
                             if (data.message === 'Return to keranjang') {
                                 showToast('Keranjang kosong, silakan pilih produk terlebih dahulu', 'danger');

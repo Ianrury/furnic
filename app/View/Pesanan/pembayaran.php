@@ -1,3 +1,6 @@
+<?php
+$token = $_GET['token'] ?? null;
+?>
 <!DOCTYPE html>
 <html lang="id">
 
@@ -36,6 +39,89 @@
     <style>
         :root {
             --primary-color: #294478;
+        }
+
+        .deadline-info {
+            display: flex;
+            align-items: center;
+            background-color: #f8f9fa;
+            border-radius: 0.375rem;
+            padding: 0.5rem 0.75rem;
+            margin-bottom: 1rem;
+            border-left: 3px solid #dc3545;
+            font-size: 0.75rem;
+            position: relative;
+        }
+        
+        .deadline-icon {
+            color: #dc3545;
+            margin-right: 0.75rem;
+            animation: pulse 1.5s infinite;
+            font-size: 0.875rem;
+        }
+        
+        .deadline-text {
+            flex-grow: 1;
+        }
+        
+        .deadline-title {
+            font-weight: 600;
+            color: #dc3545;
+            margin-bottom: 0.125rem;
+            font-size: 0.8rem;
+        }
+        
+        .deadline-time {
+            font-weight: 700;
+            color: #333;
+            display: flex;
+            align-items: center;
+        }
+        
+        .timer-digit {
+            display: inline-block;
+            background-color: #fff;
+            border-radius: 0.25rem;
+            padding: 0.15rem 0.3rem;
+            margin: 0 0.15rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            min-width: 1.5rem;
+            text-align: center;
+            color: #dc3545;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+        
+        .timer-separator {
+            margin: 0 0.1rem;
+        }
+        
+        .deadline-progress {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 3px;
+            width: 100%;
+            background-color: rgba(220, 53, 69, 0.1);
+        }
+        
+        .deadline-progress-bar {
+            height: 100%;
+            background-color: #dc3545;
+            width: 75%; /* Will be updated dynamically */
+            transition: width 1s linear;
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.15);
+            }
+            100% {
+                transform: scale(1);
+            }
         }
 
         body {
@@ -193,6 +279,22 @@
                 <h5 class="card-title mb-0">Halaman Pembayaran</h5>
             </div>
             <div class="card-body p-3">
+                <div class="deadline-info">
+                    <i class="fas fa-clock deadline-icon"></i>
+                    <div class="deadline-text">
+                        <div class="deadline-title">Batas Waktu Pembayaran</div>
+                        <div class="deadline-time" id="countdown">
+                            <span id="hours" class="timer-digit">23</span>
+                            <span class="timer-separator">:</span>
+                            <span id="minutes" class="timer-digit">59</span>
+                            <span class="timer-separator">:</span>
+                            <span id="seconds" class="timer-digit">59</span>
+                        </div>
+                    </div>
+                    <div class="deadline-progress">
+                        <div class="deadline-progress-bar" id="progress-bar"></div>
+                    </div>
+                </div>
                 <div class="bank-info">
                     <h5 class="mb-2">Informasi Rekening</h5>
                     <p class="bank-detail mb-1"><span>Bank:</span> BCA</p>
@@ -201,6 +303,8 @@
                 </div>
 
                 <form id="payment-form">
+                    <input type="hidden" name="token" value="<?= htmlspecialchars($token) ?>">
+
                     <div class="mb-3">
                         <label for="bank" class="form-label">Bank Pengirim</label>
                         <select id="bank" class="form-select form-select-sm" required>
@@ -305,6 +409,47 @@
             // Here you would normally send the data to your server
             alert('Pembayaran berhasil dikonfirmasi! Terima kasih.');
         });
+    </script>
+
+    <script>
+        // Set the countdown time (in this example, 24 hours from now)
+        const countDownDate = new Date();
+        countDownDate.setHours(countDownDate.getHours() + 24);
+
+        // Initial total time for progress bar calculation (in ms)
+        const totalTime = 24 * 60 * 60 * 1000;
+        let remainingTime = totalTime;
+
+        // Update the countdown every 1 second
+        const x = setInterval(function () {
+            // Get current date and time
+            const now = new Date().getTime();
+
+            // Find the distance between now and the countdown date
+            const distance = countDownDate.getTime() - now;
+            remainingTime = distance;
+
+            // Time calculations for hours, minutes and seconds
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Display the result
+            document.getElementById("hours").innerHTML = hours.toString().padStart(2, '0');
+            document.getElementById("minutes").innerHTML = minutes.toString().padStart(2, '0');
+            document.getElementById("seconds").innerHTML = seconds.toString().padStart(2, '0');
+
+            // Update progress bar
+            const progressPercentage = (remainingTime / totalTime) * 100;
+            document.getElementById("progress-bar").style.width = progressPercentage + "%";
+
+            // If the countdown is finished
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("countdown").innerHTML = "<span class='text-danger fw-bold'>Waktu Habis!</span>";
+                document.getElementById("progress-bar").style.width = "0%";
+            }
+        }, 1000);
     </script>
 </body>
 

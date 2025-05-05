@@ -162,3 +162,7 @@ ADD CONSTRAINT fk_pesanan_toko
     FOREIGN KEY (id_toko) REFERENCES toko(id);
 
 ALTER TABLE customer ADD COLUMN reset_token VARCHAR(255) DEFAULT NULL;
+
+ALTER TABLE pesanan ADD COLUMN nomor_pesanan VARCHAR(100) AFTER id_pesanan;
+
+ALTER TABLE pesanan ADD COLUMN payment_token VARCHAR(100);
