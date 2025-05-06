@@ -225,8 +225,6 @@ class KeranjangController
         $id_detail_product = $_POST["id_detail_product"] ?? null;
         $id_motif_produk = $_POST["id_motif_produk"] ?? null;
 
-        // var_dump($id_product, $qty, $sessionId, $id_detail_product, $id_motif_produk);
-
         if (!$sessionId || !$id_product || !$id_detail_product || !$id_motif_produk) {
             echo json_encode(['status' => 'error', 'message' => 'Data tidak lengkap atau belum login']);
             return;
@@ -320,37 +318,59 @@ class KeranjangController
             return;
         }
 
+        // Cek apakah kombinasi sudah ada di cart
+        $cekCart = $this->connection->prepare("
+            SELECT * FROM cart 
+            WHERE id_customer = ? AND id_product = ? AND id_detail_product = ? AND id_motif_produk = ?
+        ");
+        $cekCart->execute([$id_customer, $id_product, $id_detail_product, $id_motif_produk]);
+        $existingCart = $cekCart->fetch(\PDO::FETCH_ASSOC);
 
-        // Cek dan hapus session sebelumnya jika ada
-        if (isset($_SESSION['selected_cart_ids'])) {
-            // Log data session lama sebelum dihapus (untuk debugging)
-            error_log('Session lama dihapus: ' . json_encode($_SESSION['selected_cart_ids']));
+        if ($existingCart) {
+            $qty_lama = (int) $existingCart['qty'];
+            $total_qty = $qty_lama + $qty;
 
-            // Hapus session selected_cart_ids yang lama
-            unset($_SESSION['selected_cart_ids']);
-        }
+            // Cek apakah total qty melebihi stok motif
+            $cekStokMotif = $this->connection->prepare("SELECT qty FROM motif_produk WHERE id = ?");
+            $cekStokMotif->execute([$id_motif_produk]);
+            $stokMotif = (int) $cekStokMotif->fetchColumn();
 
-        // Simpan ke tabel cart
-        $insert = $this->connection->prepare("
+            if ($stokMotif < $total_qty) {
+                echo json_encode(['status' => 'error', 'message' => 'Stok motif tidak mencukupi untuk jumlah total']);
+                return;
+            }
+
+            // Update qty cart
+            $update = $this->connection->prepare("UPDATE cart SET qty = ? WHERE id_cart = ?");
+            $update->execute([$total_qty, $existingCart['id_cart']]);
+            $id_cart = $existingCart['id_cart'];
+        } else {
+            // Insert baru jika belum ada
+            $insert = $this->connection->prepare("
                 INSERT INTO cart (id_customer, id_product, id_detail_product, id_motif_produk, qty)
                 VALUES (?, ?, ?, ?, ?)
             ");
-        $insert->execute([$id_customer, $id_product, $id_detail_product, $id_motif_produk, $qty]);
+            $insert->execute([$id_customer, $id_product, $id_detail_product, $id_motif_produk, $qty]);
+            $id_cart = $this->connection->lastInsertId();
+        }
 
-        $id_cart = $this->connection->lastInsertId();
+        // Hapus session cart lama (jika ada)
+        if (isset($_SESSION['selected_cart_ids'])) {
+            unset($_SESSION['selected_cart_ids']);
+        }
 
         // Simpan ID cart ke session
         $_SESSION['selected_cart_ids'] = [
             $id_cart
         ];
 
-        // Output sukses
         echo json_encode([
             'status' => 'success',
             'message' => 'Produk berhasil dipilih untuk checkout',
             'id_cart' => $id_cart
         ]);
     }
+
 
 
     public function PlesQtyKeranjang()

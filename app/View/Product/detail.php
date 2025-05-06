@@ -1424,6 +1424,7 @@ function base_url($path = '')
         }
     </script>
 
+    <!-- card -->
     <script>
         function masukkanKeranjang() {
             const idProduct = document.getElementById('id_product').value;
@@ -1522,6 +1523,14 @@ function base_url($path = '')
             const id_motif_produk = document.getElementById('id_motif_produk').value;
             const qty = parseInt(document.getElementById('jumlah-beli').innerText);
 
+            // Ambil stok yang tersedia dari DOM
+            const stockAvailable = parseInt(document.querySelector('#stock span').innerText) || 0;
+
+            // Validasi jika produk tidak tersedia (stok 0)
+            if (stockAvailable === 0) {
+                showToast('Produk tidak tersedia', 'danger');
+                return; // Jangan lanjutkan jika produk tidak tersedia
+            }
             fetch('/createPesanan', {
                 method: 'POST',
                 headers: {

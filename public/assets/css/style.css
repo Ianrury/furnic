@@ -6083,8 +6083,6 @@ label {
   color: var(--theme-color);
 }
 
-
-
 /* dashboard */
 .dashboard-widget {
   display: flex;
@@ -10938,4 +10936,26 @@ input[type="checkbox"].form-check-input {
     transform: scale(1);
     opacity: 1;
   }
+}
+
+.deadline-progress {
+  width: 100%;
+  height: 10px;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  margin-top: 10px;
+  overflow: hidden;
+}
+
+.deadline-progress-bar {
+  height: 100%;
+  width: 100%;
+  background-color: #28a745;
+  transition: width 1s linear;
+}
+
+.deadline-time {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-top: 5px;
 }

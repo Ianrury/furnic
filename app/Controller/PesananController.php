@@ -613,5 +613,63 @@ class PesananController
         View::render('Pesanan/pembayaran', $model);
     }
 
+    public function cekWaktuPesanan()
+    {
+        $token = $_REQUEST['token'] ?? null;
+
+        if ($token === null) {
+            echo json_encode(['status' => 'error', 'message' => 'Token tidak ditemukan']);
+            return;
+        }
+
+        $stmt = $this->connection->prepare("SELECT limit_payment FROM pesanan WHERE payment_token = ? LIMIT 1");
+        $stmt->execute([$token]);
+        $limitPayment = $stmt->fetchColumn();
+
+        if (!$limitPayment) {
+            echo json_encode(['status' => 'error', 'message' => 'Token tidak valid atau sudah kadaluarsa']);
+            return;
+        }
+
+        $limitPaymentDateTime = new \DateTime($limitPayment);
+        echo json_encode([
+            'status' => 'success',
+            'message' => 'Berhasil mendapatkan batas waktu pembayaran.',
+            'limit_payment' => $limitPaymentDateTime->format('Y-m-d H:i:s') // Kirim format jelas
+        ]);
+    }
+
+    public function batalPesanan()
+    {
+        $token = $_REQUEST['token'] ?? null;
+
+        if ($token === null) {
+            echo json_encode(['status' => 'error', 'message' => 'Token tidak ditemukan']);
+            return;
+        }
+
+        $stmt = $this->connection->prepare("SELECT id_pesanan, qty, id_product, id_motif_produk FROM pesanan WHERE payment_token = ? LIMIT 1");
+        $stmt->execute([$token]);
+        $Pesanan = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+        if (!$Pesanan) {
+            echo json_encode(['status' => 'error', 'message' => 'Token tidak valid atau sudah kadaluarsa']);
+            return;
+        }
+
+        // Batalkan pesanan
+        $stmtBatalkan = $this->connection->prepare("UPDATE pesanan SET status_pembayaran = 'dibatalkan' WHERE id_pesanan = ?");
+        $stmtBatalkan->execute([$Pesanan['id_pesanan']]);
+
+        // Update stok produk
+        $stmtUpdateProduct = $this->connection->prepare("UPDATE product SET qty = qty + ? WHERE id_product = ?");
+        $stmtUpdateProduct->execute([$Pesanan['qty'], $Pesanan['id_product']]);
+
+        // Update stok motif produk
+        $stmtUpdateMotif = $this->connection->prepare("UPDATE motif_produk SET qty = qty + ? WHERE id_motif_produk = ?");
+        $stmtUpdateMotif->execute([$Pesanan['qty'], $Pesanan['id_motif_produk']]);
+
+        echo json_encode(['status' => 'success', 'message' => 'Pesanan berhasil dibatalkan']);
+    }
 
 }

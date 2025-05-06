@@ -166,3 +166,9 @@ ALTER TABLE customer ADD COLUMN reset_token VARCHAR(255) DEFAULT NULL;
 ALTER TABLE pesanan ADD COLUMN nomor_pesanan VARCHAR(100) AFTER id_pesanan;
 
 ALTER TABLE pesanan ADD COLUMN payment_token VARCHAR(100);
+
+ALTER TABLE pesanan
+ADD COLUMN bank_pengirim VARCHAR(100),
+ADD COLUMN no_rek_pengirim VARCHAR(50),
+ADD COLUMN nama_rekening VARCHAR(100),
+ADD COLUMN jumlah_transfer VARCHAR(50);
