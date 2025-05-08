@@ -1,3 +1,9 @@
+<?php
+require_once __DIR__ . '/../../app/env.php';
+$apiBaseUrl = env('API_BASE_URL');
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -73,24 +79,24 @@
 
 
     <main class="main">
-    <div class="container-fluid login-container">
-        <div class="row">
-            <!-- Image Section (hidden on mobile) -->
-            <div class="col-md-7 image-container">
-                <img src="assets/img/login/foto-login.PNG" alt="Woman with child on sofa with laptop">
-            </div>
-            
-            <!-- Login Form Section -->
-            <div class="col-12 col-md-5 form-container">
-                <div class="wrapper">
-                    <div class="register-form">
+        <div class="container-fluid login-container">
+            <div class="row">
+                <!-- Image Section (hidden on mobile) -->
+                <div class="col-md-7 image-container">
+                    <img src="assets/img/login/foto-login.PNG" alt="Woman with child on sofa with laptop">
+                </div>
+
+                <!-- Login Form Section -->
+                <div class="col-12 col-md-5 form-container">
+                    <div class="wrapper">
+                        <div class="register-form">
                             <h3 class="login-title">REGISTER</h3>
-                            
+
                             <form id="formRegister" method="post">
 
                                 <div class="" style="margin: auto 5px;">
-                                        <label for="nama" class="form-label">Nama Lengkap</label>
-                                        <input type="text" class="form-control form-login" id="nama_user" name="nama" placeholder="Masukkan Nama Lengkap">
+                                    <label for="nama" class="form-label">Nama Lengkap</label>
+                                    <input type="text" class="form-control form-login" id="nama_user" name="nama" placeholder="Masukkan Nama Lengkap">
                                 </div>
 
                                 <div class="" style="margin: auto 5px;">
@@ -100,10 +106,10 @@
 
                                 <div class="" style="margin: auto 5px;">
                                     <label for="no_hp" class="form-label">Nomor Telepon</label>
-                                        <div class="d-flex gap-1">
-                                            <input type="text" class="form-control form-login country-code-input" id="country_code" name="country_code" placeholder="+62" readonly>
-                                            <input type="text" class="form-control form-login phone-input" id="no_telpon" name="no_hp" placeholder="Masukkan No Telepon">
-                                        </div>
+                                    <div class="d-flex gap-1">
+                                        <input type="text" class="form-control form-login country-code-input" id="country_code" name="country_code" placeholder="+62" readonly>
+                                        <input type="text" class="form-control form-login phone-input" id="no_telpon" name="no_hp" placeholder="Masukkan No Telepon">
+                                    </div>
                                 </div>
 
                                 <div class="" style="margin: auto 5px;">
@@ -118,9 +124,9 @@
 
 
                                 <button type="submit" class="btn btn-masuk mt-2 w-100">DAFTAR</button>
-                                                       <!-- Register Button -->
+                                <!-- Register Button -->
                                 <button type="button" class="btn btn-daftar w-100">
-                                <a href="/login">MASUK</a>
+                                    <a href="/login">MASUK</a>
                                 </button>
                                 <!-- Login Button -->
                             </form>
@@ -132,13 +138,13 @@
         <div id="toastContainer" class="position-fixed top-0 end-0 p-3" style="z-index: 9999;">
             <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
                 <div class="toast-header">
-                <img src="..." class="rounded me-2" alt="...">
-                <strong class="me-auto">Bootstrap</strong>
+                    <img src="..." class="rounded me-2" alt="...">
+                    <strong class="me-auto">Bootstrap</strong>
                     <small>11 mins ago</small>
                     <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                    </div>
+                </div>
                 <div class="toast-body">
-                Hello, world! This is a toast message.
+                    Hello, world! This is a toast message.
                 </div>
             </div>
         </div>
@@ -164,8 +170,8 @@
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-    // Deteksi kesamaan password real-time
-        $('#password, #password_confirmation').on('input', function () {
+        // Deteksi kesamaan password real-time
+        $('#password, #password_confirmation').on('input', function() {
             const password = $('#password').val();
             const confirm = $('#password_confirmation').val();
 
@@ -178,7 +184,10 @@
             }
         });
 
-            $('#formRegister').on('submit', function (e) {
+        const API_BASE_URL = "<?= $apiBaseUrl ?>";
+
+
+        $('#formRegister').on('submit', function(e) {
             e.preventDefault();
 
             // Reset error
@@ -196,11 +205,11 @@
             }
 
             $.ajax({
-                url: '/register',
+                url: API_BASE_URL + '/register',
                 type: 'POST',
-                data: $(this).serialize(),
+                data: $('#formRegister').serialize(),
                 dataType: 'json',
-                success: function (response) {
+                success: function(response) {
                     console.log('Success response:', response);
 
                     if (response.success) {
@@ -219,7 +228,7 @@
                         showToast(response.message || 'Terjadi kesalahan.', 'danger');
                     }
                 },
-                error: function (xhr) {
+                error: function(xhr) {
                     console.log('Error response:', xhr);
 
                     if (xhr.status === 422) {
@@ -247,14 +256,14 @@
                         showToast(errorMessage, 'danger');
                     }
                 }
-                });
             });
+        });
 
 
-            // === TOAST FUNCTION ===
-            function showToast(message, type = 'danger') {
-                const toastId = 'toast-' + Date.now();
-                const toastHtml = `
+        // === TOAST FUNCTION ===
+        function showToast(message, type = 'danger') {
+            const toastId = 'toast-' + Date.now();
+            const toastHtml = `
                     <div id="${toastId}" class="toast align-items-center text-bg-${type} border-0 shadow" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
                         <div class="d-flex">
                             <div class="toast-body">${message}</div>
@@ -262,20 +271,19 @@
                         </div>
                     </div>`;
 
-                const $toast = $(toastHtml);
-                $('#toastContainer').append($toast);
+            const $toast = $(toastHtml);
+            $('#toastContainer').append($toast);
 
-                // Tunda sedikit biar toast masuk DOM dulu
-                setTimeout(() => {
-                    const toast = new bootstrap.Toast(document.getElementById(toastId));
-                    toast.show();
+            // Tunda sedikit biar toast masuk DOM dulu
+            setTimeout(() => {
+                const toast = new bootstrap.Toast(document.getElementById(toastId));
+                toast.show();
 
-                    document.getElementById(toastId).addEventListener('hidden.bs.toast', function () {
-                        $(this).remove();
-                    });
-                }, 10);
-            }
-
+                document.getElementById(toastId).addEventListener('hidden.bs.toast', function() {
+                    $(this).remove();
+                });
+            }, 10);
+        }
     </script>
 
 </body>

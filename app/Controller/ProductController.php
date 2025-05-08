@@ -213,7 +213,7 @@ class ProductController
                 $diskon = $promoPersen;
                 $diskonNominal = ($diskon > 0) ? ($harga * ($diskon / 100)) : 0;
                 $hargaAkhir = $harga - $diskonNominal;
-                ?>
+?>
                 <div class="col-6 col-md-4 col-lg-4">
                     <div class="card shadow position-relative rounded-4 p-2 product-card"
                         data-id="<?= htmlspecialchars($product['id_product']) ?>" style="cursor:pointer;">
@@ -274,14 +274,13 @@ class ProductController
                         </div>
                     </div>
                 </div>
-                <?php
+            <?php
             }
 
             $html = ob_get_clean();
 
             header('Content-Type: application/json');
             echo json_encode(['html' => $html]);
-
         } catch (Exception $e) {
             http_response_code(500);
             echo json_encode(['error' => 'Terjadi kesalahan pada server', 'debug' => $e->getMessage()]);
@@ -430,7 +429,7 @@ class ProductController
                 $diskon = $promoPersen;
                 $diskonNominal = ($diskon > 0) ? ($harga * ($diskon / 100)) : 0;
                 $hargaAkhir = $harga - $diskonNominal;
-                ?>
+            ?>
                 <div class="col-6 col-md-4 col-lg-4">
                     <div class="card shadow position-relative rounded-4 p-2 product-card"
                         data-id="<?= htmlspecialchars($product['id_product']) ?>" style="cursor:pointer;">
@@ -501,14 +500,13 @@ class ProductController
                         </div>
                     </div>
                 </div>
-                <?php
+<?php
             }
 
             $html = ob_get_clean();
 
             header('Content-Type: application/json');
             echo json_encode(['html' => $html]);
-
         } catch (Exception $e) {
             http_response_code(500);
             echo json_encode(['error' => 'Terjadi kesalahan pada server', 'debug' => $e->getMessage()]);
@@ -526,8 +524,8 @@ class ProductController
             $hargaMin = $_POST['harga_min'] ?? null;
             $hargaMax = $_POST['harga_max'] ?? null;
             $search = isset($_POST['search']) ? $_POST['search'] : null;
-    
-    
+
+
             // Query untuk mengambil 3 produk dengan penjualan terbanyak jika filter unggulan aktif
             $bestSellerQuery = "
                 SELECT id_product
@@ -535,11 +533,11 @@ class ProductController
                 ORDER BY beli DESC
                 LIMIT 3
             ";
-    
+
             $bestSellerStmt = $this->connection->prepare($bestSellerQuery);
             $bestSellerStmt->execute();
             $topBestSellerIds = $bestSellerStmt->fetchAll(PDO::FETCH_COLUMN);
-    
+
             // Query utama untuk mengambil produk berdasarkan filter
             $query = "
                 SELECT 
@@ -559,68 +557,67 @@ class ProductController
                     ON p.id_kategori = k.id_kategori
                 WHERE 1
             ";
-    
+
             // Menyimpan parameter untuk query yang disiapkan
             $params = [];
-    
+
             // Filter berdasarkan pencarian (search)
             if ($search !== null && !empty(trim($search))) {
                 $query .= " AND p.nama_product LIKE ?";
                 $params[] = '%' . $search . '%';
             }
-    
+
             // Filter berdasarkan kategori
             if (!empty($kategoriIds)) {
                 $placeholders = implode(',', array_fill(0, count($kategoriIds), '?'));
                 $query .= " AND p.id_kategori IN ($placeholders)";
                 $params = array_merge($params, $kategoriIds);
             }
-    
+
             // Filter berdasarkan promo
             if ($filterPromo) {
                 $query .= " AND p.id_promo IS NOT NULL";
             }
-    
+
             // Filter harga minimum
             if ($hargaMin !== null && is_numeric($hargaMin)) {
                 $query .= " AND p.harga >= ?";
                 $params[] = $hargaMin;
             }
-    
+
             // Filter harga maksimum
             if ($hargaMax !== null && is_numeric($hargaMax)) {
                 $query .= " AND p.harga <= ?";
                 $params[] = $hargaMax;
             }
-    
+
             // Filter untuk produk terbaru (7 hari terakhir)
             if ($productTerbaru) {
                 $query .= " AND p.created_at >= CURDATE() - INTERVAL 7 DAY";
                 $query .= " AND (p.id_promo IS NULL OR pr.start_date > CURDATE() OR pr.end_date < CURDATE())";
             }
-    
+
             // Filter produk unggulan (best sellers)
             if ($filterUnggulan) {
                 $query .= " AND p.id_product IN (" . implode(',', $topBestSellerIds) . ")";
             }
-    
+
             // Mengurutkan produk berdasarkan tanggal dibuat
             $query .= " ORDER BY p.created_at DESC";
-    
+
             // Menjalankan query dan menyiapkan parameter
             $statement = $this->connection->prepare($query);
             $statement->execute($params);
-    
+
             // Ambil hasil query
             $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
-    
+
             // Mengembalikan hasil dalam format JSON
             echo json_encode([
                 'status' => 'success',
                 'message' => 'Data berhasil diambil',
                 'data' => $rows,
             ]);
-    
         } catch (Exception $e) {
             // Tangani kesalahan dan kembalikan respons error
             http_response_code(500);
@@ -743,10 +740,17 @@ class ProductController
 
     public function card_pesanan()
     {
+        $pesanan = $this->productServiser->getallPesanan();
+
+        // echo '<pre>';
+        // var_dump($pesanan);
+        // echo '</pre>';
+        // exit;
         $model = [
             "title" => "Product Card Pesanan",
+            "pesanan" => $pesanan,
             "content" => "Welcome to the product card pesanan page!",
         ];
-        View::render('Pesanan/contoh-pesanan', $model);
+        View::render('Pesanan/record-pesanan', $model);
     }
 }

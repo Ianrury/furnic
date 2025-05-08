@@ -461,4 +461,33 @@ ORDER BY p.created_at DESC;
 
         return $product;
     }
+
+    public function getAllPesanan()
+    {
+        $sql = "
+            SELECT 
+                p.id_pesanan,
+                p.nomor_pesanan,
+                p.qty,
+                p.payment_token,
+                p.total_harga,
+                p.tanggal_pesanan,
+                p.done_payment,
+                p.limit_payment,
+                p.status_pembayaran,
+                t.nama AS nama_toko,
+                t.alamat AS alamat_toko,
+                jp.nama AS nama_pengiriman,
+                jp.harga AS harga_pengiriman,
+                jp.diskon AS diskon_pengiriman
+            FROM pesanan p
+            LEFT JOIN toko t ON p.id_toko = t.id
+            LEFT JOIN jenis_pengiriman jp ON p.id_jenis_pengiriman = jp.id
+            ORDER BY p.tanggal_pesanan DESC
+        ";
+
+        $statement = $this->connection->prepare($sql);
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

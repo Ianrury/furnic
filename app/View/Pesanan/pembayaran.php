@@ -739,7 +739,7 @@
     <div class="payment-container">
         <div class="logo-container">
             <!-- Placeholder logo - replace with actual logo -->
-            <img src="/api/placeholder/120/60" alt="Furnice Logo" class="logo">
+            <img src="assets/img/logo/Logo%20Furnice.png" width="120" height="60" alt="Furnice Logo" class="logo">
         </div>
 
         <div class="payment-header">
@@ -804,7 +804,7 @@
                 <div class="bank-detail">
                     <div class="bank-detail-label">Bank</div>
                     <div class="bank-detail-value">
-                        <img src="/api/placeholder/60/30" alt="BCA Logo" class="bank-logo">
+                        <img src="assets/img/logo/bca.png" width="60" height="30" alt="BCA Logo" class="bank-logo">
                         BCA
                     </div>
                 </div>
@@ -949,7 +949,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script>
         // Show/hide other bank input
-        document.getElementById('bank').addEventListener('change', function () {
+        document.getElementById('bank').addEventListener('change', function() {
             const otherBankContainer = document.getElementById('otherBankContainer');
             if (this.value === 'other') {
                 otherBankContainer.style.display = 'block';
@@ -959,7 +959,7 @@
         });
 
         // File upload preview
-        document.getElementById('paymentProof').addEventListener('change', function () {
+        document.getElementById('paymentProof').addEventListener('change', function() {
             const filePreview = document.getElementById('filePreview');
             const fileName = document.getElementById('fileName');
             const fileSize = document.getElementById('fileSize');
@@ -996,7 +996,7 @@
         });
 
         // Remove file
-        document.getElementById('removeFile').addEventListener('click', function () {
+        document.getElementById('removeFile').addEventListener('click', function() {
             const fileInput = document.getElementById('paymentProof');
             fileInput.value = '';
             document.getElementById('filePreview').style.display = 'none';
@@ -1025,7 +1025,7 @@
         }
 
         // Form submission
-        document.getElementById('payment-form').addEventListener('submit', function (e) {
+        document.getElementById('payment-form').addEventListener('submit', function(e) {
             e.preventDefault();
 
             // Show loading state on button
@@ -1048,25 +1048,74 @@
             }, 2000);
         });
 
-        // Countdown Timer - using dummy data
         function initCountdown() {
-            // Dummy deadline - 24 hours from now
-            const now = new Date();
-            const deadline = new Date(now.getTime() + 24 * 60 * 60 * 1000);
-            const totalTime = deadline.getTime() - now.getTime();
+            const token = new URLSearchParams(window.location.search).get('token') || '';
 
-            updateCountdown();
+            fetch(`/get-limit-payment?token=${token}`)
+                .then(res => res.json())
+                .then(data => {
+                    if (data.status !== 'success') {
+                        document.getElementById("countdown").innerHTML = `
+                    <span class="text-danger">${data.message}</span>
+                `;
+                        return;
+                    }
 
-            // Update countdown every second
-            const countdownInterval = setInterval(updateCountdown, 1000);
+                    // Ambil deadline dari server sebagai string Jakarta
+                    const deadlineStr = data.limit_payment; // Contoh: "2025-05-06 11:21:53"
 
-            function updateCountdown() {
-                const currentTime = new Date().getTime();
-                const distance = deadline - currentTime;
+                    // Pisahkan tanggal dan waktu
+                    const deadlineJakarta = new Date(deadlineStr); // ISO format langsung bisa dipakai
 
-                if (distance <= 0) {
-                    clearInterval(countdownInterval);
-                    document.getElementById("countdown").innerHTML = `
+                    if (isNaN(deadlineJakarta.getTime())) {
+                        document.getElementById("countdown").innerHTML = `
+        <span class="text-danger">Format waktu tidak valid</span>
+    `;
+                        return;
+                    }
+
+                    // Waktu sekarang
+                    // const now = new Date();
+                    // const totalTime = deadlineJakarta.getTime() - now.getTime();
+
+
+                    // Buat objek Date sebagai waktu UTC berdasarkan waktu Jakarta
+                    // const deadlineJakarta = new Date(Date.UTC(
+                    //     parseInt(year),
+                    //     parseInt(month) - 1,
+                    //     parseInt(day),
+                    //     parseInt(hour) - 7, // Koreksi -7 jam ke UTC
+                    //     parseInt(minute),
+                    //     parseInt(second)
+                    // ));
+
+                    // Waktu sekarang
+                    const now = new Date();
+                    const totalTime = deadlineJakarta.getTime() - now.getTime();
+
+                    // Format untuk debugging
+                    const jakartaOptions = {
+                        timeZone: 'Asia/Jakarta',
+                        hour12: false
+                    };
+                    const formattedNow = now.toLocaleString('en-US', jakartaOptions);
+                    const formattedDeadline = deadlineJakarta.toLocaleString('en-US', jakartaOptions);
+
+                    console.log(`Current time (Jakarta): ${formattedNow}`);
+                    console.log(`Deadline (Jakarta): ${formattedDeadline}`);
+                    console.log(`Time remaining: ${Math.floor(totalTime / 1000 / 60 / 60)} hours, ${Math.floor((totalTime / 1000 / 60) % 60)} minutes`);
+
+                    updateCountdown();
+
+                    const countdownInterval = setInterval(updateCountdown, 1000);
+
+                    function updateCountdown() {
+                        const currentTime = new Date().getTime();
+                        const distance = deadlineJakarta.getTime() - currentTime;
+
+                        if (distance <= 0) {
+                            clearInterval(countdownInterval);
+                            document.getElementById("countdown").innerHTML = `
                         <div class="timer-unit">
                             <span class="timer-digit text-danger">00</span>
                             <span class="timer-label">Jam</span>
@@ -1082,38 +1131,71 @@
                             <span class="timer-label">Detik</span>
                         </div>
                     `;
-                    document.getElementById("progress-bar").style.width = "0%";
-                    return;
-                }
+                            document.getElementById("progress-bar").style.width = "0%";
 
-                // Calculate hours, minutes, seconds
-                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                            // Batalkan pesanan otomatis
+                            fetch(`/get-batal-pesanan?token=${token}`)
+                                .then(res => res.json())
+                                .then(result => {
+                                    alert(result.message);
+                                });
+                            return;
+                        }
 
-                // Display the countdown
-                document.getElementById("hours").textContent = String(hours).padStart(2, '0');
-                document.getElementById("minutes").textContent = String(minutes).padStart(2, '0');
-                document.getElementById("seconds").textContent = String(seconds).padStart(2, '0');
+                        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-                // Update progress bar
-                const progressPercentage = (distance / totalTime) * 100;
-                document.getElementById("progress-bar").style.width = progressPercentage + "%";
+                        document.getElementById("hours").textContent = String(hours).padStart(2, '0');
+                        document.getElementById("minutes").textContent = String(minutes).padStart(2, '0');
+                        document.getElementById("seconds").textContent = String(seconds).padStart(2, '0');
 
-                // Change color when time is running out (less than 1 hour)
-                if (distance < 3600000) {
-                    document.querySelectorAll(".timer-digit").forEach(digit => {
-                        digit.style.color = "#ef4444";
-                    });
-                }
-            }
+                        const progressPercentage = (distance / totalTime) * 100;
+                        document.getElementById("progress-bar").style.width = progressPercentage + "%";
+
+                        if (distance < 3600000) {
+                            document.querySelectorAll(".timer-digit").forEach(digit => {
+                                digit.classList.add("text-danger");
+                            });
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.error("Error fetching deadline:", error);
+                    document.getElementById("countdown").innerHTML = `
+                <span class="text-danger">Error loading countdown timer</span>
+            `;
+                });
         }
 
-        // Initialize countdown on page load
         window.addEventListener('load', initCountdown);
 
+
+        // HTML structure needed for this timer:
+        /*
+        <div id="countdown">
+            <div class="timer-unit">
+                <span id="hours" class="timer-digit">00</span>
+                <span class="timer-label">Jam</span>
+            </div>
+            <div class="timer-separator">:</div>
+            <div class="timer-unit">
+                <span id="minutes" class="timer-digit">00</span>
+                <span class="timer-label">Menit</span>
+            </div>
+            <div class="timer-separator">:</div>
+            <div class="timer-unit">
+                <span id="seconds" class="timer-digit">00</span>
+                <span class="timer-label">Detik</span>
+            </div>
+        </div>
+        <div class="progress">
+            <div id="progress-bar" class="progress-bar" role="progressbar"></div>
+        </div>
+        */
+
         // Show file preview on page load for demo purposes
-        window.addEventListener('load', function () {
+        window.addEventListener('load', function() {
             document.getElementById('filePreview').style.display = 'none';
         });
     </script>

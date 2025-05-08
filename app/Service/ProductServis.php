@@ -155,4 +155,9 @@ class ProductServis
         $product = $this->productRepository->detailProduct($id_product);
         return $product;
     }
+
+    public function getallPesanan() {
+        $product = $this->productRepository->getAllPesanan();
+        return $product;
+    }
 }

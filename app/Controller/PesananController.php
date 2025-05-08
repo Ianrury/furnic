@@ -321,14 +321,14 @@ class PesananController
             $pembayaranLink = "http://localhost:8080/pembayaran?token=" . $tokenPembayaran;
             // Simpan token ke dalam pesanan saat insert
             $stmtInsert = $this->connection->prepare("
-    INSERT INTO pesanan (
-        id_customer, id_product, id_pricelist, id_promo, qty, total_harga,
-        tanggal_pesanan, done_payment, limit_payment, status_pembayaran,
-        foto_pembayaran, id_jenis_pengiriman, id_toko, id_detail_product, id_motif_produk,
-        nomor_pesanan, payment_token
-    )
-    VALUES (?, ?, NULL, ?, ?, ?, ?, NULL, ?, 'menunggu pembayaran', NULL, ?, ?, ?, ?, ?, ?)
-");
+                INSERT INTO pesanan (
+                    id_customer, id_product, id_pricelist, id_promo, qty, total_harga,
+                    tanggal_pesanan, done_payment, limit_payment, status_pembayaran,
+                    foto_pembayaran, id_jenis_pengiriman, id_toko, id_detail_product, id_motif_produk,
+                    nomor_pesanan, payment_token
+                )
+                VALUES (?, ?, NULL, ?, ?, ?, ?, NULL, ?, 'belum bayar', NULL, ?, ?, ?, ?, ?, ?)
+            ");
             $stmtInsert->execute([
                 $id_customer,
                 $cart['id_product'],
@@ -391,185 +391,186 @@ class PesananController
 
         // Template email
         $emailTemplate = '<!DOCTYPE html>
-    <html lang="id">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Konfirmasi Pesanan</title>
-        <style>
-            body {
-                font-family: \'Segoe UI\', Tahoma, Geneva, Verdana, sans-serif;
-                line-height: 1.6;
-                color: #333;
-                background-color: #f9f9f9;
-                margin: 0;
-                padding: 0;
-            }
-            .container {
-                max-width: 600px;
-                margin: 0 auto;
-                padding: 20px;
-                background-color: #ffffff;
-                border-radius: 8px;
-                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            }
-            .header {
-                text-align: center;
-                padding: 20px 0;
-                border-bottom: 1px solid #eaeaea;
-            }
-            .logo {
-                max-width: 150px;
-                height: auto;
-            }
-            .content {
-                padding: 20px 0;
-            }
-            h1 {
-                color: #4CAF50;
-                margin-bottom: 20px;
-            }
-            h2 {
-                color: #2E7D32;
-                border-bottom: 1px solid #eaeaea;
-                padding-bottom: 10px;
-                margin-top: 30px;
-            }
-            .order-details {
-                background-color: #f9f9f9;
-                padding: 15px;
-                border-radius: 5px;
-                margin: 20px 0;
-            }
-            .product-item {
-                border-bottom: 1px dashed #eaeaea;
-                padding: 10px 0;
-                display: flex;
-                justify-content: space-between;
-            }
-            .product-item:last-child {
-                border-bottom: none;
-            }
-            .summary {
-                margin-top: 20px;
-                background-color: #e8f5e9;
-                padding: 15px;
-                border-radius: 5px;
-            }
-            .total-row {
-                display: flex;
-                justify-content: space-between;
-                padding: 8px 0;
-                font-weight: bold;
-            }
-            .total-price {
-                color: #2E7D32;
-                font-size: 20px;
-            }
-            .shipping-info {
-                margin: 20px 0;
-                padding: 15px;
-                background-color: #e3f2fd;
-                border-radius: 5px;
-            }
-            .footer {
-                text-align: center;
-                padding: 20px;
-                border-top: 1px solid #eaeaea;
-                color: #757575;
-                font-size: 14px;
-            }
-            .button {
-                display: inline-block;
-                background-color: #4CAF50;
-                color: white;
-                padding: 10px 20px;
-                text-decoration: none;
-                border-radius: 5px;
-                margin-top: 20px;
-            }
-            .contact {
-                margin-top: 20px;
-                text-align: center;
-            }
-            @media only screen and (max-width: 600px) {
-                .container {
-                    width: 100%;
-                    padding: 10px;
+        <html lang="id">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Konfirmasi Pesanan</title>
+            <style>
+                body {
+                    font-family: \'Segoe UI\', Tahoma, Geneva, Verdana, sans-serif;
+                    line-height: 1.6;
+                    color: #333;
+                    background-color: #f9f9f9;
+                    margin: 0;
+                    padding: 0;
                 }
-            }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <div class="header">
-                <h1>Konfirmasi Pesanan</h1>
-                <p>Terima kasih telah berbelanja di toko kami!</p>
-            </div>
-            
-            <div class="content">
-                <p>Halo <strong>' . htmlspecialchars($customer['nama'] ?? 'Pelanggan') . '</strong>,</p>
-                <p>Pesanan Anda telah kami terima dan sedang diproses. Berikut adalah detail pesanan Anda:</p>
-                
-                <h2>Detail Pesanan</h2>
-                <div class="order-details">
-                    <p><strong>Nomor Pesanan:</strong> ' . $nomorPesanan . '</p>
-                    <p><strong>Tanggal Pesanan:</strong> ' . date('d F Y H:i', strtotime($now)) . '</p>
-                    <p><strong>Batas Waktu Pembayaran:</strong> ' . date('d F Y H:i', strtotime($limitPayment)) . '</p>
+                .container {
+                    max-width: 600px;
+                    margin: 0 auto;
+                    padding: 20px;
+                    background-color: #ffffff;
+                    border-radius: 8px;
+                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                }
+                .header {
+                    text-align: center;
+                    padding: 20px 0;
+                    border-bottom: 1px solid #eaeaea;
+                }
+                .logo {
+                    max-width: 150px;
+                    height: auto;
+                }
+                .content {
+                    padding: 20px 0;
+                }
+                h1 {
+                    color: #4CAF50;
+                    margin-bottom: 20px;
+                }
+                h2 {
+                    color: #2E7D32;
+                    border-bottom: 1px solid #eaeaea;
+                    padding-bottom: 10px;
+                    margin-top: 30px;
+                }
+                .order-details {
+                    background-color: #f9f9f9;
+                    padding: 15px;
+                    border-radius: 5px;
+                    margin: 20px 0;
+                }
+                .product-item {
+                    border-bottom: 1px dashed #eaeaea;
+                    padding: 10px 0;
+                    display: flex;
+                    justify-content: space-between;
+                }
+                .product-item:last-child {
+                    border-bottom: none;
+                }
+                .summary {
+                    margin-top: 20px;
+                    background-color: #e8f5e9;
+                    padding: 15px;
+                    border-radius: 5px;
+                }
+                .total-row {
+                    display: flex;
+                    justify-content: space-between;
+                    padding: 8px 0;
+                    font-weight: bold;
+                }
+                .total-price {
+                    color: #2E7D32;
+                    font-size: 20px;
+                }
+                .shipping-info {
+                    margin: 20px 0;
+                    padding: 15px;
+                    background-color: #e3f2fd;
+                    border-radius: 5px;
+                }
+                .footer {
+                    text-align: center;
+                    padding: 20px;
+                    border-top: 1px solid #eaeaea;
+                    color: #757575;
+                    font-size: 14px;
+                }
+                .button {
+                    display: inline-block;
+                    background-color: #4CAF50;
+                    color: white;
+                    padding: 10px 20px;
+                    text-decoration: none;
+                    border-radius: 5px;
+                    margin-top: 20px;
+                }
+                .contact {
+                    margin-top: 20px;
+                    text-align: center;
+                }
+                @media only screen and (max-width: 600px) {
+                    .container {
+                        width: 100%;
+                        padding: 10px;
+                    }
+                }
+            </style>
+        </head>
+        <body>
+            <div class="container">
+                <div class="header">
+                    <h1>Konfirmasi Pesanan</h1>
+                    <p>Terima kasih telah berbelanja di toko kami!</p>
                 </div>
                 
-                <h2>Produk yang Dipesan</h2>
-                <div class="product-items">
-                    ' . $productItemsHtml . '
-                </div>
-                
-                <div class="shipping-info">
-                    <h2>Informasi Pengiriman</h2>
-                    <p><strong>Metode Pengiriman:</strong> ' . htmlspecialchars($nama_pengiriman) . '</p>
-                    <p><strong>Biaya Pengiriman:</strong> Rp ' . number_format($biayaPengirimanTotal + $diskonPengirimanTotal, 0, ',', '.') . '</p>
-                    ' . ($diskonPengirimanTotal > 0 ? '<p><strong>Diskon Pengiriman:</strong> Rp ' . number_format($diskonPengirimanTotal, 0, ',', '.') . '</p>' : '') . '
-                    <p><strong>Alamat Pengiriman:</strong> ' . htmlspecialchars($customer['alamat'] ?? '-') . '</p>
-                </div>
-                
-                <div class="summary">
-                    <h2>Ringkasan Pembayaran</h2>
-                    <div class="total-row">
-                        <span>Subtotal Produk:</span>
-                        <span>Rp ' . number_format($subtotalProduk + $totalDiskon, 0, ',', '.') . '</span>
+                <div class="content">
+                    <p>Halo <strong>' . htmlspecialchars($customer['nama'] ?? 'Pelanggan') . '</strong>,</p>
+                    <p>Pesanan Anda telah kami terima dan sedang diproses. Berikut adalah detail pesanan Anda:</p>
+                    
+                    <h2>Detail Pesanan</h2>
+                    <div class="order-details">
+                        <p><strong>Nomor Pesanan:</strong> ' . $nomorPesanan . '</p>
+                        <p><strong>Tanggal Pesanan:</strong> ' . date('d F Y H:i', strtotime($now)) . '</p>
+                        <p><strong>Batas Waktu Pembayaran:</strong> ' . date('d F Y H:i', strtotime($limitPayment)) . '</p>
                     </div>
-                    ' . ($totalDiskon > 0 ? '<div class="total-row">
-                        <span>Diskon Produk:</span>
-                        <span>Rp ' . number_format($totalDiskon, 0, ',', '.') . '</span>
-                    </div>' : '') . '
-                    <div class="total-row">
-                        <span>Biaya Pengiriman:</span>
-                        <span>Rp ' . number_format($biayaPengirimanTotal, 0, ',', '.') . '</span>
+                    
+                    <h2>Produk yang Dipesan</h2>
+                    <div class="product-items">
+                        ' . $productItemsHtml . '
                     </div>
-                    <div class="total-row">
-                        <span>Total Pembayaran:</span>
-                        <span class="total-price">Rp ' . number_format($totalAllOrders, 0, ',', '.') . '</span>
+                    
+                    <div class="shipping-info">
+                        <h2>Informasi Pengiriman</h2>
+                        <p><strong>Metode Pengiriman:</strong> ' . htmlspecialchars($nama_pengiriman) . '</p>
+                        <p><strong>Biaya Pengiriman:</strong> Rp ' . number_format($biayaPengirimanTotal + $diskonPengirimanTotal, 0, ',', '.') . '</p>
+                        ' . ($diskonPengirimanTotal > 0 ? '<p><strong>Diskon Pengiriman:</strong> Rp ' . number_format($diskonPengirimanTotal, 0, ',', '.') . '</p>' : '') . '
+                        <p><strong>Alamat Pengiriman:</strong> ' . htmlspecialchars($customer['alamat'] ?? '-') . '</p>
+                    </div>
+                    
+                    <div class="summary">
+                        <h2>Ringkasan Pembayaran</h2>
+                        <div class="total-row">
+                            <span>Subtotal Produk:</span>
+                            <span>Rp ' . number_format($subtotalProduk + $totalDiskon, 0, ',', '.') . '</span>
+                        </div>
+                        ' . ($totalDiskon > 0 ? '<div class="total-row">
+                            <span>Diskon Produk:</span>
+                            <span>Rp ' . number_format($totalDiskon, 0, ',', '.') . '</span>
+                        </div>' : '') . '
+                        <div class="total-row">
+                            <span>Biaya Pengiriman:</span>
+                            <span>Rp ' . number_format($biayaPengirimanTotal, 0, ',', '.') . '</span>
+                        </div>
+                        <div class="total-row">
+                            <span>Total Pembayaran:</span>
+                            <span class="total-price">Rp ' . number_format($totalAllOrders, 0, ',', '.') . '</span>
+                        </div>
+                    </div>
+          
+                    <p style="text-align: center; margin-top: 30px;">
+    <a href="' . $pembayaranLink . '" class="button">Lakukan Pembayaran</a>
+</p>
+
+                    
+                    <p>Harap melakukan pembayaran sebelum <strong>' . date('d F Y H:i', strtotime($limitPayment)) . '</strong> untuk menghindari pembatalan otomatis.</p>
+                    
+                    <div class="contact">
+                        <p>Jika Anda memiliki pertanyaan, silakan hubungi kami di:</p>
+                        <p>Email: cs@tokoanda.com | Telepon: (021) 1234-5678</p>
                     </div>
                 </div>
                 
-                <p style="text-align: center; margin-top: 30px;">
-                    <a href="' . $pembayaranLink . '" class="button">Lakukan Pembayaran</a>
-                </p>
-                
-                <p>Harap melakukan pembayaran sebelum <strong>' . date('d F Y H:i', strtotime($limitPayment)) . '</strong> untuk menghindari pembatalan otomatis.</p>
-                
-                <div class="contact">
-                    <p>Jika Anda memiliki pertanyaan, silakan hubungi kami di:</p>
-                    <p>Email: cs@tokoanda.com | Telepon: (021) 1234-5678</p>
+                <div class="footer">
+                    <p>&copy; 2025 Toko Anda. Semua hak dilindungi.</p>
+                    <p>Ini adalah email otomatis, mohon tidak membalas email ini.</p>
                 </div>
             </div>
-            
-            <div class="footer">
-                <p>&copy; 2025 Toko Anda. Semua hak dilindungi.</p>
-                <p>Ini adalah email otomatis, mohon tidak membalas email ini.</p>
-            </div>
-        </div>
-    </body>
-    </html>';
+        </body>
+        </html>';
 
         // Kirim email
         $emailTujuan = $customer['email'] ?? "ianroeri@gmail.com";
@@ -631,11 +632,12 @@ class PesananController
             return;
         }
 
-        $limitPaymentDateTime = new \DateTime($limitPayment);
+        $limitPaymentDateTime = new \DateTime($limitPayment, new \DateTimeZone('Asia/Jakarta'));
+        $limitPaymentDateTime->setTimezone(new \DateTimeZone('UTC'));
+
         echo json_encode([
             'status' => 'success',
-            'message' => 'Berhasil mendapatkan batas waktu pembayaran.',
-            'limit_payment' => $limitPaymentDateTime->format('Y-m-d H:i:s') // Kirim format jelas
+            'limit_payment' => $limitPaymentDateTime->format('c') // ISO 8601 format: 2025-05-06T04:21:53Z
         ]);
     }
 
@@ -671,5 +673,4 @@ class PesananController
 
         echo json_encode(['status' => 'success', 'message' => 'Pesanan berhasil dibatalkan']);
     }
-
 }

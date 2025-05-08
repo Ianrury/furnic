@@ -1,3 +1,9 @@
+<?php
+require_once __DIR__ . '/../../app/env.php';
+$apiBaseUrl = env('API_BASE_URL');
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -73,35 +79,35 @@
 
 
     <main class="main">
-    <div class="container-fluid login-container">
-        <div class="row">
-            <!-- Image Section (hidden on mobile) -->
-            <div class="col-md-7 image-container">
-                <img src="assets/img/login/foto-login.PNG" alt="Woman with child on sofa with laptop">
-            </div>
-            
-            <!-- Login Form Section -->
-            <div class="col-12 col-md-5 form-container">
-                <div class="wrapper">
-                    <div class="login-form">
+        <div class="container-fluid login-container">
+            <div class="row">
+                <!-- Image Section (hidden on mobile) -->
+                <div class="col-md-7 image-container">
+                    <img src="assets/img/login/foto-login.PNG" alt="Woman with child on sofa with laptop">
+                </div>
+
+                <!-- Login Form Section -->
+                <div class="col-12 col-md-5 form-container">
+                    <div class="wrapper">
+                        <div class="login-form">
                             <h3 class="login-title">MASUK</h3>
-                            
-                            <form id="loginForm"  method="post">
+
+                            <form id="loginForm" method="post">
                                 <!-- Email Field -->
-                                <div class=""  style="margin: auto 5px;">
+                                <div class="" style="margin: auto 5px;">
                                     <label for="email" class="form-label">Email <span class="required">*</span></label>
                                     <input type="email" class="form-control form-login" id="email" name="email" placeholder="Masukkan Email">
                                 </div>
-                                
+
                                 <!-- Password Field -->
-                                <div class=""  style="margin: auto 5px;">
+                                <div class="" style="margin: auto 5px;">
                                     <label for="password" class="form-label">Password</label>
                                     <input type="password" class="form-control form-login" id="password" name="password" placeholder="Masukkan Password" style="margin-bottom: 0px;">
                                 </div>
                                 <div class="d-flex justify-content-end">
                                     <p><a href="/forgot-password" style="font-size: 10px;">Lupa Kata Sandi?</a></p>
                                 </div>
-                                
+
                                 <!-- Remember Me Checkbox -->
                                 <div class="checkbox-wrapper">
                                     <div class="form-check">
@@ -109,13 +115,13 @@
                                         <label class="form-check-label text-tetap text-black" for="remember" style="font-size: 14px;">Tetap Login</label>
                                     </div>
                                 </div>
-                                
+
                                 <!-- Login Button -->
                                 <button type="submit" class="btn btn-masuk w-100">MASUK</button>
-                                
+
                                 <!-- Register Button -->
                                 <button type="button" class="btn btn-daftar w-100">
-                                <a href="/register">REGISTER</a>
+                                    <a href="/register">REGISTER</a>
                                 </button>
                                 <hr class="hr-tebal">
                                 <!-- Google Login Button -->
@@ -123,7 +129,7 @@
                                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" alt="Google logo">
                                     Continue with Google
                                 </button>
-                                
+
                                 <!-- Help Text -->
                                 <div class="help-text">
                                     Butuh bantuan? Kunjungi <a href="#" class="link">FAQ kami</a> atau <a href="#" class="link">hubungi kami</a>
@@ -133,18 +139,18 @@
                     </div>
                 </div>
             </div>
-         </div>
+        </div>
 
-         <div id="toastContainer" class="position-fixed top-0 end-0 p-3" style="z-index: 9999;">
+        <div id="toastContainer" class="position-fixed top-0 end-0 p-3" style="z-index: 9999;">
             <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
                 <div class="toast-header">
-                <img src="..." class="rounded me-2" alt="...">
-                <strong class="me-auto">Bootstrap</strong>
+                    <img src="..." class="rounded me-2" alt="...">
+                    <strong class="me-auto">Bootstrap</strong>
                     <small>11 mins ago</small>
                     <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                    </div>
+                </div>
                 <div class="toast-body">
-                Hello, world! This is a toast message.
+                    Hello, world! This is a toast message.
                 </div>
             </div>
         </div>
@@ -170,7 +176,8 @@
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        $('#loginForm').on('submit', function (e) {
+        const API_BASE_URL = "<?= $apiBaseUrl ?>";
+        $('#loginForm').on('submit', function(e) {
             e.preventDefault();
 
             // Reset error
@@ -179,19 +186,20 @@
 
 
             $.ajax({
-                url: '/login',
+                url: API_BASE_URL + '/login',
                 type: 'POST',
                 data: $(this).serialize(),
                 dataType: 'json',
-                success: function (response) {
+                success: function(response) {
                     if (response.success) {
+                        localStorage.setItem('auth_token', response.token);
                         showToast(response.message, 'success');
                         setTimeout(() => {
                             window.location.href = "/";
                         }, 2000);
                     }
                 },
-                error: function (xhr) {
+                error: function(xhr) {
                     if (xhr.status === 422) {
                         const res = JSON.parse(xhr.responseText);
                         const message = res.message;
@@ -233,12 +241,11 @@
                 const toast = new bootstrap.Toast(document.getElementById(toastId));
                 toast.show();
 
-                document.getElementById(toastId).addEventListener('hidden.bs.toast', function () {
+                document.getElementById(toastId).addEventListener('hidden.bs.toast', function() {
                     $(this).remove();
                 });
             }, 10);
         }
-
     </script>
 </body>
 

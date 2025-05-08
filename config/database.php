@@ -5,7 +5,7 @@ function getDatabaseConfig(): array
     return [
         "database" => [
             "test" => [
-                "url" => "mysql:host=localhost;dbname=php_login_test",
+                "url" => "mysql:host=localhost;dbname=php_furnic_test",
                 "username" => "root",
                 "password" => "",
             ],
