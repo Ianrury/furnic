@@ -72,6 +72,7 @@ Router::add('POST', '/pesanan', PesananController::class, 'createPesanan');
 Router::add('GET', '/pembayaran', PesananController::class, 'pembayaran');
 Router::add('GET', '/get-limit-payment', PesananController::class, 'cekWaktuPesanan');
 Router::add('GET', '/get-batal-pesanan', PesananController::class, 'batalPesanan');
+Router::add('GET', '/product/{slug}/{token}', ProductController::class, 'detailProduct');
 
 
 // Wislist Product cekWaktuPesanan

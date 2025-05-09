@@ -138,17 +138,16 @@ $apiBaseUrl = env('API_BASE_URL');
 
                     <!-- Product Details Column -->
                     <div class="col-md-5 product-details">
-                        <h1 class="text-black fw-bold mb-1" style="font-size: 25px;">
-                            <?= htmlspecialchars($model['detail']['nama_product']) ?>
+                        <h1 class="text-black fw-bold mb-1" style="font-size: 25px;" id="nama_product">
+                            
                         </h1>
-                        <p class="text-black mb-3 fw-normal" style="font-size: 14px;">
-                            <?= htmlspecialchars($model['detail']['deskripsi']) ?>
+                        <p class="text-black mb-3 fw-normal" style="font-size: 14px;" id="descripsi">
                         </p>
 
                         <div class="mb-4">
                             <p class="mb-2 fw-normal text-black" style="font-size: 14px;">Warna</p>
                             <div class="row g-2" id="warna-container">
-                                <?php
+                                <!-- <?php
                                 // Looping untuk menampilkan warna berdasarkan data 'details'
                                 foreach ($model['detail']['details'] as $index => $detail) {
                                     $warna = $detail['warna']; // Ambil warna dari detail produk
@@ -170,7 +169,7 @@ $apiBaseUrl = env('API_BASE_URL');
                                             <?= htmlspecialchars($warna) ?>
                                         </div>
                                     </div>
-                                <?php } ?>
+                                <?php } ?> -->
                             </div>
                         </div>
 
@@ -179,7 +178,7 @@ $apiBaseUrl = env('API_BASE_URL');
                         <div class="mb-4">
                             <p class="mb-2 fw-normal text-black" style="font-size: 14px;">Motif</p>
                             <div class="row g-2" id="motif-container">
-                                <?php
+                                <!-- <?php
                                 // Loop untuk menampilkan motif berdasarkan warna pertama yang aktif
                                 foreach ($model['detail']['details'][0]['motifs'] as $motif) {
                                 ?>
@@ -192,7 +191,7 @@ $apiBaseUrl = env('API_BASE_URL');
                                     </div>
                                 <?php
                                 }
-                                ?>
+                                ?> -->
                             </div>
                         </div>
 
@@ -224,7 +223,7 @@ $apiBaseUrl = env('API_BASE_URL');
                         <div class="d-flex justify-content-between align-items-center mb-4">
                             <p class="mb-0 text-black" style="font-size: 14px;">Subtotal Pembelian:</p>
                             <p class="mb-0 fw-bold text-black" style="font-size: 16px;" id="subtotal-text">
-                                Rp <?= number_format($model['detail']['harga'], 0, ',', '.') ?>
+                                <!-- Rp <?= number_format($model['detail']['harga'], 0, ',', '.') ?> -->
                             </p>
                         </div>
 
@@ -254,7 +253,7 @@ $apiBaseUrl = env('API_BASE_URL');
         </div>
 
         <!-- detail Product -->
-        <div class="product-area product-area-new ">
+        <div class="product-area product-area-new">
             <div class="container">
                 <div class="row">
                     <div class="col-12 wow fadeInDown mb-0" data-wow-delay=".25s">
@@ -267,8 +266,7 @@ $apiBaseUrl = env('API_BASE_URL');
                     <div style="background-color: #f5f6fa; height: 170px" class="rounded-3">
                         <ul class="d-flex mb-0 ms-3 pt-3" style="list-style: none; padding-left: 0; gap: 20px;">
                             <li class="nav-item">
-                                <div class="custom-nav-link-descripsi active" data-tab="spesifikasi">Spesifikasi Product
-                                </div>
+                                <div class="custom-nav-link-descripsi active" data-tab="spesifikasi">Spesifikasi Product</div>
                             </li>
                             <li class="nav-item">
                                 <div class="custom-nav-link-descripsi" data-tab="informasi">Informasi Product</div>
@@ -276,40 +274,14 @@ $apiBaseUrl = env('API_BASE_URL');
                         </ul>
 
                         <div class="tab-content-scroll me-3">
+                            <!-- Specifications tab -->
                             <div id="spesifikasi" class="tab-pane active">
-                                <?php
-                                // Misalnya, $model['detail']['spesifikasi'] berisi JSON
-                                $spesifikasi = json_decode($model['detail']['spesifikasi'], true);
-
-                                foreach ($spesifikasi as $key => $value) {
-                                    echo '<div class="spec-item">';
-                                    echo '<span class="label">' . htmlspecialchars($key) . '</span>';
-                                    echo '<span class="value">: ' . htmlspecialchars($value) . '</span>';
-                                    echo '</div>';
-                                }
-                                ?>
-
-
-                                <!-- <div class="spec-item">
-                                    <span class="label">Material</span>
-                                    <span class="value">: Polypropylene, Metal</span>
-                                </div>
-                                <div class="spec-item">
-                                    <span class="label">Dimensi</span>
-                                    <span class="value">: 40×36×51cm</span>
-                                </div>
-                                <div class="spec-item">
-                                    <span class="label">Tinggi Kursi</span>
-                                    <span class="value">: 35cm</span>
-                                </div>
-                                <div class="spec-item">
-                                    <span class="label">Warna</span>
-                                    <span class="value">: Red & Yellow</span>
-                                </div> -->
+                                <!-- Content will be populated dynamically by JavaScript -->
                             </div>
 
+                            <!-- Information tab -->
                             <div id="informasi" class="tab-pane">
-                                <p><?= htmlspecialchars($model['detail']['informasi_product']) ?></p>
+                                <!-- Content will be populated dynamically by JavaScript -->
                             </div>
                         </div>
                     </div>
@@ -837,7 +809,7 @@ $apiBaseUrl = env('API_BASE_URL');
                 <div class="tab-content wow fadeInUp" data-wow-delay=".25s" id="item-tabContent">
                     <div class="container">
                         <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4  justify-content-center" id="expensif">
-                    
+
                         </div>
                     </div>
                 </div>
@@ -857,7 +829,7 @@ $apiBaseUrl = env('API_BASE_URL');
                 <div class="tab-content wow fadeInUp" data-wow-delay=".25s" id="item-tabContent">
                     <div class="container">
                         <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4 justify-content-center" id="bestseller">
-                          
+
                         </div>
                     </div>
 
@@ -913,7 +885,7 @@ $apiBaseUrl = env('API_BASE_URL');
     <script src="assets/js/countdown.min.js"></script>
     <script src="assets/js/wow.min.js"></script>
     <script src="assets/js/main.js"></script>
-    <!-- jQuery --> 
+    <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         const API_BASE_URL = "<?= $apiBaseUrl ?>";
@@ -1037,7 +1009,7 @@ $apiBaseUrl = env('API_BASE_URL');
         });
     </script>
 
-<script>
+    <script>
         document.addEventListener("DOMContentLoaded", function() {
             fetch(`${API_BASE_URL}/product-bestseller`)
                 .then(response => response.json())
@@ -1233,9 +1205,122 @@ $apiBaseUrl = env('API_BASE_URL');
     </script>
 
     <script>
-        let currentHarga = <?= $model['detail']['harga'] ?>;
-        let maxQty = 0;
-        let currentMotif = null; // ⬅️ tambahan: motif aktif sekarang
+        // Definisikan global variabel yang akan menyimpan data model
+        let $model = {
+            detail: {
+                harga: 0,
+                details: []
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // 1. Ambil path dari URL saat ini
+            const currentPath = window.location.pathname;
+            console.log('Current path:', currentPath);
+
+            // 2. Pecah berdasarkan '/'
+            const parts = currentPath.split('/');
+
+            // 3. Ambil slug dan token
+            // Contoh hasil parts = ["", "product", "safi-bar-chair-coffee-2", "0fa31a6936977be1c123aa57bccaf582"]
+            const slug = parts[2];
+            const token = parts[3];
+
+            console.log('Slug:', slug);
+            console.log('Token:', token);
+
+            // Tampilkan loading message
+            const errorMessageElement = document.getElementById('error-message');
+            if (errorMessageElement) {
+                errorMessageElement.textContent = 'Loading product data...';
+                errorMessageElement.classList.remove('d-none');
+                errorMessageElement.classList.remove('alert-danger');
+                errorMessageElement.classList.add('alert-info');
+            }
+
+            if (slug && token) {
+                // 4. Gunakan dalam fetch API
+                fetch(`${API_BASE_URL}/product/${slug}/${token}`)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok: ' + response.statusText);
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        if (data.status === 'success') {
+                            console.log('Produk detail:', data.data);
+
+                            // Simpan data ke model global
+                            $model.detail = data.data;
+
+                            // Sembunyikan pesan loading
+                            if (errorMessageElement) {
+                                errorMessageElement.classList.add('d-none');
+                            }
+
+                            // Inisialisasi UI dengan data yang sudah diambil
+                            initProductUI();
+                        } else {
+                            console.error(data.message);
+                            if (errorMessageElement) {
+                                errorMessageElement.textContent = data.message || 'Terjadi kesalahan saat memuat produk';
+                                errorMessageElement.classList.remove('alert-info');
+                                errorMessageElement.classList.add('alert-danger');
+                                errorMessageElement.classList.remove('d-none');
+                            }
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Terjadi kesalahan:', error);
+                        if (errorMessageElement) {
+                            errorMessageElement.textContent = 'Terjadi kesalahan saat memuat produk: ' + error.message;
+                            errorMessageElement.classList.remove('alert-info');
+                            errorMessageElement.classList.add('alert-danger');
+                            errorMessageElement.classList.remove('d-none');
+                        }
+                    });
+            } else {
+                console.error('Slug atau token tidak ditemukan di URL');
+                if (errorMessageElement) {
+                    errorMessageElement.textContent = 'URL produk tidak valid';
+                    errorMessageElement.classList.remove('alert-info');
+                    errorMessageElement.classList.add('alert-danger');
+                    errorMessageElement.classList.remove('d-none');
+                }
+            }
+        });
+
+        // Fungsi untuk menginisialisasi UI setelah data diambil
+        function initProductUI() {
+            let currentHarga = $model.detail.harga;
+            let maxQty = 0;
+            let currentMotif = null; // ⬅️ tambahan: motif aktif sekarang
+
+            // Update judul dan harga produk
+            const titleElement = document.getElementById('product-title');
+            if (titleElement) {
+                titleElement.textContent = $model.detail.nama || 'Product Name';
+            }
+
+            const priceElement = document.getElementById('product-price');
+            if (priceElement) {
+                priceElement.textContent = formatRupiah(currentHarga);
+            }
+
+            // Inisialisasi warna jika ada
+            if ($model.detail.details && $model.detail.details.length > 0) {
+                // Cari warna pertama yang memiliki stok
+                for (let i = 0; i < $model.detail.details.length; i++) {
+                    let hasStock = $model.detail.details[i].motifs &&
+                        $model.detail.details[i].motifs.some(motif => motif.qty > 0);
+                    if (hasStock) {
+                        setActiveWarna(i);
+                        break;
+                    }
+                }
+            }
+        }
 
         function formatRupiah(number) {
             return new Intl.NumberFormat('id-ID', {
@@ -1246,45 +1331,72 @@ $apiBaseUrl = env('API_BASE_URL');
         }
 
         function setActiveWarna(index) {
-            document.querySelectorAll('.color-option').forEach(e => e.classList.remove('active'));
-            document.querySelectorAll('.color-option')[index].classList.add('active');
+            const colorOptions = document.querySelectorAll('.color-option');
+            colorOptions.forEach(e => e.classList.remove('active'));
 
-            document.getElementById('jumlah-beli').innerText = '1';
+            if (index < colorOptions.length) {
+                colorOptions[index].classList.add('active');
+            }
 
-            let details = <?= json_encode($model['detail']['details']) ?>;
-            let selectedDetail = details[index];
-            document.getElementById('id_detail_product').value = selectedDetail.id_detail_product; // ← update ID detail
+            const jumlahBeli = document.getElementById('jumlah-beli');
+            if (jumlahBeli) {
+                jumlahBeli.innerText = '1';
+            }
+
+            let selectedDetail = $model.detail.details[index];
+
+            const idDetailProduct = document.getElementById('id_detail_product');
+            if (idDetailProduct && selectedDetail) {
+                idDetailProduct.value = selectedDetail.id_detail_product; // ← update ID detail
+            }
 
             updateMotifs(index);
             updateSubtotal();
         }
 
-
         function updateMotifs(index) {
-            let motifContainer = document.getElementById('motif-container');
+            const motifContainer = document.getElementById('motif-container');
+            if (!motifContainer) {
+                console.error('Element motif-container tidak ditemukan');
+                return;
+            }
+
             motifContainer.innerHTML = '';
 
-            let details = <?= json_encode($model['detail']['details']) ?>;
-            let selectedDetail = details[index];
+            if (!$model.detail.details || !$model.detail.details[index]) {
+                console.error('Detail produk tidak ditemukan untuk index', index);
+                return;
+            }
+
+            let selectedDetail = $model.detail.details[index];
+
+            if (!selectedDetail.motifs) {
+                console.error('Motifs tidak ditemukan untuk detail dengan index', index);
+                return;
+            }
 
             let totalQty = 0;
-            selectedDetail['motifs'].forEach(motif => totalQty += motif.qty);
+            selectedDetail.motifs.forEach(motif => totalQty += motif.qty);
             maxQty = totalQty;
-            document.getElementById('stock').innerHTML = `Tersedia <span class="text-black">${totalQty}</span> pcs`;
+
+            const stockElement = document.getElementById('stock');
+            if (stockElement) {
+                stockElement.innerHTML = `Tersedia <span class="text-black">${totalQty}</span> pcs`;
+            }
 
             let firstPolosElement = null;
             let firstAvailableMotif = null;
 
-            selectedDetail['motifs'].forEach(motif => {
+            selectedDetail.motifs.forEach(motif => {
                 let div = document.createElement('div');
                 div.classList.add('col-3');
                 div.innerHTML = `
-            <div class="color-option motif-option" 
-                data-motif='${JSON.stringify(motif)}'
-                data-qty="${motif.qty}" 
-                onclick="setActiveMotif(this)">
-                ${motif.motif}
-            </div>`;
+        <div class="color-option motif-option" 
+            data-motif='${JSON.stringify(motif)}'
+            data-qty="${motif.qty}" 
+            onclick="setActiveMotif(this)">
+            ${motif.motif}
+        </div>`;
                 motifContainer.appendChild(div);
 
                 if (motif.motif.toLowerCase() === 'polos') {
@@ -1295,14 +1407,16 @@ $apiBaseUrl = env('API_BASE_URL');
                 }
             });
 
+            const btnTambah = document.getElementById('btn-tambah');
+
             if (firstPolosElement) {
                 setActiveMotif(firstPolosElement);
-                document.getElementById('btn-tambah').disabled = false;
+                if (btnTambah) btnTambah.disabled = false;
             } else if (firstAvailableMotif) {
                 setActiveMotif(firstAvailableMotif);
-                document.getElementById('btn-tambah').disabled = false;
+                if (btnTambah) btnTambah.disabled = false;
             } else {
-                document.getElementById('btn-tambah').disabled = true;
+                if (btnTambah) btnTambah.disabled = true;
             }
         }
 
@@ -1312,20 +1426,33 @@ $apiBaseUrl = env('API_BASE_URL');
 
             let motifData = JSON.parse(element.getAttribute('data-motif'));
             currentMotif = motifData;
-            document.getElementById('id_motif_produk').value = motifData.id_motif_produk; // ← update ID motif
+
+            const idMotifProduk = document.getElementById('id_motif_produk');
+            if (idMotifProduk) {
+                idMotifProduk.value = motifData.id_motif_produk; // ← update ID motif
+            }
 
             let qty = parseInt(element.getAttribute('data-qty'));
             maxQty = qty;
-            document.getElementById('stock').innerHTML = `Tersedia <span class="text-black">${qty}</span> pcs`;
 
-            document.getElementById('jumlah-beli').innerText = '1';
+            const stockElement = document.getElementById('stock');
+            if (stockElement) {
+                stockElement.innerHTML = `Tersedia <span class="text-black">${qty}</span> pcs`;
+            }
+
+            const jumlahBeli = document.getElementById('jumlah-beli');
+            if (jumlahBeli) {
+                jumlahBeli.innerText = '1';
+            }
+
             updateSubtotal();
             updateMainAndThumbnailImage();
         }
 
-
         function changeQty(change) {
-            let jumlahElem = document.getElementById('jumlah-beli');
+            const jumlahElem = document.getElementById('jumlah-beli');
+            if (!jumlahElem) return;
+
             let currentQty = parseInt(jumlahElem.innerText);
             let newQty = currentQty + change;
 
@@ -1333,66 +1460,193 @@ $apiBaseUrl = env('API_BASE_URL');
             if (newQty > maxQty) return;
 
             jumlahElem.innerText = newQty;
+
+            // Update hidden input for form submission
+            const quantityInput = document.getElementById('quantity');
+            if (quantityInput) {
+                quantityInput.value = newQty;
+            }
+
             updateSubtotal();
         }
 
         function updateSubtotal() {
-            let qty = parseInt(document.getElementById('jumlah-beli').innerText);
-            let subtotal = qty * currentHarga;
-            document.getElementById('subtotal-text').innerText = formatRupiah(subtotal);
+            const jumlahBeli = document.getElementById('jumlah-beli');
+            const subtotalText = document.getElementById('subtotal-text');
+
+            if (!jumlahBeli || !subtotalText) return;
+
+            let qty = parseInt(jumlahBeli.innerText);
+            let subtotal = qty * $model.detail.harga;
+            subtotalText.innerText = formatRupiah(subtotal);
         }
 
         function updateMainAndThumbnailImage() {
             if (!currentMotif) return;
 
             // Update gambar utama
-            document.getElementById('main-product-image').src = "assets/img/product/" + currentMotif.foto_kanan;
+            const mainProductImage = document.getElementById('main-product-image');
+            if (mainProductImage) {
+                mainProductImage.src = currentMotif.url_foto_kanan;
+            }
 
             // Update thumbnails
-            let thumbnailContainer = document.getElementById('thumbnail-container');
+            const thumbnailContainer = document.getElementById('thumbnail-container');
+            if (!thumbnailContainer) return;
+
             thumbnailContainer.innerHTML = `
             <div class="col-3">
                 <div class="thumbnail active p-1">
-                    <img src="assets/img/product/${currentMotif.foto_kanan}" alt="Thumbnail Kanan" class="img-fluid" width="100" height="100" onclick="changeMainImage('${currentMotif.foto_kanan}')">
+                    <img src="${currentMotif.url_foto_kanan}" alt="Thumbnail Kanan" class="img-fluid" width="100" height="100" onclick="changeMainImage('${currentMotif.url_foto_kanan}')">
                 </div>
             </div>
             <div class="col-3">
                 <div class="thumbnail p-1">
-                    <img src="assets/img/product/${currentMotif.foto_kiri}" alt="Thumbnail Kiri" class="img-fluid" width="100" height="100" onclick="changeMainImage('${currentMotif.foto_kiri}')">
+                    <img src="${currentMotif.url_foto_kiri}" alt="Thumbnail Kiri" class="img-fluid" width="100" height="100" onclick="changeMainImage('${currentMotif.url_foto_kiri}')">
                 </div>
             </div>
             <div class="col-3">
                 <div class="thumbnail p-1">
-                    <img src="assets/img/product/${currentMotif.foto_depan}" alt="Thumbnail Depan" class="img-fluid" width="100" height="100" onclick="changeMainImage('${currentMotif.foto_depan}')">
+                    <img src="${currentMotif.url_foto_depan}" alt="Thumbnail Depan" class="img-fluid" width="100" height="100" onclick="changeMainImage('${currentMotif.url_foto_depan}')">
                 </div>
             </div>
             <div class="col-3">
                 <div class="thumbnail p-1">
-                    <img src="assets/img/product/${currentMotif.foto_belakang}" alt="Thumbnail Belakang" class="img-fluid" width="100" height="100" onclick="changeMainImage('${currentMotif.foto_belakang}')">
+                    <img src="${currentMotif.url_foto_belakang}" alt="Thumbnail Belakang" class="img-fluid" width="100" height="100" onclick="changeMainImage('${currentMotif.url_foto_belakang}')">
                 </div>
             </div>
-        `;
+            `;
         }
 
         function changeMainImage(filename) {
-            document.getElementById('main-product-image').src = "assets/img/product/" + filename;
+            const mainProductImage = document.getElementById('main-product-image');
+            if (!mainProductImage) return;
+
+            mainProductImage.src = filename;
+
             document.querySelectorAll('.thumbnail').forEach(e => e.classList.remove('active'));
             event.target.parentElement.classList.add('active');
         }
+        // Function to initialize the product detail tabs
+        function initProductDetailTabs() {
+            // Add listeners to tab navigation
+            document.querySelectorAll('.custom-nav-link-descripsi').forEach(tabLink => {
+                tabLink.addEventListener('click', function() {
+                    // Remove active class from all tabs
+                    document.querySelectorAll('.custom-nav-link-descripsi').forEach(tab => {
+                        tab.classList.remove('active');
+                    });
 
-        document.addEventListener('DOMContentLoaded', function() {
-            let details = <?= json_encode($model['detail']['details']) ?>;
+                    // Hide all tab panes
+                    document.querySelectorAll('.tab-pane').forEach(pane => {
+                        pane.classList.remove('active');
+                    });
 
-            for (let i = 0; i < details.length; i++) {
-                let hasStock = details[i].motifs.some(motif => motif.qty > 0);
-                if (hasStock) {
-                    setActiveWarna(i);
-                    break;
-                }
+                    // Add active class to clicked tab
+                    this.classList.add('active');
+
+                    // Show the corresponding tab content
+                    const tabId = this.getAttribute('data-tab');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+        }
+
+        // Function to update product details section with AJAX data
+        function updateProductDetails() {
+            if (!$model.detail) {
+                console.error('Product detail data not available');
+                return;
             }
-        });
-    </script>
 
+            // Update product name
+            const nameElement = document.getElementById('nama_product');
+            if (nameElement) {
+                nameElement.textContent = $model.detail.nama_product || $model.detail.nama || 'Product Name';
+            }
+
+            // Update product description
+            const descElement = document.getElementById('descripsi');
+            if (descElement) {
+                descElement.textContent = $model.detail.deskripsi || '';
+            }
+
+            // Update product specifications tab
+            updateSpecifications();
+
+            // Update product information tab
+            updateProductInformation();
+
+            // Initialize tab functionality
+            initProductDetailTabs();
+        }
+
+        // Function to update specifications tab
+        function updateSpecifications() {
+            const specTab = document.getElementById('spesifikasi');
+            if (!specTab) return;
+
+            specTab.innerHTML = '';
+
+            if ($model.detail.spesifikasi) {
+                let specifications;
+
+                // Check if spesifikasi is a string (JSON) or already an object
+                if (typeof $model.detail.spesifikasi === 'string') {
+                    try {
+                        specifications = JSON.parse($model.detail.spesifikasi);
+                    } catch (e) {
+                        console.error('Failed to parse specifications:', e);
+                        specifications = {};
+                    }
+                } else {
+                    specifications = $model.detail.spesifikasi;
+                }
+
+                // Create specification items
+                for (const [key, value] of Object.entries(specifications)) {
+                    const specItem = document.createElement('div');
+                    specItem.className = 'spec-item';
+
+                    const labelSpan = document.createElement('span');
+                    labelSpan.className = 'label';
+                    labelSpan.textContent = key;
+
+                    const valueSpan = document.createElement('span');
+                    valueSpan.className = 'value';
+                    valueSpan.textContent = ': ' + value;
+
+                    specItem.appendChild(labelSpan);
+                    specItem.appendChild(valueSpan);
+                    specTab.appendChild(specItem);
+                }
+            } else {
+                specTab.innerHTML = '<p>No specifications available</p>';
+            }
+        }
+
+        // Function to update product information tab
+        function updateProductInformation() {
+            const infoTab = document.getElementById('informasi');
+            if (!infoTab) return;
+
+            if ($model.detail.informasi_product) {
+                infoTab.innerHTML = `<p>${$model.detail.informasi_product}</p>`;
+            } else {
+                infoTab.innerHTML = '<p>No additional information available</p>';
+            }
+        }
+
+        // Update the initProductUI function to include product details update
+        const originalInitProductUI = initProductUI;
+        initProductUI = function() {
+            // Call the original initialization function
+            originalInitProductUI();
+
+            // Also update the product details section
+            updateProductDetails();
+        };
+    </script>
     <script>
         document.getElementById('wishlistBtn').addEventListener('click', function() {
             var productId = document.getElementById('id_product').value;
