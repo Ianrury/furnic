@@ -123,7 +123,11 @@ $apiBaseUrl = env('API_BASE_URL');
                                 </div>
 
 
-                                <button type="submit" class="btn btn-masuk mt-2 w-100">DAFTAR</button>
+                                <button type="submit" class="btn btn-masuk mt-2 w-100" id="btnSubmit">
+                                    <span class="spinner-border spinner-border-sm me-2 d-none" role="status" aria-hidden="true" id="btnSpinner"></span>
+                                    DAFTAR
+                                </button>
+
                                 <!-- Register Button -->
                                 <button type="button" class="btn btn-daftar w-100">
                                     <a href="/login">MASUK</a>
@@ -194,13 +198,20 @@ $apiBaseUrl = env('API_BASE_URL');
             $('.invalid-feedback').text('');
             $('.form-control').removeClass('is-invalid');
 
-            // Cek password dan konfirmasi sama
+            // Disable tombol dan tampilkan spinner
+            $('#btnSubmit').attr('disabled', true);
+            $('#btnSpinner').removeClass('d-none');
+
             const password = $('#password').val();
             const confirm = $('#password_confirmation').val();
 
             if (password !== confirm) {
                 $('#password_confirmation').addClass('is-invalid');
                 $('#error-password_confirmation').text('Password tidak sama');
+
+                // Kembalikan tombol
+                $('#btnSubmit').attr('disabled', false);
+                $('#btnSpinner').addClass('d-none');
                 return;
             }
 
@@ -215,17 +226,16 @@ $apiBaseUrl = env('API_BASE_URL');
                     if (response.success) {
                         showToast(response.message, 'success');
 
-                        // Reset form
                         $('#formRegister')[0].reset();
                         $('.form-control').removeClass('is-invalid');
 
-                        // Redirect ke /login
                         setTimeout(() => {
                             window.location.href = "/login";
                         }, 2000);
                     } else {
-                        // Handle jika success = false
                         showToast(response.message || 'Terjadi kesalahan.', 'danger');
+                        $('#btnSubmit').attr('disabled', false);
+                        $('#btnSpinner').addClass('d-none');
                     }
                 },
                 error: function(xhr) {
@@ -235,7 +245,6 @@ $apiBaseUrl = env('API_BASE_URL');
                         const res = xhr.responseJSON || JSON.parse(xhr.responseText);
                         const message = res.message || 'Validasi gagal.';
 
-                        // Deteksi input error berdasarkan pesan
                         if (message.toLowerCase().includes('email')) {
                             $('#email').addClass('is-invalid');
                             $('#error-email').text(message);
@@ -255,9 +264,14 @@ $apiBaseUrl = env('API_BASE_URL');
                         const errorMessage = xhr.responseJSON?.message || 'Terjadi kesalahan server. Silakan coba lagi.';
                         showToast(errorMessage, 'danger');
                     }
+
+                    // Kembalikan tombol
+                    $('#btnSubmit').attr('disabled', false);
+                    $('#btnSpinner').addClass('d-none');
                 }
             });
         });
+
 
 
         // === TOAST FUNCTION ===

@@ -87,7 +87,6 @@ class ProductRepository
                 p.spesifikasi,
                 p.tipe_product,
                 dp.id AS id_detail_product,
-                dp.id_sku,
                 dp.warna,
                 mp.id AS id_motif_produk,
                 mp.motif,
@@ -135,7 +134,7 @@ class ProductRepository
                 if (!isset($details[$id_detail_product])) {
                     $details[$id_detail_product] = [
                         'id_detail_product' => $id_detail_product,
-                        'id_sku' => $row['id_sku'],
+                        // 'id_sku' => $row['id_sku'],
                         'warna' => $row['warna'],
                         'motifs' => [] // Array untuk menyimpan motif terkait
                     ];

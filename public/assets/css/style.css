@@ -9150,23 +9150,135 @@ label {
   color: #000;
 }
 
+/* CSS for category-pilihan with bottom line indicators */
+.category-pilihan {
+  position: relative;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  width: 100%;
+  padding: 5px 0;
+  margin-bottom: 10px;
+  
+  /* Hide scrollbar completely while maintaining functionality */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.category-pilihan::-webkit-scrollbar {
+  display: none;
+}
+
+#category-list {
+  display: inline-flex;
+  flex-wrap: nowrap;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#category-list li {
+  flex: 0 0 auto;
+  margin-right: 16px;
+}
+
+#category-list li:last-child {
+  margin-right: 0;
+}
+
+#category-list a {
+  padding: 8px 4px;
+  white-space: nowrap;
+  text-decoration: none;
+  color: #333;
+  position: relative;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+/* Bottom line indicator for hover and active states */
+#category-list a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #0d6efd;
+  transition: width 0.3s ease;
+}
+
+#category-list a:hover::after,
+#category-list a.active::after {
+  width: 100%;
+}
+
+#category-list a:hover {
+  color: #0d6efd;
+}
+
+#category-list a.active {
+  color: #0d6efd;
+  font-weight: 600;
+}
+
+/* Gradient indicators for scroll ability */
+.category-pilihan::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 30px;
+  background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,0.9));
+  pointer-events: none;
+}
+
+.category-pilihan::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 30px;
+  background: linear-gradient(to left, rgba(255,255,255,0), rgba(255,255,255,0.9));
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+/* Show left gradient only when scrolled */
+.category-pilihan.scrolled-right::before {
+  opacity: 1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  #category-list li {
+      margin-right: 12px;
+  }
+  
+  #category-list a {
+      font-size: 14px;
+  }
+}
+
+@media (max-width: 576px) {
+  #category-list li {
+      margin-right: 10px;
+  }
+  
+  #category-list a {
+      font-size: 13px;
+      padding: 6px 2px;
+  }
+}
+
 /* Responsive - Desktop */
 @media (max-width: 2000px) {
-  .custom-nav-link-product {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 14px;
-    padding: 13px 0;
-    color: #000;
-    /* default warna hitam */
-    text-decoration: none;
-    width: 90px;
-    height: 2px;
-    margin: 0 !important;
-    transition: color 0.3s ease;
-  }
+
 
   /* Saat aktif: tulisan jadi biru & garis bawah muncul */
   .custom-nav-link-product.active {
@@ -9193,7 +9305,7 @@ label {
   .custom-nav-link-product.active::after {
     content: "";
     position: absolute;
-    width: 120px;
+    /* width: 120px; */
     height: 2px;
     background-color: #5c86b8;
     bottom: 0;
@@ -9205,7 +9317,7 @@ label {
   .custom-nav-link-product:not(.active)::after {
     content: "";
     position: absolute;
-    width: 120px;
+    /* width: 120px; */
     height: 2px;
     background-color: #5c86b8;
     bottom: 0;
@@ -9459,21 +9571,7 @@ label {
     margin-left: 5px;
   }
 
-  .custom-nav-link-product {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 12px;
-    padding: 13px 0;
-    color: #000;
-    /* default warna hitam */
-    text-decoration: none;
-    /* width: 55px; */
-    height: 2px;
-    margin: 0 !important;
-    transition: color 0.3s ease;
-  }
+  
 
   /* Saat aktif: tulisan jadi biru & garis bawah muncul */
   .custom-nav-link-product.active {
@@ -9486,7 +9584,7 @@ label {
   .custom-nav-link-product.active::after {
     content: "";
     position: absolute;
-    width: 55px;
+    /* width: 55px; */
     height: 2px;
     background-color: #5c86b8;
     bottom: 0;
@@ -9498,7 +9596,7 @@ label {
   .custom-nav-link-product:not(.active)::after {
     content: "";
     position: absolute;
-    width: 50px;
+    /* width: 50px; */
     height: 2px;
     background-color: #5c86b8;
     bottom: 0;

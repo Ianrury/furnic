@@ -40,67 +40,63 @@ class KeranjangController
     {
 
         // query mendapatkan produk yang ada di keranjang untuk user ini
-        $sessionId = $_COOKIE[self::$COOKIE_NAME] ?? null;
+//         $sessionId = $_COOKIE[self::$COOKIE_NAME] ?? null;
 
-        $expensif = $this->productServiser->GetProductExpensif();
-        if (!$sessionId) {
-            echo json_encode(['status' => 'error', 'message' => 'Silakan login terlebih dahulu']);
-            return;
-        }
+//         $expensif = $this->productServiser->GetProductExpensif();
 
-        $statement = $this->connection->prepare("SELECT id_user FROM session WHERE id_session = ? LIMIT 1");
-        $statement->execute([$sessionId]);
-        $session = $statement->fetch(\PDO::FETCH_ASSOC);
-        if (!$session || !isset($session['id_user'])) {
-            echo json_encode(['status' => 'error', 'message' => 'Sesi tidak valid, silakan login ulang']);
-            return;
-        }
-        $id_customer = $session['id_user'];
+//         $statement = $this->connection->prepare("SELECT id_user FROM session WHERE id_session = ? LIMIT 1");
+//         $statement->execute([$sessionId]);
+//         $session = $statement->fetch(\PDO::FETCH_ASSOC);
+//         if (!$session || !isset($session['id_user'])) {
+//             echo json_encode(['status' => 'error', 'message' => 'Sesi tidak valid, silakan login ulang']);
+//             return;
+//         }
+//         $id_customer = $session['id_user'];
 
-        $statement = $this->connection->prepare("
-    SELECT 
-        cart.id_cart,
-        cart.qty AS qty_cart,
-        cart.id_detail_product,
-        cart.id_motif_produk,
+//         $statement = $this->connection->prepare("
+//     SELECT 
+//         cart.id_cart,
+//         cart.qty AS qty_cart,
+//         cart.id_detail_product,
+//         cart.id_motif_produk,
         
-        detail_product.warna,
-        motif_produk.motif,
-        motif_produk.qty AS qty_motif,
+//         detail_product.warna,
+//         motif_produk.motif,
+//         motif_produk.qty AS qty_motif,
 
-        product.id_product,
-        product.nama_product,
-        product.deskripsi,
-        product.harga,
+//         product.id_product,
+//         product.nama_product,
+//         product.deskripsi,
+//         product.harga,
         
-        -- Jika promo aktif, gunakan promo.total_promo sebagai diskon, kalau tidak, 0
-        CASE 
-            WHEN promo.id_promo IS NOT NULL 
-                THEN promo.total_promo 
-            ELSE 0 
-        END AS diskon,
+//         -- Jika promo aktif, gunakan promo.total_promo sebagai diskon, kalau tidak, 0
+//         CASE 
+//             WHEN promo.id_promo IS NOT NULL 
+//                 THEN promo.total_promo 
+//             ELSE 0 
+//         END AS diskon,
         
-        product.spesifikasi,
-        product.foto,
-        product.qty AS stok,
-        product.uom,
-        product.nama_vendor
+//         product.spesifikasi,
+//         product.foto,
+//         product.qty AS stok,
+//         product.uom,
+//         product.nama_vendor
 
-    FROM cart
-    INNER JOIN product ON cart.id_product = product.id_product
-    LEFT JOIN promo ON product.id_promo = promo.id_promo 
-        AND promo.start_date <= CURDATE() 
-        AND promo.end_date >= CURDATE()
-    LEFT JOIN detail_product ON cart.id_detail_product = detail_product.id
-    LEFT JOIN motif_produk ON cart.id_motif_produk = motif_produk.id
-    WHERE cart.id_customer = ?
-");
-
-
+//     FROM cart
+//     INNER JOIN product ON cart.id_product = product.id_product
+//     LEFT JOIN promo ON product.id_promo = promo.id_promo 
+//         AND promo.start_date <= CURDATE() 
+//         AND promo.end_date >= CURDATE()
+//     LEFT JOIN detail_product ON cart.id_detail_product = detail_product.id
+//     LEFT JOIN motif_produk ON cart.id_motif_produk = motif_produk.id
+//     WHERE cart.id_customer = ?
+// ");
 
 
-        $statement->execute([$id_customer]);
-        $productsInCart = $statement->fetchAll(\PDO::FETCH_ASSOC);
+
+
+//         $statement->execute([$id_customer]);
+//         $productsInCart = $statement->fetchAll(\PDO::FETCH_ASSOC);
 
 
         // mecari isi 
@@ -112,8 +108,8 @@ class KeranjangController
 
         $model = [
             "title" => "Keranjang",
-            "expensif" => $expensif,
-            "data" => $productsInCart,
+            // "expensif" => $expensif,
+            // "data" => $productsInCart,
             "content" => "Welcome to the keranjang page!",
         ];
         View::render('Keranjang/index', $model);

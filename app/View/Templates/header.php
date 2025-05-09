@@ -12,6 +12,10 @@ function is_active($route)
     // Untuk selain '/', cocokkan awal URL
     return strpos($current_path, $target_path) === 0 ? 'active' : '';
 }
+
+// require_once __DIR__ . '/../../app/env.php';
+// $apiBaseUrl = env('API_BASE_URL');
+
 ?>
 
 
@@ -122,13 +126,14 @@ function is_active($route)
                                 </li>
 
                                 <li style="position: relative;">
-                                    <a href="/keranjang" class="list-link position-relative">
+                                    <a href="#" class="list-link position-relative auth-link" data-url="/keranjang">
                                         <i class="far fa-shopping-cart text-dark fa-sm"></i>
-                                        <span id="cart-badge">3</span>
+                                        <span id="cart-badge">0</span>
                                     </a>
                                 </li>
+
                                 <li style="position: relative;">
-                                    <a href="/product/wishlist" class="list-link position-relative">
+                                    <a href="#" class="list-link position-relative auth-link" data-url="/product/wishlist">
                                         <i class="far fa-heart text-dark fa-sm"></i>
                                         <span id="wishlist-badge">7</span>
                                     </a>
@@ -215,3 +220,66 @@ function is_active($route)
         </div>
     </div>
 </div>
+
+<script>
+    // const API_BASE_URL = "<?= $apiBaseUrl ?>";
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const token = localStorage.getItem('auth_token');
+        if (!token) return;
+
+        // Fetch nominal keranjang
+        fetch(API_BASE_URL + '/nominal-keranjang', {
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                }
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    const nominal = data.total_nominal || 0;
+                    document.getElementById('cart-badge').innerText = nominal;
+                } else {
+                    console.error('Gagal ambil nominal keranjang:', data.message);
+                }
+            })
+            .catch(err => {
+                console.error('Error fetch nominal keranjang:', err);
+            });
+
+        // Fetch jumlah wishlist
+        fetch(API_BASE_URL + '/nominal-wishlist', {
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                }
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    const wishlistCount = data.total_wishlist || 0;
+                    document.getElementById('wishlist-badge').innerText = wishlistCount;
+                } else {
+                    console.error('Gagal ambil jumlah wishlist:', data.message);
+                }
+            })
+            .catch(err => {
+                console.error('Error fetch wishlist:', err);
+            });
+    });
+
+    // Navigasi aman berdasarkan token
+    document.querySelectorAll('.auth-link').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const token = localStorage.getItem('auth_token');
+            if (!token) {
+                window.location.href = '/login';
+            } else {
+                const targetUrl = this.getAttribute('data-url');
+                window.location.href = targetUrl;
+            }
+        });
+    });
+</script>

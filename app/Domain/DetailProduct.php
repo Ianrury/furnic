@@ -14,5 +14,5 @@ class DetailProduct
     public ?string $motif;
     public string $created_at;
     public string $updated_at;
-    public ?string $id_sku;
+    // public ?string $id_sku;
 }

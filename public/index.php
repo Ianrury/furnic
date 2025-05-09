@@ -57,7 +57,7 @@ Router::add('GET', '/pesanan/detail', ProductController::class, 'card_pesanan');
 
 
 // Contooller kerangjang 
-Router::add('GET', '/keranjang', KeranjangController::class, 'index', [MustLoginMiddleware::class]);
+Router::add('GET', '/keranjang', KeranjangController::class, 'index');
 Router::add('POST', '/keranjang', KeranjangController::class, 'createKeranjang');
 Router::add('POST', '/deletekeranjang', KeranjangController::class, 'deleteKeranjang'); 
 Router::add('POST', '/cekquantity', KeranjangController::class, 'cekQuantity'); 

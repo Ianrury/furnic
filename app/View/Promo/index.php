@@ -1,3 +1,9 @@
+<?php
+require_once __DIR__ . '/../../app/env.php';
+$apiBaseUrl = env('API_BASE_URL');
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -110,7 +116,7 @@
                 </div>
                 <div class="tab-content wow fadeInUp" data-wow-delay=".25s" id="item-tabContent">
                     <div class="container">
-                        <div class="row row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 new-product">
+                        <div class="row row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 new-product" id="product-terbaru">
                             <?php if (!empty($model['product'])): ?>
                                 <?php foreach ($model['product'] as $product): ?>
                                     <div class="col-6 col-md-4 col-lg-3">
@@ -189,7 +195,7 @@
                                                         // Harga produk dan total_promo (diskon) yang ada di data produk
                                                         $harga = $product['harga']; // Harga produk
                                                         $total_promo = $product['total_promo']; // Diskon dalam persen
-                                                
+
                                                         // Hitung diskon nominal
                                                         $diskon_nominal = ($total_promo > 0) ? ($harga * ($total_promo / 100)) : 0;
                                                         $harga_setelah_diskon = $harga - $diskon_nominal; // Harga setelah diskon
@@ -369,17 +375,17 @@
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             const offcanvasToggler = document.getElementById('offcanvasToggler');
             const offcanvasNavbar = document.getElementById('offcanvasNavbar');
 
             // Mencegah pembuatan backdrop
-            offcanvasNavbar.addEventListener('show.bs.offcanvas', function () {
+            offcanvasNavbar.addEventListener('show.bs.offcanvas', function() {
                 document.querySelectorAll('.offcanvas-backdrop').forEach(el => el.remove());
             });
 
             // Alternatif: nonaktifkan backdrop sepenuhnya
-            offcanvasNavbar.addEventListener('shown.bs.offcanvas', function () {
+            offcanvasNavbar.addEventListener('shown.bs.offcanvas', function() {
                 const backdrops = document.querySelectorAll('.offcanvas-backdrop');
                 backdrops.forEach(backdrop => {
                     backdrop.classList.remove('show');
@@ -388,16 +394,16 @@
             });
 
             // Pastikan backdrop dihapus saat menutup
-            offcanvasNavbar.addEventListener('hidden.bs.offcanvas', function () {
+            offcanvasNavbar.addEventListener('hidden.bs.offcanvas', function() {
                 document.querySelectorAll('.offcanvas-backdrop').forEach(el => el.remove());
             });
         });
 
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             const hotspots = document.querySelectorAll('.hotspot-dot');
 
             hotspots.forEach(hotspot => {
-                hotspot.addEventListener('mouseenter', function () {
+                hotspot.addEventListener('mouseenter', function() {
                     // Store the tooltip element
                     const tooltip = this.querySelector('.hotspot-tooltip');
 
@@ -420,321 +426,103 @@
         });
 
         // Add focus event to automatically open modal when clicking the search field
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             const searchModal = document.getElementById('searchModal');
-            searchModal.addEventListener('shown.bs.modal', function () {
+            searchModal.addEventListener('shown.bs.modal', function() {
                 searchModal.querySelector('input').focus();
             });
         });
+        const API_BASE_URL = "<?= $apiBaseUrl ?>";
 
-        // Data produk (untuk contoh)
-        const products = [
-            {
-                title: "CT-IMP Matto Light Brown",
-                description: "Meja ruang tamu aesthetic.",
-                price: "500.000",
-                oldPrice: "600.000",
-                rating: 5,
-                sold: 300,
-                image: "assets/img/gallery/promo1.jpg",
-                isNew: true
-            },
-            {
-                title: "Scandinavian Coffee Table",
-                description: "Meja kopi minimalis modern.",
-                price: "450.000",
-                oldPrice: "550.000",
-                rating: 4,
-                sold: 250,
-                image: "assets/img/gallery/promo2.jpg",
-                isNew: false
-            },
-            {
-                title: "Woody Chair Classic",
-                description: "Kursi kayu dengan bantalan nyaman.",
-                price: "350.000",
-                oldPrice: "400.000",
-                rating: 5,
-                sold: 420,
-                image: "assets/img/gallery/promo3.jpg",
-                isNew: true
-            },
-            {
-                title: "Sofa Corner Premium",
-                description: "Sofa sudut untuk ruang keluarga.",
-                price: "2.500.000",
-                oldPrice: "3.000.000",
-                rating: 5,
-                sold: 150,
-                image: "assets/img/gallery/promo4.jpg",
-                isNew: false
-            },
-            {
-                title: "Minimalist Side Table",
-                description: "Meja samping dengan laci.",
-                price: "275.000",
-                oldPrice: "325.000",
-                rating: 4,
-                sold: 180,
-                image: "assets/img/gallery/promo5.jpg",
-                isNew: false
-            },
-            {
-                title: "Dining Chair White",
-                description: "Kursi makan putih elegan.",
-                price: "225.000",
-                oldPrice: "300.000",
-                rating: 4,
-                sold: 320,
-                image: "assets/img/gallery/promo3.jpg",
-                isNew: true
-            },
-            {
-                title: "Rattan Accent Chair",
-                description: "Kursi rotan untuk ruang tamu.",
-                price: "450.000",
-                oldPrice: "550.000",
-                rating: 5,
-                sold: 200,
-                image: "assets/img/gallery/promo4.jpg",
-                isNew: false
-            },
-            {
-                title: "Modern TV Cabinet",
-                description: "Kabinet TV dengan penyimpanan.",
-                price: "1.200.000",
-                oldPrice: "1.500.000",
-                rating: 5,
-                sold: 120,
-                image: "assets/img/gallery/promo3.jpg",
-                isNew: true
-            },
-            {
-                title: "Storage Ottoman",
-                description: "Ottoman dengan penyimpanan.",
-                price: "350.000",
-                oldPrice: "400.000",
-                rating: 4,
-                sold: 180,
-                image: "assets/img/gallery/promo5.jpg",
-                isNew: false
-            },
-            {
-                title: "Round Dining Table",
-                description: "Meja makan bulat untuk 4 orang.",
-                price: "750.000",
-                oldPrice: "900.000",
-                rating: 5,
-                sold: 90,
-                image: "assets/img/gallery/promo4.jpg",
-                isNew: true
-            },
-            {
-                title: "Bedside Table Oak",
-                description: "Meja samping tempat tidur kayu oak.",
-                price: "320.000",
-                oldPrice: "380.000",
-                rating: 4,
-                sold: 220,
-                image: "assets/img/gallery/promo2.jpg",
-                isNew: false
-            },
-            {
-                title: "Bar Stool Black",
-                description: "Kursi bar hitam tinggi.",
-                price: "280.000",
-                oldPrice: "350.000",
-                rating: 4,
-                sold: 150,
-                image: "assets/img/gallery/promo4.jpg",
-                isNew: true
-            },
-            {
-                title: "Office Desk White",
-                description: "Meja kerja putih dengan laci.",
-                price: "850.000",
-                oldPrice: "950.000",
-                rating: 5,
-                sold: 80,
-                image: "assets/img/gallery/promo4.jpg",
-                isNew: false
-            },
-            {
-                title: "Bathroom Cabinet",
-                description: "Kabinet kamar mandi dengan cermin.",
-                price: "420.000",
-                oldPrice: "500.000",
-                rating: 4,
-                sold: 110,
-                image: "assets/img/gallery/promo4.jpg",
-                isNew: true
-            },
-            {
-                title: "Bookshelf Modern",
-                description: "Rak buku minimalis modern.",
-                price: "650.000",
-                oldPrice: "750.000",
-                rating: 5,
-                sold: 95,
-                image: "assets/img/gallery/promo4.jpg",
-                isNew: false
-            },
-            {
-                title: "Kitchen Island Small",
-                description: "Pulau dapur kecil dengan penyimpanan.",
-                price: "900.000",
-                oldPrice: "1.100.000",
-                rating: 5,
-                sold: 70,
-                image: "assets/img/gallery/promo4.jpg",
-                isNew: true
-            }
-        ];
+        $.ajax({
+            url: API_BASE_URL + '/get-promo',
+            type: 'GET', // Sesuai dengan route kamu
+            dataType: 'json',
+            success: function(response) {
+                if (response.status === 'success') {
+                    const produk = response.data;
+                    console.log("terbaru", produk);
+                    // Kosongkan isi sebelumnya
+                    $('#product-terbaru').html('');
 
-        // Variabel untuk pagination
-        let currentPage = 1;
-        const productsPerPage = 4; // Menampilkan 8 produk per halaman untuk ukuran laptop
-        const totalPages = Math.ceil(products.length / productsPerPage);
+                    if (produk.length > 0) {
+                        produk.forEach(function(product) {
+                            const harga = product.harga;
+                            const totalPromo = product.total_promo;
+                            const diskonNominal = totalPromo > 0 ? (harga * (totalPromo / 100)) : 0;
+                            const hargaSetelahDiskon = harga - diskonNominal;
 
-        // Fungsi untuk membuat card produk
-        function createProductCard(product) {
-            return `
-    <div class="col">
-      <div class="card shadow position-relative h-100 rounded-4 overflow-hidden">
-        <!-- Full card image without overlays -->
-        <img src="${product.image}" class="card-img w-100 h-100 object-fit-cover" alt="Product Image">
-      </div>
-    </div>
-  `;
-        }
-        // Fungsi untuk membuat rating bintang
-        function createStarRating(rating) {
-            let stars = '';
-            for (let i = 0; i < 5; i++) {
-                if (i < rating) {
-                    stars += '<i class="bi bi-star-fill text-warning small-icon"></i>';
-                } else {
-                    stars += '<i class="bi bi-star text-warning small-icon"></i>';
-                }
-            }
-            return stars;
-        }
-
-        // Fungsi untuk membuat pagination
-        function createPagination() {
-            let paginationHTML = `
-            <nav aria-label="Page navigation">
-            <ul class="pagination">
-                <li class="page-item ${currentPage === 1 ? 'disabled' : ''}">
-                <a class="page-link" href="#" aria-label="Previous" data-page="prev">
-                    <span class="double-arrow">&laquo;</span>
-                </a>
-                </li>
-        `;
-
-            for (let i = 1; i <= totalPages; i++) {
-                paginationHTML += `
-      <li class="page-item ${currentPage === i ? 'active' : ''}">
-        <a class="page-link" href="#" data-page="${i}">${i}</a>
-      </li>
-    `;
-            }
-
-            paginationHTML += `
-        <li class="page-item ${currentPage === totalPages ? 'disabled' : ''}">
-          <a class="page-link" href="#" aria-label="Next" data-page="next">
-            <span class="double-arrow-right">&raquo;</span>
-          </a>
-        </li>
-      </ul>
-    </nav>
-  `;
-
-            return paginationHTML;
-        }
-
-        // Fungsi untuk menampilkan produk pada halaman tertentu
-        function displayProducts() {
-            const productContainer = document.querySelector('#product-pagination-container .row');
-            const paginationContainer = document.getElementById('pagination-container');
-
-            if (!productContainer || !paginationContainer) return;
-
-            // Hitung produk untuk halaman saat ini
-            const startIndex = (currentPage - 1) * productsPerPage;
-            const endIndex = Math.min(startIndex + productsPerPage, products.length);
-            const currentProducts = products.slice(startIndex, endIndex);
-
-            // Buat HTML untuk produk
-            let productsHTML = '';
-            currentProducts.forEach(product => {
-                productsHTML += createProductCard(product);
-            });
-
-            // Tampilkan produk
-            productContainer.innerHTML = productsHTML;
-
-            // Tampilkan pagination
-            paginationContainer.innerHTML = createPagination();
-
-            // Tambahkan event listener untuk pagination
-            const pageLinks = paginationContainer.querySelectorAll('.page-link');
-            pageLinks.forEach(link => {
-                link.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const pageData = this.getAttribute('data-page');
-
-                    if (pageData === 'prev') {
-                        if (currentPage > 1) currentPage--;
-                    } else if (pageData === 'next') {
-                        if (currentPage < totalPages) currentPage++;
+                            const html = `
+                        <div class="col-6 col-md-4 col-lg-3">
+                            <div class="card shadow position-relative rounded-4 p-2 product-card" data-id="${product.id_product}"      data-slug="${product.slug}" 
+     data-token="${product.token}" style="cursor:pointer;">
+                                <div class="position-absolute ribbon-wrapper">
+                                    <div class="ribbon text-white text-uppercase fw-bold text-center">New Product</div>
+                                </div>
+                                <div class="text-center pt-3">
+                                    <img src="${product.url_foto ?? ''}" class="img-fluid product-image" alt="Product Image">
+                                </div>
+                                <div class="bodykartu">
+                                    <div class="d-flex flex-column">
+                                        <p class="card-title text-truncate product-title">${product.nama_product ?? 'Nama produk tidak tersedia'}</p>
+                                        <p class="card-text text-truncate product-desc">${product.deskripsi ?? 'Deskripsi tidak tersedia'}</p>
+                                        <div class="d-flex gap-1 align-items-center">
+                                            <i class="bi bi-star-fill text-warning small-icon"></i>
+                                            <i class="bi bi-star-fill text-warning small-icon"></i>
+                                            <i class="bi bi-star-fill text-warning small-icon"></i>
+                                            <i class="bi bi-star-fill text-warning small-icon"></i>
+                                            <i class="bi bi-star-fill text-warning small-icon"></i>
+                                            <small class="text-muted fst-italic ms-1 sold-text">${product.beli ?? 0} terjual</small>
+                                        </div>
+                                        <div class="mt-auto">
+                                            <div class="d-flex flex-wrap align-items-baseline">
+                                                <div class="me-2">
+                                                    <span class="fw-bold price">
+                                                        <sup class="fw-normal">Rp</sup>${Number(hargaSetelahDiskon).toLocaleString('id-ID')}
+                                                    </span>
+                                                </div>
+                                                ${diskonNominal > 0 ? `
+                                                    <div>
+                                                        <span class="fw-normal text-danger old-price">
+                                                            <sup>Rp</sup><span class="text-decoration-line-through">${Number(harga).toLocaleString('id-ID')}</span>
+                                                        </span>
+                                                    </div>
+                                                ` : ''}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>`;
+                            $('#product-terbaru').append(html);
+                        });
                     } else {
-                        currentPage = parseInt(pageData);
+                        $('#product-terbaru').html('<p>Tidak ada produk terbaru yang tersedia.</p>');
                     }
-
-                    displayProducts();
-
-                    // Scroll dengan smooth ke bagian atas produk
-                    productContainer.scrollIntoView({ behavior: 'smooth' });
-                });
-            });
-        }
-
-        // Jalankan ketika DOM sudah siap
-        document.addEventListener('DOMContentLoaded', function () {
-            // Gunakan selector yang lebih spesifik
-            const productContainer = document.querySelector('#product-pagination-container .row');
-
-            if (!productContainer) return;
-
-            const productSection = productContainer.parentElement;
-
-            // Tambahkan container untuk pagination jika belum ada
-            if (!document.getElementById('pagination-container')) {
-                const paginationContainer = document.createElement('div');
-                paginationContainer.id = 'pagination-container';
-                paginationContainer.className = 'mt-4 d-flex justify-content-center';
-                productSection.appendChild(paginationContainer);
+                } else {
+                    showToast('Gagal memuat produk terbaru', 'danger');
+                }
+            },
+            error: function() {
+                showToast('Terjadi kesalahan saat mengambil data produk.', 'danger');
             }
-
-            // Tampilkan produk dan pagination
-            displayProducts();
         });
-
         //categoty product
     </script>
 
     <script>
-        document.addEventListener('click', function (e) {
+        document.addEventListener('click', function(e) {
             const card = e.target.closest('.product-card');
             if (card) {
-                const productId = card.getAttribute('data-id');
-                if (productId) {
-                    window.location.href = `/product/detail/${productId}`;
+                const slug = card.getAttribute('data-slug');
+                const token = card.getAttribute('data-token');
+                if (slug && token) {
+                    window.location.href =  `/product/${slug}/${token}`;
                 }
             }
         });
     </script>
+
 </body>
 
 </html>

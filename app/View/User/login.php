@@ -117,7 +117,11 @@ $apiBaseUrl = env('API_BASE_URL');
                                 </div>
 
                                 <!-- Login Button -->
-                                <button type="submit" class="btn btn-masuk w-100">MASUK</button>
+                                <button type="submit" class="btn btn-masuk w-100" id="btnLogin">
+                                    <span class="spinner-border spinner-border-sm me-2 d-none" role="status" aria-hidden="true" id="loginSpinner"></span>
+                                    MASUK
+                                </button>
+
 
                                 <!-- Register Button -->
                                 <button type="button" class="btn btn-daftar w-100">
@@ -184,6 +188,9 @@ $apiBaseUrl = env('API_BASE_URL');
             $('.invalid-feedback').text('');
             $('.form-control').removeClass('is-invalid');
 
+            // Disable tombol & tampilkan spinner
+            $('#btnLogin').attr('disabled', true);
+            $('#loginSpinner').removeClass('d-none');
 
             $.ajax({
                 url: API_BASE_URL + '/login',
@@ -197,6 +204,10 @@ $apiBaseUrl = env('API_BASE_URL');
                         setTimeout(() => {
                             window.location.href = "/";
                         }, 2000);
+                    } else {
+                        showToast(response.message || 'Login gagal.', 'danger');
+                        $('#btnLogin').attr('disabled', false);
+                        $('#loginSpinner').addClass('d-none');
                     }
                 },
                 error: function(xhr) {
@@ -204,7 +215,6 @@ $apiBaseUrl = env('API_BASE_URL');
                         const res = JSON.parse(xhr.responseText);
                         const message = res.message;
 
-                        // Deteksi field
                         if (message.toLowerCase().includes('email')) {
                             $('#email').addClass('is-invalid');
                             $('#error-email').text(message);
@@ -213,14 +223,18 @@ $apiBaseUrl = env('API_BASE_URL');
                             $('#error-password').text(message);
                         }
 
-                        // Tampilkan toast juga
                         showToast(message, 'danger');
                     } else {
                         showToast('Terjadi kesalahan server. Silakan coba lagi.', 'danger');
                     }
+
+                    // Kembalikan tombol
+                    $('#btnLogin').attr('disabled', false);
+                    $('#loginSpinner').addClass('d-none');
                 }
             });
         });
+
 
         // === TOAST FUNCTION ===
         function showToast(message, type = 'danger') {
