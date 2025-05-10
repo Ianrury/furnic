@@ -454,7 +454,7 @@ $apiBaseUrl = env('API_BASE_URL');
 
                             const html = `
                         <div class="col-6 col-md-4 col-lg-3">
-                            <div class="card shadow position-relative rounded-4 p-2 product-card" data-id="${product.id_product}"      data-slug="${product.slug}" 
+                            <div class="card shadow position-relative rounded-4 p-2 product-card" data-id="${product.id_product}" data-slug="${product.slug}" 
      data-token="${product.token}" style="cursor:pointer;">
                                 <div class="position-absolute ribbon-wrapper">
                                     <div class="ribbon text-white text-uppercase fw-bold text-center">New Product</div>

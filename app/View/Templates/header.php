@@ -269,6 +269,36 @@ function is_active($route)
             });
     });
 
+    document.addEventListener('DOMContentLoaded', function() {
+        const tokenLogin = localStorage.getItem('auth_token');
+
+
+        const currentPath = window.location.pathname;
+        const parts = currentPath.split('/');
+        const slug = parts[2];
+        const token = parts[3];
+
+        fetch(`${API_BASE_URL}/product/create/cekwishlist/${slug}/${token}`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + tokenLogin
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                const icon = document.getElementById('wishlistIcon');
+                if (data.status === 'success' && data.wishlisted) {
+                    icon.src = 'assets/img/icon/love_wislist.svg';
+                } else {
+                    icon.src = 'assets/img/icon/love.svg';
+                }
+            })
+            .catch(error => {
+                console.error('Gagal cek wishlist:', error);
+            });
+
+    });
+
     // Navigasi aman berdasarkan token
     document.querySelectorAll('.auth-link').forEach(link => {
         link.addEventListener('click', function(e) {

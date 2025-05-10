@@ -551,6 +551,8 @@ $apiBaseUrl = env('API_BASE_URL');
                     promo: promoPersen,
                     rating: product.rating ?? 4,
                     sold: product.beli ?? 0,
+                    slug: product.slug,
+                    token: product.token,
                     stock: product.qty,
                     image: product.url_foto,
                     created_at: product.created_at,
@@ -566,7 +568,8 @@ $apiBaseUrl = env('API_BASE_URL');
         function createProductCard(product) {
             return `
             <div class="col">
-                <div class="card shadow position-relative rounded-4 p-2 product-card" data-id="${product.id}" style="cursor:pointer;">
+                <div class="card shadow position-relative rounded-4 p-2 product-card" data-id="${product.id}" data-slug="${product.slug}" 
+     data-token="${product.token}" style="cursor:pointer;">
 
                     ${product.ribbon ? `
                         <div class="position-absolute ribbon-wrapper">
@@ -881,12 +884,14 @@ $apiBaseUrl = env('API_BASE_URL');
     </script>
 
     <script>
-        document.addEventListener('click', function(e) {
+            document.addEventListener('click', function(e) {
             const card = e.target.closest('.product-card');
             if (card) {
-                const productId = card.getAttribute('data-id');
-                if (productId) {
-                    window.location.href = API_BASE_URL + `product/{slug}/{token}`;
+                const slug = card.getAttribute('data-slug');
+                const token = card.getAttribute('data-token');
+                console.log(slug, token);
+                if (slug && token) {
+                    window.location.href =  `/product/${slug}/${token}`;
                 }
             }
         });

@@ -56,6 +56,60 @@ $apiBaseUrl = env('API_BASE_URL');
         .product-area-new {
             font-family: 'inter';
         }
+
+        .store-availability-badge {
+            z-index: 10;
+            transition: all 0.3s ease;
+        }
+
+        .store-availability-badge .badge {
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.03em;
+        }
+
+        /* Ensuring the badge is responsive */
+        @media (max-width: 576px) {
+            .store-name {
+                display: none;
+            }
+
+            .store-availability-badge .badge {
+                padding: 0.25rem !important;
+                width: 32px;
+                height: 32px;
+                border-radius: 50% !important;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .store-availability-badge .badge i {
+                margin-right: 0 !important;
+            }
+        }
+
+        /* Medium hover effect */
+        .store-availability-badge:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Animation effect */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translate3d(0, -20px, 0);
+            }
+
+            to {
+                opacity: 1;
+                transform: translate3d(0, 0, 0);
+            }
+        }
+
+        .store-availability-badge {
+            animation: fadeInDown 0.5s ease-out forwards;
+        }
     </style>
 
 </head>
@@ -85,7 +139,7 @@ $apiBaseUrl = env('API_BASE_URL');
                 <ol class="breadcrumb mb-0">
                     <li class="breadcrumb-item"><a href="/">Beranda</a></li>
                     <li class="breadcrumb-item"><a href="/product">Product</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Clover Chair</li>
+                    <li class="breadcrumb-item active" aria-current="page" id="nama_breadcrumb">Clover Chair</li>
                 </ol>
             </nav>
         </div>
@@ -110,6 +164,7 @@ $apiBaseUrl = env('API_BASE_URL');
             <div class="container">
                 <div class="row g-0 g-md-5">
                     <!-- Product Images Column -->
+                    <!-- Modified Product Card with Bootstrap Availability Indicator -->
                     <div class="col-md-5">
                         <div class="card product-card-detail">
                             <!-- New Product Badge -->
@@ -119,10 +174,19 @@ $apiBaseUrl = env('API_BASE_URL');
                                 </div>
                             </div>
 
+                            <!-- Store Availability Badge (New) -->
+                            <div class="position-absolute top-0 end-0 m-3">
+                                <div class="store-availability-badge d-flex align-items-center">
+                                    <span class="badge bg-success px-3 py-2 rounded-pill shadow-sm d-flex align-items-center">
+                                        <i class="fas fa-store me-2"></i>
+                                        <span class="store-name"></span>
+                                    </span>
+                                </div>
+                            </div>
+
                             <!-- Main Product Image -->
                             <div class="card-body text-center p-4">
-                                <img id="main-product-image" src="" alt="Main Product" class="img-fluid" width="255"
-                                    height="255">
+                                <img id="main-product-image" src="" alt="Main Product" class="img-fluid" width="255" height="255">
                             </div>
 
                             <!-- Thumbnail Images -->
@@ -131,15 +195,13 @@ $apiBaseUrl = env('API_BASE_URL');
                                     <!-- Thumbnails akan di-generate di sini -->
                                 </div>
                             </div>
-
-
                         </div>
                     </div>
 
                     <!-- Product Details Column -->
                     <div class="col-md-5 product-details">
                         <h1 class="text-black fw-bold mb-1" style="font-size: 25px;" id="nama_product">
-                            
+
                         </h1>
                         <p class="text-black mb-3 fw-normal" style="font-size: 14px;" id="descripsi">
                         </p>
@@ -148,21 +210,21 @@ $apiBaseUrl = env('API_BASE_URL');
                             <p class="mb-2 fw-normal text-black" style="font-size: 14px;">Warna</p>
                             <div class="row g-2" id="warna-container">
                                 <!-- <?php
-                                // Looping untuk menampilkan warna berdasarkan data 'details'
-                                foreach ($model['detail']['details'] as $index => $detail) {
-                                    $warna = $detail['warna']; // Ambil warna dari detail produk
+                                        // Looping untuk menampilkan warna berdasarkan data 'details'
+                                        foreach ($model['detail']['details'] as $index => $detail) {
+                                            $warna = $detail['warna']; // Ambil warna dari detail produk
 
-                                    // Cek apakah ada motif dengan qty > 0
-                                    $isActive = false;
-                                    foreach ($detail['motifs'] as $motif) {
-                                        if ($motif['qty'] > 0) {
-                                            $isActive = true;
-                                            break;
-                                        }
-                                    }
-                                    // Tentukan kelas active jika motif memiliki qty > 0 dan warna pertama
-                                    $activeClass = $isActive && $index === 0 ? 'active' : ''; // Default aktifkan warna pertama
-                                ?>
+                                            // Cek apakah ada motif dengan qty > 0
+                                            $isActive = false;
+                                            foreach ($detail['motifs'] as $motif) {
+                                                if ($motif['qty'] > 0) {
+                                                    $isActive = true;
+                                                    break;
+                                                }
+                                            }
+                                            // Tentukan kelas active jika motif memiliki qty > 0 dan warna pertama
+                                            $activeClass = $isActive && $index === 0 ? 'active' : ''; // Default aktifkan warna pertama
+                                        ?>
                                     <div class="col-3">
                                         <div class="color-option <?= $activeClass ?>" data-index="<?= $index ?>"
                                             onclick="setActiveWarna(<?= $index ?>)">
@@ -179,9 +241,9 @@ $apiBaseUrl = env('API_BASE_URL');
                             <p class="mb-2 fw-normal text-black" style="font-size: 14px;">Motif</p>
                             <div class="row g-2" id="motif-container">
                                 <!-- <?php
-                                // Loop untuk menampilkan motif berdasarkan warna pertama yang aktif
-                                foreach ($model['detail']['details'][0]['motifs'] as $motif) {
-                                ?>
+                                        // Loop untuk menampilkan motif berdasarkan warna pertama yang aktif
+                                        foreach ($model['detail']['details'][0]['motifs'] as $motif) {
+                                        ?>
                                     <div class="col-3">
                                         <div class="color-option motif-option"
                                             data-motif="<?= htmlspecialchars($motif['motif']) ?>"
@@ -190,7 +252,7 @@ $apiBaseUrl = env('API_BASE_URL');
                                         </div>
                                     </div>
                                 <?php
-                                }
+                                        }
                                 ?> -->
                             </div>
                         </div>
@@ -837,7 +899,7 @@ $apiBaseUrl = env('API_BASE_URL');
             </div>
         </div>
         <div id="toastContainer" class="position-fixed top-0 end-0 p-3" style="z-index: 9999;"></div>
-        <input type="text" value="<?= htmlspecialchars($model['detail']['id_product']) ?>" id="id_product" hidden>
+        <input type="text" value="" id="id_product" hidden>
 
         <input type="text" value="" id="id_detail_product" hidden>
         <input type="text" value="" id="id_motif_produk" hidden>
@@ -954,7 +1016,8 @@ $apiBaseUrl = env('API_BASE_URL');
 
                             const card = `
                         <div class="col-6 col-md-4 col-lg-3">
-                            <div class="card shadow position-relative rounded-4 p-2 product-card" data-id="${product.id_product}" style="cursor:pointer;">
+                            <div class="card shadow position-relative rounded-4 p-2 product-card" data-id="${product.id_product}" data-slug="${product.slug}" 
+     data-token="${product.token}" style="cursor:pointer;">
                                 ${ribbon ? `
                                     <div class="position-absolute ribbon-wrapper">
                                         <div class="ribbon text-uppercase fw-bold text-center" style="background-color: ${bgColor}; color: ${textColor};">
@@ -1049,7 +1112,8 @@ $apiBaseUrl = env('API_BASE_URL');
 
                             const card = `
                         <div class="col-6 col-md-4 col-lg-3">
-                            <div class="card shadow position-relative rounded-4 p-2 product-card" data-id="${product.id_product}" style="cursor:pointer;">
+                            <div class="card shadow position-relative rounded-4 p-2 product-card" data-id="${product.id_product}" data-slug="${product.slug}" 
+     data-token="${product.token}" style="cursor:pointer;">
                                 ${ribbon ? `
                                     <div class="position-absolute ribbon-wrapper">
                                         <div class="ribbon text-uppercase fw-bold text-center" style="background-color: ${bgColor}; color: ${textColor};">
@@ -1204,11 +1268,13 @@ $apiBaseUrl = env('API_BASE_URL');
         });
     </script>
 
+
     <script>
         // Definisikan global variabel yang akan menyimpan data model
         let $model = {
             detail: {
                 harga: 0,
+                diskon: 0, // Tambahkan field diskon untuk menampung nilai diskon
                 details: []
             }
         };
@@ -1226,8 +1292,8 @@ $apiBaseUrl = env('API_BASE_URL');
             const slug = parts[2];
             const token = parts[3];
 
-            console.log('Slug:', slug);
-            console.log('Token:', token);
+            // console.log('Slug:', slug);
+            // console.log('Token:', token);
 
             // Tampilkan loading message
             const errorMessageElement = document.getElementById('error-message');
@@ -1250,6 +1316,8 @@ $apiBaseUrl = env('API_BASE_URL');
                     .then(data => {
                         if (data.status === 'success') {
                             console.log('Produk detail:', data.data);
+                            document.getElementById('nama_breadcrumb').innerHTML = data.data.nama_product
+                            document.getElementById('id_product').value = data.data.id_product;
 
                             // Simpan data ke model global
                             $model.detail = data.data;
@@ -1303,10 +1371,23 @@ $apiBaseUrl = env('API_BASE_URL');
                 titleElement.textContent = $model.detail.nama || 'Product Name';
             }
 
+            // Update harga produk (dengan diskon jika ada)
             const priceElement = document.getElementById('product-price');
             if (priceElement) {
-                priceElement.textContent = formatRupiah(currentHarga);
+                if ($model.detail.diskon && $model.detail.diskon > 0) {
+                    // Jika ada diskon, tampilkan harga asli yang dicoret dan harga setelah diskon
+                    const discountedPrice = currentHarga - (currentHarga * $model.detail.diskon / 100);
+                    priceElement.innerHTML = `
+                <span class="text-decoration-line-through text-muted me-2">${formatRupiah(currentHarga)}</span>
+                <span class="text-danger">${formatRupiah(discountedPrice)}</span>
+            `;
+                } else {
+                    priceElement.textContent = formatRupiah(currentHarga);
+                }
             }
+
+            // Inisialisasi kontainer warna
+            initColorOptions();
 
             // Inisialisasi warna jika ada
             if ($model.detail.details && $model.detail.details.length > 0) {
@@ -1320,6 +1401,35 @@ $apiBaseUrl = env('API_BASE_URL');
                     }
                 }
             }
+
+            // Juga update detail produk
+            updateProductDetails();
+        }
+
+        // Fungsi untuk menginisialisasi opsi warna
+        function initColorOptions() {
+            const warnaContainer = document.getElementById('warna-container');
+            if (!warnaContainer || !$model.detail.details) return;
+
+            warnaContainer.innerHTML = '';
+
+            // Loop untuk menambahkan opsi warna
+            $model.detail.details.forEach((detail, index) => {
+                // Cek apakah warna ini memiliki stok
+                let hasStock = detail.motifs && detail.motifs.some(motif => motif.qty > 0);
+
+                const div = document.createElement('div');
+                div.classList.add('col-3');
+                div.innerHTML = `
+            <div class="color-option ${hasStock ? '' : 'disabled'}" 
+                data-index="${index}" 
+                onclick="${hasStock ? 'setActiveWarna(' + index + ')' : ''}"
+                style="${!hasStock ? 'cursor: not-allowed; opacity: 0.5;' : ''}">
+                ${detail.warna}
+            </div>
+        `;
+                warnaContainer.appendChild(div);
+            });
         }
 
         function formatRupiah(number) {
@@ -1332,10 +1442,16 @@ $apiBaseUrl = env('API_BASE_URL');
 
         function setActiveWarna(index) {
             const colorOptions = document.querySelectorAll('.color-option');
-            colorOptions.forEach(e => e.classList.remove('active'));
+            colorOptions.forEach(e => {
+                if (!e.classList.contains('motif-option')) {
+                    e.classList.remove('active');
+                }
+            });
 
-            if (index < colorOptions.length) {
-                colorOptions[index].classList.add('active');
+            // Find the specific color option using data-index
+            const selectedColorOption = document.querySelector(`.color-option[data-index="${index}"]`);
+            if (selectedColorOption) {
+                selectedColorOption.classList.add('active');
             }
 
             const jumlahBeli = document.getElementById('jumlah-beli');
@@ -1390,16 +1506,27 @@ $apiBaseUrl = env('API_BASE_URL');
             selectedDetail.motifs.forEach(motif => {
                 let div = document.createElement('div');
                 div.classList.add('col-3');
+
+                // Pastikan data motif lengkap dengan semua URL foto
+                const motifData = {
+                    ...motif,
+                    url_foto_kanan: motif.url_foto_kanan || '',
+                    url_foto_kiri: motif.url_foto_kiri || '',
+                    url_foto_depan: motif.url_foto_depan || '',
+                    url_foto_belakang: motif.url_foto_belakang || ''
+                };
+
                 div.innerHTML = `
-        <div class="color-option motif-option" 
-            data-motif='${JSON.stringify(motif)}'
-            data-qty="${motif.qty}" 
-            onclick="setActiveMotif(this)">
-            ${motif.motif}
-        </div>`;
+            <div class="color-option motif-option ${motif.qty <= 0 ? 'disabled' : ''}" 
+                data-motif='${JSON.stringify(motifData)}'
+                data-qty="${motif.qty}" 
+                onclick="${motif.qty > 0 ? 'setActiveMotif(this)' : ''}"
+                style="${motif.qty <= 0 ? 'cursor: not-allowed; opacity: 0.5;' : ''}">
+                ${motif.motif}
+            </div>`;
                 motifContainer.appendChild(div);
 
-                if (motif.motif.toLowerCase() === 'polos') {
+                if (motif.motif.toLowerCase() === 'polos' && motif.qty > 0) {
                     firstPolosElement = div.querySelector('.motif-option');
                 }
                 if (!firstAvailableMotif && motif.qty > 0) {
@@ -1477,45 +1604,84 @@ $apiBaseUrl = env('API_BASE_URL');
             if (!jumlahBeli || !subtotalText) return;
 
             let qty = parseInt(jumlahBeli.innerText);
-            let subtotal = qty * $model.detail.harga;
+            let harga = $model.detail.harga;
+
+            // Hitung harga setelah diskon jika ada
+            if ($model.detail.diskon && $model.detail.diskon > 0) {
+                harga = harga - (harga * $model.detail.diskon / 100);
+            }
+
+            let subtotal = qty * harga;
             subtotalText.innerText = formatRupiah(subtotal);
         }
 
         function updateMainAndThumbnailImage() {
             if (!currentMotif) return;
 
+            // Default ke foto depan jika tersedia
+            const defaultImageUrl = currentMotif.url_foto_depan ||
+                currentMotif.url_foto_kanan ||
+                currentMotif.url_foto_kiri ||
+                currentMotif.url_foto_belakang;
+
             // Update gambar utama
             const mainProductImage = document.getElementById('main-product-image');
             if (mainProductImage) {
-                mainProductImage.src = currentMotif.url_foto_kanan;
+                mainProductImage.src = defaultImageUrl;
             }
 
-            // Update thumbnails
+            // Update thumbnails (hanya jika URL tersedia)
             const thumbnailContainer = document.getElementById('thumbnail-container');
             if (!thumbnailContainer) return;
 
-            thumbnailContainer.innerHTML = `
-            <div class="col-3">
-                <div class="thumbnail active p-1">
-                    <img src="${currentMotif.url_foto_kanan}" alt="Thumbnail Kanan" class="img-fluid" width="100" height="100" onclick="changeMainImage('${currentMotif.url_foto_kanan}')">
-                </div>
+            thumbnailContainer.innerHTML = '';
+
+            // Tambahkan foto depan (jika tersedia)
+            if (currentMotif.url_foto_depan) {
+                thumbnailContainer.innerHTML += `
+        <div class="col-3">
+            <div class="thumbnail active p-1">
+                <img src="${currentMotif.url_foto_depan}" alt="Thumbnail Depan" class="img-fluid" width="100" height="100" onclick="changeMainImage('${currentMotif.url_foto_depan}')">
             </div>
-            <div class="col-3">
-                <div class="thumbnail p-1">
-                    <img src="${currentMotif.url_foto_kiri}" alt="Thumbnail Kiri" class="img-fluid" width="100" height="100" onclick="changeMainImage('${currentMotif.url_foto_kiri}')">
-                </div>
+        </div>`;
+            }
+
+            // Tambahkan foto kanan (jika tersedia)
+            if (currentMotif.url_foto_kanan) {
+                thumbnailContainer.innerHTML += `
+        <div class="col-3">
+            <div class="thumbnail p-1">
+                <img src="${currentMotif.url_foto_kanan}" alt="Thumbnail Kanan" class="img-fluid" width="100" height="100" onclick="changeMainImage('${currentMotif.url_foto_kanan}')">
             </div>
-            <div class="col-3">
-                <div class="thumbnail p-1">
-                    <img src="${currentMotif.url_foto_depan}" alt="Thumbnail Depan" class="img-fluid" width="100" height="100" onclick="changeMainImage('${currentMotif.url_foto_depan}')">
-                </div>
+        </div>`;
+            }
+
+            // Tambahkan foto kiri (jika tersedia)
+            if (currentMotif.url_foto_kiri) {
+                thumbnailContainer.innerHTML += `
+        <div class="col-3">
+            <div class="thumbnail p-1">
+                <img src="${currentMotif.url_foto_kiri}" alt="Thumbnail Kiri" class="img-fluid" width="100" height="100" onclick="changeMainImage('${currentMotif.url_foto_kiri}')">
             </div>
-            <div class="col-3">
-                <div class="thumbnail p-1">
-                    <img src="${currentMotif.url_foto_belakang}" alt="Thumbnail Belakang" class="img-fluid" width="100" height="100" onclick="changeMainImage('${currentMotif.url_foto_belakang}')">
-                </div>
+        </div>`;
+            }
+
+            // Tambahkan foto belakang (jika tersedia)
+            if (currentMotif.url_foto_belakang) {
+                thumbnailContainer.innerHTML += `
+        <div class="col-3">
+            <div class="thumbnail p-1">
+                <img src="${currentMotif.url_foto_belakang}" alt="Thumbnail Belakang" class="img-fluid" width="100" height="100" onclick="changeMainImage('${currentMotif.url_foto_belakang}')">
             </div>
-            `;
+        </div>`;
+            }
+
+            // Set thumbnail pertama sebagai aktif
+            const firstThumbnail = thumbnailContainer.querySelector('.thumbnail');
+            if (firstThumbnail) {
+                thumbnailContainer.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active'));
+                firstThumbnail.classList.add('active');
+            }
         }
 
         function changeMainImage(filename) {
@@ -1527,6 +1693,7 @@ $apiBaseUrl = env('API_BASE_URL');
             document.querySelectorAll('.thumbnail').forEach(e => e.classList.remove('active'));
             event.target.parentElement.classList.add('active');
         }
+
         // Function to initialize the product detail tabs
         function initProductDetailTabs() {
             // Add listeners to tab navigation
@@ -1579,6 +1746,8 @@ $apiBaseUrl = env('API_BASE_URL');
 
             // Initialize tab functionality
             initProductDetailTabs();
+
+            updateStoreAvailability();
         }
 
         // Function to update specifications tab
@@ -1637,37 +1806,83 @@ $apiBaseUrl = env('API_BASE_URL');
             }
         }
 
-        // Update the initProductUI function to include product details update
-        const originalInitProductUI = initProductUI;
-        initProductUI = function() {
-            // Call the original initialization function
-            originalInitProductUI();
+        // This function will be called from your existing updateMainAndThumbnailImage function
+        function updateStoreAvailability() {
+            const storeName = $model.detail.nama_toko || "Toko Dummy";
+            console.log(storeName);
+            const storeNameElement = document.querySelector('.store-name');
 
-            // Also update the product details section
-            updateProductDetails();
-        };
+            if (storeNameElement) {
+                storeNameElement.textContent = 'Tersedia di ' + storeName;
+            }
+        }
     </script>
+
+    <!-- disini -->
     <script>
         document.getElementById('wishlistBtn').addEventListener('click', function() {
-            var productId = document.getElementById('id_product').value;
+            const tokenLogin = localStorage.getItem('auth_token');
+            if (!tokenLogin) {
+                window.location.href = '/login';
+                return;
+            }
 
-            fetch(`/product/create/wishlist/${productId}`)
+            const currentPath = window.location.pathname;
+            const parts = currentPath.split('/');
+            const slug = parts[2];
+            const token = parts[3];
+
+            fetch(`${API_BASE_URL}/product/create/wishlist/${slug}/${token}`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': 'Bearer ' + tokenLogin
+                    }
+                })
                 .then(response => response.json())
                 .then(data => {
                     showToast(data.message, data.status === 'success' ? 'success' : 'danger');
 
-                    // Ganti ikon jika berhasil atau batalkan wishlist
                     const icon = document.getElementById('wishlistIcon');
                     if (data.status === 'success' && data.wishlisted) {
                         icon.src = 'assets/img/icon/love_wislist.svg';
                     } else {
                         icon.src = 'assets/img/icon/love.svg';
                     }
+
+                    // Panggil update jumlah wishlist setelah sukses
+                    updateWishlistBadge(tokenLogin);
                 })
                 .catch(error => {
+                    if (error.message === 'Token tidak ditemukan') {
+                        window.location.href = '/login';
+                        return;
+                    }
                     showToast('Terjadi kesalahan saat mengirim permintaan.', 'danger');
                 });
         });
+
+        // Fungsi untuk update badge wishlist
+        function updateWishlistBadge(tokenLogin) {
+            fetch(API_BASE_URL + '/nominal-wishlist', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': 'Bearer ' + tokenLogin
+                    }
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        const wishlistCount = data.total_wishlist || 0;
+                        document.getElementById('wishlist-badge').innerText = wishlistCount;
+                    } else {
+                        console.error('Gagal ambil jumlah wishlist:', data.message);
+                    }
+                })
+                .catch(err => {
+                    console.error('Error fetch wishlist:', err);
+                });
+        }
+
 
         function showToast(message, type) {
             const toastEl = document.getElementById('liveToast');
@@ -1707,22 +1922,63 @@ $apiBaseUrl = env('API_BASE_URL');
 
             const formData = new FormData();
             formData.append('id', idProduct);
+            console.log(idProduct);
             formData.append('qty', qty);
             formData.append('id_detail_product', idDetailProduct);
             formData.append('id_motif_produk', idMotifProduk);
-
-            fetch('/keranjang', {
+            // disini keranjang
+            const tokenLogin = localStorage.getItem('auth_token');
+            if (!tokenLogin) {
+                window.location.href = '/login';
+                return;
+            }
+            fetch(`${API_BASE_URL}/keranjang`, {
                     method: 'POST',
-                    body: formData
+                    body: formData,
+                    headers: {
+                        'Authorization': 'Bearer ' + tokenLogin
+                    }
                 })
                 .then(response => response.json())
                 .then(data => {
                     showToast(data.message, data.status === 'success' ? 'success' : 'danger');
+                    if (data.status === 'success') {
+                        updateNominalKeranjang(); // ✅ Tambahkan ini
+                    }
                 })
                 .catch(() => {
+                    if (error.message === 'Token tidak ditemukan' || error.message === 'Token tidak valid, silakan login ulang') {
+                        window.location.href = '/login';
+                        return;
+                    }
                     showToast('Terjadi kesalahan. Coba lagi.', 'danger');
                 });
         }
+
+        function updateNominalKeranjang() {
+            const token = localStorage.getItem('auth_token');
+            if (!token) return;
+
+            fetch(API_BASE_URL + '/nominal-keranjang', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': 'Bearer ' + token
+                    }
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        const nominal = data.total_nominal || 0;
+                        document.getElementById('cart-badge').innerText = nominal;
+                    } else {
+                        console.error('Gagal ambil nominal keranjang:', data.message);
+                    }
+                })
+                .catch(err => {
+                    console.error('Error fetch nominal keranjang:', err);
+                });
+        }
+
 
         function showToast(message, type = 'success') {
             const toastId = `toast-${Date.now()}`;
@@ -1741,11 +1997,24 @@ $apiBaseUrl = env('API_BASE_URL');
     </script>
 
 
-    <script>
+    <!-- <script>
         document.addEventListener('DOMContentLoaded', function() {
-            var productId = document.getElementById('id_product').value;
+            const tokenLogin = localStorage.getItem('auth_token');
+            if (!tokenLogin) {
+                window.location.href = '/login';
+                return;
+            }
 
-            fetch(`/product/create/cekwishlist/${productId}`)
+            const currentPath = window.location.pathname;
+            const parts = currentPath.split('/');
+            const slug = parts[2];
+            const token = parts[3];
+
+            fetch(`${API_BASE_URL}/product/create/cekwishlist/${slug}/${token}`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + tokenLogin
+                }
                 .then(response => response.json())
                 .then(data => {
                     const icon = document.getElementById('wishlistIcon');
@@ -1757,17 +2026,19 @@ $apiBaseUrl = env('API_BASE_URL');
                 })
                 .catch(error => {
                     console.error('Gagal cek wishlist:', error);
-                });
+                })
+            })
         });
-    </script>
+    </script> -->
 
     <script>
         document.addEventListener('click', function(e) {
             const card = e.target.closest('.product-card');
             if (card) {
-                const productId = card.getAttribute('data-id');
-                if (productId) {
-                    window.location.href = `/product/detail/${productId}`;
+                const slug = card.getAttribute('data-slug');
+                const token = card.getAttribute('data-token');
+                if (slug && token) {
+                    window.location.href = `/product/${slug}/${token}`;
                 }
             }
         });

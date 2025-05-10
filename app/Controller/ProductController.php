@@ -86,9 +86,9 @@ class ProductController
         // echo '</pre>';
         // exit;
         $model = [
-            "bestseller" => $bestseller,
-            "detail" => $detail,
-            "expensif" => $expensif,
+            // "bestseller" => $bestseller,
+            // // "detail" => $detail,
+            // "expensif" => $expensif,
             "title" => "Product Detail",
             "content" => "Welcome to the product detail page!",
         ];
