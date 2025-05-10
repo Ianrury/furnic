@@ -40,139 +40,139 @@ class PesananController
     public function index()
     {
         // Start the session if not already started
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
-        }
+        // if (session_status() === PHP_SESSION_NONE) {
+        //     session_start();
+        // }
 
-        $jenisPengiriman = $this->productServiser->GetPengiriman();
-        $toko = $this->productServiser->getAllToko();
+        // $jenisPengiriman = $this->productServiser->GetPengiriman();
+        // $toko = $this->productServiser->getAllToko();
 
-        // query mendapatkan produk yang ada di keranjang untuk user ini
-        $sessionId = $_COOKIE[self::$COOKIE_NAME] ?? null;
+        // // query mendapatkan produk yang ada di keranjang untuk user ini
+        // $sessionId = $_COOKIE[self::$COOKIE_NAME] ?? null;
 
-        if (!$sessionId) {
-            echo json_encode(['status' => 'error', 'message' => 'Silakan login terlebih dahulu']);
-            return;
-        }
+        // if (!$sessionId) {
+        //     echo json_encode(['status' => 'error', 'message' => 'Silakan login terlebih dahulu']);
+        //     return;
+        // }
 
-        $statement = $this->connection->prepare("SELECT id_user FROM session WHERE id_session = ? LIMIT 1");
-        $statement->execute([$sessionId]);
-        $session = $statement->fetch(\PDO::FETCH_ASSOC);
-        if (!$session || !isset($session['id_user'])) {
-            echo json_encode(['status' => 'error', 'message' => 'Sesi tidak valid, silakan login ulang']);
-            return;
-        }
-        $id_customer = $session['id_user']; // Ambil dari session
+        // $statement = $this->connection->prepare("SELECT id_user FROM session WHERE id_session = ? LIMIT 1");
+        // $statement->execute([$sessionId]);
+        // $session = $statement->fetch(\PDO::FETCH_ASSOC);
+        // if (!$session || !isset($session['id_user'])) {
+        //     echo json_encode(['status' => 'error', 'message' => 'Sesi tidak valid, silakan login ulang']);
+        //     return;
+        // }
+        // $id_customer = $session['id_user']; // Ambil dari session
 
-        $userQuery = $this->connection->prepare("SELECT id_customer, nama, email, no_hp, alamat, kode_pos, detail FROM customer WHERE id_customer = ?");
-        $userQuery->execute([$id_customer]);
-        $user = $userQuery->fetch(\PDO::FETCH_ASSOC);
+        // $userQuery = $this->connection->prepare("SELECT id_customer, nama, email, no_hp, alamat, kode_pos, detail FROM customer WHERE id_customer = ?");
+        // $userQuery->execute([$id_customer]);
+        // $user = $userQuery->fetch(\PDO::FETCH_ASSOC);
 
-        // Hapus awalan +62 dari no_hp jika ada
-        if ($user && isset($user['no_hp'])) {
-            $user['no_hp'] = preg_replace('/^\+62/', '', $user['no_hp']);
-        }
-        if (!$user) {
-            echo json_encode(['status' => 'error', 'message' => 'User tidak ditemukan']);
-            return;
-        }
+        // // Hapus awalan +62 dari no_hp jika ada
+        // if ($user && isset($user['no_hp'])) {
+        //     $user['no_hp'] = preg_replace('/^\+62/', '', $user['no_hp']);
+        // }
+        // if (!$user) {
+        //     echo json_encode(['status' => 'error', 'message' => 'User tidak ditemukan']);
+        //     return;
+        // }
 
-        // Check if we have selected cart IDs in the session
-        $selectedCartIds = $_SESSION['selected_cart_ids'] ?? [];
-        // var_dump($selectedCartIds); // Debugging line to check the selected cart IDs
-        // exit;
+        // // Check if we have selected cart IDs in the session
+        // $selectedCartIds = $_SESSION['selected_cart_ids'] ?? [];
+        // // var_dump($selectedCartIds); // Debugging line to check the selected cart IDs
+        // // exit;
 
-        if (empty($selectedCartIds)) {
+        // if (empty($selectedCartIds)) {
 
-            header("Location: /keranjang"); // Redirect to keranjang if no cart IDs are selected
-            exit;
-        }
+        //     header("Location: /keranjang"); // Redirect to keranjang if no cart IDs are selected
+        //     exit;
+        // }
 
-        // Convert cart IDs to a format suitable for SQL IN clause
-        $placeholders = implode(',', array_fill(0, count($selectedCartIds), '?'));
+        // // Convert cart IDs to a format suitable for SQL IN clause
+        // $placeholders = implode(',', array_fill(0, count($selectedCartIds), '?'));
 
-        // Modify the query to include the cart ID filter
-        $query = "
-            SELECT 
-                cart.id_cart,
-                cart.qty AS qty_cart,
-                cart.id_detail_product,
-                cart.id_motif_produk,
+        // // Modify the query to include the cart ID filter
+        // $query = "
+        //     SELECT 
+        //         cart.id_cart,
+        //         cart.qty AS qty_cart,
+        //         cart.id_detail_product,
+        //         cart.id_motif_produk,
                 
-                detail_product.warna,
-                motif_produk.motif,
-                motif_produk.qty AS qty_motif,
+        //         detail_product.warna,
+        //         motif_produk.motif,
+        //         motif_produk.qty AS qty_motif,
     
-                product.id_product,
-                product.nama_product,
-                product.deskripsi,
-                product.harga,
+        //         product.id_product,
+        //         product.nama_product,
+        //         product.deskripsi,
+        //         product.harga,
                 
-                -- Jika promo aktif, gunakan promo.total_promo sebagai diskon, kalau tidak, 0
-                CASE 
-                    WHEN promo.id_promo IS NOT NULL 
-                        THEN promo.total_promo 
-                    ELSE 0 
-                END AS diskon,
+        //         -- Jika promo aktif, gunakan promo.total_promo sebagai diskon, kalau tidak, 0
+        //         CASE 
+        //             WHEN promo.id_promo IS NOT NULL 
+        //                 THEN promo.total_promo 
+        //             ELSE 0 
+        //         END AS diskon,
                 
-                product.spesifikasi,
-                product.foto,
-                product.qty AS stok,
-                product.uom,
-                product.nama_vendor
+        //         product.spesifikasi,
+        //         product.foto,
+        //         product.qty AS stok,
+        //         product.uom,
+        //         product.nama_vendor
     
-            FROM cart
-            INNER JOIN product ON cart.id_product = product.id_product
-            LEFT JOIN promo ON product.id_promo = promo.id_promo 
-                AND promo.start_date <= CURDATE() 
-                AND promo.end_date >= CURDATE()
-            LEFT JOIN detail_product ON cart.id_detail_product = detail_product.id
-            LEFT JOIN motif_produk ON cart.id_motif_produk = motif_produk.id
-            WHERE cart.id_customer = ? 
-            AND cart.id_cart IN ($placeholders)
-        ";
+        //     FROM cart
+        //     INNER JOIN product ON cart.id_product = product.id_product
+        //     LEFT JOIN promo ON product.id_promo = promo.id_promo 
+        //         AND promo.start_date <= CURDATE() 
+        //         AND promo.end_date >= CURDATE()
+        //     LEFT JOIN detail_product ON cart.id_detail_product = detail_product.id
+        //     LEFT JOIN motif_produk ON cart.id_motif_produk = motif_produk.id
+        //     WHERE cart.id_customer = ? 
+        //     AND cart.id_cart IN ($placeholders)
+        // ";
 
-        // Prepare the query parameters: first is the customer ID, then all cart IDs
-        $queryParams = array_merge([$id_customer], $selectedCartIds);
+        // // Prepare the query parameters: first is the customer ID, then all cart IDs
+        // $queryParams = array_merge([$id_customer], $selectedCartIds);
 
-        $statement = $this->connection->prepare($query);
-        $statement->execute($queryParams);
-        $productsInCart = $statement->fetchAll(\PDO::FETCH_ASSOC);
+        // $statement = $this->connection->prepare($query);
+        // $statement->execute($queryParams);
+        // $productsInCart = $statement->fetchAll(\PDO::FETCH_ASSOC);
 
-        // If no products found with the given IDs, handle the error
-        if (empty($productsInCart)) {
-            header("Location: /keranjang"); // Redirect to keranjang if no products found
-            exit;
-        }
+        // // If no products found with the given IDs, handle the error
+        // if (empty($productsInCart)) {
+        //     header("Location: /keranjang"); // Redirect to keranjang if no products found
+        //     exit;
+        // }
 
-        $subtotal = 0;
-        $totalDiskon = 0;
+        // $subtotal = 0;
+        // $totalDiskon = 0;
 
-        foreach ($productsInCart as $item) {
-            $harga = $item['harga'];
-            $qty = $item['qty_cart'];
-            $diskonPersen = floatval($item['diskon']);
+        // foreach ($productsInCart as $item) {
+        //     $harga = $item['harga'];
+        //     $qty = $item['qty_cart'];
+        //     $diskonPersen = floatval($item['diskon']);
 
-            $itemSubtotal = $harga * $qty;
-            $itemDiskon = $itemSubtotal * ($diskonPersen / 100);
+        //     $itemSubtotal = $harga * $qty;
+        //     $itemDiskon = $itemSubtotal * ($diskonPersen / 100);
 
-            $subtotal += $itemSubtotal;
-            $totalDiskon += $itemDiskon;
-        }
+        //     $subtotal += $itemSubtotal;
+        //     $totalDiskon += $itemDiskon;
+        // }
 
-        $totalPembayaran = $subtotal - $totalDiskon;
-        $totalOngkir = 0;
+        // $totalPembayaran = $subtotal - $totalDiskon;
+        // $totalOngkir = 0;
 
         $model = [
             "title" => "Pesanan",
-            "jenisPengiriman" => $jenisPengiriman,
-            "subtotal" => $subtotal,
-            'user' => $user,
-            'total_diskon' => $totalDiskon,
-            'total_pembayaran' => $totalPembayaran,
-            'total_ongkir' => $totalOngkir,
-            "toko" => $toko,
-            "data" => $productsInCart,
+            // "jenisPengiriman" => $jenisPengiriman,
+            // "subtotal" => $subtotal,
+            // 'user' => $user,
+            // 'total_diskon' => $totalDiskon,
+            // 'total_pembayaran' => $totalPembayaran,
+            // 'total_ongkir' => $totalOngkir,
+            // "toko" => $toko,
+            // "data" => $productsInCart,
             "content" => "Welcome to the Pesanan page!",
         ];
         View::render('Pesanan/pesanan', $model);

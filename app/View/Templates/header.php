@@ -135,7 +135,7 @@ function is_active($route)
                                 <li style="position: relative;">
                                     <a href="#" class="list-link position-relative auth-link" data-url="/product/wishlist">
                                         <i class="far fa-heart text-dark fa-sm"></i>
-                                        <span id="wishlist-badge">7</span>
+                                        <span id="wishlist-badge">0</span>
                                     </a>
                                 </li>
 
@@ -222,8 +222,6 @@ function is_active($route)
 </div>
 
 <script>
-    // const API_BASE_URL = "<?= $apiBaseUrl ?>";
-
     document.addEventListener('DOMContentLoaded', function() {
         const token = localStorage.getItem('auth_token');
         if (!token) return;
@@ -294,7 +292,7 @@ function is_active($route)
                 }
             })
             .catch(error => {
-                console.error('Gagal cek wishlist:', error);
+                // console.error('Gagal cek wishlist:', error);
             });
 
     });
