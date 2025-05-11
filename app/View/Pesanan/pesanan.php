@@ -129,23 +129,19 @@ $apiBaseUrl = env('API_BASE_URL');
                             <!-- List Produk -->
                             <div class="col-lg-8 ps-0">
                                 <div class="custom-col rounded-4 panjang-card" style="border: 2px solid #D9D9D9;">
-                                    <div class="px-4 py-3">
+                                    <div class="px-4 py-3 mb-4 border rounded shadow-sm">
                                         <div>
                                             <h4 class="text-black text-header-informasi">Alamat Pengirim</h4>
                                         </div>
                                         <div class="text-alamat-rumah my-2">
-                                            <p id="display_detail"><?= ucfirst($model['user']['detail'] ?? '') ?></p>
-                                            <p id="display_nama"><?= $model['user']['nama'] ?? '' ?></p>
-                                            <p id="display_hp"><?= $model['user']['no_hp'] ?? '' ?></p>
-                                            <p id="display_alamat"><?= $model['user']['alamat'] ?? '' ?></p>
-                                            <p id="display_email" class="d-none"><?= $model['user']['email'] ?? '' ?>
-                                            </p>
-
-                                            <!-- untuk keperluan update -->
+                                            <p id="display_detail"></p>
+                                            <p id="display_nama"></p>
+                                            <p id="display_hp"></p>
+                                            <p id="display_alamat"></p>
+                                            <p id="display_email" class="d-none"></p>
                                         </div>
                                         <div>
-                                            <button class="button-edit" data-bs-toggle="modal"
-                                                data-bs-target="#editAlamatModal">Edit Alamat</button>
+                                            <button class="button-edit" data-bs-toggle="modal" data-bs-target="#editAlamatModal">Edit Alamat</button>
                                         </div>
                                     </div>
                                 </div>
@@ -175,30 +171,9 @@ $apiBaseUrl = env('API_BASE_URL');
                                             <div class="pt-3 px-2" id="pengiriman-content">
                                                 <!-- Default aktif: Antar ke Alamat -->
                                                 <h6 class="text-black header-pilih-jasa">Pilih jasa Pengiriman</h6>
-                                                <?php foreach ($model['jenisPengiriman'] as $pengiriman): ?>
-                                                    <div
-                                                        class="d-flex justify-content-between align-items-center w-100 mt-2">
-                                                        <div class="d-flex align-items-center gap-2">
-                                                            <input type="checkbox" id="pengiriman_<?= $pengiriman['id'] ?>"
-                                                                name="jenis_pengiriman" value="<?= $pengiriman['id'] ?>">
-                                                            <div class="text-detail-jasa">
-                                                                <?= htmlspecialchars($pengiriman['nama']) ?>
-                                                            </div>
-                                                        </div>
-                                                        <div class="d-flex align-items-center gap-3">
-                                                            <?php if ($pengiriman['diskon'] > 0): ?>
-                                                                <div class="text-danger old-price fw-normal">
-                                                                    <sup>Rp</sup><span
-                                                                        class="text-decoration-line-through"><?= number_format($pengiriman['harga'], 0, ',', '.') ?></span>
-                                                                </div>
-                                                            <?php endif; ?>
-                                                            <div class="text-nominal text-black">
-                                                                <?= $pengiriman['harga_setelah_diskon'] == 0 ? 'gratis' : 'Rp ' . number_format($pengiriman['harga_setelah_diskon'], 0, ',', '.') ?>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                <?php endforeach; ?>
-
+                                                <div id="pengiriman-content">
+                                                    <!-- Delivery content will be loaded here -->
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -221,152 +196,9 @@ $apiBaseUrl = env('API_BASE_URL');
                                             <div style="width: 15%; text-align: center;" class="text-header">Harga</div>
                                             <div style="width: 20%; text-align: center;" class="text-header">Total</div>
                                         </div>
-
-                                        <?php foreach ($model['data'] as $item): ?>
-                                            <div class="w-100 p-4 pt-0 d-flex align-items-center">
-                                                <!-- Product Column -->
-                                                <div style="width: 50%;" class="d-flex gap-3 align-items-center">
-                                                    <div class="card shadow position-relative rounded-4 p-2">
-                                                        <!-- Corner Ribbon -->
-                                                        <div class="position-absolute ribbon-wrapper-keranjang">
-                                                            <div
-                                                                class="ribbon-keranjang text-white text-uppercase fw-bold text-center">
-                                                                New Product
-                                                            </div>
-                                                        </div>
-                                                        <!-- Product Image -->
-                                                        <div class="text-center pt-3">
-                                                            <img src="assets/img/product/<?= htmlspecialchars($item['foto']) ?>"
-                                                                class=" img-fluid product-image-keranjang"
-                                                                alt="Product Image">
-                                                        </div>
-                                                    </div>
-                                                    <div>
-                                                        <h5 class="title-keranjang">
-                                                            <?= htmlspecialchars($item['nama_product']) ?>
-                                                        </h5>
-                                                        <p class="name-keranjang">
-                                                            <?= htmlspecialchars($item['deskripsi']) ?>
-                                                        </p>
-                                                        <ul class="list-unstyled m-0 p-0">
-                                                            <li class="motif-keranjang">
-                                                                <span class="label-keranjang">Warna</span> : <span
-                                                                    class="value-keranjang"><?= htmlspecialchars($item['warna']) ?></span>
-                                                            </li>
-                                                            <li class="motif-keranjang">
-                                                                <span class="label-keranjang">Motif</span> : <span
-                                                                    class="value-keranjang"><?= htmlspecialchars($item['motif']) ?></span>
-                                                            </li>
-                                                        </ul>
-                                                        <div class="d-flex flex-wrap align-items-baseline">
-                                                            <div class="me-2">
-                                                                <span class="fw-bold title-keranjang">
-                                                                    <?php
-                                                                    $harga_normal = $item['harga']; // harga normal dari database
-                                                                    $diskon = $item['diskon']; // diskon dari database, bisa null atau 0
-
-                                                                    // Jika diskon ada (lebih dari 0), hitung harga setelah diskon
-                                                                    if ($diskon > 0):
-                                                                        // Menghitung nominal diskon
-                                                                        $nominal_diskon = ($diskon / 100) * $harga_normal;
-                                                                        // Menghitung harga setelah diskon
-                                                                        $harga_setelah_diskon = $harga_normal - $nominal_diskon;
-                                                                    else:
-                                                                        // Jika tidak ada diskon, harga tetap harga normal
-                                                                        $harga_setelah_diskon = $harga_normal;
-                                                                    endif;
-                                                                    ?>
-
-                                                                    <sup class="fw-normal">Rp</sup>
-                                                                    <?= number_format($harga_setelah_diskon, 0, ',', '.') ?>
-                                                                </span>
-                                                            </div>
-                                                            <div>
-                                                                <?php
-                                                                $harga_normal = $item['harga']; // harga normal dari database
-                                                                $diskon = $item['diskon']; // diskon dari database, bisa null atau 0
-
-                                                                // Jika diskon ada (lebih dari 0), tampilkan harga lama dengan diskon
-                                                                if ($diskon > 0):
-                                                                    // Menghitung nominal diskon
-                                                                    $nominal_diskon = ($diskon / 100) * $harga_normal;
-                                                                ?>
-                                                                    <div>
-                                                                        <span class="fw-normal text-danger old-price">
-                                                                            <sup>Rp</sup>
-                                                                            <span class="text-decoration-line-through">
-                                                                                <?= number_format($nominal_diskon, 0, ',', '.') ?>
-                                                                            </span>
-                                                                        </span>
-                                                                    </div>
-                                                                <?php
-                                                                endif;
-                                                                ?>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <!-- Quantity Column -->
-                                                <div style="width: 15%; text-align: center;">
-                                                    <span class="fw-normal text-black" style="font-size: 14px;"
-                                                        id="qty-<?= $item['id_cart'] ?>"
-                                                        data-max="<?= $item['qty_motif'] ?>"
-                                                        data-price="<?= ($item['diskon'] > 0) ? ($item['harga'] - ($item['diskon'] / 100 * $item['harga'])) : $item['harga'] ?>">
-                                                        <?= ($item['qty_cart'] > $item['qty_motif']) ? $item['qty_motif'] : $item['qty_cart'] ?>
-                                                    </span>
-                                                </div>
-
-                                                <!-- Price Column -->
-                                                <div style="width: 15%; text-align: center;">
-                                                    <?php
-                                                    // Menghitung harga setelah diskon (jika ada)
-                                                    $harga_normal = $item['harga']; // Harga normal dari database
-                                                    $diskon = $item['diskon']; // Diskon dari database
-
-                                                    // Jika diskon ada, hitung harga setelah diskon
-                                                    if ($diskon > 0) {
-                                                        $nominal_diskon = ($diskon / 100) * $harga_normal; // Nominal diskon
-                                                        $harga_setelah_diskon = $harga_normal - $nominal_diskon; // Harga setelah diskon
-                                                    } else {
-                                                        $harga_setelah_diskon = $harga_normal; // Tidak ada diskon, gunakan harga normal
-                                                    }
-                                                    ?>
-                                                    <span class="fw-bold title-keranjang">
-                                                        <sup class="fw-normal">Rp</sup>
-                                                        <?= number_format($harga_setelah_diskon, 0, ',', '.') ?>
-                                                    </span>
-                                                </div>
-
-                                                <!-- Total Column -->
-                                                <div style="width: 20%; text-align: center;">
-                                                    <?php
-                                                    // Menghitung qty yang valid (tidak melebihi qty_motif)
-                                                    $qty = ($item['qty_cart'] > $item['qty_motif']) ? $item['qty_motif'] : $item['qty_cart'];
-
-                                                    // Menghitung harga setelah diskon (jika ada)
-                                                    $harga_normal = $item['harga']; // Harga normal dari database
-                                                    $diskon = $item['diskon']; // Diskon dari database
-
-                                                    // Jika diskon ada, hitung harga setelah diskon
-                                                    if ($diskon > 0) {
-                                                        $nominal_diskon = ($diskon / 100) * $harga_normal; // Nominal diskon
-                                                        $harga_setelah_diskon = $harga_normal - $nominal_diskon; // Harga setelah diskon
-                                                    } else {
-                                                        $harga_setelah_diskon = $harga_normal; // Tidak ada diskon, gunakan harga normal
-                                                    }
-
-                                                    // Hitung total harga
-                                                    $total = $qty * $harga_setelah_diskon;
-                                                    ?>
-                                                    <span id="total-<?= $item['id_cart'] ?>"
-                                                        class="fw-bold title-keranjang total-produk-detail">
-                                                        <sup class="fw-normal">Rp</sup>
-                                                        <?= number_format($total, 0, ',', '.') ?>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        <?php endforeach; ?>
+                                        <div id="product-list" class="mb-4">
+                                            <!-- Products will be dynamically loaded here -->
+                                        </div>
                                         <div class="px-4">
                                             <hr class="hr-tebal">
                                         </div>
@@ -380,55 +212,45 @@ $apiBaseUrl = env('API_BASE_URL');
 
                                             <!-- Card B: Selalu terlihat -->
                                             <div class="col-lg-6">
-                                                <div class="px-4 py-2 bg-white">
-                                                    <!-- Subtotal -->
-                                                    <div>
-                                                        <h1 class="fw-bold text-black" style="font-size: 16px;">Detail
-                                                            Rincian Pembayaran</h1>
-                                                        <div class="order-summary">
-                                                            <div class="summary-label">Subtotal Harga</div>
-                                                            <div class="summary-value">
-                                                                <span class="currency-symbol">Rp</span>
-                                                                <?= number_format($model['subtotal'], 0, ',', '.') ?>
-                                                            </div>
-
-                                                            <div class="summary-label">Total Diskon</div>
-                                                            <div class="summary-value">
-                                                                <span class="currency-symbol">Rp</span>
-                                                                <?= number_format($model['total_diskon'], 0, ',', '.') ?>
-                                                            </div>
-
-                                                            <div class="summary-label">Total Ongkir</div>
-                                                            <div class="summary-value"><span
-                                                                    class="currency-symbol">Rp</span> <span
-                                                                    id="total-ongkir">0</span></div>
-                                                        </div>
-                                                        <hr class="hr-tebal" style="margin-top: 10px;">
-                                                        <div class="order-summary" style="font-weight: bold;">
-                                                            <div class="summary-label">Total Pembayaran</div>
-                                                            <div class="summary-value"><span
-                                                                    class="currency-symbol">Rp</span> <span
-                                                                    id="total-pembayaran">
-                                                                    <?= number_format($model['total_pembayaran'], 0, ',', '.') ?></span>
-                                                            </div>
+                                                <div class="px-4 py-3 mb-4 border rounded shadow-sm">
+                                                    <h1 class="fw-bold text-black" style="font-size: 16px;">Detail Rincian Pembayaran</h1>
+                                                    <div class="order-summary">
+                                                        <div class="summary-label">Subtotal Harga</div>
+                                                        <div class="summary-value">
+                                                            <span class="currency-symbol">Rp</span>
+                                                            <span id="subtotal">0</span>
                                                         </div>
 
+                                                        <div class="summary-label">Total Diskon</div>
+                                                        <div class="summary-value">
+                                                            <span class="currency-symbol">Rp</span>
+                                                            <span id="total-diskon">0</span>
+                                                        </div>
+
+                                                        <div class="summary-label">Total Ongkir</div>
+                                                        <div class="summary-value">
+                                                            <span class="currency-symbol">Rp</span>
+                                                            <span id="total-ongkir">0</span>
+                                                        </div>
+                                                    </div>
+                                                    <hr class="hr-tebal" style="margin-top: 10px;">
+                                                    <div class="order-summary" style="font-weight: bold;">
+                                                        <div class="summary-label">Total Pembayaran</div>
+                                                        <div class="summary-value">
+                                                            <span class="currency-symbol">Rp</span>
+                                                            <span id="total-pembayaran">0</span>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="px-4 mb-3 pt-2">
+                                        <div class="px-4 py-3">
                                             <form id="formBayar" method="post">
                                                 <input type="text" id="id_toko" value="" hidden>
-                                                <!-- <input type="text" id="id_warna" value="" hidden>
-                                                <input type="text" id="id_motif" value="" hidden> -->
                                                 <input type="text" id="id_pengiriman" value="" hidden>
-                                                <button type="submit" class="btn btn-buy w-100 rounded-3 fw-bold"
-                                                    style="font-size: 14px;">Bayar</button>
+                                                <button type="submit" class="btn btn-buy w-100 rounded-3 fw-bold" style="font-size: 14px;">Bayar</button>
                                             </form>
                                         </div>
-
-
                                         <!-- Selesai 1 produk -->
                                     </div>
                                 </div>
@@ -690,7 +512,7 @@ $apiBaseUrl = env('API_BASE_URL');
                 formData.append('id_pengiriman', idPengiriman);
 
                 // Kirim data ke server
-                fetch( API_BASE_URL + '/pesanan', {
+                fetch(API_BASE_URL + '/pesanan', {
                         method: 'POST',
                         body: formData
                     })
@@ -738,6 +560,299 @@ $apiBaseUrl = env('API_BASE_URL');
             }
         });
     </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const token = localStorage.getItem('auth_token');
+            console.log(token);
+            if (!token) {
+                window.location.href = '/login';
+                return;
+            }
+
+            // Mendapatkan cart_ids dari localStorage
+            const cartIds = localStorage.getItem('cart_ids');
+            console.log(cartIds);
+
+            fetch(`${API_BASE_URL}/pesanan/index?cart_ids=${cartIds}`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': 'Bearer ' + token
+                    },
+                })
+                .then(res => res.json())
+                .then(response => {
+                    const data = response.data;
+                    if (!data || !data.user) {
+                        console.error("User data is missing or undefined");
+                        return;
+                    }
+
+                    console.log("User:", data.user);
+                    console.log("Products:", data.products);
+                    console.log("Pengiriman:", data.jenisPengiriman);
+                    console.log("subtotal:", data.subtotal);
+                    console.log("total_diskon:", data.total_diskon);
+                    console.log("total_pembayaran:", data.total_pembayaran);
+
+                    // Fill user data
+                    populateUserData(data.user);
+
+                    // Render products
+                    renderProducts(data.products);
+
+                    // Set up delivery methods
+                    setupDeliveryMethods(data.jenisPengiriman, data.toko, data.subtotal - data.total_diskon);
+
+                    // Update payment summary
+                    updatePaymentSummary(data.subtotal, data.total_diskon, data.total_pembayaran);
+                })
+                .catch(error => {
+                    console.error("FETCH ERROR:", error.message);
+                });
+
+            // Handle form submission
+            document.getElementById('formBayar').addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                const idToko = document.getElementById('id_toko').value;
+                const idPengiriman = document.getElementById('id_pengiriman').value;
+
+                if (!idToko && !idPengiriman) {
+                    alert('Silakan pilih metode pengiriman terlebih dahulu');
+                    return;
+                }
+
+                // Submit payment logic here
+                console.log('Processing payment with toko:', idToko, 'pengiriman:', idPengiriman);
+                // Add your payment processing code
+            });
+        });
+
+        function populateUserData(user) {
+            document.getElementById('display_detail').textContent = user.detail ? ucFirst(user.detail) : '';
+            document.getElementById('display_nama').textContent = user.nama || '';
+            document.getElementById('display_hp').textContent = user.no_hp || '';
+            document.getElementById('display_alamat').textContent = user.alamat || '';
+            document.getElementById('display_email').textContent = user.email || '';
+        }
+
+        function renderProducts(products) {
+            const productListElement = document.getElementById('product-list');
+            let productHTML = '';
+
+            products.forEach(item => {
+                // Calculate discounted price
+                const hargaNormal = parseInt(item.harga);
+                const diskon = parseInt(item.diskon);
+                let hargaSetelahDiskon = hargaNormal;
+                let nominalDiskon = 0;
+
+                if (diskon > 0) {
+                    nominalDiskon = (diskon / 100) * hargaNormal;
+                    hargaSetelahDiskon = hargaNormal - nominalDiskon;
+                }
+
+                // Determine valid quantity (not exceeding available stock)
+                const validQty = (parseInt(item.qty_cart) > parseInt(item.qty_motif)) ?
+                    parseInt(item.qty_motif) : parseInt(item.qty_cart);
+
+                // Calculate total price for this item
+                const totalItemPrice = validQty * hargaSetelahDiskon;
+
+                productHTML += `
+            <div class="w-100 p-4 pt-0 d-flex align-items-center border-bottom pb-3">
+                <!-- Product Column -->
+                <div style="width: 50%;" class="d-flex gap-3 align-items-center">
+                    <div class="card shadow position-relative rounded-4 p-2">
+                        <!-- Corner Ribbon -->
+                        <div class="position-absolute ribbon-wrapper-keranjang">
+                            <div class="ribbon-keranjang text-white text-uppercase fw-bold text-center">
+                                New Product
+                            </div>
+                        </div>
+                        <!-- Product Image -->
+                        <div class="text-center pt-3">
+                            <img src="${item.url_foto}"
+                                class="img-fluid product-image-keranjang"
+                                alt="${item.nama_product}">
+                        </div>
+                    </div>
+                    <div>
+                        <h5 class="title-keranjang">
+                            ${item.nama_product}
+                        </h5>
+                        <p class="name-keranjang">
+                            ${item.deskripsi}
+                        </p>
+                        <ul class="list-unstyled m-0 p-0">
+                            <li class="motif-keranjang">
+                                <span class="label-keranjang">Warna</span> : <span
+                                    class="value-keranjang">${item.warna}</span>
+                            </li>
+                            <li class="motif-keranjang">
+                                <span class="label-keranjang">Motif</span> : <span
+                                    class="value-keranjang">${item.motif}</span>
+                            </li>
+                        </ul>
+                        <div class="d-flex flex-wrap align-items-baseline">
+                            <div class="me-2">
+                                <span class="fw-bold title-keranjang">
+                                    <sup class="fw-normal">Rp</sup>
+                                    ${formatNumber(hargaSetelahDiskon)}
+                                </span>
+                            </div>
+                            <div>
+                                ${diskon > 0 ? `
+                                <div>
+                                    <span class="fw-normal text-danger old-price">
+                                        <sup>Rp</sup>
+                                        <span class="text-decoration-line-through">
+                                            ${formatNumber(hargaNormal)}
+                                        </span>
+                                    </span>
+                                </div>` : ''}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quantity Column -->
+                <div style="width: 15%; text-align: center;">
+                    <span class="fw-normal text-black" style="font-size: 14px;"
+                        id="qty-${item.id_cart}"
+                        data-max="${item.qty_motif}"
+                        data-price="${hargaSetelahDiskon}">
+                        ${validQty}
+                    </span>
+                </div>
+
+                <!-- Price Column -->
+                <div style="width: 15%; text-align: center;">
+                    <span class="fw-bold title-keranjang">
+                        <sup class="fw-normal">Rp</sup>
+                        ${formatNumber(hargaSetelahDiskon)}
+                    </span>
+                </div>
+
+                <!-- Total Column -->
+                <div style="width: 20%; text-align: center;">
+                    <span id="total-${item.id_cart}"
+                        class="fw-bold title-keranjang total-produk-detail">
+                        <sup class="fw-normal">Rp</sup>
+                        ${formatNumber(totalItemPrice)}
+                    </span>
+                </div>
+            </div>`;
+            });
+
+            productListElement.innerHTML = productHTML;
+        }
+
+        function potongDeskripsi(teks, jumlahKata = 10) {
+            const kata = teks.split(' ');
+            if (kata.length <= jumlahKata) return teks;
+            return kata.slice(0, jumlahKata).join(' ') + '...';
+        }
+
+        function setupDeliveryMethods(jenisPengiriman, tokoList, baseTotal) {
+            const btnAntar = document.getElementById('btn-antar');
+            const btnAmbil = document.getElementById('btn-ambil');
+            const content = document.getElementById('pengiriman-content');
+            const idTokoInput = document.getElementById('id_toko');
+            const idPengirimanInput = document.getElementById('id_pengiriman');
+            const ongkirEl = document.getElementById('total-ongkir');
+            const totalPembayaranEl = document.getElementById('total-pembayaran');
+
+            function renderContent(type) {
+                if (type === 'antar') {
+                    let html = `<h6 class="text-black header-pilih-jasa">Pilih jasa Pengiriman</h6>`;
+                    jenisPengiriman.forEach(p => {
+                        const harga = parseInt(p.harga_setelah_diskon);
+                        const originalHarga = parseInt(p.harga);
+                        html += `
+                    <div class="d-flex justify-content-between align-items-center w-100 mt-2">
+                        <div class="d-flex align-items-center gap-2">
+                            <input type="radio" name="jenis_pengiriman" id="pengiriman_${p.id}" value="${p.id}" data-harga="${harga}" onchange="selectPengiriman(this)">
+                            <div class="text-detail-jasa">${p.nama}</div>
+                        </div>
+                        <div class="d-flex align-items-center gap-3">
+                            ${p.diskon > 0 ? `<div class="text-danger old-price fw-normal"><sup>Rp</sup><span class="text-decoration-line-through">${formatNumber(originalHarga)}</span></div>` : ''}
+                            <div class="text-nominal text-black">${harga === 0 ? 'gratis' : 'Rp ' + formatNumber(harga)}</div>
+                        </div>
+                    </div>`;
+                    });
+                    content.innerHTML = html;
+                } else {
+                    let html = `<h6 class="text-black header-pilih-jasa">Pilih Lokasi Pengambilan</h6>`;
+                    tokoList.forEach(toko => {
+                        html += `
+                    <div class="d-flex align-items-start gap-2 w-100 mt-2">
+                        <input type="radio" name="lokasi_toko" value="${toko.id}" onchange="selectToko(this)" style="margin-top: 4px;">
+                        <div class="d-flex flex-column">
+                            <div class="text-detail-jasa">${toko.nama}</div>
+                            <div class="text-detail-jasa">${toko.alamat || 'Alamat tidak tersedia'}</div>
+                        </div>
+                    </div>`;
+                    });
+                    content.innerHTML = html;
+                }
+            }
+
+            window.selectPengiriman = function(el) {
+                const harga = parseInt(el.dataset.harga);
+                idPengirimanInput.value = el.value;
+                idTokoInput.value = '';
+                ongkirEl.innerText = formatNumber(harga);
+                totalPembayaranEl.innerText = formatNumber(baseTotal + harga);
+            };
+
+            window.selectToko = function(el) {
+                idTokoInput.value = el.value;
+                idPengirimanInput.value = '';
+                ongkirEl.innerText = '0';
+                totalPembayaranEl.innerText = formatNumber(baseTotal);
+            };
+
+            btnAntar.addEventListener('click', () => {
+                renderContent('antar');
+                btnAntar.classList.add('active');
+                btnAmbil.classList.remove('active');
+                idTokoInput.value = '';
+                idPengirimanInput.value = '';
+                ongkirEl.innerText = '0';
+                totalPembayaranEl.innerText = formatNumber(baseTotal);
+            });
+
+            btnAmbil.addEventListener('click', () => {
+                renderContent('ambil');
+                btnAmbil.classList.add('active');
+                btnAntar.classList.remove('active');
+                idTokoInput.value = '';
+                idPengirimanInput.value = '';
+                ongkirEl.innerText = '0';
+                totalPembayaranEl.innerText = formatNumber(baseTotal);
+            });
+
+            // Render default antar saat load
+            renderContent('antar');
+        }
+
+        function updatePaymentSummary(subtotal, totalDiskon, totalPembayaran) {
+            document.getElementById('subtotal').innerText = formatNumber(subtotal);
+            document.getElementById('total-diskon').innerText = formatNumber(totalDiskon);
+            document.getElementById('total-pembayaran').innerText = formatNumber(totalPembayaran);
+        }
+
+        function formatNumber(number) {
+            return new Intl.NumberFormat('id-ID').format(number);
+        }
+
+        function ucFirst(string) {
+            return string.charAt(0).toUpperCase() + string.slice(1);
+        }
+    </script>
+
 
     <script>
         $('#formEditUser').on('submit', function(e) {

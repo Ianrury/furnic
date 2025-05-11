@@ -3,6 +3,8 @@ function base_url($path = '')
 {
     return '/' . ltrim($path, '/');
 }
+require_once __DIR__ . '/../../app/env.php';
+$apiBaseUrl = env('API_BASE_URL');
 ?>
 
 <!DOCTYPE html>
@@ -67,6 +69,26 @@ function base_url($path = '')
             border: 5px solid white;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             object-fit: cover;
+        }
+
+        .alamat-item {
+            position: relative;
+        }
+
+        .label-utama {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #198754;
+            /* Bootstrap's success color */
+            color: white;
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            z-index: 1;
         }
 
         .profile-card {
@@ -196,21 +218,31 @@ function base_url($path = '')
                             </div>
                             <div class="col-md-6">
                                 <div class="d-flex align-items-center mb-2">
-                                    <h2 class="mb-0">Ibu Siti Rahayu</h2>
-                                    <span class="ms-2 badge bg-light text-dark"><i
-                                            class="fas fa-check-circle text-primary me-1"></i>Terverifikasi</span>
+                                    <h2 class="mb-0">
+                                        <i class="fas fa-user me-2"></i>
+                                        <span id="name-header"> Ibu Siti Rahayu</span>
+                                    </h2>
+                                    <span class="ms-2 badge bg-light text-dark">
+                                        <i class="fas fa-check-circle text-primary me-1"></i>Terverifikasi
+                                    </span>
                                 </div>
-                                <p class="mb-2"><i class="fas fa-envelope me-2"></i>sitirahayu@email.com</p>
-                                <p class="mb-2"><i class="fas fa-phone me-2"></i>+62 812 3456 7890</p>
-                                <p class="mb-0"><i class="fas fa-map-marker-alt me-2"></i>Jakarta, Indonesia</p>
+                                <p class="mb-2">
+                                    <i class="fas fa-envelope me-2"></i><span id="email-header">sitirahayu@email.com</span>
+                                </p>
+                                <p class="mb-2">
+                                    <i class="fas fa-phone me-2"></i><span id="phone-header">+62 812 3456 7890</span>
+                                </p>
+                                <p class="mb-0"><i class="fas fa-map-marker-alt me-2"></i> <span>Indonesia</span></p>
                             </div>
                             <div class="col-md-4 text-md-end mt-3 mt-md-0">
                                 <div class="mb-2">
                                     <span class="badge badge-status me-2"><i class="fas fa-award me-1"></i>Member
                                         Silver</span>
                                 </div>
-                                <p class="mb-2"><i class="fas fa-shopping-bag me-1"></i>25 Transaksi Berhasil</p>
-                                <button class="btn btn-light mt-2"><i class="fas fa-edit me-1"></i>Edit Profil</button>
+                                <p class="mb-2" id="count-order">
+                                    <i class="fas fa-shopping-bag me-1"></i><span id="successful-payment-count">0</span> Transaksi Berhasil
+                                </p>
+                                <button class="btn btn-light mt-2 trigger-tab-akun"><i class="fas fa-edit me-1"></i>Edit Profil</button>
                             </div>
                         </div>
                     </div>
@@ -241,7 +273,7 @@ function base_url($path = '')
                                 <a class="nav-link mb-2" href="#pembayaran" data-bs-toggle="tab">
                                     <i class="fas fa-credit-card me-2"></i>Metode Pembayaran
                                 </a>
-                                <a class="nav-link mb-2" href="#pengaturan-akun" data-bs-toggle="tab">
+                                <a class="nav-link mb-2" id="nav-akun-tab" href="#pengaturan-akun" data-bs-toggle="tab">
                                     <i class="fas fa-shield-alt me-2"></i>Keamanan Akun
                                 </a>
                             </nav>
@@ -257,39 +289,40 @@ function base_url($path = '')
                             <div class="card profile-card mb-4">
                                 <div class="card-header bg-white d-flex justify-content-between align-items-center">
                                     <h5 class="mb-0">Informasi Pribadi</h5>
-                                    <span class="edit-icon"><i class="fas fa-edit"></i></span>
+                                    <span class="edit-icon trigger-tab-akun"><i class="fas fa-edit"></i></span>
                                 </div>
                                 <div class="card-body">
                                     <div class="row mb-3">
                                         <div class="col-md-4">
                                             <p class="text-muted mb-1">Nama Lengkap</p>
-                                            <p class="fw-bold">Siti Rahayu</p>
+                                            <p class="fw-bold" id="user-nama"></p>
                                         </div>
                                         <div class="col-md-4">
                                             <p class="text-muted mb-1">Tanggal Lahir</p>
-                                            <p class="fw-bold">15 Mei 1985</p>
+                                            <p class="fw-bold" id="user-tanggal-lahir"></p>
                                         </div>
                                         <div class="col-md-4">
                                             <p class="text-muted mb-1">Jenis Kelamin</p>
-                                            <p class="fw-bold">Perempuan</p>
+                                            <p class="fw-bold" id="user-jenis-kelamin"></p>
                                         </div>
                                     </div>
                                     <hr>
                                     <div class="row mb-3">
                                         <div class="col-md-4">
                                             <p class="text-muted mb-1">Nomor Telepon</p>
-                                            <p class="fw-bold">+62 812 3456 7890</p>
+                                            <p class="fw-bold" id="user-phone"></p>
                                         </div>
                                         <div class="col-md-4">
                                             <p class="text-muted mb-1">Email</p>
-                                            <p class="fw-bold">sitirahayu@email.com</p>
+                                            <p class="fw-bold" id="user-email"></p>
                                         </div>
                                         <div class="col-md-4">
                                             <p class="text-muted mb-1">Bergabung Sejak</p>
-                                            <p class="fw-bold">12 Januari 2023</p>
+                                            <p class="fw-bold" id="user-bergabung"></p>
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
 
                             <div class="card profile-card">
@@ -572,104 +605,8 @@ function base_url($path = '')
                                     <h5 class="mb-0">Wishlist Saya</h5>
                                 </div>
                                 <div class="card-body">
-                                    <div class="row">
-                                        <!-- Wishlist Item 1 -->
-                                        <div class="col-md-6 mb-4">
-                                            <div class="card wishlist-item h-100">
-                                                <div class="row g-0">
-                                                    <div class="col-4">
-                                                        <img src="assets/img/product/UT M01 2.png" width="150"
-                                                            height="150"
-                                                            class="img-fluid rounded-start h-100 object-fit-cover"
-                                                            alt="Product">
-                                                    </div>
-                                                    <div class="col-8">
-                                                        <div class="card-body">
-                                                            <h6 class="card-title">Headphone Sony WH-1000XM5</h6>
-                                                            <div class="d-flex align-items-center mb-2">
-                                                                <span class="text-warning me-1"><i
-                                                                        class="fas fa-star"></i></span>
-                                                                <span>4.9 (120 ulasan)</span>
-                                                            </div>
-                                                            <p class="card-text text-primary fw-bold mb-3">Rp 4.599.000
-                                                            </p>
-                                                            <div class="d-flex">
-                                                                <button class="btn btn-sm btn-primary me-2">Tambah ke
-                                                                    Keranjang</button>
-                                                                <button class="btn btn-sm btn-outline-danger"><i
-                                                                        class="fas fa-trash"></i></button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- Wishlist Item 2 -->
-                                        <div class="col-md-6 mb-4">
-                                            <div class="card wishlist-item h-100">
-                                                <div class="row g-0">
-                                                    <div class="col-4">
-                                                        <img src="assets/img/product/UT M01 2.png" width="150"
-                                                            height="150"
-                                                            class="img-fluid rounded-start h-100 object-fit-cover"
-                                                            alt="Product">
-                                                    </div>
-                                                    <div class="col-8">
-                                                        <div class="card-body">
-                                                            <h6 class="card-title
-">Laptop ASUS ROG Zephyrus G14</h6>
-                                                            <div class="d-flex align-items-center mb-2">
-                                                                <span class="text-warning me-1"><i
-                                                                        class="fas fa-star"></i></span>
-                                                                <span>4.8 (85 ulasan)</span>
-                                                            </div>
-                                                            <p class="card-text text-primary fw-bold mb-3">Rp 22.999.000
-                                                            </p>
-                                                            <div class="d-flex">
-                                                                <button class="btn btn-sm btn-primary me-2">Tambah ke
-                                                                    Keranjang</button>
-                                                                <button class="btn btn-sm btn-outline-danger"><i
-                                                                        class="fas fa-trash"></i></button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- Wishlist Item 3 -->
-                                        <div class="col-md-6 mb-4">
-                                            <div class="card wishlist-item h-100">
-                                                <div class="row g-0">
-                                                    <div class="col-4">
-                                                        <img src="assets/img/product/UT M01 2.png" width="150"
-                                                            height="150"
-                                                            class="img-fluid rounded-start h-100 object-fit-cover"
-                                                            alt="Product">
-                                                    </div>
-                                                    <div class="col-8">
-                                                        <div class="card-body">
-                                                            <h6
-                                                                class="card-title                                                        ">
-                                                                Smartphone Samsung Galaxy S22</h6>
-                                                            <div class="d-flex align-items-center mb-2">
-                                                                <span class="text-warning me-1"><i
-                                                                        class="fas fa-star"></i></span>
-                                                                <span>4.7 (200 ulasan)</span>
-                                                            </div>
-                                                            <p class="card-text text-primary fw-bold mb-3">Rp 12.999.000
-                                                            </p>
-                                                            <div class="d-flex">
-                                                                <button class="btn btn-sm btn-primary me-2">Tambah ke
-                                                                    Keranjang</button>
-                                                                <button class="btn btn-sm btn-outline-danger"><i
-                                                                        class="fas fa-trash"></i></button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- Wishlist Item 4 -->
+                                    <div class="row" id="wishlist-list">
+
                                     </div>
                                 </div>
 
@@ -682,55 +619,11 @@ function base_url($path = '')
                                     <h5 class="mb-0">Alamat Tersimpan</h5>
                                 </div>
                                 <div class="card-body">
-                                    <div class="row">
-                                        <!-- Alamat Item 1 -->
-                                        <div class="col-md-6 mb-4">
-                                            <div class="card alamat-item h-100">
-                                                <div class="row g-0">
-                                                    <div class="col-12">
-                                                        <div class="card-body">
-                                                            <h6 class="card-title">Budi Santoso</h6>
-                                                            <p class="card-text">Jl. Raya Serpong No.10, RT.2/RW.1,
-                                                                Serpong,<br>
-                                                                Kota Tangerang Selatan, Banten 15310</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <div class="card-footer d-flex justify-content-between">
-                                                            <button class="btn btn-sm btn-primary">Edit</button>
-                                                            <button class="btn btn-sm btn-outline-danger"><i
-                                                                    class="fas fa-trash"></i></button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- Alamat Item 2 -->
-                                        <div class="col-md-6 mb-4">
-                                            <div class="card alamat-item h-100">
-                                                <div class="row g-0">
-                                                    <div class="col-12">
-                                                        <div class="card-body">
-                                                            <h6 class="card-title
+                                    <div class="mb-2">
+                                        <button class="btn btn-sm btn-primary px-2" data-bs-toggle="modal" data-bs-target="#tambahAlamatModal">Tambah Alamat</button>
+                                    </div>
+                                    <div class="row" id="alamat-list">
 
-
-                                                            ">Siti Rahayu</h6>
-                                                            <p class="card-text">Jl. Raya Bogor No.20, RT.3/RW.2,
-                                                                Bogor,<br>
-
-                                                                Jawa Barat 16110</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <div class="card-footer d-flex justify-content-between">
-                                                            <button class="btn btn-sm btn-primary">Edit</button>
-                                                            <button class="btn btn-sm btn-outline-danger"><i
-                                                                    class="fas fa-trash"></i></button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -738,34 +631,50 @@ function base_url($path = '')
 
                         <div class="tab-pane fade" id="pengaturan-akun">
                             <div class="card profile-card mb-4">
-                                <div class="card-header bg-white">
-                                    <h5 class="mb-0">Pengaturan Akun</h5>
-                                </div>
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-md-6 mb-3">
-                                            <label for="username" class="form-label">Username</label>
-                                            <input type="text" class="form-control" id="username" value="budi123">
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label for="email" class="form-label">Email</label>
-                                            <input type="email" class="form-control" id="email"
-                                                value="oBZ7g@example.com">
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label for="phone" class="form-label">Nomor Telepon</label>
-                                            <input type="text" class="form-control" id="phone"
-                                                value="+62 812-3456-7890">
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label for="password" class="form-label">Password</label>
-                                            <input type="password" class="form-control" id="password">
+                                <form id="edit-akun" method="post">
+                                    <div class="card-header bg-white">
+                                        <h5 class="mb-0">Pengaturan Akun</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <label for="username" class="form-label">Username</label>
+                                                <input type="text" class="form-control" id="username" value="budi123">
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label for="email" class="form-label">Email</label>
+                                                <input type="email" class="form-control" id="email"
+                                                    value="oBZ7g@example.com">
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label for="tanggal_lahir" class="form-label">Tanggal Lahir</label>
+                                                <input type="date" class="form-control" id="tanggal_lahir"
+                                                    value="">
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label for="jenis_kelamin" class="form-label">Jenis Kelamin</label>
+                                                <select class="form-control" id="jenis_kelamin" name="jenis_kelamin">
+                                                    <option value="">-- Pilih Jenis Kelamin --</option>
+                                                    <option value="Laki-laki">Laki-laki</option>
+                                                    <option value="Perempuan">Perempuan</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="col-md-6 mb-3">
+                                                <label for="phone" class="form-label">Nomor Telepon</label>
+                                                <input type="text" class="form-control" id="phone"
+                                                    value="+62 812-3456-7890">
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label for="password" class="form-label">Password</label>
+                                                <input type="password" class="form-control" id="password">
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="card-footer d-flex justify-content-end">
-                                    <button class="btn btn-primary">Simpan Perubahan</button>
-                                </div>
+                                    <div class="card-footer d-flex justify-content-end">
+                                        <button class="btn btn-primary" id="submit-btn">Simpan Perubahan</button>
+                                    </div>
+                                </form>
                             </div>
                             <div class="card profile-card mb-4">
                                 <div class="card-header bg-white">
@@ -804,6 +713,105 @@ function base_url($path = '')
         </div>
     </main>
 
+    <!-- editalamat -->
+    <div class="modal fade bd-example-modal-lg" id="editAlamatModal" tabindex="-1" role="dialog"
+        aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-black" id="exampleModalLabel">Tambah Alamat</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="formeditAlamat" method="post">
+                        <input type="hidden" name="id_alamat" id="id_alamat">
+                        <div>
+                            <label for="provinsi-edit" class="form-label">Provinsi <span class="required">*</span></label>
+                            <input type="text" class="form-control form-login" id="provinsi-edit" name="provinsi-edit" placeholder="Contoh: Jawa Tengah">
+                        </div>
+
+                        <div>
+                            <label for="kabupaten-edit" class="form-label">Kabupaten <span class="required">*</span></label>
+                            <input type="text" class="form-control form-login" id="kabupaten-edit" name="kabupaten-edit" placeholder="Contoh: Kabupaten Semarang">
+                        </div>
+
+                        <div>
+                            <label for="kecamatan-edit" class="form-label">Kecamatan <span class="required">*</span></label>
+                            <input type="text" class="form-control form-login" id="kecamatan-edit" name="kecamatan-edit" placeholder="Contoh: Ungaran Barat">
+                        </div>
+
+                        <div>
+                            <label for="kelurahan-edit" class="form-label">Kelurahan <span class="required">*</span></label>
+                            <input type="text" class="form-control form-login" id="kelurahan-edit" name="kelurahan-edit" placeholder="Contoh: Leyangan">
+                        </div>
+
+                        <div>
+                            <label for="detail_rumah-edit" class="form-label">Detail Rumah <span class="required">*</span></label>
+                            <input type="text" class="form-control form-login" id="detail_rumah-edit" name="detail_rumah-edit" placeholder="Contoh: Rumah warna biru, dekat masjid">
+                        </div>
+
+                        <div>
+                            <label for="detail_alamat-edit" class="form-label">Alamat Lengkap <span class="required">*</span></label>
+                            <textarea class="form-control form-login p-1" id="detail_alamat-edit" name="detail_alamat-edit" rows="3"
+                                placeholder="Contoh: Jl. Raya Salatiga No. 15, RT 02 RW 01, Leyangan, Ungaran Barat, Kab. Semarang, Jawa Tengah"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-masuk mt-2 w-100" id="submit-btn-alamat-edit">Submit</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade bd-example-modal-lg" id="tambahAlamatModal" tabindex="-1" role="dialog"
+        aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-black" id="exampleModalLabel">Tambah Alamat</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="formTambahAlamat" method="post">
+                        <div>
+                            <label for="provinsi" class="form-label">Provinsi <span class="required">*</span></label>
+                            <input type="text" class="form-control form-login" id="provinsi" name="provinsi" placeholder="Contoh: Jawa Tengah">
+                        </div>
+
+                        <div>
+                            <label for="kabupaten" class="form-label">Kabupaten <span class="required">*</span></label>
+                            <input type="text" class="form-control form-login" id="kabupaten" name="kabupaten" placeholder="Contoh: Kabupaten Semarang">
+                        </div>
+
+                        <div>
+                            <label for="kecamatan" class="form-label">Kecamatan <span class="required">*</span></label>
+                            <input type="text" class="form-control form-login" id="kecamatan" name="kecamatan" placeholder="Contoh: Ungaran Barat">
+                        </div>
+
+                        <div>
+                            <label for="kelurahan" class="form-label">Kelurahan <span class="required">*</span></label>
+                            <input type="text" class="form-control form-login" id="kelurahan" name="kelurahan" placeholder="Contoh: Leyangan">
+                        </div>
+
+                        <div>
+                            <label for="detail_rumah" class="form-label">Detail Rumah <span class="required">*</span></label>
+                            <input type="text" class="form-control form-login" id="detail_rumah" name="detail_rumah" placeholder="Contoh: Rumah warna biru, dekat masjid">
+                        </div>
+
+                        <div>
+                            <label for="detail_alamat" class="form-label">Alamat Lengkap <span class="required">*</span></label>
+                            <textarea class="form-control form-login p-1" id="detail_alamat" name="detail_alamat" rows="3"
+                                placeholder="Contoh: Jl. Raya Salatiga No. 15, RT 02 RW 01, Leyangan, Ungaran Barat, Kab. Semarang, Jawa Tengah"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-masuk mt-2 w-100" id="submit-btn-alamat">Submit</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- footer area -->
     <?php include __DIR__ . '/../templates/footer.php'; ?>
@@ -832,6 +840,547 @@ function base_url($path = '')
     <script src="assets/js/main.js"></script>
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.trigger-tab-akun').on('click', function() {
+                console.log("clicked");
+
+                // Ambil elemen tab target
+                var tabEl = document.querySelector('#nav-akun-tab');
+
+                // Gunakan Bootstrap Tab API untuk show
+                var tab = new bootstrap.Tab(tabEl);
+                tab.show();
+            });
+        });
+    </script>
+
+    <script>
+        const API_BASE_URL = "<?= $apiBaseUrl ?>";
+    </script>
+    <script>
+        function addMainAddressLabel(addressElement, isMain = false) {
+            if (isMain) {
+                const label = document.createElement('span');
+                label.className = 'label-utama';
+                label.textContent = 'Utama';
+                addressElement.appendChild(label);
+            }
+        }
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const token = localStorage.getItem('auth_token');
+            const productList = document.getElementById('product-list');
+
+            if (!token) {
+                productList.innerHTML = '<div class="alert alert-warning">Silakan login terlebih dahulu</div>';
+                return;
+            }
+
+            fetch(`${API_BASE_URL}/user/index`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => response.json())
+                .then(result => {
+                    if (result.status !== 'success') {
+                        productList.innerHTML = `<div class="alert alert-danger">${result.message || 'Terjadi kesalahan'}</div>`;
+                        return;
+                    }
+
+                    const user = result.data.user;
+                    const successful_payment_count = result.data.successful_payment_count;
+
+                    console.log("Successful Payment Count:", successful_payment_count); // Debugging nilai successful_payment_count
+
+                    // Set value ke form
+                    document.getElementById('username').value = user.nama || '';
+                    document.getElementById('email').value = user.email || '';
+                    document.getElementById('tanggal_lahir').value = user.tanggal_lahir || '';
+                    document.getElementById('jenis_kelamin').value = user.jenis_kelamin || '';
+                    document.getElementById('phone').value = user.no_hp || '';
+                    document.getElementById('password').value = ''; // Tidak ditampilkan demi keamanan
+
+                    // Menampilkan data ke elemen HTML
+                    document.getElementById('user-nama').textContent = user.nama || 'N/A';
+                    document.getElementById('user-tanggal-lahir').textContent = user.tanggal_lahir || 'N/A';
+                    document.getElementById('user-jenis-kelamin').textContent = user.jenis_kelamin || 'N/A';
+                    document.getElementById('user-phone').textContent = user.no_hp || 'N/A';
+                    document.getElementById('user-email').textContent = user.email || 'N/A';
+                    document.getElementById('user-bergabung').textContent = user.created_at ? new Date(user.created_at).toLocaleDateString() : 'N/A';
+
+                    document.getElementById('name-header').textContent = user.nama || 'N/A';
+                    document.getElementById('phone-header').textContent = user.no_hp || 'N/A';
+                    document.getElementById('email-header').textContent = user.email || 'N/A';
+
+                    // Menangani successful_payment_count dengan lebih tepat
+                    const countText = successful_payment_count !== null && successful_payment_count !== undefined ? successful_payment_count : 0;
+                    document.getElementById('successful-payment-count').textContent = countText;
+                })
+
+
+                .catch(error => {
+                    console.error('Error fetching user data:', error);
+                    productList.innerHTML = '<div class="alert alert-danger">Gagal memuat data user</div>';
+                });
+
+            fetch(`${API_BASE_URL}/alamat`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => response.json())
+                .then(result => {
+                    if (result.status !== 'success') {
+                        document.getElementById('alamat-list').innerHTML = `<div class="alert alert-danger">${result.message || 'Terjadi kesalahan'}</div>`;
+                        return;
+                    }
+
+                    const alamatList = result.data;
+                    const alamatContainer = document.getElementById('alamat-list');
+                    alamatContainer.innerHTML = ''; // Clear existing content
+
+                    // Loop through the alamat data and create HTML for each item
+                    alamatList.forEach(alamat => {
+                        const alamatItem = document.createElement('div');
+                        alamatItem.classList.add('col-md-6', 'mb-4');
+
+                        // Create card content
+                        alamatItem.innerHTML = `
+            <div class="card alamat-item h-100">
+                ${alamat.utama ? '<span class="label-utama">Utama</span>' : ''}
+                <div class="row g-0">
+                    <div class="col-12">
+                        <div class="card-body">
+                            <h6 class="card-title">${alamat.provinsi}</h6>
+                            <p class="card-text">
+                                ${alamat.detail_alamat}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="card-footer d-flex justify-content-between">
+                            <button class="btn btn-sm btn-primary tombol-edit" data-bs-toggle="modal" data-bs-target="#editAlamatModal" data-id="${alamat.id}">Edit</button>
+                            <button class="btn btn-sm btn-outline-danger tombol-delete" data-id="${alamat.id}">
+    <i class="fas fa-trash"></i>
+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+
+                        alamatContainer.appendChild(alamatItem);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Terjadi kesalahan saat mengupdate data');
+                });
+
+        });
+
+        // Menangani tombol Edit
+        $(document).on('click', '.tombol-edit', function() {
+            const alamatId = $(this).data('id'); // Mendapatkan ID alamat dari atribut data-id
+            const token = localStorage.getItem('auth_token');
+            const productList = document.getElementById('product-list');
+
+            if (!token) {
+                productList.innerHTML = '<div class="alert alert-warning">Silakan login terlebih dahulu</div>';
+                return;
+            }
+            // Mengambil data alamat dari server
+            document.getElementById('id_alamat').value = alamatId;
+            $.ajax({
+                url: `${API_BASE_URL}/alamat/edit/${alamatId}`, // Endpoint API untuk mengambil data alamat
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                },
+                contentType: 'application/json', // Tentukan tipe konten sebagai JSON
+                success: function(response) {
+                    if (response.status === 'success') {
+                        const alamat = response.data;
+
+                        // Isi modal dengan data alamat yang diterima
+                        $('#provinsi-edit').val(alamat.provinsi);
+                        $('#kabupaten-edit').val(alamat.kabupaten);
+                        $('#kecamatan-edit').val(alamat.kecamatan);
+                        $('#kelurahan-edit').val(alamat.kelurahan);
+                        $('#detail_rumah-edit').val(alamat.detail_rumah);
+                        $('#detail_alamat-edit').val(alamat.detail_alamat);
+
+                        // Set title modal sesuai dengan alamat
+                        $('#editAlamatModal .modal-title').text('Edit Alamat');
+                    } else {
+                        alert(response.message || 'Gagal memuat data alamat');
+                    }
+                },
+                error: function() {
+                    alert('Terjadi kesalahan saat menghubungi server');
+                }
+            });
+        });
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const form = document.getElementById('formeditAlamat');
+            const submitButton = document.getElementById('submit-btn-alamat-edit');
+
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                const token = localStorage.getItem('auth_token');
+                // const alamatId = form.getAttribute('data-id'); // Pastikan Anda set attribute ini saat buka modal edit
+
+                // Ambil data dari form
+                const provinsi = document.getElementById('provinsi-edit').value;
+                const kabupaten = document.getElementById('kabupaten-edit').value;
+                const kecamatan = document.getElementById('kecamatan-edit').value;
+                const kelurahan = document.getElementById('kelurahan-edit').value;
+                const detail_rumah = document.getElementById('detail_rumah-edit').value;
+                const detail_alamat = document.getElementById('detail_alamat-edit').value;
+
+                // Validasi sederhana
+                if (!provinsi || !kabupaten || !kecamatan || !kelurahan || !detail_alamat || !detail_rumah) {
+                    alert('Semua field wajib diisi!');
+                    return;
+                }
+
+                const dataToSend = {
+                    provinsi,
+                    kabupaten,
+                    kecamatan,
+                    kelurahan,
+                    detail_rumah,
+                    detail_alamat,
+                    utama: 0 // Bisa ganti 1 jika alamat utama
+                };
+                const alamatId = document.getElementById('id_alamat').value;
+                // console.log(alamatId);
+                fetch(`${API_BASE_URL}/alamat/update/${alamatId}`, {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': `Bearer ${token}`,
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(dataToSend)
+                    })
+                    .then(response => response.json())
+                    .then(result => {
+                        if (result.status === 'success') {
+                            alert('Alamat Berhasil Diupdate');
+                            window.location.reload();
+                        } else {
+                            alert('Gagal mengupdate alamat: ' + result.message);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('Terjadi kesalahan saat mengupdate alamat');
+                    });
+            });
+        });
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const token = localStorage.getItem('auth_token');
+            if (!token) {
+                window.location.href = '/login'; // Sesuaikan dengan lokasi halaman login kamu
+                return;
+            }
+
+            $.ajax({
+                url: API_BASE_URL + '/product/wishlist',
+                type: 'GET',
+                dataType: 'json',
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                },
+                success: function(response) {
+                    if (response.status === 'success') {
+                        console.log('Data produk wishlist:', response.data);
+                        const allProductsRaw = response.data;
+                        const wishlistContainer = $('#wishlist-list');
+                        wishlistContainer.empty(); // Kosongkan dulu isi sebelumnya
+
+                        allProductsRaw.forEach(product => {
+                            const html = `
+                    <div class="col-md-6 mb-4">
+                        <div class="card wishlist-item h-100">
+                            <div class="row g-0">
+                                <div class="col-4">
+                                    <img src="${product.url_foto}" width="150" height="150"
+                                        class="img-fluid rounded-start h-100 object-fit-cover"
+                                        alt="${product.nama_product}">
+                                </div>
+                                <div class="col-8">
+                                    <div class="card-body">
+                                        <h6 class="card-title">${product.nama_product}</h6>
+                                        <div class="d-flex align-items-center mb-2">
+                                            <span class="text-warning me-1"><i class="fas fa-star"></i></span>
+                                            <span>4.9 (120 ulasan)</span>
+                                        </div>
+                                        <p class="card-text text-primary fw-bold mb-3">Rp ${formatRupiah(product.harga)}</p>
+                                        <div class="d-flex">
+                                            <button class="btn btn-sm btn-primary me-2 product-card" data-id="${product.id_product}" data-slug="${product.slug}" 
+                       data-token="${product.token}" style="cursor:pointer;">Tambah ke Keranjang</button>
+                                            <button class="btn btn-sm btn-outline-danger tombol-delete-wishlist" data-id_product="${product.id_product}">
+                      <i class="fas fa-trash"></i>
+                           </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
+
+                            wishlistContainer.append(html);
+                        });
+                    } else {
+                        console.error('Terjadi kesalahan:', response.message);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Terjadi kesalahan:', error);
+                }
+            });
+
+            function formatRupiah(angka) {
+                return angka.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+            }
+        })
+        document.addEventListener("DOMContentLoaded", function() {
+            document.addEventListener("click", function(e) {
+                if (e.target.closest(".tombol-delete-wishlist")) {
+                    const button = e.target.closest(".tombol-delete-wishlist");
+                    const id = button.getAttribute("data-id_product");
+                    const token = localStorage.getItem("auth_token");
+
+                    if (confirm("Yakin ingin menghapus alamat ini?")) {
+                        fetch(`${API_BASE_URL}/product/wishlist/delete/${id}`, {
+                                method: 'GET',
+                                headers: {
+                                    'Authorization': `Bearer ${token}`,
+                                    'Content-Type': 'application/json',
+                                },
+                            })
+                            .then(response => response.json())
+                            .then(result => {
+                                if (result.status === "success") {
+                                    alert("Product Wislist berhasil dihapus");
+                                    window.location.reload();
+                                } else {
+                                    alert("Gagal menghapus: " + result.message);
+                                }
+                            })
+                            .catch(error => {
+                                if (error.message.includes('Token tidak ditemukan') || error.message.includes('Token tidak valid, silakan login ulang')) {
+                                    localStorage.removeItem('auth_token');
+                                    alert("Sesi Anda telah habis. Silakan login ulang.");
+                                    window.location.href = '/login';
+                                    return;
+                                }
+                                console.error('Error:', error);
+                                alert('Terjadi kesalahan saat mengupdate data');
+                            });
+                    }
+                }
+            });
+        });
+
+        document.addEventListener("DOMContentLoaded", function() {
+            document.addEventListener("click", function(e) {
+                if (e.target.closest(".tombol-delete")) {
+                    const button = e.target.closest(".tombol-delete");
+                    const id = button.getAttribute("data-id");
+                    const token = localStorage.getItem("auth_token");
+
+                    if (confirm("Yakin ingin menghapus alamat ini?")) {
+                        fetch(`${API_BASE_URL}/alamat/delete/${id}`, {
+                                method: 'POST',
+                                headers: {
+                                    'Authorization': `Bearer ${token}`,
+                                    'Content-Type': 'application/json',
+                                },
+                                body: JSON.stringify({
+                                    id: id
+                                })
+                            })
+                            .then(response => response.json())
+                            .then(result => {
+                                if (result.status === "success") {
+                                    alert("Alamat berhasil dihapus");
+                                    window.location.reload();
+                                } else {
+                                    alert("Gagal menghapus: " + result.message);
+                                }
+                            })
+                            .catch(error => {
+                                if (error.message.includes('Token tidak ditemukan') || error.message.includes('Token tidak valid, silakan login ulang')) {
+                                    localStorage.removeItem('auth_token');
+                                    alert("Sesi Anda telah habis. Silakan login ulang.");
+                                    window.location.href = '/login';
+                                    return;
+                                }
+                                console.error('Error:', error);
+                                alert('Terjadi kesalahan saat mengupdate data');
+                            });
+                    }
+                }
+            });
+        });
+
+
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const form = document.getElementById('edit-akun');
+            const submitButton = document.getElementById('submit-btn');
+
+            form.addEventListener('submit', function(event) {
+                event.preventDefault(); // Menghentikan pengiriman form
+
+                // Ambil data dari form
+                const username = document.getElementById('username').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const tanggal_lahir = document.getElementById('tanggal_lahir').value;
+                const jenis_kelamin = document.getElementById('jenis_kelamin').value;
+                const phone = document.getElementById('phone').value.trim();
+                const password = document.getElementById('password').value.trim();
+
+
+
+                // Validasi form
+                if (!username || !email || !tanggal_lahir || !jenis_kelamin || !phone) {
+                    alert('Semua kolom wajib diisi');
+                    return;
+                }
+
+                const token = localStorage.getItem('auth_token');
+                const dataToUpdate = {
+                    nama: username,
+                    email: email,
+                    tanggal_lahir: tanggal_lahir,
+                    jenis_kelamin: jenis_kelamin,
+                    no_hp: phone,
+                    password: password || undefined
+                };
+
+                // Kirim data dengan fetch
+                fetch(`${API_BASE_URL}/user/edit`, {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': `Bearer ${token}`,
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(dataToUpdate)
+                    })
+                    .then(response => response.json())
+                    .then(result => {
+                        if (result.status === 'success') {
+                            alert('Data berhasil diupdate');
+                            window.location.reload(); // Refresh halaman setelah berhasil
+                        } else {
+                            alert('Gagal mengupdate data: ' + result.message);
+                        }
+                    })
+                    .catch(error => {
+                        if (error.message.includes('Token tidak ditemukan') || error.message.includes('Token tidak valid, silakan login ulang')) {
+                            // Token tidak valid, hapus token dan redirect ke login
+                            localStorage.removeItem('auth_token');
+                            alert("Sesi Anda telah habis. Silakan login ulang.");
+                            window.location.href = '/login'; // Ganti sesuai path halaman login
+                            return;
+                        }
+                        console.error('Error:', error);
+                        alert('Terjadi kesalahan saat mengupdate data');
+                    });
+            });
+        });
+
+
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const form = document.getElementById('formTambahAlamat');
+            const submitButton = document.getElementById('submit-btn-alamat');
+
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                const token = localStorage.getItem('auth_token');
+
+                const provinsi = document.getElementById('provinsi').value.trim();
+                const kabupaten = document.getElementById('kabupaten').value.trim();
+                const kecamatan = document.getElementById('kecamatan').value.trim();
+                const kelurahan = document.getElementById('kelurahan').value.trim();
+                const detail_alamat = document.getElementById('detail_alamat').value.trim(); // Pastikan ini sesuai dengan nama input
+                const detail_rumah = document.getElementById('detail_rumah').value.trim();
+
+                if (!provinsi || !kabupaten || !kecamatan || !kelurahan || !detail_alamat || !detail_rumah) {
+                    alert('Semua field wajib diisi!');
+                    return;
+                }
+
+                const dataToSend = {
+                    provinsi,
+                    kabupaten,
+                    kecamatan,
+                    kelurahan,
+                    detail_alamat,
+                    detail_rumah,
+                    utama: 0 // Default bukan alamat utama
+                };
+
+                fetch(`${API_BASE_URL}/alamat/create`, {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': `Bearer ${token}`,
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(dataToSend)
+                    })
+                    .then(response => response.json())
+                    .then(result => {
+                        if (result.status === 'success') {
+                            alert('Alamat Berhasil Ditambahkan');
+                            window.location.reload();
+                        } else {
+                            alert('Gagal menambahkan alamat: ' + result.message);
+                        }
+                    })
+                    .catch(error => {
+                        if (error.message.includes('Token tidak ditemukan') || error.message.includes('Token tidak valid, silakan login ulang')) {
+                            localStorage.removeItem('auth_token');
+                            alert("Sesi Anda telah habis. Silakan login ulang.");
+                            window.location.href = '/login';
+                            return;
+                        }
+                        console.error('Error:', error);
+                        alert('Terjadi kesalahan saat mengupdate data');
+                    });
+            });
+        });
+    </script>
+
+    <script>
+        document.addEventListener('click', function(e) {
+            const card = e.target.closest('.product-card');
+            if (card) {
+                const slug = card.getAttribute('data-slug');
+                const token = card.getAttribute('data-token');
+                if (slug && token) {
+                    window.location.href = `/product/${slug}/${token}`;
+                }
+            }
+        });
+    </script>
+
 </body>
 
 </html>

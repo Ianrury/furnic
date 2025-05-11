@@ -702,7 +702,17 @@ $apiBaseUrl = env('API_BASE_URL');
                             .then(response => response.json())
                             .then(data => {
                                 if (data.status === 'success') {
-                                    window.location.href = '/pesanan';
+                                    // Cek apakah cart_ids sudah ada di localStorage
+                                    if (localStorage.getItem('cart_ids')) {
+                                        // Hapus cart_ids lama dari localStorage
+                                        localStorage.removeItem('cart_ids');
+                                    }
+
+                                    // Simpan cart_ids yang baru ke localStorage
+                                    localStorage.setItem('cart_ids', JSON.stringify(data.cart_ids));
+
+                                    // Redirect ke halaman pesanan
+                                    window.location.href = '/buat-pesanan';
                                 } else {
                                     showToast(data.message, 'danger');
                                 }
@@ -713,6 +723,7 @@ $apiBaseUrl = env('API_BASE_URL');
                             });
                     });
                 }
+
             }
 
             // Function to update cart quantity via AJAX
