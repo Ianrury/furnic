@@ -3,6 +3,9 @@ function base_url($path = '')
 {
     return '/' . ltrim($path, '/');
 }
+require_once __DIR__ . '/../../app/env.php';
+$apiBaseUrl = env('API_BASE_URL');
+
 ?>
 
 <!DOCTYPE html>
@@ -331,376 +334,8 @@ function base_url($path = '')
                     </div>
                 </div>
                 <div class="tab-content wow fadeInUp" data-wow-delay=".25s" id="item-tabContent">
-                    <div class="container">
-                        <?php foreach ($model['pesanan'] as $pesanan): ?>
-                            <?php if ($pesanan['status_pembayaran'] == 'belum bayar'): ?>
-                                <!-- HTML untuk pesanan yang belum bayar -->
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="order-card">
-                                            <div class="status-label status-pending"><?= ucfirst($pesanan['status_pembayaran'] ?? 'Belum Bayar') ?></div>
-                                            <div class="order-header">
-                                                <div>
-                                                    <div class="order-id">Pesanan #<?= htmlspecialchars($pesanan['nomor_pesanan']) ?></div>
-                                                    <div class="order-date"><?= date('j F Y', strtotime($pesanan['tanggal_pesanan'])) ?></div>
-                                                </div>
-                                                <div class="order-icon">
-                                                    <i class="fas fa-shopping-bag"></i>
-                                                </div>
-                                            </div>
-                                            <div class="order-body">
-                                                <div class="row">
-                                                    <div class="col-md-8">
-                                                        <div class="row">
-                                                            <div class="col-md-4">
-                                                                <div class="order-detail">
-                                                                    <span class="order-detail-label">Total Produk</span>
-                                                                    <span class="order-detail-value"><?= $pesanan['qty'] ?> item</span>
-                                                                </div>
-                                                                <div class="order-detail">
-                                                                    <span class="order-detail-label">Total Harga</span>
-                                                                    <span class="order-detail-value">Rp <?= number_format($pesanan['total_harga'], 0, ',', '.') ?></span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <div class="order-detail">
-                                                                    <span class="order-detail-label">Metode Bayar</span>
-                                                                    <span class="order-detail-value"><?= $pesanan['bank_pengirim'] ?? 'Transfer Bank' ?></span>
-                                                                </div>
-                                                                <div class="order-detail">
-                                                                    <span class="order-detail-label">Pengiriman</span>
-                                                                    <span class="order-detail-value"><?= $pesanan['nama_pengiriman'] ?? '-' ?></span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <div class="payment-countdown">
-                                                                    <i class="fas fa-clock"></i>
-                                                                    <span
-                                                                        class="countdown-timer"
-                                                                        id="countdown-<?= $pesanan['id_pesanan'] ?>"
-                                                                        data-limit="<?= $pesanan['limit_payment'] ?>">
-                                                                    </span>
-                                                                </div>
+                    <div class="container" id="pemesanan_list">
 
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4 text-md-end mt-3 mt-md-0">
-                                                        <a href="/pembayaran?token=<?= $pesanan['payment_token'] ?>">
-                                                            <button class="btn btn-pay me-2">
-                                                                <i class="fas fa-money-bill me-1"></i> Bayar Sekarang
-                                                            </button>
-                                                        </a>
-                                                        <button class="btn btn-outline-primary">
-                                                            <i class="fas fa-info-circle me-1"></i> Detail
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            <?php elseif ($pesanan['status_pembayaran'] == 'dikonfirmasi'): ?>
-                                <!-- Pesanan Dikonfirmasi Admin (Full Width) -->
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="order-card">
-                                            <div class="status-label status-confirm">Dikonfirmasi</div>
-                                            <div class="order-header">
-                                                <div>
-                                                    <div class="order-id">Pesanan #ORD789012</div>
-                                                    <div class="order-date">3 Mei 2025</div>
-                                                </div>
-                                                <div class="order-icon">
-                                                    <i class="fas fa-clipboard-check"></i>
-                                                </div>
-                                            </div>
-                                            <div class="order-body">
-                                                <div class="row">
-                                                    <div class="col-md-8">
-                                                        <div class="row">
-                                                            <div class="col-md-4">
-                                                                <div class="order-detail">
-                                                                    <span class="order-detail-label">Total Produk</span>
-                                                                    <span class="order-detail-value">2 item</span>
-                                                                </div>
-                                                                <div class="order-detail">
-                                                                    <span class="order-detail-label">Total Harga</span>
-                                                                    <span class="order-detail-value">Rp 1.250.000</span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-8">
-                                                                <div class="progress-container">
-                                                                    <div class="progress">
-                                                                        <div class="progress-bar bg-primary" role="progressbar"
-                                                                            style="width: 20%;" aria-valuenow="20"
-                                                                            aria-valuemin="0" aria-valuemax="100"></div>
-                                                                    </div>
-                                                                    <div class="progress-steps">
-                                                                        <div class="progress-step active">
-                                                                            <div class="progress-dot"></div>
-                                                                            <div>Konfirmasi</div>
-                                                                        </div>
-                                                                        <div class="progress-step">
-                                                                            <div class="progress-dot"></div>
-                                                                            <div>Dikemas</div>
-                                                                        </div>
-                                                                        <div class="progress-step">
-                                                                            <div class="progress-dot"></div>
-                                                                            <div>Dikirim</div>
-                                                                        </div>
-                                                                        <div class="progress-step">
-                                                                            <div class="progress-dot"></div>
-                                                                            <div>Sampai</div>
-                                                                        </div>
-                                                                        <div class="progress-step">
-                                                                            <div class="progress-dot"></div>
-                                                                            <div>Selesai</div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4 text-md-end mt-3 mt-md-0">
-                                                        <button class="btn btn-primary">
-                                                            <i class="fas fa-info-circle me-1"></i> Detail Pesanan
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            <?php elseif ($pesanan['status_pembayaran'] == 'dikemas'): ?>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="order-card">
-                                            <div class="status-label status-processing">Dikemas</div>
-                                            <div class="order-header">
-                                                <div>
-                                                    <div class="order-id">Pesanan #ORD456789</div>
-                                                    <div class="order-date">2 Mei 2025</div>
-                                                </div>
-                                                <div class="order-icon">
-                                                    <i class="fas fa-box"></i>
-                                                </div>
-                                            </div>
-                                            <div class="order-body">
-                                                <div class="row">
-                                                    <div class="col-md-8">
-                                                        <div class="row">
-                                                            <div class="col-md-4">
-                                                                <div class="order-detail">
-                                                                    <span class="order-detail-label">Total Produk</span>
-                                                                    <span class="order-detail-value">1 item</span>
-                                                                </div>
-                                                                <div class="order-detail">
-                                                                    <span class="order-detail-label">Total Harga</span>
-                                                                    <span class="order-detail-value">Rp 850.000</span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-8">
-                                                                <div class="progress-container">
-                                                                    <div class="progress">
-                                                                        <div class="progress-bar bg-primary" role="progressbar"
-                                                                            style="width: 40%;" aria-valuenow="40"
-                                                                            aria-valuemin="0" aria-valuemax="100"></div>
-                                                                    </div>
-                                                                    <div class="progress-steps">
-                                                                        <div class="progress-step active">
-                                                                            <div class="progress-dot"></div>
-                                                                            <div>Konfirmasi</div>
-                                                                        </div>
-                                                                        <div class="progress-step active">
-                                                                            <div class="progress-dot"></div>
-                                                                            <div>Dikemas</div>
-                                                                        </div>
-                                                                        <div class="progress-step">
-                                                                            <div class="progress-dot"></div>
-                                                                            <div>Dikirim</div>
-                                                                        </div>
-                                                                        <div class="progress-step">
-                                                                            <div class="progress-dot"></div>
-                                                                            <div>Sampai</div>
-                                                                        </div>
-                                                                        <div class="progress-step">
-                                                                            <div class="progress-dot"></div>
-                                                                            <div>Selesai</div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4 text-md-end mt-3 mt-md-0">
-                                                        <button class="btn btn-primary">
-                                                            <i class="fas fa-info-circle me-1"></i> Detail Pesanan
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            <?php elseif ($pesanan['status_pembayaran'] == 'dikirim'): ?>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="order-card">
-                                            <div class="status-label status-shipping">Dikirim</div>
-                                            <div class="order-header">
-                                                <div>
-                                                    <div class="order-id">Pesanan #ORD234567</div>
-                                                    <div class="order-date">1 Mei 2025</div>
-                                                </div>
-                                                <div class="order-icon">
-                                                    <i class="fas fa-truck"></i>
-                                                </div>
-                                            </div>
-                                            <div class="order-body">
-                                                <div class="row">
-                                                    <div class="col-md-8">
-                                                        <div class="row">
-                                                            <div class="col-md-4">
-                                                                <div class="order-detail">
-                                                                    <span class="order-detail-label">Total Produk</span>
-                                                                    <span class="order-detail-value">4 item</span>
-                                                                </div>
-                                                                <div class="order-detail">
-                                                                    <span class="order-detail-label">Total Harga</span>
-                                                                    <span class="order-detail-value">Rp 2.150.000</span>
-                                                                </div>
-                                                                <div class="order-detail">
-                                                                    <span class="order-detail-label">No. Resi</span>
-                                                                    <span class="order-detail-value">JNE123456789</span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-8">
-                                                                <div class="progress-container">
-                                                                    <div class="progress">
-                                                                        <div class="progress-bar bg-primary" role="progressbar"
-                                                                            style="width: 60%;" aria-valuenow="60"
-                                                                            aria-valuemin="0" aria-valuemax="100"></div>
-                                                                    </div>
-                                                                    <div class="progress-steps">
-                                                                        <div class="progress-step active">
-                                                                            <div class="progress-dot"></div>
-                                                                            <div>Konfirmasi</div>
-                                                                        </div>
-                                                                        <div class="progress-step active">
-                                                                            <div class="progress-dot"></div>
-                                                                            <div>Dikemas</div>
-                                                                        </div>
-                                                                        <div class="progress-step active">
-                                                                            <div class="progress-dot"></div>
-                                                                            <div>Dikirim</div>
-                                                                        </div>
-                                                                        <div class="progress-step">
-                                                                            <div class="progress-dot"></div>
-                                                                            <div>Sampai</div>
-                                                                        </div>
-                                                                        <div class="progress-step">
-                                                                            <div class="progress-dot"></div>
-                                                                            <div>Selesai</div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4 text-md-end mt-3 mt-md-0">
-                                                        <button class="btn btn-primary">
-                                                            <i class="fas fa-truck me-1"></i> Lacak Pengiriman
-                                                        </button>
-                                                        <button class="btn btn-outline-primary mt-2 mt-md-0 ms-md-2">
-                                                            <i class="fas fa-info-circle me-1"></i> Detail
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            <?php elseif ($pesanan['status_pembayaran'] == 'selesai'): ?>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="order-card">
-                                            <div class="status-label status-completed">Selesai</div>
-                                            <div class="order-header">
-                                                <div>
-                                                    <div class="order-id">Pesanan #ORD345678</div>
-                                                    <div class="order-date">28 April 2025</div>
-                                                </div>
-                                                <div class="order-icon">
-                                                    <i class="fas fa-check-circle"></i>
-                                                </div>
-                                            </div>
-                                            <div class="order-body">
-                                                <div class="row">
-                                                    <div class="col-md-8">
-                                                        <div class="row">
-                                                            <div class="col-md-4">
-                                                                <div class="order-detail">
-                                                                    <span class="order-detail-label">Total Produk</span>
-                                                                    <span class="order-detail-value">2 item</span>
-                                                                </div>
-                                                                <div class="order-detail">
-                                                                    <span class="order-detail-label">Total Harga</span>
-                                                                    <span class="order-detail-value">Rp 750.000</span>
-                                                                </div>
-                                                                <div class="order-detail">
-                                                                    <span class="order-detail-label">Selesai pada</span>
-                                                                    <span class="order-detail-value">3 Mei 2025</span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-8">
-                                                                <div class="progress-container">
-                                                                    <div class="progress">
-                                                                        <div class="progress-bar bg-primary" role="progressbar"
-                                                                            style="width: 100%;" aria-valuenow="100"
-                                                                            aria-valuemin="0" aria-valuemax="100"></div>
-                                                                    </div>
-                                                                    <div class="progress-steps">
-                                                                        <div class="progress-step active">
-                                                                            <div class="progress-dot"></div>
-                                                                            <div>Konfirmasi</div>
-                                                                        </div>
-                                                                        <div class="progress-step active">
-                                                                            <div class="progress-dot"></div>
-                                                                            <div>Dikemas</div>
-                                                                        </div>
-                                                                        <div class="progress-step active">
-                                                                            <div class="progress-dot"></div>
-                                                                            <div>Dikirim</div>
-                                                                        </div>
-                                                                        <div class="progress-step active">
-                                                                            <div class="progress-dot"></div>
-                                                                            <div>Sampai</div>
-                                                                        </div>
-                                                                        <div class="progress-step active">
-                                                                            <div class="progress-dot"></div>
-                                                                            <div>Selesai</div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4 text-md-end mt-3 mt-md-0">
-                                                        <button class="btn btn-primary">
-                                                            <i class="fas fa-star me-1"></i> Beri Ulasan
-                                                        </button>
-                                                        <button class="btn btn-outline-primary mt-2 mt-md-0 ms-md-2">
-                                                            <i class="fas fa-info-circle me-1"></i> Detail
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            <?php endif; ?>
-                        <?php endforeach; ?>
                     </div>
                 </div>
             </div>
@@ -736,35 +371,367 @@ function base_url($path = '')
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
+<script>
+    const API_BASE_URL = "<?= $apiBaseUrl ?>";
+</script>
 
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-    const timers = document.querySelectorAll('.countdown-timer');
+    const token = localStorage.getItem('auth_token');
 
-    timers.forEach(timer => {
-        const limitTime = new Date(timer.getAttribute('data-limit')).getTime();
-        const timerId = timer.id;
 
-        function updateCountdown() {
-            const now = new Date().getTime();
-            const distance = limitTime - now;
+    // Fungsi untuk memformat mata uang
+    function formatRupiah(angka) {
+        return 'Rp ' + new Intl.NumberFormat('id-ID').format(angka);
+    }
 
-            if (distance <= 0) {
-                document.getElementById(timerId).textContent = "00:00:00";
-                return;
-            }
+    // Fungsi untuk memformat tanggal dengan jam
+    function formatTanggalDenganJam(tanggal) {
+        return new Date(tanggal).toLocaleString('id-ID', {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+    }
 
-            const hours = String(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
-            const minutes = String(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
-            const seconds = String(Math.floor((distance % (1000 * 60)) / 1000)).padStart(2, '0');
+    // Fungsi untuk menghitung sisa waktu pembayaran dengan detail
+    function hitungSisaWaktuPembayaran(limitPembayaran) {
+        // Tambahkan zona waktu Jakarta secara eksplisit
+        const waktuBatas = new Date(`${limitPembayaran} GMT+0700`);
+        const waktuSekarang = new Date();
 
-            document.getElementById(timerId).textContent = `${hours}:${minutes}:${seconds}`;
+        const selisih = waktuBatas - waktuSekarang;
+
+        if (selisih > 0) {
+            const hari = Math.floor(selisih / (1000 * 60 * 60 * 24));
+            const jam = Math.floor((selisih % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const menit = Math.floor((selisih % (1000 * 60 * 60)) / (1000 * 60));
+            const detik = Math.floor((selisih % (1000 * 60)) / 1000);
+
+            return {
+                total: selisih,
+                formatted: hari > 0 ?
+                    `${hari}d ${jam}j ${menit}m` : `${jam}j ${menit}m ${detik}d`,
+                isExpired: false
+            };
+        }
+        return {
+            total: 0,
+            formatted: 'Timeout',
+            isExpired: true
+        };
+    }
+
+    // Fungsi untuk mendapatkan metode pengiriman
+    function getMetodePengiriman(pesanan) {
+        if (pesanan.jenis_pengiriman && pesanan.jenis_pengiriman.nama) {
+            return pesanan.jenis_pengiriman.nama;
         }
 
-        updateCountdown();
-        setInterval(updateCountdown, 1000);
+        if (pesanan.toko) {
+            return 'Ambil di Tempat';
+        }
+
+        return 'Belum Ditentukan';
+    }
+
+    // Fungsi untuk membuat kartu pesanan yang lebih responsif dan user-friendly
+    function buatKartuPesanan(pesanan) {
+        const sisaWaktu = hitungSisaWaktuPembayaran(pesanan.limit_payment);
+        const metodePengiriman = getMetodePengiriman(pesanan);
+
+        const statusInfo = {
+            'waiting': {
+                label: 'Menunggu',
+                warna: 'warning',
+                ikon: 'fa-clock'
+            },
+            'belum bayar': {
+                label: 'Belum Bayar',
+                warna: 'danger',
+                ikon: 'fa-money-bill-wave'
+            },
+            'dikonfirmasi': {
+                label: 'Dikonfirmasi',
+                warna: 'primary',
+                ikon: 'fa-check-circle'
+            },
+            'dikirim': {
+                label: 'Dikirim',
+                warna: 'success',
+                ikon: 'fa-truck'
+            },
+            'selesai': {
+                label: 'Selesai',
+                warna: 'success',
+                ikon: 'fa-check-double'
+            }
+        };
+
+        const status = (pesanan.status_pesanan || pesanan.status_pembayaran || '').toLowerCase();
+        const infoStatus = statusInfo[status] || statusInfo['waiting'];
+
+        return `
+        <div class="col-12 col-md-6 col-lg-4 mb-3">
+            <div class="card h-100 shadow-sm border-${infoStatus.warna}">
+                <div class="card-header bg-${infoStatus.warna} text-white d-flex justify-content-between align-items-center py-2 px-3">
+                    <small>
+                        <i class="fas ${infoStatus.ikon} me-2"></i>
+                        ${infoStatus.label}
+                    </small>
+                    <small class="badge bg-light text-dark">#${pesanan.nomor_pesanan}</small>
+                </div>
+                <div class="card-body py-2 px-3">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <small class="text-muted">
+                            <strong>${formatTanggalDenganJam(pesanan.tanggal_pesanan)}</strong>
+                        </small>
+                        <small class="text-muted">${metodePengiriman}</small>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <small>
+                            <i class="fas fa-box me-2"></i>
+                            ${pesanan.products ? pesanan.products.length : 0} item
+                        </small>
+                        <h6 class="mb-0 text-primary">${formatRupiah(pesanan.total_harga)}</h6>
+                    </div>
+
+                    ${(status === 'waiting' || status === 'belum bayar') ? `
+                    <div class="alert ${sisaWaktu.isExpired ? 'alert-secondary' : 'alert-danger'} py-2 px-3 mb-2" role="alert">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <small><i class="fas fa-hourglass-half me-2"></i>Batas Pembayaran</small>
+                            <small id="countdown-${pesanan.nomor_pesanan}" 
+                                   class="countdown-timer" 
+                                   data-limit="${pesanan.limit_payment}">
+                                ${sisaWaktu.formatted}
+                            </small>
+                        </div>
+                    </div>
+                    ` : ''}
+
+                    <div class="d-grid gap-2">
+                        ${(status === 'waiting' || status === 'belum bayar') ? `
+                        <button onclick="batalPembayaran('${pesanan.nomor_pesanan}')" 
+                                class="btn btn-sm btn-outline-danger ${sisaWaktu.isExpired ? 'disabled' : ''}"
+                                ${sisaWaktu.isExpired ? 'disabled' : ''}>
+                            <i class="fas fa-times-circle me-2"></i>Batalkan
+                        </button>
+                        <a href="/pembayaran/${pesanan.payment_token}" 
+                           class="btn btn-sm btn-primary ${sisaWaktu.isExpired ? 'disabled' : ''}">
+                            <i class="fas fa-money-bill-wave me-2"></i>Bayar Sekarang
+                        </a>
+                        ` : ''}
+                        
+                        ${status === 'dikirim' ? `
+                        <button class="btn btn-sm btn-outline-success">
+                            <i class="fas fa-truck me-2"></i>Lacak Pengiriman
+                        </button>
+                        ` : ''}
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+    }
+
+    // Fungsi untuk membatalkan pembayaran
+    function batalPembayaran(nomorPesanan) {
+        // Periksa apakah SweetAlert tersedia
+        if (typeof Swal === 'undefined') {
+            alert('Pembatalan Pembayaran: ' + nomorPesanan);
+            return;
+        }
+
+        $.ajax({
+            url: API_BASE_URL + '/batal-pembayaran',
+            type: 'POST',
+            dataType: 'json',
+            headers: {
+                'Authorization': 'Bearer ' + token,
+                'Content-Type': 'application/json'
+            },
+            data: JSON.stringify({
+                nomor_pesanan: nomorPesanan
+            }),
+            success: function(response) {
+                if (response.status === 'success') {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Pembatalan Berhasil',
+                        text: 'Pesanan berhasil dibatalkan.',
+                        confirmButtonText: 'OK'
+                    }).then(() => {
+                        fetchOrders(); // Refresh daftar pesanan
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Gagal Membatalkan',
+                        text: response.message || 'Terjadi kesalahan saat membatalkan pesanan.',
+                        confirmButtonText: 'Tutup'
+                    });
+                }
+            },
+            error: function(xhr, status, error) {
+                // Fallback jika SweetAlert tidak tersedia
+                if (typeof Swal === 'undefined') {
+                    alert('Kesalahan Jaringan: Silakan coba lagi nanti.');
+                    return;
+                }
+
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Kesalahan Jaringan',
+                    text: 'Silakan coba lagi nanti.',
+                    confirmButtonText: 'Tutup'
+                });
+            }
+        });
+    }
+
+    // Fungsi untuk menampilkan daftar pesanan
+    function tampilkanDaftarPesanan(dataPesanan) {
+        const containerPesanan = $('#pemesanan_list');
+        containerPesanan.empty();
+
+        // Hapus bagian "Semua" pesanan
+        const kategoriBaru = {
+            menunggu: dataPesanan.menunggu,
+            konfirmasi: dataPesanan.konfirmasi,
+            dikirim: dataPesanan.dikirim,
+            selesai: dataPesanan.selesai
+        };
+
+        containerPesanan.html(`
+        <div class="row mb-3">
+            <div class="col-12">
+                <nav>
+                    <div class="nav nav-pills nav-fill" id="nav-tab" role="tablist">
+                        <button class="nav-link active" id="nav-menunggu-tab" data-bs-toggle="tab" 
+                                data-status="menunggu" type="button" role="tab">
+                            Menunggu (${kategoriBaru.menunggu.length})
+                        </button>
+                        <button class="nav-link" id="nav-konfirmasi-tab" data-bs-toggle="tab" 
+                                data-status="konfirmasi" type="button" role="tab">
+                            Dikonfirmasi (${kategoriBaru.konfirmasi.length})
+                        </button>
+                        <button class="nav-link" id="nav-dikirim-tab" data-bs-toggle="tab" 
+                                data-status="dikirim" type="button" role="tab">
+                            Dikirim (${kategoriBaru.dikirim.length})
+                        </button>
+                        <button class="nav-link" id="nav-selesai-tab" data-bs-toggle="tab" 
+                                data-status="selesai" type="button" role="tab">
+                            Selesai (${kategoriBaru.selesai.length})
+                        </button>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <div class="row" id="pesanan-container">
+            ${kategoriBaru.menunggu.map(buatKartuPesanan).join('')}
+        </div>
+    `);
+
+        // Event listener untuk tab
+        $('.nav-link').on('click', function() {
+            const status = $(this).data('status');
+            const pesananDifilter = kategoriBaru[status];
+
+            $('#pesanan-container').html(
+                pesananDifilter.length > 0 ?
+                pesananDifilter.map(buatKartuPesanan).join('') :
+                `
+            <div class="col-12 text-center py-5">
+                <h6 class="text-muted">Tidak ada pesanan</h6>
+                <small class="text-muted">Anda belum memiliki pesanan pada kategori ini</small>
+            </div>
+            `
+            );
+
+            startCountdowns();
+        });
+
+        startCountdowns();
+    }
+
+    // Fungsi untuk memulai countdown
+    function startCountdowns() {
+        $('.countdown-timer').each(function() {
+            const $this = $(this);
+            const limitPayment = $this.data('limit');
+            const alertContainer = $this.closest('.alert');
+            const batalButton = $this.closest('.card-body').find('button.btn-outline-danger');
+            const bayarButton = $this.closest('.card-body').find('a.btn-primary');
+
+            function updateCountdown() {
+                const sisaWaktu = hitungSisaWaktuPembayaran(limitPayment);
+                $this.text(sisaWaktu.formatted);
+
+                // Jika waktu habis
+                if (sisaWaktu.isExpired) {
+                    alertContainer.removeClass('alert-danger').addClass('alert-secondary');
+                    $this.text('Timeout');
+
+                    // Nonaktifkan tombol batalkan dan bayar
+                    batalButton.prop('disabled', true).addClass('disabled');
+                    bayarButton.prop('disabled', true).addClass('disabled');
+                }
+            }
+
+            // Update countdown setiap detik
+            const countdownInterval = setInterval(updateCountdown, 1000);
+            updateCountdown();
+
+            $this.data('interval', countdownInterval);
+        });
+    }
+
+    // Fungsi untuk mengambil pesanan
+    function fetchOrders() {
+        // Tambahkan header SweetAlert untuk menghindari error
+        if (typeof Swal === 'undefined') {
+            window.Swal = {
+                fire: function(options) {
+                    console.log('SweetAlert:', options);
+                    if (options.then) options.then();
+                }
+            };
+        }
+
+        $.ajax({
+            url: API_BASE_URL + '/getAllPesanan',
+            type: 'GET',
+            dataType: 'json',
+            headers: {
+                'Authorization': 'Bearer ' + token
+            },
+            success: function(response) {
+                if (response.status === 'success') {
+                    tampilkanDaftarPesanan(response.data);
+                } else {
+                    $('#pemesanan_list').html(`
+                    <div class="alert alert-danger" role="alert">
+                        Gagal memuat pesanan: ${response.message}
+                    </div>
+                `);
+                }
+            },
+            error: function(xhr, status, error) {
+                $('#pemesanan_list').html(`
+                <div class="alert alert-danger" role="alert">
+                    Terjadi kesalahan saat memuat pesanan. Silakan coba lagi.
+                </div>
+            `);
+            }
+        });
+    }
+
+    // Panggil fetchOrders saat halaman dimuat
+    $(document).ready(function() {
+        fetchOrders();
     });
-});
 </script>
 
 </html>

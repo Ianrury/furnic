@@ -129,19 +129,24 @@ $apiBaseUrl = env('API_BASE_URL');
                             <!-- List Produk -->
                             <div class="col-lg-8 ps-0">
                                 <div class="custom-col rounded-4 panjang-card" style="border: 2px solid #D9D9D9;">
-                                    <div class="px-4 py-3 mb-4 border rounded shadow-sm">
+                                    <div class="px-4 py-3 border rounded shadow-sm">
                                         <div>
-                                            <h4 class="text-black text-header-informasi">Alamat Pengirim</h4>
+                                            <h4 class="text-black text-header-informasi">Alamat Penerima</h4>
                                         </div>
                                         <div class="text-alamat-rumah my-2">
-                                            <p id="display_detail"></p>
+                                            <!-- <p id="display_detail"></p>
                                             <p id="display_nama"></p>
                                             <p id="display_hp"></p>
                                             <p id="display_alamat"></p>
-                                            <p id="display_email" class="d-none"></p>
+                                            <p id="display_email" class="d-none"></p> -->
+                                            <div id="alamat-content">
+                                                <!-- Delivery content will be loaded here -->
+                                            </div>
                                         </div>
                                         <div>
-                                            <button class="button-edit" data-bs-toggle="modal" data-bs-target="#editAlamatModal">Edit Alamat</button>
+                                            <a href="/profile">
+                                                <button class="button-edit">Edit Alamat</button>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -248,7 +253,10 @@ $apiBaseUrl = env('API_BASE_URL');
                                             <form id="formBayar" method="post">
                                                 <input type="text" id="id_toko" value="" hidden>
                                                 <input type="text" id="id_pengiriman" value="" hidden>
-                                                <button type="submit" class="btn btn-buy w-100 rounded-3 fw-bold" style="font-size: 14px;">Bayar</button>
+                                                <button type="submit" id="payButton" class="btn btn-buy w-100 rounded-3 fw-bold position-relative" style="font-size: 14px;">
+                                                    <span id="buttonText">Bayar</span>
+                                                    <span id="buttonSpinner" class="spinner-border spinner-border-sm position-absolute" style="display: none; right: 10px;" role="status" aria-hidden="true"></span>
+                                                </button>
                                             </form>
                                         </div>
                                         <!-- Selesai 1 produk -->
@@ -271,65 +279,6 @@ $apiBaseUrl = env('API_BASE_URL');
                 </div>
             </div> -->
 
-            <div class="modal fade bd-example-modal-lg" id="editAlamatModal" tabindex="-1" role="dialog"
-                aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title text-black" id="exampleModalLabel">Edit Alamat</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form id="formEditUser" method="post">
-                                <input type="text" id="id_user" name="id_user"
-                                    value="<?= $model['user']['id_customer'] ?>" hidden>
-                                <div class="" style="margin: auto 5px;">
-                                    <label for="nama" class="form-label">Nama Lengkap <span
-                                            class="required">*</span></label>
-                                    <input type="text" class="form-control form-login" id="nama_user" name="nama"
-                                        placeholder="Masukkan Nama Lengkap" value="<?= $model['user']['nama'] ?>">
-                                </div>
-
-                                <div class="" style="margin: auto 5px;">
-                                    <label for="detail" class="form-label">Detail<span class="required">*</span></label>
-                                    <input type="text" class="form-control form-login" id="detail" name="detail"
-                                        placeholder="Masukkan detail Lengkap" value="<?= $model['user']['detail'] ?>">
-                                </div>
-
-                                <div class="" style="margin: auto 5px;" hidden>
-                                    <label for="email" class="form-label">Email <span class="required">*</span></label>
-                                    <input type="email" class="form-control form-login" id="email" name="email"
-                                        placeholder="Masukkan Email" value="<?= $model['user']['email'] ?? '' ?>">
-
-                                </div>
-
-                                <div class="" style="margin: auto 5px;">
-                                    <label for="no_hp" class="form-label">Nomor Telepon <span
-                                            class="required">*</span></label>
-                                    <div class="d-flex gap-1">
-                                        <input type="text" class="form-control form-login country-code-input"
-                                            id="country_code" name="country_code" placeholder="+62" readonly>
-                                        <input type="text" class="form-control form-login phone-input" id="no_telpon"
-                                            name="no_hp" placeholder="Masukkan No Telepon"
-                                            value="<?= $model['user']['no_hp'] ?>">
-                                    </div>
-                                </div>
-
-                                <div class="" style="margin: auto 5px;">
-                                    <label for="Alamat" class="form-label">Alamat Lengkap <span
-                                            class="required">*</span></label>
-                                    <textarea class="form-control form-login p-1" id="Alamat" name="alamat" rows="3"
-                                        placeholder="Masukkan Alamat"><?= $model['user']['alamat'] ?? '' ?></textarea>
-
-                                </div>
-                                <button type="submit" class="btn btn-masuk mt-2 w-100">Submit</button>
-                                <!-- Login Button -->
-                            </form>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
 
             <div id="toastContainer" class="position-fixed top-0 end-0 p-3" style="z-index: 9999;"></div>
     </main>
@@ -478,53 +427,215 @@ $apiBaseUrl = env('API_BASE_URL');
         // Render default antar saat load
         renderContent('antar');
     </script>
+    <script>
+        // Function to display addresses with the primary address at the top
+        function displayAddresses(addresses) {
+            // Sort addresses to put the primary address (utama = 1 or true) at the top
+            addresses.sort((a, b) => {
+                return b.utama - a.utama;
+            });
 
+            const alamatContentElement = document.getElementById('alamat-content');
+            alamatContentElement.innerHTML = ''; // Clear existing content
+
+            // Loop through sorted addresses and create HTML elements
+            addresses.forEach(address => {
+                const addressElement = document.createElement('div');
+                addressElement.className = 'd-flex align-items-start gap-2 w-100 mt-2';
+
+                // Create radio input
+                const radioInput = document.createElement('input');
+                radioInput.type = 'radio';
+                radioInput.name = 'lokasi_alamat';
+                radioInput.value = address.id;
+                radioInput.style.marginTop = '4px';
+                radioInput.checked = address.utama === 1;
+                radioInput.onchange = function() {
+                    selectAlamat(this);
+                };
+
+                // Create text container div
+                const textContainer = document.createElement('div');
+                textContainer.className = 'd-flex flex-column';
+
+                // Add address details
+                const addressLine1 = document.createElement('div');
+                addressLine1.className = 'text-detail-jasa';
+                addressLine1.textContent = `${address.detail_alamat}`;
+
+                const addressLine2 = document.createElement('div');
+                addressLine2.className = 'text-detail-jasa';
+                addressLine2.textContent = `${address.kelurahan}, ${address.kecamatan}, ${address.kabupaten}, ${address.provinsi}`;
+
+                // Append elements
+                textContainer.appendChild(addressLine1);
+                textContainer.appendChild(addressLine2);
+
+                addressElement.appendChild(radioInput);
+                addressElement.appendChild(textContainer);
+
+                alamatContentElement.appendChild(addressElement);
+            });
+        }
+
+        // Function to handle radio button selection and update primary address
+        function selectAlamat(radioElement) {
+            const addressId = radioElement.value;
+            const token = localStorage.getItem('auth_token');
+
+            if (!token) {
+                window.location.href = '/login';
+                return;
+            }
+
+            const dataToSend = {
+                address_id: addressId
+            };
+
+            fetch(`${API_BASE_URL}/update-alamat`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(dataToSend)
+                })
+                .then(response => response.json())
+                .then(result => {
+                    console.log(result.data);
+                    // Update the UI to reflect the new primary address
+                    const allRadios = document.querySelectorAll('input[name="lokasi_alamat"]');
+                    allRadios.forEach(radio => {
+                        const parentDiv = radio.closest('.d-flex');
+                        if (radio.value === addressId) {
+                            // This is now the primary address
+                            radio.checked = true;
+                        }
+                    });
+                })
+                .catch(error => {
+                    if (error.message.includes('Token tidak ditemukan') || error.message.includes('Token tidak valid, silakan login ulang')) {
+                        // Token is invalid, remove token and redirect to login
+                        localStorage.removeItem('auth_token');
+                        alert("Sesi Anda telah habis. Silakan login ulang.");
+                        window.location.href = '/login';
+                        return;
+                    }
+                    console.error('Error:', error);
+                    alert('Terjadi kesalahan saat mengupdate data');
+                });
+        }
+
+        // Fetch addresses on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const token = localStorage.getItem('auth_token');
+            if (!token) {
+                window.location.href = '/login';
+                return;
+            }
+
+            fetch(`${API_BASE_URL}/alamat`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => response.json())
+                .then(result => {
+                    console.log(result.data);
+                    displayAddresses(result.data);
+                })
+                .catch(error => {
+                    if (error.message.includes('Token tidak ditemukan') || error.message.includes('Token tidak valid, silakan login ulang')) {
+                        // Token is invalid, remove token and redirect to login
+                        localStorage.removeItem('auth_token');
+                        alert("Sesi Anda telah habis. Silakan login ulang.");
+                        window.location.href = '/login';
+                        return;
+                    }
+                    console.error('Error:', error);
+                    alert('Terjadi kesalahan saat mengambil data alamat');
+                });
+        });
+    </script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('formBayar').addEventListener('submit', function(e) {
-                e.preventDefault(); // Mencegah form submit default
+                e.preventDefault(); // Prevent default form submission
 
-                const nama = $('#nama_user').val().trim();
-                const email = $('#email').val().trim();
-                const no_hp = $('#no_telpon').val().trim();
-                const alamat = $('#Alamat').val().trim();
-                const detail = $('#detail').val().trim();
-                // Ambil data dari form
+                // Get button elements
+                const payButton = document.getElementById('payButton');
+                const buttonText = document.getElementById('buttonText');
+                const buttonSpinner = document.getElementById('buttonSpinner');
 
-                if (!nama || !email || !no_hp || !alamat || !detail) {
-                    showToast('Silahkan lengkapi data diri anda terlebih dahulu', 'danger');
-                    $('#editAlamatModal').modal('show');
+                // If button is already in loading state, don't process again
+                if (payButton.getAttribute('data-loading') === 'true') {
                     return;
                 }
+
+                // Set button to loading state
+                payButton.setAttribute('data-loading', 'true');
+                payButton.classList.add('disabled');
+                buttonText.textContent = 'Memproses...';
+                buttonSpinner.style.display = 'inline-block';
+
+                const token = localStorage.getItem('auth_token');
+                console.log(token);
+                if (!token) {
+                    window.location.href = '/login';
+                    return;
+                }
+
+                // Get cart_ids from localStorage
+                const cartIds = localStorage.getItem('cart_ids');
+                if (cartIds === null) {
+                    // kembali ke product
+                    window.location.href = '/product';
+                    return;
+                }
+                // console.log(cartIds);
 
                 const idToko = document.getElementById('id_toko').value;
                 const idPengiriman = document.getElementById('id_pengiriman').value;
 
-                // Validasi
+                // Validation
                 if (!idToko && !idPengiriman) {
                     showToast('Pilih toko atau jenis pengiriman terlebih dahulu', 'danger');
+                    // Reset button state
+                    resetButtonState();
                     return;
                 }
 
-                // Buat FormData object
+                // Create FormData object
                 const formData = new FormData();
                 formData.append('id_toko', idToko);
                 formData.append('id_pengiriman', idPengiriman);
 
-                // Kirim data ke server
-                fetch(API_BASE_URL + '/pesanan', {
+                // Send data to server
+                fetch(`${API_BASE_URL}/pesanan?cart_ids=${cartIds}`, {
                         method: 'POST',
+                        headers: {
+                            'Authorization': 'Bearer ' + token
+                        },
                         body: formData
                     })
-                    .then(response => response.json()) // Mengonversi response ke format JSON
+                    .then(response => response.json())
                     .then(data => {
                         if (data.status === 'success') {
+                            // reset storage carg
+                            const cartIds = localStorage.getItem('cart_ids');
+                            localStorage.removeItem('cart_ids');
                             showToast(data.message || 'Pesanan berhasil dibuat', 'success');
+                            // cek disini
                             setTimeout(() => {
                                 window.location.href = data.redirect_url || '/pembayaran';
                             }, 1500);
                         } else {
-                            // Cek jika perlu redirect ke halaman keranjang
+                            // Reset button state on error
+                            resetButtonState();
+
+                            // Check if we need to redirect to cart page
                             if (data.message === 'Return to keranjang') {
                                 showToast('Keranjang kosong, silakan pilih produk terlebih dahulu', 'danger');
                                 setTimeout(() => {
@@ -533,12 +644,25 @@ $apiBaseUrl = env('API_BASE_URL');
                             } else {
                                 showToast(data.message || 'Terjadi kesalahan', 'danger');
                             }
+                            if (data.message === "Alamat belum ditambahkan") {
+                                showToast('Alamat belum ditambahkan', 'danger');
+                            }
                         }
                     })
                     .catch(error => {
+                        // Reset button state on error
+                        resetButtonState();
                         showToast('Terjadi kesalahan dalam mengirim data', 'danger');
                         console.error('Error:', error);
                     });
+
+                // Function to reset button state
+                function resetButtonState() {
+                    payButton.removeAttribute('data-loading');
+                    payButton.classList.remove('disabled');
+                    buttonText.textContent = 'Bayar';
+                    buttonSpinner.style.display = 'none';
+                }
             });
 
             function showToast(message, type = 'danger') {
@@ -572,6 +696,11 @@ $apiBaseUrl = env('API_BASE_URL');
 
             // Mendapatkan cart_ids dari localStorage
             const cartIds = localStorage.getItem('cart_ids');
+            if (cartIds === null) {
+                // kembali ke product
+                window.location.href = '/product';
+                return;
+            }
             console.log(cartIds);
 
             fetch(`${API_BASE_URL}/pesanan/index?cart_ids=${cartIds}`, {
@@ -584,6 +713,7 @@ $apiBaseUrl = env('API_BASE_URL');
                 .then(response => {
                     const data = response.data;
                     if (!data || !data.user) {
+                        window.location.href = '/product';
                         console.error("User data is missing or undefined");
                         return;
                     }
@@ -618,10 +748,10 @@ $apiBaseUrl = env('API_BASE_URL');
                 const idToko = document.getElementById('id_toko').value;
                 const idPengiriman = document.getElementById('id_pengiriman').value;
 
-                if (!idToko && !idPengiriman) {
-                    alert('Silakan pilih metode pengiriman terlebih dahulu');
-                    return;
-                }
+                // if (!idToko && !idPengiriman) {
+                //     alert('Silakan pilih metode pengiriman terlebih dahulu');
+                //     return;
+                // }
 
                 // Submit payment logic here
                 console.log('Processing payment with toko:', idToko, 'pengiriman:', idPengiriman);
@@ -630,11 +760,11 @@ $apiBaseUrl = env('API_BASE_URL');
         });
 
         function populateUserData(user) {
-            document.getElementById('display_detail').textContent = user.detail ? ucFirst(user.detail) : '';
-            document.getElementById('display_nama').textContent = user.nama || '';
-            document.getElementById('display_hp').textContent = user.no_hp || '';
-            document.getElementById('display_alamat').textContent = user.alamat || '';
-            document.getElementById('display_email').textContent = user.email || '';
+            // document.getElementById('display_detail').textContent = user.detail ? ucFirst(user.detail) : '';
+            // document.getElementById('display_nama').textContent = user.nama || '';
+            // document.getElementById('display_hp').textContent = user.no_hp || '';
+            // document.getElementById('display_alamat').textContent = user.alamat || '';
+            // document.getElementById('display_email').textContent = user.email || '';
         }
 
         function renderProducts(products) {
@@ -683,7 +813,7 @@ $apiBaseUrl = env('API_BASE_URL');
                             ${item.nama_product}
                         </h5>
                         <p class="name-keranjang">
-                            ${item.deskripsi}
+                        ${truncateWords(item.deskripsi, 10)}
                         </p>
                         <ul class="list-unstyled m-0 p-0">
                             <li class="motif-keranjang">
@@ -755,6 +885,14 @@ $apiBaseUrl = env('API_BASE_URL');
             return kata.slice(0, jumlahKata).join(' ') + '...';
         }
 
+        function truncateWords(text, wordLimit) {
+            if (!text) return '';
+            const words = text.trim().split(/\s+/);
+            if (words.length <= wordLimit) return text;
+            return words.slice(0, wordLimit).join(' ') + '...';
+        }
+
+
         function setupDeliveryMethods(jenisPengiriman, tokoList, baseTotal) {
             const btnAntar = document.getElementById('btn-antar');
             const btnAmbil = document.getElementById('btn-ambil');
@@ -764,74 +902,120 @@ $apiBaseUrl = env('API_BASE_URL');
             const ongkirEl = document.getElementById('total-ongkir');
             const totalPembayaranEl = document.getElementById('total-pembayaran');
 
+            // Simpan seleksi yang dipilih user
+            let selectedPengirimanId = '';
+            let selectedTokoId = '';
+            let currentMode = 'antar'; // Default mode
+
             function renderContent(type) {
+                currentMode = type;
+
                 if (type === 'antar') {
                     let html = `<h6 class="text-black header-pilih-jasa">Pilih jasa Pengiriman</h6>`;
                     jenisPengiriman.forEach(p => {
                         const harga = parseInt(p.harga_setelah_diskon);
                         const originalHarga = parseInt(p.harga);
+                        const isChecked = p.id.toString() === selectedPengirimanId ? 'checked' : '';
+
                         html += `
-                    <div class="d-flex justify-content-between align-items-center w-100 mt-2">
-                        <div class="d-flex align-items-center gap-2">
-                            <input type="radio" name="jenis_pengiriman" id="pengiriman_${p.id}" value="${p.id}" data-harga="${harga}" onchange="selectPengiriman(this)">
-                            <div class="text-detail-jasa">${p.nama}</div>
-                        </div>
-                        <div class="d-flex align-items-center gap-3">
-                            ${p.diskon > 0 ? `<div class="text-danger old-price fw-normal"><sup>Rp</sup><span class="text-decoration-line-through">${formatNumber(originalHarga)}</span></div>` : ''}
-                            <div class="text-nominal text-black">${harga === 0 ? 'gratis' : 'Rp ' + formatNumber(harga)}</div>
-                        </div>
-                    </div>`;
+                <div class="d-flex justify-content-between align-items-center w-100 mt-2">
+                    <div class="d-flex align-items-center gap-2">
+                        <input type="radio" name="jenis_pengiriman" id="pengiriman_${p.id}" 
+                               value="${p.id}" data-harga="${harga}" ${isChecked}
+                               onchange="selectPengiriman(this)">
+                        <div class="text-detail-jasa">${p.nama}</div>
+                    </div>
+                    <div class="d-flex align-items-center gap-3">
+                        ${p.diskon > 0 ? `<div class="text-danger old-price fw-normal"><sup>Rp</sup><span class="text-decoration-line-through">${formatNumber(originalHarga)}</span></div>` : ''}
+                        <div class="text-nominal text-black">${harga === 0 ? 'gratis' : 'Rp ' + formatNumber(harga)}</div>
+                    </div>
+                </div>`;
                     });
                     content.innerHTML = html;
+
+                    // Jika ada pengiriman yang sudah dipilih sebelumnya, update total
+                    if (selectedPengirimanId) {
+                        const selectedPengiriman = jenisPengiriman.find(p => p.id.toString() === selectedPengirimanId);
+                        if (selectedPengiriman) {
+                            const harga = parseInt(selectedPengiriman.harga_setelah_diskon);
+                            ongkirEl.innerText = formatNumber(harga);
+                            totalPembayaranEl.innerText = formatNumber(baseTotal + harga);
+                        }
+                    }
                 } else {
                     let html = `<h6 class="text-black header-pilih-jasa">Pilih Lokasi Pengambilan</h6>`;
                     tokoList.forEach(toko => {
+                        const isChecked = toko.id.toString() === selectedTokoId ? 'checked' : '';
+
                         html += `
-                    <div class="d-flex align-items-start gap-2 w-100 mt-2">
-                        <input type="radio" name="lokasi_toko" value="${toko.id}" onchange="selectToko(this)" style="margin-top: 4px;">
-                        <div class="d-flex flex-column">
-                            <div class="text-detail-jasa">${toko.nama}</div>
-                            <div class="text-detail-jasa">${toko.alamat || 'Alamat tidak tersedia'}</div>
-                        </div>
-                    </div>`;
+                <div class="d-flex align-items-start gap-2 w-100 mt-2">
+                    <input type="radio" name="lokasi_toko" value="${toko.id}" ${isChecked}
+                           onchange="selectToko(this)" style="margin-top: 4px;">
+                    <div class="d-flex flex-column">
+                        <div class="text-detail-jasa">${toko.nama}</div>
+                        <div class="text-detail-jasa">${toko.alamat || 'Alamat tidak tersedia'}</div>
+                    </div>
+                </div>`;
                     });
                     content.innerHTML = html;
+
+                    // Jika ada toko yang sudah dipilih sebelumnya, update total
+                    if (selectedTokoId) {
+                        ongkirEl.innerText = '0';
+                        totalPembayaranEl.innerText = formatNumber(baseTotal);
+                    }
                 }
             }
 
             window.selectPengiriman = function(el) {
                 const harga = parseInt(el.dataset.harga);
+                selectedPengirimanId = el.value;
                 idPengirimanInput.value = el.value;
                 idTokoInput.value = '';
+                selectedTokoId = ''; // Reset toko selection when pengiriman is selected
                 ongkirEl.innerText = formatNumber(harga);
                 totalPembayaranEl.innerText = formatNumber(baseTotal + harga);
             };
 
             window.selectToko = function(el) {
+                selectedTokoId = el.value;
                 idTokoInput.value = el.value;
                 idPengirimanInput.value = '';
+                selectedPengirimanId = ''; // Reset pengiriman selection when toko is selected
                 ongkirEl.innerText = '0';
                 totalPembayaranEl.innerText = formatNumber(baseTotal);
             };
 
             btnAntar.addEventListener('click', () => {
-                renderContent('antar');
-                btnAntar.classList.add('active');
-                btnAmbil.classList.remove('active');
-                idTokoInput.value = '';
-                idPengirimanInput.value = '';
-                ongkirEl.innerText = '0';
-                totalPembayaranEl.innerText = formatNumber(baseTotal);
+                if (currentMode !== 'antar') {
+                    renderContent('antar');
+                    btnAntar.classList.add('active');
+                    btnAmbil.classList.remove('active');
+
+                    // Jika tidak ada pengiriman yang dipilih, reset nilainya
+                    if (!selectedPengirimanId) {
+                        idTokoInput.value = '';
+                        idPengirimanInput.value = '';
+                        ongkirEl.innerText = '0';
+                        totalPembayaranEl.innerText = formatNumber(baseTotal);
+                    }
+                }
             });
 
             btnAmbil.addEventListener('click', () => {
-                renderContent('ambil');
-                btnAmbil.classList.add('active');
-                btnAntar.classList.remove('active');
-                idTokoInput.value = '';
-                idPengirimanInput.value = '';
-                ongkirEl.innerText = '0';
-                totalPembayaranEl.innerText = formatNumber(baseTotal);
+                if (currentMode !== 'ambil') {
+                    renderContent('ambil');
+                    btnAmbil.classList.add('active');
+                    btnAntar.classList.remove('active');
+
+                    // Jika tidak ada toko yang dipilih, reset nilainya
+                    if (!selectedTokoId) {
+                        idTokoInput.value = '';
+                        idPengirimanInput.value = '';
+                        ongkirEl.innerText = '0';
+                        totalPembayaranEl.innerText = formatNumber(baseTotal);
+                    }
+                }
             });
 
             // Render default antar saat load
@@ -854,7 +1038,7 @@ $apiBaseUrl = env('API_BASE_URL');
     </script>
 
 
-    <script>
+    <!-- <script>
         $('#formEditUser').on('submit', function(e) {
             e.preventDefault();
 
@@ -898,11 +1082,11 @@ $apiBaseUrl = env('API_BASE_URL');
                             showToast(res.message, 'success');
 
                             // Update tampilan data di luar modal
-                            $('#display_nama').text(nama);
-                            $('#display_email').text(email);
-                            $('#display_hp').text('+62' + no_hp.replace(/^0+/, '')); // hapus 0 di depan
-                            $('#display_alamat').text(alamat);
-                            $('#display_detail').text(detail);
+                            // $('#display_nama').text(nama);
+                            // $('#display_email').text(email);
+                            // $('#display_hp').text('+62' + no_hp.replace(/^0+/, '')); // hapus 0 di depan
+                            // $('#display_alamat').text(alamat);
+                            // $('#display_detail').text(detail);
                         } else {
                             showToast(res.message || 'Gagal update.', 'danger');
                         }
@@ -942,7 +1126,7 @@ $apiBaseUrl = env('API_BASE_URL');
             const toastElement = new bootstrap.Toast(document.getElementById(toastId));
             toastElement.show();
         }
-    </script>
+    </script> -->
 </body>
 
 </html>

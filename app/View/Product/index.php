@@ -228,7 +228,7 @@ $apiBaseUrl = env('API_BASE_URL');
                                     <!-- Kategori -->
                                     <div class="mb-3">
                                         <h6 class="fw-bold text-dark mb-2" style="font-size: 15px;">Kategori</h6>
-                                        <div class="row" >
+                                        <div class="row">
                                             <?php foreach (array_chunk($model['category'], 2) as $chunk): ?>
                                                 <?php foreach ($chunk as $cat): ?>
                                                     <div class="col-6">
@@ -252,7 +252,7 @@ $apiBaseUrl = env('API_BASE_URL');
 
                                     <!-- Harga -->
                                     <div class="mb-3">
-                                        <h6 class="fw-bold text-dark mb-2" style="font-size: 15px;">Kategori</h6>
+                                        <h6 class="fw-bold text-dark mb-2" style="font-size: 15px;">Harga</h6>
                                         <div class="input-group input-group-sm mb-3">
                                             <span class="input-group-text fw-bold"
                                                 style="font-size: 10px; background-color: #D9D9D9;">Rp</span>
@@ -391,7 +391,8 @@ $apiBaseUrl = env('API_BASE_URL');
 
                             const html = `
                         <div class="col-6 col-md-4 col-lg-3">
-                            <div class="card shadow position-relative rounded-4 p-2 product-card" data-id="${product.id_product}" style="cursor:pointer;">
+                            <div class="card shadow position-relative rounded-4 p-2 product-card" data-id="${product.id_product}" data-slug="${product.slug}" 
+     data-token="${product.token}" style="cursor:pointer;">
                                 <div class="position-absolute ribbon-wrapper">
                                     <div class="ribbon text-white text-uppercase fw-bold text-center">New Product</div>
                                 </div>
@@ -669,6 +670,8 @@ $apiBaseUrl = env('API_BASE_URL');
                     rating: product.rating ?? 4,
                     sold: product.beli ?? 0,
                     stock: product.qty,
+                    slug: product.slug,
+                    token: product.token,
                     image: product.url_foto,
                     created_at: product.created_at,
                     ribbon
@@ -683,7 +686,8 @@ $apiBaseUrl = env('API_BASE_URL');
         function createProductCard(product) {
             return `
             <div class="col">
-                <div class="card shadow position-relative rounded-4 p-2 product-card" data-id="${product.id}" style="cursor:pointer;">
+                <div class="card shadow position-relative rounded-4 p-2 product-card" data-id="${product.id}"  data-slug="${product.slug}" 
+     data-token="${product.token}" style="cursor:pointer;">
 
                     ${product.ribbon ? `
                         <div class="position-absolute ribbon-wrapper">
@@ -1001,9 +1005,11 @@ $apiBaseUrl = env('API_BASE_URL');
         document.addEventListener('click', function(e) {
             const card = e.target.closest('.product-card');
             if (card) {
-                const productId = card.getAttribute('data-id');
-                if (productId) {
-                    window.location.href = `/product/detail/${productId}`;
+                const slug = card.getAttribute('data-slug');
+                const token = card.getAttribute('data-token');
+                console.log(slug, token);
+                if (slug && token) {
+                    window.location.href = `/product/${slug}/${token}`;
                 }
             }
         });

@@ -383,215 +383,58 @@ $apiBaseUrl = env('API_BASE_URL');
                                 <div class="card-header bg-white">
                                     <h5 class="mb-0">Riwayat Pesanan</h5>
                                 </div>
-                                <div class="card-body">
+                                <!-- Order List Template -->
+                                <div class="card-body" id="order-list">
                                     <ul class="nav nav-pills mb-3" id="orderTabs" role="tablist">
                                         <li class="nav-item" role="presentation">
                                             <button class="nav-link active" id="all-orders-tab" data-bs-toggle="pill"
-                                                data-bs-target="#all-orders" type="button">Semua (25)</button>
+                                                data-bs-target="#all-orders" type="button">Semua (<span id="all-orders-count">0</span>)</button>
                                         </li>
                                         <li class="nav-item" role="presentation">
                                             <button class="nav-link" id="pending-orders-tab" data-bs-toggle="pill"
-                                                data-bs-target="#pending-orders" type="button">Menunggu (2)</button>
+                                                data-bs-target="#pending-orders" type="button">Menunggu (<span id="pending-orders-count">0</span>)</button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="confirmed-orders-tab" data-bs-toggle="pill"
+                                                data-bs-target="#confirmed-orders" type="button">Dikonfirmasi (<span id="confirmed-orders-count">0</span>)</button>
                                         </li>
                                         <li class="nav-item" role="presentation">
                                             <button class="nav-link" id="shipped-orders-tab" data-bs-toggle="pill"
-                                                data-bs-target="#shipped-orders" type="button">Dikirim (1)</button>
+                                                data-bs-target="#shipped-orders" type="button">Dikirim (<span id="shipped-orders-count">0</span>)</button>
                                         </li>
                                         <li class="nav-item" role="presentation">
                                             <button class="nav-link" id="completed-orders-tab" data-bs-toggle="pill"
-                                                data-bs-target="#completed-orders" type="button">Selesai (22)</button>
+                                                data-bs-target="#completed-orders" type="button">Selesai (<span id="completed-orders-count">0</span>)</button>
                                         </li>
                                     </ul>
 
                                     <div class="tab-content" id="orderTabsContent">
+                                        <!-- All Orders Tab -->
                                         <div class="tab-pane fade show active" id="all-orders">
-                                            <!-- Order Item 1 -->
-                                            <div class="card mb-3 order-item">
-                                                <div class="card-body">
-                                                    <div class="row align-items-center">
-                                                        <div class="col-md-8">
-                                                            <div class="d-flex align-items-center mb-3">
-                                                                <span class="badge bg-success me-2">Selesai</span>
-                                                                <strong>No. Order: #ORD-2025050123</strong>
-                                                            </div>
-                                                            <p class="mb-2">2 Mei 2025 • 3 Produk • Total: Rp 650.000
-                                                            </p>
-                                                            <div class="d-flex align-items-center mb-2">
-                                                                <img src="assets/img/product/UT M01 2.png"
-                                                                    class="me-2 rounded" alt="Product" width="50"
-                                                                    height="50">
-                                                                <span class="text-truncate">Sepatu Running Nike Air Zoom
-                                                                    + 2
-                                                                    produk lainnya</span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-4 text-md-end mt-3 mt-md-0">
-                                                            <button class="btn btn-outline-primary mb-2 me-2">Beli
-                                                                Lagi</button>
-                                                            <button class="btn btn-primary">Detail</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <!-- Order Item 2 -->
-                                            <div class="card mb-3 order-item">
-                                                <div class="card-body">
-                                                    <div class="row align-items-center">
-                                                        <div class="col-md-8">
-                                                            <div class="d-flex align-items-center mb-3">
-                                                                <span
-                                                                    class="badge bg-warning text-dark me-2">Dikirim</span>
-                                                                <strong>No. Order: #ORD-2025050096</strong>
-                                                            </div>
-                                                            <p class="mb-2">29 April 2025 • 1 Produk • Total: Rp 235.000
-                                                            </p>
-                                                            <div class="d-flex align-items-center mb-2">
-                                                                <img src="assets/img/product/UT M01 2.png"
-                                                                    class="me-2 rounded" alt="Product" width="50"
-                                                                    height="50">
-                                                                <span class="text-truncate">Kemeja Formal Pria Slim
-                                                                    Fit</span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-4 text-md-end mt-3 mt-md-0">
-                                                            <button
-                                                                class="btn btn-outline-success mb-2 me-2">Lacak</button>
-                                                            <button class="btn btn-primary">Detail</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <!-- Order Item 3 -->
-                                            <div class="card mb-3 order-item">
-                                                <div class="card-body">
-                                                    <div class="row align-items-center">
-                                                        <div class="col-md-8">
-                                                            <div class="d-flex align-items-center mb-3">
-                                                                <span class="badge bg-primary me-2">Menunggu
-                                                                    Pembayaran</span>
-                                                                <strong>No. Order: #ORD-2025050075</strong>
-                                                            </div>
-                                                            <p class="mb-2">27 April 2025 • 5 Produk • Total: Rp
-                                                                1.250.000
-                                                            </p>
-                                                            <div class="d-flex align-items-center mb-2">
-                                                                <img src="assets/img/product/UT M01 2.png"
-                                                                    class="me-2 rounded" alt="Product" width="50"
-                                                                    height="50">
-                                                                <span class="text-truncate">iPhone 15 Pro Case + 4
-                                                                    produk
-                                                                    lainnya</span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-4 text-md-end mt-3 mt-md-0">
-                                                            <button
-                                                                class="btn btn-outline-primary mb-2 me-2">Bayar</button>
-                                                            <button class="btn btn-primary">Detail</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="text-center mt-4">
+                                            <div id="all-orders-container"></div>
+                                            <!-- <div class="text-center mt-4">
                                                 <button class="btn btn-outline-primary">Lihat Semua Pesanan</button>
-                                            </div>
+                                            </div> -->
                                         </div>
 
+                                        <!-- Pending Orders Tab -->
                                         <div class="tab-pane fade" id="pending-orders">
-                                            <!-- Pending Orders will be here -->
-                                            <div class="card mb-3 order-item">
-                                                <div class="card-body">
-                                                    <div class="row align-items-center">
-                                                        <div class="col-md-8">
-                                                            <div class="d-flex align-items-center mb-3">
-                                                                <span class="badge bg-primary me-2">Menunggu
-                                                                    Pembayaran</span>
-                                                                <strong>No. Order: #ORD-2025050075</strong>
-                                                            </div>
-                                                            <p class="mb-2">27 April 2025 • 5 Produk • Total: Rp
-                                                                1.250.000
-                                                            </p>
-                                                            <div class="d-flex align-items-center mb-2">
-                                                                <img src="assets/img/product/UT M01 2.png"
-                                                                    class="me-2 rounded" alt="Product" width="50"
-                                                                    height="50">
-                                                                <span class="text-truncate">iPhone 15 Pro Case + 4
-                                                                    produk
-                                                                    lainnya</span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-4 text-md-end mt-3 mt-md-0">
-                                                            <button
-                                                                class="btn btn-outline-primary mb-2 me-2">Bayar</button>
-                                                            <button class="btn btn-primary">Detail</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            <div id="pending-orders-container"></div>
                                         </div>
 
+                                        <!-- Confirmed Orders Tab -->
+                                        <div class="tab-pane fade" id="confirmed-orders">
+                                            <div id="confirmed-orders-container"></div>
+                                        </div>
+
+                                        <!-- Shipped Orders Tab -->
                                         <div class="tab-pane fade" id="shipped-orders">
-                                            <!-- Shipped Orders will be here -->
-                                            <div class="card mb-3 order-item">
-                                                <div class="card-body">
-                                                    <div class="row align-items-center">
-                                                        <div class="col-md-8">
-                                                            <div class="d-flex align-items-center mb-3">
-                                                                <span
-                                                                    class="badge bg-warning text-dark me-2">Dikirim</span>
-                                                                <strong>No. Order: #ORD-2025050096</strong>
-                                                            </div>
-                                                            <p class="mb-2">29 April 2025 • 1 Produk • Total: Rp 235.000
-                                                            </p>
-                                                            <div class="d-flex align-items-center mb-2">
-                                                                <img src="assets/img/product/UT M01 2.png"
-                                                                    class="me-2 rounded" alt="Product" width="50"
-                                                                    height="50">
-                                                                <span class="text-truncate">Kemeja Formal Pria Slim
-                                                                    Fit</span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-4 text-md-end mt-3 mt-md-0">
-                                                            <button
-                                                                class="btn btn-outline-success mb-2 me-2">Lacak</button>
-                                                            <button class="btn btn-primary">Detail</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            <div id="shipped-orders-container"></div>
                                         </div>
 
+                                        <!-- Completed Orders Tab -->
                                         <div class="tab-pane fade" id="completed-orders">
-                                            <!-- Completed Orders will be here -->
-                                            <div class="card mb-3 order-item">
-                                                <div class="card-body">
-                                                    <div class="row align-items-center">
-                                                        <div class="col-md-8">
-                                                            <div class="d-flex align-items-center mb-3">
-                                                                <span class="badge bg-success me-2">Selesai</span>
-                                                                <strong>No. Order: #ORD-2025050123</strong>
-                                                            </div>
-                                                            <p class="mb-2">2 Mei 2025 • 3 Produk • Total: Rp 650.000
-                                                            </p>
-                                                            <div class="d-flex align-items-center mb-2">
-                                                                <img src="assets/img/product/UT M01 2.png"
-                                                                    class="me-2 rounded" alt="Product" width="50"
-                                                                    height="50">
-                                                                <span class="text-truncate">Sepatu Running Nike Air Zoom
-                                                                    + 2
-                                                                    produk lainnya</span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-4 text-md-end mt-3 mt-md-0">
-                                                            <button class="btn btn-outline-primary mb-2 me-2">Beli
-                                                                Lagi</button>
-                                                            <button class="btn btn-primary">Detail</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            <div id="completed-orders-container"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -812,6 +655,7 @@ $apiBaseUrl = env('API_BASE_URL');
             </div>
         </div>
     </div>
+    <div id="toastContainer" class="position-fixed top-0 end-0 p-3" style="z-index: 9999;"></div>
 
     <!-- footer area -->
     <?php include __DIR__ . '/../templates/footer.php'; ?>
@@ -1273,6 +1117,25 @@ $apiBaseUrl = env('API_BASE_URL');
                 };
 
                 // Kirim data dengan fetch
+                function showToast(message, type = 'danger') {
+                    const toastId = 'toast-' + Date.now();
+                    const toastHTML = `
+    <div id="${toastId}" class="toast align-items-center text-bg-${type} border-0 shadow" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="3000">
+        <div class="d-flex">
+            <div class="toast-body">${message}</div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+    </div>
+    `;
+
+                    const toastContainer = document.getElementById('toastContainer');
+                    toastContainer.insertAdjacentHTML('beforeend', toastHTML);
+
+                    const toastElement = new bootstrap.Toast(document.getElementById(toastId));
+                    toastElement.show();
+                }
+
+                // Panggil API untuk update data user
                 fetch(`${API_BASE_URL}/user/edit`, {
                         method: 'POST',
                         headers: {
@@ -1281,26 +1144,33 @@ $apiBaseUrl = env('API_BASE_URL');
                         },
                         body: JSON.stringify(dataToUpdate)
                     })
-                    .then(response => response.json())
-                    .then(result => {
+                    .then(async response => {
+                        const result = await response.json();
+
+                        if (!response.ok) {
+                            throw new Error(result.message || 'Terjadi kesalahan saat mengupdate data');
+                        }
+
                         if (result.status === 'success') {
-                            alert('Data berhasil diupdate');
-                            window.location.reload(); // Refresh halaman setelah berhasil
+                            showToast('Data berhasil diupdate', 'success');
+                            setTimeout(() => window.location.reload(), 1500); // Tunggu toast selesai dulu
                         } else {
-                            alert('Gagal mengupdate data: ' + result.message);
+                            showToast('Gagal mengupdate data: ' + result.message, 'danger');
                         }
                     })
                     .catch(error => {
-                        if (error.message.includes('Token tidak ditemukan') || error.message.includes('Token tidak valid, silakan login ulang')) {
-                            // Token tidak valid, hapus token dan redirect ke login
+                        if (error.message.includes('Token tidak ditemukan') || error.message.includes('Token tidak valid')) {
                             localStorage.removeItem('auth_token');
-                            alert("Sesi Anda telah habis. Silakan login ulang.");
-                            window.location.href = '/login'; // Ganti sesuai path halaman login
+                            showToast("Sesi Anda telah habis. Silakan login ulang.", 'danger');
+                            setTimeout(() => {
+                                window.location.href = '/login'; // Ganti dengan URL login kamu
+                            }, 1500);
                             return;
                         }
-                        console.error('Error:', error);
-                        alert('Terjadi kesalahan saat mengupdate data');
+
+                        showToast('Terjadi kesalahan: ' + error.message, 'danger');
                     });
+
             });
         });
 
@@ -1368,6 +1238,184 @@ $apiBaseUrl = env('API_BASE_URL');
         });
     </script>
 
+    <script>
+        const token = localStorage.getItem('auth_token');
+
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const day = date.getDate().toString().padStart(2, '0');
+            const month = (date.getMonth() + 1).toString().padStart(2, '0');
+            const year = date.getFullYear();
+            return `${day} ${getMonthName(month)} ${year}`;
+        }
+
+        // Function to get month name in Indonesian
+        function getMonthName(month) {
+            const monthNames = {
+                '01': 'Januari',
+                '02': 'Februari',
+                '03': 'Maret',
+                '04': 'April',
+                '05': 'Mei',
+                '06': 'Juni',
+                '07': 'Juli',
+                '08': 'Agustus',
+                '09': 'September',
+                '10': 'Oktober',
+                '11': 'November',
+                '12': 'Desember'
+            };
+            return monthNames[month] || month;
+        }
+
+        // Function to format currency
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            }).format(amount);
+        }
+
+        // Function to create order card
+        function createOrderCard(order) {
+            // Determine badge and status
+            let badgeClass = 'bg-primary';
+            let badgeText = 'Menunggu Pembayaran';
+
+            switch (order.status_pesanan) {
+                case 'waiting':
+                    badgeClass = 'bg-primary';
+                    badgeText = 'Menunggu Pembayaran';
+                    break;
+                case 'confirmed':
+                    badgeClass = 'bg-info';
+                    badgeText = 'Dikonfirmasi';
+                    break;
+                case 'shipped':
+                    badgeClass = 'bg-warning text-dark';
+                    badgeText = 'Dikirim';
+                    break;
+                case 'completed':
+                    badgeClass = 'bg-success';
+                    badgeText = 'Selesai';
+                    break;
+            }
+
+            // Create product description
+            const productNames = order.products.map(p => p.nama_product);
+            const productDescription = productNames.length > 1 ?
+                `${productNames[0]} + ${productNames.length - 1} produk lainnya` :
+                productNames[0];
+
+            return `
+        <div class="card mb-3 order-item">
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <div class="d-flex align-items-center mb-3">
+                            <span class="badge ${badgeClass} me-2">${badgeText}</span>
+                            <strong>No. Order: ${order.nomor_pesanan}</strong>
+                        </div>
+                        <p class="mb-2">${formatDate(order.tanggal_pesanan)} • ${order.products.length} Produk • Total: ${formatCurrency(order.total_harga)}</p>
+                        <div class="d-flex align-items-center mb-2">
+                            <img src="assets/img/product/UT M01 2.png" class="me-2 rounded" alt="Product" width="50" height="50">
+                            <span class="text-truncate">${productDescription}</span>
+                        </div>
+                    </div>
+                    <div class="col-md-4 text-md-end mt-3 mt-md-0">
+                        ${order.status_pembayaran === 'belum bayar' 
+                            ? `<button onclick="goToPayment('${order.payment_token}')" class="btn btn-outline-primary mb-2 me-2">Bayar</button>` 
+                            : ''
+                        }
+                        <button class="btn btn-primary">Detail</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+        }
+
+        // Function to render orders
+        function renderOrders(orders) {
+            // Reset containers and counts
+            const containers = {
+                'all': document.getElementById('all-orders-container'),
+                'pending': document.getElementById('pending-orders-container'),
+                'confirmed': document.getElementById('confirmed-orders-container'),
+                'shipped': document.getElementById('shipped-orders-container'),
+                'completed': document.getElementById('completed-orders-container')
+            };
+
+            const countElements = {
+                'all': document.getElementById('all-orders-count'),
+                'pending': document.getElementById('pending-orders-count'),
+                'confirmed': document.getElementById('confirmed-orders-count'),
+                'shipped': document.getElementById('shipped-orders-count'),
+                'completed': document.getElementById('completed-orders-count')
+            };
+
+            // Clear previous content
+            Object.values(containers).forEach(container => container.innerHTML = '');
+
+            // Group orders by status
+            const groupedOrders = {
+                'all': orders,
+                'pending': orders.filter(o => o.status_pesanan === 'waiting'),
+                'confirmed': orders.filter(o => o.status_pesanan === 'confirmed'),
+                'shipped': orders.filter(o => o.status_pesanan === 'shipped'),
+                'completed': orders.filter(o => o.status_pesanan === 'completed')
+            };
+
+            // Render orders in each container
+            Object.keys(groupedOrders).forEach(status => {
+                const ordersForStatus = groupedOrders[status];
+                countElements[status].textContent = ordersForStatus.length;
+
+                ordersForStatus.forEach(order => {
+                    const orderCard = createOrderCard(order);
+                    containers[status].innerHTML += orderCard;
+                });
+            });
+        }
+
+        // Function to handle payment redirection
+        function goToPayment(token) {
+            // Redirect to payment page with token
+            window.location.href = `/pembayaran/${token}`;
+        }
+
+        // Fetch orders function
+        function fetchOrders() {
+            $.ajax({
+                url: API_BASE_URL + '/getAllPesanan',
+                type: 'GET',
+                dataType: 'json',
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                },
+                success: function(response) {
+                    if (response.status === 'success') {
+                        console.log('Data Pesanan', response.data.semua);
+                        renderOrders(response.data.semua);
+                    } else {
+                        console.error('Terjadi kesalahan:', response.message);
+                        alert('Gagal memuat pesanan');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Terjadi kesalahan:', error);
+                    alert('Terjadi kesalahan saat memuat pesanan');
+                }
+            });
+        }
+
+        // Call fetch orders when page loads
+        $(document).ready(function() {
+            fetchOrders();
+        });
+    </script>
     <script>
         document.addEventListener('click', function(e) {
             const card = e.target.closest('.product-card');

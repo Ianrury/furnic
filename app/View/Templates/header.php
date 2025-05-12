@@ -74,10 +74,10 @@ function is_active($route)
                                     href="/promo" style="font-size: 14px;">Promo</a>
                             </li>
 
-                            <li class="nav-item">
+                            <!-- <li class="nav-item">
                                 <a class="d-flex justify-content-center align-items-center w-100 h-100 custom-nav-link <?= is_active('pesanan') ?>"
                                     href="/pesanan/detail" style="font-size: 14px;">Pesanan</a>
-                            </li>
+                            </li> -->
 
                             <li class="nav-item">
                                 <a class="d-flex justify-content-center align-items-center w-100 h-100 custom-nav-link <?= is_active('lokasi') ?>"

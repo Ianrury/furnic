@@ -273,7 +273,7 @@ $apiBaseUrl = env('API_BASE_URL');
         </div>
         <!-- popular item end -->
 
-        <div class="product-area product-area-new">
+        <!-- <div class="product-area product-area-new">
             <div class="container">
                 <div class="row">
                     <div class="col-12 wow fadeInDown mb-0" data-wow-delay=".25s">
@@ -321,7 +321,7 @@ $apiBaseUrl = env('API_BASE_URL');
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
 
 
         <!-- choose-area -->
@@ -772,6 +772,8 @@ $apiBaseUrl = env('API_BASE_URL');
                         promo: promoPersen,
                         rating: product.rating ?? 4,
                         sold: product.beli ?? 0,
+                        slug: product.slug,
+                        token: product.token,
                         stock: product.qty,
                         image: product.url_foto,
                         created_at: product.created_at,
@@ -787,7 +789,8 @@ $apiBaseUrl = env('API_BASE_URL');
             function createProductCard(product) {
                 return `
                 <div class="col">
-                    <div class="card shadow position-relative rounded-4 p-2 product-card" data-id="${product.id}" style="cursor:pointer;">
+                    <div class="card shadow position-relative rounded-4 p-2 product-card" data-id="${product.id}" data-slug="${product.slug}" 
+     data-token="${product.token}" style="cursor:pointer;">
 
                         ${product.ribbon ? `
                             <div class="position-absolute ribbon-wrapper">
@@ -1027,7 +1030,8 @@ $apiBaseUrl = env('API_BASE_URL');
 
                 return `
                         <div class="col animate__animated animate__fadeInRight">
-                            <div class="card shadow position-relative rounded-4 p-2 product-card" data-id="${product.id_product}" style="cursor:pointer;">
+                            <div class="card shadow position-relative rounded-4 p-2 product-card" data-id="${product.id_product}" data-slug="${product.slug}" 
+     data-token="${product.token}" style="cursor:pointer;">
                                 ${ribbon ? `
                                 <div class="position-absolute ribbon-wrapper">
                                     <div class="ribbon text-uppercase fw-bold text-center"
@@ -1152,7 +1156,8 @@ $apiBaseUrl = env('API_BASE_URL');
 
                             const html = `
                         <div class="col-6 col-md-4 col-lg-3">
-                            <div class="card shadow position-relative rounded-4 p-2 product-card" data-id="${product.id_product}" style="cursor:pointer;">
+                            <div class="card shadow position-relative rounded-4 p-2 product-card" data-id="${product.id_product}" data-slug="${product.slug}" 
+     data-token="${product.token}" style="cursor:pointer;">
                                 <div class="position-absolute ribbon-wrapper">
                                     <div class="ribbon text-white text-uppercase fw-bold text-center">New Product</div>
                                 </div>
@@ -1210,9 +1215,11 @@ $apiBaseUrl = env('API_BASE_URL');
         document.addEventListener('click', function(e) {
             const card = e.target.closest('.product-card');
             if (card) {
-                const productId = card.getAttribute('data-id');
-                if (productId) {
-                    window.location.href = `/product/detail/${productId}`;
+                const slug = card.getAttribute('data-slug');
+                const token = card.getAttribute('data-token');
+                console.log(slug, token);
+                if (slug && token) {
+                    window.location.href = `/product/${slug}/${token}`;
                 }
             }
         });
@@ -1265,6 +1272,7 @@ $apiBaseUrl = env('API_BASE_URL');
             }
         });
     </script>
+
 </body>
 
 </html>

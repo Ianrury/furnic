@@ -2088,7 +2088,7 @@ $apiBaseUrl = env('API_BASE_URL');
                 showToast('Produk tidak tersedia', 'danger');
                 return; // Jangan lanjutkan jika produk tidak tersedia
             }
-            fetch('/createPesanan', {
+            fetch( API_BASE_URL + '/createPesanan', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded'

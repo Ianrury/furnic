@@ -8,6 +8,7 @@
 
     <!-- favicon -->
     <link rel="icon" type="image/x-icon" href="assets/img/logo/favicon.png">
+    <base href="/">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css">
@@ -779,22 +780,6 @@
                     <div class="deadline-progress">
                         <div class="deadline-progress-bar" id="progress-bar"></div>
                     </div>
-                </div>
-            </div>
-
-            <!-- Metode pembayaran yang tersedia -->
-            <div class="payment-methods">
-                <div class="payment-method">
-                    <img src="/api/placeholder/50/30" alt="BCA">
-                </div>
-                <div class="payment-method">
-                    <img src="/api/placeholder/50/30" alt="BNI">
-                </div>
-                <div class="payment-method">
-                    <img src="/api/placeholder/50/30" alt="BRI">
-                </div>
-                <div class="payment-method">
-                    <img src="/api/placeholder/50/30" alt="Mandiri">
                 </div>
             </div>
 
