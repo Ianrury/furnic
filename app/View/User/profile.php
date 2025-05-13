@@ -1284,23 +1284,30 @@ $apiBaseUrl = env('API_BASE_URL');
             let badgeClass = 'bg-primary';
             let badgeText = 'Menunggu Pembayaran';
 
-            switch (order.status_pesanan) {
-                case 'waiting':
-                    badgeClass = 'bg-primary';
-                    badgeText = 'Menunggu Pembayaran';
-                    break;
-                case 'konfirmasi':
-                    badgeClass = 'bg-info';
-                    badgeText = 'konfirmasi';
-                    break;
-                case 'shipped':
-                    badgeClass = 'bg-warning text-dark';
-                    badgeText = 'Dikirim';
-                    break;
-                case 'completed':
-                    badgeClass = 'bg-success';
-                    badgeText = 'Selesai';
-                    break;
+            // Handle canceled orders first
+            if (order.isbatal === 1) {
+                badgeClass = 'bg-danger';
+                badgeText = 'Dibatalkan';
+            } else {
+                // Process regular order statuses
+                switch (order.status_pesanan) {
+                    case 'waiting':
+                        badgeClass = 'bg-primary';
+                        badgeText = 'Menunggu Pembayaran';
+                        break;
+                    case 'konfirmasi':
+                        badgeClass = 'bg-info';
+                        badgeText = 'Konfirmasi';
+                        break;
+                    case 'shipped':
+                        badgeClass = 'bg-warning text-dark';
+                        badgeText = 'Dikirim';
+                        break;
+                    case 'completed':
+                        badgeClass = 'bg-success';
+                        badgeText = 'Selesai';
+                        break;
+                }
             }
 
             // Create product description
@@ -1325,7 +1332,7 @@ $apiBaseUrl = env('API_BASE_URL');
                         </div>
                     </div>
                     <div class="col-md-4 text-md-end mt-3 mt-md-0">
-                        ${order.status_pesanan === 'waiting' 
+                        ${(order.status_pesanan === 'waiting' && order.isbatal !== 1) 
                             ? `<button onclick="goToPayment('${order.payment_token}')" class="btn btn-outline-primary mb-2 me-2">Bayar</button>` 
                             : ''
                         }
@@ -1334,7 +1341,7 @@ $apiBaseUrl = env('API_BASE_URL');
                 </div>
             </div>
         </div>
-    `;
+     `;
         }
 
         // Function to render orders
@@ -1345,7 +1352,8 @@ $apiBaseUrl = env('API_BASE_URL');
                 'pending': document.getElementById('pending-orders-container'),
                 'konfirmasi': document.getElementById('confirmed-orders-container'),
                 'shipped': document.getElementById('shipped-orders-container'),
-                'completed': document.getElementById('completed-orders-container')
+                'completed': document.getElementById('completed-orders-container'),
+                'canceled': document.getElementById('canceled-orders-container')
             };
 
             const countElements = {
@@ -1353,30 +1361,44 @@ $apiBaseUrl = env('API_BASE_URL');
                 'pending': document.getElementById('pending-orders-count'),
                 'konfirmasi': document.getElementById('confirmed-orders-count'),
                 'shipped': document.getElementById('shipped-orders-count'),
-                'completed': document.getElementById('completed-orders-count')
+                'completed': document.getElementById('completed-orders-count'),
+                'canceled': document.getElementById('canceled-orders-count')
             };
 
             // Clear previous content
-            Object.values(containers).forEach(container => container.innerHTML = '');
+            Object.values(containers).forEach(container => {
+                if (container) container.innerHTML = '';
+            });
 
             // Group orders by status
             const groupedOrders = {
                 'all': orders,
-                'pending': orders.filter(o => o.status_pesanan === 'waiting'),
-                'konfirmasi': orders.filter(o => o.status_pesanan === 'konfirmasi'),
-                'shipped': orders.filter(o => o.status_pesanan === 'shipped'),
-                'completed': orders.filter(o => o.status_pesanan === 'completed')
+                'pending': orders.filter(o => o.status_pesanan === 'waiting' && o.isbatal !== 1),
+                'konfirmasi': orders.filter(o => o.status_pesanan === 'konfirmasi' && o.isbatal !== 1),
+                'shipped': orders.filter(o => o.status_pesanan === 'shipped' && o.isbatal !== 1),
+                'completed': orders.filter(o => o.status_pesanan === 'completed' && o.isbatal !== 1),
+                'canceled': orders.filter(o => o.isbatal === 1)
             };
 
             // Render orders in each container
             Object.keys(groupedOrders).forEach(status => {
                 const ordersForStatus = groupedOrders[status];
+
+                // Skip if container doesn't exist (for backward compatibility)
+                if (!containers[status] || !countElements[status]) return;
+
+                // Update count
                 countElements[status].textContent = ordersForStatus.length;
 
-                ordersForStatus.forEach(order => {
-                    const orderCard = createOrderCard(order);
-                    containers[status].innerHTML += orderCard;
-                });
+                // Render orders
+                if (ordersForStatus.length === 0) {
+                    containers[status].innerHTML = '<div class="alert alert-info">Tidak ada pesanan</div>';
+                } else {
+                    ordersForStatus.forEach(order => {
+                        const orderCard = createOrderCard(order);
+                        containers[status].innerHTML += orderCard;
+                    });
+                }
             });
         }
 

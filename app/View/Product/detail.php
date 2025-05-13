@@ -2079,19 +2079,22 @@ $apiBaseUrl = env('API_BASE_URL');
             const id_detail_product = document.getElementById('id_detail_product').value;
             const id_motif_produk = document.getElementById('id_motif_produk').value;
             const qty = parseInt(document.getElementById('jumlah-beli').innerText);
-
             // Ambil stok yang tersedia dari DOM
             const stockAvailable = parseInt(document.querySelector('#stock span').innerText) || 0;
 
             // Validasi jika produk tidak tersedia (stok 0)
             if (stockAvailable === 0) {
                 showToast('Produk tidak tersedia', 'danger');
-                return; // Jangan lanjutkan jika produk tidak tersedia
+                return; // Janga
+                // n lanjutkan jika produk tidak tersedia
             }
-            fetch( API_BASE_URL + '/createPesanan', {
+            const token = localStorage.getItem('auth_token');
+            if (!token) return;
+
+            fetch(API_BASE_URL + '/createPesanan', {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded'
+                        'Authorization': 'Bearer ' + token
                     },
                     body: new URLSearchParams({
                         id: id_product,
@@ -2103,18 +2106,28 @@ $apiBaseUrl = env('API_BASE_URL');
                 .then(response => response.json())
                 .then(result => {
                     if (result.status === 'success') {
+                        // Simpan ke localStorage
+                        if (localStorage.getItem('cart_ids')) {
+                            localStorage.removeItem('cart_ids');
+                        }
+
+                        // Simpan data baru
+                        localStorage.setItem('cart_ids', JSON.stringify(result.cart_ids));
+
                         showToast(result.message, 'success');
+
                         setTimeout(() => {
-                            window.location.href = '/pesanan';
-                        }, 1500); // tunggu 1.5 detik biar user sempat lihat toast-nya
+                            window.location.href = '/buat-pesanan';
+                        }, 1500);
                     } else {
-                        showToast(result.message, 'danger'); // warna merah untuk error
+                        showToast(result.message, 'danger');
                     }
                 })
                 .catch(error => {
                     console.error('Error:', error);
                     showToast('Terjadi kesalahan. Coba lagi nanti.', 'danger');
                 });
+
         });
     </script>
 

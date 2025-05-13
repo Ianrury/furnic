@@ -1204,7 +1204,7 @@ $apiBaseUrl = env('API_BASE_URL');
         </div>
         ${orderData.total_diskon_pemesanan > 0 ? `
         <div class="order-total-row">
-            <div class="order-total-label">Pengiriman</div>
+            <div class="order-total-label">Diskon</div>
             <div class="order-total-value">${formatRupiah(orderData.total_diskon_pemesanan)}</div>
         </div>
         ` : ''}

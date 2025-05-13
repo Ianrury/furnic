@@ -369,6 +369,9 @@ $apiBaseUrl = env('API_BASE_URL');
     <script src="assets/js/wow.min.js"></script>
     <script src="assets/js/main.js"></script>
     <!-- jQuery -->
+    <!-- SweetAlert2 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
 <script>
@@ -377,8 +380,6 @@ $apiBaseUrl = env('API_BASE_URL');
 
 <script>
     const token = localStorage.getItem('auth_token');
-
-
     // Fungsi untuk memformat mata uang
     function formatRupiah(angka) {
         return 'Rp ' + new Intl.NumberFormat('id-ID').format(angka);
@@ -440,7 +441,9 @@ $apiBaseUrl = env('API_BASE_URL');
     function buatKartuPesanan(pesanan) {
         const sisaWaktu = hitungSisaWaktuPembayaran(pesanan.limit_payment);
         const metodePengiriman = getMetodePengiriman(pesanan);
+        const isBatal = pesanan.isbatal === 1 || pesanan.isbatal === true;
 
+        // Status info dengan penambahan status dibatalkan
         const statusInfo = {
             'waiting': {
                 label: 'Menunggu',
@@ -453,7 +456,7 @@ $apiBaseUrl = env('API_BASE_URL');
                 ikon: 'fa-money-bill-wave'
             },
             'konfirmasi': {
-                label: 'konfirmasi',
+                label: 'Konfirmasi',
                 warna: 'primary',
                 ikon: 'fa-check-circle'
             },
@@ -466,83 +469,150 @@ $apiBaseUrl = env('API_BASE_URL');
                 label: 'Selesai',
                 warna: 'success',
                 ikon: 'fa-check-double'
+            },
+            'batal': {
+                label: 'Dibatalkan',
+                warna: 'secondary',
+                ikon: 'fa-ban'
             }
         };
 
-        const status = (pesanan.status_pesanan || pesanan.status_pembayaran || '').toLowerCase();
+        // Tentukan status berdasarkan isbatal atau status_pesanan
+        let status = (pesanan.status_pesanan || pesanan.status_pembayaran || '').toLowerCase();
+        if (isBatal) {
+            status = 'batal';
+        }
+
         const infoStatus = statusInfo[status] || statusInfo['waiting'];
 
         return `
-        <div class="col-12 col-md-6 col-lg-4 mb-3">
-            <div class="card h-100 shadow-sm border-${infoStatus.warna}">
-                <div class="card-header bg-${infoStatus.warna} text-white d-flex justify-content-between align-items-center py-2 px-3">
-                    <small>
-                        <i class="fas ${infoStatus.ikon} me-2"></i>
-                        ${infoStatus.label}
+    <div class="col-12 col-md-6 col-lg-4 mb-3">
+        <div class="card h-100 shadow-sm border-${infoStatus.warna}">
+            <div class="card-header bg-${infoStatus.warna} text-white d-flex justify-content-between align-items-center py-2 px-3">
+                <small>
+                    <i class="fas ${infoStatus.ikon} me-2"></i>
+                    ${infoStatus.label}
+                </small>
+                <small class="badge bg-light text-dark">#${pesanan.nomor_pesanan}</small>
+            </div>
+            <div class="card-body py-2 px-3">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <small class="text-muted">
+                        <strong>${formatTanggalDenganJam(pesanan.tanggal_pesanan)}</strong>
                     </small>
-                    <small class="badge bg-light text-dark">#${pesanan.nomor_pesanan}</small>
+                    <small class="text-muted">${metodePengiriman}</small>
                 </div>
-                <div class="card-body py-2 px-3">
-                    <div class="d-flex justify-content-between align-items-center mb-2">
-                        <small class="text-muted">
-                            <strong>${formatTanggalDenganJam(pesanan.tanggal_pesanan)}</strong>
-                        </small>
-                        <small class="text-muted">${metodePengiriman}</small>
-                    </div>
-                    
-                    <div class="d-flex justify-content-between align-items-center mb-2">
-                        <small>
-                            <i class="fas fa-box me-2"></i>
-                            ${pesanan.products ? pesanan.products.length : 0} item
-                        </small>
-                        <h6 class="mb-0 text-primary">${formatRupiah(pesanan.total_harga)}</h6>
-                    </div>
+                
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <small>
+                        <i class="fas fa-box me-2"></i>
+                        ${pesanan.products ? pesanan.products.length : 0} item
+                    </small>
+                    <h6 class="mb-0 text-primary">${formatRupiah(pesanan.total_harga)}</h6>
+                </div>
 
-                    ${(status === 'waiting' || status === 'belum bayar') ? `
-                    <div class="alert ${sisaWaktu.isExpired ? 'alert-secondary' : 'alert-danger'} py-2 px-3 mb-2" role="alert">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <small><i class="fas fa-hourglass-half me-2"></i>Batas Pembayaran</small>
-                            <small id="countdown-${pesanan.nomor_pesanan}" 
-                                   class="countdown-timer" 
-                                   data-limit="${pesanan.limit_payment}">
-                                ${sisaWaktu.formatted}
-                            </small>
-                        </div>
+                ${(status === 'waiting' || status === 'belum bayar') && !isBatal ? `
+                <div class="alert ${sisaWaktu.isExpired ? 'alert-secondary' : 'alert-danger'} py-2 px-3 mb-2" role="alert">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <small><i class="fas fa-hourglass-half me-2"></i>Batas Pembayaran</small>
+                        <small id="countdown-${pesanan.nomor_pesanan}" 
+                               class="countdown-timer" 
+                               data-limit="${pesanan.limit_payment}">
+                            ${sisaWaktu.formatted}
+                        </small>
                     </div>
+                </div>
+                ` : ''}
+
+                ${isBatal ? `
+                <div class="alert alert-secondary py-2 px-3 mb-2" role="alert">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <small><i class="fas fa-ban me-2"></i>Status Pesanan</small>
+                        <small>Sudah Dibatalkan</small>
+                    </div>
+                </div>
+                ` : ''}
+
+                <div class="d-grid gap-2">
+                    ${(status === 'waiting' || status === 'belum bayar') && !isBatal ? `
+                    <button onclick="batalPembayaran('${pesanan.nomor_pesanan}')" 
+                            class="btn btn-sm btn-outline-danger ${sisaWaktu.isExpired ? 'disabled' : ''}"
+                            ${sisaWaktu.isExpired ? 'disabled' : ''}>
+                        <i class="fas fa-times-circle me-2"></i>Batalkan
+                    </button>
+                    <a href="/pembayaran/${pesanan.payment_token}" 
+                       class="btn btn-sm btn-primary ${sisaWaktu.isExpired ? 'disabled' : ''}">
+                        <i class="fas fa-money-bill-wave me-2"></i>Bayar Sekarang
+                    </a>
                     ` : ''}
-
-                    <div class="d-grid gap-2">
-                        ${(status === 'waiting' || status === 'belum bayar') ? `
-                        <button onclick="batalPembayaran('${pesanan.nomor_pesanan}')" 
-                                class="btn btn-sm btn-outline-danger ${sisaWaktu.isExpired ? 'disabled' : ''}"
-                                ${sisaWaktu.isExpired ? 'disabled' : ''}>
-                            <i class="fas fa-times-circle me-2"></i>Batalkan
-                        </button>
-                        <a href="/pembayaran/${pesanan.payment_token}" 
-                           class="btn btn-sm btn-primary ${sisaWaktu.isExpired ? 'disabled' : ''}">
-                            <i class="fas fa-money-bill-wave me-2"></i>Bayar Sekarang
-                        </a>
-                        ` : ''}
-                        
-                        ${status === 'dikirim' ? `
-                        <button class="btn btn-sm btn-outline-success">
-                            <i class="fas fa-truck me-2"></i>Lacak Pengiriman
-                        </button>
-                        ` : ''}
-                    </div>
+                    
+                    ${status === 'dikirim' && !isBatal ? `
+                    <button class="btn btn-sm btn-outline-success">
+                        <i class="fas fa-truck me-2"></i>Lacak Pengiriman
+                    </button>
+                    ` : ''}
                 </div>
             </div>
         </div>
-    `;
+    </div>
+`;
     }
 
     // Fungsi untuk membatalkan pembayaran
     function batalPembayaran(nomorPesanan) {
         // Periksa apakah SweetAlert tersedia
         if (typeof Swal === 'undefined') {
-            alert('Pembatalan Pembayaran: ' + nomorPesanan);
+            if (confirm('Apakah Anda yakin ingin membatalkan pesanan ' + nomorPesanan + '?')) {
+                lanjutkanPembatalan(nomorPesanan);
+            }
             return;
         }
+
+        try {
+            const swalResult = Swal.fire({
+                title: 'Batalkan Pesanan?',
+                text: 'Apakah Anda yakin ingin membatalkan pesanan ini?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Ya, Batalkan',
+                cancelButtonText: 'Tidak'
+            });
+
+            // Handle different versions of SweetAlert
+            if (swalResult && typeof swalResult.then === 'function') {
+                swalResult.then((result) => {
+                    if (result && result.isConfirmed) {
+                        lanjutkanPembatalan(nomorPesanan);
+                    }
+                }).catch(err => {
+                    console.error('SweetAlert error:', err);
+                    // Fallback to simple confirmation if SweetAlert fails
+                    if (confirm('Apakah Anda yakin ingin membatalkan pesanan ' + nomorPesanan + '?')) {
+                        lanjutkanPembatalan(nomorPesanan);
+                    }
+                });
+            } else {
+                // SweetAlert might be an older version or customized
+                // Go ahead with cancellation after a simple confirmation
+                if (confirm('Apakah Anda yakin ingin membatalkan pesanan ' + nomorPesanan + '?')) {
+                    lanjutkanPembatalan(nomorPesanan);
+                }
+            }
+        } catch (error) {
+            console.error('Error in SweetAlert handling:', error);
+            // Final fallback
+            if (confirm('Apakah Anda yakin ingin membatalkan pesanan ' + nomorPesanan + '?')) {
+                lanjutkanPembatalan(nomorPesanan);
+            }
+        }
+    }
+
+    // Fungsi lanjutan untuk proses pembatalan
+    function lanjutkanPembatalan(nomorPesanan) {
+        // Ambil token yang telah diperbarui untuk menghindari masalah token kedaluwarsa
+        const token = localStorage.getItem('auth_token');
 
         $.ajax({
             url: API_BASE_URL + '/batal-pembayaran',
@@ -557,36 +627,55 @@ $apiBaseUrl = env('API_BASE_URL');
             }),
             success: function(response) {
                 if (response.status === 'success') {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Pembatalan Berhasil',
-                        text: 'Pesanan berhasil dibatalkan.',
-                        confirmButtonText: 'OK'
-                    }).then(() => {
-                        fetchOrders(); // Refresh daftar pesanan
-                    });
+                    if (typeof Swal !== 'undefined') {
+                        try {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Pembatalan Berhasil',
+                                text: 'Pesanan berhasil dibatalkan.',
+                                confirmButtonText: 'OK'
+                            });
+                        } catch (e) {
+                            alert('Pembatalan berhasil');
+                        }
+                    } else {
+                        alert('Pembatalan berhasil');
+                    }
+
+                    // Refresh daftar pesanan
+                    fetchOrders();
                 } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Gagal Membatalkan',
-                        text: response.message || 'Terjadi kesalahan saat membatalkan pesanan.',
-                        confirmButtonText: 'Tutup'
-                    });
+                    if (typeof Swal !== 'undefined') {
+                        try {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Gagal Membatalkan',
+                                text: response.message || 'Terjadi kesalahan saat membatalkan pesanan.',
+                                confirmButtonText: 'Tutup'
+                            });
+                        } catch (e) {
+                            alert('Gagal membatalkan: ' + (response.message || 'Terjadi kesalahan'));
+                        }
+                    } else {
+                        alert('Gagal membatalkan: ' + (response.message || 'Terjadi kesalahan'));
+                    }
                 }
             },
             error: function(xhr, status, error) {
-                // Fallback jika SweetAlert tidak tersedia
-                if (typeof Swal === 'undefined') {
+                if (typeof Swal !== 'undefined') {
+                    try {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Kesalahan Jaringan',
+                            text: 'Silakan coba lagi nanti.',
+                            confirmButtonText: 'Tutup'
+                        });
+                    } catch (e) {
+                        alert('Kesalahan Jaringan: Silakan coba lagi nanti.');
+                    }
+                } else {
                     alert('Kesalahan Jaringan: Silakan coba lagi nanti.');
-                    return;
                 }
-
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Kesalahan Jaringan',
-                    text: 'Silakan coba lagi nanti.',
-                    confirmButtonText: 'Tutup'
-                });
             }
         });
     }
@@ -596,43 +685,53 @@ $apiBaseUrl = env('API_BASE_URL');
         const containerPesanan = $('#pemesanan_list');
         containerPesanan.empty();
 
-        // Hapus bagian "Semua" pesanan
+        // Siapkan array untuk pesanan dibatalkan
+        const pesananDibatalkan = dataPesanan.semua.filter(pesanan => pesanan.isbatal === 1 || pesanan.isbatal === true);
+
+        // Filter semua kategori untuk menghilangkan pesanan yang sudah dibatalkan
+        const filterBatal = pesanan => pesanan.isbatal !== 1 && pesanan.isbatal !== true;
+
         const kategoriBaru = {
-            menunggu: dataPesanan.menunggu,
-            konfirmasi: dataPesanan.konfirmasi,
-            dikirim: dataPesanan.dikirim,
-            selesai: dataPesanan.selesai
+            menunggu: dataPesanan.menunggu.filter(filterBatal),
+            konfirmasi: dataPesanan.konfirmasi.filter(filterBatal),
+            dikirim: dataPesanan.dikirim.filter(filterBatal),
+            selesai: dataPesanan.selesai.filter(filterBatal),
+            batal: pesananDibatalkan
         };
 
         containerPesanan.html(`
-        <div class="row mb-3">
-            <div class="col-12">
-                <nav>
-                    <div class="nav nav-pills nav-fill" id="nav-tab" role="tablist">
-                        <button class="nav-link active" id="nav-menunggu-tab" data-bs-toggle="tab" 
-                                data-status="menunggu" type="button" role="tab">
-                            Menunggu (${kategoriBaru.menunggu.length})
-                        </button>
-                        <button class="nav-link" id="nav-konfirmasi-tab" data-bs-toggle="tab" 
-                                data-status="konfirmasi" type="button" role="tab">
-                            Dikonfirmasi (${kategoriBaru.konfirmasi.length})
-                        </button>
-                        <button class="nav-link" id="nav-dikirim-tab" data-bs-toggle="tab" 
-                                data-status="dikirim" type="button" role="tab">
-                            Dikirim (${kategoriBaru.dikirim.length})
-                        </button>
-                        <button class="nav-link" id="nav-selesai-tab" data-bs-toggle="tab" 
-                                data-status="selesai" type="button" role="tab">
-                            Selesai (${kategoriBaru.selesai.length})
-                        </button>
-                    </div>
-                </nav>
-            </div>
+    <div class="row mb-3">
+        <div class="col-12">
+            <nav>
+                <div class="nav nav-pills nav-fill" id="nav-tab" role="tablist">
+                    <button class="nav-link active" id="nav-menunggu-tab" data-bs-toggle="tab" 
+                            data-status="menunggu" type="button" role="tab">
+                        Menunggu (${kategoriBaru.menunggu.length})
+                    </button>
+                    <button class="nav-link" id="nav-konfirmasi-tab" data-bs-toggle="tab" 
+                            data-status="konfirmasi" type="button" role="tab">
+                        Dikonfirmasi (${kategoriBaru.konfirmasi.length})
+                    </button>
+                    <button class="nav-link" id="nav-dikirim-tab" data-bs-toggle="tab" 
+                            data-status="dikirim" type="button" role="tab">
+                        Dikirim (${kategoriBaru.dikirim.length})
+                    </button>
+                    <button class="nav-link" id="nav-selesai-tab" data-bs-toggle="tab" 
+                            data-status="selesai" type="button" role="tab">
+                        Selesai (${kategoriBaru.selesai.length})
+                    </button>
+                    <button class="nav-link" id="nav-batal-tab" data-bs-toggle="tab" 
+                            data-status="batal" type="button" role="tab">
+                        Dibatalkan (${kategoriBaru.batal.length})
+                    </button>
+                </div>
+            </nav>
         </div>
-        <div class="row" id="pesanan-container">
-            ${kategoriBaru.menunggu.map(buatKartuPesanan).join('')}
-        </div>
-    `);
+    </div>
+    <div class="row" id="pesanan-container">
+        ${kategoriBaru.menunggu.map(buatKartuPesanan).join('')}
+    </div>
+`);
 
         // Event listener untuk tab
         $('.nav-link').on('click', function() {
@@ -643,11 +742,11 @@ $apiBaseUrl = env('API_BASE_URL');
                 pesananDifilter.length > 0 ?
                 pesananDifilter.map(buatKartuPesanan).join('') :
                 `
-            <div class="col-12 text-center py-5">
-                <h6 class="text-muted">Tidak ada pesanan</h6>
-                <small class="text-muted">Anda belum memiliki pesanan pada kategori ini</small>
-            </div>
-            `
+        <div class="col-12 text-center py-5">
+            <h6 class="text-muted">Tidak ada pesanan</h6>
+            <small class="text-muted">Anda belum memiliki pesanan pada kategori ini</small>
+        </div>
+        `
             );
 
             startCountdowns();
@@ -658,6 +757,14 @@ $apiBaseUrl = env('API_BASE_URL');
 
     // Fungsi untuk memulai countdown
     function startCountdowns() {
+        // Hapus interval lama untuk menghindari memory leak
+        $('.countdown-timer').each(function() {
+            const interval = $(this).data('interval');
+            if (interval) {
+                clearInterval(interval);
+            }
+        });
+
         $('.countdown-timer').each(function() {
             const $this = $(this);
             const limitPayment = $this.data('limit');
@@ -690,6 +797,16 @@ $apiBaseUrl = env('API_BASE_URL');
 
     // Fungsi untuk mengambil pesanan
     function fetchOrders() {
+        // Tampilkan loading indicator
+        $('#pemesanan_list').html(`
+        <div class="text-center py-5">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <p class="mt-2">Memuat data pesanan...</p>
+        </div>
+    `);
+
         // Tambahkan header SweetAlert untuk menghindari error
         if (typeof Swal === 'undefined') {
             window.Swal = {
@@ -712,24 +829,53 @@ $apiBaseUrl = env('API_BASE_URL');
                     tampilkanDaftarPesanan(response.data);
                 } else {
                     $('#pemesanan_list').html(`
-                    <div class="alert alert-danger" role="alert">
-                        Gagal memuat pesanan: ${response.message}
-                    </div>
-                `);
+                <div class="alert alert-danger" role="alert">
+                    <i class="fas fa-exclamation-triangle me-2"></i>
+                    Gagal memuat pesanan: ${response.message}
+                </div>
+            `);
                 }
             },
             error: function(xhr, status, error) {
                 $('#pemesanan_list').html(`
-                <div class="alert alert-danger" role="alert">
-                    Terjadi kesalahan saat memuat pesanan. Silakan coba lagi.
-                </div>
-            `);
+            <div class="alert alert-danger" role="alert">
+                <i class="fas fa-exclamation-triangle me-2"></i>
+                Terjadi kesalahan saat memuat pesanan. Silakan coba lagi.
+                <button class="btn btn-sm btn-outline-danger mt-2" onclick="fetchOrders()">
+                    <i class="fas fa-sync-alt me-2"></i>Coba Lagi
+                </button>
+            </div>
+        `);
             }
         });
     }
 
     // Panggil fetchOrders saat halaman dimuat
     $(document).ready(function() {
+        // Set global API base URL jika belum diset
+        if (typeof API_BASE_URL === 'undefined') {
+            window.API_BASE_URL = '/api'; // Default API base URL
+        }
+
+        // Ambil token dari localStorage
+        const token = localStorage.getItem('auth_token');
+
+        // Periksa apakah token tersedia
+        if (!token) {
+            $('#pemesanan_list').html(`
+            <div class="alert alert-warning" role="alert">
+                <i class="fas fa-exclamation-circle me-2"></i>
+                Anda belum login. Silakan login untuk melihat pesanan Anda.
+                <div class="mt-2">
+                    <a href="/login" class="btn btn-sm btn-primary">
+                        <i class="fas fa-sign-in-alt me-2"></i>Login
+                    </a>
+                </div>
+            </div>
+        `);
+            return;
+        }
+
         fetchOrders();
     });
 </script>
