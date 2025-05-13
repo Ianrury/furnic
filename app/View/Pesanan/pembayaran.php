@@ -1,3 +1,8 @@
+<?php
+require_once __DIR__ . '/../../app/env.php';
+$apiBaseUrl = env('API_BASE_URL');
+
+?>
 <!DOCTYPE html>
 <html lang="id">
 
@@ -48,6 +53,13 @@
             max-width: 700px;
             margin: 2rem auto;
             padding: 0 1rem;
+        }
+
+        .btn-disabled {
+            background-color: #ccc;
+            border-color: #ccc;
+            cursor: not-allowed;
+            pointer-events: none;
         }
 
         .logo-container {
@@ -746,14 +758,14 @@
         <div class="payment-header">
             <h1>Halaman Pembayaran</h1>
             <span class="order-number">Order #FF283759</span>
-            <span class="status-badge status-pending">Menunggu Pembayaran</span>
+            <span class="status-badge " id="payment-status">Menunggu Pembayaran</span>
         </div>
 
         <div class="payment-section">
             <!-- Jumlah yang harus dibayar dengan highlight -->
             <div class="payment-amount">
                 <div class="payment-amount-label">Total Pembayaran</div>
-                <div class="payment-amount-value">IDR 8.750.000</div>
+                <div class="payment-amount-value" id="total-amount">0</div>
             </div>
 
             <!-- Informasi deadline pembayaran -->
@@ -847,9 +859,9 @@
                         <div class="order-total-label">Subtotal</div>
                         <div class="order-total-value">IDR 8.250.000</div>
                     </div>
-                    <div class="order-total-row">
-                        <div class="order-total-label">Pengiriman</div>
-                        <div class="order-total-value">IDR 500.000</div>
+                    <div class="order-diskon-row">
+                        <div class="order-diskon-label">Diskon</div>
+                        <div class="order-diskon-value">IDR 500.000</div>
                     </div>
                     <div class="order-grand-total">
                         <div class="order-grand-total-label">Total</div>
@@ -922,7 +934,7 @@
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-primary w-100">
+                <button type="submit" id="confirmPayment" class="btn btn-primary w-100">
                     <i class="fas fa-check-circle me-2"></i>Konfirmasi Pembayaran
                 </button>
             </form>
@@ -932,6 +944,9 @@
     <!-- JavaScript -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const API_BASE_URL = "<?= $apiBaseUrl ?>";
+    </script>
     <script>
         // Show/hide other bank input
         document.getElementById('bank').addEventListener('change', function() {
@@ -1033,156 +1048,249 @@
             }, 2000);
         });
 
-        function initCountdown() {
-            const token = new URLSearchParams(window.location.search).get('token') || '';
 
-            fetch(`/get-limit-payment?token=${token}`)
-                .then(res => res.json())
-                .then(data => {
-                    if (data.status !== 'success') {
-                        document.getElementById("countdown").innerHTML = `
-                    <span class="text-danger">${data.message}</span>
-                `;
-                        return;
-                    }
+        // window.addEventListener('load', initCountdown);
 
-                    // Ambil deadline dari server sebagai string Jakarta
-                    const deadlineStr = data.limit_payment; // Contoh: "2025-05-06 11:21:53"
-
-                    // Pisahkan tanggal dan waktu
-                    const deadlineJakarta = new Date(deadlineStr); // ISO format langsung bisa dipakai
-
-                    if (isNaN(deadlineJakarta.getTime())) {
-                        document.getElementById("countdown").innerHTML = `
-        <span class="text-danger">Format waktu tidak valid</span>
-    `;
-                        return;
-                    }
-
-                    // Waktu sekarang
-                    // const now = new Date();
-                    // const totalTime = deadlineJakarta.getTime() - now.getTime();
-
-
-                    // Buat objek Date sebagai waktu UTC berdasarkan waktu Jakarta
-                    // const deadlineJakarta = new Date(Date.UTC(
-                    //     parseInt(year),
-                    //     parseInt(month) - 1,
-                    //     parseInt(day),
-                    //     parseInt(hour) - 7, // Koreksi -7 jam ke UTC
-                    //     parseInt(minute),
-                    //     parseInt(second)
-                    // ));
-
-                    // Waktu sekarang
-                    const now = new Date();
-                    const totalTime = deadlineJakarta.getTime() - now.getTime();
-
-                    // Format untuk debugging
-                    const jakartaOptions = {
-                        timeZone: 'Asia/Jakarta',
-                        hour12: false
-                    };
-                    const formattedNow = now.toLocaleString('en-US', jakartaOptions);
-                    const formattedDeadline = deadlineJakarta.toLocaleString('en-US', jakartaOptions);
-
-                    console.log(`Current time (Jakarta): ${formattedNow}`);
-                    console.log(`Deadline (Jakarta): ${formattedDeadline}`);
-                    console.log(`Time remaining: ${Math.floor(totalTime / 1000 / 60 / 60)} hours, ${Math.floor((totalTime / 1000 / 60) % 60)} minutes`);
-
-                    updateCountdown();
-
-                    const countdownInterval = setInterval(updateCountdown, 1000);
-
-                    function updateCountdown() {
-                        const currentTime = new Date().getTime();
-                        const distance = deadlineJakarta.getTime() - currentTime;
-
-                        if (distance <= 0) {
-                            clearInterval(countdownInterval);
-                            document.getElementById("countdown").innerHTML = `
-                        <div class="timer-unit">
-                            <span class="timer-digit text-danger">00</span>
-                            <span class="timer-label">Jam</span>
-                        </div>
-                        <div class="timer-separator">:</div>
-                        <div class="timer-unit">
-                            <span class="timer-digit text-danger">00</span>
-                            <span class="timer-label">Menit</span>
-                        </div>
-                        <div class="timer-separator">:</div>
-                        <div class="timer-unit">
-                            <span class="timer-digit text-danger">00</span>
-                            <span class="timer-label">Detik</span>
-                        </div>
-                    `;
-                            document.getElementById("progress-bar").style.width = "0%";
-
-                            // Batalkan pesanan otomatis
-                            fetch(`/get-batal-pesanan?token=${token}`)
-                                .then(res => res.json())
-                                .then(result => {
-                                    alert(result.message);
-                                });
-                            return;
-                        }
-
-                        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-                        document.getElementById("hours").textContent = String(hours).padStart(2, '0');
-                        document.getElementById("minutes").textContent = String(minutes).padStart(2, '0');
-                        document.getElementById("seconds").textContent = String(seconds).padStart(2, '0');
-
-                        const progressPercentage = (distance / totalTime) * 100;
-                        document.getElementById("progress-bar").style.width = progressPercentage + "%";
-
-                        if (distance < 3600000) {
-                            document.querySelectorAll(".timer-digit").forEach(digit => {
-                                digit.classList.add("text-danger");
-                            });
-                        }
-                    }
-                })
-                .catch(error => {
-                    console.error("Error fetching deadline:", error);
-                    document.getElementById("countdown").innerHTML = `
-                <span class="text-danger">Error loading countdown timer</span>
-            `;
-                });
-        }
-
-        window.addEventListener('load', initCountdown);
-
-
-        // HTML structure needed for this timer:
-        /*
-        <div id="countdown">
-            <div class="timer-unit">
-                <span id="hours" class="timer-digit">00</span>
-                <span class="timer-label">Jam</span>
-            </div>
-            <div class="timer-separator">:</div>
-            <div class="timer-unit">
-                <span id="minutes" class="timer-digit">00</span>
-                <span class="timer-label">Menit</span>
-            </div>
-            <div class="timer-separator">:</div>
-            <div class="timer-unit">
-                <span id="seconds" class="timer-digit">00</span>
-                <span class="timer-label">Detik</span>
-            </div>
-        </div>
-        <div class="progress">
-            <div id="progress-bar" class="progress-bar" role="progressbar"></div>
-        </div>
-        */
 
         // Show file preview on page load for demo purposes
         window.addEventListener('load', function() {
             document.getElementById('filePreview').style.display = 'none';
         });
+    </script>
+
+    <script>
+        // Fungsi untuk format mata uang Rupiah
+        function formatRupiah(angka) {
+            return new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            }).format(angka);
+        }
+
+        // Fungsi untuk menghitung sisa waktu pembayaran
+        function hitungSisaWaktuPembayaran(limitPembayaran) {
+            // Tambahkan zona waktu Jakarta secara eksplisit
+            const waktuBatas = new Date(`${limitPembayaran} GMT+0700`);
+            const waktuSekarang = new Date();
+
+            const selisih = waktuBatas - waktuSekarang;
+
+            if (selisih > 0) {
+                const hari = Math.floor(selisih / (1000 * 60 * 60 * 24));
+                const jam = Math.floor((selisih % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const menit = Math.floor((selisih % (1000 * 60 * 60)) / (1000 * 60));
+                const detik = Math.floor((selisih % (1000 * 60)) / 1000);
+
+                return {
+                    total: selisih,
+                    hari,
+                    jam,
+                    menit,
+                    detik,
+                    formatted: hari > 0 ?
+                        `${hari}d ${jam}j ${menit}m` : `${jam}j ${menit}m ${detik}d`,
+                    isExpired: false
+                };
+            }
+            return {
+                total: 0,
+                hari: 0,
+                jam: 0,
+                menit: 0,
+                detik: 0,
+                formatted: 'Timeout',
+                isExpired: true
+            };
+        }
+
+
+        // Fungsi untuk memperbarui tampilan countdown timer
+        function updateCountdown(limitPembayaran) {
+            const countdownElement = document.getElementById('countdown');
+            const progressBarElement = document.getElementById('progress-bar');
+            const hoursElement = document.getElementById('hours');
+            const minutesElement = document.getElementById('minutes');
+            const secondsElement = document.getElementById('seconds');
+
+            const totalTime = 24 * 60 * 60 * 1000;
+            let interval;
+
+            const updateTimer = () => {
+                const timeLeft = hitungSisaWaktuPembayaran(limitPembayaran);
+
+                if (timeLeft.isExpired) {
+                    hoursElement.textContent = '00';
+                    minutesElement.textContent = '00';
+                    secondsElement.textContent = '00';
+                    progressBarElement.style.width = '0%';
+
+                    countdownElement.classList.add('expired');
+
+                    const confirmButton = document.getElementById('confirmPayment');
+                    if (confirmButton) {
+                        confirmButton.disabled = true;
+                        confirmButton.classList.add('btn-disabled');
+                        confirmButton.innerHTML = `<i class="fas fa-times-circle me-2"></i>Waktu Habis`;
+                    }
+
+                    clearInterval(interval);
+                    return;
+                }
+
+                // Update tampilan timer
+                hoursElement.textContent = String(timeLeft.jam).padStart(2, '0');
+                minutesElement.textContent = String(timeLeft.menit).padStart(2, '0');
+                secondsElement.textContent = String(timeLeft.detik).padStart(2, '0');
+
+                // Update progress bar
+                const progressPercentage = (timeLeft.total / totalTime) * 100;
+                progressBarElement.style.width = `${progressPercentage}%`;
+
+                if (progressPercentage < 25) {
+                    progressBarElement.style.backgroundColor = '#FF5252'; // Merah
+                } else if (progressPercentage < 50) {
+                    progressBarElement.style.backgroundColor = '#FFC107'; // Kuning
+                } else {
+                    progressBarElement.style.backgroundColor = '#4CAF50'; // Hijau
+                }
+            };
+
+            // Jalankan pertama kali
+            updateTimer();
+
+            // Set interval tiap detik
+            interval = setInterval(updateTimer, 1000);
+
+            return interval;
+        }
+
+
+        // Fungsi untuk menampilkan ringkasan pesanan
+        // Fungsi untuk menampilkan ringkasan pesanan
+        function renderOrderSummary(orderData) {
+            const orderSummaryElement = document.querySelector('.order-summary');
+            const orderItemsContainer = orderSummaryElement.querySelector(':scope > h3').nextElementSibling;
+            // Hapus item-item contoh yang sudah ada
+            const existingItems = orderSummaryElement.querySelectorAll('.order-item');
+            existingItems.forEach(item => item.remove());
+
+            // Tambahkan item-item produk dari data
+            orderData.products.forEach(product => {
+                const orderItemElement = document.createElement('div');
+                orderItemElement.className = 'order-item';
+                orderItemElement.innerHTML = `
+            <img src="${product.foto}" alt="${product.nama_product}" class="order-item-image">
+            <div class="order-item-details">
+                <div class="order-item-name">${product.nama_product}</div>
+                <div class="order-item-variant">
+                    ${product.motif_product ? 'Motif: ' + product.motif_product + ', ' : ''}
+                    ${product.material_product ? 'Material: ' + product.material_product : ''}
+                    ${product.qty_pemesanan > 1 ? ` (${product.qty_pemesanan} item)` : ''}
+                </div>
+                <div class="order-item-price">${formatRupiah(product.total_harga)}</div>
+            </div>
+        `;
+                orderSummaryElement.insertBefore(orderItemElement, orderSummaryElement.querySelector('.order-totals'));
+            });
+
+            // Update total-total
+            const totalsContainer = orderSummaryElement.querySelector('.order-totals');
+            totalsContainer.innerHTML = `
+        <div class="order-total-row">
+            <div class="order-total-label">Subtotal</div>
+            <div class="order-total-value">${formatRupiah(orderData.harga_sebelum_diskon || orderData.total_belanja + orderData.total_diskon_pemesanan)}</div>
+        </div>
+        ${orderData.total_diskon_pemesanan > 0 ? `
+        <div class="order-total-row">
+            <div class="order-total-label">Pengiriman</div>
+            <div class="order-total-value">${formatRupiah(orderData.total_diskon_pemesanan)}</div>
+        </div>
+        ` : ''}
+        <div class="order-grand-total">
+            <div class="order-grand-total-label">Total</div>
+            <div class="order-grand-total-value">${formatRupiah(orderData.total_belanja)}</div>
+        </div>
+     `;
+
+            document.getElementById('total-amount').textContent = formatRupiah(orderData.total_belanja);
+            document.getElementById('nominal-transfer').textContent = formatRupiah(orderData.total_belanja);
+
+            // Tambahkan nomor pesanan
+            const orderNumberElement = document.createElement('div');
+            orderNumberElement.className = 'order-number';
+            // orderNumberElement.innerHTML = `<span>Nomor Pesanan:</span> ${orderData.nomor_pesanan}`;
+            orderSummaryElement.insertBefore(orderNumberElement, orderSummaryElement.querySelector('h3').nextSibling);
+        }
+
+        // Fungsi utama untuk inisialisasi halaman pembayaran
+        function initializePaymentPage() {
+            // Ambil token dari path URL terakhir
+            const pathSegments = window.location.pathname.split('/');
+            const token = pathSegments[pathSegments.length - 1] || '';
+
+            if (!token) {
+                console.error('Token tidak ditemukan di URL.');
+                // Tampilkan pesan error ke user
+                document.querySelector('.order-summary').innerHTML = `
+            <div class="error-message">
+                Token pembayaran tidak valid. Silakan periksa URL atau hubungi customer service.
+            </div>
+        `;
+                return;
+            }
+
+            // Fetch data pembayaran dari API
+            fetch(API_BASE_URL + `/pembayaran/${token}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Gagal mengambil data pembayaran.');
+                    }
+                    return response.json();
+                })
+                .then(result => {
+                    console.log(result);
+                    // Update status and order number
+                    if (result.status === 'success' && result.data) {
+                        // Render ringkasan pesanan
+                        renderOrderSummary(result.data);
+
+                        // Inisialisasi countdown
+                        updateCountdown(result.data.limit_payment);
+
+                        // Update order number
+                        const orderNumberElement = document.querySelector('.order-number');
+                        if (orderNumberElement) {
+                            orderNumberElement.textContent = `Order #${result.data.nomor_pesanan}`;
+                        }
+
+                        // Update status pesanan jika ada
+                        if (result.data.status) {
+                            const statusElement = document.getElementById('payment-status');
+                            if (statusElement) {
+                                // Update existing status element
+                                statusElement.className = 'status-badge ' + result.data.status;
+                                statusElement.textContent = result.data.status === 'waiting' ? 'Menunggu Pembayaran' : result.data.status;
+                            }
+                        }
+                    } else {
+                        throw new Error(result.message || 'Gagal memuat data pembayaran.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Terjadi kesalahan:', error);
+                    // Tampilkan pesan error ke user
+                    document.querySelector('.order-summary').innerHTML = `
+                <div class="error-message">
+                    ${error.message || 'Terjadi kesalahan saat memuat data pembayaran.'}
+                </div>
+            `;
+                });
+        }
+
+        // Jalankan fungsi inisialisasi saat dokumen selesai dimuat
+        document.addEventListener('DOMContentLoaded', initializePaymentPage);
     </script>
 </body>
 

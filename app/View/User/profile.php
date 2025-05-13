@@ -1289,9 +1289,9 @@ $apiBaseUrl = env('API_BASE_URL');
                     badgeClass = 'bg-primary';
                     badgeText = 'Menunggu Pembayaran';
                     break;
-                case 'confirmed':
+                case 'konfirmasi':
                     badgeClass = 'bg-info';
-                    badgeText = 'Dikonfirmasi';
+                    badgeText = 'konfirmasi';
                     break;
                 case 'shipped':
                     badgeClass = 'bg-warning text-dark';
@@ -1320,12 +1320,12 @@ $apiBaseUrl = env('API_BASE_URL');
                         </div>
                         <p class="mb-2">${formatDate(order.tanggal_pesanan)} • ${order.products.length} Produk • Total: ${formatCurrency(order.total_harga)}</p>
                         <div class="d-flex align-items-center mb-2">
-                            <img src="assets/img/product/UT M01 2.png" class="me-2 rounded" alt="Product" width="50" height="50">
+                            <img src="${order.products[0].foto_produk}" class="me-2 rounded" alt="Product" width="50" height="50">
                             <span class="text-truncate">${productDescription}</span>
                         </div>
                     </div>
                     <div class="col-md-4 text-md-end mt-3 mt-md-0">
-                        ${order.status_pembayaran === 'belum bayar' 
+                        ${order.status_pesanan === 'waiting' 
                             ? `<button onclick="goToPayment('${order.payment_token}')" class="btn btn-outline-primary mb-2 me-2">Bayar</button>` 
                             : ''
                         }
@@ -1343,7 +1343,7 @@ $apiBaseUrl = env('API_BASE_URL');
             const containers = {
                 'all': document.getElementById('all-orders-container'),
                 'pending': document.getElementById('pending-orders-container'),
-                'confirmed': document.getElementById('confirmed-orders-container'),
+                'konfirmasi': document.getElementById('confirmed-orders-container'),
                 'shipped': document.getElementById('shipped-orders-container'),
                 'completed': document.getElementById('completed-orders-container')
             };
@@ -1351,7 +1351,7 @@ $apiBaseUrl = env('API_BASE_URL');
             const countElements = {
                 'all': document.getElementById('all-orders-count'),
                 'pending': document.getElementById('pending-orders-count'),
-                'confirmed': document.getElementById('confirmed-orders-count'),
+                'konfirmasi': document.getElementById('confirmed-orders-count'),
                 'shipped': document.getElementById('shipped-orders-count'),
                 'completed': document.getElementById('completed-orders-count')
             };
@@ -1363,7 +1363,7 @@ $apiBaseUrl = env('API_BASE_URL');
             const groupedOrders = {
                 'all': orders,
                 'pending': orders.filter(o => o.status_pesanan === 'waiting'),
-                'confirmed': orders.filter(o => o.status_pesanan === 'confirmed'),
+                'konfirmasi': orders.filter(o => o.status_pesanan === 'konfirmasi'),
                 'shipped': orders.filter(o => o.status_pesanan === 'shipped'),
                 'completed': orders.filter(o => o.status_pesanan === 'completed')
             };

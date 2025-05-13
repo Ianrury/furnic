@@ -452,8 +452,8 @@ $apiBaseUrl = env('API_BASE_URL');
                 warna: 'danger',
                 ikon: 'fa-money-bill-wave'
             },
-            'dikonfirmasi': {
-                label: 'Dikonfirmasi',
+            'konfirmasi': {
+                label: 'konfirmasi',
                 warna: 'primary',
                 ikon: 'fa-check-circle'
             },

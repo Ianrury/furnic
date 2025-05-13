@@ -1,3 +1,9 @@
+<?php
+require_once __DIR__ . '/../../app/env.php';
+$apiBaseUrl = env('API_BASE_URL');
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -367,17 +373,20 @@
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        const API_BASE_URL = "<?= $apiBaseUrl ?>";
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
             const offcanvasToggler = document.getElementById('offcanvasToggler');
             const offcanvasNavbar = document.getElementById('offcanvasNavbar');
 
             // Mencegah pembuatan backdrop
-            offcanvasNavbar.addEventListener('show.bs.offcanvas', function () {
+            offcanvasNavbar.addEventListener('show.bs.offcanvas', function() {
                 document.querySelectorAll('.offcanvas-backdrop').forEach(el => el.remove());
             });
 
             // Alternatif: nonaktifkan backdrop sepenuhnya
-            offcanvasNavbar.addEventListener('shown.bs.offcanvas', function () {
+            offcanvasNavbar.addEventListener('shown.bs.offcanvas', function() {
                 const backdrops = document.querySelectorAll('.offcanvas-backdrop');
                 backdrops.forEach(backdrop => {
                     backdrop.classList.remove('show');
@@ -386,16 +395,16 @@
             });
 
             // Pastikan backdrop dihapus saat menutup
-            offcanvasNavbar.addEventListener('hidden.bs.offcanvas', function () {
+            offcanvasNavbar.addEventListener('hidden.bs.offcanvas', function() {
                 document.querySelectorAll('.offcanvas-backdrop').forEach(el => el.remove());
             });
         });
 
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             const hotspots = document.querySelectorAll('.hotspot-dot');
 
             hotspots.forEach(hotspot => {
-                hotspot.addEventListener('mouseenter', function () {
+                hotspot.addEventListener('mouseenter', function() {
                     // Store the tooltip element
                     const tooltip = this.querySelector('.hotspot-tooltip');
 
@@ -418,9 +427,9 @@
         });
 
         // Add focus event to automatically open modal when clicking the search field
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             const searchModal = document.getElementById('searchModal');
-            searchModal.addEventListener('shown.bs.modal', function () {
+            searchModal.addEventListener('shown.bs.modal', function() {
                 searchModal.querySelector('input').focus();
             });
         });
