@@ -365,7 +365,7 @@ $apiBaseUrl = env('API_BASE_URL');
                     <div class="row">
                         <!-- Left grid - Ratings and photos -->
                         <div class="col-12 col-lg-4">
-                            <div class="review-grid">
+                            <div class="review-grid" id="review-grid">
                                 <div class="d-flex justify-content-start align-items-center mb-3">
                                     <div>
                                         <img src="assets/img/product/decorasi/ruang-santai.jpg" alt="foto review"
@@ -378,34 +378,34 @@ $apiBaseUrl = env('API_BASE_URL');
                                             <img src="assets/img/icon/star.svg" alt="start" class="star-icon-review">
                                             <img src="assets/img/icon/star.svg" alt="start" class="star-icon-review">
                                             <img src="assets/img/icon/star.svg" alt="start" class="star-icon-review">
-                                            <div class="star-count">200</div>
+                                            <div class="star-count">0</div>
                                         </div>
                                         <div class="star-rating">
                                             <img src="assets/img/icon/star.svg" alt="start" class="star-icon-review">
                                             <img src="assets/img/icon/star.svg" alt="start" class="star-icon-review">
                                             <img src="assets/img/icon/star.svg" alt="start" class="star-icon-review">
                                             <img src="assets/img/icon/star.svg" alt="start" class="star-icon-review">
-                                            <div class="star-count">200</div>
+                                            <div class="star-count">0</div>
                                         </div>
                                         <div class="star-rating">
                                             <img src="assets/img/icon/star.svg" alt="start" class="star-icon-review">
                                             <img src="assets/img/icon/star.svg" alt="start" class="star-icon-review">
                                             <img src="assets/img/icon/star.svg" alt="start" class="star-icon-review">
-                                            <div class="star-count">200</div>
+                                            <div class="star-count">0</div>
                                         </div>
                                         <div class="star-rating">
                                             <img src="assets/img/icon/star.svg" alt="start" class="star-icon-review">
                                             <img src="assets/img/icon/star.svg" alt="start" class="star-icon-review">
-                                            <div class="star-count">200</div>
+                                            <div class="star-count">0</div>
                                         </div>
                                         <div class="star-rating">
                                             <img src="assets/img/icon/star.svg" alt="start" class="star-icon-review">
-                                            <div class="star-count">200</div>
+                                            <div class="star-count">0</div>
                                         </div>
                                     </div>
                                 </div>
-                                <h6 class="text-black" style="font-size: 14px; font-weight: 400;">Foto oleh pelanggan
-                                    (100)</h6>
+                                <h6 class="text-black" style="font-size: 14px; font-weight: 400;" id="foto-pelanggan-total">Foto oleh pelanggan
+                                    (0)</h6>
                                 <div class="container mt-3">
                                     <div class="review-photos-container" id="reviewPhotos">
                                         <div class="row gap-2 justify-content-start visible-photos">
@@ -455,30 +455,6 @@ $apiBaseUrl = env('API_BASE_URL');
                                                     data-bs-target="#reviewModal">+5</div>
                                             </div>
                                         </div>
-
-                                        <!-- Foto tersembunyi (hidden) -->
-                                        <div class="row g-2 justify-content-start hidden-photos">
-                                            <div class="col-2 review-photo-pelanggan">
-                                                <img src="assets/img/product/decorasi/ruang-santai.jpg"
-                                                    class="rounded-3" alt="Product review 11">
-                                            </div>
-                                            <div class="col-2 review-photo-pelanggan">
-                                                <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png"
-                                                    class="rounded-3" alt="Product review 12">
-                                            </div>
-                                            <div class="col-2 review-photo-pelanggan">
-                                                <img src="assets/img/product/decorasi/ruang-santai.jpg"
-                                                    class="rounded-3" alt="Product review 13">
-                                            </div>
-                                            <div class="col-2 review-photo-pelanggan">
-                                                <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png"
-                                                    class="rounded-3" alt="Product review 14">
-                                            </div>
-                                            <div class="col-2 review-photo-pelanggan">
-                                                <img src="assets/img/product/decorasi/ruang-santai.jpg"
-                                                    class="rounded-3" alt="Product review 15">
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -487,9 +463,9 @@ $apiBaseUrl = env('API_BASE_URL');
                         <!-- Right grid - User reviews -->
                         <div class="col-12 col-lg-8">
                             <!-- First review -->
-                            <div class="review-grid-review">
-                                <div class="username">Yolanda</div>
-                                <div class="review-text">Kursinya kokoh, warnanya lucu</div>
+                            <div class="review-grid-review" id="card-review">
+                                <div class="username"></div>
+                                <div class="review-text"></div>
                                 <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
                                 <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
                                 <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
@@ -497,36 +473,6 @@ $apiBaseUrl = env('API_BASE_URL');
                                 <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
 
 
-                                <div class="review-photos">
-                                    <div class="review-photo">
-                                        <img src="assets/img/product/decorasi/ruang-santai.jpg" alt="Product review">
-                                    </div>
-                                    <div class="review-photo">
-                                        <img src="assets/img/product/decorasi/ruang-santai.jpg" alt="Product review">
-                                    </div>
-                                    <div class="review-photo">
-                                        <img src="assets/img/product/decorasi/ruang-santai.jpg" alt="Product review">
-                                    </div>
-                                    <div class="review-photo">
-                                        <img src="assets/img/product/decorasi/ruang-santai.jpg" alt="Product review">
-                                    </div>
-                                    <div class="review-photo">
-                                        <img src="assets/img/product/decorasi/ruang-santai.jpg" alt="Product review">
-                                    </div>
-                                </div>
-                                <div class="date">18/04/2023</div>
-                            </div>
-
-                            <!-- Second review -->
-                            <div class="review-grid-review">
-                                <div class="username">Yolanda</div>
-                                <div class="review-text">kursinya bagus rekomen untuk yang mencari kursi belajar anak,
-                                    warna yang di berikan juga variatif</div>
-                                <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
-                                <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
-                                <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
-                                <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
-                                <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
                                 <div class="review-photos">
                                     <div class="review-photo">
                                         <img src="assets/img/product/decorasi/ruang-santai.jpg" alt="Product review">
@@ -712,144 +658,13 @@ $apiBaseUrl = env('API_BASE_URL');
                                 <div class="col-md-9 ps-1">
                                     <!-- First review -->
                                     <div class="review-grid-review-modal" style="background-color: #FFFFFF;">
-                                        <div class="username">Yolanda</div>
-                                        <div class="fw-normal text-black" style="font-size: 12px;">kursinya bagus
-                                            rekomen
-                                            untuk yang mencari kursi belajar
-                                            anak,
-                                            warna yang di berikan juga variatif</div>
+                                        <div class="username"></div>
+                                        <div class="fw-normal text-black" style="font-size: 12px;"></div>
                                         <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
                                         <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
                                         <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
                                         <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
                                         <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
-                                        <div class="review-photos">
-                                            <div class="review-photo">
-                                                <img src="assets/img/product/decorasi/ruang-santai.jpg"
-                                                    alt="Product review">
-                                            </div>
-                                            <div class="review-photo">
-                                                <img src="assets/img/product/decorasi/ruang-santai.jpg"
-                                                    alt="Product review">
-                                            </div>
-                                            <div class="review-photo">
-                                                <img src="assets/img/product/decorasi/ruang-santai.jpg"
-                                                    alt="Product review">
-                                            </div>
-                                            <div class="review-photo">
-                                                <img src="assets/img/product/decorasi/ruang-santai.jpg"
-                                                    alt="Product review">
-                                            </div>
-                                            <div class="review-photo">
-                                                <img src="assets/img/product/decorasi/ruang-santai.jpg"
-                                                    alt="Product review">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="review-grid-review-modal" style="background-color: #FFFFFF;">
-                                        <div class="username">Yolanda</div>
-                                        <div class="fw-normal text-black" style="font-size: 12px;">kursinya bagus
-                                            rekomen
-                                            untuk yang mencari kursi belajar
-                                            anak,
-                                            warna yang di berikan juga variatif</div>
-                                        <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
-                                        <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
-                                        <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
-                                        <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
-                                        <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
-                                        <div class="review-photos">
-                                            <div class="review-photo">
-                                                <img src="assets/img/product/decorasi/ruang-santai.jpg"
-                                                    alt="Product review">
-                                            </div>
-                                            <div class="review-photo">
-                                                <img src="assets/img/product/decorasi/ruang-santai.jpg"
-                                                    alt="Product review">
-                                            </div>
-                                            <div class="review-photo">
-                                                <img src="assets/img/product/decorasi/ruang-santai.jpg"
-                                                    alt="Product review">
-                                            </div>
-                                            <div class="review-photo">
-                                                <img src="assets/img/product/decorasi/ruang-santai.jpg"
-                                                    alt="Product review">
-                                            </div>
-                                            <div class="review-photo">
-                                                <img src="assets/img/product/decorasi/ruang-santai.jpg"
-                                                    alt="Product review">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="review-grid-review-modal" style="background-color: #FFFFFF;">
-                                        <div class="username">Yolanda</div>
-                                        <div class="fw-normal text-black" style="font-size: 12px;">kursinya bagus
-                                            rekomen
-                                            untuk yang mencari kursi belajar
-                                            anak,
-                                            warna yang di berikan juga variatif</div>
-                                        <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
-                                        <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
-                                        <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
-                                        <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
-                                        <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
-                                        <div class="review-photos">
-                                            <div class="review-photo">
-                                                <img src="assets/img/product/decorasi/ruang-santai.jpg"
-                                                    alt="Product review">
-                                            </div>
-                                            <div class="review-photo">
-                                                <img src="assets/img/product/decorasi/ruang-santai.jpg"
-                                                    alt="Product review">
-                                            </div>
-                                            <div class="review-photo">
-                                                <img src="assets/img/product/decorasi/ruang-santai.jpg"
-                                                    alt="Product review">
-                                            </div>
-                                            <div class="review-photo">
-                                                <img src="assets/img/product/decorasi/ruang-santai.jpg"
-                                                    alt="Product review">
-                                            </div>
-                                            <div class="review-photo">
-                                                <img src="assets/img/product/decorasi/ruang-santai.jpg"
-                                                    alt="Product review">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="review-grid-review-modal" style="background-color: #FFFFFF;">
-                                        <div class="username">Yolanda</div>
-                                        <div class="fw-normal text-black" style="font-size: 12px;">kursinya bagus
-                                            rekomen
-                                            untuk yang mencari kursi belajar
-                                            anak,
-                                            warna yang di berikan juga variatif</div>
-                                        <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
-                                        <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
-                                        <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
-                                        <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
-                                        <img src="assets/img/icon/star.svg" alt="start" class="star-icon">
-                                        <div class="review-photos">
-                                            <div class="review-photo">
-                                                <img src="assets/img/product/decorasi/ruang-santai.jpg"
-                                                    alt="Product review">
-                                            </div>
-                                            <div class="review-photo">
-                                                <img src="assets/img/product/decorasi/ruang-santai.jpg"
-                                                    alt="Product review">
-                                            </div>
-                                            <div class="review-photo">
-                                                <img src="assets/img/product/decorasi/ruang-santai.jpg"
-                                                    alt="Product review">
-                                            </div>
-                                            <div class="review-photo">
-                                                <img src="assets/img/product/decorasi/ruang-santai.jpg"
-                                                    alt="Product review">
-                                            </div>
-                                            <div class="review-photo">
-                                                <img src="assets/img/product/decorasi/ruang-santai.jpg"
-                                                    alt="Product review">
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -1017,7 +832,7 @@ $apiBaseUrl = env('API_BASE_URL');
                             const card = `
                         <div class="col-6 col-md-4 col-lg-3">
                             <div class="card shadow position-relative rounded-4 p-2 product-card" data-id="${product.id_product}" data-slug="${product.slug}" 
-     data-token="${product.token}" style="cursor:pointer;">
+                 data-token="${product.token}" style="cursor:pointer;">
                                 ${ribbon ? `
                                     <div class="position-absolute ribbon-wrapper">
                                         <div class="ribbon text-uppercase fw-bold text-center" style="background-color: ${bgColor}; color: ${textColor};">
@@ -1113,7 +928,7 @@ $apiBaseUrl = env('API_BASE_URL');
                             const card = `
                         <div class="col-6 col-md-4 col-lg-3">
                             <div class="card shadow position-relative rounded-4 p-2 product-card" data-id="${product.id_product}" data-slug="${product.slug}" 
-     data-token="${product.token}" style="cursor:pointer;">
+                   data-token="${product.token}" style="cursor:pointer;">
                                 ${ribbon ? `
                                     <div class="position-absolute ribbon-wrapper">
                                         <div class="ribbon text-uppercase fw-bold text-center" style="background-color: ${bgColor}; color: ${textColor};">
@@ -1168,6 +983,667 @@ $apiBaseUrl = env('API_BASE_URL');
         });
     </script>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPath = window.location.pathname;
+            console.log('Current path:', currentPath);
+
+            // Pecah berdasarkan '/'
+            const parts = currentPath.split('/');
+
+            // Ambil slug dan token
+            const slug = parts[2];
+            const token = parts[3];
+
+            fetch(`${API_BASE_URL}/review/detail/${slug}/${token}`)
+                .then(response => response.json())
+                .then(result => {
+                    if (result.status === 'success') {
+                        console.log("data review", result.data);
+
+                        // Check if there are reviews
+                        if (result.data && result.data.length > 0) {
+                            // Render review cards (max 2)
+                            renderReviewCards(result.data);
+
+                            // Render review photos
+                            renderReviewPhotos(result.data);
+
+                            // Render rating summary
+                            renderRatingSummary(result.data);
+
+                            // Render all reviews in modal
+                            renderReviewsInModal(result.data);
+
+                            // Set up the original data for reset functionality
+                            window.originalReviewData = result.data;
+
+                            // Make sure all review sections are visible
+                            showReviewSections();
+                        } else {
+                            // No reviews, show empty state
+                            handleEmptyReviews();
+                        }
+                    } else {
+                        // API returned success: false or had an error
+                        handleEmptyReviews();
+                        console.error("Error in API response:", result);
+                    }
+                })
+                .catch(error => {
+                    handleEmptyReviews();
+                    console.error("Error fetching reviews:", error);
+                });
+
+            // Setup image zoom functionality
+            setupImageZoom();
+        });
+
+        // New function to handle empty reviews state
+        function handleEmptyReviews() {
+            // Hide all review sections
+            hideReviewSections();
+
+            // Show empty state message
+            showEmptyReviewMessage();
+        }
+
+        // Function to hide all review sections
+        function hideReviewSections() {
+            // Hide review cards section
+            const cardContainerElement = document.getElementById('card-review');
+            if (cardContainerElement && cardContainerElement.parentElement) {
+                cardContainerElement.parentElement.style.display = 'none';
+            }
+
+            // Hide review photos section
+            const reviewPhotosContainer = document.getElementById('reviewPhotos');
+            if (reviewPhotosContainer) {
+                reviewPhotosContainer.style.display = 'none';
+            }
+
+            // Hide rating summary section
+            const ratingSummaryContainer = document.querySelector('.d-flex.justify-content-start.align-items-center.mb-3');
+            if (ratingSummaryContainer) {
+                ratingSummaryContainer.style.display = 'none';
+            }
+
+            // Disable "See more" button if it exists
+            const seeMoreButton = document.querySelector('.see-more-btn');
+            if (seeMoreButton) {
+                seeMoreButton.style.display = 'none';
+            }
+        }
+
+        // Function to show all review sections
+        function showReviewSections() {
+            // Show review cards section
+            const cardContainerElement = document.getElementById('card-review');
+            if (cardContainerElement && cardContainerElement.parentElement) {
+                cardContainerElement.parentElement.style.display = 'block';
+            }
+
+            // Show review photos section
+            const reviewPhotosContainer = document.getElementById('reviewPhotos');
+            if (reviewPhotosContainer) {
+                reviewPhotosContainer.style.display = 'block';
+            }
+
+            // Show rating summary section
+            const ratingSummaryContainer = document.querySelector('.d-flex.justify-content-start.align-items-center.mb-3');
+            if (ratingSummaryContainer) {
+                ratingSummaryContainer.style.display = 'flex';
+            }
+        }
+
+        // Function to show empty review message
+        function showEmptyReviewMessage() {
+            // Find a good container to show the message
+            const mainContainer = document.querySelector('.product-review-container') ||
+                document.querySelector('.container.py-5') ||
+                document.querySelector('main');
+
+            if (mainContainer) {
+                // Create empty state message
+                const emptyStateElement = document.createElement('div');
+                emptyStateElement.className = 'empty-review-message text-center py-5';
+                emptyStateElement.innerHTML = `
+            <div class="mb-3">
+                <img src="assets/img/icon/no-review.svg" alt="No Reviews" style="width: 80px; height: 80px;" 
+                     onerror="this.onerror=null; this.src='assets/img/icon/star.svg';">
+            </div>
+            <h5 class="mb-3">Belum ada ulasan untuk produk ini</h5>
+            <p class="text-muted">Jadilah yang pertama memberikan ulasan untuk produk ini</p>
+        `;
+
+                // Insert the empty state message
+                mainContainer.appendChild(emptyStateElement);
+
+                // Add styles for the empty state
+                const style = document.createElement('style');
+                style.textContent = `
+            .empty-review-message {
+                background-color: #f9f9f9;
+                border-radius: 8px;
+                padding: 2rem;
+                margin: 2rem 0;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            }
+        `;
+                document.head.appendChild(style);
+            }
+        }
+
+        // Function to render review cards (max 2)
+        function renderReviewCards(reviewData) {
+            // Find the container that holds the reviews
+            const cardContainerElement = document.getElementById('card-review').parentElement;
+
+            // Find the "See more" button
+            const seeMoreButton = cardContainerElement.querySelector('.see-more-btn');
+
+            // Remove existing review cards but keep the button
+            const reviewCards = cardContainerElement.querySelectorAll('.review-grid-review');
+            reviewCards.forEach(card => card.remove());
+
+            // Display maximum 2 cards
+            const displayCount = Math.min(reviewData.length, 2);
+
+            // Reference for where to insert cards (before the button)
+            const insertBeforeElement = seeMoreButton || null;
+
+            for (let i = 0; i < displayCount; i++) {
+                const review = reviewData[i];
+
+                // Create stars based on rating
+                let starsHTML = '';
+                for (let j = 0; j < review.bintang_review; j++) {
+                    starsHTML += '<img src="assets/img/icon/star.svg" alt="start" class="star-icon">';
+                }
+
+                // Create photos HTML
+                let photosHTML = '';
+                if (review.foto_review && review.foto_review.length > 0) {
+                    photosHTML = '<div class="review-photos">';
+                    // Display up to 5 photos per review
+                    const photoCount = Math.min(review.foto_review.length, 5);
+                    for (let j = 0; j < photoCount; j++) {
+                        photosHTML += `
+                    <div class="review-photo">
+                        <img src="${review.foto_review[j]}" alt="Product review" class="zoomable-image">
+                    </div>
+                `;
+                    }
+                    photosHTML += '</div>';
+                }
+
+                // Format date
+                const reviewDate = new Date(review.tanggal);
+                const formattedDate = reviewDate.toLocaleDateString('id-ID', {
+                    year: 'numeric',
+                    month: '2-digit',
+                    day: '2-digit'
+                }).replace(/\//g, '/');
+
+                // Create card element
+                const cardElement = document.createElement('div');
+                cardElement.className = 'review-grid-review';
+                cardElement.innerHTML = `
+            <div class="username">${review.nama_customer}</div>
+            <div class="review-text">${review.review}</div>
+            ${starsHTML}
+            ${photosHTML}
+            <div class="date">${formattedDate}</div>
+        `;
+
+                // Insert card before the "See more" button
+                cardContainerElement.insertBefore(cardElement, insertBeforeElement);
+            }
+
+            // Make sure the "See more" button is visible only if we have reviews
+            if (seeMoreButton) {
+                seeMoreButton.style.display = reviewData.length > 0 ? 'block' : 'none';
+            }
+        }
+
+        // Function to setup image zoom functionality
+        function setupImageZoom() {
+            // Create modal for zoomed images
+            if (!document.getElementById('imageZoomModal')) {
+                const modal = document.createElement('div');
+                modal.id = 'imageZoomModal';
+                modal.className = 'image-zoom-modal';
+                modal.innerHTML = `
+            <div class="image-zoom-content">
+                <span class="close-zoom">&times;</span>
+                <img id="zoomedImage">
+            </div>
+        `;
+                document.body.appendChild(modal);
+
+                // Close modal when clicking on X
+                modal.querySelector('.close-zoom').addEventListener('click', function() {
+                    modal.style.display = 'none';
+                });
+
+                // Close modal when clicking outside the image
+                modal.addEventListener('click', function(e) {
+                    if (e.target === modal) {
+                        modal.style.display = 'none';
+                    }
+                });
+            }
+
+            // Add event listeners for images (using event delegation)
+            document.addEventListener('click', function(e) {
+                if (e.target && e.target.classList.contains('zoomable-image')) {
+                    const modal = document.getElementById('imageZoomModal');
+                    const modalImg = document.getElementById('zoomedImage');
+                    modal.style.display = 'block';
+                    modalImg.src = e.target.src;
+                }
+            });
+
+            // Add hover effect (using event delegation)
+            document.addEventListener('mouseover', function(e) {
+                if (e.target && e.target.classList.contains('zoomable-image')) {
+                    e.target.style.transform = 'scale(1.1)';
+                    e.target.style.transition = 'transform 0.3s ease';
+                    e.target.style.cursor = 'pointer';
+                    e.target.style.zIndex = '1';
+                }
+            });
+
+            document.addEventListener('mouseout', function(e) {
+                if (e.target && e.target.classList.contains('zoomable-image')) {
+                    e.target.style.transform = 'scale(1)';
+                    e.target.style.zIndex = 'auto';
+                }
+            });
+
+            // Add CSS for the image zoom modal
+            if (!document.getElementById('zoomStyles')) {
+                const style = document.createElement('style');
+                style.id = 'zoomStyles';
+                style.textContent = `
+            .image-zoom-modal {
+                display: none;
+                position: fixed;
+                z-index: 1000;
+                padding-top: 100px;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                overflow: auto;
+                background-color: rgba(0,0,0,0.9);
+            }
+            .image-zoom-content {
+                margin: auto;
+                display: block;
+                position: relative;
+                max-width: 80%;
+                max-height: 80%;
+            }
+            #zoomedImage {
+                display: block;
+                width: 100%;
+                max-height: 70vh;
+                object-fit: contain;
+            }
+            .close-zoom {
+                position: absolute;
+                top: -30px;
+                right: 0;
+                color: #f1f1f1;
+                font-size: 40px;
+                font-weight: bold;
+                transition: 0.3s;
+                cursor: pointer;
+            }
+            .close-zoom:hover {
+                color: #bbb;
+            }
+            @media only screen and (max-width: 700px){
+                .image-zoom-content {
+                    width: 100%;
+                }
+            }
+        `;
+                document.head.appendChild(style);
+            }
+        }
+
+        // Function to render review photos in the grid
+        function renderReviewPhotos(reviewData) {
+            const reviewPhotosContainer = document.getElementById('reviewPhotos');
+            if (!reviewPhotosContainer) return;
+
+            const photosRow = reviewPhotosContainer.querySelector('.row');
+            if (!photosRow) return;
+
+            // Clear existing content
+            photosRow.innerHTML = '';
+
+            // Get all photos from all reviews
+            let allPhotos = [];
+            reviewData.forEach(review => {
+                if (review.foto_review && review.foto_review.length > 0) {
+                    allPhotos = allPhotos.concat(review.foto_review);
+                }
+            });
+
+            // Update total photos count
+            const totalPhotosElement = document.getElementById('foto-pelanggan-total');
+            if (totalPhotosElement) {
+                totalPhotosElement.textContent = `Foto oleh pelanggan (${allPhotos.length})`;
+            }
+
+            // If no photos, hide this section
+            if (allPhotos.length === 0) {
+                reviewPhotosContainer.style.display = 'none';
+                return;
+            } else {
+                reviewPhotosContainer.style.display = 'block';
+            }
+
+            // Display up to 10 photos in the grid
+            const visiblePhotos = allPhotos.slice(0, 10);
+            const hiddenPhotosCount = allPhotos.length > 10 ? allPhotos.length - 10 : 0;
+
+            visiblePhotos.forEach((photo, index) => {
+                const isLast = index === 9 && hiddenPhotosCount > 0;
+                const photoDiv = document.createElement('div');
+                photoDiv.className = 'col-2 review-photo-pelanggan';
+
+                if (isLast) {
+                    photoDiv.id = 'lastVisiblePhoto';
+                    photoDiv.innerHTML = `
+                <img src="${photo}" class="rounded-3 zoomable-image" alt="Product review ${index + 1}">
+                <div class="more-photos-overlay" data-bs-toggle="modal" data-bs-target="#reviewModal">+${hiddenPhotosCount}</div>
+            `;
+                } else {
+                    photoDiv.innerHTML = `
+                <img src="${photo}" class="rounded-3 zoomable-image" alt="Product review ${index + 1}">
+            `;
+                }
+
+                photosRow.appendChild(photoDiv);
+            });
+
+            // If we have less than 10 photos, fill with what we have but don't duplicate
+            if (visiblePhotos.length > 0 && visiblePhotos.length < 10) {
+                const remainingSlots = Math.min(10 - visiblePhotos.length, visiblePhotos.length);
+
+                for (let i = 0; i < remainingSlots; i++) {
+                    const photoDiv = document.createElement('div');
+                    photoDiv.className = 'col-2 review-photo-pelanggan';
+                    photoDiv.innerHTML = `
+                <img src="${visiblePhotos[i % visiblePhotos.length]}" class="rounded-3 zoomable-image" alt="Product review fill">
+            `;
+                    photosRow.appendChild(photoDiv);
+                }
+            }
+        }
+
+        // Function to render rating summary
+        function renderRatingSummary(reviewData) {
+            // Get rating summary container
+            const ratingSummaryContainer = document.querySelector('.d-flex.justify-content-start.align-items-center.mb-3');
+            if (!ratingSummaryContainer) return;
+
+            // Count reviews by rating
+            const ratingCounts = {
+                1: 0,
+                2: 0,
+                3: 0,
+                4: 0,
+                5: 0
+            };
+
+            reviewData.forEach(review => {
+                const rating = parseInt(review.bintang_review);
+                if (rating >= 1 && rating <= 5) {
+                    ratingCounts[rating]++;
+                }
+            });
+
+            // Select random photo for main display
+            let randomPhoto = 'assets/img/product/decorasi/ruang-santai.jpg'; // Default
+            for (const review of reviewData) {
+                if (review.foto_review && review.foto_review.length > 0) {
+                    randomPhoto = review.foto_review[Math.floor(Math.random() * review.foto_review.length)];
+                    break;
+                }
+            }
+
+            // Update main photo
+            const mainPhotoElement = ratingSummaryContainer.querySelector('.img-fluid.foto-review');
+            if (mainPhotoElement) {
+                mainPhotoElement.src = randomPhoto;
+                mainPhotoElement.classList.add('zoomable-image');
+            }
+
+            // Update star counts
+            const starRatings = ratingSummaryContainer.querySelectorAll('.star-rating');
+            starRatings.forEach((starRating, index) => {
+                const ratingNumber = 5 - index; // 5, 4, 3, 2, 1
+                const starCount = starRating.querySelector('.star-count');
+                if (starCount) {
+                    starCount.textContent = ratingCounts[ratingNumber];
+                }
+            });
+        }
+
+        // Function to render reviews in modal
+        function renderReviewsInModal(reviewData) {
+            const reviewsContainer = document.querySelector('.col-md-9.ps-1');
+            if (!reviewsContainer) return;
+
+            // Clear existing content
+            reviewsContainer.innerHTML = '';
+
+            // If no reviews after filtering
+            if (reviewData.length === 0) {
+                const noReviewsElement = document.createElement('div');
+                noReviewsElement.className = 'no-reviews-message';
+                noReviewsElement.innerHTML = '<p class="text-center py-5">Tidak ada ulasan yang sesuai dengan filter yang dipilih.</p>';
+                reviewsContainer.appendChild(noReviewsElement);
+                return;
+            }
+
+            // Render each review
+            reviewData.forEach(review => {
+                const reviewElement = document.createElement('div');
+                reviewElement.className = 'review-grid-review-modal';
+                reviewElement.style.backgroundColor = '#FFFFFF';
+
+                // Render stars based on rating
+                let starsHTML = '';
+                for (let i = 0; i < review.bintang_review; i++) {
+                    starsHTML += '<img src="assets/img/icon/star.svg" alt="start" class="star-icon">';
+                }
+
+                // Render photos
+                let photosHTML = '';
+                if (review.foto_review && review.foto_review.length > 0) {
+                    photosHTML = '<div class="review-photos">';
+                    review.foto_review.forEach(photo => {
+                        photosHTML += `
+                    <div class="review-photo">
+                        <img src="${photo}" alt="Product review" class="zoomable-image">
+                    </div>
+                `;
+                    });
+                    photosHTML += '</div>';
+                }
+
+                // Format date
+                const reviewDate = new Date(review.tanggal);
+                const formattedDate = reviewDate.toLocaleDateString('id-ID', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+
+                reviewElement.innerHTML = `
+            <div class="username">${review.nama_customer}</div>
+            <div class="fw-normal text-black" style="font-size: 12px;">${review.review}</div>
+            <div class="stars-container">${starsHTML}</div>
+            <div class="review-date text-muted" style="font-size: 11px;">${formattedDate}</div>
+            ${photosHTML}
+        `;
+
+                reviewsContainer.appendChild(reviewElement);
+            });
+        }
+
+        // Function to set up filter listeners
+        function setupFilterListeners(reviewData) {
+            // Store original data for reset functionality
+            window.originalReviewData = reviewData;
+
+            const resetFilterBtn = document.getElementById('resetFilter');
+            const ratingCheckboxes = document.querySelectorAll('.form-check-input');
+
+            if (!resetFilterBtn || !ratingCheckboxes.length) return;
+
+            // Reset filter
+            resetFilterBtn.addEventListener('click', function() {
+                // Uncheck all checkboxes
+                ratingCheckboxes.forEach(checkbox => {
+                    checkbox.checked = false;
+                });
+
+                // Render all reviews again using the original data
+                renderReviewsInModal(window.originalReviewData);
+            });
+
+            // Rating filter
+            ratingCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    // Get selected ratings
+                    const selectedRatings = [];
+                    document.querySelectorAll('.form-check-input:checked').forEach(checkedBox => {
+                        const parentDiv = checkedBox.closest('.form-check');
+                        const stars = parentDiv.querySelectorAll('.star-icon');
+                        selectedRatings.push(stars.length);
+                    });
+
+                    // If none selected, show all
+                    if (selectedRatings.length === 0) {
+                        renderReviewsInModal(window.originalReviewData);
+                        return;
+                    }
+
+                    // Filter reviews by selected ratings
+                    const filteredReviews = window.originalReviewData.filter(review => {
+                        const rating = parseInt(review.bintang_review);
+                        return selectedRatings.includes(rating);
+                    });
+
+                    // Render filtered reviews
+                    renderReviewsInModal(filteredReviews);
+                });
+            });
+
+            // Sort options
+            const sortOptions = document.querySelectorAll('.dropdown-item');
+            sortOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    const sortText = this.textContent.trim();
+                    const dropdownButton = document.querySelector('#dropdownMenu2');
+                    if (dropdownButton) {
+                        dropdownButton.textContent = sortText;
+                    }
+
+                    // Get currently visible reviews (which might be filtered)
+                    const currentlyDisplayedReviews = [...window.originalReviewData];
+
+                    // Apply current filter
+                    const selectedRatings = [];
+                    document.querySelectorAll('.form-check-input:checked').forEach(checkedBox => {
+                        const parentDiv = checkedBox.closest('.form-check');
+                        const stars = parentDiv.querySelectorAll('.star-icon');
+                        selectedRatings.push(stars.length);
+                    });
+
+                    let displayedReviews = currentlyDisplayedReviews;
+                    if (selectedRatings.length > 0) {
+                        displayedReviews = currentlyDisplayedReviews.filter(review => {
+                            const rating = parseInt(review.bintang_review);
+                            return selectedRatings.includes(rating);
+                        });
+                    }
+
+                    // Apply sorting
+                    if (sortText === 'Ulasan Terbaru') {
+                        displayedReviews.sort((a, b) => new Date(b.tanggal) - new Date(a.tanggal));
+                    } else if (sortText === 'Rating Tertinggi') {
+                        displayedReviews.sort((a, b) => b.bintang_review - a.bintang_review);
+                    } else if (sortText === 'Rating terendah') {
+                        displayedReviews.sort((a, b) => a.bintang_review - b.bintang_review);
+                    }
+
+                    renderReviewsInModal(displayedReviews);
+                });
+            });
+        }
+
+        // Add CSS for responsive modal
+        function addResponsiveModalStyles() {
+            if (!document.getElementById('responsiveModalStyles')) {
+                const style = document.createElement('style');
+                style.id = 'responsiveModalStyles';
+                style.textContent = `
+            @media (max-width: 768px) {
+                .modal-dialog {
+                    margin: 0.5rem;
+                    max-width: calc(100% - 1rem);
+                }
+                .col-md-3, .col-md-9 {
+                    width: 100%;
+                    padding: 0.5rem;
+                }
+                .review-grid-review-modal {
+                    margin-bottom: 1rem;
+                }
+                .review-photo img {
+                    max-width: 100%;
+                    height: auto;
+                }
+            }
+            .review-photo img.zoomable-image:hover {
+                transform: scale(1.1);
+                transition: transform 0.3s ease;
+                cursor: pointer;
+                z-index: 1;
+            }
+            .stars-container {
+                display: flex;
+                flex-wrap: wrap;
+            }
+        `;
+                document.head.appendChild(style);
+            }
+        }
+
+        // Initialize when modal is shown
+        document.addEventListener('DOMContentLoaded', function() {
+            const reviewModal = document.getElementById('reviewModal');
+            if (reviewModal) {
+                reviewModal.addEventListener('shown.bs.modal', function() {
+                    // Call this function when modal is shown
+                    addResponsiveModalStyles();
+
+                    // Set up filter listeners if not already set up
+                    if (window.originalReviewData) {
+                        setupFilterListeners(window.originalReviewData);
+                    }
+                });
+            }
+        });
+    </script>
     <script>
         // slid halaman detail
         const tabs = document.querySelectorAll('.custom-nav-link-descripsi');
@@ -1247,23 +1723,6 @@ $apiBaseUrl = env('API_BASE_URL');
                 if (item.textContent.trim() === "Ulasan Terbaru") {
                     item.classList.add('active');
                 }
-            });
-        });
-    </script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const morePhotosBtn = document.getElementById('morePhotosBtn');
-            const reviewPhotosContainer = document.getElementById('reviewPhotos');
-
-            // Jumlah foto yang tersembunyi
-            const hiddenPhotosCount = document.querySelectorAll('.hidden-photos .review-photo-pelanggan').length;
-
-            // Update teks pada overlay sesuai jumlah foto yang tersembunyi
-            morePhotosBtn.textContent = '+' + hiddenPhotosCount;
-
-            // Ketika overlay diklik, tampilkan semua foto tersembunyi
-            morePhotosBtn.addEventListener('click', function() {
-                reviewPhotosContainer.classList.toggle('expanded');
             });
         });
     </script>
@@ -2024,41 +2483,6 @@ $apiBaseUrl = env('API_BASE_URL');
             toastElement.show();
         }
     </script>
-
-
-    <!-- <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const tokenLogin = localStorage.getItem('auth_token');
-            if (!tokenLogin) {
-                window.location.href = '/login';
-                return;
-            }
-
-            const currentPath = window.location.pathname;
-            const parts = currentPath.split('/');
-            const slug = parts[2];
-            const token = parts[3];
-
-            fetch(`${API_BASE_URL}/product/create/cekwishlist/${slug}/${token}`, {
-                method: 'GET',
-                headers: {
-                    'Authorization': 'Bearer ' + tokenLogin
-                }
-                .then(response => response.json())
-                .then(data => {
-                    const icon = document.getElementById('wishlistIcon');
-                    if (data.status === 'success' && data.wishlisted) {
-                        icon.src = 'assets/img/icon/love_wislist.svg';
-                    } else {
-                        icon.src = 'assets/img/icon/love.svg';
-                    }
-                })
-                .catch(error => {
-                    console.error('Gagal cek wishlist:', error);
-                })
-            })
-        });
-    </script> -->
 
     <script>
         document.addEventListener('click', function(e) {

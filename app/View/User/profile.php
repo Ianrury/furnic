@@ -1328,16 +1328,15 @@ $apiBaseUrl = env('API_BASE_URL');
             }
 
             // Add review button for completed orders
-            if (order.status_pesanan === 'completed' && order.isbatal !== 1) {
-                // Check if review already given (this is a placeholder - you'll need to implement the actual check)
-                const hasReviewed = order.hasReviewed || false;
 
-                if (!hasReviewed) {
-                    actionButtons = `<button onclick="openReviewModal('${order.nomor_pesanan}', '${order.payment_token}')" class="btn btn-outline-success mb-2 me-2">Beri Ulasan</button>
-                                    ${actionButtons}`;
+            // Add review button for completed orders
+            if (order.status_pesanan === 'completed' && order.isbatal !== 1) {
+                // Check if review already given using is_review property
+                if (!order.is_review) {
+                    actionButtons = `<button onclick="openReviewModal('${order.payment_token}')" class="btn btn-outline-success mb-2 me-2">Beri Ulasan</button>
+                        ${actionButtons}`;
                 }
             }
-
             return `
         <div class="card mb-3 order-item">
             <div class="card-body">
@@ -1427,31 +1426,8 @@ $apiBaseUrl = env('API_BASE_URL');
         }
 
         // Function to open review modal
-        function openReviewModal(orderNumber, paymentToken) {
-            // Get order details (you might want to fetch specific products to review)
-            $.ajax({
-                url: API_BASE_URL + '/getPesananDetail',
-                type: 'GET',
-                dataType: 'json',
-                data: {
-                    payment_token: paymentToken
-                },
-                headers: {
-                    'Authorization': 'Bearer ' + token
-                },
-                success: function(response) {
-                    if (response.status === 'success') {
-                        showReviewModal(response.data, orderNumber, paymentToken);
-                    } else {
-                        console.error('Terjadi kesalahan:', response.message);
-                        alert('Gagal memuat detail pesanan untuk ulasan');
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.error('Terjadi kesalahan:', error);
-                    alert('Terjadi kesalahan saat memuat detail pesanan');
-                }
-            });
+        function openReviewModal(paymentToken) {
+            window.location.href = `/review/${paymentToken}`;
         }
 
         // Function to show review modal
@@ -1628,7 +1604,7 @@ $apiBaseUrl = env('API_BASE_URL');
                 },
                 success: function(response) {
                     if (response.status === 'success') {
-                        // console.log('Data Pesanan', response.data);
+                        console.log('Data Pesanan', response.data);
                         renderOrders(response.data.semua);
                     } else {
                         console.error('Terjadi kesalahan:', response.message);
