@@ -2089,7 +2089,10 @@ $apiBaseUrl = env('API_BASE_URL');
                 // n lanjutkan jika produk tidak tersedia
             }
             const token = localStorage.getItem('auth_token');
-            if (!token) return;
+            if (!token) {
+                window.location.href = '/login';
+                return;
+            };
 
             fetch(API_BASE_URL + '/createPesanan', {
                     method: 'POST',

@@ -9,7 +9,7 @@ $apiBaseUrl = env('API_BASE_URL');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Halaman Pembayaran - PT Furnice Furnishing Indonesia</title>
+    <title>Halaman Detail - PT Furnice Furnishing Indonesia</title>
 
     <!-- favicon -->
     <link rel="icon" type="image/x-icon" href="assets/img/logo/favicon.png">
@@ -756,7 +756,7 @@ $apiBaseUrl = env('API_BASE_URL');
         </div>
 
         <div class="payment-header">
-            <h1>Halaman Pembayaran</h1>
+            <h1>Halaman Detail</h1>
             <span class="order-number">Order #FF283759</span>
             <span class="status-badge " id="payment-status">Menunggu Pembayaran</span>
         </div>
@@ -797,30 +797,6 @@ $apiBaseUrl = env('API_BASE_URL');
 
             <!-- Informasi rekening bank -->
             <div class="bank-info">
-                <h3>Informasi Rekening</h3>
-                <div class="bank-detail">
-                    <div class="bank-detail-label">Bank</div>
-                    <div class="bank-detail-value">
-                        <img src="assets/img/logo/bca.png" width="60" height="30" alt="BCA Logo" class="bank-logo">
-                        BCA
-                    </div>
-                </div>
-                <div class="bank-detail">
-                    <div class="bank-detail-label">Nama Rekening</div>
-                    <div class="bank-detail-value">PT Furnice Furnishing Indonesia</div>
-                </div>
-                <div class="bank-detail">
-                    <div class="bank-detail-label">No. Rekening</div>
-                    <div class="bank-detail-value">
-                        <span id="account-number">8840123456</span>
-                        <button class="copy-button" onclick="copyToClipboard('account-number')">
-                            <i class="fas fa-copy"></i> Salin
-                        </button>
-                        <span class="copy-success" id="copy-success-account">
-                            <i class="fas fa-check-circle"></i> Disalin!
-                        </span>
-                    </div>
-                </div>
                 <div class="bank-detail">
                     <div class="bank-detail-label">Nominal</div>
                     <div class="bank-detail-value">
@@ -869,73 +845,6 @@ $apiBaseUrl = env('API_BASE_URL');
                     </div>
                 </div>
             </div>
-        </div>
-
-        <!-- Form konfirmasi pembayaran -->
-        <div class="form-section">
-            <h3>Konfirmasi Pembayaran</h3>
-            <form id="payment-form" enctype="multipart/form-data">
-                <div class="mb-3">
-                    <label for="bank" class="form-label">Bank Pengirim</label>
-                    <select id="bank" name="bank" class="form-select" required>
-                        <option value="">Pilih Bank</option>
-                        <option value="bca">BCA</option>
-                        <option value="bni">BNI</option>
-                        <option value="bri">BRI</option>
-                        <option value="mandiri">Mandiri</option>
-                        <option value="other">Lainnya</option>
-                    </select>
-                </div>
-
-                <div class="mb-3" id="otherBankContainer" style="display: none;">
-                    <label for="otherBank" class="form-label">Nama Bank Lainnya</label>
-                    <input type="text" id="otherBank" name="other_bank" class="form-control"
-                        placeholder="Masukkan nama bank">
-                </div>
-
-                <div class="mb-3">
-                    <label for="accountNumber" class="form-label">Nomor Rekening Pengirim</label>
-                    <input type="text" id="accountNumber" name="account_number" class="form-control"
-                        placeholder="Masukkan nomor rekening" required>
-                </div>
-
-                <div class="mb-3">
-                    <label for="accountName" class="form-label">Nama Pemilik Rekening</label>
-                    <input type="text" id="accountName" name="account_name" class="form-control"
-                        placeholder="Masukkan nama pemilik rekening" required>
-                </div>
-
-                <div class="mb-3">
-                    <label for="amount" class="form-label">Jumlah Transfer (Rp)</label>
-                    <input type="text" id="amount" name="amount" class="form-control"
-                        placeholder="Masukkan jumlah transfer" value="" required>
-                </div>
-
-                <div class="mb-4">
-                    <label class="form-label">Bukti Pembayaran</label>
-                    <div class="file-upload">
-                        <label for="paymentProof" class="file-upload-label">
-                            <div class="file-upload-icon">
-                                <i class="fas fa-cloud-upload-alt"></i>
-                                <span>Unggah Bukti Pembayaran</span>
-                            </div>
-                        </label>
-                        <input type="file" id="paymentProof" name="payment_proof" accept="image/*" required>
-                    </div>
-                    <div id="filePreview" class="file-preview">
-                        <i class="fas fa-file-image file-preview-icon"></i>
-                        <div class="file-preview-details">
-                            <div class="file-preview-name" id="fileName">bukti_transfer.jpg</div>
-                            <div class="file-preview-size" id="fileSize">320 KB</div>
-                        </div>
-                        <i class="fas fa-times file-preview-remove" id="removeFile"></i>
-                    </div>
-                </div>
-
-                <button type="submit" id="confirmPayment" class="btn btn-primary w-100 cek-bayar">
-                    <i class="fas fa-check-circle me-2"></i>Konfirmasi Pembayaran
-                </button>
-            </form>
         </div>
     </div>
 
@@ -1051,192 +960,6 @@ $apiBaseUrl = env('API_BASE_URL');
                 let value = $(this).val().replace(/\D/g, '');
                 let formatted = value.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
                 $(this).val(formatted);
-            });
-
-            // Submit form dengan SweetAlert konfirmasi
-            $('#payment-form').on('submit', function(e) {
-                e.preventDefault();
-
-                Swal.fire({
-                    title: 'Konfirmasi Pembayaran?',
-                    text: "Pastikan semua data sudah benar!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonText: 'Ya, kirim!',
-                    cancelButtonText: 'Batal',
-                    reverseButtons: true
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        let form = $('#payment-form')[0];
-                        let formData = new FormData(form);
-
-                        // Ganti bank jika "Lainnya"
-                        if ($('#bank').val() === 'other') {
-                            formData.set('bank', $('#otherBank').val());
-                        }
-
-                        // Hapus titik dari nominal sebelum dikirim
-                        let cleanAmount = $('#amount').val().replace(/\./g, '');
-                        formData.set('amount', cleanAmount);
-                        const pathSegments = window.location.pathname.split('/');
-                        const token = pathSegments[pathSegments.length - 1] || '';
-
-                        $(document).ready(function() {
-                            // Tampilkan input nama bank jika pilih "Lainnya"
-                            $('#bank').on('change', function() {
-                                if ($(this).val() === 'other') {
-                                    $('#otherBankContainer').show();
-                                } else {
-                                    $('#otherBankContainer').hide();
-                                }
-                            });
-
-                            // Dapatkan nilai subtotal dari elemen HTML
-                            const subtotalText = $('.order-total-value').text().trim();
-                            const subtotalValue = parseInt(subtotalText.replace(/[^0-9]/g, ''));
-
-                            // Format input amount saat diketik dan validasi tidak melebihi subtotal
-                            $('#amount').on('input', function() {
-                                let value = $(this).val().replace(/\D/g, '');
-                                let numValue = parseInt(value || '0');
-
-                                // Batasi nilai maksimum ke subtotal
-                                if (numValue > subtotalValue) {
-                                    numValue = subtotalValue;
-                                    value = String(subtotalValue);
-
-                                    // Tampilkan pesan error
-                                    if (!$('#amount-error').length) {
-                                        $(this).after('<div id="amount-error" class="text-danger small mt-1">Jumlah transfer tidak boleh melebihi subtotal</div>');
-                                    }
-                                } else {
-                                    $('#amount-error').remove();
-                                }
-
-                                let formatted = numValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-                                $(this).val(formatted);
-                            });
-
-                            // Validasi format file upload
-                            $('#paymentProof').on('change', function() {
-                                const file = this.files[0];
-                                if (file) {
-                                    // Tampilkan preview file
-                                    const fileName = file.name;
-                                    const fileSize = Math.round(file.size / 1024) + ' KB';
-                                    $('#fileName').text(fileName);
-                                    $('#fileSize').text(fileSize);
-                                    $('#filePreview').show();
-
-                                    // Validasi format file
-                                    const validExtensions = ['jpg', 'jpeg', 'png'];
-                                    const fileExtension = fileName.split('.').pop().toLowerCase();
-
-                                    if (!validExtensions.includes(fileExtension)) {
-                                        Swal.fire({
-                                            title: 'Format File Tidak Valid',
-                                            text: 'Hanya file JPG dan PNG yang diperbolehkan',
-                                            icon: 'error',
-                                            confirmButtonText: 'OK'
-                                        });
-
-                                        // Reset input file
-                                        $(this).val('');
-                                        $('#filePreview').hide();
-                                    }
-                                } else {
-                                    $('#filePreview').hide();
-                                }
-                            });
-
-                            // Hapus file
-                            $('#removeFile').on('click', function() {
-                                $('#paymentProof').val('');
-                                $('#filePreview').hide();
-                            });
-
-                            // Submit form dengan SweetAlert konfirmasi
-                            $('#payment-form').on('submit', function(e) {
-                                e.preventDefault();
-
-                                // Validasi jumlah transfer tidak melebihi subtotal
-                                const amountValue = parseInt($('#amount').val().replace(/\./g, '') || '0');
-                                if (amountValue > subtotalValue) {
-                                    Swal.fire('Error', 'Jumlah transfer tidak boleh melebihi subtotal', 'error');
-                                    return false;
-                                }
-
-                                // Validasi format file
-                                const file = $('#paymentProof')[0].files[0];
-                                if (file) {
-                                    const validExtensions = ['jpg', 'jpeg', 'png'];
-                                    const fileExtension = file.name.split('.').pop().toLowerCase();
-
-                                    if (!validExtensions.includes(fileExtension)) {
-                                        Swal.fire('Error', 'Hanya file JPG dan PNG yang diperbolehkan', 'error');
-                                        return false;
-                                    }
-                                }
-
-                                Swal.fire({
-                                    title: 'Konfirmasi Pembayaran?',
-                                    text: "Pastikan semua data sudah benar!",
-                                    icon: 'warning',
-                                    showCancelButton: true,
-                                    confirmButtonText: 'Ya, kirim!',
-                                    cancelButtonText: 'Batal',
-                                    reverseButtons: true
-                                }).then((result) => {
-                                    if (result.isConfirmed) {
-                                        let form = $('#payment-form')[0];
-                                        let formData = new FormData(form);
-
-                                        // Ganti bank jika "Lainnya"
-                                        if ($('#bank').val() === 'other') {
-                                            formData.set('bank', $('#otherBank').val());
-                                        }
-
-                                        // Hapus titik dari nominal sebelum dikirim
-                                        let cleanAmount = $('#amount').val().replace(/\./g, '');
-                                        formData.set('amount', cleanAmount);
-                                        const pathSegments = window.location.pathname.split('/');
-                                        const token = pathSegments[pathSegments.length - 1] || '';
-
-                                        $.ajax({
-                                            url: API_BASE_URL + `/store-pembayaran/${token}`,
-                                            type: 'POST',
-                                            data: formData,
-                                            contentType: false,
-                                            processData: false,
-                                            cache: false,
-                                            beforeSend: function() {
-                                                $('#confirmPayment').prop('disabled', true).text('Mengirim...');
-                                            },
-                                            success: function(response) {
-                                                Swal.fire({
-                                                    title: 'Berhasil!',
-                                                    text: 'Pembayaran telah dikirim.',
-                                                    icon: 'success',
-                                                    confirmButtonText: 'OK'
-                                                }).then((result) => {
-                                                    // Ketika user menekan tombol OK atau SweetAlert ditutup
-                                                    window.location.href = '/product'; // Redirect ke halaman product
-                                                });
-
-                                                $('#payment-form')[0].reset();
-                                                $('#otherBankContainer').hide();
-                                            },
-                                            error: function(xhr) {
-                                                Swal.fire('Gagal!', 'Terjadi kesalahan saat mengirim pembayaran.', 'error');
-                                                $('#confirmPayment').prop('disabled', false).text('Konfirmasi Pembayaran');
-                                            }
-                                        });
-                                    }
-                                });
-                            });
-                        });
-                    }
-                });
             });
         });
     </script>
@@ -1422,7 +1145,7 @@ $apiBaseUrl = env('API_BASE_URL');
             <div class="error-message">
                 Token pembayaran tidak valid. Silakan periksa URL atau hubungi customer service.
             </div>
-        `;
+         `;
                 return;
             }
 
@@ -1461,12 +1184,14 @@ $apiBaseUrl = env('API_BASE_URL');
 
                             // Nonaktifkan tombol konfirmasi jika status adalah "konfirmasi"
                             const confirmButton = document.querySelector('.cek-bayar');
-                            if (confirmButton && result.data.status === 'konfirmasi') {
-                                confirmButton.disabled = true;
-                                confirmButton.classList.add('disabled');
-                                confirmButton.title = 'Pembayaran sudah dikonfirmasi';
-                                window.location.href = '/product';
+                            const deadlineInfo = document.querySelector('.deadline-info');
+                            const bankinfo = document.querySelector('.bank-info');
+                            if (deadlineInfo && bankinfo) {
+                                deadlineInfo.style.display = 'none';
+                                bankinfo.style.display = 'none';
+                                // confirmButton.disabled = result.data.status === 'waiting';
                             }
+                         
                         }
                     } else {
                         throw new Error(result.message || 'Gagal memuat data pembayaran.');
@@ -1479,7 +1204,7 @@ $apiBaseUrl = env('API_BASE_URL');
             <div class="error-message">
                 ${error.message || 'Terjadi kesalahan saat memuat data pembayaran.'}
             </div>
-        `;
+         `;
                 });
 
         }

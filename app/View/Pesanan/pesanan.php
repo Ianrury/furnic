@@ -813,7 +813,7 @@ $apiBaseUrl = env('API_BASE_URL');
                             ${item.nama_product}
                         </h5>
                         <p class="name-keranjang">
-                        ${truncateWords(item.deskripsi, 10)}
+                        ${truncateWords(item.deskripsi, 6)}
                         </p>
                         <ul class="list-unstyled m-0 p-0">
                             <li class="motif-keranjang">

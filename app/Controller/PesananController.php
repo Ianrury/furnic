@@ -43,7 +43,7 @@ class PesananController
         // if (session_status() === PHP_SESSION_NONE) {
         //     session_start();
         // }
-  
+
         // $jenisPengiriman = $this->productServiser->GetPengiriman();
         // $toko = $this->productServiser->getAllToko();
 
@@ -98,29 +98,29 @@ class PesananController
         //         cart.qty AS qty_cart,
         //         cart.id_detail_product,
         //         cart.id_motif_produk,
-                
+
         //         detail_product.warna,
         //         motif_produk.motif,
         //         motif_produk.qty AS qty_motif,
-    
+
         //         product.id_product,
         //         product.nama_product,
         //         product.deskripsi,
         //         product.harga,
-                
+
         //         -- Jika promo aktif, gunakan promo.total_promo sebagai diskon, kalau tidak, 0
         //         CASE 
         //             WHEN promo.id_promo IS NOT NULL 
         //                 THEN promo.total_promo 
         //             ELSE 0 
         //         END AS diskon,
-                
+
         //         product.spesifikasi,
         //         product.foto,
         //         product.qty AS stok,
         //         product.uom,
         //         product.nama_vendor
-    
+
         //     FROM cart
         //     INNER JOIN product ON cart.id_product = product.id_product
         //     LEFT JOIN promo ON product.id_promo = promo.id_promo 
@@ -605,6 +605,22 @@ class PesananController
         ]);
     }
 
+    public function review()
+    {
+        $model = [
+            "title" => "review",
+            "content" => "Welcome to the Pesanan Detail page!",
+        ];
+        View::render('Pesanan/review', $model);
+    }
+    public function pesananDetail()
+    {
+        $model = [
+            "title" => "Detail Pesanan",
+            "content" => "Welcome to the Pesanan Detail page!",
+        ];
+        View::render('Pesanan/detail-pesanan', $model);
+    }
     public function pembayaran()
     {
         $model = [

@@ -9183,6 +9183,35 @@ label {
   margin-right: 16px;
 }
 
+.auth-login-container {
+  position: relative;
+  display: inline-block;
+}
+
+.auth-login-button-3 {
+  font-size: 13px;
+  background-color: #2b4779;
+  color: #ffffff;
+  padding: 4px 18px;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(43, 71, 121, 0.35);
+}
+
+.auth-login-button-3:hover {
+  background-color: #1e3359;
+  box-shadow: 0 4px 12px rgba(43, 71, 121, 0.5);
+}
+
+.auth-login-button-3 .auth-login-icon {
+  margin-right: 6px;
+  height: 14px;
+  width: 14px;
+}
 #category-list li:last-child {
   margin-right: 0;
 }

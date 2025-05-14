@@ -745,6 +745,16 @@ class ProductController
         View::render('Lokasi/lokasi', $model);
     }
 
+    public function lokasiDetail()
+    {
+        $alamat = $_GET['lokasi'];
+        $model = [
+            'title' => $alamat,
+            'content' => 'Welcome to the product lokasi detail page!',
+        ];
+        View::render('Lokasi/detail_alamat', $model);
+    }
+
     public function card_pesanan()
     {
         $pesanan = $this->productServiser->getallPesanan();

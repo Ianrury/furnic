@@ -270,9 +270,9 @@ $apiBaseUrl = env('API_BASE_URL');
                                 <a class="nav-link mb-2" href="#alamat-tersimpan" data-bs-toggle="tab">
                                     <i class="fas fa-map-marker-alt me-2"></i>Alamat Tersimpan
                                 </a>
-                                <a class="nav-link mb-2" href="#pembayaran" data-bs-toggle="tab">
+                                <!-- <a class="nav-link mb-2" href="#pembayaran" data-bs-toggle="tab">
                                     <i class="fas fa-credit-card me-2"></i>Metode Pembayaran
-                                </a>
+                                </a> -->
                                 <a class="nav-link mb-2" id="nav-akun-tab" href="#pengaturan-akun" data-bs-toggle="tab">
                                     <i class="fas fa-shield-alt me-2"></i>Keamanan Akun
                                 </a>
@@ -812,8 +812,8 @@ $apiBaseUrl = env('API_BASE_URL');
                         <div class="card-footer d-flex justify-content-between">
                             <button class="btn btn-sm btn-primary tombol-edit" data-bs-toggle="modal" data-bs-target="#editAlamatModal" data-id="${alamat.id}">Edit</button>
                             <button class="btn btn-sm btn-outline-danger tombol-delete" data-id="${alamat.id}">
-    <i class="fas fa-trash"></i>
-</button>
+            <i class="fas fa-trash"></i>
+        </button>
                         </div>
                     </div>
                 </div>
@@ -1120,13 +1120,13 @@ $apiBaseUrl = env('API_BASE_URL');
                 function showToast(message, type = 'danger') {
                     const toastId = 'toast-' + Date.now();
                     const toastHTML = `
-    <div id="${toastId}" class="toast align-items-center text-bg-${type} border-0 shadow" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="3000">
-        <div class="d-flex">
-            <div class="toast-body">${message}</div>
-            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-        </div>
-    </div>
-    `;
+                <div id="${toastId}" class="toast align-items-center text-bg-${type} border-0 shadow" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="3000">
+                    <div class="d-flex">
+                        <div class="toast-body">${message}</div>
+                        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                </div>
+                `;
 
                     const toastContainer = document.getElementById('toastContainer');
                     toastContainer.insertAdjacentHTML('beforeend', toastHTML);
@@ -1299,7 +1299,7 @@ $apiBaseUrl = env('API_BASE_URL');
                         badgeClass = 'bg-info';
                         badgeText = 'Konfirmasi';
                         break;
-                    case 'shipped':
+                    case 'dikirim':
                         badgeClass = 'bg-warning text-dark';
                         badgeText = 'Dikirim';
                         break;
@@ -1315,6 +1315,28 @@ $apiBaseUrl = env('API_BASE_URL');
             const productDescription = productNames.length > 1 ?
                 `${productNames[0]} + ${productNames.length - 1} produk lainnya` :
                 productNames[0];
+
+            // Determine action buttons based on order status
+            let actionButtons = `<a href="/detail/pesanan/${order.payment_token}">
+                                    <button class="btn btn-primary">Detail</button>
+                                 </a>`;
+
+            // Add payment button for waiting orders
+            if (order.status_pesanan === 'waiting' && order.isbatal !== 1) {
+                actionButtons = `<button onclick="goToPayment('${order.payment_token}')" class="btn btn-outline-primary mb-2 me-2">Bayar</button>
+                                ${actionButtons}`;
+            }
+
+            // Add review button for completed orders
+            if (order.status_pesanan === 'completed' && order.isbatal !== 1) {
+                // Check if review already given (this is a placeholder - you'll need to implement the actual check)
+                const hasReviewed = order.hasReviewed || false;
+
+                if (!hasReviewed) {
+                    actionButtons = `<button onclick="openReviewModal('${order.nomor_pesanan}', '${order.payment_token}')" class="btn btn-outline-success mb-2 me-2">Beri Ulasan</button>
+                                    ${actionButtons}`;
+                }
+            }
 
             return `
         <div class="card mb-3 order-item">
@@ -1332,11 +1354,7 @@ $apiBaseUrl = env('API_BASE_URL');
                         </div>
                     </div>
                     <div class="col-md-4 text-md-end mt-3 mt-md-0">
-                        ${(order.status_pesanan === 'waiting' && order.isbatal !== 1) 
-                            ? `<button onclick="goToPayment('${order.payment_token}')" class="btn btn-outline-primary mb-2 me-2">Bayar</button>` 
-                            : ''
-                        }
-                        <button class="btn btn-primary">Detail</button>
+                        ${actionButtons}
                     </div>
                 </div>
             </div>
@@ -1351,7 +1369,7 @@ $apiBaseUrl = env('API_BASE_URL');
                 'all': document.getElementById('all-orders-container'),
                 'pending': document.getElementById('pending-orders-container'),
                 'konfirmasi': document.getElementById('confirmed-orders-container'),
-                'shipped': document.getElementById('shipped-orders-container'),
+                'dikirim': document.getElementById('shipped-orders-container'),
                 'completed': document.getElementById('completed-orders-container'),
                 'canceled': document.getElementById('canceled-orders-container')
             };
@@ -1360,7 +1378,7 @@ $apiBaseUrl = env('API_BASE_URL');
                 'all': document.getElementById('all-orders-count'),
                 'pending': document.getElementById('pending-orders-count'),
                 'konfirmasi': document.getElementById('confirmed-orders-count'),
-                'shipped': document.getElementById('shipped-orders-count'),
+                'dikirim': document.getElementById('shipped-orders-count'),
                 'completed': document.getElementById('completed-orders-count'),
                 'canceled': document.getElementById('canceled-orders-count')
             };
@@ -1375,7 +1393,7 @@ $apiBaseUrl = env('API_BASE_URL');
                 'all': orders,
                 'pending': orders.filter(o => o.status_pesanan === 'waiting' && o.isbatal !== 1),
                 'konfirmasi': orders.filter(o => o.status_pesanan === 'konfirmasi' && o.isbatal !== 1),
-                'shipped': orders.filter(o => o.status_pesanan === 'shipped' && o.isbatal !== 1),
+                'dikirim': orders.filter(o => o.status_pesanan === 'dikirim' && o.isbatal !== 1),
                 'completed': orders.filter(o => o.status_pesanan === 'completed' && o.isbatal !== 1),
                 'canceled': orders.filter(o => o.isbatal === 1)
             };
@@ -1408,6 +1426,197 @@ $apiBaseUrl = env('API_BASE_URL');
             window.location.href = `/pembayaran/${token}`;
         }
 
+        // Function to open review modal
+        function openReviewModal(orderNumber, paymentToken) {
+            // Get order details (you might want to fetch specific products to review)
+            $.ajax({
+                url: API_BASE_URL + '/getPesananDetail',
+                type: 'GET',
+                dataType: 'json',
+                data: {
+                    payment_token: paymentToken
+                },
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                },
+                success: function(response) {
+                    if (response.status === 'success') {
+                        showReviewModal(response.data, orderNumber, paymentToken);
+                    } else {
+                        console.error('Terjadi kesalahan:', response.message);
+                        alert('Gagal memuat detail pesanan untuk ulasan');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Terjadi kesalahan:', error);
+                    alert('Terjadi kesalahan saat memuat detail pesanan');
+                }
+            });
+        }
+
+        // Function to show review modal
+        function showReviewModal(orderData, orderNumber, paymentToken) {
+            // Create modal content with products to review
+            let productsHtml = '';
+
+            orderData.products.forEach((product, index) => {
+                productsHtml += `
+                <div class="review-product-item mb-3 p-3 border rounded">
+                    <div class="d-flex">
+                        <img src="${product.foto_produk}" class="me-3 rounded" alt="${product.nama_product}" width="80" height="80">
+                        <div>
+                            <h6>${product.nama_product}</h6>
+                            <div class="mb-2">
+                                <div class="rating-stars" id="rating-${index}">
+                                    <i class="fas fa-star rating-star" data-value="1"></i>
+                                    <i class="fas fa-star rating-star" data-value="2"></i>
+                                    <i class="fas fa-star rating-star" data-value="3"></i>
+                                    <i class="fas fa-star rating-star" data-value="4"></i>
+                                    <i class="fas fa-star rating-star" data-value="5"></i>
+                                    <input type="hidden" name="product_rating_${product.id}" id="product-rating-${index}" value="0">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <textarea class="form-control" id="review-text-${index}" placeholder="Bagaimana pengalaman Anda menggunakan produk ini?" rows="2"></textarea>
+                                <input type="hidden" name="product_id_${index}" value="${product.id}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                `;
+            });
+
+            // Create and show modal
+            const modalHtml = `
+            <div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="reviewModalLabel">Beri Ulasan Untuk Pesanan #${orderNumber}</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="review-form">
+                                <input type="hidden" name="order_number" value="${orderNumber}">
+                                <input type="hidden" name="payment_token" value="${paymentToken}">
+                                
+                                ${productsHtml}
+                                
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                            <button type="button" class="btn btn-primary" id="submit-review">Kirim Ulasan</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            `;
+
+            // Append modal to body if it doesn't exist
+            if ($('#reviewModal').length === 0) {
+                $('body').append(modalHtml);
+            } else {
+                $('#reviewModal').replaceWith(modalHtml);
+            }
+
+            // Initialize modal
+            const reviewModal = new bootstrap.Modal(document.getElementById('reviewModal'));
+            reviewModal.show();
+
+            // Handle star rating
+            $('.rating-star').on('click', function() {
+                const value = $(this).data('value');
+                const ratingContainer = $(this).parent();
+                const hiddenInput = ratingContainer.find('input[type="hidden"]');
+
+                // Update hidden input value
+                hiddenInput.val(value);
+
+                // Update stars UI
+                ratingContainer.find('.rating-star').each(function() {
+                    if ($(this).data('value') <= value) {
+                        $(this).addClass('text-warning');
+                    } else {
+                        $(this).removeClass('text-warning');
+                    }
+                });
+            });
+
+            // Handle form submission
+            $('#submit-review').on('click', function() {
+                submitReview(orderData);
+            });
+        }
+
+        // Function to submit review
+        function submitReview(orderData) {
+            // Collect review data
+            const reviews = [];
+            let isValid = true;
+
+            orderData.products.forEach((product, index) => {
+                const rating = parseInt($(`#product-rating-${index}`).val());
+                const reviewText = $(`#review-text-${index}`).val().trim();
+
+                // Validate
+                if (rating === 0) {
+                    alert(`Mohon berikan rating untuk produk "${product.nama_product}"`);
+                    isValid = false;
+                    return false;
+                }
+
+                if (reviewText === '') {
+                    alert(`Mohon berikan ulasan untuk produk "${product.nama_product}"`);
+                    isValid = false;
+                    return false;
+                }
+
+                reviews.push({
+                    product_id: product.id,
+                    rating: rating,
+                    review: reviewText
+                });
+            });
+
+            if (!isValid) return;
+
+            const reviewData = {
+                order_number: $('#review-form input[name="order_number"]').val(),
+                payment_token: $('#review-form input[name="payment_token"]').val(),
+                reviews: reviews
+            };
+
+            // Submit to API
+            $.ajax({
+                url: API_BASE_URL + '/submitReview',
+                type: 'POST',
+                dataType: 'json',
+                contentType: 'application/json',
+                data: JSON.stringify(reviewData),
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                },
+                success: function(response) {
+                    if (response.status === 'success') {
+                        // Close modal and reload orders
+                        const reviewModal = bootstrap.Modal.getInstance(document.getElementById('reviewModal'));
+                        reviewModal.hide();
+
+                        alert('Terima kasih! Ulasan Anda telah berhasil dikirim.');
+                        fetchOrders(); // Refresh orders list
+                    } else {
+                        console.error('Terjadi kesalahan:', response.message);
+                        alert('Gagal mengirim ulasan: ' + response.message);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Terjadi kesalahan:', error);
+                    alert('Terjadi kesalahan saat mengirim ulasan');
+                }
+            });
+        }
+
         // Fetch orders function
         function fetchOrders() {
             $.ajax({
@@ -1419,7 +1628,7 @@ $apiBaseUrl = env('API_BASE_URL');
                 },
                 success: function(response) {
                     if (response.status === 'success') {
-                        console.log('Data Pesanan', response.data.semua);
+                        // console.log('Data Pesanan', response.data);
                         renderOrders(response.data.semua);
                     } else {
                         console.error('Terjadi kesalahan:', response.message);
@@ -1436,6 +1645,26 @@ $apiBaseUrl = env('API_BASE_URL');
         // Call fetch orders when page loads
         $(document).ready(function() {
             fetchOrders();
+
+            // Make sure Bootstrap 5 CSS and Font Awesome 5 are included in your HTML file
+            // For rating stars styling
+            const style = document.createElement('style');
+            style.textContent = `
+                .rating-stars {
+                    cursor: pointer;
+                    font-size: 1.5rem;
+                }
+                .rating-star {
+                    color: #ccc;
+                }
+                .rating-star.text-warning {
+                    color: #ffc107;
+                }
+                .review-product-item {
+                    background-color: #f8f9fa;
+                }
+            `;
+            document.head.appendChild(style);
         });
     </script>
     <script>

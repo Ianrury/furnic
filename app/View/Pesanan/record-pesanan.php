@@ -465,7 +465,7 @@ $apiBaseUrl = env('API_BASE_URL');
                 warna: 'success',
                 ikon: 'fa-truck'
             },
-            'selesai': {
+            'completed': {
                 label: 'Selesai',
                 warna: 'success',
                 ikon: 'fa-check-double'
@@ -827,6 +827,7 @@ $apiBaseUrl = env('API_BASE_URL');
             success: function(response) {
                 if (response.status === 'success') {
                     tampilkanDaftarPesanan(response.data);
+                    // console
                 } else {
                     $('#pemesanan_list').html(`
                 <div class="alert alert-danger" role="alert">

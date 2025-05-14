@@ -110,7 +110,7 @@ function is_active($route)
                                     </a>
 
                                     <!-- Dropdown Menu -->
-                                    <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0 custom-dropdown">
+                                    <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0 custom-dropdown"> 
                                         <li>
                                             <a class="dropdown-item d-flex align-items-center gap-2" href="/profile">
                                                 <i class="fas fa-user-circle text-primary"></i> Profile
@@ -120,6 +120,14 @@ function is_active($route)
                                             <a class="dropdown-item d-flex align-items-center gap-2"
                                                 href="/pesanan/detail">
                                                 <i class="fas fa-box text-success"></i> Pesanan
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <hr class="dropdown-divider">
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item d-flex align-items-center gap-2" href="#" id="logoutButton">
+                                                <i class="fas fa-sign-out-alt text-danger"></i> Logout
                                             </a>
                                         </li>
                                     </ul>
@@ -139,6 +147,18 @@ function is_active($route)
                                     </a>
                                 </li>
 
+                                <li class="auth-login-container" style="position: relative;">
+                                    <div class="auth-login-container" style="position: relative;">
+                                        <a href="/login" class="auth-login-button-3">
+                                            <svg class="auth-login-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+                                                <polyline points="10 17 15 12 10 7"></polyline>
+                                                <line x1="15" y1="12" x2="3" y2="12"></line>
+                                            </svg>
+                                            Login
+                                        </a>
+                                    </div>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -281,5 +301,44 @@ function is_active($route)
                 window.location.href = targetUrl;
             }
         });
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const token = localStorage.getItem('auth_token');
+
+        if (token) {
+            // Sembunyikan elemen login jika token tidak ada
+            const loginContainer = document.querySelector('.auth-login-container');
+            if (loginContainer) {
+                loginContainer.style.display = 'none';
+            }
+
+            // Alternatif jika ada multiple elemen dengan class yang sama
+            const loginContainers = document.querySelectorAll('.auth-login-container');
+            loginContainers.forEach(container => {
+                container.style.display = 'none';
+            });
+
+            // Jika ingin menyembunyikan elemen li parent
+            const loginLi = document.querySelector('li.auth-login-container');
+            if (loginLi) {
+                loginLi.style.display = 'none';
+            }
+        }
+    });
+    document.addEventListener('DOMContentLoaded', function() {
+        const logoutButton = document.getElementById('logoutButton');
+
+        if (logoutButton) {
+            logoutButton.addEventListener('click', function(e) {
+                e.preventDefault();
+
+                // Hapus token dari localStorage
+                localStorage.removeItem('auth_token');
+
+                // Redirect langsung ke halaman login
+                window.location.href = '/login';
+            });
+        }
     });
 </script>

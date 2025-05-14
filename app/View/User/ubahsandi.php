@@ -1,5 +1,8 @@
 <?php
 $token = $_GET['token'] ?? null;
+require_once __DIR__ . '/../../app/env.php';
+$apiBaseUrl = env('API_BASE_URL');
+
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -459,9 +462,12 @@ $token = $_GET['token'] ?? null;
 
     <!-- Bootstrap JS dan Popper.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const API_BASE_URL = "<?= $apiBaseUrl ?>";
+    </script>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             const passwordInput = document.getElementById('newPassword');
             const toggleButton = document.getElementById('togglePassword');
             const strengthBar = document.getElementById('passwordStrength');
@@ -531,7 +537,7 @@ $token = $_GET['token'] ?? null;
             }
 
             // Toggle password visibility
-            toggleButton.addEventListener('click', function () {
+            toggleButton.addEventListener('click', function() {
                 const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
                 passwordInput.setAttribute('type', type);
 
@@ -542,7 +548,7 @@ $token = $_GET['token'] ?? null;
             });
 
             // Password strength check
-            passwordInput.addEventListener('input', function () {
+            passwordInput.addEventListener('input', function() {
                 const password = passwordInput.value;
                 passwordFeedback.style.display = 'block';
 
@@ -593,7 +599,7 @@ $token = $_GET['token'] ?? null;
             });
 
             // Form submission with AJAX
-            form.addEventListener('submit', function (e) {
+            form.addEventListener('submit', function(e) {
                 e.preventDefault();
 
                 // Show loading state
@@ -605,10 +611,10 @@ $token = $_GET['token'] ?? null;
                 const formData = new FormData(form);
 
                 // Send AJAX request
-                fetch('/reset-password', {
-                    method: 'POST',
-                    body: formData
-                })
+                fetch(API_BASE_URL + '/reset-password', {
+                        method: 'POST',
+                        body: formData
+                    })
                     .then(response => response.json())
                     .then(data => {
                         if (data.success) {
@@ -623,7 +629,7 @@ $token = $_GET['token'] ?? null;
                             successAnimation.style.display = 'block';
 
                             // Optional: redirect to login page after delay
-                            setTimeout(function () {
+                            setTimeout(function() {
                                 window.location.href = '/login';
                             }, 5000);
                         } else {

@@ -122,17 +122,16 @@ $apiBaseUrl = env('API_BASE_URL');
                                     MASUK
                                 </button>
 
-
                                 <!-- Register Button -->
                                 <button type="button" class="btn btn-daftar w-100">
                                     <a href="/register">REGISTER</a>
                                 </button>
                                 <hr class="hr-tebal">
                                 <!-- Google Login Button -->
-                                <button type="button" class="btn btn-google w-100">
+                                <!-- <button type="button" class="btn btn-google w-100">
                                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" alt="Google logo">
                                     Continue with Google
-                                </button>
+                                </button> -->
 
                                 <!-- Help Text -->
                                 <div class="help-text">

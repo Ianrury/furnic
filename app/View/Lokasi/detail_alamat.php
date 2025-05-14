@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/../../app/env.php';
 $apiBaseUrl = env('API_BASE_URL');
+$lokasi_store = $_GET['lokasi'];
 
 ?>
 
@@ -112,75 +113,149 @@ $apiBaseUrl = env('API_BASE_URL');
 
     <main class="main">
 
-        <!-- blog area -->
-        <div class="blog-area py-100">
-            <div class="container">
+        <!-- shop-area -->
+        <?php if ($lokasi_store == 'Alam Sutera') { ?>
+            <div class="container pt-90 pb-90">
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="site-heading text-left">
-                            <h2 class="site-title">Lokasi Store Kami</h2>
+                            <h2 class="site-title">Furnice <?= $lokasi_store ?></h2>
                         </div>
                     </div>
                 </div>
-                <div class="row g-4">
-                    <div class="col-md-6 col-lg-4">
-                        <div class="blog-item wow fadeInUp" data-wow-delay=".25s">
-                            <div class="blog-item-img">
-                                <img src="assets/img/lokasistore/3.jpg" alt="Thumb">
-                            </div>
-                            <div class="blog-item-info">
-                                <div class="blog-item-meta">
-
+                <div class="shop-item-wrap item-list">
+                    <div class="row g-4">
+                        <div class="col-md-12">
+                            <div class="product-item">
+                                <div class="row">
+                                    <div class="col-7">
+                                        <div class="product-img" style="width: 90%;">
+                                            <img class="img-fluid" src="assets/img/lokasistore/3.jpg" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="col-5">
+                                        <div class="product-content">
+                                            <h3 class="product-title text-dark">Selamat Datang di Furnice Alam Sutera</h3>
+                                            <p>Di Alam Sutera Yogyakarta, Anda akan menemukan lebih dari 55 solusi ruangan yang diatur secara cerdas dan tiga rumah lengkap penuh inspirasi, semua terdapat di dalam toko yang berdiri dalam bangunan dua tingkat. Meliputi 35.000 meter persegi, termasuk sebuah restoran dengan 700 kursi dan lebih dari 1.000 ruang parkir, untuk mengubah rumah Anda menjadi tempat yang paling penting di dunia.​</p>
+                                        </div>
+                                    </div>
                                 </div>
-                                <h4 class="blog-title">
-                                    <a href="#">Furnice Alam Sutera</a>
-                                </h4>
-                                <p>Ayo Berkunjung di Store Kami</p>
-                                <a class="theme-btn" href="/lokasi_store_detail?lokasi=<?= 'Alam Sutera'; ?>">Lihat Selengkapnya<i class="fas fa-arrow-right"></i></a>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-lg-4">
-                        <div class="blog-item wow fadeInDown" data-wow-delay=".25s">
-                            <div class="blog-item-img">
-                                <img src="assets/img/brand/1.jpg" alt="Thumb">
-                            </div>
-                            <div class="blog-item-info">
-                                <div class="blog-item-meta">
-
-                                </div>
-                                <h4 class="blog-title">
-                                    <a href="#">Furnice Yogyakarta</a>
-                                </h4>
-                                <p>Ayo Berkunjung di Store Kami</p>
-                                <a class="theme-btn" href="/lokasi_store_detail?lokasi=<?= 'Yogyakarta'; ?>">Lihat Selengkapnya<i class="fas fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4">
-                        <div class="blog-item wow fadeInUp" data-wow-delay=".25s">
-                            <div class="blog-item-img">
-                                <img style="opacity: 0.5;" src="assets/img/coming-soon/01.jpg" alt="Thumb">
-                                <div class="category-label" style="position: absolute;bottom: 20px;left: 50%;transform: translateX(-50%);background: white;padding: 10px 15px;border-radius: 25px;font-weight: bold;text-align: center;box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);color:red;">Coming Soon</div>
-
-                            </div>
-                            <div class="blog-item-info">
-                                <div class="blog-item-meta">
-
-                                </div>
-                                <h4 class="blog-title">
-                                    <a href="#">Furnice Cibubur</a>
-                                </h4>
-                                <p>Ayo Berkunjung di Store Kami</p>
-                                <a class="theme-btn" href="#">Lihat Selengkapnya<i class="fas fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
+
+                <!-- detail alamat -->
+                <div class="container">
+                    <div class="row g-4">
+                        <div class="col-6">
+                            <div class="pt-20">
+                                <ul>
+                                    <li class="text-dark fw-bold" style="text-decoration: underline;">Jam Operasional</li>
+                                    <li>Senin - Minggu & libur nasional: 10.00 - 22.00 WIB</li>
+                                </ul>
+                                <ul>
+                                    <li class="text-dark fw-bold" style="text-decoration: underline;">Store</li>
+                                    <li>Senin - Minggu: 10.00 - 22.00 WIB</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="pt-20">
+                                <ul>
+                                    <li class="text-dark fw-bold" style="text-decoration: underline;">Alamat</li>
+                                    <li>Alam Sutera, Jl. Lingkar Barat No.15 Ruko Westonlane, Panunggangan Tim., Kec. Pinang, Kota Tangerang, Banten 15143</li>
+                                </ul>
+                                <ul>
+                                    <li class="text-dark fw-bold" style="text-decoration: underline;">Hubungi Kami</li>
+                                    <li>Phone: 08119018800</li>
+                                    <li>email: furnicefurnishing.alamsutera@gmail.com</li>
+                                </ul>
+                            </div>
+                            <div class="contact-map container pt-20 pb-50 border-1">
+                                <iframe width="100%" height="500" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
+                                    src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDR-V1XgHw6Z98uRP_szB4qodB47Bstyqw&q=-6.228995493490095, 106.65250814142586">
+                                </iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- detail alamat end -->
+
             </div>
-        </div>
-        <!-- blog area end -->
+        <?php } elseif ($lokasi_store == 'Yogyakarta') { ?>
+            <div class="container pt-90 pb-90">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="site-heading text-left">
+                            <h2 class="site-title">Furnice <?= $lokasi_store ?></h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="shop-item-wrap item-list">
+                    <div class="row g-4">
+                        <div class="col-md-12">
+                            <div class="product-item">
+                                <div class="row">
+                                    <div class="col-7">
+                                        <div class="product-img" style="width: 90%;">
+                                            <img class="img-fluid" src="assets/img/brand/1.jpg" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="col-5">
+                                        <div class="product-content">
+                                            <h3 class="product-title text-dark">Selamat Datang di Furnice Yogyakarta</h3>
+                                            <p>Di Furnice Yogyakarta, Anda akan menemukan lebih dari 55 solusi ruangan yang diatur secara cerdas dan tiga rumah lengkap penuh inspirasi, semua terdapat di dalam toko yang berdiri dalam bangunan dua tingkat. Meliputi 35.000 meter persegi, termasuk sebuah restoran dengan 700 kursi dan lebih dari 1.000 ruang parkir, untuk mengubah rumah Anda menjadi tempat yang paling penting di dunia.​</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- detail alamat -->
+                <div class="container">
+                    <div class="row g-4">
+                        <div class="col-6">
+                            <div class="pt-20">
+                                <ul>
+                                    <li class="text-dark fw-bold" style="text-decoration: underline;">Jam Operasional</li>
+                                    <li>Senin - Minggu & libur nasional: 10.00 - 22.00 WIB</li>
+                                </ul>
+                                <ul>
+                                    <li class="text-dark fw-bold" style="text-decoration: underline;">Store</li>
+                                    <li>Senin - Minggu: 10.00 - 22.00 WIB</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="pt-20">
+                                <ul>
+                                    <li class="text-dark fw-bold" style="text-decoration: underline;">Alamat</li>
+                                    <li>Jl. Magelang No.Km. 11, Dukuh, Tridadi, Kec. Sleman, Kabupaten Sleman, Daerah Istimewa Yogyakarta 55511</li>
+                                </ul>
+                                <ul>
+                                    <li class="text-dark fw-bold" style="text-decoration: underline;">Hubungi Kami</li>
+                                    <li>Phone: 08119018800</li>
+                                    <li>email: furnicefurnishing.alamsutera@gmail.com</li>
+                                </ul>
+                            </div>
+                            <div class="contact-map container pt-20 pb-50 border-1">
+                                <iframe width="100%" height="500" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
+                                    src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDR-V1XgHw6Z98uRP_szB4qodB47Bstyqw&q=-7.710176066990484, 110.35623262452886">
+                                </iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- detail alamat end -->
+
+            </div>
+        <?php } ?>
+
+        <!-- shop-area end -->
+
 
     </main>
 
@@ -188,59 +263,6 @@ $apiBaseUrl = env('API_BASE_URL');
     <?php include __DIR__ . '/../templates/footer.php'; ?>
     <!-- footer area end -->
 
-
-    <!-- modal quick shop-->
-    <div class="modal quickview fade" id="quickview" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="quickview" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i
-                        class="far fa-xmark"></i></button>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-                            <img src="assets/img/product/04.png" alt="#">
-                        </div>
-                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-                            <div class="quickview-content">
-                                <h4 class="quickview-title">Simple Denim Chair</h4>
-                                <div class="quickview-rating">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star-half-alt"></i>
-                                    <i class="far fa-star"></i>
-                                    <span class="rating-count"> (4 Customer Reviews)</span>
-                                </div>
-                                <div class="quickview-price">
-                                    <h5><del>$860</del><span>$740</span></h5>
-                                </div>
-                                <ul class="quickview-list">
-                                    <li>Brand:<span>Ricordi</span></li>
-                                    <li>Category:<span>Living Room</span></li>
-                                    <li>Stock:<span class="stock">Available</span></li>
-                                    <li>Code:<span>789FGSA</span></li>
-                                </ul>
-                                <div class="quickview-cart">
-                                    <a href="#" class="theme-btn">Add to cart</a>
-                                </div>
-                                <div class="quickview-social">
-                                    <span>Share:</span>
-                                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                                    <a target="_blank" href="https://www.instagram.com/furnicefurnishing/"><i
-                                            class="fab fa-instagram"></i></a>
-                                    <a href="#"><i class="fab fa-pinterest-p"></i></a>
-                                    <a href="#"><i class="fab fa-instagram"></i></a>
-                                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- modal quick shop end -->
 
 
     <!-- js -->

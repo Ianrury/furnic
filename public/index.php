@@ -51,6 +51,7 @@ Router::add('POST', '/filter/pencarian', ProductController::class, 'filterProduc
 
 
 Router::add('GET', '/lokasi', ProductController::class, 'lokasi');
+Router::add('GET', '/lokasi_store_detail', ProductController::class, 'lokasiDetail');
 
 Router::add('GET', '/pesanan/detail', ProductController::class, 'card_pesanan');
 
@@ -73,6 +74,10 @@ Router::add('GET', '/pembayaran/{token}', PesananController::class, 'pembayaran'
 Router::add('GET', '/get-limit-payment', PesananController::class, 'cekWaktuPesanan');
 Router::add('GET', '/get-batal-pesanan', PesananController::class, 'batalPesanan');
 Router::add('GET', '/product/{slug}/{token}', ProductController::class, 'detailProduct');
+
+Router::add('GET', '/detail/pesanan/{token}', PesananController::class, 'pesananDetail');
+Router::add('GET', '/review/{token}', PesananController::class, 'review');
+
 
 
 // Wislist Product cekWaktuPesanan

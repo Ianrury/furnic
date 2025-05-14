@@ -1,3 +1,14 @@
+<?php
+function base_url($path = '')
+{
+    return '/' . ltrim($path, '/');
+}
+require_once __DIR__ . '/../../app/env.php';
+$apiBaseUrl = env('API_BASE_URL');
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="id">
 
@@ -335,7 +346,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        const API_BASE_URL = "<?= $apiBaseUrl ?>";
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
             const form = document.getElementById('forgotPasswordForm');
             const loadingOverlay = document.getElementById('loadingOverlay');
 
@@ -379,7 +393,7 @@
 
                 // Add close functionality
                 const closeButton = toastContainer.querySelector('.toast-close');
-                closeButton.addEventListener('click', function () {
+                closeButton.addEventListener('click', function() {
                     toastContainer.remove();
                 });
 
@@ -397,7 +411,7 @@
             }
 
             // Handle form submission
-            form.addEventListener('submit', function (e) {
+            form.addEventListener('submit', function(e) {
                 e.preventDefault();
 
                 // Show loading overlay
@@ -407,14 +421,14 @@
                 const email = document.getElementById('email').value;
 
                 // Make AJAX request
-                fetch('/forgot-password', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                        'X-Requested-With': 'XMLHttpRequest'
-                    },
-                    body: `email=${encodeURIComponent(email)}`
-                })
+                fetch( API_BASE_URL + '/forgot-password', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                            'X-Requested-With': 'XMLHttpRequest'
+                        },
+                        body: `email=${encodeURIComponent(email)}`
+                    })
                     .then(response => response.json())
                     .then(data => {
                         // Hide loading overlay
