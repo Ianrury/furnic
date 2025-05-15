@@ -502,7 +502,7 @@ $apiBaseUrl = env('API_BASE_URL');
                 })
                 .then(response => response.json())
                 .then(result => {
-                    console.log(result.data);
+                    // console.log(result.data);
                     // Update the UI to reflect the new primary address
                     const allRadios = document.querySelectorAll('input[name="lokasi_alamat"]');
                     allRadios.forEach(radio => {
@@ -543,7 +543,7 @@ $apiBaseUrl = env('API_BASE_URL');
                 })
                 .then(response => response.json())
                 .then(result => {
-                    console.log(result.data);
+                    // console.log(result.data);
                     displayAddresses(result.data);
                 })
                 .catch(error => {
@@ -581,7 +581,7 @@ $apiBaseUrl = env('API_BASE_URL');
                 buttonSpinner.style.display = 'inline-block';
 
                 const token = localStorage.getItem('auth_token');
-                console.log(token);
+                // console.log(token);
                 if (!token) {
                     window.location.href = '/login';
                     return;
@@ -688,7 +688,7 @@ $apiBaseUrl = env('API_BASE_URL');
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const token = localStorage.getItem('auth_token');
-            console.log(token);
+            // console.log(token);
             if (!token) {
                 window.location.href = '/login';
                 return;
@@ -701,7 +701,7 @@ $apiBaseUrl = env('API_BASE_URL');
                 window.location.href = '/product';
                 return;
             }
-            console.log(cartIds);
+            // console.log(cartIds);
 
             fetch(`${API_BASE_URL}/pesanan/index?cart_ids=${cartIds}`, {
                     method: 'GET',
@@ -717,13 +717,6 @@ $apiBaseUrl = env('API_BASE_URL');
                         console.error("User data is missing or undefined");
                         return;
                     }
-
-                    console.log("User:", data.user);
-                    console.log("Products:", data.products);
-                    console.log("Pengiriman:", data.jenisPengiriman);
-                    console.log("subtotal:", data.subtotal);
-                    console.log("total_diskon:", data.total_diskon);
-                    console.log("total_pembayaran:", data.total_pembayaran);
 
                     // Fill user data
                     populateUserData(data.user);
@@ -754,7 +747,7 @@ $apiBaseUrl = env('API_BASE_URL');
                 // }
 
                 // Submit payment logic here
-                console.log('Processing payment with toko:', idToko, 'pengiriman:', idPengiriman);
+                // console.log('Processing payment with toko:', idToko, 'pengiriman:', idPengiriman);
                 // Add your payment processing code
             });
         });
