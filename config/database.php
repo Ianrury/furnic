@@ -10,9 +10,9 @@ function getDatabaseConfig(): array
                 "password" => "",
             ],
             "production" => [
-                "url" => "mysql:host=192.168.1.238;port=9356;dbname=web-furnice",
-                "username" => "dev_programmer",
-                "password" => "BismillahLancar8*#",
+                "url" => "mysql:host=localhost;dbname=php_furnic_test",
+                "username" => "root",
+                "password" => "",
             ],
         ]
     ];

@@ -15,7 +15,7 @@ use Importa\Furnic\PHP\FFI\Middleware\MustNotLoginMiddleware;
 use Importa\Furnic\PHP\FFI\Middleware\MustLoginMiddleware;
 
 
-Database::getConnection('test');
+Database::getConnection('production');
 
 // Controller HomeController
 Router::add('GET', '/', HomeController::class, 'index');
@@ -60,8 +60,8 @@ Router::add('GET', '/pesanan/detail', ProductController::class, 'card_pesanan');
 // Contooller kerangjang 
 Router::add('GET', '/keranjang', KeranjangController::class, 'index');
 Router::add('POST', '/keranjang', KeranjangController::class, 'createKeranjang');
-Router::add('POST', '/deletekeranjang', KeranjangController::class, 'deleteKeranjang'); 
-Router::add('POST', '/cekquantity', KeranjangController::class, 'cekQuantity'); 
+Router::add('POST', '/deletekeranjang', KeranjangController::class, 'deleteKeranjang');
+Router::add('POST', '/cekquantity', KeranjangController::class, 'cekQuantity');
 Router::add('POST', '/pleskeranjang', KeranjangController::class, 'PlesQtyKeranjang');
 Router::add('POST', '/minuskeranjang', KeranjangController::class, 'MinusQtyKeranjang');
 Router::add('POST', '/createPesanan', KeranjangController::class, 'createPesanan');
