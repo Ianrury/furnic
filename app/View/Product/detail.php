@@ -277,7 +277,7 @@ $apiBaseUrl = env('API_BASE_URL');
                                 </div>
                                 <div>
                                     <small id="stock" class="fst-italic text-black" style="font-size: 14px;">Tersedia
-                                        <span class="text-black">0</span> pcs</small>
+                                        <span class="text-black">0</span> <span id="satuan">pcs</span></small>
                                 </div>
                             </div>
                         </div>
@@ -1777,6 +1777,8 @@ $apiBaseUrl = env('API_BASE_URL');
                             console.log('Produk detail:', data.data);
                             document.getElementById('nama_breadcrumb').innerHTML = data.data.nama_product
                             document.getElementById('id_product').value = data.data.id_product;
+                            // console.log('satuan', data.data.uom);
+                            document.getElementById('satuan').innerHTML = data.data.uom;
 
                             // Simpan data ke model global
                             $model.detail = data.data;
@@ -2023,7 +2025,7 @@ $apiBaseUrl = env('API_BASE_URL');
 
             const stockElement = document.getElementById('stock');
             if (stockElement) {
-                stockElement.innerHTML = `Tersedia <span class="text-black">${qty}</span> pcs`;
+                stockElement.innerHTML = `Tersedia <span class="text-black">${qty}</span> `;
             }
 
             const jumlahBeli = document.getElementById('jumlah-beli');

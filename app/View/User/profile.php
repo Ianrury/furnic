@@ -964,23 +964,23 @@ $apiBaseUrl = env('API_BASE_URL');
                                         class="img-fluid rounded-start h-100 object-fit-cover"
                                         alt="${product.nama_product}">
                                 </div>
-                                <div class="col-8">
-                                    <div class="card-body">
-                                        <h6 class="card-title">${product.nama_product}</h6>
-                                        <div class="d-flex align-items-center mb-2">
-                                            <span class="text-warning me-1"><i class="fas fa-star"></i></span>
-                                            <span>4.9 (120 ulasan)</span>
-                                        </div>
-                                        <p class="card-text text-primary fw-bold mb-3">Rp ${formatRupiah(product.harga)}</p>
-                                        <div class="d-flex">
-                                            <button class="btn btn-sm btn-primary me-2 product-card" data-id="${product.id_product}" data-slug="${product.slug}" 
-                       data-token="${product.token}" style="cursor:pointer;">Tambah ke Keranjang</button>
-                                            <button class="btn btn-sm btn-outline-danger tombol-delete-wishlist" data-id_product="${product.id_product}">
-                      <i class="fas fa-trash"></i>
-                           </button>
-                                        </div>
-                                    </div>
-                                </div>
+                               <div class="col-8">
+    <div class="card-body">
+        <h6 class="card-title">${product.nama_product}</h6>
+        <div class="d-flex align-items-center mb-2">
+            <span class="text-warning me-1"><i class="fas fa-star"></i></span>
+            <span>${parseFloat(product.avg_rating).toFixed(1)} (${product.review_count} ulasan)</span>
+        </div>
+        <p class="card-text text-primary fw-bold mb-3">Rp ${formatRupiah(product.harga)}</p>
+        <div class="d-flex">
+            <button class="btn btn-sm btn-primary me-2 product-card" data-id="${product.id_product}" data-slug="${product.slug}" 
+                data-token="${product.token}" style="cursor:pointer;">Tambah ke Keranjang</button>
+            <button class="btn btn-sm btn-outline-danger tombol-delete-wishlist" data-id_product="${product.id_product}">
+                <i class="fas fa-trash"></i>
+            </button>
+        </div>
+    </div>
+</div>
                             </div>
                         </div>
                     </div>`;
@@ -1295,6 +1295,10 @@ $apiBaseUrl = env('API_BASE_URL');
                         badgeClass = 'bg-primary';
                         badgeText = 'Menunggu Pembayaran';
                         break;
+                    case 'menunggu verifikasi':
+                        badgeClass = 'bg-info';
+                        badgeText = 'Menunggu Verifikasi';
+                        break;
                     case 'konfirmasi':
                         badgeClass = 'bg-info';
                         badgeText = 'Konfirmasi';
@@ -1322,12 +1326,10 @@ $apiBaseUrl = env('API_BASE_URL');
                                  </a>`;
 
             // Add payment button for waiting orders
-            if (order.status_pesanan === 'waiting' && order.isbatal !== 1) {
+            if (order.status_pesanan === 'waiting' && order.status_pembayaran !== 'sudah bayar' && order.isbatal !== 1) {
                 actionButtons = `<button onclick="goToPayment('${order.payment_token}')" class="btn btn-outline-primary mb-2 me-2">Bayar</button>
                                 ${actionButtons}`;
             }
-
-            // Add review button for completed orders
 
             // Add review button for completed orders
             if (order.status_pesanan === 'completed' && order.isbatal !== 1) {
@@ -1338,7 +1340,7 @@ $apiBaseUrl = env('API_BASE_URL');
                 }
             }
             return `
-        <div class="card mb-3 order-item">
+         <div class="card mb-3 order-item">
             <div class="card-body">
                 <div class="row align-items-center">
                     <div class="col-md-8">
@@ -1357,11 +1359,10 @@ $apiBaseUrl = env('API_BASE_URL');
                     </div>
                 </div>
             </div>
-        </div>
-     `;
+            </div>
+         `;
         }
 
-        // Function to render orders
         function renderOrders(orders) {
             // Reset containers and counts
             const containers = {
@@ -1370,7 +1371,8 @@ $apiBaseUrl = env('API_BASE_URL');
                 'konfirmasi': document.getElementById('confirmed-orders-container'),
                 'dikirim': document.getElementById('shipped-orders-container'),
                 'completed': document.getElementById('completed-orders-container'),
-                'canceled': document.getElementById('canceled-orders-container')
+                'canceled': document.getElementById('canceled-orders-container'),
+                'verification': document.getElementById('verification-orders-container')
             };
 
             const countElements = {
@@ -1379,7 +1381,8 @@ $apiBaseUrl = env('API_BASE_URL');
                 'konfirmasi': document.getElementById('confirmed-orders-count'),
                 'dikirim': document.getElementById('shipped-orders-count'),
                 'completed': document.getElementById('completed-orders-count'),
-                'canceled': document.getElementById('canceled-orders-count')
+                'canceled': document.getElementById('canceled-orders-count'),
+                'verification': document.getElementById('verification-orders-count')
             };
 
             // Clear previous content
@@ -1390,7 +1393,11 @@ $apiBaseUrl = env('API_BASE_URL');
             // Group orders by status
             const groupedOrders = {
                 'all': orders,
-                'pending': orders.filter(o => o.status_pesanan === 'waiting' && o.isbatal !== 1),
+                // Change this line to include both 'waiting' and 'menunggu verifikasi' in pending
+                'pending': orders.filter(o => (o.status_pesanan === 'waiting' && o.status_pembayaran !== 'sudah bayar') ||
+                    (o.status_pesanan === 'menunggu verifikasi') && o.isbatal !== 1),
+                // Remove the verification group or use it for something else if needed
+                'verification': orders.filter(o => false), // This will create an empty array
                 'konfirmasi': orders.filter(o => o.status_pesanan === 'konfirmasi' && o.isbatal !== 1),
                 'dikirim': orders.filter(o => o.status_pesanan === 'dikirim' && o.isbatal !== 1),
                 'completed': orders.filter(o => o.status_pesanan === 'completed' && o.isbatal !== 1),

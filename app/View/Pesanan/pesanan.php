@@ -555,7 +555,7 @@ $apiBaseUrl = env('API_BASE_URL');
                         return;
                     }
                     console.error('Error:', error);
-                    alert('Terjadi kesalahan saat mengambil data alamat');
+                    // alert('Terjadi kesalahan saat mengambil data alamat');
                 });
         });
     </script>

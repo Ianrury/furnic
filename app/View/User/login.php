@@ -109,12 +109,12 @@ $apiBaseUrl = env('API_BASE_URL');
                                 </div>
 
                                 <!-- Remember Me Checkbox -->
-                                <div class="checkbox-wrapper">
+                                <!-- <div class="checkbox-wrapper">
                                     <div class="form-check">
                                         <input type="checkbox" class="form-check-input" id="remember">
                                         <label class="form-check-label text-tetap text-black" for="remember" style="font-size: 14px;">Tetap Login</label>
                                     </div>
-                                </div>
+                                </div> -->
 
                                 <!-- Login Button -->
                                 <button type="submit" class="btn btn-masuk w-100" id="btnLogin">
@@ -200,8 +200,21 @@ $apiBaseUrl = env('API_BASE_URL');
                     if (response.success) {
                         localStorage.setItem('auth_token', response.token);
                         showToast(response.message, 'success');
+
                         setTimeout(() => {
-                            window.location.href = "/";
+                            const referrer = document.referrer;
+                            const currentHost = window.location.origin;
+                            if (referrer && referrer.startsWith(currentHost)) {
+                                const referrerPath = new URL(referrer).pathname;
+
+                                if (referrerPath.includes('/register')) {
+                                    window.location.href = "/";
+                                } else {
+                                    window.history.back();
+                                }
+                            } else {
+                                window.location.href = "/";
+                            }
                         }, 2000);
                     } else {
                         showToast(response.message || 'Login gagal.', 'danger');

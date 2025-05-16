@@ -757,8 +757,8 @@ $apiBaseUrl = env('API_BASE_URL');
 
         <div class="payment-header">
             <h1>Halaman Pembayaran</h1>
-            <span class="order-number">Order #FF283759</span>
-            <span class="status-badge " id="payment-status">Menunggu Pembayaran</span>
+            <span class="order-number">Order #0</span>
+            <span class="status-badge " id="payment-status">-</span>
         </div>
 
         <div class="payment-section">
@@ -775,17 +775,17 @@ $apiBaseUrl = env('API_BASE_URL');
                     <div class="deadline-title">Batas Waktu Pembayaran</div>
                     <div class="deadline-time" id="countdown">
                         <div class="timer-unit">
-                            <span id="hours" class="timer-digit">23</span>
+                            <span id="hours" class="timer-digit">0</span>
                             <span class="timer-label">Jam</span>
                         </div>
                         <div class="timer-separator">:</div>
                         <div class="timer-unit">
-                            <span id="minutes" class="timer-digit">45</span>
+                            <span id="minutes" class="timer-digit">0</span>
                             <span class="timer-label">Menit</span>
                         </div>
                         <div class="timer-separator">:</div>
                         <div class="timer-unit">
-                            <span id="seconds" class="timer-digit">18</span>
+                            <span id="seconds" class="timer-digit">0</span>
                             <span class="timer-label">Detik</span>
                         </div>
                     </div>
@@ -824,7 +824,7 @@ $apiBaseUrl = env('API_BASE_URL');
                 <div class="bank-detail">
                     <div class="bank-detail-label">Nominal</div>
                     <div class="bank-detail-value">
-                        <span id="nominal-transfer">8.750.000</span>
+                        <span id="nominal-transfer">-</span>
                         <button class="copy-button" onclick="copyToClipboard('nominal-transfer')">
                             <i class="fas fa-copy"></i> Salin
                         </button>
@@ -841,31 +841,31 @@ $apiBaseUrl = env('API_BASE_URL');
                 <div class="order-item">
                     <img src="/api/placeholder/70/70" alt="Produk" class="order-item-image">
                     <div class="order-item-details">
-                        <div class="order-item-name">Sofa Scandinavian 3 Seater</div>
-                        <div class="order-item-variant">Warna: Abu-abu, Material: Fabric</div>
-                        <div class="order-item-price">IDR 6.500.000</div>
+                        <div class="order-item-name">-</div>
+                        <div class="order-item-variant">-</div>
+                        <div class="order-item-price">IDR 0</div>
                     </div>
                 </div>
                 <div class="order-item">
                     <img src="/api/placeholder/70/70" alt="Produk" class="order-item-image">
                     <div class="order-item-details">
-                        <div class="order-item-name">Coffee Table Minimalis</div>
-                        <div class="order-item-variant">Material: Kayu Jati, Finishing: Natural</div>
-                        <div class="order-item-price">IDR 1.750.000</div>
+                        <div class="order-item-name">-</div>
+                        <div class="order-item-variant">-</div>
+                        <div class="order-item-price">IDR 0</div>
                     </div>
                 </div>
                 <div class="order-totals">
                     <div class="order-total-row">
                         <div class="order-total-label">Subtotal</div>
-                        <div class="order-total-value">IDR 8.250.000</div>
+                        <div class="order-total-value">IDR -</div>
                     </div>
                     <div class="order-diskon-row">
                         <div class="order-diskon-label">Diskon</div>
-                        <div class="order-diskon-value">IDR 500.000</div>
+                        <div class="order-diskon-value">IDR -</div>
                     </div>
                     <div class="order-grand-total">
                         <div class="order-grand-total-label">Total</div>
-                        <div class="order-grand-total-value">IDR 8.750.000</div>
+                        <div class="order-grand-total-value">IDR -</div>
                     </div>
                 </div>
             </div>
@@ -1037,6 +1037,9 @@ $apiBaseUrl = env('API_BASE_URL');
     </script>
     <script>
         $(document).ready(function() {
+            const pathSegments = window.location.pathname.split('/');
+            const token = pathSegments[pathSegments.length - 1] || '';
+
             // Tampilkan input nama bank jika pilih "Lainnya"
             $('#bank').on('change', function() {
                 if ($(this).val() === 'other') {
@@ -1046,16 +1049,78 @@ $apiBaseUrl = env('API_BASE_URL');
                 }
             });
 
-            // Format input amount saat diketik
+            // Format input nominal dan validasi tidak melebihi subtotal
+            const subtotalText = $('.order-total-value').text().trim();
+            const subtotalValue = parseInt(subtotalText.replace(/[^0-9]/g, ''));
+
             $('#amount').on('input', function() {
                 let value = $(this).val().replace(/\D/g, '');
-                let formatted = value.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+                let numValue = parseInt(value || '0');
+
+                if (numValue > subtotalValue) {
+                    numValue = subtotalValue;
+                    value = String(subtotalValue);
+
+                    if (!$('#amount-error').length) {
+                        $(this).after('<div id="amount-error" class="text-danger small mt-1">Jumlah transfer tidak boleh melebihi subtotal</div>');
+                    }
+                } else {
+                    $('#amount-error').remove();
+                }
+
+                let formatted = numValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
                 $(this).val(formatted);
             });
 
-            // Submit form dengan SweetAlert konfirmasi
+            // Validasi dan preview file bukti pembayaran
+            $('#paymentProof').on('change', function() {
+                const file = this.files[0];
+                if (file) {
+                    const fileName = file.name;
+                    const fileSize = Math.round(file.size / 1024) + ' KB';
+                    $('#fileName').text(fileName);
+                    $('#fileSize').text(fileSize);
+                    $('#filePreview').show();
+
+                    const validExtensions = ['jpg', 'jpeg', 'png'];
+                    const fileExtension = fileName.split('.').pop().toLowerCase();
+
+                    if (!validExtensions.includes(fileExtension)) {
+                        Swal.fire('Format File Tidak Valid', 'Hanya file JPG dan PNG yang diperbolehkan', 'error');
+                        $(this).val('');
+                        $('#filePreview').hide();
+                    }
+                } else {
+                    $('#filePreview').hide();
+                }
+            });
+
+            // Hapus file bukti
+            $('#removeFile').on('click', function() {
+                $('#paymentProof').val('');
+                $('#filePreview').hide();
+            });
+
+            // Submit form
             $('#payment-form').on('submit', function(e) {
                 e.preventDefault();
+
+                const amountValue = parseInt($('#amount').val().replace(/\./g, '') || '0');
+                if (amountValue > subtotalValue) {
+                    Swal.fire('Error', 'Jumlah transfer tidak boleh melebihi subtotal', 'error');
+                    return;
+                }
+
+                const file = $('#paymentProof')[0].files[0];
+                if (file) {
+                    const validExtensions = ['jpg', 'jpeg', 'png'];
+                    const fileExtension = file.name.split('.').pop().toLowerCase();
+
+                    if (!validExtensions.includes(fileExtension)) {
+                        Swal.fire('Error', 'Hanya file JPG dan PNG yang diperbolehkan', 'error');
+                        return;
+                    }
+                }
 
                 Swal.fire({
                     title: 'Konfirmasi Pembayaran?',
@@ -1067,179 +1132,49 @@ $apiBaseUrl = env('API_BASE_URL');
                     reverseButtons: true
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        let form = $('#payment-form')[0];
-                        let formData = new FormData(form);
+                        const form = $('#payment-form')[0];
+                        const formData = new FormData(form);
 
-                        // Ganti bank jika "Lainnya"
                         if ($('#bank').val() === 'other') {
                             formData.set('bank', $('#otherBank').val());
                         }
 
-                        // Hapus titik dari nominal sebelum dikirim
-                        let cleanAmount = $('#amount').val().replace(/\./g, '');
-                        formData.set('amount', cleanAmount);
-                        const pathSegments = window.location.pathname.split('/');
-                        const token = pathSegments[pathSegments.length - 1] || '';
+                        formData.set('amount', amountValue);
 
-                        $(document).ready(function() {
-                            // Tampilkan input nama bank jika pilih "Lainnya"
-                            $('#bank').on('change', function() {
-                                if ($(this).val() === 'other') {
-                                    $('#otherBankContainer').show();
-                                } else {
-                                    $('#otherBankContainer').hide();
-                                }
-                            });
-
-                            // Dapatkan nilai subtotal dari elemen HTML
-                            const subtotalText = $('.order-total-value').text().trim();
-                            const subtotalValue = parseInt(subtotalText.replace(/[^0-9]/g, ''));
-
-                            // Format input amount saat diketik dan validasi tidak melebihi subtotal
-                            $('#amount').on('input', function() {
-                                let value = $(this).val().replace(/\D/g, '');
-                                let numValue = parseInt(value || '0');
-
-                                // Batasi nilai maksimum ke subtotal
-                                if (numValue > subtotalValue) {
-                                    numValue = subtotalValue;
-                                    value = String(subtotalValue);
-
-                                    // Tampilkan pesan error
-                                    if (!$('#amount-error').length) {
-                                        $(this).after('<div id="amount-error" class="text-danger small mt-1">Jumlah transfer tidak boleh melebihi subtotal</div>');
-                                    }
-                                } else {
-                                    $('#amount-error').remove();
-                                }
-
-                                let formatted = numValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-                                $(this).val(formatted);
-                            });
-
-                            // Validasi format file upload
-                            $('#paymentProof').on('change', function() {
-                                const file = this.files[0];
-                                if (file) {
-                                    // Tampilkan preview file
-                                    const fileName = file.name;
-                                    const fileSize = Math.round(file.size / 1024) + ' KB';
-                                    $('#fileName').text(fileName);
-                                    $('#fileSize').text(fileSize);
-                                    $('#filePreview').show();
-
-                                    // Validasi format file
-                                    const validExtensions = ['jpg', 'jpeg', 'png'];
-                                    const fileExtension = fileName.split('.').pop().toLowerCase();
-
-                                    if (!validExtensions.includes(fileExtension)) {
-                                        Swal.fire({
-                                            title: 'Format File Tidak Valid',
-                                            text: 'Hanya file JPG dan PNG yang diperbolehkan',
-                                            icon: 'error',
-                                            confirmButtonText: 'OK'
-                                        });
-
-                                        // Reset input file
-                                        $(this).val('');
-                                        $('#filePreview').hide();
-                                    }
-                                } else {
-                                    $('#filePreview').hide();
-                                }
-                            });
-
-                            // Hapus file
-                            $('#removeFile').on('click', function() {
-                                $('#paymentProof').val('');
-                                $('#filePreview').hide();
-                            });
-
-                            // Submit form dengan SweetAlert konfirmasi
-                            $('#payment-form').on('submit', function(e) {
-                                e.preventDefault();
-
-                                // Validasi jumlah transfer tidak melebihi subtotal
-                                const amountValue = parseInt($('#amount').val().replace(/\./g, '') || '0');
-                                if (amountValue > subtotalValue) {
-                                    Swal.fire('Error', 'Jumlah transfer tidak boleh melebihi subtotal', 'error');
-                                    return false;
-                                }
-
-                                // Validasi format file
-                                const file = $('#paymentProof')[0].files[0];
-                                if (file) {
-                                    const validExtensions = ['jpg', 'jpeg', 'png'];
-                                    const fileExtension = file.name.split('.').pop().toLowerCase();
-
-                                    if (!validExtensions.includes(fileExtension)) {
-                                        Swal.fire('Error', 'Hanya file JPG dan PNG yang diperbolehkan', 'error');
-                                        return false;
-                                    }
-                                }
-
+                        $.ajax({
+                            url: API_BASE_URL + `/store-pembayaran/${token}`,
+                            type: 'POST',
+                            data: formData,
+                            contentType: false,
+                            processData: false,
+                            cache: false,
+                            beforeSend: function() {
+                                $('#confirmPayment').prop('disabled', true).text('Mengirim...');
+                            },
+                            success: function(response) {
                                 Swal.fire({
-                                    title: 'Konfirmasi Pembayaran?',
-                                    text: "Pastikan semua data sudah benar!",
-                                    icon: 'warning',
-                                    showCancelButton: true,
-                                    confirmButtonText: 'Ya, kirim!',
-                                    cancelButtonText: 'Batal',
-                                    reverseButtons: true
-                                }).then((result) => {
-                                    if (result.isConfirmed) {
-                                        let form = $('#payment-form')[0];
-                                        let formData = new FormData(form);
-
-                                        // Ganti bank jika "Lainnya"
-                                        if ($('#bank').val() === 'other') {
-                                            formData.set('bank', $('#otherBank').val());
-                                        }
-
-                                        // Hapus titik dari nominal sebelum dikirim
-                                        let cleanAmount = $('#amount').val().replace(/\./g, '');
-                                        formData.set('amount', cleanAmount);
-                                        const pathSegments = window.location.pathname.split('/');
-                                        const token = pathSegments[pathSegments.length - 1] || '';
-
-                                        $.ajax({
-                                            url: API_BASE_URL + `/store-pembayaran/${token}`,
-                                            type: 'POST',
-                                            data: formData,
-                                            contentType: false,
-                                            processData: false,
-                                            cache: false,
-                                            beforeSend: function() {
-                                                $('#confirmPayment').prop('disabled', true).text('Mengirim...');
-                                            },
-                                            success: function(response) {
-                                                Swal.fire({
-                                                    title: 'Berhasil!',
-                                                    text: 'Pembayaran telah dikirim.',
-                                                    icon: 'success',
-                                                    confirmButtonText: 'OK'
-                                                }).then((result) => {
-                                                    // Ketika user menekan tombol OK atau SweetAlert ditutup
-                                                    window.location.href = '/product'; // Redirect ke halaman product
-                                                });
-
-                                                $('#payment-form')[0].reset();
-                                                $('#otherBankContainer').hide();
-                                            },
-                                            error: function(xhr) {
-                                                Swal.fire('Gagal!', 'Terjadi kesalahan saat mengirim pembayaran.', 'error');
-                                                $('#confirmPayment').prop('disabled', false).text('Konfirmasi Pembayaran');
-                                            }
-                                        });
-                                    }
+                                    title: 'Berhasil!',
+                                    text: 'Pembayaran telah dikirim.',
+                                    icon: 'success',
+                                    confirmButtonText: 'OK'
+                                }).then(() => {
+                                    window.location.href = '/product';
                                 });
-                            });
+
+                                $('#payment-form')[0].reset();
+                                $('#otherBankContainer').hide();
+                            },
+                            error: function(xhr) {
+                                Swal.fire('Gagal!', 'Terjadi kesalahan saat mengirim pembayaran.', 'error');
+                                $('#confirmPayment').prop('disabled', false).html('<i class="fas fa-check-circle me-2"></i>Konfirmasi Pembayaran');
+                            }
                         });
                     }
                 });
             });
         });
     </script>
+
 
     <script>
         // Fungsi untuk format mata uang Rupiah
@@ -1436,8 +1371,39 @@ $apiBaseUrl = env('API_BASE_URL');
                 })
                 .then(result => {
                     console.log(result);
+                    // Ambil elemen input
+                    const amountInput = document.getElementById('amount');
+
+                    // Ambil nilai total belanja
+                    const total = result.data.total_belanja;
+
+                    // Format angka ke format rupiah dengan titik
+                    const formatted = total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
+                    // Set nilai input
+                    amountInput.value = formatted;
+
+                    // Buat input tidak bisa diedit atau diklik
+                    amountInput.readOnly = true; // Tidak bisa diketik
+                    amountInput.style.pointerEvents = 'none'; // Tidak bisa diklik/focus
+                    amountInput.style.backgroundColor = '#f1f1f1'; // Optional: ubah warna agar terlihat disabled
                     // Update status and order number
                     if (result.status === 'success' && result.data) {
+                        // Check if order is canceled or already reviewed
+                        if (result.data.is_batal == 1 || result.data.is_review == 1) {
+                            // Show modal alert for canceled or reviewed
+                            showStatusModal(result.data);
+                            return; // Stop further processing
+                        }
+
+                        // Check if status is "konfirmasi"
+                        if (result.data.status === 'konfirmasi') {
+                            // Show payment confirmation modal
+                            showStatusModal(result.data);
+                            return; // Stop further processing
+                        }
+
+                        // Continue with normal processing if not canceled/reviewed/confirmed
                         // Render ringkasan pesanan
                         renderOrderSummary(result.data);
 
@@ -1459,28 +1425,176 @@ $apiBaseUrl = env('API_BASE_URL');
                                 statusElement.textContent = result.data.status === 'waiting' ? 'Menunggu Pembayaran' : result.data.status;
                             }
 
-                            // Nonaktifkan tombol konfirmasi jika status adalah "konfirmasi"
+                            // Nonaktifkan tombol konfirmasi jika status lain
                             const confirmButton = document.querySelector('.cek-bayar');
-                            if (confirmButton && result.data.status === 'konfirmasi') {
+                            if (confirmButton && result.data.status !== 'waiting') {
                                 confirmButton.disabled = true;
                                 confirmButton.classList.add('disabled');
-                                confirmButton.title = 'Pembayaran sudah dikonfirmasi';
-                                window.location.href = '/product';
+                                confirmButton.title = 'Status pembayaran sudah berubah';
                             }
                         }
                     } else {
                         throw new Error(result.message || 'Gagal memuat data pembayaran.');
                     }
                 })
-                .catch(error => {
-                    console.error('Terjadi kesalahan:', error);
-                    // Tampilkan pesan error ke user
-                    document.querySelector('.order-summary').innerHTML = `
-            <div class="error-message">
-                ${error.message || 'Terjadi kesalahan saat memuat data pembayaran.'}
+
+            // Add this function to show the modal
+            function showStatusModal(data) {
+                // Create modal HTML if it doesn't exist
+                if (!document.getElementById('statusModal')) {
+                    const modalHTML = `
+        <div class="modal fade" id="statusModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="statusModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" style="max-width: 280px;">
+                <div class="modal-content border-0 shadow-lg rounded-4">
+                    <div class="modal-body text-center p-4">
+                        <div class="status-icon mb-3">
+                            <i class="fas fa-info-circle fa-3x text-primary"></i>
+                        </div>
+                        <h5 id="statusMessage" class="mb-2 fw-bold"></h5>
+                        <p id="statusDetail" class="text-muted small mb-3"></p>
+                        <div class="order-info mb-3">
+                            <span class="badge bg-light text-dark">Order #<span id="modalOrderNumber"></span></span>
+                        </div>
+                        <button type="button" class="btn btn-primary w-100" id="backToProductBtn">Kembali ke Produk</button>
+                    </div>
+                </div>
             </div>
+        </div>
         `;
+
+                    // Append modal to body
+                    const modalContainer = document.createElement('div');
+                    modalContainer.innerHTML = modalHTML;
+                    document.body.appendChild(modalContainer.firstElementChild);
+                }
+
+                // Set modal content based on status
+                const modalOrderNumber = document.getElementById('modalOrderNumber');
+                const statusMessage = document.getElementById('statusMessage');
+                const statusDetail = document.getElementById('statusDetail');
+                const statusIcon = document.querySelector('.status-icon i');
+                const backButton = document.getElementById('backToProductBtn');
+
+                if (modalOrderNumber) modalOrderNumber.textContent = data.nomor_pesanan;
+
+                if (data.is_batal == 1) {
+                    // Case: Pesanan dibatalkan
+                    if (statusMessage) statusMessage.textContent = 'Pesanan Dibatalkan';
+                    if (statusDetail) statusDetail.textContent = 'Pesanan ini telah dibatalkan dan tidak dapat diproses lebih lanjut.';
+                    if (statusIcon) {
+                        statusIcon.className = 'fas fa-times-circle fa-3x text-danger';
+                    }
+                } else if (data.is_review == 1) {
+                    // Case: Pesanan sudah direview
+                    if (statusMessage) statusMessage.textContent = 'Pesanan Sudah Direview';
+                    if (statusDetail) statusDetail.textContent = 'Anda telah memberikan review untuk pesanan ini.';
+                    if (statusIcon) {
+                        statusIcon.className = 'fas fa-check-circle fa-3x text-success';
+                    }
+                } else if (data.status === 'konfirmasi') {
+                    // Case: Pesanan sudah dikonfirmasi pembayarannya
+                    if (statusMessage) statusMessage.textContent = 'Pembayaran Dikonfirmasi';
+                    if (statusDetail) statusDetail.textContent = 'Anda sudah membayar. Silahkan menunggu konfirmasi dari admin.';
+                    if (statusIcon) {
+                        statusIcon.className = 'fas fa-money-check-alt fa-3x text-success';
+                    }
+                }
+
+                // Show the modal with animation
+                const statusModal = new bootstrap.Modal(document.getElementById('statusModal'), {
+                    backdrop: 'static',
+                    keyboard: false
                 });
+                statusModal.show();
+
+                // Add entrance animation
+                const modalContent = document.querySelector('.modal-content');
+                if (modalContent) {
+                    modalContent.classList.add('animate__animated', 'animate__zoomIn');
+                    modalContent.addEventListener('animationend', function() {
+                        modalContent.classList.remove('animate__animated', 'animate__zoomIn');
+                    });
+                }
+
+                // Automatically redirect after a short delay
+                setTimeout(() => {
+                    window.location.href = '/product';
+                }, 3000);
+
+                // Add click event for immediate redirect
+                if (backButton) {
+                    backButton.addEventListener('click', function() {
+                        window.location.href = '/product';
+                    });
+                }
+            }
+
+            // Add necessary CSS for animations
+            (function() {
+                const style = document.createElement('style');
+                style.textContent = `
+        @keyframes zoomIn {
+            from {
+                opacity: 0;
+                transform: scale3d(0.3, 0.3, 0.3);
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+        
+        .animate__animated {
+            animation-duration: 0.5s;
+            animation-fill-mode: both;
+        }
+        
+        .animate__zoomIn {
+            animation-name: zoomIn;
+        }
+        
+        #statusModal .modal-content {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        #statusModal .status-icon {
+            display: inline-block;
+            width: 70px;
+            height: 70px;
+            line-height: 70px;
+            border-radius: 50%;
+            background-color: rgba(0,123,255,0.1);
+            margin-bottom: 1rem;
+        }
+        
+        #statusModal #backToProductBtn {
+            border-radius: 8px;
+            font-weight: 600;
+            padding: 8px;
+        }
+        
+        #statusModal .badge {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-weight: normal;
+        }
+        
+        #statusModal {
+            z-index: 2000;
+        }
+    `;
+                document.head.appendChild(style);
+            })()
+            .catch(error => {
+                console.error('Terjadi kesalahan:', error);
+                // Tampilkan pesan error ke user
+                document.querySelector('.order-summary').innerHTML = `
+                    <div class="error-message">
+                        ${error.message || 'Terjadi kesalahan saat memuat data pembayaran.'}
+                    </div>
+                `;
+            });
 
         }
 

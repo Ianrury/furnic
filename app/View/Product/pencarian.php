@@ -563,7 +563,7 @@ $apiBaseUrl = env('API_BASE_URL');
                     potongan: potongan.toLocaleString('id-ID'),
                     promo: promoPersen,
                     rating: product.rating ?? 4,
-                    sold: product.beli,
+                    sold: product.beli ?? 0,
                     slug: product.slug,
                     token: product.token,
                     stock: product.stock || product.qty,

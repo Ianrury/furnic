@@ -143,12 +143,12 @@ $apiBaseUrl = env('API_BASE_URL');
                                             style="font-size: 14px; color: #ff3838; cursor: pointer;">Hapus</p>
                                     </div>
                                 </div>
-                                <div class="d-flex flex-column gap-3" id="product-list">
-                                    <!-- Mulai looping produk di sini -->
-
-
-                                    <!-- Selesai 1 produk -->
+                                <div class="row row-cols-1 g-3" id="product-list">
+                                    <div class="col">
+                                        <!-- Item produk disini -->
+                                    </div>
                                 </div>
+
                             </div>
 
                             <!-- Detail Pembayaran -->
@@ -178,7 +178,7 @@ $apiBaseUrl = env('API_BASE_URL');
                                         <div class="col">
                                             <!-- Subtotal Harga -->
                                             <span id="subtotal-harga" class="fw-bold title-keranjang mb-0 text-start">
-                                                <sup class="fw-normal">Rp</sup> 0
+                                                <sup class="fw-normal">Rp </sup> 0
                                             </span>
                                         </div>
                                         <p class="font-italic fw-normal" style="font-size: 11px; color: #FF0000;">
@@ -386,7 +386,7 @@ $apiBaseUrl = env('API_BASE_URL');
 
                         // Render products from API response
                         renderProducts(result.data);
-
+                        // console.log(result.data);
                         // Set up event listeners after rendering products
                         setupEventListeners();
 
@@ -426,88 +426,98 @@ $apiBaseUrl = env('API_BASE_URL');
 
                     // Calculate total price for this item
                     const total = qty * hargaSetelahDiskon;
-
                     html += `
-            <div class="d-flex gap-3 align-items-start">
-                <div class="rounded-2 ms-4">
-                    <input class="form-check-input item-checkbox" type="checkbox"
-                        id="checkbox-${item.id_cart}" data-id="${item.id_cart}"
-                        data-price="${item.harga}" data-discount="${item.diskon}">
-                </div>
-                <div class="w-100 p-3 d-flex align-items-center justify-content-between rounded-4"
-                    style="border: 1px solid #D9D9D9;">
-                    <div class="d-flex gap-3 align-items-center">
-                        <div class="card shadow position-relative rounded-4 p-2">
-                            <!-- Corner Ribbon -->
-                            <div class="position-absolute ribbon-wrapper-keranjang">
-                                <div class="ribbon-keranjang text-white text-uppercase fw-bold text-center">
-                                    New Product
-                                </div>
+                        <div class="d-flex flex-column flex-md-row gap-3 align-items-start w-100">
+                            <!-- Checkbox -->
+                            <div class="rounded-2 ms-2">
+                                <input class="form-check-input item-checkbox" type="checkbox"
+                                    id="checkbox-${item.id_cart}" data-id="${item.id_cart}"
+                                    data-price="${item.harga}" data-discount="${item.diskon}">
                             </div>
-                            <!-- Product Image -->
-                            <div class="text-center pt-3">
-                                <img src="${item.url_foto}"
-                                    class="img-fluid product-image-keranjang"
-                                    alt="${item.nama_product}">
-                            </div>
-                        </div>
-                        <div>
-                            <h5 class="title-keranjang">${item.nama_product}</h5>
-                            <p class="name-keranjang">${truncateWords(item.deskripsi, 5)}</p>
-                            <ul class="list-unstyled m-0 p-0">
-                                <li class="motif-keranjang">
-                                    <span class="label-keranjang">Warna</span> : <span
-                                        class="value-keranjang">${item.warna}</span>
-                                </li>
-                                <li class="motif-keranjang">
-                                    <span class="label-keranjang">Motif</span> : <span
-                                        class="value-keranjang">${item.motif}</span>
-                                </li>
-                            </ul>
-                            <div class="d-flex flex-wrap align-items-baseline">
-                                <div class="me-2">
-                                    <span class="fw-bold title-keranjang">
-                                        <sup class="fw-normal">Rp</sup>
-                                        ${formatNumber(hargaSetelahDiskon)}
-                                    </span>
-                                </div>
-                                <div>
-                                    ${diskon > 0 ? `
-                                        <div>
-                                            <span class="fw-normal text-danger old-price">
-                                                <sup>Rp</sup>
-                                                <span class="text-decoration-line-through">${formatNumber(hargaNormal)}</span>
-                                            </span>
-                                        </div>
-                                    ` : ''}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Quantity -->
-                    <div class="d-flex align-items-center">
-                        <button class="btn-quantity decrease-qty" data-id="${item.id_cart}">
-                            <span style="font-size: 20px;">-</span>
-                        </button>
-                        <span class="mx-4 fw-normal text-black" style="font-size: 14px;"
-                            id="qty-${item.id_cart}" data-max="${item.qty_motif}"
-                            data-price="${hargaSetelahDiskon}">
-                            ${qty}
-                        </span>
-                        <button class="btn-quantity increase-qty" data-id="${item.id_cart}">
-                            <span style="font-size: 20px;">+</span>
-                        </button>
-                    </div>
-                    <!-- Harga total per item -->
-                    <div>
-                        <span id="total-${item.id_cart}" class="fw-bold title-keranjang total-produk-detail">
-                            <sup class="fw-normal">Rp</sup>
-                            ${formatNumber(total)}
-                        </span>
-                    </div>
-                </div>
+
+                            <!-- Kartu Produk -->
+                            <div class="w-100 p-3 d-flex flex-wrap flex-md-nowrap align-items-center justify-content-between rounded-4 position-relative" style="border: 1px solid #D9D9D9;">
+
+                                <!-- Gambar & Info -->
+                               <!-- Gambar & Info -->
+<div class="d-flex gap-3 align-items-start flex-grow-1 w-100 position-relative">
+    <!-- Gambar Produk -->
+    <div class="card shadow position-relative rounded-4 product-card-wrapper">
+        <!-- Ribbon -->
+        <div class="position-absolute ribbon-wrapper-keranjang">
+            <div class="ribbon-keranjang text-white text-uppercase fw-bold text-center">
+                New Product
             </div>
-        `;
+        </div>
+        <!-- Gambar -->
+        <div class="text-center pt-3">
+            <img src="${item.url_foto}" class="img-fluid product-image-keranjang" alt="${item.nama_product}">
+        </div>
+    </div>
+
+    <!-- Detail Produk -->
+    <div class="flex-grow-1">
+        <h5 class="title-keranjang">${item.nama_product}</h5>
+        <p class="name-keranjang">${truncateWords(item.deskripsi, 2)}</p>
+        <ul class="list-unstyled m-0 p-0">
+            <li class="motif-keranjang">
+                <span class="label-keranjang">Warna</span> : <span class="value-keranjang">${item.warna}</span>
+            </li>
+            <li class="motif-keranjang">
+                <span class="label-keranjang">Motif</span> : <span class="value-keranjang">${item.motif}</span>
+            </li>
+        </ul>
+        <div class="d-flex flex-wrap align-items-baseline mt-2">
+            <div class="me-2">
+                <span class="fw-bold title-keranjang">
+                    <sup class="fw-normal">Rp</sup>${formatNumber(hargaSetelahDiskon)}
+                </span>
+            </div>
+            ${diskon > 0 ? `
+                <div>
+                    <span class="fw-normal text-danger old-price">
+                        <sup>Rp</sup>
+                        <span class="text-decoration-line-through">Rp ${formatNumber(hargaNormal)}</span>
+                    </span>
+                </div>
+            ` : ''}
+        </div>
+    </div>
+
+    <!-- Stok info di kanan -->
+    <div class="stok-kanan-info text-end">
+        Tersedia <span id="stock-${item.id_cart}">${item.qty_motif}</span> <span id="satuan-${item.id_cart}">${item.uom}</span>
+    </div>
+</div>
+
+
+                                <!-- Qty + Total -->
+                            <!-- Qty + Total -->
+                        <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3 mt-3 mt-md-0 ms-md-3 w-100 w-md-auto">
+                            <div class="d-flex align-items-center justify-content-md-end">
+                                <button class="btn-quantity decrease-qty" data-id="${item.id_cart}">
+                                    <span style="font-size: 20px;">-</span>
+                                </button>
+                                <span class="mx-3 fw-normal text-black" style="font-size: 14px;"
+                                    id="qty-${item.id_cart}" data-max="${item.qty_motif}" data-price="${hargaSetelahDiskon}">
+                                    ${qty}
+                                </span>
+                                <button class="btn-quantity increase-qty" data-id="${item.id_cart}">
+                                    <span style="font-size: 20px;">+</span>
+                                </button>
+                            </div>
+                            <div class="text-md-end">
+                                <span id="total-${item.id_cart}" class="fw-bold title-keranjang total-produk-detail">
+                                    <sup class="fw-normal">Rp </sup>
+                                    ${formatNumber(total)}
+                                </span>
+                            </div>
+                        </div>
+
+                            </div>
+                        </div>
+                        `;
+
                 });
 
                 productListElement.innerHTML = html;
@@ -811,7 +821,7 @@ $apiBaseUrl = env('API_BASE_URL');
                                 <div class="text-center py-5">
                                     <h4>Keranjang belanja Anda kosong</h4>
                                     <p>Silakan tambahkan produk ke keranjang</p>
-                                    <a href="/products" class="btn btn-primary mt-3">Belanja Sekarang</a>
+                                    <a href="/product" class="btn btn-primary mt-3">Belanja Sekarang</a>
                                 </div>
                             `;
                                             }

@@ -396,34 +396,6 @@ $apiBaseUrl = env('API_BASE_URL');
         });
     }
 
-    // Fungsi untuk menghitung sisa waktu pembayaran dengan detail
-    function hitungSisaWaktuPembayaran(limitPembayaran) {
-        // Tambahkan zona waktu Jakarta secara eksplisit
-        const waktuBatas = new Date(`${limitPembayaran} GMT+0700`);
-        const waktuSekarang = new Date();
-
-        const selisih = waktuBatas - waktuSekarang;
-
-        if (selisih > 0) {
-            const hari = Math.floor(selisih / (1000 * 60 * 60 * 24));
-            const jam = Math.floor((selisih % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const menit = Math.floor((selisih % (1000 * 60 * 60)) / (1000 * 60));
-            const detik = Math.floor((selisih % (1000 * 60)) / 1000);
-
-            return {
-                total: selisih,
-                formatted: hari > 0 ?
-                    `${hari}d ${jam}j ${menit}m` : `${jam}j ${menit}m ${detik}d`,
-                isExpired: false
-            };
-        }
-        return {
-            total: 0,
-            formatted: 'Timeout',
-            isExpired: true
-        };
-    }
-
     // Fungsi untuk mendapatkan metode pengiriman
     function getMetodePengiriman(pesanan) {
         if (pesanan.jenis_pengiriman && pesanan.jenis_pengiriman.nama) {
@@ -506,7 +478,7 @@ $apiBaseUrl = env('API_BASE_URL');
                 <div class="d-flex justify-content-between align-items-center mb-2">
                     <small>
                         <i class="fas fa-box me-2"></i>
-                        ${pesanan.products ? pesanan.products.length : 0} item
+                        ${pesanan.products ? pesanan.products.length : 0} Product
                     </small>
                     <h6 class="mb-0 text-primary">${formatRupiah(pesanan.total_harga)}</h6>
                 </div>
@@ -701,37 +673,37 @@ $apiBaseUrl = env('API_BASE_URL');
 
         containerPesanan.html(`
     <div class="row mb-3">
-        <div class="col-12">
-            <nav>
-                <div class="nav nav-pills nav-fill" id="nav-tab" role="tablist">
-                    <button class="nav-link active" id="nav-menunggu-tab" data-bs-toggle="tab" 
-                            data-status="menunggu" type="button" role="tab">
-                        Menunggu (${kategoriBaru.menunggu.length})
-                    </button>
-                    <button class="nav-link" id="nav-konfirmasi-tab" data-bs-toggle="tab" 
-                            data-status="konfirmasi" type="button" role="tab">
-                        Dikonfirmasi (${kategoriBaru.konfirmasi.length})
-                    </button>
-                    <button class="nav-link" id="nav-dikirim-tab" data-bs-toggle="tab" 
-                            data-status="dikirim" type="button" role="tab">
-                        Dikirim (${kategoriBaru.dikirim.length})
-                    </button>
-                    <button class="nav-link" id="nav-selesai-tab" data-bs-toggle="tab" 
-                            data-status="selesai" type="button" role="tab">
-                        Selesai (${kategoriBaru.selesai.length})
-                    </button>
-                    <button class="nav-link" id="nav-batal-tab" data-bs-toggle="tab" 
-                            data-status="batal" type="button" role="tab">
-                        Dibatalkan (${kategoriBaru.batal.length})
-                    </button>
-                </div>
-            </nav>
+    <div class="col-12">
+        <nav>
+            <div class="nav nav-pills nav-fill" id="nav-tab" role="tablist">
+                <button class="nav-link active" id="nav-menunggu-tab" data-bs-toggle="tab" 
+                        data-status="menunggu" type="button" role="tab">
+                    Menunggu (${kategoriBaru.menunggu.length})
+                </button>
+                <button class="nav-link" id="nav-konfirmasi-tab" data-bs-toggle="tab" 
+                        data-status="konfirmasi" type="button" role="tab">
+                    Dikonfirmasi (${kategoriBaru.konfirmasi.length})
+                </button>
+                <button class="nav-link" id="nav-dikirim-tab" data-bs-toggle="tab" 
+                        data-status="dikirim" type="button" role="tab">
+                    Dikirim (${kategoriBaru.dikirim.length})
+                </button>
+                <button class="nav-link" id="nav-selesai-tab" data-bs-toggle="tab" 
+                        data-status="selesai" type="button" role="tab">
+                    Selesai (${kategoriBaru.selesai.length})
+                </button>
+                <button class="nav-link" id="nav-batal-tab" data-bs-toggle="tab" 
+                        data-status="batal" type="button" role="tab">
+                    Dibatalkan (${kategoriBaru.batal.length})
+                </button>
+            </div>
+        </nav>
+    </div>
         </div>
-    </div>
-    <div class="row" id="pesanan-container">
-        ${kategoriBaru.menunggu.map(buatKartuPesanan).join('')}
-    </div>
-`);
+        <div class="row" id="pesanan-container">
+            ${kategoriBaru.menunggu.map(buatKartuPesanan).join('')}
+        </div>
+    `);
 
         // Event listener untuk tab
         $('.nav-link').on('click', function() {
@@ -742,17 +714,270 @@ $apiBaseUrl = env('API_BASE_URL');
                 pesananDifilter.length > 0 ?
                 pesananDifilter.map(buatKartuPesanan).join('') :
                 `
-        <div class="col-12 text-center py-5">
-            <h6 class="text-muted">Tidak ada pesanan</h6>
-            <small class="text-muted">Anda belum memiliki pesanan pada kategori ini</small>
-        </div>
-        `
+    <div class="col-12 text-center py-5">
+        <h6 class="text-muted">Tidak ada pesanan</h6>
+        <small class="text-muted">Anda belum memiliki pesanan pada kategori ini</small>
+    </div>
+    `
             );
 
             startCountdowns();
         });
 
         startCountdowns();
+    }
+
+    // Fungsi untuk membuat kartu pesanan
+    function buatKartuPesanan(pesanan) {
+        // Tentukan badge dan status berdasarkan status pesanan
+        let badgeClass = 'bg-primary';
+        let badgeText = 'Menunggu Pembayaran';
+        let countdownHtml = '';
+
+        // Cek jika pesanan dibatalkan
+        if (pesanan.isbatal === 1 || pesanan.isbatal === true) {
+            badgeClass = 'bg-danger';
+            badgeText = 'Dibatalkan';
+        }
+        // Cek status pesanan
+        else {
+            switch (pesanan.status_pesanan) {
+                case 'waiting':
+                    badgeClass = 'bg-primary';
+                    badgeText = 'Menunggu Pembayaran';
+                    break;
+                case 'menunggu verifikasi':
+                    badgeClass = 'bg-info text-white';
+                    badgeText = 'Menunggu Verifikasi';
+                    break;
+                case 'konfirmasi':
+                    badgeClass = 'bg-info text-white';
+                    badgeText = 'Dikonfirmasi';
+                    break;
+                case 'dikirim':
+                    badgeClass = 'bg-warning text-dark';
+                    badgeText = 'Dikirim';
+                    break;
+                case 'completed':
+                    badgeClass = 'bg-success';
+                    badgeText = 'Selesai';
+                    break;
+            }
+        }
+
+        // Tambahkan countdown jika status waiting dan belum dibayar
+        if (pesanan.status_pesanan === 'waiting' && pesanan.status_pembayaran === 'belum bayar' && pesanan.limit_payment) {
+            countdownHtml = `
+            <div class="alert alert-danger mt-2" role="alert">
+                <small>
+                    <i class="fas fa-clock me-1"></i> Bayar sebelum: 
+                    <span class="countdown-timer fw-bold" data-limit="${pesanan.limit_payment}">
+                        ${hitungSisaWaktuPembayaran(pesanan.limit_payment).formatted}
+                    </span>
+                </small>
+            </div>
+        `;
+        }
+        // Tambahkan info sudah dibayar untuk status menunggu verifikasi
+        else if (pesanan.status_pesanan === 'menunggu verifikasi' && pesanan.status_pembayaran === 'sudah bayar') {
+            countdownHtml = `
+            <div class="alert alert-info mt-2" role="alert">
+                <small>
+                    <i class="fas fa-check-circle me-1"></i> Pembayaran sedang diverifikasi 
+                    <span class="countdown-timer fw-bold" data-limit="${pesanan.tanggal_pesanan}">
+                        00:00:00
+                    </span>
+                </small>
+            </div>
+        `;
+        }
+
+        // Format tanggal
+        const tanggalPesanan = formatTanggal(pesanan.tanggal_pesanan);
+        const totalHarga = formatRupiah(pesanan.total_harga);
+
+        // Ambil info produk
+        const produk = pesanan.products[0];
+        const gambarProduk = produk.foto_produk || '/assets/images/no-image.jpg';
+        const namaProduk = produk.nama_product;
+
+        // Tambahkan info produk tambahan jika ada lebih dari 1
+        let produkTambahan = '';
+        if (pesanan.products.length > 1) {
+            produkTambahan = `<small class="text-muted">+${pesanan.products.length - 1} produk lainnya</small>`;
+        }
+
+        // Buat tombol tindakan berdasarkan status
+        let tombolTindakan = '';
+
+        // Untuk pesanan yang dibatalkan
+        if (pesanan.isbatal === 1 || pesanan.isbatal === true) {
+            tombolTindakan = `
+            <a href="/detail/pesanan/${pesanan.payment_token}" class="btn btn-outline-secondary btn-sm w-100 mb-2">
+                Lihat Detail
+            </a>
+        `;
+        }
+        // Untuk pesanan menunggu pembayaran (waiting & belum bayar)
+        else if (pesanan.status_pesanan === 'waiting' && pesanan.status_pembayaran === 'belum bayar') {
+            const isTimeExpired = hitungSisaWaktuPembayaran(pesanan.limit_payment).isExpired;
+
+
+            tombolTindakan = `
+            <a href="/pembayaran/${pesanan.payment_token}" class="btn btn-primary btn-sm w-100 mb-2" ${isTimeExpired ? 'disabled' : ''}>
+                Bayar Sekarang
+            </a>
+            <a href="/detail/pesanan/${pesanan.payment_token}" class="btn btn-outline-secondary btn-sm w-100 mb-2">
+                Lihat Detail
+            </a>
+            <button onclick="batalkanPesanan('${pesanan.payment_token}')" class="btn btn-outline-danger btn-sm w-100" ${isTimeExpired ? 'disabled' : ''}>
+                Batalkan
+            </button>
+        `;
+        }
+        // Untuk pesanan menunggu verifikasi (sudah bayar)
+        else if (pesanan.status_pesanan === 'menunggu verifikasi' && pesanan.status_pembayaran === 'sudah bayar') {
+            tombolTindakan = `
+            <a href="/pembayaran/${pesanan.payment_token}" class="btn btn-primary btn-sm w-100 mb-2 disabled">
+                Sudah Dibayar
+            </a>
+            <a href="/detail/pesanan/${pesanan.payment_token}" class="btn btn-outline-secondary btn-sm w-100 mb-2">
+                Lihat Detail
+            </a>
+            <button onclick="batalkanPesanan('${pesanan.payment_token}')" class="btn btn-outline-danger btn-sm w-100 disabled">
+                Batalkan
+            </button>
+        `;
+        }
+        // Untuk pesanan dikonfirmasi
+        else if (pesanan.status_pesanan === 'konfirmasi') {
+            tombolTindakan = `
+            <a href="/detail/pesanan/${pesanan.payment_token}" class="btn btn-outline-secondary btn-sm w-100 mb-2">
+                Lihat Detail
+            </a>
+        `;
+        }
+        // Untuk pesanan dikirim
+        else if (pesanan.status_pesanan === 'dikirim') {
+            tombolTindakan = `
+            <button onclick="terimaBarang('${pesanan.payment_token}')" class="btn btn-success btn-sm w-100 mb-2">
+                Terima Barang
+            </button>
+            <a href="/detail/pesanan/${pesanan.payment_token}" class="btn btn-outline-secondary btn-sm w-100">
+                Lihat Detail
+            </a>
+        `;
+        }
+        // Untuk pesanan selesai
+        else if (pesanan.status_pesanan === 'completed') {
+            let tombolUlasan = '';
+
+            // Tampilkan tombol ulasan jika belum direview
+            if (pesanan.is_review === 0) {
+                tombolUlasan = `
+                <a href="/review/${pesanan.payment_token}" class="btn btn-outline-primary btn-sm w-100 mb-2">
+                    Beri Ulasan
+                </a>
+            `;
+            }
+
+            tombolTindakan = `
+            ${tombolUlasan}
+            <a href="/detail/pesanan/${pesanan.payment_token}" class="btn btn-outline-secondary btn-sm w-100">
+                Lihat Detail
+            </a>
+        `;
+        }
+
+        // Buat kartu pesanan
+        return `
+    <div class="col-12 mb-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-8 col-lg-9">
+                        <div class="d-flex align-items-center mb-2">
+                            <span class="badge ${badgeClass} me-2">${badgeText}</span>
+                            <strong>No. Pesanan: ${pesanan.nomor_pesanan}</strong>
+                        </div>
+                        <p class="mb-1">${tanggalPesanan} • ${pesanan.products.length} Produk • Total: ${totalHarga}</p>
+                        ${countdownHtml}
+                        <div class="d-flex align-items-center mt-3">
+                            <img src="${gambarProduk}" alt="${namaProduk}" class="img-thumbnail me-3" style="width: 70px; height: 70px; object-fit: cover;">
+                            <div>
+                                <p class="mb-0 fw-medium">${namaProduk}</p>
+                                ${produkTambahan}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-lg-3 mt-3 mt-md-0">
+                        ${tombolTindakan}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    `;
+    }
+
+    // Fungsi untuk menghitung sisa waktu pembayaran
+    function hitungSisaWaktuPembayaran(limitPembayaran) {
+        // Tambahkan zona waktu Jakarta secara eksplisit
+        const waktuBatas = new Date(`${limitPembayaran} GMT+0700`);
+        const waktuSekarang = new Date();
+
+        const selisih = waktuBatas - waktuSekarang;
+
+        if (selisih > 0) {
+            const hari = Math.floor(selisih / (1000 * 60 * 60 * 24));
+            const jam = Math.floor((selisih % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const menit = Math.floor((selisih % (1000 * 60 * 60)) / (1000 * 60));
+            const detik = Math.floor((selisih % (1000 * 60)) / 1000);
+
+            return {
+                total: selisih,
+                formatted: hari > 0 ?
+                    `${hari}d ${jam}j ${menit}m` : `${jam}j ${menit}m ${detik}d`,
+                isExpired: false
+            };
+        }
+        return {
+            total: 0,
+            formatted: 'Timeout',
+            isExpired: true
+        };
+    }
+
+
+    // Fungsi untuk format tanggal
+    function formatTanggal(tanggalString) {
+        const tanggal = new Date(tanggalString);
+
+        const hari = String(tanggal.getDate()).padStart(2, '0');
+        const bulan = getNamaBulan(tanggal.getMonth() + 1);
+        const tahun = tanggal.getFullYear();
+
+        return `${hari} ${bulan} ${tahun}`;
+    }
+
+    // Fungsi untuk mendapatkan nama bulan
+    function getNamaBulan(bulan) {
+        const namaBulan = [
+            'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+            'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+        ];
+
+        return namaBulan[bulan - 1];
+    }
+
+    // Fungsi untuk format rupiah
+    function formatRupiah(angka) {
+        return new Intl.NumberFormat('id-ID', {
+            style: 'currency',
+            currency: 'IDR',
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0
+        }).format(angka);
     }
 
     // Fungsi untuk memulai countdown
@@ -771,6 +996,11 @@ $apiBaseUrl = env('API_BASE_URL');
             const alertContainer = $this.closest('.alert');
             const batalButton = $this.closest('.card-body').find('button.btn-outline-danger');
             const bayarButton = $this.closest('.card-body').find('a.btn-primary');
+
+            // Skip untuk pesanan menunggu verifikasi (countdown selalu 00:00:00)
+            if ($this.text().trim() === '00:00:00') {
+                return;
+            }
 
             function updateCountdown() {
                 const sisaWaktu = hitungSisaWaktuPembayaran(limitPayment);
@@ -795,17 +1025,151 @@ $apiBaseUrl = env('API_BASE_URL');
         });
     }
 
+    // Fungsi untuk batalkan pesanan
+    function batalkanPesanan(token) {
+        Swal.fire({
+            title: 'Batalkan Pesanan',
+            text: 'Apakah Anda yakin ingin membatalkan pesanan ini?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Ya, Batalkan',
+            cancelButtonText: 'Tidak',
+            confirmButtonColor: '#dc3545',
+            cancelButtonColor: '#6c757d',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Tampilkan loading
+                Swal.fire({
+                    title: 'Memproses...',
+                    text: 'Sedang membatalkan pesanan',
+                    allowOutsideClick: false,
+                    didOpen: () => {
+                        Swal.showLoading();
+                    }
+                });
+
+                // Kirim request ke server
+                $.ajax({
+                    url: API_BASE_URL + '/batalkanPesanan',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        payment_token: token
+                    },
+                    headers: {
+                        'Authorization': 'Bearer ' + token
+                    },
+                    success: function(response) {
+                        if (response.status === 'success') {
+                            Swal.fire({
+                                title: 'Berhasil',
+                                text: 'Pesanan berhasil dibatalkan',
+                                icon: 'success',
+                                confirmButtonColor: '#28a745'
+                            }).then(() => {
+                                // Muat ulang pesanan
+                                fetchOrders();
+                            });
+                        } else {
+                            Swal.fire({
+                                title: 'Gagal',
+                                text: response.message || 'Gagal membatalkan pesanan',
+                                icon: 'error',
+                                confirmButtonColor: '#dc3545'
+                            });
+                        }
+                    },
+                    error: function() {
+                        Swal.fire({
+                            title: 'Error',
+                            text: 'Terjadi kesalahan saat menghubungi server',
+                            icon: 'error',
+                            confirmButtonColor: '#dc3545'
+                        });
+                    }
+                });
+            }
+        });
+    }
+
+    // Fungsi untuk terima barang
+    function terimaBarang(token) {
+        Swal.fire({
+            title: 'Terima Barang',
+            text: 'Apakah Anda sudah menerima pesanan ini?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Ya, Sudah Diterima',
+            cancelButtonText: 'Belum',
+            confirmButtonColor: '#28a745',
+            cancelButtonColor: '#6c757d',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Tampilkan loading
+                Swal.fire({
+                    title: 'Memproses...',
+                    text: 'Sedang memproses konfirmasi penerimaan',
+                    allowOutsideClick: false,
+                    didOpen: () => {
+                        Swal.showLoading();
+                    }
+                });
+
+                // Kirim request ke server
+                $.ajax({
+                    url: API_BASE_URL + '/terimaBarang',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        payment_token: token
+                    },
+                    headers: {
+                        'Authorization': 'Bearer ' + token
+                    },
+                    success: function(response) {
+                        if (response.status === 'success') {
+                            Swal.fire({
+                                title: 'Berhasil',
+                                text: 'Pesanan telah dikonfirmasi diterima',
+                                icon: 'success',
+                                confirmButtonColor: '#28a745'
+                            }).then(() => {
+                                // Muat ulang pesanan
+                                fetchOrders();
+                            });
+                        } else {
+                            Swal.fire({
+                                title: 'Gagal',
+                                text: response.message || 'Gagal mengonfirmasi penerimaan',
+                                icon: 'error',
+                                confirmButtonColor: '#dc3545'
+                            });
+                        }
+                    },
+                    error: function() {
+                        Swal.fire({
+                            title: 'Error',
+                            text: 'Terjadi kesalahan saat menghubungi server',
+                            icon: 'error',
+                            confirmButtonColor: '#dc3545'
+                        });
+                    }
+                });
+            }
+        });
+    }
+
     // Fungsi untuk mengambil pesanan
     function fetchOrders() {
         // Tampilkan loading indicator
         $('#pemesanan_list').html(`
-        <div class="text-center py-5">
-            <div class="spinner-border text-primary" role="status">
-                <span class="visually-hidden">Loading...</span>
-            </div>
-            <p class="mt-2">Memuat data pesanan...</p>
+    <div class="text-center py-5">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
         </div>
-    `);
+        <p class="mt-2">Memuat data pesanan...</p>
+    </div>
+  `);
 
         // Tambahkan header SweetAlert untuk menghindari error
         if (typeof Swal === 'undefined') {
@@ -827,26 +1191,26 @@ $apiBaseUrl = env('API_BASE_URL');
             success: function(response) {
                 if (response.status === 'success') {
                     tampilkanDaftarPesanan(response.data);
-                    // console
+                    // console.log('Data Pesanan', response.data);
                 } else {
                     $('#pemesanan_list').html(`
-                <div class="alert alert-danger" role="alert">
-                    <i class="fas fa-exclamation-triangle me-2"></i>
-                    Gagal memuat pesanan: ${response.message}
-                </div>
-            `);
+            <div class="alert alert-danger" role="alert">
+                <i class="fas fa-exclamation-triangle me-2"></i>
+                Gagal memuat pesanan: ${response.message}
+            </div>
+        `);
                 }
             },
             error: function(xhr, status, error) {
                 $('#pemesanan_list').html(`
-            <div class="alert alert-danger" role="alert">
-                <i class="fas fa-exclamation-triangle me-2"></i>
-                Terjadi kesalahan saat memuat pesanan. Silakan coba lagi.
-                <button class="btn btn-sm btn-outline-danger mt-2" onclick="fetchOrders()">
-                    <i class="fas fa-sync-alt me-2"></i>Coba Lagi
-                </button>
-            </div>
-        `);
+        <div class="alert alert-danger" role="alert">
+            <i class="fas fa-exclamation-triangle me-2"></i>
+            Terjadi kesalahan saat memuat pesanan. Silakan coba lagi.
+            <button class="btn btn-sm btn-outline-danger mt-2" onclick="fetchOrders()">
+                <i class="fas fa-sync-alt me-2"></i>Coba Lagi
+            </button>
+        </div>
+    `);
             }
         });
     }
