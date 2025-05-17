@@ -83,6 +83,26 @@ function is_active($route)
                                 <a class="d-flex justify-content-center align-items-center w-100 h-100 custom-nav-link <?= is_active('lokasi') ?>"
                                     href="/lokasi" style="font-size: 14px;">Lokasi Store</a>
                             </li>
+                            <li class="nav-item navbar-toggler">
+                                <a class="d-flex justify-content-center align-items-center w-100 h-100 custom-nav-link <?= is_active('profile') ?>"
+                                    href="/profile" style="font-size: 14px;">Profile</a>
+                            </li>
+                            <li class="nav-item navbar-toggler">
+                                <a class="d-flex justify-content-center align-items-center w-100 h-100 custom-nav-link <?= is_active('pesanan') ?>"
+                                    href="/pesanan/detail" style="font-size: 14px;">Pesanan</a>
+                            </li>
+                            <li class="nav-item navbar-toggler">
+                                <a class="d-flex justify-content-center align-items-center w-100 h-100 custom-nav-link <?= is_active('wishlist') ?>"
+                                    href="/product/wishlist" style="font-size: 14px;">Wishlist</a>
+                            </li>
+                            <li class="nav-item navbar-toggler">
+                                <a class="d-flex justify-content-center align-items-center w-100 h-100 custom-nav-link <?= is_active('keranjang') ?>"
+                                    href="/keranjang" style="font-size: 14px;">Keranjang</a>
+                            </li>
+                            <li class="nav-item navbar-toggler">
+                                <a class="d-flex justify-content-center align-items-center w-100 h-100 custom-nav-link <?= is_active('logout') ?>"
+                                    href="/logout" style="font-size: 14px;">Logout</a>
+                            </li>
                         </ul>
 
                         <!-- nav-right -->
@@ -110,7 +130,7 @@ function is_active($route)
                                     </a>
 
                                     <!-- Dropdown Menu -->
-                                    <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0 custom-dropdown"> 
+                                    <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0 custom-dropdown">
                                         <li>
                                             <a class="dropdown-item d-flex align-items-center gap-2" href="/profile">
                                                 <i class="fas fa-user-circle text-primary"></i> Profile
@@ -187,13 +207,13 @@ function is_active($route)
             </div>
             <div class="modal-body pt-2">
                 <!-- Section Title -->
-                <div class="search-section-title mb-2 ps-2">
+                <!-- <div class="search-section-title mb-2 ps-2">
                     <span class="text-muted fs-7">Pencarian Terakhir</span>
-                </div>
+                </div> -->
 
                 <!-- Recent Searches -->
                 <div class="search-suggestions">
-                    <div class="search-item">
+                    <!-- <div class="search-item">
                         <i class="bi bi-clock-history search-icon"></i>
                         <span>kulkas 2 pintu</span>
                         <i class="bi bi-x-lg delete-search ms-auto"></i>
@@ -207,10 +227,10 @@ function is_active($route)
                         <i class="bi bi-clock-history search-icon"></i>
                         <span>parfum pria</span>
                         <i class="bi bi-x-lg delete-search ms-auto"></i>
-                    </div>
+                    </div> -->
 
                     <!-- Popular Searches Section -->
-                    <div class="search-section-title mt-3 mb-2 ps-2">
+                    <!-- <div class="search-section-title mt-3 mb-2 ps-2">
                         <span class="text-muted fs-7">Pencarian Populer</span>
                     </div>
 
@@ -225,7 +245,7 @@ function is_active($route)
                     <div class="search-item">
                         <i class="bi bi-graph-up-arrow search-icon trending-icon"></i>
                         <span>minyak goreng 2l</span>
-                    </div>
+                    </div> -->
 
                     <!-- Tips Section -->
                     <div class="search-item mt-3 border-top pt-3">
