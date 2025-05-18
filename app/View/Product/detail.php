@@ -20,7 +20,7 @@ $apiBaseUrl = env('API_BASE_URL');
     <meta name="keywords" content="">
 
     <!-- title -->
-    <title><?php echo $model['title']; ?> - PT Furnice Furnishing Indonesia</title>
+    <title><?php echo $model['slug']; ?> - PT Furnice Furnishing Indonesia</title>
     <base href="/">
     <!-- favicon -->
     <link rel="icon" type="image/x-icon" href="assets/img/logo/favicon.png">
@@ -203,8 +203,8 @@ $apiBaseUrl = env('API_BASE_URL');
                         <h1 class="text-black fw-bold mb-1" style="font-size: 25px;" id="nama_product">
 
                         </h1>
-                        <p class="text-black mb-3 fw-normal" style="font-size: 14px;" id="descripsi">
-                        </p>
+                        <!-- <p class="text-black mb-3 fw-normal" style="font-size: 14px;" id="descripsi">
+                        </p> -->
 
                         <div class="mb-4">
                             <p class="mb-2 fw-normal text-black" style="font-size: 14px;">Warna</p>
@@ -331,7 +331,7 @@ $apiBaseUrl = env('API_BASE_URL');
                                 <div class="custom-nav-link-descripsi active" data-tab="spesifikasi">Spesifikasi Product</div>
                             </li>
                             <li class="nav-item">
-                                <div class="custom-nav-link-descripsi" data-tab="informasi">Informasi Product</div>
+                                <div class="custom-nav-link-descripsi"  data-tab="informasi">Descripsi Product</div>
                             </li>
                         </ul>
 
@@ -2071,8 +2071,8 @@ $apiBaseUrl = env('API_BASE_URL');
             if ($model.detail.diskon && $model.detail.diskon > 0) {
                 harga = harga - (harga * $model.detail.diskon / 100);
             }
-
-            let subtotal = qty * harga;
+            console.log($model.detail.diskon);
+            let subtotal = qty * harga ;
             subtotalText.innerText = formatRupiah(subtotal);
         }
 
@@ -2260,8 +2260,8 @@ $apiBaseUrl = env('API_BASE_URL');
             const infoTab = document.getElementById('informasi');
             if (!infoTab) return;
 
-            if ($model.detail.informasi_product) {
-                infoTab.innerHTML = `<p>${$model.detail.informasi_product}</p>`;
+            if ($model.detail.deskripsi) {
+                infoTab.innerHTML = `<p>${$model.detail.deskripsi}</p>`;
             } else {
                 infoTab.innerHTML = '<p>No additional information available</p>';
             }

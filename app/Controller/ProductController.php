@@ -68,8 +68,10 @@ class ProductController
 
     public function detailProduct($slug, $token)
     {
+        // $slug = $_GET['slug'];
         $model = [
             "title" => "Product Detail",
+            "slug" => $slug,
             "content" => "Welcome to the product detail page!",
         ];
         View::render('Product/detail', $model);

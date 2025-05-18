@@ -838,15 +838,11 @@ $apiBaseUrl = env('API_BASE_URL');
         // Untuk pesanan menunggu verifikasi (sudah bayar)
         else if (pesanan.status_pesanan === 'menunggu verifikasi' && pesanan.status_pembayaran === 'sudah bayar') {
             tombolTindakan = `
-            <a href="/pembayaran/${pesanan.payment_token}" class="btn btn-primary btn-sm w-100 mb-2 disabled">
-                Sudah Dibayar
-            </a>
+       
             <a href="/detail/pesanan/${pesanan.payment_token}" class="btn btn-outline-secondary btn-sm w-100 mb-2">
                 Lihat Detail
             </a>
-            <button onclick="batalkanPesanan('${pesanan.payment_token}')" class="btn btn-outline-danger btn-sm w-100 disabled">
-                Batalkan
-            </button>
+         
         `;
         }
         // Untuk pesanan dikonfirmasi
