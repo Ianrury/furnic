@@ -3,24 +3,17 @@ function is_active($route)
 {
     $current_path = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
     $target_path = trim($route, '/');
-
-    // Khusus untuk route '/'
     if ($target_path === '') {
         return $current_path === '' ? 'active' : '';
     }
-
-    // Untuk selain '/', cocokkan awal URL
     return strpos($current_path, $target_path) === 0 ? 'active' : '';
 }
 
-// require_once __DIR__ . '/../../app/env.php';
-// $apiBaseUrl = env('API_BASE_URL');
 
 ?>
 
 
 <header class="header bg-info-emphasis">
-    <!-- navbar -->
     <div class="main-navigation shadow-bottom-sm  mt-2">
         <nav class="navbar navbar-expand-lg  d-flex justify-content-between align-items-center">
             <div class="container position-relative px-0">
@@ -29,7 +22,7 @@ function is_active($route)
                 </a>
                 <div class="mobile-menu-right">
                     <div class="d-flex justify-content-between align-items-center gap-3 gap-sm-3 gap-md-4 gap-lg-5">
-                        <!-- Search Button -->
+
                         <div class="search-button-container" data-bs-toggle="modal" data-bs-target="#searchModal">
                             <div class="search-button d-flex align-items-center justify-content-center">
                                 <div class="search-icon-wrapper">
@@ -38,7 +31,7 @@ function is_active($route)
                             </div>
                         </div>
 
-                        <!-- Menu Toggle Button -->
+
                         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
                             data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar"
                             aria-label="Toggle navigation">
@@ -58,15 +51,15 @@ function is_active($route)
                         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                     </div>
                     <div class="offcanvas-body">
-                        <ul class="navbar-nav mx-4 justify-content-around flex-grow-1 text-center">
+                        <ul class="navbar-nav mx-4 justify-content-center gap-xl-5 flex-grow-1 text-center">
                             <li class="nav-item">
                                 <a class="d-flex justify-content-center home-link align-items-center w-100 h-100 custom-nav-link <?= is_active('/') ?>"
-                                    href="/" style="font-size: 14px;">Home</a>
+                                    href="/" style="font-size: 14px;">Utama</a>
                             </li>
 
                             <li class="nav-item">
                                 <a class="d-flex justify-content-center align-items-center w-100 h-100 custom-nav-link <?= is_active('product') ?>"
-                                    href="/product" style="font-size: 14px;">Product</a>
+                                    href="/product" style="font-size: 14px;">Produk</a>
                             </li>
 
                             <li class="nav-item">
@@ -74,14 +67,9 @@ function is_active($route)
                                     href="/promo" style="font-size: 14px;">Promo</a>
                             </li>
 
-                            <!-- <li class="nav-item">
-                                <a class="d-flex justify-content-center align-items-center w-100 h-100 custom-nav-link <?= is_active('pesanan') ?>"
-                                    href="/pesanan/detail" style="font-size: 14px;">Pesanan</a>
-                            </li> -->
-
                             <li class="nav-item">
                                 <a class="d-flex justify-content-center align-items-center w-100 h-100 custom-nav-link <?= is_active('lokasi') ?>"
-                                    href="/lokasi" style="font-size: 14px;">Lokasi Store</a>
+                                    href="/lokasi" style="font-size: 14px;">Lokasi Toko</a>
                             </li>
                             <li class="nav-item navbar-toggler">
                                 <a class="d-flex justify-content-center align-items-center w-100 h-100 custom-nav-link <?= is_active('profile') ?>"
@@ -91,7 +79,7 @@ function is_active($route)
                                 <a class="d-flex justify-content-center align-items-center w-100 h-100 custom-nav-link <?= is_active('pesanan') ?>"
                                     href="/pesanan/detail" style="font-size: 14px;">Pesanan</a>
                             </li>
-                            <li class="nav-item navbar-toggler">
+                            <li class="nav-item navbar-toggler" style="visibility: hidden;">
                                 <a class="d-flex justify-content-center align-items-center w-100 h-100 custom-nav-link <?= is_active('wishlist') ?>"
                                     href="/product/wishlist" style="font-size: 14px;">Wishlist</a>
                             </li>
@@ -101,15 +89,13 @@ function is_active($route)
                             </li>
                             <li class="nav-item navbar-toggler">
                                 <a class="d-flex justify-content-center align-items-center w-100 h-100 custom-nav-link <?= is_active('logout') ?>"
-                                    href="/logout" style="font-size: 14px;">Logout</a>
+                                    href="/logout" style="font-size: 14px;">Keluar</a>
                             </li>
                         </ul>
-
-                        <!-- nav-right -->
                         <div class="nav-right">
                             <ul class="nav-right-list">
                                 <li class="me-3">
-                                    <form class="d-flex" action="/product/hasil" role="search">
+                                    <form class="d-flex w-100" action="/product/hasil" role="search">
                                         <div class="input-group">
                                             <input type="search" name="search" class="form-control custom-search-input"
                                                 placeholder="Cari" aria-label="Search"
@@ -128,17 +114,14 @@ function is_active($route)
                                         style="font-size: 20px;">
                                         <i class="far fa-user text-dark fa-sm"></i>
                                     </a>
-
-                                    <!-- Dropdown Menu -->
-                                    <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0 custom-dropdown">
+                                    <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0 custom-dropdown small p-0">
                                         <li>
                                             <a class="dropdown-item d-flex align-items-center gap-2" href="/profile">
                                                 <i class="fas fa-user-circle text-primary"></i> Profile
                                             </a>
                                         </li>
                                         <li>
-                                            <a class="dropdown-item d-flex align-items-center gap-2"
-                                                href="/pesanan/detail">
+                                            <a class="dropdown-item d-flex align-items-center gap-2" href="/pesanan/detail">
                                                 <i class="fas fa-box text-success"></i> Pesanan
                                             </a>
                                         </li>
@@ -147,10 +130,11 @@ function is_active($route)
                                         </li>
                                         <li>
                                             <a class="dropdown-item d-flex align-items-center gap-2" href="#" id="logoutButton">
-                                                <i class="fas fa-sign-out-alt text-danger"></i> Logout
+                                                <i class="fas fa-sign-out-alt text-danger"></i> Keluar
                                             </a>
                                         </li>
                                     </ul>
+
                                 </li>
 
                                 <li style="position: relative;">
@@ -159,14 +143,6 @@ function is_active($route)
                                         <span id="cart-badge">0</span>
                                     </a>
                                 </li>
-
-                                <li style="position: relative;">
-                                    <a href="#" class="list-link position-relative auth-link" data-url="/product/wishlist">
-                                        <i class="far fa-heart text-dark fa-sm"></i>
-                                        <span id="wishlist-badge">0</span>
-                                    </a>
-                                </li>
-
                                 <li class="auth-login-container" style="position: relative;">
                                     <div class="auth-login-container" style="position: relative;">
                                         <a href="/login" class="auth-login-button-3">
@@ -186,10 +162,8 @@ function is_active($route)
             </div>
         </nav>
     </div>
-    <!-- navbar end -->
 </header>
 
-<!-- Search Modal -->
 <div class="modal fade no-backdrop" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel"
     data-bs-backdrop="false">
     <div class="modal-dialog modal-dialog-centered m-auto">
@@ -201,53 +175,11 @@ function is_active($route)
                         <input type="text" class="form-control modal-search-input" name="search"
                             placeholder="Cari di Furnice" autofocus>
                     </form>
-                    <!-- <i class="bi bi-mic-fill voice-search-icon"></i> -->
                 </div>
                 <button type="button" class="btn-close ms-3" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body pt-2">
-                <!-- Section Title -->
-                <!-- <div class="search-section-title mb-2 ps-2">
-                    <span class="text-muted fs-7">Pencarian Terakhir</span>
-                </div> -->
-
-                <!-- Recent Searches -->
                 <div class="search-suggestions">
-                    <!-- <div class="search-item">
-                        <i class="bi bi-clock-history search-icon"></i>
-                        <span>kulkas 2 pintu</span>
-                        <i class="bi bi-x-lg delete-search ms-auto"></i>
-                    </div>
-                    <div class="search-item">
-                        <i class="bi bi-clock-history search-icon"></i>
-                        <span>kipas angin dinding</span>
-                        <i class="bi bi-x-lg delete-search ms-auto"></i>
-                    </div>
-                    <div class="search-item">
-                        <i class="bi bi-clock-history search-icon"></i>
-                        <span>parfum pria</span>
-                        <i class="bi bi-x-lg delete-search ms-auto"></i>
-                    </div> -->
-
-                    <!-- Popular Searches Section -->
-                    <!-- <div class="search-section-title mt-3 mb-2 ps-2">
-                        <span class="text-muted fs-7">Pencarian Populer</span>
-                    </div>
-
-                    <div class="search-item">
-                        <i class="bi bi-graph-up-arrow search-icon trending-icon"></i>
-                        <span>cushion</span>
-                    </div>
-                    <div class="search-item">
-                        <i class="bi bi-graph-up-arrow search-icon trending-icon"></i>
-                        <span>dompet pria</span>
-                    </div>
-                    <div class="search-item">
-                        <i class="bi bi-graph-up-arrow search-icon trending-icon"></i>
-                        <span>minyak goreng 2l</span>
-                    </div> -->
-
-                    <!-- Tips Section -->
                     <div class="search-item mt-3 border-top pt-3">
                         <i class="bi bi-lightbulb-fill tips-icon"></i>
                         <div class="d-flex justify-content-between w-100 align-items-center">
@@ -286,30 +218,12 @@ function is_active($route)
                 console.error('Error fetch nominal keranjang:', err);
             });
 
-        // Fetch jumlah wishlist
-        fetch(API_BASE_URL + '/nominal-wishlist', {
-                method: 'GET',
-                headers: {
-                    'Authorization': 'Bearer ' + token
-                }
-            })
-            .then(res => res.json())
-            .then(data => {
-                if (data.status === 'success') {
-                    const wishlistCount = data.total_wishlist || 0;
-                    document.getElementById('wishlist-badge').innerText = wishlistCount;
-                } else {
-                    console.error('Gagal ambil jumlah wishlist:', data.message);
-                }
-            })
-            .catch(err => {
-                console.error('Error fetch wishlist:', err);
-            });
+
     });
 
 
 
-    // Navigasi aman berdasarkan token
+
     document.querySelectorAll('.auth-link').forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
@@ -327,19 +241,15 @@ function is_active($route)
         const token = localStorage.getItem('auth_token');
 
         if (token) {
-            // Sembunyikan elemen login jika token tidak ada
             const loginContainer = document.querySelector('.auth-login-container');
             if (loginContainer) {
                 loginContainer.style.display = 'none';
             }
-
-            // Alternatif jika ada multiple elemen dengan class yang sama
             const loginContainers = document.querySelectorAll('.auth-login-container');
             loginContainers.forEach(container => {
                 container.style.display = 'none';
             });
 
-            // Jika ingin menyembunyikan elemen li parent
             const loginLi = document.querySelector('li.auth-login-container');
             if (loginLi) {
                 loginLi.style.display = 'none';
@@ -352,11 +262,9 @@ function is_active($route)
         if (logoutButton) {
             logoutButton.addEventListener('click', function(e) {
                 e.preventDefault();
-
-                // Hapus token dari localStorage
                 localStorage.removeItem('auth_token');
 
-                // Redirect langsung ke halaman login
+
                 window.location.href = '/login';
             });
         }

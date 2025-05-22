@@ -145,7 +145,7 @@ $apiBaseUrl = env('API_BASE_URL');
                                         </div>
                                         <div>
                                             <a href="/profile">
-                                                <button class="button-edit">Edit Alamat</button>
+                                                <button class="button-edit">Tambah Alamat</button>
                                             </a>
                                         </div>
                                     </div>
@@ -291,7 +291,6 @@ $apiBaseUrl = env('API_BASE_URL');
     <!-- js -->
     <?php include __DIR__ . '/../Scripts/script.php'; ?>
     <!-- js end -->
-    <script data-cfasync="false" src="cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
     <script src="assets/js/jquery-3.7.1.min.js"></script>
     <script src="assets/js/modernizr.min.js"></script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
@@ -342,8 +341,8 @@ $apiBaseUrl = env('API_BASE_URL');
 
     <!-- Script -->
     <script>
-        const tokoList = <?php echo json_encode($model['toko']); ?>;
-        const jenisPengiriman = <?php echo json_encode($model['jenisPengiriman']); ?>;
+        let tokoList = [];
+        let jenisPengiriman = [];
         const btnAntar = document.getElementById('btn-antar');
         const btnAmbil = document.getElementById('btn-ambil');
         const content = document.getElementById('pengiriman-content');
@@ -351,7 +350,7 @@ $apiBaseUrl = env('API_BASE_URL');
         const idPengirimanInput = document.getElementById('id_pengiriman');
         const ongkirEl = document.getElementById('total-ongkir');
         const totalPembayaranEl = document.getElementById('total-pembayaran');
-        const baseTotal = <?= $model['subtotal'] - $model['total_diskon'] ?>;
+        const baseTotal = [];
 
         function formatRupiah(angka) {
             return new Intl.NumberFormat('id-ID').format(angka);
@@ -424,26 +423,23 @@ $apiBaseUrl = env('API_BASE_URL');
             totalPembayaranEl.innerText = formatRupiah(baseTotal);
         });
 
-        // Render default antar saat load
+  
         renderContent('antar');
     </script>
     <script>
-        // Function to display addresses with the primary address at the top
+        
         function displayAddresses(addresses) {
-            // Sort addresses to put the primary address (utama = 1 or true) at the top
+         
             addresses.sort((a, b) => {
                 return b.utama - a.utama;
             });
 
             const alamatContentElement = document.getElementById('alamat-content');
-            alamatContentElement.innerHTML = ''; // Clear existing content
-
-            // Loop through sorted addresses and create HTML elements
+            alamatContentElement.innerHTML = ''; 
             addresses.forEach(address => {
                 const addressElement = document.createElement('div');
                 addressElement.className = 'd-flex align-items-start gap-2 w-100 mt-2';
 
-                // Create radio input
                 const radioInput = document.createElement('input');
                 radioInput.type = 'radio';
                 radioInput.name = 'lokasi_alamat';
@@ -454,11 +450,10 @@ $apiBaseUrl = env('API_BASE_URL');
                     selectAlamat(this);
                 };
 
-                // Create text container div
+            
                 const textContainer = document.createElement('div');
                 textContainer.className = 'd-flex flex-column';
 
-                // Add address details
                 const addressLine1 = document.createElement('div');
                 addressLine1.className = 'text-detail-jasa';
                 addressLine1.textContent = `${address.detail_alamat}`;
@@ -467,7 +462,7 @@ $apiBaseUrl = env('API_BASE_URL');
                 addressLine2.className = 'text-detail-jasa';
                 addressLine2.textContent = `${address.kelurahan}, ${address.kecamatan}, ${address.kabupaten}, ${address.provinsi}`;
 
-                // Append elements
+     
                 textContainer.appendChild(addressLine1);
                 textContainer.appendChild(addressLine2);
 
@@ -478,7 +473,6 @@ $apiBaseUrl = env('API_BASE_URL');
             });
         }
 
-        // Function to handle radio button selection and update primary address
         function selectAlamat(radioElement) {
             const addressId = radioElement.value;
             const token = localStorage.getItem('auth_token');
@@ -502,20 +496,19 @@ $apiBaseUrl = env('API_BASE_URL');
                 })
                 .then(response => response.json())
                 .then(result => {
-                    // console.log(result.data);
-                    // Update the UI to reflect the new primary address
+                 
                     const allRadios = document.querySelectorAll('input[name="lokasi_alamat"]');
                     allRadios.forEach(radio => {
                         const parentDiv = radio.closest('.d-flex');
                         if (radio.value === addressId) {
-                            // This is now the primary address
+                         
                             radio.checked = true;
                         }
                     });
                 })
                 .catch(error => {
                     if (error.message.includes('Token tidak ditemukan') || error.message.includes('Token tidak valid, silakan login ulang')) {
-                        // Token is invalid, remove token and redirect to login
+                
                         localStorage.removeItem('auth_token');
                         alert("Sesi Anda telah habis. Silakan login ulang.");
                         window.location.href = '/login';
@@ -526,7 +519,7 @@ $apiBaseUrl = env('API_BASE_URL');
                 });
         }
 
-        // Fetch addresses on page load
+    
         document.addEventListener('DOMContentLoaded', function() {
             const token = localStorage.getItem('auth_token');
             if (!token) {
@@ -543,45 +536,37 @@ $apiBaseUrl = env('API_BASE_URL');
                 })
                 .then(response => response.json())
                 .then(result => {
-                    // console.log(result.data);
                     displayAddresses(result.data);
                 })
                 .catch(error => {
                     if (error.message.includes('Token tidak ditemukan') || error.message.includes('Token tidak valid, silakan login ulang')) {
-                        // Token is invalid, remove token and redirect to login
+            
                         localStorage.removeItem('auth_token');
                         alert("Sesi Anda telah habis. Silakan login ulang.");
                         window.location.href = '/login';
                         return;
                     }
                     console.error('Error:', error);
-                    // alert('Terjadi kesalahan saat mengambil data alamat');
                 });
         });
     </script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('formBayar').addEventListener('submit', function(e) {
-                e.preventDefault(); // Prevent default form submission
-
-                // Get button elements
+                e.preventDefault(); 
                 const payButton = document.getElementById('payButton');
                 const buttonText = document.getElementById('buttonText');
                 const buttonSpinner = document.getElementById('buttonSpinner');
-
-                // If button is already in loading state, don't process again
                 if (payButton.getAttribute('data-loading') === 'true') {
                     return;
                 }
 
-                // Set button to loading state
                 payButton.setAttribute('data-loading', 'true');
                 payButton.classList.add('disabled');
                 buttonText.textContent = 'Memproses...';
                 buttonSpinner.style.display = 'inline-block';
 
                 const token = localStorage.getItem('auth_token');
-                // console.log(token);
                 if (!token) {
                     window.location.href = '/login';
                     return;
@@ -594,7 +579,6 @@ $apiBaseUrl = env('API_BASE_URL');
                     window.location.href = '/product';
                     return;
                 }
-                // console.log(cartIds);
 
                 const idToko = document.getElementById('id_toko').value;
                 const idPengiriman = document.getElementById('id_pengiriman').value;
@@ -645,12 +629,11 @@ $apiBaseUrl = env('API_BASE_URL');
                                 showToast(data.message || 'Terjadi kesalahan', 'danger');
                             }
                             if (data.message === "Alamat belum ditambahkan") {
-                                showToast('Alamat belum ditambahkan', 'danger');
+                                window.location.href = '/profile';
                             }
                         }
                     })
                     .catch(error => {
-                        // Reset button state on error
                         resetButtonState();
                         showToast('Terjadi kesalahan dalam mengirim data', 'danger');
                         console.error('Error:', error);
@@ -688,20 +671,17 @@ $apiBaseUrl = env('API_BASE_URL');
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const token = localStorage.getItem('auth_token');
-            // console.log(token);
             if (!token) {
                 window.location.href = '/login';
                 return;
             }
 
-            // Mendapatkan cart_ids dari localStorage
+
             const cartIds = localStorage.getItem('cart_ids');
             if (cartIds === null) {
-                // kembali ke product
                 window.location.href = '/product';
                 return;
             }
-            // console.log(cartIds);
 
             fetch(`${API_BASE_URL}/pesanan/index?cart_ids=${cartIds}`, {
                     method: 'GET',
@@ -747,7 +727,6 @@ $apiBaseUrl = env('API_BASE_URL');
                 // }
 
                 // Submit payment logic here
-                // console.log('Processing payment with toko:', idToko, 'pengiriman:', idPengiriman);
                 // Add your payment processing code
             });
         });
@@ -765,7 +744,6 @@ $apiBaseUrl = env('API_BASE_URL');
             let productHTML = '';
 
             products.forEach(item => {
-                // Calculate discounted price
                 const hargaNormal = parseInt(item.harga);
                 const diskon = parseInt(item.diskon);
                 let hargaSetelahDiskon = hargaNormal;
@@ -776,97 +754,103 @@ $apiBaseUrl = env('API_BASE_URL');
                     hargaSetelahDiskon = hargaNormal - nominalDiskon;
                 }
 
-                // Determine valid quantity (not exceeding available stock)
+        
                 const validQty = (parseInt(item.qty_cart) > parseInt(item.qty_motif)) ?
                     parseInt(item.qty_motif) : parseInt(item.qty_cart);
-
-                // Calculate total price for this item
                 const totalItemPrice = validQty * hargaSetelahDiskon;
 
                 productHTML += `
-            <div class="w-100 p-4 pt-0 d-flex align-items-center border-bottom pb-3">
-                <!-- Product Column -->
-                <div style="width: 50%;" class="d-flex gap-3 align-items-center">
-                    <div class="card shadow position-relative rounded-4 p-2">
-                        <!-- Corner Ribbon -->
-                        <div class="position-absolute ribbon-wrapper-keranjang">
-                            <div class="ribbon-keranjang text-white text-uppercase fw-bold text-center">
-                                New Product
-                            </div>
-                        </div>
-                        <!-- Product Image -->
-                        <div class="text-center pt-3">
-                            <img src="${item.url_foto}"
-                                class="img-fluid product-image-keranjang"
-                                alt="${item.nama_product}">
+        <div class="w-100 p-4 pt-0 d-flex align-items-center border-bottom pb-3">
+            <!-- Product Column -->
+            <div style="width: 50%;" class="d-flex gap-3 align-items-center">
+                <div class="card shadow position-relative rounded-4 p-2">
+                    <!-- Corner Ribbon -->
+                    <div class="position-absolute ribbon-wrapper-keranjang">
+                        <div class="ribbon-keranjang text-white text-uppercase fw-bold text-center">
+                            New Product
                         </div>
                     </div>
-                    <div>
-                        <h5 class="title-keranjang">
-                            ${item.nama_product}
-                        </h5>
-                        <p class="name-keranjang">
-                        ${truncateWords(item.deskripsi, 6)}
-                        </p>
-                        <ul class="list-unstyled m-0 p-0">
-                            <li class="motif-keranjang">
-                                <span class="label-keranjang">Warna</span> : <span
-                                    class="value-keranjang">${item.warna}</span>
-                            </li>
-                            <li class="motif-keranjang">
-                                <span class="label-keranjang">Motif</span> : <span
-                                    class="value-keranjang">${item.motif}</span>
-                            </li>
-                        </ul>
-                        <div class="d-flex flex-wrap align-items-baseline">
-                            <div class="me-2">
-                                <span class="fw-bold title-keranjang">
-                                    <sup class="fw-normal">Rp</sup>
-                                    ${formatNumber(hargaSetelahDiskon)}
-                                </span>
-                            </div>
+                    <!-- Product Image -->
+                    <div class="text-center pt-3">
+                        <img src="${item.url_foto}"
+                            class="img-fluid product-image-keranjang"
+                            alt="${item.nama_product}">
+                    </div>
+                </div>
+                <div>
+                    <h5 class="title-keranjang">
+                        ${item.nama_product}
+                    </h5>
+                    <p class="name-keranjang">
+                    ${truncateWords(item.deskripsi, 6)}
+                    </p>
+                    <ul class="list-unstyled m-0 p-0">
+                        <li class="motif-keranjang">
+                            <span class="label-keranjang">Warna</span> : <span
+                                class="value-keranjang">${item.warna}</span>
+                        </li>
+                        <li class="motif-keranjang">
+                            <span class="label-keranjang">Motif</span> : <span
+                                class="value-keranjang">${item.motif}</span>
+                        </li>
+                    </ul>
+                    
+                    <!-- Shop Name Card -->
+                    <div class="shop-name-card bg-light rounded p-1 mt-1 mb-2">
+                        <small class="text-muted">
+                            <i class="fas fa-store me-1"></i>${item.nama_toko || "Toko Furnic"}
+                        </small>
+                    </div>
+                    
+                    <div class="d-flex flex-wrap align-items-baseline">
+                        <div class="me-2">
+                            <span class="fw-bold title-keranjang">
+                                <sup class="fw-normal">Rp</sup>
+                                ${formatNumber(hargaSetelahDiskon)}
+                            </span>
+                        </div>
+                        <div>
+                            ${diskon > 0 ? `
                             <div>
-                                ${diskon > 0 ? `
-                                <div>
-                                    <span class="fw-normal text-danger old-price">
-                                        <sup>Rp</sup>
-                                        <span class="text-decoration-line-through">
-                                            ${formatNumber(hargaNormal)}
-                                        </span>
+                                <span class="fw-normal text-danger old-price">
+                                    <sup>Rp</sup>
+                                    <span class="text-decoration-line-through">
+                                        ${formatNumber(hargaNormal)}
                                     </span>
-                                </div>` : ''}
-                            </div>
+                                </span>
+                            </div>` : ''}
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- Quantity Column -->
-                <div style="width: 15%; text-align: center;">
-                    <span class="fw-normal text-black" style="font-size: 14px;"
-                        id="qty-${item.id_cart}"
-                        data-max="${item.qty_motif}"
-                        data-price="${hargaSetelahDiskon}">
-                        ${validQty}
-                    </span>
-                </div>
+            <!-- Quantity Column -->
+            <div style="width: 15%; text-align: center;">
+                <span class="fw-normal text-black" style="font-size: 14px;"
+                    id="qty-${item.id_cart}"
+                    data-max="${item.qty_motif}"
+                    data-price="${hargaSetelahDiskon}">
+                    ${validQty}
+                </span>
+            </div>
 
-                <!-- Price Column -->
-                <div style="width: 15%; text-align: center;">
-                    <span class="fw-bold title-keranjang">
-                        <sup class="fw-normal">Rp</sup>
-                        ${formatNumber(hargaSetelahDiskon)}
-                    </span>
-                </div>
+            <!-- Price Column -->
+            <div style="width: 15%; text-align: center;">
+                <span class="fw-bold title-keranjang">
+                    <sup class="fw-normal">Rp</sup>
+                    ${formatNumber(hargaSetelahDiskon)}
+                </span>
+            </div>
 
-                <!-- Total Column -->
-                <div style="width: 20%; text-align: center;">
-                    <span id="total-${item.id_cart}"
-                        class="fw-bold title-keranjang total-produk-detail">
-                        <sup class="fw-normal">Rp</sup>
-                        ${formatNumber(totalItemPrice)}
-                    </span>
-                </div>
-            </div>`;
+            <!-- Total Column -->
+            <div style="width: 20%; text-align: center;">
+                <span id="total-${item.id_cart}"
+                    class="fw-bold title-keranjang total-produk-detail">
+                    <sup class="fw-normal">Rp</sup>
+                    ${formatNumber(totalItemPrice)}
+                </span>
+            </div>
+        </div>`;
             });
 
             productListElement.innerHTML = productHTML;
@@ -1062,7 +1046,6 @@ $apiBaseUrl = env('API_BASE_URL');
                         const res = JSON.parse(response);
                         if (res.status === 'success') {
                             // Ambil data dari form
-                            console.log(res);
                             const nama = $('#nama_user').val();
                             const email = $('#email').val();
                             const no_hp = $('#no_telpon').val();

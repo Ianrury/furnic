@@ -11,23 +11,21 @@ $apiBaseUrl = env('API_BASE_URL');
 <html lang="en">
 
 <head>
-    <!-- meta tags -->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="keywords" content="">
 
-    <!-- title -->
+
     <title><?php echo $model['title']; ?> - PT Furnice Furnishing Indonesia</title>
     <base href="/">
-    <!-- favicon -->
+
     <link rel="icon" type="image/x-icon" href="assets/img/logo/favicon.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
         integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 
-    <!-- css -->
-    <!-- <link rel="stylesheet" href="/app/App/assets/css/bootstrap"> -->
+
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/all-fontawesome.min.css">
     <link rel="stylesheet" href="assets/css/animate.min.css">
@@ -41,7 +39,9 @@ $apiBaseUrl = env('API_BASE_URL');
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
-
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+    <!-- Select2 Bootstrap 5 Theme -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -177,18 +177,16 @@ $apiBaseUrl = env('API_BASE_URL');
         <i class="fab fa-whatsapp"></i>
     </a>
 
-    <!-- preloader -->
+
     <div class="preloader">
         <div class="loader-ripple">
             <div></div>
             <div></div>
         </div>
     </div>
-    <!-- preloader end -->
 
-    <!-- header area -->
     <?php include __DIR__ . '/../templates/header.php'; ?>
-    <!-- header area end -->
+
 
     <nav class="breadcrumb-nav mt-3">
         <div class="container">
@@ -202,13 +200,11 @@ $apiBaseUrl = env('API_BASE_URL');
         </div>
     </nav>
 
-    <!-- popup search end -->
-
 
     <main class="main">
         <div class="container my-4">
             <div class="row">
-                <!-- Profile Header -->
+
                 <div class="col-12 mb-4">
                     <div class="profile-header">
                         <div class="row align-items-center">
@@ -250,7 +246,7 @@ $apiBaseUrl = env('API_BASE_URL');
             </div>
 
             <div class="row">
-                <!-- Left Sidebar -->
+
                 <div class="col-md-3 mb-4">
                     <div class="card profile-card mb-4">
                         <div class="card-header bg-white">
@@ -264,15 +260,11 @@ $apiBaseUrl = env('API_BASE_URL');
                                 <a class="nav-link mb-2" href="#riwayat-pesanan" data-bs-toggle="tab">
                                     <i class="fas fa-shopping-bag me-2"></i>Riwayat Pesanan
                                 </a>
-                                <a class="nav-link mb-2" href="#wishlist" data-bs-toggle="tab">
-                                    <i class="fas fa-heart me-2"></i>Wishlist
-                                </a>
+
                                 <a class="nav-link mb-2" href="#alamat-tersimpan" data-bs-toggle="tab">
                                     <i class="fas fa-map-marker-alt me-2"></i>Alamat Tersimpan
                                 </a>
-                                <!-- <a class="nav-link mb-2" href="#pembayaran" data-bs-toggle="tab">
-                                    <i class="fas fa-credit-card me-2"></i>Metode Pembayaran
-                                </a> -->
+
                                 <a class="nav-link mb-2" id="nav-akun-tab" href="#pengaturan-akun" data-bs-toggle="tab">
                                     <i class="fas fa-shield-alt me-2"></i>Keamanan Akun
                                 </a>
@@ -281,10 +273,9 @@ $apiBaseUrl = env('API_BASE_URL');
                     </div>
                 </div>
 
-                <!-- Main Content -->
                 <div class="col-md-9">
                     <div class="tab-content">
-                        <!-- Informasi Pribadi -->
+
                         <div class="tab-pane fade show active" id="informasi-pribadi">
                             <div class="card profile-card mb-4">
                                 <div class="card-header bg-white d-flex justify-content-between align-items-center">
@@ -377,13 +368,13 @@ $apiBaseUrl = env('API_BASE_URL');
                             </div>
                         </div>
 
-                        <!-- Riwayat Pesanan -->
+
                         <div class="tab-pane fade" id="riwayat-pesanan">
                             <div class="card profile-card mb-4">
                                 <div class="card-header bg-white">
                                     <h5 class="mb-0">Riwayat Pesanan</h5>
                                 </div>
-                                <!-- Order List Template -->
+
                                 <div class="card-body" id="order-list">
                                     <ul class="nav nav-pills mb-3" id="orderTabs" role="tablist">
                                         <li class="nav-item" role="presentation">
@@ -409,30 +400,27 @@ $apiBaseUrl = env('API_BASE_URL');
                                     </ul>
 
                                     <div class="tab-content" id="orderTabsContent">
-                                        <!-- All Orders Tab -->
+
                                         <div class="tab-pane fade show active" id="all-orders">
                                             <div id="all-orders-container"></div>
-                                            <!-- <div class="text-center mt-4">
-                                                <button class="btn btn-outline-primary">Lihat Semua Pesanan</button>
-                                            </div> -->
+
                                         </div>
 
-                                        <!-- Pending Orders Tab -->
                                         <div class="tab-pane fade" id="pending-orders">
                                             <div id="pending-orders-container"></div>
                                         </div>
 
-                                        <!-- Confirmed Orders Tab -->
+
                                         <div class="tab-pane fade" id="confirmed-orders">
                                             <div id="confirmed-orders-container"></div>
                                         </div>
 
-                                        <!-- Shipped Orders Tab -->
+
                                         <div class="tab-pane fade" id="shipped-orders">
                                             <div id="shipped-orders-container"></div>
                                         </div>
 
-                                        <!-- Completed Orders Tab -->
+
                                         <div class="tab-pane fade" id="completed-orders">
                                             <div id="completed-orders-container"></div>
                                         </div>
@@ -441,8 +429,8 @@ $apiBaseUrl = env('API_BASE_URL');
                             </div>
                         </div>
 
-                        <!-- Wishlist -->
-                        <div class="tab-pane fade" id="wishlist">
+
+                        <div class="tab-pane fade" id="wishlist" style="visibility: hidden;">
                             <div class="card profile-card">
                                 <div class="card-header bg-white">
                                     <h5 class="mb-0">Wishlist Saya</h5>
@@ -455,7 +443,7 @@ $apiBaseUrl = env('API_BASE_URL');
 
                             </div>
                         </div>
-                        <!-- Alamat Tersimpan -->
+
                         <div class="tab-pane fade" id="alamat-tersimpan">
                             <div class="card profile-card">
                                 <div class="card-header bg-white">
@@ -562,7 +550,7 @@ $apiBaseUrl = env('API_BASE_URL');
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title text-black" id="exampleModalLabel">Tambah Alamat</h5>
+                    <h5 class="modal-title text-black" id="exampleModalLabel">Edit Alamat</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -617,24 +605,38 @@ $apiBaseUrl = env('API_BASE_URL');
                 </div>
                 <div class="modal-body">
                     <form id="formTambahAlamat" method="post">
+                        <!-- Hidden inputs to store the actual text values -->
+                        <input type="hidden" id="provinsi" name="provinsi">
+                        <input type="hidden" id="kabupaten" name="kabupaten">
+                        <input type="hidden" id="kecamatan" name="kecamatan">
+                        <input type="hidden" id="kelurahan" name="kelurahan">
+
                         <div>
-                            <label for="provinsi" class="form-label">Provinsi <span class="required">*</span></label>
-                            <input type="text" class="form-control form-login" id="provinsi" name="provinsi" placeholder="Contoh: Jawa Tengah">
+                            <label for="select2-provinsi" class="form-label">Provinsi <span class="required">*</span></label>
+                            <select class="form-control form-login" id="select2-provinsi">
+                                <!-- Options will be loaded dynamically -->
+                            </select>
                         </div>
 
                         <div>
-                            <label for="kabupaten" class="form-label">Kabupaten <span class="required">*</span></label>
-                            <input type="text" class="form-control form-login" id="kabupaten" name="kabupaten" placeholder="Contoh: Kabupaten Semarang">
+                            <label for="select2-kabupaten" class="form-label">Kabupaten <span class="required">*</span></label>
+                            <select class="form-control form-login" id="select2-kabupaten">
+                                <!-- Options will be loaded dynamically -->
+                            </select>
                         </div>
 
                         <div>
-                            <label for="kecamatan" class="form-label">Kecamatan <span class="required">*</span></label>
-                            <input type="text" class="form-control form-login" id="kecamatan" name="kecamatan" placeholder="Contoh: Ungaran Barat">
+                            <label for="select2-kecamatan" class="form-label">Kecamatan <span class="required">*</span></label>
+                            <select class="form-control form-login" id="select2-kecamatan">
+                                <!-- Options will be loaded dynamically -->
+                            </select>
                         </div>
 
                         <div>
-                            <label for="kelurahan" class="form-label">Kelurahan <span class="required">*</span></label>
-                            <input type="text" class="form-control form-login" id="kelurahan" name="kelurahan" placeholder="Contoh: Leyangan">
+                            <label for="select2-kelurahan" class="form-label">Kelurahan <span class="required">*</span></label>
+                            <select class="form-control form-login" id="select2-kelurahan">
+                                <!-- Options will be loaded dynamically -->
+                            </select>
                         </div>
 
                         <div>
@@ -650,23 +652,14 @@ $apiBaseUrl = env('API_BASE_URL');
 
                         <button type="submit" class="btn btn-masuk mt-2 w-100" id="submit-btn-alamat">Submit</button>
                     </form>
-
                 </div>
             </div>
         </div>
     </div>
     <div id="toastContainer" class="position-fixed top-0 end-0 p-3" style="z-index: 9999;"></div>
 
-    <!-- footer area -->
     <?php include __DIR__ . '/../templates/footer.php'; ?>
-    <!-- footer area end -->
 
-
-
-    <!-- js -->
-
-    <!-- js end -->
-    <!-- <script data-cfasync="false" src="cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script> -->
     <script src="assets/js/jquery-3.7.1.min.js"></script>
     <script src="assets/js/modernizr.min.js"></script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
@@ -683,16 +676,16 @@ $apiBaseUrl = env('API_BASE_URL');
     <script src="assets/js/wow.min.js"></script>
     <script src="assets/js/main.js"></script>
     <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
     <script>
         $(document).ready(function() {
             $('.trigger-tab-akun').on('click', function() {
-                console.log("clicked");
 
-                // Ambil elemen tab target
                 var tabEl = document.querySelector('#nav-akun-tab');
 
-                // Gunakan Bootstrap Tab API untuk show
+
                 var tab = new bootstrap.Tab(tabEl);
                 tab.show();
             });
@@ -739,17 +732,15 @@ $apiBaseUrl = env('API_BASE_URL');
                     const user = result.data.user;
                     const successful_payment_count = result.data.successful_payment_count;
 
-                    console.log("Successful Payment Count:", successful_payment_count); // Debugging nilai successful_payment_count
 
-                    // Set value ke form
                     document.getElementById('username').value = user.nama || '';
                     document.getElementById('email').value = user.email || '';
                     document.getElementById('tanggal_lahir').value = user.tanggal_lahir || '';
                     document.getElementById('jenis_kelamin').value = user.jenis_kelamin || '';
                     document.getElementById('phone').value = user.no_hp || '';
-                    document.getElementById('password').value = ''; // Tidak ditampilkan demi keamanan
+                    document.getElementById('password').value = '';
 
-                    // Menampilkan data ke elemen HTML
+
                     document.getElementById('user-nama').textContent = user.nama || 'N/A';
                     document.getElementById('user-tanggal-lahir').textContent = user.tanggal_lahir || 'N/A';
                     document.getElementById('user-jenis-kelamin').textContent = user.jenis_kelamin || 'N/A';
@@ -761,7 +752,7 @@ $apiBaseUrl = env('API_BASE_URL');
                     document.getElementById('phone-header').textContent = user.no_hp || 'N/A';
                     document.getElementById('email-header').textContent = user.email || 'N/A';
 
-                    // Menangani successful_payment_count dengan lebih tepat
+
                     const countText = successful_payment_count !== null && successful_payment_count !== undefined ? successful_payment_count : 0;
                     document.getElementById('successful-payment-count').textContent = countText;
                 })
@@ -788,14 +779,13 @@ $apiBaseUrl = env('API_BASE_URL');
 
                     const alamatList = result.data;
                     const alamatContainer = document.getElementById('alamat-list');
-                    alamatContainer.innerHTML = ''; // Clear existing content
+                    alamatContainer.innerHTML = '';
 
-                    // Loop through the alamat data and create HTML for each item
                     alamatList.forEach(alamat => {
                         const alamatItem = document.createElement('div');
                         alamatItem.classList.add('col-md-6', 'mb-4');
 
-                        // Create card content
+
                         alamatItem.innerHTML = `
             <div class="card alamat-item h-100">
                 ${alamat.utama ? '<span class="label-utama">Utama</span>' : ''}
@@ -830,9 +820,9 @@ $apiBaseUrl = env('API_BASE_URL');
 
         });
 
-        // Menangani tombol Edit
+
         $(document).on('click', '.tombol-edit', function() {
-            const alamatId = $(this).data('id'); // Mendapatkan ID alamat dari atribut data-id
+            const alamatId = $(this).data('id');
             const token = localStorage.getItem('auth_token');
             const productList = document.getElementById('product-list');
 
@@ -840,21 +830,20 @@ $apiBaseUrl = env('API_BASE_URL');
                 productList.innerHTML = '<div class="alert alert-warning">Silakan login terlebih dahulu</div>';
                 return;
             }
-            // Mengambil data alamat dari server
+
             document.getElementById('id_alamat').value = alamatId;
             $.ajax({
-                url: `${API_BASE_URL}/alamat/edit/${alamatId}`, // Endpoint API untuk mengambil data alamat
+                url: `${API_BASE_URL}/alamat/edit/${alamatId}`,
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json'
                 },
-                contentType: 'application/json', // Tentukan tipe konten sebagai JSON
+                contentType: 'application/json',
                 success: function(response) {
                     if (response.status === 'success') {
                         const alamat = response.data;
 
-                        // Isi modal dengan data alamat yang diterima
                         $('#provinsi-edit').val(alamat.provinsi);
                         $('#kabupaten-edit').val(alamat.kabupaten);
                         $('#kecamatan-edit').val(alamat.kecamatan);
@@ -862,7 +851,6 @@ $apiBaseUrl = env('API_BASE_URL');
                         $('#detail_rumah-edit').val(alamat.detail_rumah);
                         $('#detail_alamat-edit').val(alamat.detail_alamat);
 
-                        // Set title modal sesuai dengan alamat
                         $('#editAlamatModal .modal-title').text('Edit Alamat');
                     } else {
                         alert(response.message || 'Gagal memuat data alamat');
@@ -882,9 +870,7 @@ $apiBaseUrl = env('API_BASE_URL');
                 event.preventDefault();
 
                 const token = localStorage.getItem('auth_token');
-                // const alamatId = form.getAttribute('data-id'); // Pastikan Anda set attribute ini saat buka modal edit
 
-                // Ambil data dari form
                 const provinsi = document.getElementById('provinsi-edit').value;
                 const kabupaten = document.getElementById('kabupaten-edit').value;
                 const kecamatan = document.getElementById('kecamatan-edit').value;
@@ -892,7 +878,7 @@ $apiBaseUrl = env('API_BASE_URL');
                 const detail_rumah = document.getElementById('detail_rumah-edit').value;
                 const detail_alamat = document.getElementById('detail_alamat-edit').value;
 
-                // Validasi sederhana
+
                 if (!provinsi || !kabupaten || !kecamatan || !kelurahan || !detail_alamat || !detail_rumah) {
                     alert('Semua field wajib diisi!');
                     return;
@@ -905,10 +891,9 @@ $apiBaseUrl = env('API_BASE_URL');
                     kelurahan,
                     detail_rumah,
                     detail_alamat,
-                    utama: 0 // Bisa ganti 1 jika alamat utama
+                    utama: 0
                 };
                 const alamatId = document.getElementById('id_alamat').value;
-                // console.log(alamatId);
                 fetch(`${API_BASE_URL}/alamat/update/${alamatId}`, {
                         method: 'POST',
                         headers: {
@@ -936,7 +921,7 @@ $apiBaseUrl = env('API_BASE_URL');
         document.addEventListener("DOMContentLoaded", function() {
             const token = localStorage.getItem('auth_token');
             if (!token) {
-                window.location.href = '/login'; // Sesuaikan dengan lokasi halaman login kamu
+                window.location.href = '/login';
                 return;
             }
 
@@ -949,10 +934,9 @@ $apiBaseUrl = env('API_BASE_URL');
                 },
                 success: function(response) {
                     if (response.status === 'success') {
-                        console.log('Data produk wishlist:', response.data);
                         const allProductsRaw = response.data;
                         const wishlistContainer = $('#wishlist-list');
-                        wishlistContainer.empty(); // Kosongkan dulu isi sebelumnya
+                        wishlistContainer.empty();
 
                         allProductsRaw.forEach(product => {
                             const html = `
@@ -965,22 +949,22 @@ $apiBaseUrl = env('API_BASE_URL');
                                         alt="${product.nama_product}">
                                 </div>
                                <div class="col-8">
-    <div class="card-body">
-        <h6 class="card-title">${product.nama_product}</h6>
-        <div class="d-flex align-items-center mb-2">
-            <span class="text-warning me-1"><i class="fas fa-star"></i></span>
-            <span>${parseFloat(product.avg_rating).toFixed(1)} (${product.review_count} ulasan)</span>
-        </div>
-        <p class="card-text text-primary fw-bold mb-3">Rp ${formatRupiah(product.harga)}</p>
-        <div class="d-flex">
-            <button class="btn btn-sm btn-primary me-2 product-card" data-id="${product.id_product}" data-slug="${product.slug}" 
-                data-token="${product.token}" style="cursor:pointer;">Tambah ke Keranjang</button>
-            <button class="btn btn-sm btn-outline-danger tombol-delete-wishlist" data-id_product="${product.id_product}">
-                <i class="fas fa-trash"></i>
-            </button>
-        </div>
-    </div>
-</div>
+                                <div class="card-body">
+                                    <h6 class="card-title">${product.nama_product}</h6>
+                                    <div class="d-flex align-items-center mb-2">
+                                        <span class="text-warning me-1"><i class="fas fa-star"></i></span>
+                                        <span>${parseFloat(product.avg_rating).toFixed(1)} (${product.review_count} ulasan)</span>
+                                    </div>
+                                    <p class="card-text text-primary fw-bold mb-3">Rp ${formatRupiah(product.harga)}</p>
+                                    <div class="d-flex">
+                                        <button class="btn btn-sm btn-primary me-2 product-card" data-id="${product.id_product}" data-slug="${product.slug}" 
+                                            data-token="${product.token}" style="cursor:pointer;">Tambah ke Keranjang</button>
+                                        <button class="btn btn-sm btn-outline-danger tombol-delete-wishlist" data-id_product="${product.id_product}">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                             </div>
                         </div>
                     </div>`;
@@ -1088,9 +1072,8 @@ $apiBaseUrl = env('API_BASE_URL');
             const submitButton = document.getElementById('submit-btn');
 
             form.addEventListener('submit', function(event) {
-                event.preventDefault(); // Menghentikan pengiriman form
+                event.preventDefault();
 
-                // Ambil data dari form
                 const username = document.getElementById('username').value.trim();
                 const email = document.getElementById('email').value.trim();
                 const tanggal_lahir = document.getElementById('tanggal_lahir').value;
@@ -1100,7 +1083,7 @@ $apiBaseUrl = env('API_BASE_URL');
 
 
 
-                // Validasi form
+
                 if (!username || !email || !tanggal_lahir || !jenis_kelamin || !phone) {
                     alert('Semua kolom wajib diisi');
                     return;
@@ -1116,7 +1099,7 @@ $apiBaseUrl = env('API_BASE_URL');
                     password: password || undefined
                 };
 
-                // Kirim data dengan fetch
+
                 function showToast(message, type = 'danger') {
                     const toastId = 'toast-' + Date.now();
                     const toastHTML = `
@@ -1135,7 +1118,6 @@ $apiBaseUrl = env('API_BASE_URL');
                     toastElement.show();
                 }
 
-                // Panggil API untuk update data user
                 fetch(`${API_BASE_URL}/user/edit`, {
                         method: 'POST',
                         headers: {
@@ -1163,7 +1145,7 @@ $apiBaseUrl = env('API_BASE_URL');
                             localStorage.removeItem('auth_token');
                             showToast("Sesi Anda telah habis. Silakan login ulang.", 'danger');
                             setTimeout(() => {
-                                window.location.href = '/login'; // Ganti dengan URL login kamu
+                                window.location.href = '/login';
                             }, 1500);
                             return;
                         }
@@ -1171,69 +1153,6 @@ $apiBaseUrl = env('API_BASE_URL');
                         showToast('Terjadi kesalahan: ' + error.message, 'danger');
                     });
 
-            });
-        });
-
-
-
-        document.addEventListener("DOMContentLoaded", function() {
-            const form = document.getElementById('formTambahAlamat');
-            const submitButton = document.getElementById('submit-btn-alamat');
-
-            form.addEventListener('submit', function(event) {
-                event.preventDefault();
-
-                const token = localStorage.getItem('auth_token');
-
-                const provinsi = document.getElementById('provinsi').value.trim();
-                const kabupaten = document.getElementById('kabupaten').value.trim();
-                const kecamatan = document.getElementById('kecamatan').value.trim();
-                const kelurahan = document.getElementById('kelurahan').value.trim();
-                const detail_alamat = document.getElementById('detail_alamat').value.trim(); // Pastikan ini sesuai dengan nama input
-                const detail_rumah = document.getElementById('detail_rumah').value.trim();
-
-                if (!provinsi || !kabupaten || !kecamatan || !kelurahan || !detail_alamat || !detail_rumah) {
-                    alert('Semua field wajib diisi!');
-                    return;
-                }
-
-                const dataToSend = {
-                    provinsi,
-                    kabupaten,
-                    kecamatan,
-                    kelurahan,
-                    detail_alamat,
-                    detail_rumah,
-                    utama: 0 // Default bukan alamat utama
-                };
-
-                fetch(`${API_BASE_URL}/alamat/create`, {
-                        method: 'POST',
-                        headers: {
-                            'Authorization': `Bearer ${token}`,
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(dataToSend)
-                    })
-                    .then(response => response.json())
-                    .then(result => {
-                        if (result.status === 'success') {
-                            alert('Alamat Berhasil Ditambahkan');
-                            window.location.reload();
-                        } else {
-                            alert('Gagal menambahkan alamat: ' + result.message);
-                        }
-                    })
-                    .catch(error => {
-                        if (error.message.includes('Token tidak ditemukan') || error.message.includes('Token tidak valid, silakan login ulang')) {
-                            localStorage.removeItem('auth_token');
-                            alert("Sesi Anda telah habis. Silakan login ulang.");
-                            window.location.href = '/login';
-                            return;
-                        }
-                        console.error('Error:', error);
-                        alert('Terjadi kesalahan saat mengupdate data');
-                    });
             });
         });
     </script>
@@ -1249,7 +1168,7 @@ $apiBaseUrl = env('API_BASE_URL');
             return `${day} ${getMonthName(month)} ${year}`;
         }
 
-        // Function to get month name in Indonesian
+
         function getMonthName(month) {
             const monthNames = {
                 '01': 'Januari',
@@ -1268,7 +1187,6 @@ $apiBaseUrl = env('API_BASE_URL');
             return monthNames[month] || month;
         }
 
-        // Function to format currency
         function formatCurrency(amount) {
             return new Intl.NumberFormat('id-ID', {
                 style: 'currency',
@@ -1278,18 +1196,17 @@ $apiBaseUrl = env('API_BASE_URL');
             }).format(amount);
         }
 
-        // Function to create order card
         function createOrderCard(order) {
-            // Determine badge and status
+
             let badgeClass = 'bg-primary';
             let badgeText = 'Menunggu Pembayaran';
 
-            // Handle canceled orders first
+
             if (order.isbatal === 1) {
                 badgeClass = 'bg-danger';
                 badgeText = 'Dibatalkan';
             } else {
-                // Process regular order statuses
+
                 switch (order.status_pesanan) {
                     case 'waiting':
                         badgeClass = 'bg-primary';
@@ -1314,26 +1231,26 @@ $apiBaseUrl = env('API_BASE_URL');
                 }
             }
 
-            // Create product description
+
             const productNames = order.products.map(p => p.nama_product);
             const productDescription = productNames.length > 1 ?
                 `${productNames[0]} + ${productNames.length - 1} produk lainnya` :
                 productNames[0];
 
-            // Determine action buttons based on order status
+
             let actionButtons = `<a href="/detail/pesanan/${order.payment_token}">
                                     <button class="btn btn-primary">Detail</button>
                                  </a>`;
 
-            // Add payment button for waiting orders
+
             if (order.status_pesanan === 'waiting' && order.status_pembayaran !== 'sudah bayar' && order.isbatal !== 1) {
                 actionButtons = `<button onclick="goToPayment('${order.payment_token}')" class="btn btn-outline-primary mb-2 me-2">Bayar</button>
                                 ${actionButtons}`;
             }
 
-            // Add review button for completed orders
+
             if (order.status_pesanan === 'completed' && order.isbatal !== 1) {
-                // Check if review already given using is_review property
+
                 if (!order.is_review) {
                     actionButtons = `<button onclick="openReviewModal('${order.payment_token}')" class="btn btn-outline-success mb-2 me-2">Beri Ulasan</button>
                         ${actionButtons}`;
@@ -1364,7 +1281,7 @@ $apiBaseUrl = env('API_BASE_URL');
         }
 
         function renderOrders(orders) {
-            // Reset containers and counts
+
             const containers = {
                 'all': document.getElementById('all-orders-container'),
                 'pending': document.getElementById('pending-orders-container'),
@@ -1385,36 +1302,34 @@ $apiBaseUrl = env('API_BASE_URL');
                 'verification': document.getElementById('verification-orders-count')
             };
 
-            // Clear previous content
+
             Object.values(containers).forEach(container => {
                 if (container) container.innerHTML = '';
             });
 
-            // Group orders by status
+
             const groupedOrders = {
                 'all': orders,
-                // Change this line to include both 'waiting' and 'menunggu verifikasi' in pending
+
                 'pending': orders.filter(o => (o.status_pesanan === 'waiting' && o.status_pembayaran !== 'sudah bayar') ||
                     (o.status_pesanan === 'menunggu verifikasi') && o.isbatal !== 1),
-                // Remove the verification group or use it for something else if needed
-                'verification': orders.filter(o => false), // This will create an empty array
+                'verification': orders.filter(o => false),
                 'konfirmasi': orders.filter(o => o.status_pesanan === 'konfirmasi' && o.isbatal !== 1),
                 'dikirim': orders.filter(o => o.status_pesanan === 'dikirim' && o.isbatal !== 1),
                 'completed': orders.filter(o => o.status_pesanan === 'completed' && o.isbatal !== 1),
                 'canceled': orders.filter(o => o.isbatal === 1)
             };
 
-            // Render orders in each container
+
             Object.keys(groupedOrders).forEach(status => {
                 const ordersForStatus = groupedOrders[status];
 
-                // Skip if container doesn't exist (for backward compatibility)
                 if (!containers[status] || !countElements[status]) return;
 
-                // Update count
+
                 countElements[status].textContent = ordersForStatus.length;
 
-                // Render orders
+
                 if (ordersForStatus.length === 0) {
                     containers[status].innerHTML = '<div class="alert alert-info">Tidak ada pesanan</div>';
                 } else {
@@ -1426,20 +1341,15 @@ $apiBaseUrl = env('API_BASE_URL');
             });
         }
 
-        // Function to handle payment redirection
         function goToPayment(token) {
-            // Redirect to payment page with token
             window.location.href = `/pembayaran/${token}`;
         }
 
-        // Function to open review modal
         function openReviewModal(paymentToken) {
             window.location.href = `/review/${paymentToken}`;
         }
 
-        // Function to show review modal
         function showReviewModal(orderData, orderNumber, paymentToken) {
-            // Create modal content with products to review
             let productsHtml = '';
 
             orderData.products.forEach((product, index) => {
@@ -1469,7 +1379,6 @@ $apiBaseUrl = env('API_BASE_URL');
                 `;
             });
 
-            // Create and show modal
             const modalHtml = `
             <div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
@@ -1496,27 +1405,26 @@ $apiBaseUrl = env('API_BASE_URL');
             </div>
             `;
 
-            // Append modal to body if it doesn't exist
+
             if ($('#reviewModal').length === 0) {
                 $('body').append(modalHtml);
             } else {
                 $('#reviewModal').replaceWith(modalHtml);
             }
 
-            // Initialize modal
             const reviewModal = new bootstrap.Modal(document.getElementById('reviewModal'));
             reviewModal.show();
 
-            // Handle star rating
+
             $('.rating-star').on('click', function() {
                 const value = $(this).data('value');
                 const ratingContainer = $(this).parent();
                 const hiddenInput = ratingContainer.find('input[type="hidden"]');
 
-                // Update hidden input value
+
                 hiddenInput.val(value);
 
-                // Update stars UI
+
                 ratingContainer.find('.rating-star').each(function() {
                     if ($(this).data('value') <= value) {
                         $(this).addClass('text-warning');
@@ -1526,15 +1434,15 @@ $apiBaseUrl = env('API_BASE_URL');
                 });
             });
 
-            // Handle form submission
+
             $('#submit-review').on('click', function() {
                 submitReview(orderData);
             });
         }
 
-        // Function to submit review
+
         function submitReview(orderData) {
-            // Collect review data
+
             const reviews = [];
             let isValid = true;
 
@@ -1542,7 +1450,6 @@ $apiBaseUrl = env('API_BASE_URL');
                 const rating = parseInt($(`#product-rating-${index}`).val());
                 const reviewText = $(`#review-text-${index}`).val().trim();
 
-                // Validate
                 if (rating === 0) {
                     alert(`Mohon berikan rating untuk produk "${product.nama_product}"`);
                     isValid = false;
@@ -1570,7 +1477,7 @@ $apiBaseUrl = env('API_BASE_URL');
                 reviews: reviews
             };
 
-            // Submit to API
+
             $.ajax({
                 url: API_BASE_URL + '/submitReview',
                 type: 'POST',
@@ -1582,12 +1489,12 @@ $apiBaseUrl = env('API_BASE_URL');
                 },
                 success: function(response) {
                     if (response.status === 'success') {
-                        // Close modal and reload orders
+
                         const reviewModal = bootstrap.Modal.getInstance(document.getElementById('reviewModal'));
                         reviewModal.hide();
 
                         alert('Terima kasih! Ulasan Anda telah berhasil dikirim.');
-                        fetchOrders(); // Refresh orders list
+                        fetchOrders();
                     } else {
                         console.error('Terjadi kesalahan:', response.message);
                         alert('Gagal mengirim ulasan: ' + response.message);
@@ -1600,7 +1507,6 @@ $apiBaseUrl = env('API_BASE_URL');
             });
         }
 
-        // Fetch orders function
         function fetchOrders() {
             $.ajax({
                 url: API_BASE_URL + '/getAllPesanan',
@@ -1611,7 +1517,6 @@ $apiBaseUrl = env('API_BASE_URL');
                 },
                 success: function(response) {
                     if (response.status === 'success') {
-                        console.log('Data Pesanan', response.data);
                         renderOrders(response.data.semua);
                     } else {
                         console.error('Terjadi kesalahan:', response.message);
@@ -1625,12 +1530,10 @@ $apiBaseUrl = env('API_BASE_URL');
             });
         }
 
-        // Call fetch orders when page loads
         $(document).ready(function() {
             fetchOrders();
 
-            // Make sure Bootstrap 5 CSS and Font Awesome 5 are included in your HTML file
-            // For rating stars styling
+
             const style = document.createElement('style');
             style.textContent = `
                 .rating-stars {
@@ -1663,6 +1566,251 @@ $apiBaseUrl = env('API_BASE_URL');
         });
     </script>
 
+    <script>
+        var urlProvinsi = "https://ibnux.github.io/data-indonesia/provinsi.json";
+        var urlKabupaten = "https://ibnux.github.io/data-indonesia/kabupaten/";
+        var urlKecamatan = "https://ibnux.github.io/data-indonesia/kecamatan/";
+        var urlKelurahan = "https://ibnux.github.io/data-indonesia/kelurahan/";
+
+        function clearOptions(id) {
+            $('#' + id).empty().trigger('change');
+        }
+
+        function loadProvinsi(selectId) {
+            console.log('Load Provinsi...');
+            $.getJSON(urlProvinsi, function(res) {
+                res = $.map(res, function(obj) {
+                    obj.text = obj.nama;
+                    return obj;
+                });
+
+                var data = [{
+                    id: "",
+                    text: "- Pilih Provinsi -",
+                }].concat(res);
+
+                $("#" + selectId).select2({
+                    dropdownAutoWidth: true,
+                    width: '100%',
+                    data: data,
+                    dropdownParent: $("#tambahAlamatModal") // Fix untuk modal
+                });
+            });
+        }
+
+        function loadKabupaten(provinsiId, selectId) {
+            console.log('Load Kabupaten di provinsi ' + provinsiId + '...');
+            $.getJSON(urlKabupaten + provinsiId + ".json", function(res) {
+                res = $.map(res, function(obj) {
+                    obj.text = obj.nama;
+                    return obj;
+                });
+
+                var data = [{
+                    id: "",
+                    text: "- Pilih Kabupaten -"
+                }].concat(res);
+
+                $("#" + selectId).select2({
+                    dropdownAutoWidth: true,
+                    width: '100%',
+                    data: data,
+                    dropdownParent: $("#tambahAlamatModal") // Fix untuk modal
+                });
+            });
+        }
+
+        function loadKecamatan(kabupatenId, selectId) {
+            console.log('Load Kecamatan di kabupaten ' + kabupatenId + '...');
+            $.getJSON(urlKecamatan + kabupatenId + ".json", function(res) {
+                res = $.map(res, function(obj) {
+                    obj.text = obj.nama;
+                    return obj;
+                });
+
+                var data = [{
+                    id: "",
+                    text: "- Pilih Kecamatan -"
+                }].concat(res);
+
+                $("#" + selectId).select2({
+                    dropdownAutoWidth: true,
+                    width: '100%',
+                    data: data,
+                    dropdownParent: $("#tambahAlamatModal") // Fix untuk modal
+                });
+            });
+        }
+
+        function loadKelurahan(kecamatanId, selectId) {
+            console.log('Load Kelurahan di kecamatan ' + kecamatanId + '...');
+            $.getJSON(urlKelurahan + kecamatanId + ".json", function(res) {
+                res = $.map(res, function(obj) {
+                    obj.text = obj.nama;
+                    return obj;
+                });
+
+                var data = [{
+                    id: "",
+                    text: "- Pilih Kelurahan -"
+                }].concat(res);
+
+                $("#" + selectId).select2({
+                    dropdownAutoWidth: true,
+                    width: '100%',
+                    data: data,
+                    dropdownParent: $("#tambahAlamatModal") // Fix untuk modal
+                });
+            });
+        }
+
+        function updateAlamatLengkap() {
+            const provinsi = $("#select2-provinsi option:selected").text();
+            const kabupaten = $("#select2-kabupaten option:selected").text();
+            const kecamatan = $("#select2-kecamatan option:selected").text();
+            const kelurahan = $("#select2-kelurahan option:selected").text();
+            const detailRumah = $("#detail_rumah").val();
+
+            // Update hidden fields with the text values
+            if (provinsi && provinsi !== "- Pilih Provinsi -") {
+                $("#provinsi").val(provinsi);
+            }
+
+            if (kabupaten && kabupaten !== "- Pilih Kabupaten -") {
+                $("#kabupaten").val(kabupaten);
+            }
+
+            if (kecamatan && kecamatan !== "- Pilih Kecamatan -") {
+                $("#kecamatan").val(kecamatan);
+            }
+
+            if (kelurahan && kelurahan !== "- Pilih Kelurahan -") {
+                $("#kelurahan").val(kelurahan);
+            }
+
+            // Only update if all fields are selected (not the default "- Pilih X -" options)
+            if (provinsi && kabupaten && kecamatan && kelurahan &&
+                provinsi !== "- Pilih Provinsi -" &&
+                kabupaten !== "- Pilih Kabupaten -" &&
+                kecamatan !== "- Pilih Kecamatan -" &&
+                kelurahan !== "- Pilih Kelurahan -") {
+
+                let alamatLengkap = `${detailRumah ? detailRumah + ', ' : ''}${kelurahan}, ${kecamatan}, ${kabupaten}, ${provinsi}`;
+                $("#detail_alamat").val(alamatLengkap);
+            }
+        }
+
+        // Inisialisasi Select2 setelah modal terbuka
+        $('#tambahAlamatModal').on('shown.bs.modal', function() {
+            // Initialize Select2 dropdowns
+            loadProvinsi('select2-provinsi');
+        });
+
+        document.addEventListener("DOMContentLoaded", function() {
+            // Set up event listeners
+            $(document).on('change', '#select2-provinsi', function() {
+                var provinsi = $(this).val();
+                clearOptions('select2-kabupaten');
+                clearOptions('select2-kecamatan');
+                clearOptions('select2-kelurahan');
+
+                if (provinsi) {
+                    loadKabupaten(provinsi, 'select2-kabupaten');
+                }
+
+                updateAlamatLengkap();
+            });
+
+            $(document).on('change', '#select2-kabupaten', function() {
+                var kabupaten = $(this).val();
+                clearOptions('select2-kecamatan');
+                clearOptions('select2-kelurahan');
+
+                if (kabupaten) {
+                    loadKecamatan(kabupaten, 'select2-kecamatan');
+                }
+
+                updateAlamatLengkap();
+            });
+
+            $(document).on('change', '#select2-kecamatan', function() {
+                var kecamatan = $(this).val();
+                clearOptions('select2-kelurahan');
+
+                if (kecamatan) {
+                    loadKelurahan(kecamatan, 'select2-kelurahan');
+                }
+
+                updateAlamatLengkap();
+            });
+
+            $(document).on('change', '#select2-kelurahan', function() {
+                updateAlamatLengkap();
+            });
+
+            $('#detail_rumah').on('input', function() {
+                updateAlamatLengkap();
+            });
+
+            // Form submission
+            $('#formTambahAlamat').on('submit', function(e) {
+                e.preventDefault();
+
+                const token = localStorage.getItem('auth_token');
+
+                // Get values from hidden input fields (which contain actual text values)
+                const provinsi = $("#provinsi").val().trim();
+                const kabupaten = $("#kabupaten").val().trim();
+                const kecamatan = $("#kecamatan").val().trim();
+                const kelurahan = $("#kelurahan").val().trim();
+                const detail_alamat = $("#detail_alamat").val().trim();
+                const detail_rumah = $("#detail_rumah").val().trim();
+
+                if (!provinsi || !kabupaten || !kecamatan || !kelurahan || !detail_alamat || !detail_rumah) {
+                    alert('Semua field wajib diisi!');
+                    return;
+                }
+
+                const dataToSend = {
+                    provinsi,
+                    kabupaten,
+                    kecamatan,
+                    kelurahan,
+                    detail_alamat,
+                    detail_rumah,
+                    utama: 0
+                };
+
+                fetch(`${API_BASE_URL}/alamat/create`, {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': `Bearer ${token}`,
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(dataToSend)
+                    })
+                    .then(response => response.json())
+                    .then(result => {
+                        if (result.status === 'success') {
+                            alert('Alamat Berhasil Ditambahkan');
+                            window.location.reload();
+                        } else {
+                            alert('Gagal menambahkan alamat: ' + result.message);
+                        }
+                    })
+                    .catch(error => {
+                        if (error.message.includes('Token tidak ditemukan') || error.message.includes('Token tidak valid, silakan login ulang')) {
+                            localStorage.removeItem('auth_token');
+                            alert("Sesi Anda telah habis. Silakan login ulang.");
+                            window.location.href = '/login';
+                            return;
+                        }
+                        console.error('Error:', error);
+                        alert('Terjadi kesalahan saat mengupdate data');
+                    });
+            });
+        });
+    </script>
 </body>
 
 </html>

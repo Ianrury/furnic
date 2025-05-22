@@ -1037,13 +1037,13 @@ $apiBaseUrl = env('API_BASE_URL');
 
                         <!-- Photo upload -->
                         <div class="mb-review">
-                            <label class="form-label-review">Tambahkan Foto (Opsional)</label>
+                            <label class="form-label-review">Tambahkan Foto (minimal 1 foto)</label>
                             <div>
                                 <div class="preview-container-review">
                                     <label for="photo-upload" class="custom-file-upload-review">
                                         <i class="bi bi-camera fs-3"></i>
                                     </label>
-                                    <input type="file" id="photo-upload" accept="image/jpeg,image/png" multiple style="display: none;">
+                                    <input type="file" id="photo-upload" accept="image/jpeg,image/png" multiple style="display: none;" required>
                                 </div>
                                 <small class="text-muted mt-2 d-block">Maksimal 3 foto (JPG/PNG)</small>
                             </div>
@@ -1253,15 +1253,11 @@ $apiBaseUrl = env('API_BASE_URL');
                 formData.append(`photo[${index}]`, photo.file);
             });
 
-            // Show loading state
             toggleLoadingState(true);
 
-            // Send to API
             fetch(`${API_BASE_URL}/review/${token}`, {
                     method: 'POST',
                     body: formData,
-                    // Do not set Content-Type header when sending FormData
-                    // The browser will set it automatically with the correct boundary
                 })
                 .then(response => {
                     if (!response.ok) {
@@ -1270,15 +1266,12 @@ $apiBaseUrl = env('API_BASE_URL');
                     return response.json();
                 })
                 .then(data => {
-                    console.log('Success:', data);
-                    // Show success toast
                     showToast('Ulasan berhasil dibuat');
 
-                    // Reset form after success
                     setTimeout(() => {
                         resetForm();
 
-                        // Redirect to homepage after 3 seconds
+
                         setTimeout(() => {
                             window.location.href = '/';
                         }, 3000);
@@ -1286,7 +1279,7 @@ $apiBaseUrl = env('API_BASE_URL');
                 })
                 .catch(error => {
                     console.error('Error:', error);
-                    // Show error toast
+        
                     showToast('Gagal mengirim ulasan. Silakan coba lagi.', true);
                 })
                 .finally(() => {
@@ -1294,12 +1287,11 @@ $apiBaseUrl = env('API_BASE_URL');
                 });
         }
 
-        // Show toast message
+
         function showToast(message, isError = false) {
-            // Check if toast element exists
+
             let toastElement = document.getElementById('reviewToast');
 
-            // If toast doesn't exist, create it
             if (!toastElement) {
                 toastElement = document.createElement('div');
                 toastElement.id = 'reviewToast';
@@ -1319,7 +1311,7 @@ $apiBaseUrl = env('API_BASE_URL');
             const toastBody = toastElement.querySelector('.toast-body');
             toastBody.textContent = message;
 
-            // Set toast color based on error state
+
             if (isError) {
                 toastElement.classList.add('bg-danger', 'text-white');
                 toastElement.classList.remove('bg-success');
@@ -1328,14 +1320,12 @@ $apiBaseUrl = env('API_BASE_URL');
                 toastElement.classList.remove('bg-danger');
             }
 
-            // Show toast using Bootstrap Toast
             const toast = new bootstrap.Toast(toastElement, {
                 delay: 3000
             });
             toast.show();
         }
 
-        // Toggle loading state
         function toggleLoadingState(isLoading) {
             const submitBtn = document.querySelector('.btn-primary-review');
             if (isLoading) {
@@ -1347,7 +1337,7 @@ $apiBaseUrl = env('API_BASE_URL');
             }
         }
 
-        // Reset form
+ 
         function resetForm() {
             const form = document.getElementById('reviewForm');
             form.reset();
@@ -1358,7 +1348,7 @@ $apiBaseUrl = env('API_BASE_URL');
         }
     </script>
     <script>
-        // Show/hide other bank input
+
         document.getElementById('bank').addEventListener('change', function() {
             const otherBankContainer = document.getElementById('otherBankContainer');
             if (this.value === 'other') {
@@ -1368,7 +1358,7 @@ $apiBaseUrl = env('API_BASE_URL');
             }
         });
 
-        // File upload preview
+
         document.getElementById('paymentProof').addEventListener('change', function() {
             const filePreview = document.getElementById('filePreview');
             const fileName = document.getElementById('fileName');
@@ -1378,7 +1368,7 @@ $apiBaseUrl = env('API_BASE_URL');
                 const file = this.files[0];
                 fileName.textContent = file.name;
 
-                // Format file size
+
                 const fileSizeKB = Math.round(file.size / 1024);
                 let fileSizeText;
 
@@ -1391,14 +1381,14 @@ $apiBaseUrl = env('API_BASE_URL');
                 fileSize.textContent = fileSizeText;
                 filePreview.style.display = 'flex';
 
-                // Change the upload label text
+    
                 document.querySelector('.file-upload-icon span').textContent = 'Ubah File';
                 document.querySelector('.file-upload-icon i').classList.remove('fa-cloud-upload-alt');
                 document.querySelector('.file-upload-icon i').classList.add('fa-exchange-alt');
             } else {
                 filePreview.style.display = 'none';
 
-                // Reset the upload label text
+
                 document.querySelector('.file-upload-icon span').textContent = 'Unggah Bukti Pembayaran';
                 document.querySelector('.file-upload-icon i').classList.remove('fa-exchange-alt');
                 document.querySelector('.file-upload-icon i').classList.add('fa-cloud-upload-alt');
@@ -1629,19 +1619,17 @@ $apiBaseUrl = env('API_BASE_URL');
             // Tambahkan nomor pesanan
             const orderNumberElement = document.createElement('div');
             orderNumberElement.className = 'order-number';
-            // orderNumberElement.innerHTML = `<span>Nomor Pesanan:</span> ${orderData.nomor_pesanan}`;
             orderSummaryElement.insertBefore(orderNumberElement, orderSummaryElement.querySelector('h3').nextSibling);
         }
 
-        // Fungsi utama untuk inisialisasi halaman pembayaran
+
         function initializePaymentPage() {
-            // Ambil token dari path URL terakhir
+ 
             const pathSegments = window.location.pathname.split('/');
             const token = pathSegments[pathSegments.length - 1] || '';
 
             if (!token) {
                 console.error('Token tidak ditemukan di URL.');
-                // Tampilkan pesan error ke user
                 document.querySelector('.order-summary').innerHTML = `
             <div class="error-message">
                 Token pembayaran tidak valid. Silakan periksa URL atau hubungi customer service.
@@ -1650,7 +1638,7 @@ $apiBaseUrl = env('API_BASE_URL');
                 return;
             }
 
-            // Fetch data pembayaran dari API
+
             fetch(API_BASE_URL + `/pembayaran/${token}`)
                 .then(response => {
                     if (!response.ok) {
@@ -1659,10 +1647,9 @@ $apiBaseUrl = env('API_BASE_URL');
                     return response.json();
                 })
                 .then(result => {
-                    console.log(result);
-                    // Update status and order number
+
                     if (result.status === 'success' && result.data) {
-                        // Render ringkasan pesanan
+    
                         renderOrderSummary(result.data);
                         if (result.data.is_review) {
                             window.location.href = '/'

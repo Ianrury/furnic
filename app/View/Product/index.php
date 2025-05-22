@@ -7,23 +7,19 @@ $apiBaseUrl = env('API_BASE_URL');
 <html lang="en">
 
 <head>
-    <!-- meta tags -->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="keywords" content="">
 
-    <!-- title -->
     <title><?php echo $model['title']; ?> - PT Furnice Furnishing Indonesia</title>
 
-    <!-- favicon -->
     <link rel="icon" type="image/x-icon" href="assets/img/logo/favicon.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
         integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 
-    <!-- css -->
-    <!-- <link rel="stylesheet" href="/app/App/assets/css/bootstrap"> -->
+
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/all-fontawesome.min.css">
     <link rel="stylesheet" href="assets/css/animate.min.css">
@@ -61,20 +57,15 @@ $apiBaseUrl = env('API_BASE_URL');
         <i class="fab fa-whatsapp"></i>
     </a>
 
-    <!-- preloader -->
     <div class="preloader">
         <div class="loader-ripple">
             <div></div>
             <div></div>
         </div>
     </div>
-    <!-- preloader end -->
 
-    <!-- header area -->
     <?php include __DIR__ . '/../templates/header.php'; ?>
-    <!-- header area end -->
 
-    <!-- popup search -->
     <div class="search-popup">
         <button class="close-search"><span class="far fa-times"></span></button>
         <form action="#">
@@ -84,12 +75,10 @@ $apiBaseUrl = env('API_BASE_URL');
             </div>
         </form>
     </div>
-    <!-- popup search end -->
 
 
     <main class="main">
 
-        <!-- hero slider -->
         <div class="hero-section mt-3 hs-1">
             <div class="container ">
                 <div class="hero-slider owl-carousel owl-theme">
@@ -102,7 +91,6 @@ $apiBaseUrl = env('API_BASE_URL');
                 </div>
             </div>
         </div>
-        <!-- Dekorasi Pilihan -->
         <div class="product-area product-area-new">
             <div class="container">
                 <div class="row">
@@ -116,7 +104,6 @@ $apiBaseUrl = env('API_BASE_URL');
                 <div class="container-fluid">
                     <div class="tab-content wow fadeInUp" data-wow-delay=".25s" id="item-tabContent">
                         <div class="row row-cols-1 row-cols-md-4 g-3">
-                            <!-- Card: Kamar Tidur -->
                             <div class="col">
                                 <div class="card h-100 border-0 overflow-hidden rounded-2 position-relative"
                                     style="height: 300px;">
@@ -130,7 +117,6 @@ $apiBaseUrl = env('API_BASE_URL');
                                 </div>
                             </div>
 
-                            <!-- Card: Ruang Tamu -->
                             <div class="col">
                                 <div class="card h-100 border-0 overflow-hidden rounded-2 position-relative"
                                     style="height: 300px;">
@@ -144,7 +130,6 @@ $apiBaseUrl = env('API_BASE_URL');
                                 </div>
                             </div>
 
-                            <!-- Card: Kantor -->
                             <div class="col">
                                 <div class="card h-100 border-0 overflow-hidden rounded-2 position-relative"
                                     style="height: 300px;">
@@ -158,7 +143,6 @@ $apiBaseUrl = env('API_BASE_URL');
                                 </div>
                             </div>
 
-                            <!-- Card: Ruang Santai -->
                             <div class="col">
                                 <div class="card h-100 border-0 overflow-hidden rounded-2 position-relative"
                                     style="height: 300px;">
@@ -177,7 +161,6 @@ $apiBaseUrl = env('API_BASE_URL');
             </div>
 
         </div>
-        <!-- Product -->
         <div class="product-area product-area-new">
             <div class="container">
                 <div class="row">
@@ -190,12 +173,10 @@ $apiBaseUrl = env('API_BASE_URL');
                 <div class="tab-content wow fadeInUp" data-wow-delay=".25s" id="item-tabContent">
                     <div class="container">
                         <div class="row">
-                            <!-- Sidebar Filter -->
                             <div class="col-md-3 m-0 p-0" style="opacity: 1 !important; background-color: white;">
                                 <p class="fw-semibold text-dark" style="font-size: 14px;">Urutkan berdasarkan</p>
 
                                 <div class=" " style="width: 250px;">
-                                    <!-- Urutkan Berdasarkan -->
                                     <div class="mb-3">
                                         <button id="resetFilter" class="btn btn-secondary btn-sm mt-1"
                                             style="font-size: 11px; padding-right: 27px; padding-left: 27px;padding-top: 1px; padding-bottom: 1px; background-color: #D9D9D9; border: #D9D9D9;">Reset</button>
@@ -203,7 +184,6 @@ $apiBaseUrl = env('API_BASE_URL');
 
                                     <hr>
 
-                                    <!-- Rekomendasi -->
                                     <div class="mb-3">
                                         <h6 class="fw-bold text-dark mb-2" style="font-size: 15px;">Rekomendasi</h6>
                                         <div class="form-check custom-check">
@@ -225,7 +205,6 @@ $apiBaseUrl = env('API_BASE_URL');
 
                                     <hr>
 
-                                    <!-- Kategori -->
                                     <div class="mb-3">
                                         <h6 class="fw-bold text-dark mb-2" style="font-size: 15px;">Kategori</h6>
                                         <div class="row">
@@ -250,7 +229,6 @@ $apiBaseUrl = env('API_BASE_URL');
 
                                     <hr>
 
-                                    <!-- Harga -->
                                     <div class="mb-3">
                                         <h6 class="fw-bold text-dark mb-2" style="font-size: 15px;">Harga</h6>
                                         <div class="input-group input-group-sm mb-3">
@@ -270,7 +248,6 @@ $apiBaseUrl = env('API_BASE_URL');
                                 </div>
                             </div>
 
-                            <!-- Produk Grid -->
                             <div class="col-md-9">
                                 <div id="loading-spinner" class="text-center mb-3" style="display: none;">
                                     <div class="spinner-border text-primary" role="status">
@@ -279,7 +256,6 @@ $apiBaseUrl = env('API_BASE_URL');
                                 </div>
 
                                 <div class="row row-cols-2 row-cols-md-2 row-cols-lg-3 g-4" id="product-list">
-                                    <!-- Produk akan dimuat di sini -->
                                 </div>
 
                                 <div class="container mt-4">
@@ -293,7 +269,6 @@ $apiBaseUrl = env('API_BASE_URL');
                 </div>
             </div>
         </div>
-        <!-- Rekomendasi Product -->
         <div class="product-area product-area-new">
             <div class="container">
                 <div class="row">
@@ -317,14 +292,9 @@ $apiBaseUrl = env('API_BASE_URL');
     </main>
 
 
-    <!-- footer area -->
     <?php include __DIR__ . '/../templates/footer.php'; ?>
-    <!-- footer area end -->
 
-    <!-- js -->
     <?php include __DIR__ . '/../Scripts/script.php'; ?>
-    <!-- js end -->
-    <script data-cfasync="false" src="cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
     <script src="assets/js/jquery-3.7.1.min.js"></script>
     <script src="assets/js/modernizr.min.js"></script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
@@ -340,19 +310,16 @@ $apiBaseUrl = env('API_BASE_URL');
     <script src="assets/js/countdown.min.js"></script>
     <script src="assets/js/wow.min.js"></script>
     <script src="assets/js/main.js"></script>
-    <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const offcanvasToggler = document.getElementById('offcanvasToggler');
             const offcanvasNavbar = document.getElementById('offcanvasNavbar');
 
-            // Mencegah pembuatan backdrop
             offcanvasNavbar.addEventListener('show.bs.offcanvas', function() {
                 document.querySelectorAll('.offcanvas-backdrop').forEach(el => el.remove());
             });
 
-            // Alternatif: nonaktifkan backdrop sepenuhnya
             offcanvasNavbar.addEventListener('shown.bs.offcanvas', function() {
                 const backdrops = document.querySelectorAll('.offcanvas-backdrop');
                 backdrops.forEach(backdrop => {
@@ -361,7 +328,6 @@ $apiBaseUrl = env('API_BASE_URL');
                 });
             });
 
-            // Pastikan backdrop dihapus saat menutup
             offcanvasNavbar.addEventListener('hidden.bs.offcanvas', function() {
                 document.querySelectorAll('.offcanvas-backdrop').forEach(el => el.remove());
             });
@@ -373,13 +339,11 @@ $apiBaseUrl = env('API_BASE_URL');
 
         $.ajax({
             url: API_BASE_URL + '/product-terbaru',
-            type: 'GET', // Sesuai dengan route kamu
+            type: 'GET',
             dataType: 'json',
             success: function(response) {
                 if (response.status === 'success') {
                     const produk = response.data;
-                    console.log("terbaru", produk);
-                    // Kosongkan isi sebelumnya
                     $('#product-terbaru').html('');
 
                     if (produk.length > 0) {
@@ -389,13 +353,24 @@ $apiBaseUrl = env('API_BASE_URL');
                             const diskonNominal = totalPromo > 0 ? (harga * (totalPromo / 100)) : 0;
                             const hargaSetelahDiskon = harga - diskonNominal;
 
+                            let ribbonHTML = `
+                        <div class="position-absolute ribbon-wrapper">
+                            <div class="ribbon text-white text-uppercase fw-bold text-center" style="background-color: #2B4779; color: #FFFFFF;">New Product</div>
+                        </div>`;
+
+                            if (product.qty <= 0) {
+                                ribbonHTML = `
+                        <div class="position-absolute ribbon-wrapper">
+                            <div class="ribbon text-uppercase fw-bold text-center" 
+                                style="background-color: #FF0000; color: #FFFFFF;">Out of Stock</div>
+                        </div>`;
+                            }
+
                             const html = `
                         <div class="col-6 col-md-4 col-lg-3">
                             <div class="card shadow position-relative rounded-4 p-2 product-card" data-id="${product.id_product}" data-slug="${product.slug}" 
-     data-token="${product.token}" style="cursor:pointer;">
-                                <div class="position-absolute ribbon-wrapper">
-                                    <div class="ribbon text-white text-uppercase fw-bold text-center">New Product</div>
-                                </div>
+                                data-token="${product.token}" style="cursor:pointer;">  
+                                ${ribbonHTML}
                                 <div class="text-center pt-3">
                                     <img src="${product.url_foto ?? ''}" class="img-fluid product-image" alt="Product Image">
                                 </div>
@@ -444,7 +419,6 @@ $apiBaseUrl = env('API_BASE_URL');
                 showToast('Terjadi kesalahan saat mengambil data produk.', 'danger');
             }
         });
-        // Add focus event to automatically open modal when clicking the search field
         document.addEventListener('DOMContentLoaded', function() {
             const searchModal = document.getElementById('searchModal');
             searchModal.addEventListener('shown.bs.modal', function() {
@@ -486,11 +460,10 @@ $apiBaseUrl = env('API_BASE_URL');
             input.addEventListener('input', function() {
                 const cleaned = this.value.replace(/\./g, '');
                 this.value = formatRupiah(cleaned);
-                debounceApplyFilter(); // Trigger filter setelah delay
+                debounceApplyFilter();
             });
         });
 
-        // Debounce: tunggu 500ms setelah user berhenti mengetik
         let debounceTimeout;
 
         function debounceApplyFilter() {
@@ -510,7 +483,6 @@ $apiBaseUrl = env('API_BASE_URL');
                 }
             });
 
-            // Ambil harga min & max (hapus titik-nya)
             const hargaMin = document.getElementById('harga_min').value.replace(/\./g, '');
             const hargaMax = document.getElementById('harga_max').value.replace(/\./g, '');
 
@@ -518,7 +490,6 @@ $apiBaseUrl = env('API_BASE_URL');
             if (hargaMax) formData.append('harga_max', hargaMax);
 
             fetch(API_BASE_URL + '/filter', {
-                    // url: API_BASE_URL + '/product-terbaru',
                     method: 'POST',
                     body: formData
                 }).then(res => res.json())
@@ -535,7 +506,6 @@ $apiBaseUrl = env('API_BASE_URL');
                 });
         }
 
-        // Event listener checkbox & harga
         checkboxes.forEach(cb => {
             cb.addEventListener('change', () => {
                 updateResetButtonState();
@@ -546,11 +516,10 @@ $apiBaseUrl = env('API_BASE_URL');
         hargaInputs.forEach(input => {
             input.addEventListener('input', () => {
                 updateResetButtonState();
-                applyFilter(); // Bisa disesuaikan jika nanti ada filter harga
+                applyFilter();
             });
         });
 
-        // Reset button
         resetBtn.addEventListener('click', function() {
             checkboxes.forEach(cb => cb.checked = false);
             hargaInputs.forEach(input => input.value = '');
@@ -558,33 +527,28 @@ $apiBaseUrl = env('API_BASE_URL');
             applyFilter();
         });
 
-        // Declare these variables at the top of your script
         let products = [];
         let currentPage = 1;
         let totalPages = 1;
-        let productsPerPage = 12; // Default value that will be updated later
+        let productsPerPage = 12;
 
-        // Function to calculate total pages
         function calculateTotalPages() {
             return Math.ceil(products.length / productsPerPage);
         }
 
-        // Function to set products per page based on screen size
         function setProductsPerPage() {
-            // You can adjust these values based on your design needs
             if (window.innerWidth < 576) {
-                return 6; // For small mobile screens
+                return 6;
             } else if (window.innerWidth < 992) {
-                return 8; // For tablets and larger phones
+                return 8;
             } else {
-                return 12; // For desktops
+                return 12;
             }
         }
 
         // Load products on page load
         loadProducts();
 
-        // Function to load products from API
         function loadProducts() {
             $.ajax({
                 url: API_BASE_URL + '/full-product',
@@ -592,13 +556,9 @@ $apiBaseUrl = env('API_BASE_URL');
                 dataType: 'json',
                 success: function(response) {
                     if (response.status === 'success') {
-                        const allProductsRaw = response.FullProduck; // Get product array from response
-                        console.log('Data produk:', allProductsRaw);
-
-                        // Process the raw products
+                        const allProductsRaw = response.FullProduck;
                         processProducts(allProductsRaw);
 
-                        // Display the products
                         displayProducts();
                     } else {
                         console.error('Terjadi kesalahan:', response.message);
@@ -610,18 +570,15 @@ $apiBaseUrl = env('API_BASE_URL');
             });
         }
 
-        // Rest of your code remains the same...
 
 
         function processProducts(allProductsRaw) {
-            // Get 3 best seller product IDs
             const topBestSellerIds = allProductsRaw
-                .filter(p => p.qty > 0) // only products with stock
+                .filter(p => p.qty > 0)
                 .sort((a, b) => b.beli - a.beli)
                 .slice(0, 3)
                 .map(p => p.id_product);
 
-            // Process products
             products = allProductsRaw.map(product => {
                 const harga = Number(product.harga) || 0;
                 const promoPersen = Number(product.total_promo) || 0;
@@ -656,9 +613,6 @@ $apiBaseUrl = env('API_BASE_URL');
                     };
                 }
 
-                // Debug the image URL
-                console.log(`Product ${product.id_product} image URL:`, product.url_foto);
-
                 return {
                     id: product.id_product,
                     title: product.nama_product,
@@ -678,11 +632,9 @@ $apiBaseUrl = env('API_BASE_URL');
                 };
             });
 
-            // Update total pages based on processed products
             totalPages = Math.ceil(products.length / productsPerPage);
         }
 
-        // Fungsi untuk membuat card produk
         function createProductCard(product) {
             return `
             <div class="col">
@@ -734,7 +686,6 @@ $apiBaseUrl = env('API_BASE_URL');
                 `;
         }
 
-        // Fungsi untuk membuat rating bintang
         function createStarRating(rating) {
             let stars = '';
             for (let i = 0; i < 5; i++) {
@@ -747,7 +698,6 @@ $apiBaseUrl = env('API_BASE_URL');
             return stars;
         }
 
-        // Fungsi untuk membuat pagination
         function createPagination() {
             const totalPages = calculateTotalPages();
             let paginationHTML = `
@@ -760,19 +710,15 @@ $apiBaseUrl = env('API_BASE_URL');
                     </li>
             `;
 
-            // Menentukan range halaman yang ditampilkan (maksimal 5)
             let startPage = Math.max(1, currentPage - 2);
             let endPage = Math.min(totalPages, startPage + 4);
 
-            // Jika kurang dari 5 halaman untuk ditampilkan di akhir, sesuaikan startPage
             if (endPage - startPage < 4) {
                 startPage = Math.max(1, endPage - 4);
             }
 
-            // Tambahkan class untuk container scroll jika total halaman > 5
             const scrollClass = totalPages > 5 ? 'pagination-scroll' : '';
 
-            // Tambahkan halaman ke pagination
             for (let i = startPage; i <= endPage; i++) {
                 paginationHTML += `
                 <li class="page-item ${currentPage === i ? 'active' : ''}">
@@ -794,32 +740,25 @@ $apiBaseUrl = env('API_BASE_URL');
             return paginationHTML;
         }
 
-        // Fungsi untuk menampilkan produk pada halaman tertentu
         function displayProducts() {
-            // Gunakan selector yang spesifik dengan ID untuk produk container
             const productContainer = document.querySelector('#product-list');
             const paginationContainer = document.querySelector('#pagination-container');
 
             if (!productContainer || !paginationContainer) return;
 
-            // Hitung produk untuk halaman saat ini
             const startIndex = (currentPage - 1) * productsPerPage;
             const endIndex = Math.min(startIndex + productsPerPage, products.length);
             const currentProducts = products.slice(startIndex, endIndex);
 
-            // Buat HTML untuk produk
             let productsHTML = '';
             currentProducts.forEach(product => {
                 productsHTML += createProductCard(product);
             });
 
-            // Tampilkan produk
             productContainer.innerHTML = productsHTML;
 
-            // Tampilkan pagination
             paginationContainer.innerHTML = createPagination();
 
-            // Tambahkan event listener untuk pagination
             const pageLinks = paginationContainer.querySelectorAll('.page-link');
             pageLinks.forEach(link => {
                 link.addEventListener('click', function(e) {
@@ -836,7 +775,6 @@ $apiBaseUrl = env('API_BASE_URL');
 
                     displayProducts();
 
-                    // Scroll dengan smooth ke bagian atas produk
                     productContainer.scrollIntoView({
                         behavior: 'smooth'
                     });
@@ -844,7 +782,6 @@ $apiBaseUrl = env('API_BASE_URL');
             });
         }
 
-        // CSS untuk pagination scroll
         function addPaginationStyles() {
             if (!document.getElementById('pagination-styles')) {
                 const style = document.createElement('style');
@@ -889,18 +826,14 @@ $apiBaseUrl = env('API_BASE_URL');
             }
         }
 
-        // Persiapkan struktur HTML untuk produk dan pagination jika belum ada
         function prepareHTML() {
-            // Temukan container yang sesuai atau buat jika belum ada
             let mainContainer = document.querySelector('#products-with-pagination');
 
             if (!mainContainer) {
-                // Jika tidak ada, buat container utama
                 mainContainer = document.createElement('div');
                 mainContainer.id = 'products-with-pagination';
                 document.body.appendChild(mainContainer);
 
-                // Buat container untuk produk
                 const productSection = document.createElement('div');
                 productSection.className = 'container';
                 productSection.innerHTML = `
@@ -908,7 +841,6 @@ $apiBaseUrl = env('API_BASE_URL');
                 `;
                 mainContainer.appendChild(productSection);
 
-                // Buat container untuk pagination
                 const paginationContainer = document.createElement('div');
                 paginationContainer.className = 'container mt-4';
                 paginationContainer.innerHTML = `
@@ -918,29 +850,21 @@ $apiBaseUrl = env('API_BASE_URL');
             }
         }
 
-        // Jalankan ketika DOM sudah siap
         document.addEventListener('DOMContentLoaded', function() {
-            // Tambahkan styles untuk pagination
             addPaginationStyles();
 
-            // Persiapkan HTML jika diperlukan
             prepareHTML();
 
-            // Set produk per halaman berdasarkan ukuran layar
             productsPerPage = setProductsPerPage();
 
-            // Tampilkan produk dan pagination
             displayProducts();
 
-            // Update saat ukuran layar berubah
             window.addEventListener('resize', function() {
                 const newProductsPerPage = setProductsPerPage();
 
-                // Hanya update jika jumlah produk per halaman berubah
                 if (newProductsPerPage !== productsPerPage) {
                     productsPerPage = newProductsPerPage;
 
-                    // Jika halaman saat ini melebihi total halaman baru
                     if (currentPage > calculateTotalPages()) {
                         currentPage = calculateTotalPages();
                     }
@@ -949,25 +873,19 @@ $apiBaseUrl = env('API_BASE_URL');
                 }
             });
         });
-
-
-        // filter data
     </script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const scrollContainer = document.querySelector('.row.flex-nowrap');
             let scrollPosition = 0;
-            const cardWidth = scrollContainer.querySelector('.col-6').offsetWidth;
-            const scrollSpeed = 5000; // ms between scrolls
+            const scrollSpeed = 5000;
 
             function autoScroll() {
                 if (scrollPosition >= scrollContainer.scrollWidth - scrollContainer.clientWidth) {
-                    // Reset to beginning when reaching the end
                     scrollPosition = 0;
                 } else {
-                    // Move by one card width
-                    scrollPosition += cardWidth + 16; // 16px accounts for gutter
+                    scrollPosition += cardWidth + 16;
                 }
 
                 scrollContainer.scrollTo({
@@ -978,10 +896,8 @@ $apiBaseUrl = env('API_BASE_URL');
                 setTimeout(autoScroll, scrollSpeed);
             }
 
-            // Start the auto-scrolling after 3 seconds
             setTimeout(autoScroll, 3000);
 
-            // Pause scrolling when user interacts with the container
             scrollContainer.addEventListener('mouseenter', function() {
                 clearTimeout(window.scrollTimeout);
             });
@@ -1007,7 +923,6 @@ $apiBaseUrl = env('API_BASE_URL');
             if (card) {
                 const slug = card.getAttribute('data-slug');
                 const token = card.getAttribute('data-token');
-                console.log(slug, token);
                 if (slug && token) {
                     window.location.href = `/product/${slug}/${token}`;
                 }

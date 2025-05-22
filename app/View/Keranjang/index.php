@@ -278,7 +278,6 @@ $apiBaseUrl = env('API_BASE_URL');
     <!-- js -->
     <?php include __DIR__ . '/../Scripts/script.php'; ?>
     <!-- js end -->
-    <script data-cfasync="false" src="cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
     <script src="assets/js/jquery-3.7.1.min.js"></script>
     <script src="assets/js/modernizr.min.js"></script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
@@ -386,7 +385,6 @@ $apiBaseUrl = env('API_BASE_URL');
 
                         // Render products from API response
                         renderProducts(result.data);
-                        // console.log(result.data);
                         // Set up event listeners after rendering products
                         setupEventListeners();
 

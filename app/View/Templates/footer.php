@@ -38,8 +38,7 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="row"> <!-- Tambahkan ini untuk grid-nya -->
-                        <!-- Quick Links -->
+                    <div class="row"> 
                         <div class="col-6 mt-4">
                             <div class="footer-widget-box list">
                                 <h4 class="footer-widget-title" style="font-size: 13px;">Quick Links</h4>
@@ -55,7 +54,6 @@
                             </div>
                         </div>
 
-                        <!-- Browse Category -->
                         <div class="col-6 mt-4">
                             <div class="footer-widget-box list">
                                 <h4 class="footer-widget-title" style="font-size: 13px;">Browse Category</h4>

@@ -352,7 +352,6 @@ $apiBaseUrl = env('API_BASE_URL');
     <!-- js -->
 
     <!-- js end -->
-    <!-- <script data-cfasync="false" src="cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script> -->
     <script src="assets/js/jquery-3.7.1.min.js"></script>
     <script src="assets/js/modernizr.min.js"></script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
@@ -1171,7 +1170,6 @@ $apiBaseUrl = env('API_BASE_URL');
         if (typeof Swal === 'undefined') {
             window.Swal = {
                 fire: function(options) {
-                    console.log('SweetAlert:', options);
                     if (options.then) options.then();
                 }
             };
@@ -1187,7 +1185,6 @@ $apiBaseUrl = env('API_BASE_URL');
             success: function(response) {
                 if (response.status === 'success') {
                     tampilkanDaftarPesanan(response.data);
-                    // console.log('Data Pesanan', response.data);
                 } else {
                     $('#pemesanan_list').html(`
             <div class="alert alert-danger" role="alert">

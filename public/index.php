@@ -32,6 +32,7 @@ Router::add('GET', '/reset-password', UserController::class, 'ubahsandi');
 Router::add('POST', '/reset-password', UserController::class, 'ubahsandiPost');
 Router::add('GET', '/forgot-password', UserController::class, 'forgotPassword');
 Router::add('POST', '/forgot-password', UserController::class, 'postForgotPassword');
+Router::add('GET', '/user/verifikasi/{token}', UserController::class, 'verfikasiEmail');
 
 Router::add('GET', '/profile', UserController::class, 'profile');
 

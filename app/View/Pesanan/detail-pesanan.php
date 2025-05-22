@@ -857,94 +857,6 @@ $apiBaseUrl = env('API_BASE_URL');
         const API_BASE_URL = "<?= $apiBaseUrl ?>";
     </script>
     <script>
-        // Show/hide other bank input
-        document.getElementById('bank').addEventListener('change', function() {
-            const otherBankContainer = document.getElementById('otherBankContainer');
-            if (this.value === 'other') {
-                otherBankContainer.style.display = 'block';
-            } else {
-                otherBankContainer.style.display = 'none';
-            }
-        });
-
-        // File upload preview
-        document.getElementById('paymentProof').addEventListener('change', function() {
-            const filePreview = document.getElementById('filePreview');
-            const fileName = document.getElementById('fileName');
-            const fileSize = document.getElementById('fileSize');
-
-            if (this.files && this.files[0]) {
-                const file = this.files[0];
-                fileName.textContent = file.name;
-
-                // Format file size
-                const fileSizeKB = Math.round(file.size / 1024);
-                let fileSizeText;
-
-                if (fileSizeKB >= 1024) {
-                    fileSizeText = (fileSizeKB / 1024).toFixed(1) + ' MB';
-                } else {
-                    fileSizeText = fileSizeKB + ' KB';
-                }
-
-                fileSize.textContent = fileSizeText;
-                filePreview.style.display = 'flex';
-
-                // Change the upload label text
-                document.querySelector('.file-upload-icon span').textContent = 'Ubah File';
-                document.querySelector('.file-upload-icon i').classList.remove('fa-cloud-upload-alt');
-                document.querySelector('.file-upload-icon i').classList.add('fa-exchange-alt');
-            } else {
-                filePreview.style.display = 'none';
-
-                // Reset the upload label text
-                document.querySelector('.file-upload-icon span').textContent = 'Unggah Bukti Pembayaran';
-                document.querySelector('.file-upload-icon i').classList.remove('fa-exchange-alt');
-                document.querySelector('.file-upload-icon i').classList.add('fa-cloud-upload-alt');
-            }
-        });
-
-        // Remove file
-        document.getElementById('removeFile').addEventListener('click', function() {
-            const fileInput = document.getElementById('paymentProof');
-            fileInput.value = '';
-            document.getElementById('filePreview').style.display = 'none';
-
-            // Reset the upload icon
-            document.querySelector('.file-upload-icon span').textContent = 'Unggah Bukti Pembayaran';
-            document.querySelector('.file-upload-icon i').classList.remove('fa-exchange-alt');
-            document.querySelector('.file-upload-icon i').classList.add('fa-cloud-upload-alt');
-        });
-
-        // Copy to clipboard function
-        function copyToClipboard(elementId) {
-            const element = document.getElementById(elementId);
-            const text = element.innerText;
-
-            navigator.clipboard.writeText(text.replace(/\./g, '')).then(() => {
-                // Show success message
-                const successElement = document.getElementById(`copy-success-${elementId === 'account-number' ? 'account' : 'nominal'}`);
-                successElement.style.display = 'flex';
-
-                // Hide after 2 seconds
-                setTimeout(() => {
-                    successElement.style.display = 'none';
-                }, 2000);
-            });
-        }
-
-        // Form submission
-
-
-        // window.addEventListener('load', initCountdown);
-
-
-        // Show file preview on page load for demo purposes
-        window.addEventListener('load', function() {
-            document.getElementById('filePreview').style.display = 'none';
-        });
-    </script>
-    <script>
         $(document).ready(function() {
             // Tampilkan input nama bank jika pilih "Lainnya"
             $('#bank').on('change', function() {
@@ -1158,7 +1070,6 @@ $apiBaseUrl = env('API_BASE_URL');
                     return response.json();
                 })
                 .then(result => {
-                    console.log(result);
                     // Update status and order number
                     if (result.status === 'success' && result.data) {
                         // Render ringkasan pesanan

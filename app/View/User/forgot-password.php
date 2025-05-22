@@ -15,16 +15,14 @@ $apiBaseUrl = env('API_BASE_URL');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- title -->
+
     <title><?php echo $model['title']; ?> - PT Furnice Furnishing Indonesia</title>
 
-    <!-- favicon -->
     <link rel="icon" type="image/x-icon" href="assets/img/logo/favicon.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
         integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 
-    <!-- css -->
-    <!-- <link rel="stylesheet" href="/app/App/assets/css/bootstrap"> -->
+
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/all-fontawesome.min.css">
     <link rel="stylesheet" href="assets/css/animate.min.css">
@@ -41,9 +39,9 @@ $apiBaseUrl = env('API_BASE_URL');
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Bootstrap CSS CDN -->
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css">
-    <!-- Font Awesome untuk ikon -->
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
         body {
@@ -335,14 +333,14 @@ $apiBaseUrl = env('API_BASE_URL');
                 </div>
             </div>
 
-            <!-- Loading Overlay -->
+        
             <div class="loading-overlay" id="loadingOverlay">
                 <div class="spinner"></div>
             </div>
         </form>
     </div>
 
-    <!-- Bootstrap JS dan Popper.js -->
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
 
     <script>
@@ -353,19 +351,19 @@ $apiBaseUrl = env('API_BASE_URL');
             const form = document.getElementById('forgotPasswordForm');
             const loadingOverlay = document.getElementById('loadingOverlay');
 
-            // Function to show toast
+           
             function showToast(type, title, message, duration = 5000) {
-                // Remove existing toasts
+             
                 const existingToasts = document.querySelectorAll('.custom-toast');
                 existingToasts.forEach(toast => {
                     toast.remove();
                 });
 
-                // Create toast container
+                
                 const toastContainer = document.createElement('div');
                 toastContainer.className = `custom-toast toast-${type}`;
 
-                // Toast HTML structure
+              
                 let icon = type === 'success' ? 'check' : 'exclamation-triangle';
 
                 toastContainer.innerHTML = `
@@ -388,16 +386,15 @@ $apiBaseUrl = env('API_BASE_URL');
                     </div>
                 `;
 
-                // Append toast to body
+            
                 document.body.appendChild(toastContainer);
 
-                // Add close functionality
                 const closeButton = toastContainer.querySelector('.toast-close');
                 closeButton.addEventListener('click', function() {
                     toastContainer.remove();
                 });
 
-                // Auto close after duration
+         
                 setTimeout(() => {
                     if (document.body.contains(toastContainer)) {
                         toastContainer.style.animation = 'slideIn 0.3s ease-out reverse forwards';
@@ -410,17 +407,14 @@ $apiBaseUrl = env('API_BASE_URL');
                 }, duration);
             }
 
-            // Handle form submission
+
             form.addEventListener('submit', function(e) {
                 e.preventDefault();
 
-                // Show loading overlay
                 loadingOverlay.style.display = 'flex';
 
-                // Get form data
                 const email = document.getElementById('email').value;
 
-                // Make AJAX request
                 fetch( API_BASE_URL + '/forgot-password', {
                         method: 'POST',
                         headers: {
@@ -431,32 +425,24 @@ $apiBaseUrl = env('API_BASE_URL');
                     })
                     .then(response => response.json())
                     .then(data => {
-                        // Hide loading overlay
+            
                         loadingOverlay.style.display = 'none';
 
                         if (data.success) {
-                            // Show success toast
+    
                             showToast('success', 'Berhasil', data.message);
 
-                            // Reset form
-                            form.reset();
 
-                            // // Redirect if needed
-                            // if (data.redirect) {
-                            //     setTimeout(() => {
-                            //         window.location.href = data.redirect;
-                            //     }, 3000);
-                            // }
+                            form.reset();
                         } else {
-                            // Show error toast
+                
                             showToast('error', 'Gagal', data.message);
                         }
                     })
                     .catch(error => {
-                        // Hide loading overlay
+       
                         loadingOverlay.style.display = 'none';
 
-                        // Show error toast
                         showToast('error', 'Error', 'Terjadi kesalahan, silakan coba lagi.');
                         console.error('Error:', error);
                     });

@@ -8,23 +8,22 @@ $apiBaseUrl = env('API_BASE_URL');
 <html lang="en">
 
 <head>
-    <!-- meta tags -->
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="keywords" content="">
 
-    <!-- title -->
+
     <title><?php echo $model['title']; ?> - PT Furnice Furnishing Indonesia</title>
 
-    <!-- favicon -->
+
     <link rel="icon" type="image/x-icon" href="assets/img/logo/favicon.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
         integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 
-    <!-- css -->
-    <!-- <link rel="stylesheet" href="/app/App/assets/css/bootstrap"> -->
+
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/all-fontawesome.min.css">
     <link rel="stylesheet" href="assets/css/animate.min.css">
@@ -62,20 +61,14 @@ $apiBaseUrl = env('API_BASE_URL');
         <i class="fab fa-whatsapp"></i>
     </a>
 
-    <!-- preloader -->
+
     <div class="preloader">
         <div class="loader-ripple">
             <div></div>
             <div></div>
         </div>
     </div>
-    <!-- preloader end -->
-
-    <!-- header area -->
     <?php include __DIR__ . '/../templates/header.php'; ?>
-    <!-- header area end -->
-
-    <!-- popup search -->
     <div class="search-popup">
         <button class="close-search"><span class="far fa-times"></span></button>
         <form action="#">
@@ -85,12 +78,7 @@ $apiBaseUrl = env('API_BASE_URL');
             </div>
         </form>
     </div>
-    <!-- popup search end -->
-
-
     <main class="main">
-
-        <!-- hero slider -->
         <div class="hero-section mt-3 hs-1">
             <div class="container">
                 <div class="hero-slider owl-carousel owl-theme">
@@ -103,7 +91,6 @@ $apiBaseUrl = env('API_BASE_URL');
                 </div>
             </div>
         </div>
-        <!-- hero slider end -->
         <div class="product-area product-area-new">
             <div class="container">
                 <div class="row">
@@ -246,7 +233,6 @@ $apiBaseUrl = env('API_BASE_URL');
             </div>
         </div>
 
-        <!-- popular item -->
         <div class="product-area product-area-new">
             <div class="container">
                 <div class="row">
@@ -265,9 +251,6 @@ $apiBaseUrl = env('API_BASE_URL');
                 </div>
             </div>
         </div>
-        <!-- popular item end -->
-
-        <!-- newsletter area -->
         <div class="newsletter-area pt-40">
             <div>
                 <div class="container wow fadeInUp rounded-4" data-wow-delay=".25s">
@@ -296,12 +279,7 @@ $apiBaseUrl = env('API_BASE_URL');
     </main>
 
 
-    <!-- footer area -->
     <?php include __DIR__ . '/../templates/footer.php'; ?>
-    <!-- footer area end -->
-
-
-    <!-- modal quick shop-->
     <div class="modal quickview fade" id="quickview" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="quickview" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
@@ -352,11 +330,6 @@ $apiBaseUrl = env('API_BASE_URL');
             </div>
         </div>
     </div>
-    <!-- modal quick shop end -->
-
-
-    <!-- js -->
-    <script data-cfasync="false" src="cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
     <script src="assets/js/jquery-3.7.1.min.js"></script>
     <script src="assets/js/modernizr.min.js"></script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
@@ -372,19 +345,16 @@ $apiBaseUrl = env('API_BASE_URL');
     <script src="assets/js/countdown.min.js"></script>
     <script src="assets/js/wow.min.js"></script>
     <script src="assets/js/main.js"></script>
-    <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const offcanvasToggler = document.getElementById('offcanvasToggler');
             const offcanvasNavbar = document.getElementById('offcanvasNavbar');
 
-            // Mencegah pembuatan backdrop
             offcanvasNavbar.addEventListener('show.bs.offcanvas', function() {
                 document.querySelectorAll('.offcanvas-backdrop').forEach(el => el.remove());
             });
 
-            // Alternatif: nonaktifkan backdrop sepenuhnya
             offcanvasNavbar.addEventListener('shown.bs.offcanvas', function() {
                 const backdrops = document.querySelectorAll('.offcanvas-backdrop');
                 backdrops.forEach(backdrop => {
@@ -393,7 +363,7 @@ $apiBaseUrl = env('API_BASE_URL');
                 });
             });
 
-            // Pastikan backdrop dihapus saat menutup
+
             offcanvasNavbar.addEventListener('hidden.bs.offcanvas', function() {
                 document.querySelectorAll('.offcanvas-backdrop').forEach(el => el.remove());
             });
@@ -404,19 +374,17 @@ $apiBaseUrl = env('API_BASE_URL');
 
             hotspots.forEach(hotspot => {
                 hotspot.addEventListener('mouseenter', function() {
-                    // Store the tooltip element
+
                     const tooltip = this.querySelector('.hotspot-tooltip');
 
-                    // Clear any existing timeout
+
                     if (this.tooltipTimeout) {
                         clearTimeout(this.tooltipTimeout);
                     }
 
-                    // Make tooltip visible
                     tooltip.style.opacity = '1';
                     tooltip.style.visibility = 'visible';
 
-                    // Set timeout to hide tooltip after 5 seconds
                     this.tooltipTimeout = setTimeout(() => {
                         tooltip.style.opacity = '0';
                         tooltip.style.visibility = 'hidden';
@@ -425,7 +393,6 @@ $apiBaseUrl = env('API_BASE_URL');
             });
         });
 
-        // Add focus event to automatically open modal when clicking the search field
         document.addEventListener('DOMContentLoaded', function() {
             const searchModal = document.getElementById('searchModal');
             searchModal.addEventListener('shown.bs.modal', function() {
@@ -436,13 +403,12 @@ $apiBaseUrl = env('API_BASE_URL');
 
         $.ajax({
             url: API_BASE_URL + '/get-promo',
-            type: 'GET', // Sesuai dengan route kamu
+            type: 'GET',
             dataType: 'json',
             success: function(response) {
                 if (response.status === 'success') {
                     const produk = response.data;
-                    console.log("terbaru", produk);
-                    // Kosongkan isi sebelumnya
+
                     $('#product-terbaru').html('');
 
                     if (produk.length > 0) {
@@ -452,13 +418,24 @@ $apiBaseUrl = env('API_BASE_URL');
                             const diskonNominal = totalPromo > 0 ? (harga * (totalPromo / 100)) : 0;
                             const hargaSetelahDiskon = harga - diskonNominal;
 
+                            let ribbonHTML = `
+                        <div class="position-absolute ribbon-wrapper">
+                            <div class="ribbon text-white text-uppercase fw-bold text-center" style="background-color: #2B4779; color: #FFFFFF;">New Product</div>
+                        </div>`;
+
+                            if (product.qty <= 0) {
+                                ribbonHTML = `
+                        <div class="position-absolute ribbon-wrapper">
+                            <div class="ribbon text-uppercase fw-bold text-center" 
+                                style="background-color: #FF0000; color: #FFFFFF;">Out of Stock</div>
+                        </div>`;
+                            }
+
                             const html = `
                         <div class="col-6 col-md-4 col-lg-3">
                             <div class="card shadow position-relative rounded-4 p-2 product-card" data-id="${product.id_product}" data-slug="${product.slug}" 
-     data-token="${product.token}" style="cursor:pointer;">
-                                <div class="position-absolute ribbon-wrapper">
-                                    <div class="ribbon text-white text-uppercase fw-bold text-center">New Product</div>
-                                </div>
+                                data-token="${product.token}" style="cursor:pointer;">
+                                ${ribbonHTML}
                                 <div class="text-center pt-3">
                                     <img src="${product.url_foto ?? ''}" class="img-fluid product-image" alt="Product Image">
                                 </div>
@@ -507,7 +484,6 @@ $apiBaseUrl = env('API_BASE_URL');
                 showToast('Terjadi kesalahan saat mengambil data produk.', 'danger');
             }
         });
-        //categoty product
     </script>
 
     <script>
@@ -517,7 +493,7 @@ $apiBaseUrl = env('API_BASE_URL');
                 const slug = card.getAttribute('data-slug');
                 const token = card.getAttribute('data-token');
                 if (slug && token) {
-                    window.location.href =  `/product/${slug}/${token}`;
+                    window.location.href = `/product/${slug}/${token}`;
                 }
             }
         });

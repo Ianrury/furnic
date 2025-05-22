@@ -52,6 +52,21 @@ $apiBaseUrl = env('API_BASE_URL');
         .product-area-new {
             font-family: 'inter';
         }
+
+        .password-container {
+            position: relative;
+            margin: auto 5px;
+        }
+
+      
+
+        .eye-icon {
+            position: absolute;
+            right: 10px;
+            top: 35px;
+            cursor: pointer;
+            color: #6c757d;
+        }
     </style>
 
 </head>
@@ -62,18 +77,16 @@ $apiBaseUrl = env('API_BASE_URL');
         <i class="fab fa-whatsapp"></i>
     </a>
 
-    <!-- preloader -->
+
     <div class="preloader">
         <div class="loader-ripple">
             <div></div>
             <div></div>
         </div>
     </div>
-    <!-- preloader end -->
 
-    <!-- header area -->
     <?php include __DIR__ . '/../templates/header.php'; ?>
-    <!-- header area end -->
+
 
 
 
@@ -81,59 +94,55 @@ $apiBaseUrl = env('API_BASE_URL');
     <main class="main">
         <div class="container-fluid login-container">
             <div class="row">
-                <!-- Image Section (hidden on mobile) -->
+
                 <div class="col-md-7 image-container">
                     <img src="assets/img/login/foto-login.PNG" alt="Woman with child on sofa with laptop">
                 </div>
 
-                <!-- Login Form Section -->
+
                 <div class="col-12 col-md-5 form-container">
                     <div class="wrapper">
                         <div class="login-form">
                             <h3 class="login-title">MASUK</h3>
 
                             <form id="loginForm" method="post">
-                                <!-- Email Field -->
+
                                 <div class="" style="margin: auto 5px;">
                                     <label for="email" class="form-label">Email <span class="required">*</span></label>
                                     <input type="email" class="form-control form-login" id="email" name="email" placeholder="Masukkan Email">
                                 </div>
 
-                                <!-- Password Field -->
-                                <div class="" style="margin: auto 5px;">
+
+                                <div class="password-container">
                                     <label for="password" class="form-label">Password</label>
                                     <input type="password" class="form-control form-login" id="password" name="password" placeholder="Masukkan Password" style="margin-bottom: 0px;">
+                                    <i class="eye-icon" id="togglePassword" onclick="togglePasswordVisibility()">
+                                        <!-- Eye icon (closed by default) -->
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" id="eyeIcon">
+                                            <path id="eyeSlash" d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z" />
+                                            <path id="eyeSlash2" d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z" />
+                                            <path id="eyeSlash3" d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z" />
+                                            <path id="eye" class="hidden" d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
+                                            <path id="eyeDot" class="hidden" d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
+                                        </svg>
+                                    </i>
                                 </div>
                                 <div class="d-flex justify-content-end">
                                     <p><a href="/forgot-password" style="font-size: 10px;">Lupa Kata Sandi?</a></p>
                                 </div>
 
-                                <!-- Remember Me Checkbox -->
-                                <!-- <div class="checkbox-wrapper">
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="remember">
-                                        <label class="form-check-label text-tetap text-black" for="remember" style="font-size: 14px;">Tetap Login</label>
-                                    </div>
-                                </div> -->
 
-                                <!-- Login Button -->
                                 <button type="submit" class="btn btn-masuk w-100" id="btnLogin">
                                     <span class="spinner-border spinner-border-sm me-2 d-none" role="status" aria-hidden="true" id="loginSpinner"></span>
                                     MASUK
                                 </button>
 
-                                <!-- Register Button -->
                                 <button type="button" class="btn btn-daftar w-100">
                                     <a href="/register">REGISTER</a>
                                 </button>
                                 <hr class="hr-tebal">
-                                <!-- Google Login Button -->
-                                <!-- <button type="button" class="btn btn-google w-100">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" alt="Google logo">
-                                    Continue with Google
-                                </button> -->
 
-                                <!-- Help Text -->
+
                                 <div class="help-text">
                                     Butuh bantuan? Kunjungi <a href="#" class="link">FAQ kami</a> atau <a href="#" class="link">hubungi kami</a>
                                 </div>
@@ -159,8 +168,7 @@ $apiBaseUrl = env('API_BASE_URL');
         </div>
     </main>
 
-    <!-- js -->
-    <script data-cfasync="false" src="cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+
     <script src="assets/js/jquery-3.7.1.min.js"></script>
     <script src="assets/js/modernizr.min.js"></script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
@@ -176,18 +184,53 @@ $apiBaseUrl = env('API_BASE_URL');
     <script src="assets/js/countdown.min.js"></script>
     <script src="assets/js/wow.min.js"></script>
     <script src="assets/js/main.js"></script>
-    <!-- jQuery -->
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function togglePasswordVisibility() {
+            const passwordInput = document.getElementById('password');
+            const eyeIcon = document.getElementById('eyeIcon');
+            const eyeOpen = document.getElementById('eye');
+            const eyeOpenDot = document.getElementById('eyeDot');
+            const eyeSlash = document.getElementById('eyeSlash');
+            const eyeSlash2 = document.getElementById('eyeSlash2');
+            const eyeSlash3 = document.getElementById('eyeSlash3');
+
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                eyeOpen.classList.remove('hidden');
+                eyeOpenDot.classList.remove('hidden');
+                eyeSlash.classList.add('hidden');
+                eyeSlash2.classList.add('hidden');
+                eyeSlash3.classList.add('hidden');
+            } else {
+                passwordInput.type = 'password';
+                eyeOpen.classList.add('hidden');
+                eyeOpenDot.classList.add('hidden');
+                eyeSlash.classList.remove('hidden');
+                eyeSlash2.classList.remove('hidden');
+                eyeSlash3.classList.remove('hidden');
+            }
+        }
+
+        // Add CSS for the hidden class
+        const style = document.createElement('style');
+        style.textContent = `
+            .hidden {
+                display: none;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
     <script>
         const API_BASE_URL = "<?= $apiBaseUrl ?>";
         $('#loginForm').on('submit', function(e) {
             e.preventDefault();
 
-            // Reset error
             $('.invalid-feedback').text('');
             $('.form-control').removeClass('is-invalid');
 
-            // Disable tombol & tampilkan spinner
+
             $('#btnLogin').attr('disabled', true);
             $('#loginSpinner').removeClass('d-none');
 
@@ -207,9 +250,11 @@ $apiBaseUrl = env('API_BASE_URL');
                             if (referrer && referrer.startsWith(currentHost)) {
                                 const referrerPath = new URL(referrer).pathname;
 
-                                if (referrerPath.includes('/register')) {
+                                if (referrerPath.includes('/register') ||
+                                    referrerPath.includes('/user/verifikasi')) {
                                     window.location.href = "/";
                                 } else {
+                                    
                                     window.history.back();
                                 }
                             } else {
@@ -240,7 +285,6 @@ $apiBaseUrl = env('API_BASE_URL');
                         showToast('Terjadi kesalahan server. Silakan coba lagi.', 'danger');
                     }
 
-                    // Kembalikan tombol
                     $('#btnLogin').attr('disabled', false);
                     $('#loginSpinner').addClass('d-none');
                 }
@@ -248,7 +292,6 @@ $apiBaseUrl = env('API_BASE_URL');
         });
 
 
-        // === TOAST FUNCTION ===
         function showToast(message, type = 'danger') {
             const toastId = 'toast-' + Date.now();
             const toastHtml = `
@@ -262,7 +305,7 @@ $apiBaseUrl = env('API_BASE_URL');
             const $toast = $(toastHtml);
             $('#toastContainer').append($toast);
 
-            // Tunda sedikit biar toast masuk DOM dulu
+
             setTimeout(() => {
                 const toast = new bootstrap.Toast(document.getElementById(toastId));
                 toast.show();

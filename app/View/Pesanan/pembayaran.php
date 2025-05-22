@@ -1370,7 +1370,6 @@ $apiBaseUrl = env('API_BASE_URL');
                     return response.json();
                 })
                 .then(result => {
-                    console.log(result);
                     // Ambil elemen input
                     const amountInput = document.getElementById('amount');
 
@@ -1387,6 +1386,7 @@ $apiBaseUrl = env('API_BASE_URL');
                     amountInput.readOnly = true; // Tidak bisa diketik
                     amountInput.style.pointerEvents = 'none'; // Tidak bisa diklik/focus
                     amountInput.style.backgroundColor = '#f1f1f1'; // Optional: ubah warna agar terlihat disabled
+
                     // Update status and order number
                     if (result.status === 'success' && result.data) {
                         // Check if order is canceled or already reviewed
@@ -1437,30 +1437,39 @@ $apiBaseUrl = env('API_BASE_URL');
                         throw new Error(result.message || 'Gagal memuat data pembayaran.');
                     }
                 })
+                .catch(error => {
+                    console.error('Terjadi kesalahan:', error);
+                    // Tampilkan pesan error ke user
+                    document.querySelector('.order-summary').innerHTML = `
+                <div class="error-message">
+                    ${error.message || 'Terjadi kesalahan saat memuat data pembayaran.'}
+                </div>
+            `;
+                });
 
-            // Add this function to show the modal
+            // Function to show the modal - dipindahkan ke luar promise chain
             function showStatusModal(data) {
                 // Create modal HTML if it doesn't exist
                 if (!document.getElementById('statusModal')) {
                     const modalHTML = `
-        <div class="modal fade" id="statusModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="statusModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" style="max-width: 280px;">
-                <div class="modal-content border-0 shadow-lg rounded-4">
-                    <div class="modal-body text-center p-4">
-                        <div class="status-icon mb-3">
-                            <i class="fas fa-info-circle fa-3x text-primary"></i>
+                <div class="modal fade" id="statusModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="statusModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" style="max-width: 280px;">
+                        <div class="modal-content border-0 shadow-lg rounded-4">
+                            <div class="modal-body text-center p-4">
+                                <div class="status-icon mb-3">
+                                    <i class="fas fa-info-circle fa-3x text-primary"></i>
+                                </div>
+                                <h5 id="statusMessage" class="mb-2 fw-bold"></h5>
+                                <p id="statusDetail" class="text-muted small mb-3"></p>
+                                <div class="order-info mb-3">
+                                    <span class="badge bg-light text-dark">Order #<span id="modalOrderNumber"></span></span>
+                                </div>
+                                <button type="button" class="btn btn-primary w-100" id="backToProductBtn">Kembali ke Produk</button>
+                            </div>
                         </div>
-                        <h5 id="statusMessage" class="mb-2 fw-bold"></h5>
-                        <p id="statusDetail" class="text-muted small mb-3"></p>
-                        <div class="order-info mb-3">
-                            <span class="badge bg-light text-dark">Order #<span id="modalOrderNumber"></span></span>
-                        </div>
-                        <button type="button" class="btn btn-primary w-100" id="backToProductBtn">Kembali ke Produk</button>
                     </div>
                 </div>
-            </div>
-        </div>
-        `;
+            `;
 
                     // Append modal to body
                     const modalContainer = document.createElement('div');
@@ -1529,73 +1538,63 @@ $apiBaseUrl = env('API_BASE_URL');
                 }
             }
 
-            // Add necessary CSS for animations
+            // Add necessary CSS for animations - dipindahkan ke luar promise chain
             (function() {
                 const style = document.createElement('style');
                 style.textContent = `
-        @keyframes zoomIn {
-            from {
-                opacity: 0;
-                transform: scale3d(0.3, 0.3, 0.3);
+            @keyframes zoomIn {
+                from {
+                    opacity: 0;
+                    transform: scale3d(0.3, 0.3, 0.3);
+                }
+                50% {
+                    opacity: 1;
+                }
             }
-            50% {
-                opacity: 1;
+            
+            .animate__animated {
+                animation-duration: 0.5s;
+                animation-fill-mode: both;
             }
-        }
-        
-        .animate__animated {
-            animation-duration: 0.5s;
-            animation-fill-mode: both;
-        }
-        
-        .animate__zoomIn {
-            animation-name: zoomIn;
-        }
-        
-        #statusModal .modal-content {
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-        }
-        
-        #statusModal .status-icon {
-            display: inline-block;
-            width: 70px;
-            height: 70px;
-            line-height: 70px;
-            border-radius: 50%;
-            background-color: rgba(0,123,255,0.1);
-            margin-bottom: 1rem;
-        }
-        
-        #statusModal #backToProductBtn {
-            border-radius: 8px;
-            font-weight: 600;
-            padding: 8px;
-        }
-        
-        #statusModal .badge {
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-weight: normal;
-        }
-        
-        #statusModal {
-            z-index: 2000;
-        }
-    `;
+            
+            .animate__zoomIn {
+                animation-name: zoomIn;
+            }
+            
+            #statusModal .modal-content {
+                border-radius: 16px;
+                overflow: hidden;
+                box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            }
+            
+            #statusModal .status-icon {
+                display: inline-block;
+                width: 70px;
+                height: 70px;
+                line-height: 70px;
+                border-radius: 50%;
+                background-color: rgba(0,123,255,0.1);
+                margin-bottom: 1rem;
+            }
+            
+            #statusModal #backToProductBtn {
+                border-radius: 8px;
+                font-weight: 600;
+                padding: 8px;
+            }
+            
+            #statusModal .badge {
+                padding: 6px 12px;
+                border-radius: 20px;
+                font-weight: normal;
+            }
+            
+            #statusModal {
+                z-index: 2000;
+            }
+        `;
                 document.head.appendChild(style);
-            })()
-            .catch(error => {
-                console.error('Terjadi kesalahan:', error);
-                // Tampilkan pesan error ke user
-                document.querySelector('.order-summary').innerHTML = `
-                    <div class="error-message">
-                        ${error.message || 'Terjadi kesalahan saat memuat data pembayaran.'}
-                    </div>
-                `;
-            });
-
+            })();
         }
 
         // Jalankan fungsi inisialisasi saat dokumen selesai dimuat

@@ -237,6 +237,14 @@ class UserController
         View::render('User/ubahsandi', $model);
     }
 
+    public function verfikasiEmail()
+    {
+        $model = [
+            'title'=> 'Verifikasi Email',
+        ];
+        View::render('User/verfikasi-email', $model);
+    }
+
 
     public function logout()
     {

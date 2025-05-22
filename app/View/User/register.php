@@ -8,23 +8,22 @@ $apiBaseUrl = env('API_BASE_URL');
 <html lang="en">
 
 <head>
-    <!-- meta tags -->
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="keywords" content="">
 
-    <!-- title -->
+
     <title><?php echo $model['title']; ?> - PT Furnice Furnishing Indonesia</title>
 
-    <!-- favicon -->
+
     <link rel="icon" type="image/x-icon" href="assets/img/logo/favicon.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
         integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 
-    <!-- css -->
-    <!-- <link rel="stylesheet" href="/app/App/assets/css/bootstrap"> -->
+
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/all-fontawesome.min.css">
     <link rel="stylesheet" href="assets/css/animate.min.css">
@@ -52,6 +51,22 @@ $apiBaseUrl = env('API_BASE_URL');
         .product-area-new {
             font-family: 'inter';
         }
+
+        .password-field {
+            position: relative;
+        }
+
+        .eye-icon {
+            position: absolute;
+            right: 10px;
+            top: 38px;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .eye-icon:hover {
+            color: #333;
+        }
     </style>
 
 </head>
@@ -69,11 +84,8 @@ $apiBaseUrl = env('API_BASE_URL');
             <div></div>
         </div>
     </div>
-    <!-- preloader end -->
-
-    <!-- header area -->
     <?php include __DIR__ . '/../templates/header.php'; ?>
-    <!-- header area end -->
+
 
 
 
@@ -81,12 +93,11 @@ $apiBaseUrl = env('API_BASE_URL');
     <main class="main">
         <div class="container-fluid login-container">
             <div class="row">
-                <!-- Image Section (hidden on mobile) -->
                 <div class="col-md-7 image-container">
                     <img src="assets/img/login/foto-login.PNG" alt="Woman with child on sofa with laptop">
                 </div>
 
-                <!-- Login Form Section -->
+
                 <div class="col-12 col-md-5 form-container">
                     <div class="wrapper">
                         <div class="register-form">
@@ -104,22 +115,28 @@ $apiBaseUrl = env('API_BASE_URL');
                                     <input type="email" class="form-control form-login" id="email" name="email" placeholder="Masukkan Email">
                                 </div>
 
-                                <div class="" style="margin: auto 5px;">
-                                    <label for="no_hp" class="form-label">Nomor Telepon</label>
-                                    <div class="d-flex gap-1">
-                                        <input type="text" class="form-control form-login country-code-input" id="country_code" name="country_code" placeholder="+62" readonly>
-                                        <input type="text" class="form-control form-login phone-input" id="no_telpon" name="no_hp" placeholder="Masukkan No Telepon">
+                                <div class="form-group" style="margin: auto 5px;">
+                                    <label for="no_telpon" class="form-label">Nomor Telepon</label>
+                                    <input type="text" class="form-control form-login phone-input" id="no_telpon" name="no_hp" placeholder="Masukkan No Telepon">
+                                    <div class="invalid-feedback" id="phone-error">
+                                        Nomor telepon hanya boleh berisi angka
                                     </div>
                                 </div>
 
-                                <div class="" style="margin: auto 5px;">
-                                    <label for="kata_sandi" class="form-label">Password</label>
+                                <div class="form-group password-field" style="margin: auto 5px;">
+                                    <label for="password" class="form-label">Password</label>
                                     <input type="password" class="form-control form-login" id="password" name="kata_sandi" placeholder="Masukkan Password">
+                                    <span class="eye-icon" id="togglePassword">
+                                        <i class="fas fa-eye-slash"></i>
+                                    </span>
                                 </div>
 
-                                <div class="" style="margin: auto 5px;">
+                                <div class="form-group password-field" style="margin: auto 5px;">
                                     <label for="password_confirmation" class="form-label">Ulangi Password</label>
                                     <input type="password" class="form-control form-login" id="password_confirmation" name="password_confirmation" placeholder="Ulangi Password">
+                                    <span class="eye-icon" id="toggleConfirmPassword">
+                                        <i class="fas fa-eye-slash"></i>
+                                    </span>
                                 </div>
 
 
@@ -128,11 +145,9 @@ $apiBaseUrl = env('API_BASE_URL');
                                     DAFTAR
                                 </button>
 
-                                <!-- Register Button -->
                                 <button type="button" class="btn btn-daftar w-100">
                                     <a href="/login">MASUK</a>
                                 </button>
-                                <!-- Login Button -->
                             </form>
                         </div>
                     </div>
@@ -142,7 +157,7 @@ $apiBaseUrl = env('API_BASE_URL');
         <div id="toastContainer" class="position-fixed top-0 end-0 p-3" style="z-index: 9999;">
             <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
                 <div class="toast-header">
-                    <img src="..." class="rounded me-2" alt="...">
+                    <!-- <img src="..." class="rounded me-2" alt="..."> -->
                     <strong class="me-auto">Bootstrap</strong>
                     <small>11 mins ago</small>
                     <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
@@ -154,8 +169,7 @@ $apiBaseUrl = env('API_BASE_URL');
         </div>
     </main>
 
-    <!-- js -->
-    <script data-cfasync="false" src="cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+
     <script src="assets/js/jquery-3.7.1.min.js"></script>
     <script src="assets/js/modernizr.min.js"></script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
@@ -171,14 +185,71 @@ $apiBaseUrl = env('API_BASE_URL');
     <script src="assets/js/countdown.min.js"></script>
     <script src="assets/js/wow.min.js"></script>
     <script src="assets/js/main.js"></script>
-    <!-- jQuery -->
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        // Deteksi kesamaan password real-time
+        function setupPasswordToggle(toggleId, passwordId) {
+            const togglePassword = document.getElementById(toggleId);
+            const password = document.getElementById(passwordId);
+
+            togglePassword.addEventListener('click', function() {
+
+                const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+                password.setAttribute('type', type);
+
+                const icon = this.querySelector('i');
+                icon.classList.toggle('fa-eye');
+                icon.classList.toggle('fa-eye-slash');
+            });
+        }
+
+        setupPasswordToggle('togglePassword', 'password');
+        setupPasswordToggle('toggleConfirmPassword', 'password_confirmation');
+    </script>
+    <script>
+        const phoneInput = document.getElementById('no_telpon');
+        const phoneError = document.getElementById('phone-error');
+        phoneInput.addEventListener('input', function(e) {
+
+            const sanitizedValue = this.value.replace(/\D/g, '');
+
+
+            if (this.value !== sanitizedValue) {
+                this.classList.add('invalid');
+                phoneError.style.display = 'block';
+            } else {
+                this.classList.remove('invalid');
+                phoneError.style.display = 'none';
+            }
+            this.value = sanitizedValue;
+        });
+    </script>
+    <script>
         $('#password, #password_confirmation').on('input', function() {
             const password = $('#password').val();
             const confirm = $('#password_confirmation').val();
+            const formatRegex = /^[a-zA-Z0-9]{2,8}$/;
 
+            // Cek apakah password memiliki kombinasi huruf dan angka
+            const hasLetter = /[a-zA-Z]/.test(password);
+            const hasNumber = /[0-9]/.test(password);
+
+            // Validasi format password
+            if (password) {
+                if (!formatRegex.test(password)) {
+                    $('#password').addClass('is-invalid');
+                    $('#error-password').text('Password harus 2-8 karakter, hanya huruf dan angka.');
+                } else if (!(hasLetter && hasNumber)) {
+                    // Pastikan password mengandung minimal satu huruf dan satu angka
+                    $('#password').addClass('is-invalid');
+                    $('#error-password').text('Password harus mengandung minimal satu huruf dan satu angka.');
+                } else {
+                    $('#password').removeClass('is-invalid');
+                    $('#error-password').text('');
+                }
+            }
+
+            // Validasi konfirmasi password
             if (confirm && password !== confirm) {
                 $('#password_confirmation').addClass('is-invalid');
                 $('#error-password_confirmation').text('Password tidak sama');
@@ -188,32 +259,52 @@ $apiBaseUrl = env('API_BASE_URL');
             }
         });
 
-        const API_BASE_URL = "<?= $apiBaseUrl ?>";
 
+        const API_BASE_URL = "<?= $apiBaseUrl ?>";
 
         $('#formRegister').on('submit', function(e) {
             e.preventDefault();
 
-            // Reset error
             $('.invalid-feedback').text('');
             $('.form-control').removeClass('is-invalid');
-
-            // Disable tombol dan tampilkan spinner
-            $('#btnSubmit').attr('disabled', true);
-            $('#btnSpinner').removeClass('d-none');
 
             const password = $('#password').val();
             const confirm = $('#password_confirmation').val();
 
-            if (password !== confirm) {
-                $('#password_confirmation').addClass('is-invalid');
-                $('#error-password_confirmation').text('Password tidak sama');
-
-                // Kembalikan tombol
-                $('#btnSubmit').attr('disabled', false);
-                $('#btnSpinner').addClass('d-none');
+            // Validasi minimal 8 karakter
+            if (password.length < 8) {
+                $('#password').addClass('is-invalid');
+                $('#error-password').text('Password minimal 8 karakter.');
+                showToast('Password minimal 8 karakter.', 'danger');
                 return;
             }
+
+            // Hitung kombinasi jenis karakter
+            let combinationCount = 0;
+            if (/[a-z]/.test(password)) combinationCount++; // huruf kecil
+            if (/[A-Z]/.test(password)) combinationCount++; // huruf besar
+            if (/[0-9]/.test(password)) combinationCount++; // angka
+            if (/[^a-zA-Z0-9]/.test(password)) combinationCount++; // simbol
+
+            // Validasi kombinasi minimal 2 jenis
+            if (combinationCount < 2) {
+                $('#password').addClass('is-invalid');
+                $('#error-password').text('Password harus mengandung minimal 2 jenis karakter (huruf besar, huruf kecil, angka, simbol).');
+                showToast('Password harus mengandung minimal 2 jenis karakter.', 'danger');
+                return;
+            }
+
+            // Validasi password confirmation
+            if (password !== confirm) {
+                $('#password_confirmation').addClass('is-invalid');
+                $('#error-password_confirmation').text('Password tidak sama.');
+                showToast('Password dan konfirmasi tidak sama.', 'danger');
+                return;
+            }
+
+            // Jika validasi lolos, lanjut submit
+            $('#btnSubmit').attr('disabled', true);
+            $('#btnSpinner').removeClass('d-none');
 
             $.ajax({
                 url: API_BASE_URL + '/register',
@@ -221,8 +312,6 @@ $apiBaseUrl = env('API_BASE_URL');
                 data: $('#formRegister').serialize(),
                 dataType: 'json',
                 success: function(response) {
-                    console.log('Success response:', response);
-
                     if (response.success) {
                         showToast(response.message, 'success');
 
@@ -239,8 +328,6 @@ $apiBaseUrl = env('API_BASE_URL');
                     }
                 },
                 error: function(xhr) {
-                    console.log('Error response:', xhr);
-
                     if (xhr.status === 422) {
                         const res = xhr.responseJSON || JSON.parse(xhr.responseText);
                         const message = res.message || 'Validasi gagal.';
@@ -265,7 +352,6 @@ $apiBaseUrl = env('API_BASE_URL');
                         showToast(errorMessage, 'danger');
                     }
 
-                    // Kembalikan tombol
                     $('#btnSubmit').attr('disabled', false);
                     $('#btnSpinner').addClass('d-none');
                 }
@@ -274,7 +360,8 @@ $apiBaseUrl = env('API_BASE_URL');
 
 
 
-        // === TOAST FUNCTION ===
+
+
         function showToast(message, type = 'danger') {
             const toastId = 'toast-' + Date.now();
             const toastHtml = `
@@ -288,7 +375,7 @@ $apiBaseUrl = env('API_BASE_URL');
             const $toast = $(toastHtml);
             $('#toastContainer').append($toast);
 
-            // Tunda sedikit biar toast masuk DOM dulu
+
             setTimeout(() => {
                 const toast = new bootstrap.Toast(document.getElementById(toastId));
                 toast.show();

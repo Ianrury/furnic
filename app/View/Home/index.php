@@ -273,55 +273,6 @@ $apiBaseUrl = env('API_BASE_URL');
         </div>
         <!-- popular item end -->
 
-        <!-- <div class="product-area product-area-new">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12 wow fadeInDown mb-0" data-wow-delay=".25s">
-                        <div class="site-heading-inline">
-                            <h2 class="site-title">Kategory Product</h2>
-                        </div>
-                    </div>
-                </div>
-                <div class="tab-content wow fadeInUp" data-wow-delay=".25s" id="item-tabContent">
-                    <div class="container">
-                        <div class="row align-items-center mb-2">
-                            <div class="col d-flex justify-content-between align-items-center ps-0">
-                                <div class="category-pilihan">
-                                    <ul class="d-flex mb-0">
-                                        <?php if (!empty($model['category'])): ?>
-                                            <?php foreach ($model['category'] as $product): ?>
-                                                <li class="nav-item">
-                                                    <a class="d-flex justify-content-center align-items-center custom-nav-link-product"
-                                                        data-category="<?= strtolower($product['nama']) ?>"
-                                                        href="javascript:void(0)">
-                                                        <?= ucfirst($product['nama']) ?>
-                                                    </a>
-                                                </li>
-                                            <?php endforeach; ?>
-                                        <?php else: ?>
-                                            <li>
-                                                <p class="text-muted">Tidak ada category yang tersedia.</p>
-                                            </li>
-                                        <?php endif; ?>
-                                    </ul>
-                                </div>
-
-                                <a href="#" class="small view-more">View More <i
-                                        class="fas fa-angle-double-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="tab-content wow fadeInUp" data-wow-delay=".25s" id="item-tabContent">
-                    <div class="container category-product">
-                        <div id="product-container"
-                            class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4  justify-content-start">
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> -->
 
 
         <!-- choose-area -->
@@ -600,7 +551,6 @@ $apiBaseUrl = env('API_BASE_URL');
 
 
     <!-- js -->
-    <script data-cfasync="false" src="cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
     <script src="assets/js/jquery-3.7.1.min.js"></script>
     <script src="assets/js/modernizr.min.js"></script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
@@ -680,16 +630,14 @@ $apiBaseUrl = env('API_BASE_URL');
         const API_BASE_URL = "<?= $apiBaseUrl ?>";
 
         document.addEventListener('DOMContentLoaded', function() {
-            // Define variables for pagination
+        
             let currentPage = 1;
-            const productsPerPage = 8; // 8 products per page for laptop size
+            const productsPerPage = 8; 
             let totalPages = 0;
             let products = [];
 
-            // Initialize - fetch products from API
             loadProducts();
 
-            // Function to load products from API
             function loadProducts() {
                 $.ajax({
                     url: API_BASE_URL + '/full-product',
@@ -697,13 +645,11 @@ $apiBaseUrl = env('API_BASE_URL');
                     dataType: 'json',
                     success: function(response) {
                         if (response.status === 'success') {
-                            const allProductsRaw = response.FullProduck; // Get product array from response
-                            console.log('Data produk:', allProductsRaw);
+                            const allProductsRaw = response.FullProduck; 
 
-                            // Process the raw products
+                  
                             processProducts(allProductsRaw);
 
-                            // Display the products
                             displayProducts();
                         } else {
                             console.error('Terjadi kesalahan:', response.message);
@@ -715,16 +661,15 @@ $apiBaseUrl = env('API_BASE_URL');
                 });
             }
 
-            // Process raw product data
             function processProducts(allProductsRaw) {
-                // Get 3 best seller product IDs
+          
                 const topBestSellerIds = allProductsRaw
-                    .filter(p => p.qty > 0) // only products with stock
+                    .filter(p => p.qty > 0) 
                     .sort((a, b) => b.beli - a.beli)
                     .slice(0, 3)
                     .map(p => p.id_product);
 
-                // Process products
+           
                 products = allProductsRaw.map(product => {
                     const harga = Number(product.harga) || 0;
                     const promoPersen = Number(product.total_promo) || 0;
@@ -759,8 +704,7 @@ $apiBaseUrl = env('API_BASE_URL');
                         };
                     }
 
-                    // Debug the image URL
-                    console.log(`Product ${product.id_product} image URL:`, product.url_foto);
+              
 
                     return {
                         id: product.id_product,
@@ -781,11 +725,11 @@ $apiBaseUrl = env('API_BASE_URL');
                     };
                 });
 
-                // Update total pages based on processed products
+          
                 totalPages = Math.ceil(products.length / productsPerPage);
             }
 
-            // Function to create product card
+      
             function createProductCard(product) {
                 return `
                 <div class="col">
@@ -850,7 +794,6 @@ $apiBaseUrl = env('API_BASE_URL');
                 return stars;
             }
 
-            // Function to create pagination
             function createPagination() {
                 let paginationHTML = `
         <nav aria-label="Page navigation">
@@ -883,7 +826,7 @@ $apiBaseUrl = env('API_BASE_URL');
                 return paginationHTML;
             }
 
-            // Function to display products on the current page
+   
             function displayProducts() {
                 const productContainer = document.querySelector('#product-pagination-container .row');
                 const paginationContainer = document.getElementById('pagination-container');
@@ -893,7 +836,6 @@ $apiBaseUrl = env('API_BASE_URL');
                     return;
                 }
 
-                // Create pagination container if it doesn't exist
                 if (!paginationContainer) {
                     const newPaginationContainer = document.createElement('div');
                     newPaginationContainer.id = 'pagination-container';
@@ -901,12 +843,11 @@ $apiBaseUrl = env('API_BASE_URL');
                     productContainer.parentElement.appendChild(newPaginationContainer);
                 }
 
-                // Calculate products for current page
+              
                 const startIndex = (currentPage - 1) * productsPerPage;
                 const endIndex = Math.min(startIndex + productsPerPage, products.length);
                 const currentProducts = products.slice(startIndex, endIndex);
 
-                // Create HTML for products
                 let productsHTML = '';
                 if (currentProducts.length === 0) {
                     productsHTML = '<div class="col-12 text-center"><p>Tidak ada produk yang tersedia.</p></div>';
@@ -916,15 +857,14 @@ $apiBaseUrl = env('API_BASE_URL');
                     });
                 }
 
-                // Display products
                 productContainer.innerHTML = productsHTML;
 
-                // Display pagination if needed
+      
                 const actualPaginationContainer = document.getElementById('pagination-container');
                 if (actualPaginationContainer) {
                     actualPaginationContainer.innerHTML = totalPages > 1 ? createPagination() : '';
 
-                    // Add event listeners for pagination
+              
                     const pageLinks = actualPaginationContainer.querySelectorAll('.page-link');
                     pageLinks.forEach(link => {
                         link.addEventListener('click', function(e) {
@@ -941,7 +881,6 @@ $apiBaseUrl = env('API_BASE_URL');
 
                             displayProducts();
 
-                            // Smooth scroll to top of product section
                             productContainer.scrollIntoView({
                                 behavior: 'smooth'
                             });
@@ -949,7 +888,6 @@ $apiBaseUrl = env('API_BASE_URL');
                     });
                 }
 
-                // Add click event to product cards
                 const productCards = document.querySelectorAll('.product-card');
                 productCards.forEach(card => {
                     card.addEventListener('click', function() {
@@ -960,16 +898,15 @@ $apiBaseUrl = env('API_BASE_URL');
             }
         });
 
-        //categoty produc
+     
     </script>
 
-    <!-- JavaScript -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Data produk dari PHP (contoh)
+        
             const productkategori = <?= json_encode($model["kategori"]); ?>;
 
-            // Mapping kategori berdasarkan nama_kategori
+        
             function mapCategory(name) {
                 const lowercaseName = name.toLowerCase();
                 if (lowercaseName.includes('living')) return 'living';
@@ -979,7 +916,7 @@ $apiBaseUrl = env('API_BASE_URL');
                 return 'other';
             }
 
-            // Fungsi membuat rating dummy
+     
             function createStarRating(rating) {
                 let stars = '';
                 for (let i = 0; i < 5; i++) {
@@ -987,11 +924,10 @@ $apiBaseUrl = env('API_BASE_URL');
                 }
                 return stars;
             }
-            // animate__animated animate__fadeInRight
-            // Fungsi men-generate card produk
+
             function createProductCard(product) {
                 const harga = Number(product.harga) || 0;
-                const oldPrice = harga; // Didefinisikan untuk menghindari error
+                const oldPrice = harga; 
                 const promoPersen = Number(product.total_promo) || 0;
 
                 const potongan = Math.round(harga * (promoPersen / 100));
@@ -1024,14 +960,14 @@ $apiBaseUrl = env('API_BASE_URL');
                     };
                 }
 
-                // Menambahkan titik pemisah ribuan pada harga
+    
                 const formattedHargaSetelahDiskon = hargaSetelahDiskon.toLocaleString('id-ID');
                 const formattedOldPrice = oldPrice.toLocaleString('id-ID');
 
                 return `
                         <div class="col animate__animated animate__fadeInRight">
                             <div class="card shadow position-relative rounded-4 p-2 product-card" data-id="${product.id_product}" data-slug="${product.slug}" 
-     data-token="${product.token}" style="cursor:pointer;">
+                      data-token="${product.token}" style="cursor:pointer;">
                                 ${ribbon ? `
                                 <div class="position-absolute ribbon-wrapper">
                                     <div class="ribbon text-uppercase fw-bold text-center"
@@ -1078,9 +1014,13 @@ $apiBaseUrl = env('API_BASE_URL');
                         `;
             }
 
-            // Fungsi render produk
+        
             function renderProducts(category) {
                 const container = document.getElementById('product-container');
+                if (!container) {
+                    return;
+                }
+
                 container.classList.remove('animate__fadeInRight');
                 container.classList.add('animate__fadeOutLeft');
 
@@ -1102,14 +1042,14 @@ $apiBaseUrl = env('API_BASE_URL');
                 }, 400);
             }
 
-            // Gunakan kategori pertama secara default jika ada
+      
             if (productkategori.length > 0) {
                 const firstCategory = productkategori[0].nama_kategori.toLowerCase();
                 renderProducts(firstCategory);
                 setActiveCategory(firstCategory);
             }
 
-            // Menambahkan kelas 'active' ke kategori yang diklik
+    
             function setActiveCategory(category) {
                 document.querySelectorAll('.custom-nav-link-product').forEach(link => {
                     if (link.dataset.category === category) {
@@ -1120,16 +1060,14 @@ $apiBaseUrl = env('API_BASE_URL');
                 });
             }
 
-            // Menampilkan produk kategori 'living' secara default
             renderProducts('living');
-            setActiveCategory('living'); // Menandai kategori 'living' sebagai aktif secara default
+            setActiveCategory('living'); 
 
-            // Event klik kategori
             document.querySelectorAll('.custom-nav-link-product').forEach(link => {
                 link.addEventListener('click', function() {
                     const category = this.dataset.category;
                     renderProducts(category);
-                    setActiveCategory(category); // Menandai kategori yang diklik sebagai aktif
+                    setActiveCategory(category); 
                 });
             });
         });
@@ -1138,13 +1076,11 @@ $apiBaseUrl = env('API_BASE_URL');
 
         $.ajax({
             url: API_BASE_URL + '/product-terbaru',
-            type: 'GET', // Sesuai dengan route kamu
+            type: 'GET',
             dataType: 'json',
             success: function(response) {
                 if (response.status === 'success') {
                     const produk = response.data;
-                    console.log("terbaru", produk);
-                    // Kosongkan isi sebelumnya
                     $('#product-terbaru').html('');
 
                     if (produk.length > 0) {
@@ -1154,48 +1090,63 @@ $apiBaseUrl = env('API_BASE_URL');
                             const diskonNominal = totalPromo > 0 ? (harga * (totalPromo / 100)) : 0;
                             const hargaSetelahDiskon = harga - diskonNominal;
 
+                    
+                            let ribbonHTML = `
+                        <div class="position-absolute ribbon-wrapper">
+                            <div class="ribbon text-white text-uppercase fw-bold text-center" style="background-color: #2B4779; color: #FFFFFF;">New Product</div>
+                        </div>`;
+
+                            if (product.qty <= 0) {
+                                ribbonHTML = `
+                        <div class="position-absolute ribbon-wrapper">
+                            <div class="ribbon text-uppercase fw-bold text-center" 
+                                style="background-color: #FF0000; color: #FFFFFF;">Out of Stock</div>
+                        </div>`;
+                            }
+
                             const html = `
-                        <div class="col-6 col-md-4 col-lg-3">
-                            <div class="card shadow position-relative rounded-4 p-2 product-card" data-id="${product.id_product}" data-slug="${product.slug}" 
-     data-token="${product.token}" style="cursor:pointer;">
-                                <div class="position-absolute ribbon-wrapper">
-                                    <div class="ribbon text-white text-uppercase fw-bold text-center">New Product</div>
-                                </div>
-                                <div class="text-center pt-3">
-                                    <img src="${product.url_foto ?? ''}" class="img-fluid product-image" alt="Product Image">
-                                </div>
-                                <div class="bodykartu">
-                                    <div class="d-flex flex-column">
-                                        <p class="card-title text-truncate product-title">${product.nama_product ?? 'Nama produk tidak tersedia'}</p>
-                                        <p class="card-text text-truncate product-desc">${product.deskripsi ?? 'Deskripsi tidak tersedia'}</p>
-                                        <div class="d-flex gap-1 align-items-center">
-                                            <i class="bi bi-star-fill text-warning small-icon"></i>
-                                            <i class="bi bi-star-fill text-warning small-icon"></i>
-                                            <i class="bi bi-star-fill text-warning small-icon"></i>
-                                            <i class="bi bi-star-fill text-warning small-icon"></i>
-                                            <i class="bi bi-star-fill text-warning small-icon"></i>
-                                            <small class="text-muted fst-italic ms-1 sold-text">${product.beli ?? 0} terjual</small>
-                                        </div>
-                                        <div class="mt-auto">
-                                            <div class="d-flex flex-wrap align-items-baseline">
-                                                <div class="me-2">
-                                                    <span class="fw-bold price">
-                                                        <sup class="fw-normal">Rp</sup>${Number(hargaSetelahDiskon).toLocaleString('id-ID')}
-                                                    </span>
-                                                </div>
-                                                ${diskonNominal > 0 ? `
-                                                    <div>
-                                                        <span class="fw-normal text-danger old-price">
-                                                            <sup>Rp</sup><span class="text-decoration-line-through">${Number(harga).toLocaleString('id-ID')}</span>
-                                                        </span>
-                                                    </div>
-                                                ` : ''}
+                    <div class="col-6 col-md-4 col-lg-3">
+                        <div class="card shadow position-relative rounded-4 p-2 product-card" 
+                            data-id="${product.id_product}" data-slug="${product.slug}" data-token="${product.token}" 
+                            style="cursor:pointer;">
+                            
+                            ${ribbonHTML}
+
+                            <div class="text-center pt-3">
+                                <img src="${product.url_foto ?? ''}" class="img-fluid product-image" alt="Product Image">
+                            </div>
+                            <div class="bodykartu">
+                                <div class="d-flex flex-column">
+                                    <p class="card-title text-truncate product-title">${product.nama_product ?? 'Nama produk tidak tersedia'}</p>
+                                    <p class="card-text text-truncate product-desc">${product.deskripsi ?? 'Deskripsi tidak tersedia'}</p>
+                                    <div class="d-flex gap-1 align-items-center">
+                                        <i class="bi bi-star-fill text-warning small-icon"></i>
+                                        <i class="bi bi-star-fill text-warning small-icon"></i>
+                                        <i class="bi bi-star-fill text-warning small-icon"></i>
+                                        <i class="bi bi-star-fill text-warning small-icon"></i>
+                                        <i class="bi bi-star-fill text-warning small-icon"></i>
+                                        <small class="text-muted fst-italic ms-1 sold-text">${product.beli ?? 0} terjual</small>
+                                    </div>
+                                    <div class="mt-auto">
+                                        <div class="d-flex flex-wrap align-items-baseline">
+                                            <div class="me-2">
+                                                <span class="fw-bold price">
+                                                    <sup class="fw-normal">Rp</sup>${Number(hargaSetelahDiskon).toLocaleString('id-ID')}
+                                                </span>
                                             </div>
+                                            ${diskonNominal > 0 ? `
+                                                <div>
+                                                    <span class="fw-normal text-danger old-price">
+                                                        <sup>Rp</sup><span class="text-decoration-line-through">${Number(harga).toLocaleString('id-ID')}</span>
+                                                    </span>
+                                                </div>` : ''}
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>`;
+                        </div>
+                    </div>`;
+
                             $('#product-terbaru').append(html);
                         });
                     } else {
@@ -1217,7 +1168,6 @@ $apiBaseUrl = env('API_BASE_URL');
             if (card) {
                 const slug = card.getAttribute('data-slug');
                 const token = card.getAttribute('data-token');
-                console.log(slug, token);
                 if (slug && token) {
                     window.location.href = `/product/${slug}/${token}`;
                 }
@@ -1230,7 +1180,6 @@ $apiBaseUrl = env('API_BASE_URL');
             const categoryContainer = document.querySelector('.category-pilihan');
 
             if (categoryContainer) {
-                // Check if scrolled to show left gradient
                 function checkScroll() {
                     if (categoryContainer.scrollLeft > 10) {
                         categoryContainer.classList.add('scrolled-right');
@@ -1239,12 +1188,7 @@ $apiBaseUrl = env('API_BASE_URL');
                     }
                 }
 
-                // Listen for scroll events
                 categoryContainer.addEventListener('scroll', checkScroll);
-
-                // Enable touch scrolling with momentum for mobile (already built into browsers)
-
-                // Enable horizontal scrolling with mouse wheel for desktop
                 categoryContainer.addEventListener('wheel', function(e) {
                     if (e.deltaY !== 0) {
                         e.preventDefault();
@@ -1253,21 +1197,16 @@ $apiBaseUrl = env('API_BASE_URL');
                     }
                 });
 
-                // Add active state toggle for categories
+    
                 const categoryLinks = categoryContainer.querySelectorAll('.custom-nav-link-product');
                 categoryLinks.forEach(link => {
                     link.addEventListener('click', function() {
                         categoryLinks.forEach(l => l.classList.remove('active'));
                         this.classList.add('active');
 
-                        // Get category value for filtering
                         const category = this.getAttribute('data-category');
-                        console.log('Selected category:', category);
-                        // Add your filtering logic here
                     });
                 });
-
-                // Initial check for scroll position
                 checkScroll();
             }
         });

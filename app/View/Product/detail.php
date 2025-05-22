@@ -163,18 +163,14 @@ $apiBaseUrl = env('API_BASE_URL');
         <div class="product-area product-area-new">
             <div class="container">
                 <div class="row g-0 g-md-5">
-                    <!-- Product Images Column -->
-                    <!-- Modified Product Card with Bootstrap Availability Indicator -->
                     <div class="col-md-5">
                         <div class="card product-card-detail">
-                            <!-- New Product Badge -->
                             <div class="position-absolute ribbon-wrapper-detail">
                                 <div class="ribbon-detail text-white text-uppercase fw-bold text-center">
                                     New Product
                                 </div>
                             </div>
 
-                            <!-- Store Availability Badge (New) -->
                             <div class="position-absolute top-0 end-0 m-3">
                                 <div class="store-availability-badge d-flex align-items-center">
                                     <span class="badge bg-success px-3 py-2 rounded-pill shadow-sm d-flex align-items-center">
@@ -192,7 +188,7 @@ $apiBaseUrl = env('API_BASE_URL');
                             <!-- Thumbnail Images -->
                             <div class="card-footer bg-white p-3 border-0">
                                 <div class="row g-2" id="thumbnail-container">
-                                    <!-- Thumbnails akan di-generate di sini -->
+
                                 </div>
                             </div>
                         </div>
@@ -299,7 +295,7 @@ $apiBaseUrl = env('API_BASE_URL');
                                         Sekarang</button>
                                 </div>
                                 <div class="col-3 d-flex justify-content-end gap-3">
-                                    <div class="action-icon" id="wishlistBtn">
+                                    <div class="action-icon" id="wishlistBtn" style="visibility: hidden;">
                                         <img id="wishlistIcon" src="assets/img/icon/love.svg" alt="Love Icon" width="30"
                                             height="30">
                                     </div>
@@ -331,7 +327,7 @@ $apiBaseUrl = env('API_BASE_URL');
                                 <div class="custom-nav-link-descripsi active" data-tab="spesifikasi">Spesifikasi Product</div>
                             </li>
                             <li class="nav-item">
-                                <div class="custom-nav-link-descripsi"  data-tab="informasi">Descripsi Product</div>
+                                <div class="custom-nav-link-descripsi" data-tab="informasi">Descripsi Product</div>
                             </li>
                         </ul>
 
@@ -409,51 +405,6 @@ $apiBaseUrl = env('API_BASE_URL');
                                 <div class="container mt-3">
                                     <div class="review-photos-container" id="reviewPhotos">
                                         <div class="row gap-2 justify-content-start visible-photos">
-                                            <!-- Foto 1-9 yang langsung terlihat -->
-                                            <div class="col-2 review-photo-pelanggan">
-                                                <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png"
-                                                    class="rounded-3" alt="Product review 1">
-                                            </div>
-                                            <div class="col-2 review-photo-pelanggan">
-                                                <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png"
-                                                    class="rounded-3" alt="Product review 2">
-                                            </div>
-                                            <div class="col-2 review-photo-pelanggan">
-                                                <img src="assets/img/product/decorasi/ruang-santai.jpg"
-                                                    class="rounded-3" alt="Product review 3">
-                                            </div>
-                                            <div class="col-2 review-photo-pelanggan">
-                                                <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png"
-                                                    class="rounded-3" alt="Product review 4">
-                                            </div>
-                                            <div class="col-2 review-photo-pelanggan">
-                                                <img src="assets/img/product/decorasi/ruang-santai.jpg"
-                                                    class="rounded-3" alt="Product review 5">
-                                            </div>
-                                            <div class="col-2 review-photo-pelanggan">
-                                                <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png"
-                                                    class="rounded-3" alt="Product review 6">
-                                            </div>
-                                            <div class="col-2 review-photo-pelanggan">
-                                                <img src="assets/img/product/decorasi/ruang-santai.jpg"
-                                                    class="rounded-3" alt="Product review 7">
-                                            </div>
-                                            <div class="col-2 review-photo-pelanggan">
-                                                <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png"
-                                                    class="rounded-3" alt="Product review 8">
-                                            </div>
-                                            <div class="col-2 review-photo-pelanggan">
-                                                <img src="assets/img/product/decorasi/ruang-santai.jpg"
-                                                    class="rounded-3" alt="Product review 9">
-                                            </div>
-
-                                            <!-- Foto ke-10 dengan overlay -->
-                                            <div class="col-2 review-photo-pelanggan" id="lastVisiblePhoto">
-                                                <img src="assets/img/product/kursi/ZULU CHAIR WHITE.png"
-                                                    class="rounded-3" alt="Product review 10">
-                                                <div class="more-photos-overlay" data-bs-toggle="modal"
-                                                    data-bs-target="#reviewModal">+5</div>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -746,7 +697,6 @@ $apiBaseUrl = env('API_BASE_URL');
     <!-- js -->
 
     <!-- js end -->
-    <!-- <script data-cfasync="false" src="cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script> -->
     <script src="assets/js/jquery-3.7.1.min.js"></script>
     <script src="assets/js/modernizr.min.js"></script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
@@ -986,7 +936,6 @@ $apiBaseUrl = env('API_BASE_URL');
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const currentPath = window.location.pathname;
-            console.log('Current path:', currentPath);
 
             // Pecah berdasarkan '/'
             const parts = currentPath.split('/');
@@ -999,7 +948,6 @@ $apiBaseUrl = env('API_BASE_URL');
                 .then(response => response.json())
                 .then(result => {
                     if (result.status === 'success') {
-                        console.log("data review", result.data);
 
                         // Check if there are reviews
                         if (result.data && result.data.length > 0) {
@@ -1728,6 +1676,7 @@ $apiBaseUrl = env('API_BASE_URL');
     </script>
 
 
+
     <script>
         // Definisikan global variabel yang akan menyimpan data model
         let $model = {
@@ -1741,7 +1690,6 @@ $apiBaseUrl = env('API_BASE_URL');
         document.addEventListener('DOMContentLoaded', function() {
             // 1. Ambil path dari URL saat ini
             const currentPath = window.location.pathname;
-            console.log('Current path:', currentPath);
 
             // 2. Pecah berdasarkan '/'
             const parts = currentPath.split('/');
@@ -1751,8 +1699,6 @@ $apiBaseUrl = env('API_BASE_URL');
             const slug = parts[2];
             const token = parts[3];
 
-            // console.log('Slug:', slug);
-            // console.log('Token:', token);
 
             // Tampilkan loading message
             const errorMessageElement = document.getElementById('error-message');
@@ -1774,10 +1720,8 @@ $apiBaseUrl = env('API_BASE_URL');
                     })
                     .then(data => {
                         if (data.status === 'success') {
-                            console.log('Produk detail:', data.data);
                             document.getElementById('nama_breadcrumb').innerHTML = data.data.nama_product
                             document.getElementById('id_product').value = data.data.id_product;
-                            // console.log('satuan', data.data.uom);
                             document.getElementById('satuan').innerHTML = data.data.uom;
 
                             // Simpan data ke model global
@@ -1839,9 +1783,9 @@ $apiBaseUrl = env('API_BASE_URL');
                     // Jika ada diskon, tampilkan harga asli yang dicoret dan harga setelah diskon
                     const discountedPrice = currentHarga - (currentHarga * $model.detail.diskon / 100);
                     priceElement.innerHTML = `
-                <span class="text-decoration-line-through text-muted me-2">${formatRupiah(currentHarga)}</span>
-                <span class="text-danger">${formatRupiah(discountedPrice)}</span>
-            `;
+        <span class="text-decoration-line-through text-muted me-2">${formatRupiah(currentHarga)}</span>
+        <span class="text-danger">${formatRupiah(discountedPrice)}</span>
+    `;
                 } else {
                     priceElement.textContent = formatRupiah(currentHarga);
                 }
@@ -1853,13 +1797,20 @@ $apiBaseUrl = env('API_BASE_URL');
             // Inisialisasi warna jika ada
             if ($model.detail.details && $model.detail.details.length > 0) {
                 // Cari warna pertama yang memiliki stok
+                let foundWithStock = false;
                 for (let i = 0; i < $model.detail.details.length; i++) {
                     let hasStock = $model.detail.details[i].motifs &&
                         $model.detail.details[i].motifs.some(motif => motif.qty > 0);
                     if (hasStock) {
                         setActiveWarna(i);
+                        foundWithStock = true;
                         break;
                     }
+                }
+
+                // Jika tidak ada warna dengan stok, tetap tampilkan warna pertama
+                if (!foundWithStock && $model.detail.details.length > 0) {
+                    setActiveWarna(0);
                 }
             }
 
@@ -1882,13 +1833,13 @@ $apiBaseUrl = env('API_BASE_URL');
                 const div = document.createElement('div');
                 div.classList.add('col-3');
                 div.innerHTML = `
-            <div class="color-option ${hasStock ? '' : 'disabled'}" 
-                data-index="${index}" 
-                onclick="${hasStock ? 'setActiveWarna(' + index + ')' : ''}"
-                style="${!hasStock ? 'cursor: not-allowed; opacity: 0.5;' : ''}">
-                ${detail.warna}
-            </div>
-        `;
+    <div class="color-option ${hasStock ? '' : 'disabled'}" 
+        data-index="${index}" 
+        onclick="${hasStock ? 'setActiveWarna(' + index + ')' : ''}"
+        style="${!hasStock ? 'cursor: not-allowed; opacity: 0.5;' : ''}">
+        ${detail.warna}
+    </div>
+`;
                 warnaContainer.appendChild(div);
             });
         }
@@ -1964,6 +1915,7 @@ $apiBaseUrl = env('API_BASE_URL');
             let firstPolosElement = null;
             let firstAvailableMotif = null;
 
+            // Selalu tampilkan semua motif, bahkan jika stok 0
             selectedDetail.motifs.forEach(motif => {
                 let div = document.createElement('div');
                 div.classList.add('col-3');
@@ -1978,13 +1930,13 @@ $apiBaseUrl = env('API_BASE_URL');
                 };
 
                 div.innerHTML = `
-            <div class="color-option motif-option ${motif.qty <= 0 ? 'disabled' : ''}" 
-                data-motif='${JSON.stringify(motifData)}'
-                data-qty="${motif.qty}" 
-                onclick="${motif.qty > 0 ? 'setActiveMotif(this)' : ''}"
-                style="${motif.qty <= 0 ? 'cursor: not-allowed; opacity: 0.5;' : ''}">
-                ${motif.motif}
-            </div>`;
+    <div class="color-option motif-option ${motif.qty <= 0 ? 'disabled' : ''}" 
+        data-motif='${JSON.stringify(motifData)}'
+        data-qty="${motif.qty}" 
+        onclick="${motif.qty > 0 ? 'setActiveMotif(this)' : ''}"
+        style="${motif.qty <= 0 ? 'cursor: not-allowed; opacity: 0.5;' : ''}">
+        ${motif.motif}
+    </div>`;
                 motifContainer.appendChild(div);
 
                 if (motif.motif.toLowerCase() === 'polos' && motif.qty > 0) {
@@ -2004,11 +1956,16 @@ $apiBaseUrl = env('API_BASE_URL');
                 setActiveMotif(firstAvailableMotif);
                 if (btnTambah) btnTambah.disabled = false;
             } else {
-                if (btnTambah) btnTambah.disabled = true;
+                // Jika tidak ada motif dengan stok, pilih motif pertama untuk menampilkan gambar
+                const firstMotifElement = motifContainer.querySelector('.motif-option');
+                if (firstMotifElement) {
+                    setActiveMotif(firstMotifElement, true);
+                    if (btnTambah) btnTambah.disabled = true;
+                }
             }
         }
 
-        function setActiveMotif(element) {
+        function setActiveMotif(element, isOutOfStock) {
             document.querySelectorAll('.motif-option').forEach(e => e.classList.remove('active'));
             element.classList.add('active');
 
@@ -2017,7 +1974,7 @@ $apiBaseUrl = env('API_BASE_URL');
 
             const idMotifProduk = document.getElementById('id_motif_produk');
             if (idMotifProduk) {
-                idMotifProduk.value = motifData.id_motif_produk; // ← update ID motif
+                idMotifProduk.value = motifData.id_motif_produk;
             }
 
             let qty = parseInt(element.getAttribute('data-qty'));
@@ -2025,12 +1982,12 @@ $apiBaseUrl = env('API_BASE_URL');
 
             const stockElement = document.getElementById('stock');
             if (stockElement) {
-                stockElement.innerHTML = `Tersedia <span class="text-black">${qty}</span> `;
+                stockElement.innerHTML = `Tersedia <span class="text-black">${qty}</span> pcs`;
             }
 
             const jumlahBeli = document.getElementById('jumlah-beli');
             if (jumlahBeli) {
-                jumlahBeli.innerText = '1';
+                jumlahBeli.innerText = isOutOfStock ? '0' : '1';
             }
 
             updateSubtotal();
@@ -2071,8 +2028,7 @@ $apiBaseUrl = env('API_BASE_URL');
             if ($model.detail.diskon && $model.detail.diskon > 0) {
                 harga = harga - (harga * $model.detail.diskon / 100);
             }
-            console.log($model.detail.diskon);
-            let subtotal = qty * harga ;
+            let subtotal = qty * harga;
             subtotalText.innerText = formatRupiah(subtotal);
         }
 
@@ -2087,7 +2043,7 @@ $apiBaseUrl = env('API_BASE_URL');
 
             // Update gambar utama
             const mainProductImage = document.getElementById('main-product-image');
-            if (mainProductImage) {
+            if (mainProductImage && defaultImageUrl) {
                 mainProductImage.src = defaultImageUrl;
             }
 
@@ -2100,41 +2056,41 @@ $apiBaseUrl = env('API_BASE_URL');
             // Tambahkan foto depan (jika tersedia)
             if (currentMotif.url_foto_depan) {
                 thumbnailContainer.innerHTML += `
-        <div class="col-3">
-            <div class="thumbnail active p-1">
-                <img src="${currentMotif.url_foto_depan}" alt="Thumbnail Depan" class="img-fluid" width="100" height="100" onclick="changeMainImage('${currentMotif.url_foto_depan}')">
-            </div>
-        </div>`;
+    <div class="col-3">
+        <div class="thumbnail active p-1">
+            <img src="${currentMotif.url_foto_depan}" alt="Thumbnail Depan" class="img-fluid" width="100" height="100" onclick="changeMainImage('${currentMotif.url_foto_depan}')">
+        </div>
+    </div>`;
             }
 
             // Tambahkan foto kanan (jika tersedia)
             if (currentMotif.url_foto_kanan) {
                 thumbnailContainer.innerHTML += `
-        <div class="col-3">
-            <div class="thumbnail p-1">
-                <img src="${currentMotif.url_foto_kanan}" alt="Thumbnail Kanan" class="img-fluid" width="100" height="100" onclick="changeMainImage('${currentMotif.url_foto_kanan}')">
-            </div>
-        </div>`;
+    <div class="col-3">
+        <div class="thumbnail p-1">
+            <img src="${currentMotif.url_foto_kanan}" alt="Thumbnail Kanan" class="img-fluid" width="100" height="100" onclick="changeMainImage('${currentMotif.url_foto_kanan}')">
+        </div>
+    </div>`;
             }
 
             // Tambahkan foto kiri (jika tersedia)
             if (currentMotif.url_foto_kiri) {
                 thumbnailContainer.innerHTML += `
-        <div class="col-3">
-            <div class="thumbnail p-1">
-                <img src="${currentMotif.url_foto_kiri}" alt="Thumbnail Kiri" class="img-fluid" width="100" height="100" onclick="changeMainImage('${currentMotif.url_foto_kiri}')">
-            </div>
-        </div>`;
+    <div class="col-3">
+        <div class="thumbnail p-1">
+            <img src="${currentMotif.url_foto_kiri}" alt="Thumbnail Kiri" class="img-fluid" width="100" height="100" onclick="changeMainImage('${currentMotif.url_foto_kiri}')">
+        </div>
+    </div>`;
             }
 
             // Tambahkan foto belakang (jika tersedia)
             if (currentMotif.url_foto_belakang) {
                 thumbnailContainer.innerHTML += `
-        <div class="col-3">
-            <div class="thumbnail p-1">
-                <img src="${currentMotif.url_foto_belakang}" alt="Thumbnail Belakang" class="img-fluid" width="100" height="100" onclick="changeMainImage('${currentMotif.url_foto_belakang}')">
-            </div>
-        </div>`;
+    <div class="col-3">
+        <div class="thumbnail p-1">
+            <img src="${currentMotif.url_foto_belakang}" alt="Thumbnail Belakang" class="img-fluid" width="100" height="100" onclick="changeMainImage('${currentMotif.url_foto_belakang}')">
+        </div>
+    </div>`;
             }
 
             // Set thumbnail pertama sebagai aktif
@@ -2165,22 +2121,22 @@ $apiBaseUrl = env('API_BASE_URL');
                         tab.classList.remove('active');
                     });
 
-                    // Hide all tab panes
+
                     document.querySelectorAll('.tab-pane').forEach(pane => {
                         pane.classList.remove('active');
                     });
 
-                    // Add active class to clicked tab
+
                     this.classList.add('active');
 
-                    // Show the corresponding tab content
+
                     const tabId = this.getAttribute('data-tab');
                     document.getElementById(tabId).classList.add('active');
                 });
             });
         }
 
-        // Function to update product details section with AJAX data
+
         function updateProductDetails() {
             if (!$model.detail) {
                 console.error('Product detail data not available');
@@ -2270,7 +2226,6 @@ $apiBaseUrl = env('API_BASE_URL');
         // This function will be called from your existing updateMainAndThumbnailImage function
         function updateStoreAvailability() {
             const storeName = $model.detail.nama_toko || "Toko Dummy";
-            console.log(storeName);
             const storeNameElement = document.querySelector('.store-name');
 
             if (storeNameElement) {
@@ -2412,7 +2367,6 @@ $apiBaseUrl = env('API_BASE_URL');
 
             const formData = new FormData();
             formData.append('id', idProduct);
-            console.log(idProduct);
             formData.append('qty', qty);
             formData.append('id_detail_product', idDetailProduct);
             formData.append('id_motif_produk', idMotifProduk);
