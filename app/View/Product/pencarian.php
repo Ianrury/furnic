@@ -275,7 +275,7 @@ $apiBaseUrl = env('API_BASE_URL');
                 <div class="row">
                     <div class="col-12 wow fadeInDown mb-0" data-wow-delay=".25s">
                         <div class="site-heading-inline">
-                            <h2 class="site-title">Rekomendasi Product</h2>
+                            <h2 class="site-title">Rekomendasi Produk</h2>
                         </div>
                     </div>
                 </div>

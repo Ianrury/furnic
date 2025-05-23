@@ -38,7 +38,7 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="row"> 
+                    <div class="row">
                         <div class="col-6 mt-4">
                             <div class="footer-widget-box list">
                                 <h4 class="footer-widget-title" style="font-size: 13px;">Quick Links</h4>
@@ -58,13 +58,13 @@
                             <div class="footer-widget-box list">
                                 <h4 class="footer-widget-title" style="font-size: 13px;">Browse Category</h4>
                                 <ul class="footer-list" style="font-size: 11px;">
-                                    <li><a href="product.php">Bedroom</a></li>
-                                    <li><a href="product.php">Office</a></li>
-                                    <li><a href="product.php">Living Room</a></li>
-                                    <li><a href="product.php">Bathroom</a></li>
-                                    <li><a href="product.php">Decoration</a></li>
-                                    <li><a href="product.php">Kitchen</a></li>
-                                    <li><a href="product.php">Armchair</a></li>
+                                    <li><a href="/product/hasil?search=Bedroom">Bedroom</a></li>
+                                    <li><a href="/product/hasil?search=Office">Office</a></li>
+                                    <li><a href="/product/hasil?search=Living ">Living Room</a></li>
+                                    <li><a href="/product/hasil?search=Bathroom">Bathroom</a></li>
+                                    <li><a href="/product/hasil?search=Decoration">Decoration</a></li>
+                                    <li><a href="/product/hasil?search=Kitchen">Kitchen</a></li>
+                                    <li><a href="/product/hasil?search=Armchair">Armchair</a></li>
                                 </ul>
                             </div>
                         </div>

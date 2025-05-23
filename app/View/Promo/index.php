@@ -98,7 +98,7 @@ $apiBaseUrl = env('API_BASE_URL');
                         <div class="site-heading-inline">
                             <h2 class="site-title">Promo Terbaru</h2>
                         </div>
-                        <a href="#" class="small view-more">View More <i class="fas fa-angle-double-right"></i></a>
+                        <a href="/product" class="small view-more">Lihat Semua <i class="fas fa-angle-double-right"></i></a>
                     </div>
                 </div>
                 <div class="tab-content wow fadeInUp" data-wow-delay=".25s" id="item-tabContent">

@@ -858,7 +858,6 @@ $apiBaseUrl = env('API_BASE_URL');
     </script>
     <script>
         $(document).ready(function() {
-            // Tampilkan input nama bank jika pilih "Lainnya"
             $('#bank').on('change', function() {
                 if ($(this).val() === 'other') {
                     $('#otherBankContainer').show();
@@ -867,7 +866,6 @@ $apiBaseUrl = env('API_BASE_URL');
                 }
             });
 
-            // Format input amount saat diketik
             $('#amount').on('input', function() {
                 let value = $(this).val().replace(/\D/g, '');
                 let formatted = value.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
@@ -877,7 +875,6 @@ $apiBaseUrl = env('API_BASE_URL');
     </script>
 
     <script>
-        // Fungsi untuk format mata uang Rupiah
         function formatRupiah(angka) {
             return new Intl.NumberFormat('id-ID', {
                 style: 'currency',
@@ -887,9 +884,7 @@ $apiBaseUrl = env('API_BASE_URL');
             }).format(angka);
         }
 
-        // Fungsi untuk menghitung sisa waktu pembayaran
         function hitungSisaWaktuPembayaran(limitPembayaran) {
-            // Tambahkan zona waktu Jakarta secara eksplisit
             const waktuBatas = new Date(`${limitPembayaran} GMT+0700`);
             const waktuSekarang = new Date();
 
@@ -924,7 +919,6 @@ $apiBaseUrl = env('API_BASE_URL');
         }
 
 
-        // Fungsi untuk memperbarui tampilan countdown timer
         function updateCountdown(limitPembayaran) {
             const countdownElement = document.getElementById('countdown');
             const progressBarElement = document.getElementById('progress-bar');
@@ -957,44 +951,36 @@ $apiBaseUrl = env('API_BASE_URL');
                     return;
                 }
 
-                // Update tampilan timer
                 hoursElement.textContent = String(timeLeft.jam).padStart(2, '0');
                 minutesElement.textContent = String(timeLeft.menit).padStart(2, '0');
                 secondsElement.textContent = String(timeLeft.detik).padStart(2, '0');
 
-                // Update progress bar
                 const progressPercentage = (timeLeft.total / totalTime) * 100;
                 progressBarElement.style.width = `${progressPercentage}%`;
 
                 if (progressPercentage < 25) {
-                    progressBarElement.style.backgroundColor = '#FF5252'; // Merah
+                    progressBarElement.style.backgroundColor = '#FF5252'; 
                 } else if (progressPercentage < 50) {
-                    progressBarElement.style.backgroundColor = '#FFC107'; // Kuning
+                    progressBarElement.style.backgroundColor = '#FFC107'; 
                 } else {
-                    progressBarElement.style.backgroundColor = '#4CAF50'; // Hijau
+                    progressBarElement.style.backgroundColor = '#4CAF50'; 
                 }
             };
 
-            // Jalankan pertama kali
             updateTimer();
 
-            // Set interval tiap detik
             interval = setInterval(updateTimer, 1000);
 
             return interval;
         }
 
 
-        // Fungsi untuk menampilkan ringkasan pesanan
-        // Fungsi untuk menampilkan ringkasan pesanan
         function renderOrderSummary(orderData) {
             const orderSummaryElement = document.querySelector('.order-summary');
             const orderItemsContainer = orderSummaryElement.querySelector(':scope > h3').nextElementSibling;
-            // Hapus item-item contoh yang sudah ada
             const existingItems = orderSummaryElement.querySelectorAll('.order-item');
             existingItems.forEach(item => item.remove());
 
-            // Tambahkan item-item produk dari data
             orderData.products.forEach(product => {
                 const orderItemElement = document.createElement('div');
                 orderItemElement.className = 'order-item';
@@ -1013,7 +999,6 @@ $apiBaseUrl = env('API_BASE_URL');
                 orderSummaryElement.insertBefore(orderItemElement, orderSummaryElement.querySelector('.order-totals'));
             });
 
-            // Update total-total
             const totalsContainer = orderSummaryElement.querySelector('.order-totals');
             totalsContainer.innerHTML = `
         <div class="order-total-row">
@@ -1034,25 +1019,19 @@ $apiBaseUrl = env('API_BASE_URL');
 
             document.getElementById('total-amount').textContent = formatRupiah(orderData.total_belanja);
             document.getElementById('nominal-transfer').textContent = formatRupiah(orderData.total_belanja);
-            // document.getElementById('amount').value(orderData.total_belanja);
 
 
-            // Tambahkan nomor pesanan
             const orderNumberElement = document.createElement('div');
             orderNumberElement.className = 'order-number';
-            // orderNumberElement.innerHTML = `<span>Nomor Pesanan:</span> ${orderData.nomor_pesanan}`;
             orderSummaryElement.insertBefore(orderNumberElement, orderSummaryElement.querySelector('h3').nextSibling);
         }
 
-        // Fungsi utama untuk inisialisasi halaman pembayaran
         function initializePaymentPage() {
-            // Ambil token dari path URL terakhir
             const pathSegments = window.location.pathname.split('/');
             const token = pathSegments[pathSegments.length - 1] || '';
 
             if (!token) {
                 console.error('Token tidak ditemukan di URL.');
-                // Tampilkan pesan error ke user
                 document.querySelector('.order-summary').innerHTML = `
             <div class="error-message">
                 Token pembayaran tidak valid. Silakan periksa URL atau hubungi customer service.
@@ -1061,7 +1040,6 @@ $apiBaseUrl = env('API_BASE_URL');
                 return;
             }
 
-            // Fetch data pembayaran dari API
             fetch(API_BASE_URL + `/pembayaran/${token}`)
                 .then(response => {
                     if (!response.ok) {
@@ -1070,37 +1048,28 @@ $apiBaseUrl = env('API_BASE_URL');
                     return response.json();
                 })
                 .then(result => {
-                    // Update status and order number
                     if (result.status === 'success' && result.data) {
-                        // Render ringkasan pesanan
                         renderOrderSummary(result.data);
-
-                        // Inisialisasi countdown
                         updateCountdown(result.data.limit_payment);
 
-                        // Update order number
                         const orderNumberElement = document.querySelector('.order-number');
                         if (orderNumberElement) {
                             orderNumberElement.textContent = `Order #${result.data.nomor_pesanan}`;
                         }
 
-                        // Update status pesanan jika ada
                         if (result.data.status) {
                             const statusElement = document.getElementById('payment-status');
                             if (statusElement) {
-                                // Update existing status element
                                 statusElement.className = 'status-badge ' + result.data.status;
                                 statusElement.textContent = result.data.status === 'waiting' ? 'Menunggu Pembayaran' : result.data.status;
                             }
 
-                            // Nonaktifkan tombol konfirmasi jika status adalah "konfirmasi"
                             const confirmButton = document.querySelector('.cek-bayar');
                             const deadlineInfo = document.querySelector('.deadline-info');
                             const bankinfo = document.querySelector('.bank-info');
                             if (deadlineInfo && bankinfo) {
                                 deadlineInfo.style.display = 'none';
                                 bankinfo.style.display = 'none';
-                                // confirmButton.disabled = result.data.status === 'waiting';
                             }
                          
                         }
@@ -1110,7 +1079,6 @@ $apiBaseUrl = env('API_BASE_URL');
                 })
                 .catch(error => {
                     console.error('Terjadi kesalahan:', error);
-                    // Tampilkan pesan error ke user
                     document.querySelector('.order-summary').innerHTML = `
             <div class="error-message">
                 ${error.message || 'Terjadi kesalahan saat memuat data pembayaran.'}
@@ -1120,7 +1088,6 @@ $apiBaseUrl = env('API_BASE_URL');
 
         }
 
-        // Jalankan fungsi inisialisasi saat dokumen selesai dimuat
         document.addEventListener('DOMContentLoaded', initializePaymentPage);
     </script>
 </body>

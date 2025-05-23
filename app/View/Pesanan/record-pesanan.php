@@ -379,12 +379,10 @@ $apiBaseUrl = env('API_BASE_URL');
 
 <script>
     const token = localStorage.getItem('auth_token');
-    // Fungsi untuk memformat mata uang
     function formatRupiah(angka) {
         return 'Rp ' + new Intl.NumberFormat('id-ID').format(angka);
     }
 
-    // Fungsi untuk memformat tanggal dengan jam
     function formatTanggalDenganJam(tanggal) {
         return new Date(tanggal).toLocaleString('id-ID', {
             day: 'numeric',
@@ -395,7 +393,6 @@ $apiBaseUrl = env('API_BASE_URL');
         });
     }
 
-    // Fungsi untuk mendapatkan metode pengiriman
     function getMetodePengiriman(pesanan) {
         if (pesanan.jenis_pengiriman && pesanan.jenis_pengiriman.nama) {
             return pesanan.jenis_pengiriman.nama;
@@ -408,13 +405,11 @@ $apiBaseUrl = env('API_BASE_URL');
         return 'Belum Ditentukan';
     }
 
-    // Fungsi untuk membuat kartu pesanan yang lebih responsif dan user-friendly
     function buatKartuPesanan(pesanan) {
         const sisaWaktu = hitungSisaWaktuPembayaran(pesanan.limit_payment);
         const metodePengiriman = getMetodePengiriman(pesanan);
         const isBatal = pesanan.isbatal === 1 || pesanan.isbatal === true;
 
-        // Status info dengan penambahan status dibatalkan
         const statusInfo = {
             'waiting': {
                 label: 'Menunggu',
@@ -448,7 +443,6 @@ $apiBaseUrl = env('API_BASE_URL');
             }
         };
 
-        // Tentukan status berdasarkan isbatal atau status_pesanan
         let status = (pesanan.status_pesanan || pesanan.status_pembayaran || '').toLowerCase();
         if (isBatal) {
             status = 'batal';
@@ -529,9 +523,7 @@ $apiBaseUrl = env('API_BASE_URL');
 `;
     }
 
-    // Fungsi untuk membatalkan pembayaran
     function batalPembayaran(nomorPesanan) {
-        // Periksa apakah SweetAlert tersedia
         if (typeof Swal === 'undefined') {
             if (confirm('Apakah Anda yakin ingin membatalkan pesanan ' + nomorPesanan + '?')) {
                 lanjutkanPembatalan(nomorPesanan);
@@ -551,7 +543,6 @@ $apiBaseUrl = env('API_BASE_URL');
                 cancelButtonText: 'Tidak'
             });
 
-            // Handle different versions of SweetAlert
             if (swalResult && typeof swalResult.then === 'function') {
                 swalResult.then((result) => {
                     if (result && result.isConfirmed) {
@@ -559,30 +550,25 @@ $apiBaseUrl = env('API_BASE_URL');
                     }
                 }).catch(err => {
                     console.error('SweetAlert error:', err);
-                    // Fallback to simple confirmation if SweetAlert fails
                     if (confirm('Apakah Anda yakin ingin membatalkan pesanan ' + nomorPesanan + '?')) {
                         lanjutkanPembatalan(nomorPesanan);
                     }
                 });
             } else {
-                // SweetAlert might be an older version or customized
-                // Go ahead with cancellation after a simple confirmation
+          
                 if (confirm('Apakah Anda yakin ingin membatalkan pesanan ' + nomorPesanan + '?')) {
                     lanjutkanPembatalan(nomorPesanan);
                 }
             }
         } catch (error) {
             console.error('Error in SweetAlert handling:', error);
-            // Final fallback
             if (confirm('Apakah Anda yakin ingin membatalkan pesanan ' + nomorPesanan + '?')) {
                 lanjutkanPembatalan(nomorPesanan);
             }
         }
     }
 
-    // Fungsi lanjutan untuk proses pembatalan
     function lanjutkanPembatalan(nomorPesanan) {
-        // Ambil token yang telah diperbarui untuk menghindari masalah token kedaluwarsa
         const token = localStorage.getItem('auth_token');
 
         $.ajax({
@@ -613,7 +599,6 @@ $apiBaseUrl = env('API_BASE_URL');
                         alert('Pembatalan berhasil');
                     }
 
-                    // Refresh daftar pesanan
                     fetchOrders();
                 } else {
                     if (typeof Swal !== 'undefined') {
@@ -651,15 +636,12 @@ $apiBaseUrl = env('API_BASE_URL');
         });
     }
 
-    // Fungsi untuk menampilkan daftar pesanan
     function tampilkanDaftarPesanan(dataPesanan) {
         const containerPesanan = $('#pemesanan_list');
         containerPesanan.empty();
 
-        // Siapkan array untuk pesanan dibatalkan
         const pesananDibatalkan = dataPesanan.semua.filter(pesanan => pesanan.isbatal === 1 || pesanan.isbatal === true);
 
-        // Filter semua kategori untuk menghilangkan pesanan yang sudah dibatalkan
         const filterBatal = pesanan => pesanan.isbatal !== 1 && pesanan.isbatal !== true;
 
         const kategoriBaru = {
@@ -704,7 +686,6 @@ $apiBaseUrl = env('API_BASE_URL');
         </div>
     `);
 
-        // Event listener untuk tab
         $('.nav-link').on('click', function() {
             const status = $(this).data('status');
             const pesananDifilter = kategoriBaru[status];
@@ -726,19 +707,15 @@ $apiBaseUrl = env('API_BASE_URL');
         startCountdowns();
     }
 
-    // Fungsi untuk membuat kartu pesanan
     function buatKartuPesanan(pesanan) {
-        // Tentukan badge dan status berdasarkan status pesanan
         let badgeClass = 'bg-primary';
         let badgeText = 'Menunggu Pembayaran';
         let countdownHtml = '';
 
-        // Cek jika pesanan dibatalkan
         if (pesanan.isbatal === 1 || pesanan.isbatal === true) {
             badgeClass = 'bg-danger';
             badgeText = 'Dibatalkan';
         }
-        // Cek status pesanan
         else {
             switch (pesanan.status_pesanan) {
                 case 'waiting':
@@ -764,7 +741,6 @@ $apiBaseUrl = env('API_BASE_URL');
             }
         }
 
-        // Tambahkan countdown jika status waiting dan belum dibayar
         if (pesanan.status_pesanan === 'waiting' && pesanan.status_pembayaran === 'belum bayar' && pesanan.limit_payment) {
             countdownHtml = `
             <div class="alert alert-danger mt-2" role="alert">
@@ -777,7 +753,6 @@ $apiBaseUrl = env('API_BASE_URL');
             </div>
         `;
         }
-        // Tambahkan info sudah dibayar untuk status menunggu verifikasi
         else if (pesanan.status_pesanan === 'menunggu verifikasi' && pesanan.status_pembayaran === 'sudah bayar') {
             countdownHtml = `
             <div class="alert alert-info mt-2" role="alert">
@@ -791,25 +766,20 @@ $apiBaseUrl = env('API_BASE_URL');
         `;
         }
 
-        // Format tanggal
         const tanggalPesanan = formatTanggal(pesanan.tanggal_pesanan);
         const totalHarga = formatRupiah(pesanan.total_harga);
 
-        // Ambil info produk
         const produk = pesanan.products[0];
         const gambarProduk = produk.foto_produk || '/assets/images/no-image.jpg';
         const namaProduk = produk.nama_product;
 
-        // Tambahkan info produk tambahan jika ada lebih dari 1
         let produkTambahan = '';
         if (pesanan.products.length > 1) {
             produkTambahan = `<small class="text-muted">+${pesanan.products.length - 1} produk lainnya</small>`;
         }
 
-        // Buat tombol tindakan berdasarkan status
         let tombolTindakan = '';
 
-        // Untuk pesanan yang dibatalkan
         if (pesanan.isbatal === 1 || pesanan.isbatal === true) {
             tombolTindakan = `
             <a href="/detail/pesanan/${pesanan.payment_token}" class="btn btn-outline-secondary btn-sm w-100 mb-2">
@@ -817,7 +787,6 @@ $apiBaseUrl = env('API_BASE_URL');
             </a>
         `;
         }
-        // Untuk pesanan menunggu pembayaran (waiting & belum bayar)
         else if (pesanan.status_pesanan === 'waiting' && pesanan.status_pembayaran === 'belum bayar') {
             const isTimeExpired = hitungSisaWaktuPembayaran(pesanan.limit_payment).isExpired;
 
@@ -834,7 +803,6 @@ $apiBaseUrl = env('API_BASE_URL');
             </button>
         `;
         }
-        // Untuk pesanan menunggu verifikasi (sudah bayar)
         else if (pesanan.status_pesanan === 'menunggu verifikasi' && pesanan.status_pembayaran === 'sudah bayar') {
             tombolTindakan = `
        
@@ -844,7 +812,6 @@ $apiBaseUrl = env('API_BASE_URL');
          
         `;
         }
-        // Untuk pesanan dikonfirmasi
         else if (pesanan.status_pesanan === 'konfirmasi') {
             tombolTindakan = `
             <a href="/detail/pesanan/${pesanan.payment_token}" class="btn btn-outline-secondary btn-sm w-100 mb-2">
@@ -852,7 +819,6 @@ $apiBaseUrl = env('API_BASE_URL');
             </a>
         `;
         }
-        // Untuk pesanan dikirim
         else if (pesanan.status_pesanan === 'dikirim') {
             tombolTindakan = `
             <button onclick="terimaBarang('${pesanan.payment_token}')" class="btn btn-success btn-sm w-100 mb-2">
@@ -863,11 +829,9 @@ $apiBaseUrl = env('API_BASE_URL');
             </a>
         `;
         }
-        // Untuk pesanan selesai
         else if (pesanan.status_pesanan === 'completed') {
             let tombolUlasan = '';
 
-            // Tampilkan tombol ulasan jika belum direview
             if (pesanan.is_review === 0) {
                 tombolUlasan = `
                 <a href="/review/${pesanan.payment_token}" class="btn btn-outline-primary btn-sm w-100 mb-2">
@@ -884,7 +848,6 @@ $apiBaseUrl = env('API_BASE_URL');
         `;
         }
 
-        // Buat kartu pesanan
         return `
     <div class="col-12 mb-3">
         <div class="card">
@@ -915,9 +878,7 @@ $apiBaseUrl = env('API_BASE_URL');
     `;
     }
 
-    // Fungsi untuk menghitung sisa waktu pembayaran
     function hitungSisaWaktuPembayaran(limitPembayaran) {
-        // Tambahkan zona waktu Jakarta secara eksplisit
         const waktuBatas = new Date(`${limitPembayaran} GMT+0700`);
         const waktuSekarang = new Date();
 
@@ -944,7 +905,6 @@ $apiBaseUrl = env('API_BASE_URL');
     }
 
 
-    // Fungsi untuk format tanggal
     function formatTanggal(tanggalString) {
         const tanggal = new Date(tanggalString);
 
@@ -955,7 +915,6 @@ $apiBaseUrl = env('API_BASE_URL');
         return `${hari} ${bulan} ${tahun}`;
     }
 
-    // Fungsi untuk mendapatkan nama bulan
     function getNamaBulan(bulan) {
         const namaBulan = [
             'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
@@ -965,7 +924,6 @@ $apiBaseUrl = env('API_BASE_URL');
         return namaBulan[bulan - 1];
     }
 
-    // Fungsi untuk format rupiah
     function formatRupiah(angka) {
         return new Intl.NumberFormat('id-ID', {
             style: 'currency',
@@ -975,9 +933,7 @@ $apiBaseUrl = env('API_BASE_URL');
         }).format(angka);
     }
 
-    // Fungsi untuk memulai countdown
     function startCountdowns() {
-        // Hapus interval lama untuk menghindari memory leak
         $('.countdown-timer').each(function() {
             const interval = $(this).data('interval');
             if (interval) {
@@ -992,7 +948,6 @@ $apiBaseUrl = env('API_BASE_URL');
             const batalButton = $this.closest('.card-body').find('button.btn-outline-danger');
             const bayarButton = $this.closest('.card-body').find('a.btn-primary');
 
-            // Skip untuk pesanan menunggu verifikasi (countdown selalu 00:00:00)
             if ($this.text().trim() === '00:00:00') {
                 return;
             }
@@ -1001,18 +956,15 @@ $apiBaseUrl = env('API_BASE_URL');
                 const sisaWaktu = hitungSisaWaktuPembayaran(limitPayment);
                 $this.text(sisaWaktu.formatted);
 
-                // Jika waktu habis
                 if (sisaWaktu.isExpired) {
                     alertContainer.removeClass('alert-danger').addClass('alert-secondary');
                     $this.text('Timeout');
 
-                    // Nonaktifkan tombol batalkan dan bayar
                     batalButton.prop('disabled', true).addClass('disabled');
                     bayarButton.prop('disabled', true).addClass('disabled');
                 }
             }
 
-            // Update countdown setiap detik
             const countdownInterval = setInterval(updateCountdown, 1000);
             updateCountdown();
 
@@ -1020,7 +972,6 @@ $apiBaseUrl = env('API_BASE_URL');
         });
     }
 
-    // Fungsi untuk batalkan pesanan
     function batalkanPesanan(token) {
         Swal.fire({
             title: 'Batalkan Pesanan',
@@ -1033,7 +984,6 @@ $apiBaseUrl = env('API_BASE_URL');
             cancelButtonColor: '#6c757d',
         }).then((result) => {
             if (result.isConfirmed) {
-                // Tampilkan loading
                 Swal.fire({
                     title: 'Memproses...',
                     text: 'Sedang membatalkan pesanan',
@@ -1043,7 +993,6 @@ $apiBaseUrl = env('API_BASE_URL');
                     }
                 });
 
-                // Kirim request ke server
                 $.ajax({
                     url: API_BASE_URL + '/batalkanPesanan',
                     type: 'POST',
@@ -1087,7 +1036,6 @@ $apiBaseUrl = env('API_BASE_URL');
         });
     }
 
-    // Fungsi untuk terima barang
     function terimaBarang(token) {
         Swal.fire({
             title: 'Terima Barang',
@@ -1100,7 +1048,6 @@ $apiBaseUrl = env('API_BASE_URL');
             cancelButtonColor: '#6c757d',
         }).then((result) => {
             if (result.isConfirmed) {
-                // Tampilkan loading
                 Swal.fire({
                     title: 'Memproses...',
                     text: 'Sedang memproses konfirmasi penerimaan',
@@ -1110,7 +1057,6 @@ $apiBaseUrl = env('API_BASE_URL');
                     }
                 });
 
-                // Kirim request ke server
                 $.ajax({
                     url: API_BASE_URL + '/terimaBarang',
                     type: 'POST',
@@ -1154,9 +1100,7 @@ $apiBaseUrl = env('API_BASE_URL');
         });
     }
 
-    // Fungsi untuk mengambil pesanan
     function fetchOrders() {
-        // Tampilkan loading indicator
         $('#pemesanan_list').html(`
     <div class="text-center py-5">
         <div class="spinner-border text-primary" role="status">
@@ -1166,7 +1110,6 @@ $apiBaseUrl = env('API_BASE_URL');
     </div>
   `);
 
-        // Tambahkan header SweetAlert untuk menghindari error
         if (typeof Swal === 'undefined') {
             window.Swal = {
                 fire: function(options) {
@@ -1208,17 +1151,13 @@ $apiBaseUrl = env('API_BASE_URL');
         });
     }
 
-    // Panggil fetchOrders saat halaman dimuat
     $(document).ready(function() {
-        // Set global API base URL jika belum diset
         if (typeof API_BASE_URL === 'undefined') {
-            window.API_BASE_URL = '/api'; // Default API base URL
+            window.API_BASE_URL = '/api'; 
         }
 
-        // Ambil token dari localStorage
         const token = localStorage.getItem('auth_token');
 
-        // Periksa apakah token tersedia
         if (!token) {
             $('#pemesanan_list').html(`
             <div class="alert alert-warning" role="alert">

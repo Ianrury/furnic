@@ -165,11 +165,11 @@ $apiBaseUrl = env('API_BASE_URL');
                 <div class="row g-0 g-md-5">
                     <div class="col-md-5">
                         <div class="card product-card-detail">
-                            <div class="position-absolute ribbon-wrapper-detail">
+                            <!-- <div class="position-absolute ribbon-wrapper-detail">
                                 <div class="ribbon-detail text-white text-uppercase fw-bold text-center">
                                     New Product
                                 </div>
-                            </div>
+                            </div> -->
 
                             <div class="position-absolute top-0 end-0 m-3">
                                 <div class="store-availability-badge d-flex align-items-center">
@@ -180,12 +180,10 @@ $apiBaseUrl = env('API_BASE_URL');
                                 </div>
                             </div>
 
-                            <!-- Main Product Image -->
                             <div class="card-body text-center p-4">
                                 <img id="main-product-image" src="" alt="Main Product" class="img-fluid" width="255" height="255">
                             </div>
 
-                            <!-- Thumbnail Images -->
                             <div class="card-footer bg-white p-3 border-0">
                                 <div class="row g-2" id="thumbnail-container">
 
@@ -194,13 +192,11 @@ $apiBaseUrl = env('API_BASE_URL');
                         </div>
                     </div>
 
-                    <!-- Product Details Column -->
                     <div class="col-md-5 product-details">
                         <h1 class="text-black fw-bold mb-1" style="font-size: 25px;" id="nama_product">
 
                         </h1>
-                        <!-- <p class="text-black mb-3 fw-normal" style="font-size: 14px;" id="descripsi">
-                        </p> -->
+                   
 
                         <div class="mb-4">
                             <p class="mb-2 fw-normal text-black" style="font-size: 14px;">Warna</p>
@@ -332,14 +328,10 @@ $apiBaseUrl = env('API_BASE_URL');
                         </ul>
 
                         <div class="tab-content-scroll me-3">
-                            <!-- Specifications tab -->
                             <div id="spesifikasi" class="tab-pane active">
-                                <!-- Content will be populated dynamically by JavaScript -->
                             </div>
 
-                            <!-- Information tab -->
                             <div id="informasi" class="tab-pane">
-                                <!-- Content will be populated dynamically by JavaScript -->
                             </div>
                         </div>
                     </div>
@@ -359,7 +351,6 @@ $apiBaseUrl = env('API_BASE_URL');
                 </div>
                 <div class="tab-content wow fadeInUp" data-wow-delay=".25s" id="item-tabContent">
                     <div class="row">
-                        <!-- Left grid - Ratings and photos -->
                         <div class="col-12 col-lg-4">
                             <div class="review-grid" id="review-grid">
                                 <div class="d-flex justify-content-start align-items-center mb-3">
@@ -411,9 +402,7 @@ $apiBaseUrl = env('API_BASE_URL');
                             </div>
                         </div>
 
-                        <!-- Right grid - User reviews -->
                         <div class="col-12 col-lg-8">
-                            <!-- First review -->
                             <div class="review-grid-review" id="card-review">
                                 <div class="username"></div>
                                 <div class="review-text"></div>
@@ -444,10 +433,8 @@ $apiBaseUrl = env('API_BASE_URL');
                                 <div class="date">18/04/2023</div>
                             </div>
 
-                            <!-- See more button -->
                             <button type="button" class="see-more-btn" data-bs-toggle="modal"
                                 data-bs-target="#reviewModal">Lihat Ulasan Lainnya</button>
-                            <!-- Button trigger modal -->
                         </div>
                     </div>
                 </div>
@@ -462,19 +449,15 @@ $apiBaseUrl = env('API_BASE_URL');
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg"
                 style="max-width: 900px !important; max-height: 80vh !important;">
                 <div class="modal-content rounded-4" style="border: 2px solid #D9D9D9; height: 600px;">
-                    <!-- Modal Header -->
                     <div class="modal-header border-bottom-0">
                         <h5 class="modal-title fw-bold" id="reviewModalLabel">
                         </h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
 
-                    <!-- Modal Body -->
                     <div class="modal-body">
-                        <!-- Reset Button -->
                         <div class="tab-content-scroll-review">
                             <div class="row">
-                                <!-- Left grid - Ratings and photos -->
                                 <div class="col-md-3 pe-1">
                                     <div class="review-grid-modal" style="background-color: #FFFFFF;">
                                         <div class="col-md-3 m-0 p-0"
@@ -482,7 +465,6 @@ $apiBaseUrl = env('API_BASE_URL');
                                             <div style="width: 250px;">
                                                 <h6 class="fw-bold text-dark mb-2" style="font-size: 14px;">
                                                     Urutkan Berdasarkan</h6>
-                                                <!-- Urutkan Berdasarkan -->
                                                 <div class="mb-3">
                                                     <button id="resetFilter" class="btn btn-secondary btn-sm mt-1"
                                                         style="font-size: 11px; padding-right: 27px; padding-left: 27px;padding-top: 1px; padding-bottom: 1px; background-color: #D9D9D9; border: #D9D9D9;">Reset</button>
@@ -490,7 +472,6 @@ $apiBaseUrl = env('API_BASE_URL');
 
                                                 <hr>
 
-                                                <!-- Rekomendasi -->
                                                 <div class="mb-3">
                                                     <h6 class="fw-bold text-dark mb-2" style="font-size: 15px;">
                                                         Rekomendasi</h6>
@@ -605,9 +586,7 @@ $apiBaseUrl = env('API_BASE_URL');
                                     </div>
                                 </div>
 
-                                <!-- Right grid - User reviews -->
                                 <div class="col-md-9 ps-1">
-                                    <!-- First review -->
                                     <div class="review-grid-review-modal" style="background-color: #FFFFFF;">
                                         <div class="username"></div>
                                         <div class="fw-normal text-black" style="font-size: 12px;"></div>
@@ -624,13 +603,12 @@ $apiBaseUrl = env('API_BASE_URL');
                 </div>
             </div>
         </div>
-        <!-- Rekomendasi Product -->
         <div class="product-area product-area-new">
             <div class="container">
                 <div class="row">
                     <div class="col-12 wow fadeInDown mb-0" data-wow-delay=".25s">
                         <div class="site-heading-inline">
-                            <h2 class="site-title">Rekomendasi Product</h2>
+                            <h2 class="site-title">Rekomendasi Produk</h2>
                         </div>
                     </div>
                 </div>
@@ -721,12 +699,10 @@ $apiBaseUrl = env('API_BASE_URL');
             const offcanvasToggler = document.getElementById('offcanvasToggler');
             const offcanvasNavbar = document.getElementById('offcanvasNavbar');
 
-            // Mencegah pembuatan backdrop
             offcanvasNavbar.addEventListener('show.bs.offcanvas', function() {
                 document.querySelectorAll('.offcanvas-backdrop').forEach(el => el.remove());
             });
 
-            // Alternatif: nonaktifkan backdrop sepenuhnya
             offcanvasNavbar.addEventListener('shown.bs.offcanvas', function() {
                 const backdrops = document.querySelectorAll('.offcanvas-backdrop');
                 backdrops.forEach(backdrop => {
@@ -735,7 +711,6 @@ $apiBaseUrl = env('API_BASE_URL');
                 });
             });
 
-            // Pastikan backdrop dihapus saat menutup
             offcanvasNavbar.addEventListener('hidden.bs.offcanvas', function() {
                 document.querySelectorAll('.offcanvas-backdrop').forEach(el => el.remove());
             });
@@ -748,7 +723,7 @@ $apiBaseUrl = env('API_BASE_URL');
                 .then(result => {
                     if (result.status === 'success' && result.data.length > 0) {
                         const container = document.getElementById('expensif');
-                        container.innerHTML = ''; // kosongkan container
+                        container.innerHTML = ''; 
 
                         result.data.forEach(product => {
                             const qty = parseInt(product.qty);
@@ -757,7 +732,6 @@ $apiBaseUrl = env('API_BASE_URL');
                             const today = new Date();
                             const diffDays = Math.floor((today - createdAt) / (1000 * 60 * 60 * 24));
 
-                            // Ribbon logic
                             let ribbon = '',
                                 bgColor = '',
                                 textColor = '';
@@ -844,7 +818,7 @@ $apiBaseUrl = env('API_BASE_URL');
                 .then(result => {
                     if (result.status === 'success' && result.data.length > 0) {
                         const container = document.getElementById('bestseller');
-                        container.innerHTML = ''; // kosongkan container
+                        container.innerHTML = ''; 
 
                         result.data.forEach(product => {
                             const qty = parseInt(product.qty);
@@ -853,7 +827,6 @@ $apiBaseUrl = env('API_BASE_URL');
                             const today = new Date();
                             const diffDays = Math.floor((today - createdAt) / (1000 * 60 * 60 * 24));
 
-                            // Ribbon logic
                             let ribbon = '',
                                 bgColor = '',
                                 textColor = '';
@@ -937,10 +910,8 @@ $apiBaseUrl = env('API_BASE_URL');
         document.addEventListener('DOMContentLoaded', function() {
             const currentPath = window.location.pathname;
 
-            // Pecah berdasarkan '/'
             const parts = currentPath.split('/');
 
-            // Ambil slug dan token
             const slug = parts[2];
             const token = parts[3];
 
@@ -949,31 +920,17 @@ $apiBaseUrl = env('API_BASE_URL');
                 .then(result => {
                     if (result.status === 'success') {
 
-                        // Check if there are reviews
                         if (result.data && result.data.length > 0) {
-                            // Render review cards (max 2)
                             renderReviewCards(result.data);
-
-                            // Render review photos
                             renderReviewPhotos(result.data);
-
-                            // Render rating summary
                             renderRatingSummary(result.data);
-
-                            // Render all reviews in modal
                             renderReviewsInModal(result.data);
-
-                            // Set up the original data for reset functionality
                             window.originalReviewData = result.data;
-
-                            // Make sure all review sections are visible
                             showReviewSections();
                         } else {
-                            // No reviews, show empty state
                             handleEmptyReviews();
                         }
                     } else {
-                        // API returned success: false or had an error
                         handleEmptyReviews();
                         console.error("Error in API response:", result);
                     }
@@ -983,76 +940,59 @@ $apiBaseUrl = env('API_BASE_URL');
                     console.error("Error fetching reviews:", error);
                 });
 
-            // Setup image zoom functionality
             setupImageZoom();
         });
 
-        // New function to handle empty reviews state
         function handleEmptyReviews() {
-            // Hide all review sections
             hideReviewSections();
-
-            // Show empty state message
             showEmptyReviewMessage();
         }
 
-        // Function to hide all review sections
         function hideReviewSections() {
-            // Hide review cards section
             const cardContainerElement = document.getElementById('card-review');
             if (cardContainerElement && cardContainerElement.parentElement) {
                 cardContainerElement.parentElement.style.display = 'none';
             }
 
-            // Hide review photos section
             const reviewPhotosContainer = document.getElementById('reviewPhotos');
             if (reviewPhotosContainer) {
                 reviewPhotosContainer.style.display = 'none';
             }
 
-            // Hide rating summary section
             const ratingSummaryContainer = document.querySelector('.d-flex.justify-content-start.align-items-center.mb-3');
             if (ratingSummaryContainer) {
                 ratingSummaryContainer.style.display = 'none';
             }
 
-            // Disable "See more" button if it exists
             const seeMoreButton = document.querySelector('.see-more-btn');
             if (seeMoreButton) {
                 seeMoreButton.style.display = 'none';
             }
         }
 
-        // Function to show all review sections
         function showReviewSections() {
-            // Show review cards section
             const cardContainerElement = document.getElementById('card-review');
             if (cardContainerElement && cardContainerElement.parentElement) {
                 cardContainerElement.parentElement.style.display = 'block';
             }
 
-            // Show review photos section
             const reviewPhotosContainer = document.getElementById('reviewPhotos');
             if (reviewPhotosContainer) {
                 reviewPhotosContainer.style.display = 'block';
             }
 
-            // Show rating summary section
             const ratingSummaryContainer = document.querySelector('.d-flex.justify-content-start.align-items-center.mb-3');
             if (ratingSummaryContainer) {
                 ratingSummaryContainer.style.display = 'flex';
             }
         }
 
-        // Function to show empty review message
         function showEmptyReviewMessage() {
-            // Find a good container to show the message
             const mainContainer = document.querySelector('.product-review-container') ||
                 document.querySelector('.container.py-5') ||
                 document.querySelector('main');
 
             if (mainContainer) {
-                // Create empty state message
                 const emptyStateElement = document.createElement('div');
                 emptyStateElement.className = 'empty-review-message text-center py-5';
                 emptyStateElement.innerHTML = `
@@ -1064,10 +1004,8 @@ $apiBaseUrl = env('API_BASE_URL');
             <p class="text-muted">Jadilah yang pertama memberikan ulasan untuk produk ini</p>
         `;
 
-                // Insert the empty state message
                 mainContainer.appendChild(emptyStateElement);
 
-                // Add styles for the empty state
                 const style = document.createElement('style');
                 style.textContent = `
             .empty-review-message {
@@ -1082,38 +1020,25 @@ $apiBaseUrl = env('API_BASE_URL');
             }
         }
 
-        // Function to render review cards (max 2)
         function renderReviewCards(reviewData) {
-            // Find the container that holds the reviews
             const cardContainerElement = document.getElementById('card-review').parentElement;
-
-            // Find the "See more" button
             const seeMoreButton = cardContainerElement.querySelector('.see-more-btn');
-
-            // Remove existing review cards but keep the button
             const reviewCards = cardContainerElement.querySelectorAll('.review-grid-review');
             reviewCards.forEach(card => card.remove());
-
-            // Display maximum 2 cards
             const displayCount = Math.min(reviewData.length, 2);
-
-            // Reference for where to insert cards (before the button)
             const insertBeforeElement = seeMoreButton || null;
 
             for (let i = 0; i < displayCount; i++) {
                 const review = reviewData[i];
 
-                // Create stars based on rating
                 let starsHTML = '';
                 for (let j = 0; j < review.bintang_review; j++) {
                     starsHTML += '<img src="assets/img/icon/star.svg" alt="start" class="star-icon">';
                 }
 
-                // Create photos HTML
                 let photosHTML = '';
                 if (review.foto_review && review.foto_review.length > 0) {
                     photosHTML = '<div class="review-photos">';
-                    // Display up to 5 photos per review
                     const photoCount = Math.min(review.foto_review.length, 5);
                     for (let j = 0; j < photoCount; j++) {
                         photosHTML += `
@@ -1125,7 +1050,6 @@ $apiBaseUrl = env('API_BASE_URL');
                     photosHTML += '</div>';
                 }
 
-                // Format date
                 const reviewDate = new Date(review.tanggal);
                 const formattedDate = reviewDate.toLocaleDateString('id-ID', {
                     year: 'numeric',
@@ -1133,7 +1057,6 @@ $apiBaseUrl = env('API_BASE_URL');
                     day: '2-digit'
                 }).replace(/\//g, '/');
 
-                // Create card element
                 const cardElement = document.createElement('div');
                 cardElement.className = 'review-grid-review';
                 cardElement.innerHTML = `
@@ -1144,19 +1067,15 @@ $apiBaseUrl = env('API_BASE_URL');
             <div class="date">${formattedDate}</div>
         `;
 
-                // Insert card before the "See more" button
                 cardContainerElement.insertBefore(cardElement, insertBeforeElement);
             }
 
-            // Make sure the "See more" button is visible only if we have reviews
             if (seeMoreButton) {
                 seeMoreButton.style.display = reviewData.length > 0 ? 'block' : 'none';
             }
         }
 
-        // Function to setup image zoom functionality
         function setupImageZoom() {
-            // Create modal for zoomed images
             if (!document.getElementById('imageZoomModal')) {
                 const modal = document.createElement('div');
                 modal.id = 'imageZoomModal';
@@ -1169,12 +1088,10 @@ $apiBaseUrl = env('API_BASE_URL');
         `;
                 document.body.appendChild(modal);
 
-                // Close modal when clicking on X
                 modal.querySelector('.close-zoom').addEventListener('click', function() {
                     modal.style.display = 'none';
                 });
 
-                // Close modal when clicking outside the image
                 modal.addEventListener('click', function(e) {
                     if (e.target === modal) {
                         modal.style.display = 'none';
@@ -1182,7 +1099,6 @@ $apiBaseUrl = env('API_BASE_URL');
                 });
             }
 
-            // Add event listeners for images (using event delegation)
             document.addEventListener('click', function(e) {
                 if (e.target && e.target.classList.contains('zoomable-image')) {
                     const modal = document.getElementById('imageZoomModal');
@@ -1192,7 +1108,6 @@ $apiBaseUrl = env('API_BASE_URL');
                 }
             });
 
-            // Add hover effect (using event delegation)
             document.addEventListener('mouseover', function(e) {
                 if (e.target && e.target.classList.contains('zoomable-image')) {
                     e.target.style.transform = 'scale(1.1)';
@@ -1209,7 +1124,6 @@ $apiBaseUrl = env('API_BASE_URL');
                 }
             });
 
-            // Add CSS for the image zoom modal
             if (!document.getElementById('zoomStyles')) {
                 const style = document.createElement('style');
                 style.id = 'zoomStyles';
@@ -1262,7 +1176,6 @@ $apiBaseUrl = env('API_BASE_URL');
             }
         }
 
-        // Function to render review photos in the grid
         function renderReviewPhotos(reviewData) {
             const reviewPhotosContainer = document.getElementById('reviewPhotos');
             if (!reviewPhotosContainer) return;
@@ -1270,10 +1183,8 @@ $apiBaseUrl = env('API_BASE_URL');
             const photosRow = reviewPhotosContainer.querySelector('.row');
             if (!photosRow) return;
 
-            // Clear existing content
             photosRow.innerHTML = '';
 
-            // Get all photos from all reviews
             let allPhotos = [];
             reviewData.forEach(review => {
                 if (review.foto_review && review.foto_review.length > 0) {
@@ -1281,13 +1192,11 @@ $apiBaseUrl = env('API_BASE_URL');
                 }
             });
 
-            // Update total photos count
             const totalPhotosElement = document.getElementById('foto-pelanggan-total');
             if (totalPhotosElement) {
                 totalPhotosElement.textContent = `Foto oleh pelanggan (${allPhotos.length})`;
             }
 
-            // If no photos, hide this section
             if (allPhotos.length === 0) {
                 reviewPhotosContainer.style.display = 'none';
                 return;
@@ -1295,7 +1204,6 @@ $apiBaseUrl = env('API_BASE_URL');
                 reviewPhotosContainer.style.display = 'block';
             }
 
-            // Display up to 10 photos in the grid
             const visiblePhotos = allPhotos.slice(0, 10);
             const hiddenPhotosCount = allPhotos.length > 10 ? allPhotos.length - 10 : 0;
 
@@ -1319,7 +1227,6 @@ $apiBaseUrl = env('API_BASE_URL');
                 photosRow.appendChild(photoDiv);
             });
 
-            // If we have less than 10 photos, fill with what we have but don't duplicate
             if (visiblePhotos.length > 0 && visiblePhotos.length < 10) {
                 const remainingSlots = Math.min(10 - visiblePhotos.length, visiblePhotos.length);
 
@@ -1334,13 +1241,10 @@ $apiBaseUrl = env('API_BASE_URL');
             }
         }
 
-        // Function to render rating summary
         function renderRatingSummary(reviewData) {
-            // Get rating summary container
             const ratingSummaryContainer = document.querySelector('.d-flex.justify-content-start.align-items-center.mb-3');
             if (!ratingSummaryContainer) return;
 
-            // Count reviews by rating
             const ratingCounts = {
                 1: 0,
                 2: 0,
@@ -1356,8 +1260,7 @@ $apiBaseUrl = env('API_BASE_URL');
                 }
             });
 
-            // Select random photo for main display
-            let randomPhoto = 'assets/img/product/decorasi/ruang-santai.jpg'; // Default
+            let randomPhoto = 'assets/img/product/decorasi/ruang-santai.jpg'; 
             for (const review of reviewData) {
                 if (review.foto_review && review.foto_review.length > 0) {
                     randomPhoto = review.foto_review[Math.floor(Math.random() * review.foto_review.length)];
@@ -1365,17 +1268,15 @@ $apiBaseUrl = env('API_BASE_URL');
                 }
             }
 
-            // Update main photo
             const mainPhotoElement = ratingSummaryContainer.querySelector('.img-fluid.foto-review');
             if (mainPhotoElement) {
                 mainPhotoElement.src = randomPhoto;
                 mainPhotoElement.classList.add('zoomable-image');
             }
 
-            // Update star counts
             const starRatings = ratingSummaryContainer.querySelectorAll('.star-rating');
             starRatings.forEach((starRating, index) => {
-                const ratingNumber = 5 - index; // 5, 4, 3, 2, 1
+                const ratingNumber = 5 - index; 
                 const starCount = starRating.querySelector('.star-count');
                 if (starCount) {
                     starCount.textContent = ratingCounts[ratingNumber];
@@ -1383,15 +1284,12 @@ $apiBaseUrl = env('API_BASE_URL');
             });
         }
 
-        // Function to render reviews in modal
         function renderReviewsInModal(reviewData) {
             const reviewsContainer = document.querySelector('.col-md-9.ps-1');
             if (!reviewsContainer) return;
 
-            // Clear existing content
             reviewsContainer.innerHTML = '';
 
-            // If no reviews after filtering
             if (reviewData.length === 0) {
                 const noReviewsElement = document.createElement('div');
                 noReviewsElement.className = 'no-reviews-message';
@@ -1400,19 +1298,16 @@ $apiBaseUrl = env('API_BASE_URL');
                 return;
             }
 
-            // Render each review
             reviewData.forEach(review => {
                 const reviewElement = document.createElement('div');
                 reviewElement.className = 'review-grid-review-modal';
                 reviewElement.style.backgroundColor = '#FFFFFF';
 
-                // Render stars based on rating
                 let starsHTML = '';
                 for (let i = 0; i < review.bintang_review; i++) {
                     starsHTML += '<img src="assets/img/icon/star.svg" alt="start" class="star-icon">';
                 }
 
-                // Render photos
                 let photosHTML = '';
                 if (review.foto_review && review.foto_review.length > 0) {
                     photosHTML = '<div class="review-photos">';
@@ -1426,7 +1321,6 @@ $apiBaseUrl = env('API_BASE_URL');
                     photosHTML += '</div>';
                 }
 
-                // Format date
                 const reviewDate = new Date(review.tanggal);
                 const formattedDate = reviewDate.toLocaleDateString('id-ID', {
                     year: 'numeric',
@@ -1446,31 +1340,22 @@ $apiBaseUrl = env('API_BASE_URL');
             });
         }
 
-        // Function to set up filter listeners
         function setupFilterListeners(reviewData) {
-            // Store original data for reset functionality
             window.originalReviewData = reviewData;
 
             const resetFilterBtn = document.getElementById('resetFilter');
             const ratingCheckboxes = document.querySelectorAll('.form-check-input');
 
             if (!resetFilterBtn || !ratingCheckboxes.length) return;
-
-            // Reset filter
             resetFilterBtn.addEventListener('click', function() {
-                // Uncheck all checkboxes
                 ratingCheckboxes.forEach(checkbox => {
                     checkbox.checked = false;
                 });
-
-                // Render all reviews again using the original data
                 renderReviewsInModal(window.originalReviewData);
             });
 
-            // Rating filter
             ratingCheckboxes.forEach(checkbox => {
                 checkbox.addEventListener('change', function() {
-                    // Get selected ratings
                     const selectedRatings = [];
                     document.querySelectorAll('.form-check-input:checked').forEach(checkedBox => {
                         const parentDiv = checkedBox.closest('.form-check');
@@ -1478,24 +1363,20 @@ $apiBaseUrl = env('API_BASE_URL');
                         selectedRatings.push(stars.length);
                     });
 
-                    // If none selected, show all
                     if (selectedRatings.length === 0) {
                         renderReviewsInModal(window.originalReviewData);
                         return;
                     }
 
-                    // Filter reviews by selected ratings
                     const filteredReviews = window.originalReviewData.filter(review => {
                         const rating = parseInt(review.bintang_review);
                         return selectedRatings.includes(rating);
                     });
 
-                    // Render filtered reviews
                     renderReviewsInModal(filteredReviews);
                 });
             });
 
-            // Sort options
             const sortOptions = document.querySelectorAll('.dropdown-item');
             sortOptions.forEach(option => {
                 option.addEventListener('click', function() {
@@ -1505,10 +1386,8 @@ $apiBaseUrl = env('API_BASE_URL');
                         dropdownButton.textContent = sortText;
                     }
 
-                    // Get currently visible reviews (which might be filtered)
                     const currentlyDisplayedReviews = [...window.originalReviewData];
 
-                    // Apply current filter
                     const selectedRatings = [];
                     document.querySelectorAll('.form-check-input:checked').forEach(checkedBox => {
                         const parentDiv = checkedBox.closest('.form-check');
@@ -1524,7 +1403,6 @@ $apiBaseUrl = env('API_BASE_URL');
                         });
                     }
 
-                    // Apply sorting
                     if (sortText === 'Ulasan Terbaru') {
                         displayedReviews.sort((a, b) => new Date(b.tanggal) - new Date(a.tanggal));
                     } else if (sortText === 'Rating Tertinggi') {
@@ -1538,7 +1416,6 @@ $apiBaseUrl = env('API_BASE_URL');
             });
         }
 
-        // Add CSS for responsive modal
         function addResponsiveModalStyles() {
             if (!document.getElementById('responsiveModalStyles')) {
                 const style = document.createElement('style');
@@ -1576,15 +1453,12 @@ $apiBaseUrl = env('API_BASE_URL');
             }
         }
 
-        // Initialize when modal is shown
         document.addEventListener('DOMContentLoaded', function() {
             const reviewModal = document.getElementById('reviewModal');
             if (reviewModal) {
                 reviewModal.addEventListener('shown.bs.modal', function() {
-                    // Call this function when modal is shown
                     addResponsiveModalStyles();
 
-                    // Set up filter listeners if not already set up
                     if (window.originalReviewData) {
                         setupFilterListeners(window.originalReviewData);
                     }
@@ -1593,22 +1467,14 @@ $apiBaseUrl = env('API_BASE_URL');
         });
     </script>
     <script>
-        // slid halaman detail
         const tabs = document.querySelectorAll('.custom-nav-link-descripsi');
         const panes = document.querySelectorAll('.tab-pane');
 
         tabs.forEach(tab => {
             tab.addEventListener('click', () => {
-                // Hapus class active dari semua tab
                 tabs.forEach(t => t.classList.remove('active'));
-
-                // Tambahkan class active ke tab yang diklik
                 tab.classList.add('active');
-
-                // Ambil target tab berdasarkan atribut data-tab
                 const targetId = tab.getAttribute('data-tab');
-
-                // Tampilkan hanya tab-pane yang cocok, lainnya disembunyikan
                 panes.forEach(pane => {
                     if (pane.id === targetId) {
                         pane.classList.add('active');
@@ -1623,8 +1489,6 @@ $apiBaseUrl = env('API_BASE_URL');
     <script>
         const filterCheckboxes = document.querySelectorAll('.form-check-input');
         const resetButton = document.getElementById('resetFilter');
-
-        // Fungsi untuk cek apakah ada filter yang aktif
         function checkFilters() {
             let isAnyChecked = false;
             filterCheckboxes.forEach(cb => {
@@ -1638,12 +1502,10 @@ $apiBaseUrl = env('API_BASE_URL');
             }
         }
 
-        // Event listener untuk semua checkbox
         filterCheckboxes.forEach(cb => {
             cb.addEventListener('change', checkFilters);
         });
 
-        // Tombol Reset
         resetButton.addEventListener('click', function() {
             filterCheckboxes.forEach(cb => cb.checked = false);
             resetButton.classList.remove('active');
@@ -1651,23 +1513,17 @@ $apiBaseUrl = env('API_BASE_URL');
     </script>
 
     <script>
-        // Tunggu sampai dokumen siap
         document.addEventListener('DOMContentLoaded', function() {
-            // Ambil elemen dropdown button dan semua item dropdown
             const dropdownButton = document.getElementById('dropdownMenu2');
             const dropdownItems = document.querySelectorAll('.dropdown-menu .dropdown-item');
 
-            // Set default ke "Ulasan Terbaru"
             dropdownButton.textContent = "Ulasan Terbaru";
 
-            // Tambahkan event listener untuk setiap item dropdown
             dropdownItems.forEach(item => {
                 item.addEventListener('click', function() {
-                    // Ubah teks tombol dropdown menjadi teks dari item yang diklik
                     dropdownButton.textContent = this.textContent.trim();
                 });
 
-                // Tandai item "Ulasan Terbaru" sebagai aktif secara default
                 if (item.textContent.trim() === "Ulasan Terbaru") {
                     item.classList.add('active');
                 }
@@ -1678,29 +1534,19 @@ $apiBaseUrl = env('API_BASE_URL');
 
 
     <script>
-        // Definisikan global variabel yang akan menyimpan data model
         let $model = {
             detail: {
                 harga: 0,
-                diskon: 0, // Tambahkan field diskon untuk menampung nilai diskon
+                diskon: 0, 
                 details: []
             }
         };
 
         document.addEventListener('DOMContentLoaded', function() {
-            // 1. Ambil path dari URL saat ini
             const currentPath = window.location.pathname;
-
-            // 2. Pecah berdasarkan '/'
             const parts = currentPath.split('/');
-
-            // 3. Ambil slug dan token
-            // Contoh hasil parts = ["", "product", "safi-bar-chair-coffee-2", "0fa31a6936977be1c123aa57bccaf582"]
             const slug = parts[2];
             const token = parts[3];
-
-
-            // Tampilkan loading message
             const errorMessageElement = document.getElementById('error-message');
             if (errorMessageElement) {
                 errorMessageElement.textContent = 'Loading product data...';
@@ -1710,7 +1556,6 @@ $apiBaseUrl = env('API_BASE_URL');
             }
 
             if (slug && token) {
-                // 4. Gunakan dalam fetch API
                 fetch(`${API_BASE_URL}/product/${slug}/${token}`)
                     .then(response => {
                         if (!response.ok) {
@@ -1723,16 +1568,10 @@ $apiBaseUrl = env('API_BASE_URL');
                             document.getElementById('nama_breadcrumb').innerHTML = data.data.nama_product
                             document.getElementById('id_product').value = data.data.id_product;
                             document.getElementById('satuan').innerHTML = data.data.uom;
-
-                            // Simpan data ke model global
                             $model.detail = data.data;
-
-                            // Sembunyikan pesan loading
                             if (errorMessageElement) {
                                 errorMessageElement.classList.add('d-none');
                             }
-
-                            // Inisialisasi UI dengan data yang sudah diambil
                             initProductUI();
                         } else {
                             console.error(data.message);
@@ -1764,23 +1603,19 @@ $apiBaseUrl = env('API_BASE_URL');
             }
         });
 
-        // Fungsi untuk menginisialisasi UI setelah data diambil
         function initProductUI() {
             let currentHarga = $model.detail.harga;
             let maxQty = 0;
-            let currentMotif = null; // ⬅️ tambahan: motif aktif sekarang
+            let currentMotif = null; 
 
-            // Update judul dan harga produk
             const titleElement = document.getElementById('product-title');
             if (titleElement) {
                 titleElement.textContent = $model.detail.nama || 'Product Name';
             }
 
-            // Update harga produk (dengan diskon jika ada)
             const priceElement = document.getElementById('product-price');
             if (priceElement) {
                 if ($model.detail.diskon && $model.detail.diskon > 0) {
-                    // Jika ada diskon, tampilkan harga asli yang dicoret dan harga setelah diskon
                     const discountedPrice = currentHarga - (currentHarga * $model.detail.diskon / 100);
                     priceElement.innerHTML = `
         <span class="text-decoration-line-through text-muted me-2">${formatRupiah(currentHarga)}</span>
@@ -1791,12 +1626,9 @@ $apiBaseUrl = env('API_BASE_URL');
                 }
             }
 
-            // Inisialisasi kontainer warna
             initColorOptions();
 
-            // Inisialisasi warna jika ada
             if ($model.detail.details && $model.detail.details.length > 0) {
-                // Cari warna pertama yang memiliki stok
                 let foundWithStock = false;
                 for (let i = 0; i < $model.detail.details.length; i++) {
                     let hasStock = $model.detail.details[i].motifs &&
@@ -1808,26 +1640,21 @@ $apiBaseUrl = env('API_BASE_URL');
                     }
                 }
 
-                // Jika tidak ada warna dengan stok, tetap tampilkan warna pertama
                 if (!foundWithStock && $model.detail.details.length > 0) {
                     setActiveWarna(0);
                 }
             }
 
-            // Juga update detail produk
             updateProductDetails();
         }
 
-        // Fungsi untuk menginisialisasi opsi warna
         function initColorOptions() {
             const warnaContainer = document.getElementById('warna-container');
             if (!warnaContainer || !$model.detail.details) return;
 
             warnaContainer.innerHTML = '';
 
-            // Loop untuk menambahkan opsi warna
             $model.detail.details.forEach((detail, index) => {
-                // Cek apakah warna ini memiliki stok
                 let hasStock = detail.motifs && detail.motifs.some(motif => motif.qty > 0);
 
                 const div = document.createElement('div');
@@ -1860,7 +1687,6 @@ $apiBaseUrl = env('API_BASE_URL');
                 }
             });
 
-            // Find the specific color option using data-index
             const selectedColorOption = document.querySelector(`.color-option[data-index="${index}"]`);
             if (selectedColorOption) {
                 selectedColorOption.classList.add('active');
@@ -1915,12 +1741,10 @@ $apiBaseUrl = env('API_BASE_URL');
             let firstPolosElement = null;
             let firstAvailableMotif = null;
 
-            // Selalu tampilkan semua motif, bahkan jika stok 0
             selectedDetail.motifs.forEach(motif => {
                 let div = document.createElement('div');
                 div.classList.add('col-3');
 
-                // Pastikan data motif lengkap dengan semua URL foto
                 const motifData = {
                     ...motif,
                     url_foto_kanan: motif.url_foto_kanan || '',
@@ -1956,7 +1780,6 @@ $apiBaseUrl = env('API_BASE_URL');
                 setActiveMotif(firstAvailableMotif);
                 if (btnTambah) btnTambah.disabled = false;
             } else {
-                // Jika tidak ada motif dengan stok, pilih motif pertama untuk menampilkan gambar
                 const firstMotifElement = motifContainer.querySelector('.motif-option');
                 if (firstMotifElement) {
                     setActiveMotif(firstMotifElement, true);
@@ -2006,7 +1829,6 @@ $apiBaseUrl = env('API_BASE_URL');
 
             jumlahElem.innerText = newQty;
 
-            // Update hidden input for form submission
             const quantityInput = document.getElementById('quantity');
             if (quantityInput) {
                 quantityInput.value = newQty;
@@ -2024,7 +1846,6 @@ $apiBaseUrl = env('API_BASE_URL');
             let qty = parseInt(jumlahBeli.innerText);
             let harga = $model.detail.harga;
 
-            // Hitung harga setelah diskon jika ada
             if ($model.detail.diskon && $model.detail.diskon > 0) {
                 harga = harga - (harga * $model.detail.diskon / 100);
             }
@@ -2035,25 +1856,21 @@ $apiBaseUrl = env('API_BASE_URL');
         function updateMainAndThumbnailImage() {
             if (!currentMotif) return;
 
-            // Default ke foto depan jika tersedia
             const defaultImageUrl = currentMotif.url_foto_depan ||
                 currentMotif.url_foto_kanan ||
                 currentMotif.url_foto_kiri ||
                 currentMotif.url_foto_belakang;
 
-            // Update gambar utama
             const mainProductImage = document.getElementById('main-product-image');
             if (mainProductImage && defaultImageUrl) {
                 mainProductImage.src = defaultImageUrl;
             }
 
-            // Update thumbnails (hanya jika URL tersedia)
             const thumbnailContainer = document.getElementById('thumbnail-container');
             if (!thumbnailContainer) return;
 
             thumbnailContainer.innerHTML = '';
 
-            // Tambahkan foto depan (jika tersedia)
             if (currentMotif.url_foto_depan) {
                 thumbnailContainer.innerHTML += `
     <div class="col-3">
@@ -2063,7 +1880,6 @@ $apiBaseUrl = env('API_BASE_URL');
     </div>`;
             }
 
-            // Tambahkan foto kanan (jika tersedia)
             if (currentMotif.url_foto_kanan) {
                 thumbnailContainer.innerHTML += `
     <div class="col-3">
@@ -2073,7 +1889,6 @@ $apiBaseUrl = env('API_BASE_URL');
     </div>`;
             }
 
-            // Tambahkan foto kiri (jika tersedia)
             if (currentMotif.url_foto_kiri) {
                 thumbnailContainer.innerHTML += `
     <div class="col-3">
@@ -2083,7 +1898,6 @@ $apiBaseUrl = env('API_BASE_URL');
     </div>`;
             }
 
-            // Tambahkan foto belakang (jika tersedia)
             if (currentMotif.url_foto_belakang) {
                 thumbnailContainer.innerHTML += `
     <div class="col-3">
@@ -2093,7 +1907,6 @@ $apiBaseUrl = env('API_BASE_URL');
     </div>`;
             }
 
-            // Set thumbnail pertama sebagai aktif
             const firstThumbnail = thumbnailContainer.querySelector('.thumbnail');
             if (firstThumbnail) {
                 thumbnailContainer.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active'));
@@ -2111,12 +1924,9 @@ $apiBaseUrl = env('API_BASE_URL');
             event.target.parentElement.classList.add('active');
         }
 
-        // Function to initialize the product detail tabs
         function initProductDetailTabs() {
-            // Add listeners to tab navigation
             document.querySelectorAll('.custom-nav-link-descripsi').forEach(tabLink => {
                 tabLink.addEventListener('click', function() {
-                    // Remove active class from all tabs
                     document.querySelectorAll('.custom-nav-link-descripsi').forEach(tab => {
                         tab.classList.remove('active');
                     });
@@ -2143,31 +1953,20 @@ $apiBaseUrl = env('API_BASE_URL');
                 return;
             }
 
-            // Update product name
             const nameElement = document.getElementById('nama_product');
             if (nameElement) {
                 nameElement.textContent = $model.detail.nama_product || $model.detail.nama || 'Product Name';
             }
-
-            // Update product description
             const descElement = document.getElementById('descripsi');
             if (descElement) {
                 descElement.textContent = $model.detail.deskripsi || '';
             }
-
-            // Update product specifications tab
             updateSpecifications();
-
-            // Update product information tab
             updateProductInformation();
-
-            // Initialize tab functionality
             initProductDetailTabs();
-
             updateStoreAvailability();
         }
 
-        // Function to update specifications tab
         function updateSpecifications() {
             const specTab = document.getElementById('spesifikasi');
             if (!specTab) return;
@@ -2177,7 +1976,6 @@ $apiBaseUrl = env('API_BASE_URL');
             if ($model.detail.spesifikasi) {
                 let specifications;
 
-                // Check if spesifikasi is a string (JSON) or already an object
                 if (typeof $model.detail.spesifikasi === 'string') {
                     try {
                         specifications = JSON.parse($model.detail.spesifikasi);
@@ -2189,7 +1987,6 @@ $apiBaseUrl = env('API_BASE_URL');
                     specifications = $model.detail.spesifikasi;
                 }
 
-                // Create specification items
                 for (const [key, value] of Object.entries(specifications)) {
                     const specItem = document.createElement('div');
                     specItem.className = 'spec-item';
@@ -2211,7 +2008,6 @@ $apiBaseUrl = env('API_BASE_URL');
             }
         }
 
-        // Function to update product information tab
         function updateProductInformation() {
             const infoTab = document.getElementById('informasi');
             if (!infoTab) return;
@@ -2223,7 +2019,6 @@ $apiBaseUrl = env('API_BASE_URL');
             }
         }
 
-        // This function will be called from your existing updateMainAndThumbnailImage function
         function updateStoreAvailability() {
             const storeName = $model.detail.nama_toko || "Toko Dummy";
             const storeNameElement = document.querySelector('.store-name');
@@ -2234,7 +2029,6 @@ $apiBaseUrl = env('API_BASE_URL');
         }
     </script>
 
-    <!-- disini -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const tokenLogin = localStorage.getItem('auth_token');
@@ -2261,7 +2055,6 @@ $apiBaseUrl = env('API_BASE_URL');
                     }
                 })
                 .catch(error => {
-                    // console.error('Gagal cek wishlist:', error);
                 });
 
         });
@@ -2294,7 +2087,6 @@ $apiBaseUrl = env('API_BASE_URL');
                         icon.src = 'assets/img/icon/love.svg';
                     }
 
-                    // Panggil update jumlah wishlist setelah sukses
                     updateWishlistBadge(tokenLogin);
                 })
                 .catch(error => {
@@ -2306,7 +2098,6 @@ $apiBaseUrl = env('API_BASE_URL');
                 });
         });
 
-        // Fungsi untuk update badge wishlist
         function updateWishlistBadge(tokenLogin) {
             fetch(API_BASE_URL + '/nominal-wishlist', {
                     method: 'GET',
@@ -2342,7 +2133,6 @@ $apiBaseUrl = env('API_BASE_URL');
         }
     </script>
 
-    <!-- card -->
     <script>
         function masukkanKeranjang() {
             const idProduct = document.getElementById('id_product').value;
@@ -2350,19 +2140,16 @@ $apiBaseUrl = env('API_BASE_URL');
             const idDetailProduct = document.getElementById('id_detail_product').value;
             const idMotifProduk = document.getElementById('id_motif_produk').value;
 
-            // Ambil stok yang tersedia dari DOM
             const stockAvailable = parseInt(document.querySelector('#stock span').innerText) || 0;
 
-            // Validasi jika produk tidak tersedia (stok 0)
             if (stockAvailable === 0) {
                 showToast('Produk tidak tersedia', 'danger');
-                return; // Jangan lanjutkan jika produk tidak tersedia
+                return; 
             }
 
-            // Validasi jika qty lebih besar dari stok yang tersedia
             if (qty > stockAvailable) {
                 showToast(`Jumlah yang ingin dibeli melebihi stok yang tersedia. Stok tersedia: ${stockAvailable} pcs`, 'danger');
-                return; // Jangan lanjutkan jika qty lebih banyak dari stok
+                return;
             }
 
             const formData = new FormData();
@@ -2459,14 +2246,11 @@ $apiBaseUrl = env('API_BASE_URL');
             const id_detail_product = document.getElementById('id_detail_product').value;
             const id_motif_produk = document.getElementById('id_motif_produk').value;
             const qty = parseInt(document.getElementById('jumlah-beli').innerText);
-            // Ambil stok yang tersedia dari DOM
             const stockAvailable = parseInt(document.querySelector('#stock span').innerText) || 0;
 
-            // Validasi jika produk tidak tersedia (stok 0)
             if (stockAvailable === 0) {
                 showToast('Produk tidak tersedia', 'danger');
-                return; // Janga
-                // n lanjutkan jika produk tidak tersedia
+                return; 
             }
             const token = localStorage.getItem('auth_token');
             if (!token) {
@@ -2489,12 +2273,10 @@ $apiBaseUrl = env('API_BASE_URL');
                 .then(response => response.json())
                 .then(result => {
                     if (result.status === 'success') {
-                        // Simpan ke localStorage
                         if (localStorage.getItem('cart_ids')) {
                             localStorage.removeItem('cart_ids');
                         }
 
-                        // Simpan data baru
                         localStorage.setItem('cart_ids', JSON.stringify(result.cart_ids));
 
                         showToast(result.message, 'success');

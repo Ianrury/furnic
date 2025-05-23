@@ -113,7 +113,7 @@ $apiBaseUrl = env('API_BASE_URL');
                         <div class="site-heading-inline">
                             <h2 class="site-title">Produk Terbaru</h2>
                         </div>
-                        <a href="#" class="small view-more">View More <i class="fas fa-angle-double-right"></i></a>
+                        <a href="/product" class="small view-more">Lihat Semua <i class="fas fa-angle-double-right"></i></a>
                     </div>
                 </div>
                 <div class="tab-content wow fadeInUp" data-wow-delay=".25s" id="item-tabContent">
@@ -134,7 +134,7 @@ $apiBaseUrl = env('API_BASE_URL');
                         <div class="site-heading-inline">
                             <h2 class="site-title">Decorasi Terbaru</h2>
                         </div>
-                        <a href="#" class="small view-more">View More <i class="fas fa-angle-double-right"></i></a>
+                        <a href="/product" class="small view-more">Lihat Semua <i class="fas fa-angle-double-right"></i></a>
                     </div>
                 </div>
                 <div class="container-fluid">
@@ -251,7 +251,6 @@ $apiBaseUrl = env('API_BASE_URL');
             </div>
         </div>
 
-        <!-- popular item -->
         <div class="product-area product-area-new">
             <div class="container">
                 <div class="row">
@@ -259,7 +258,7 @@ $apiBaseUrl = env('API_BASE_URL');
                         <div class="site-heading-inline">
                             <h2 class="site-title">Produk</h2>
                         </div>
-                        <a href="#" class="small view-more">View More <i class="fas fa-angle-double-right"></i></a>
+                        <a href="/product" class="small view-more">Lihat Semua <i class="fas fa-angle-double-right"></i></a>
                     </div>
                 </div>
                 <div class="tab-content wow fadeInUp" data-wow-delay=".25s" id="item-tabContent">
@@ -271,11 +270,9 @@ $apiBaseUrl = env('API_BASE_URL');
                 </div>
             </div>
         </div>
-        <!-- popular item end -->
 
 
 
-        <!-- choose-area -->
         <div class="product-area product-area-new">
             <div class="container">
                 <div class="row">
@@ -334,7 +331,6 @@ $apiBaseUrl = env('API_BASE_URL');
             </div>
         </div>
 
-        <!-- newsletter area -->
         <div class="newsletter-area pt-40">
             <div>
                 <div class="container wow fadeInUp rounded-4" data-wow-delay=".25s">
@@ -359,7 +355,6 @@ $apiBaseUrl = env('API_BASE_URL');
                 </div>
             </div>
         </div>
-        <!-- about area -->
         <div class="about-area mt-60 pb-4">
             <div class="container">
                 <div class="row align-items-center">

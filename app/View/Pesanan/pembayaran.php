@@ -948,7 +948,6 @@ $apiBaseUrl = env('API_BASE_URL');
         const API_BASE_URL = "<?= $apiBaseUrl ?>";
     </script>
     <script>
-        // Show/hide other bank input
         document.getElementById('bank').addEventListener('change', function() {
             const otherBankContainer = document.getElementById('otherBankContainer');
             if (this.value === 'other') {
@@ -958,7 +957,6 @@ $apiBaseUrl = env('API_BASE_URL');
             }
         });
 
-        // File upload preview
         document.getElementById('paymentProof').addEventListener('change', function() {
             const filePreview = document.getElementById('filePreview');
             const fileName = document.getElementById('fileName');
@@ -968,7 +966,6 @@ $apiBaseUrl = env('API_BASE_URL');
                 const file = this.files[0];
                 fileName.textContent = file.name;
 
-                // Format file size
                 const fileSizeKB = Math.round(file.size / 1024);
                 let fileSizeText;
 
@@ -981,56 +978,46 @@ $apiBaseUrl = env('API_BASE_URL');
                 fileSize.textContent = fileSizeText;
                 filePreview.style.display = 'flex';
 
-                // Change the upload label text
                 document.querySelector('.file-upload-icon span').textContent = 'Ubah File';
                 document.querySelector('.file-upload-icon i').classList.remove('fa-cloud-upload-alt');
                 document.querySelector('.file-upload-icon i').classList.add('fa-exchange-alt');
             } else {
                 filePreview.style.display = 'none';
 
-                // Reset the upload label text
                 document.querySelector('.file-upload-icon span').textContent = 'Unggah Bukti Pembayaran';
                 document.querySelector('.file-upload-icon i').classList.remove('fa-exchange-alt');
                 document.querySelector('.file-upload-icon i').classList.add('fa-cloud-upload-alt');
             }
         });
 
-        // Remove file
         document.getElementById('removeFile').addEventListener('click', function() {
             const fileInput = document.getElementById('paymentProof');
             fileInput.value = '';
             document.getElementById('filePreview').style.display = 'none';
 
-            // Reset the upload icon
             document.querySelector('.file-upload-icon span').textContent = 'Unggah Bukti Pembayaran';
             document.querySelector('.file-upload-icon i').classList.remove('fa-exchange-alt');
             document.querySelector('.file-upload-icon i').classList.add('fa-cloud-upload-alt');
         });
 
-        // Copy to clipboard function
         function copyToClipboard(elementId) {
             const element = document.getElementById(elementId);
             const text = element.innerText;
 
             navigator.clipboard.writeText(text.replace(/\./g, '')).then(() => {
-                // Show success message
                 const successElement = document.getElementById(`copy-success-${elementId === 'account-number' ? 'account' : 'nominal'}`);
                 successElement.style.display = 'flex';
 
-                // Hide after 2 seconds
                 setTimeout(() => {
                     successElement.style.display = 'none';
                 }, 2000);
             });
         }
 
-        // Form submission
 
 
-        // window.addEventListener('load', initCountdown);
 
 
-        // Show file preview on page load for demo purposes
         window.addEventListener('load', function() {
             document.getElementById('filePreview').style.display = 'none';
         });
@@ -1040,7 +1027,6 @@ $apiBaseUrl = env('API_BASE_URL');
             const pathSegments = window.location.pathname.split('/');
             const token = pathSegments[pathSegments.length - 1] || '';
 
-            // Tampilkan input nama bank jika pilih "Lainnya"
             $('#bank').on('change', function() {
                 if ($(this).val() === 'other') {
                     $('#otherBankContainer').show();
@@ -1049,7 +1035,6 @@ $apiBaseUrl = env('API_BASE_URL');
                 }
             });
 
-            // Format input nominal dan validasi tidak melebihi subtotal
             const subtotalText = $('.order-total-value').text().trim();
             const subtotalValue = parseInt(subtotalText.replace(/[^0-9]/g, ''));
 
@@ -1072,7 +1057,6 @@ $apiBaseUrl = env('API_BASE_URL');
                 $(this).val(formatted);
             });
 
-            // Validasi dan preview file bukti pembayaran
             $('#paymentProof').on('change', function() {
                 const file = this.files[0];
                 if (file) {
@@ -1095,13 +1079,11 @@ $apiBaseUrl = env('API_BASE_URL');
                 }
             });
 
-            // Hapus file bukti
             $('#removeFile').on('click', function() {
                 $('#paymentProof').val('');
                 $('#filePreview').hide();
             });
 
-            // Submit form
             $('#payment-form').on('submit', function(e) {
                 e.preventDefault();
 
@@ -1177,7 +1159,6 @@ $apiBaseUrl = env('API_BASE_URL');
 
 
     <script>
-        // Fungsi untuk format mata uang Rupiah
         function formatRupiah(angka) {
             return new Intl.NumberFormat('id-ID', {
                 style: 'currency',
@@ -1187,9 +1168,7 @@ $apiBaseUrl = env('API_BASE_URL');
             }).format(angka);
         }
 
-        // Fungsi untuk menghitung sisa waktu pembayaran
         function hitungSisaWaktuPembayaran(limitPembayaran) {
-            // Tambahkan zona waktu Jakarta secara eksplisit
             const waktuBatas = new Date(`${limitPembayaran} GMT+0700`);
             const waktuSekarang = new Date();
 
@@ -1224,7 +1203,6 @@ $apiBaseUrl = env('API_BASE_URL');
         }
 
 
-        // Fungsi untuk memperbarui tampilan countdown timer
         function updateCountdown(limitPembayaran) {
             const countdownElement = document.getElementById('countdown');
             const progressBarElement = document.getElementById('progress-bar');
@@ -1257,12 +1235,10 @@ $apiBaseUrl = env('API_BASE_URL');
                     return;
                 }
 
-                // Update tampilan timer
                 hoursElement.textContent = String(timeLeft.jam).padStart(2, '0');
                 minutesElement.textContent = String(timeLeft.menit).padStart(2, '0');
                 secondsElement.textContent = String(timeLeft.detik).padStart(2, '0');
 
-                // Update progress bar
                 const progressPercentage = (timeLeft.total / totalTime) * 100;
                 progressBarElement.style.width = `${progressPercentage}%`;
 
@@ -1275,26 +1251,21 @@ $apiBaseUrl = env('API_BASE_URL');
                 }
             };
 
-            // Jalankan pertama kali
             updateTimer();
 
-            // Set interval tiap detik
             interval = setInterval(updateTimer, 1000);
 
             return interval;
         }
 
 
-        // Fungsi untuk menampilkan ringkasan pesanan
-        // Fungsi untuk menampilkan ringkasan pesanan
+   
         function renderOrderSummary(orderData) {
             const orderSummaryElement = document.querySelector('.order-summary');
             const orderItemsContainer = orderSummaryElement.querySelector(':scope > h3').nextElementSibling;
-            // Hapus item-item contoh yang sudah ada
             const existingItems = orderSummaryElement.querySelectorAll('.order-item');
             existingItems.forEach(item => item.remove());
 
-            // Tambahkan item-item produk dari data
             orderData.products.forEach(product => {
                 const orderItemElement = document.createElement('div');
                 orderItemElement.className = 'order-item';
@@ -1313,7 +1284,6 @@ $apiBaseUrl = env('API_BASE_URL');
                 orderSummaryElement.insertBefore(orderItemElement, orderSummaryElement.querySelector('.order-totals'));
             });
 
-            // Update total-total
             const totalsContainer = orderSummaryElement.querySelector('.order-totals');
             totalsContainer.innerHTML = `
         <div class="order-total-row">
@@ -1334,25 +1304,19 @@ $apiBaseUrl = env('API_BASE_URL');
 
             document.getElementById('total-amount').textContent = formatRupiah(orderData.total_belanja);
             document.getElementById('nominal-transfer').textContent = formatRupiah(orderData.total_belanja);
-            // document.getElementById('amount').value(orderData.total_belanja);
 
 
-            // Tambahkan nomor pesanan
             const orderNumberElement = document.createElement('div');
             orderNumberElement.className = 'order-number';
-            // orderNumberElement.innerHTML = `<span>Nomor Pesanan:</span> ${orderData.nomor_pesanan}`;
             orderSummaryElement.insertBefore(orderNumberElement, orderSummaryElement.querySelector('h3').nextSibling);
         }
 
-        // Fungsi utama untuk inisialisasi halaman pembayaran
         function initializePaymentPage() {
-            // Ambil token dari path URL terakhir
             const pathSegments = window.location.pathname.split('/');
             const token = pathSegments[pathSegments.length - 1] || '';
 
             if (!token) {
                 console.error('Token tidak ditemukan di URL.');
-                // Tampilkan pesan error ke user
                 document.querySelector('.order-summary').innerHTML = `
             <div class="error-message">
                 Token pembayaran tidak valid. Silakan periksa URL atau hubungi customer service.
@@ -1361,7 +1325,6 @@ $apiBaseUrl = env('API_BASE_URL');
                 return;
             }
 
-            // Fetch data pembayaran dari API
             fetch(API_BASE_URL + `/pembayaran/${token}`)
                 .then(response => {
                     if (!response.ok) {
@@ -1370,62 +1333,39 @@ $apiBaseUrl = env('API_BASE_URL');
                     return response.json();
                 })
                 .then(result => {
-                    // Ambil elemen input
                     const amountInput = document.getElementById('amount');
-
-                    // Ambil nilai total belanja
                     const total = result.data.total_belanja;
-
-                    // Format angka ke format rupiah dengan titik
                     const formatted = total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-
-                    // Set nilai input
                     amountInput.value = formatted;
+                    amountInput.readOnly = true; 
+                    amountInput.style.pointerEvents = 'none';
+                    amountInput.style.backgroundColor = '#f1f1f1'; 
 
-                    // Buat input tidak bisa diedit atau diklik
-                    amountInput.readOnly = true; // Tidak bisa diketik
-                    amountInput.style.pointerEvents = 'none'; // Tidak bisa diklik/focus
-                    amountInput.style.backgroundColor = '#f1f1f1'; // Optional: ubah warna agar terlihat disabled
-
-                    // Update status and order number
                     if (result.status === 'success' && result.data) {
-                        // Check if order is canceled or already reviewed
                         if (result.data.is_batal == 1 || result.data.is_review == 1) {
-                            // Show modal alert for canceled or reviewed
                             showStatusModal(result.data);
-                            return; // Stop further processing
+                            return; 
                         }
 
-                        // Check if status is "konfirmasi"
                         if (result.data.status === 'konfirmasi') {
-                            // Show payment confirmation modal
                             showStatusModal(result.data);
-                            return; // Stop further processing
+                            return; 
                         }
 
-                        // Continue with normal processing if not canceled/reviewed/confirmed
-                        // Render ringkasan pesanan
                         renderOrderSummary(result.data);
-
-                        // Inisialisasi countdown
                         updateCountdown(result.data.limit_payment);
-
-                        // Update order number
                         const orderNumberElement = document.querySelector('.order-number');
                         if (orderNumberElement) {
                             orderNumberElement.textContent = `Order #${result.data.nomor_pesanan}`;
                         }
 
-                        // Update status pesanan jika ada
                         if (result.data.status) {
                             const statusElement = document.getElementById('payment-status');
                             if (statusElement) {
-                                // Update existing status element
                                 statusElement.className = 'status-badge ' + result.data.status;
                                 statusElement.textContent = result.data.status === 'waiting' ? 'Menunggu Pembayaran' : result.data.status;
                             }
 
-                            // Nonaktifkan tombol konfirmasi jika status lain
                             const confirmButton = document.querySelector('.cek-bayar');
                             if (confirmButton && result.data.status !== 'waiting') {
                                 confirmButton.disabled = true;
@@ -1439,7 +1379,6 @@ $apiBaseUrl = env('API_BASE_URL');
                 })
                 .catch(error => {
                     console.error('Terjadi kesalahan:', error);
-                    // Tampilkan pesan error ke user
                     document.querySelector('.order-summary').innerHTML = `
                 <div class="error-message">
                     ${error.message || 'Terjadi kesalahan saat memuat data pembayaran.'}
@@ -1447,9 +1386,7 @@ $apiBaseUrl = env('API_BASE_URL');
             `;
                 });
 
-            // Function to show the modal - dipindahkan ke luar promise chain
             function showStatusModal(data) {
-                // Create modal HTML if it doesn't exist
                 if (!document.getElementById('statusModal')) {
                     const modalHTML = `
                 <div class="modal fade" id="statusModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="statusModalLabel" aria-hidden="true">
@@ -1471,13 +1408,11 @@ $apiBaseUrl = env('API_BASE_URL');
                 </div>
             `;
 
-                    // Append modal to body
                     const modalContainer = document.createElement('div');
                     modalContainer.innerHTML = modalHTML;
                     document.body.appendChild(modalContainer.firstElementChild);
                 }
 
-                // Set modal content based on status
                 const modalOrderNumber = document.getElementById('modalOrderNumber');
                 const statusMessage = document.getElementById('statusMessage');
                 const statusDetail = document.getElementById('statusDetail');
@@ -1487,21 +1422,18 @@ $apiBaseUrl = env('API_BASE_URL');
                 if (modalOrderNumber) modalOrderNumber.textContent = data.nomor_pesanan;
 
                 if (data.is_batal == 1) {
-                    // Case: Pesanan dibatalkan
                     if (statusMessage) statusMessage.textContent = 'Pesanan Dibatalkan';
                     if (statusDetail) statusDetail.textContent = 'Pesanan ini telah dibatalkan dan tidak dapat diproses lebih lanjut.';
                     if (statusIcon) {
                         statusIcon.className = 'fas fa-times-circle fa-3x text-danger';
                     }
                 } else if (data.is_review == 1) {
-                    // Case: Pesanan sudah direview
                     if (statusMessage) statusMessage.textContent = 'Pesanan Sudah Direview';
                     if (statusDetail) statusDetail.textContent = 'Anda telah memberikan review untuk pesanan ini.';
                     if (statusIcon) {
                         statusIcon.className = 'fas fa-check-circle fa-3x text-success';
                     }
                 } else if (data.status === 'konfirmasi') {
-                    // Case: Pesanan sudah dikonfirmasi pembayarannya
                     if (statusMessage) statusMessage.textContent = 'Pembayaran Dikonfirmasi';
                     if (statusDetail) statusDetail.textContent = 'Anda sudah membayar. Silahkan menunggu konfirmasi dari admin.';
                     if (statusIcon) {
@@ -1509,14 +1441,12 @@ $apiBaseUrl = env('API_BASE_URL');
                     }
                 }
 
-                // Show the modal with animation
                 const statusModal = new bootstrap.Modal(document.getElementById('statusModal'), {
                     backdrop: 'static',
                     keyboard: false
                 });
                 statusModal.show();
 
-                // Add entrance animation
                 const modalContent = document.querySelector('.modal-content');
                 if (modalContent) {
                     modalContent.classList.add('animate__animated', 'animate__zoomIn');
@@ -1525,12 +1455,10 @@ $apiBaseUrl = env('API_BASE_URL');
                     });
                 }
 
-                // Automatically redirect after a short delay
                 setTimeout(() => {
                     window.location.href = '/product';
                 }, 3000);
 
-                // Add click event for immediate redirect
                 if (backButton) {
                     backButton.addEventListener('click', function() {
                         window.location.href = '/product';
@@ -1538,7 +1466,6 @@ $apiBaseUrl = env('API_BASE_URL');
                 }
             }
 
-            // Add necessary CSS for animations - dipindahkan ke luar promise chain
             (function() {
                 const style = document.createElement('style');
                 style.textContent = `
@@ -1597,7 +1524,6 @@ $apiBaseUrl = env('API_BASE_URL');
             })();
         }
 
-        // Jalankan fungsi inisialisasi saat dokumen selesai dimuat
         document.addEventListener('DOMContentLoaded', initializePaymentPage);
     </script>
 </body>

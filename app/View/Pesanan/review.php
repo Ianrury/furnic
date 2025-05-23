@@ -1005,7 +1005,6 @@ $apiBaseUrl = env('API_BASE_URL');
                     <form id="reviewForm" class="needs-validation" novalidate>
                         <input type="hidden" id="productId" name="productId" value="1">
 
-                        <!-- Rating stars -->
                         <div class="mb-review text-center">
                             <label class="form-label-review mb-3">Berikan Penilaian</label>
                             <div class="rating-review mb-2">
@@ -1025,7 +1024,6 @@ $apiBaseUrl = env('API_BASE_URL');
                             </div>
                         </div>
 
-                        <!-- Comment textarea -->
                         <div class="mb-review">
                             <label for="comment" class="form-label-review">Tulis Ulasan</label>
                             <textarea class="form-control" id="comment" name="comment" rows="4"
@@ -1035,7 +1033,6 @@ $apiBaseUrl = env('API_BASE_URL');
                             </div>
                         </div>
 
-                        <!-- Photo upload -->
                         <div class="mb-review">
                             <label class="form-label-review">Tambahkan Foto (minimal 1 foto)</label>
                             <div>
@@ -1049,7 +1046,6 @@ $apiBaseUrl = env('API_BASE_URL');
                             </div>
                         </div>
 
-                        <!-- Submit buttons -->
                         <div class="d-grid gap-2 mt-4">
                             <button type="submit" class="btn btn-primary-review">Kirim Ulasan</button>
                             <button type="button" class="btn btn-secondary-review" onclick="window.history.back()">Kembali</button>
@@ -1060,7 +1056,6 @@ $apiBaseUrl = env('API_BASE_URL');
         </div>
     </div>
 
-    <!-- Toast notification -->
     <div class="toast-container position-fixed bottom-0 end-0 p-3">
         <div id="reviewToast" class="toast toast-review" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header toast-header-review">
@@ -1073,7 +1068,6 @@ $apiBaseUrl = env('API_BASE_URL');
         </div>
     </div>
 
-    <!-- JavaScript -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -1082,31 +1076,21 @@ $apiBaseUrl = env('API_BASE_URL');
         const API_BASE_URL = "<?= $apiBaseUrl ?>";
     </script>
     <script>
-        // Array to store uploaded photos
         let uploadedPhotos = [];
 
-        // Add event listeners when DOM is ready
         document.addEventListener('DOMContentLoaded', function() {
-            // Set up form validation
             setupFormValidation();
-
-            // Set up photo upload functionality
             setupPhotoUpload();
-
-            // Initial setup for photo preview container
             initPhotoPreviewContainer();
         });
 
-        // Setup photo upload functionality
         function setupPhotoUpload() {
             document.getElementById('photo-upload').addEventListener('change', handleFileSelect);
         }
 
-        // Initialize photo preview container
         function initPhotoPreviewContainer() {
             const container = document.querySelector('.preview-container-review');
             if (!container.querySelector('label.custom-file-upload-review')) {
-                // Create and add the upload button if it doesn't exist
                 const uploadLabel = document.createElement('label');
                 uploadLabel.className = 'custom-file-upload-review';
                 uploadLabel.setAttribute('for', 'photo-upload');
@@ -1119,16 +1103,12 @@ $apiBaseUrl = env('API_BASE_URL');
                 container.appendChild(uploadLabel);
             }
         }
-
-        // Handle file selection
         function handleFileSelect(event) {
             const files = event.target.files;
             if (!files || !files.length) return;
 
-            // Limit to 3 photos
             if (uploadedPhotos.length + files.length > 3) {
                 alert('Maksimal 3 foto yang dapat diunggah');
-                // Reset the file input to enable reselection
                 event.target.value = '';
                 return;
             }
@@ -1151,18 +1131,14 @@ $apiBaseUrl = env('API_BASE_URL');
                 reader.readAsDataURL(file);
             }
 
-            // Reset the file input to enable reselection
             event.target.value = '';
         }
 
-        // Update photo preview
         function updatePhotoPreview() {
             const container = document.querySelector('.preview-container-review');
 
-            // Clear existing previews
             container.innerHTML = '';
 
-            // Create and add the upload button first
             const uploadLabel = document.createElement('label');
             uploadLabel.className = 'custom-file-upload-review';
             uploadLabel.setAttribute('for', 'photo-upload');
@@ -1174,7 +1150,6 @@ $apiBaseUrl = env('API_BASE_URL');
 
             container.appendChild(uploadLabel);
 
-            // Add photo previews
             uploadedPhotos.forEach((photo, index) => {
                 const previewItem = document.createElement('div');
                 previewItem.className = 'preview-item-review';
@@ -1196,7 +1171,6 @@ $apiBaseUrl = env('API_BASE_URL');
             });
         }
 
-        // Remove photo at specific index
         function removePhoto(index) {
             if (index >= 0 && index < uploadedPhotos.length) {
                 uploadedPhotos.splice(index, 1);
@@ -1204,7 +1178,6 @@ $apiBaseUrl = env('API_BASE_URL');
             }
         }
 
-        // Setup form validation
         function setupFormValidation() {
             const form = document.getElementById('reviewForm');
 
@@ -1220,15 +1193,12 @@ $apiBaseUrl = env('API_BASE_URL');
             });
         }
 
-        // Get token from URL
         function getToken() {
-            // Assume token is passed in the URL as a parameter or part of the path
             const pathArray = window.location.pathname.split('/');
             const token = pathArray[pathArray.length - 1];
             return token;
         }
 
-        // Submit review to API
         function submitReview() {
             const productId = document.getElementById('productId').value;
             const ratingElement = document.querySelector('input[name="rating"]:checked');
@@ -1242,13 +1212,11 @@ $apiBaseUrl = env('API_BASE_URL');
             const comment = document.getElementById('comment').value;
             const token = getToken();
 
-            // Create FormData for API submission
             const formData = new FormData();
             formData.append('productId', productId);
             formData.append('rating', rating);
             formData.append('comment', comment);
 
-            // Add photos to FormData
             uploadedPhotos.forEach((photo, index) => {
                 formData.append(`photo[${index}]`, photo.file);
             });
@@ -1395,49 +1363,37 @@ $apiBaseUrl = env('API_BASE_URL');
             }
         });
 
-        // Remove file
         document.getElementById('removeFile').addEventListener('click', function() {
             const fileInput = document.getElementById('paymentProof');
             fileInput.value = '';
             document.getElementById('filePreview').style.display = 'none';
 
-            // Reset the upload icon
             document.querySelector('.file-upload-icon span').textContent = 'Unggah Bukti Pembayaran';
             document.querySelector('.file-upload-icon i').classList.remove('fa-exchange-alt');
             document.querySelector('.file-upload-icon i').classList.add('fa-cloud-upload-alt');
         });
 
-        // Copy to clipboard function
         function copyToClipboard(elementId) {
             const element = document.getElementById(elementId);
             const text = element.innerText;
 
             navigator.clipboard.writeText(text.replace(/\./g, '')).then(() => {
-                // Show success message
                 const successElement = document.getElementById(`copy-success-${elementId === 'account-number' ? 'account' : 'nominal'}`);
                 successElement.style.display = 'flex';
 
-                // Hide after 2 seconds
                 setTimeout(() => {
                     successElement.style.display = 'none';
                 }, 2000);
             });
         }
 
-        // Form submission
 
-
-        // window.addEventListener('load', initCountdown);
-
-
-        // Show file preview on page load for demo purposes
         window.addEventListener('load', function() {
             document.getElementById('filePreview').style.display = 'none';
         });
     </script>
     <script>
         $(document).ready(function() {
-            // Tampilkan input nama bank jika pilih "Lainnya"
             $('#bank').on('change', function() {
                 if ($(this).val() === 'other') {
                     $('#otherBankContainer').show();
@@ -1446,7 +1402,6 @@ $apiBaseUrl = env('API_BASE_URL');
                 }
             });
 
-            // Format input amount saat diketik
             $('#amount').on('input', function() {
                 let value = $(this).val().replace(/\D/g, '');
                 let formatted = value.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
@@ -1456,7 +1411,6 @@ $apiBaseUrl = env('API_BASE_URL');
     </script>
 
     <script>
-        // Fungsi untuk format mata uang Rupiah
         function formatRupiah(angka) {
             return new Intl.NumberFormat('id-ID', {
                 style: 'currency',
@@ -1466,9 +1420,7 @@ $apiBaseUrl = env('API_BASE_URL');
             }).format(angka);
         }
 
-        // Fungsi untuk menghitung sisa waktu pembayaran
         function hitungSisaWaktuPembayaran(limitPembayaran) {
-            // Tambahkan zona waktu Jakarta secara eksplisit
             const waktuBatas = new Date(`${limitPembayaran} GMT+0700`);
             const waktuSekarang = new Date();
 
@@ -1503,7 +1455,6 @@ $apiBaseUrl = env('API_BASE_URL');
         }
 
 
-        // Fungsi untuk memperbarui tampilan countdown timer
         function updateCountdown(limitPembayaran) {
             const countdownElement = document.getElementById('countdown');
             const progressBarElement = document.getElementById('progress-bar');
@@ -1536,12 +1487,10 @@ $apiBaseUrl = env('API_BASE_URL');
                     return;
                 }
 
-                // Update tampilan timer
                 hoursElement.textContent = String(timeLeft.jam).padStart(2, '0');
                 minutesElement.textContent = String(timeLeft.menit).padStart(2, '0');
                 secondsElement.textContent = String(timeLeft.detik).padStart(2, '0');
 
-                // Update progress bar
                 const progressPercentage = (timeLeft.total / totalTime) * 100;
                 progressBarElement.style.width = `${progressPercentage}%`;
 
@@ -1554,26 +1503,20 @@ $apiBaseUrl = env('API_BASE_URL');
                 }
             };
 
-            // Jalankan pertama kali
             updateTimer();
 
-            // Set interval tiap detik
             interval = setInterval(updateTimer, 1000);
 
             return interval;
         }
 
 
-        // Fungsi untuk menampilkan ringkasan pesanan
-        // Fungsi untuk menampilkan ringkasan pesanan
         function renderOrderSummary(orderData) {
             const orderSummaryElement = document.querySelector('.order-summary');
             const orderItemsContainer = orderSummaryElement.querySelector(':scope > h3').nextElementSibling;
-            // Hapus item-item contoh yang sudah ada
             const existingItems = orderSummaryElement.querySelectorAll('.order-item');
             existingItems.forEach(item => item.remove());
 
-            // Tambahkan item-item produk dari data
             orderData.products.forEach(product => {
                 const orderItemElement = document.createElement('div');
                 orderItemElement.className = 'order-item';
@@ -1592,7 +1535,6 @@ $apiBaseUrl = env('API_BASE_URL');
                 orderSummaryElement.insertBefore(orderItemElement, orderSummaryElement.querySelector('.order-totals'));
             });
 
-            // Update total-total
             const totalsContainer = orderSummaryElement.querySelector('.order-totals');
             totalsContainer.innerHTML = `
         <div class="order-total-row">
@@ -1613,10 +1555,8 @@ $apiBaseUrl = env('API_BASE_URL');
 
             document.getElementById('total-amount').textContent = formatRupiah(orderData.total_belanja);
             document.getElementById('nominal-transfer').textContent = formatRupiah(orderData.total_belanja);
-            // document.getElementById('amount').value(orderData.total_belanja);
 
 
-            // Tambahkan nomor pesanan
             const orderNumberElement = document.createElement('div');
             orderNumberElement.className = 'order-number';
             orderSummaryElement.insertBefore(orderNumberElement, orderSummaryElement.querySelector('h3').nextSibling);
@@ -1654,32 +1594,26 @@ $apiBaseUrl = env('API_BASE_URL');
                         if (result.data.is_review) {
                             window.location.href = '/'
                         }
-                        // Inisialisasi countdown
                         updateCountdown(result.data.limit_payment);
 
-                        // Update order number
                         const orderNumberElement = document.querySelector('.order-number');
                         if (orderNumberElement) {
                             orderNumberElement.textContent = `Order #${result.data.nomor_pesanan}`;
                         }
 
-                        // Update status pesanan jika ada
                         if (result.data.status) {
                             const statusElement = document.getElementById('payment-status');
                             if (statusElement) {
-                                // Update existing status element
                                 statusElement.className = 'status-badge ' + result.data.status;
                                 statusElement.textContent = result.data.status === 'waiting' ? 'Menunggu Pembayaran' : result.data.status;
                             }
 
-                            // Nonaktifkan tombol konfirmasi jika status adalah "konfirmasi"
                             const confirmButton = document.querySelector('.cek-bayar');
                             const deadlineInfo = document.querySelector('.deadline-info');
                             const bankinfo = document.querySelector('.bank-info');
                             if (deadlineInfo && bankinfo) {
                                 deadlineInfo.style.display = 'none';
                                 bankinfo.style.display = 'none';
-                                // confirmButton.disabled = result.data.status === 'waiting';
                             }
 
                         }
@@ -1688,8 +1622,6 @@ $apiBaseUrl = env('API_BASE_URL');
                     }
                 })
                 .catch(error => {
-                    console.error('Terjadi kesalahan:', error);
-                    // Tampilkan pesan error ke user
                     document.querySelector('.order-summary').innerHTML = `
             <div class="error-message">
                 ${error.message || 'Terjadi kesalahan saat memuat data pembayaran.'}
@@ -1699,7 +1631,6 @@ $apiBaseUrl = env('API_BASE_URL');
 
         }
 
-        // Jalankan fungsi inisialisasi saat dokumen selesai dimuat
         document.addEventListener('DOMContentLoaded', initializePaymentPage);
     </script>
 </body>

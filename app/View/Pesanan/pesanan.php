@@ -572,10 +572,8 @@ $apiBaseUrl = env('API_BASE_URL');
                     return;
                 }
 
-                // Get cart_ids from localStorage
                 const cartIds = localStorage.getItem('cart_ids');
                 if (cartIds === null) {
-                    // kembali ke product
                     window.location.href = '/product';
                     return;
                 }
@@ -583,20 +581,16 @@ $apiBaseUrl = env('API_BASE_URL');
                 const idToko = document.getElementById('id_toko').value;
                 const idPengiriman = document.getElementById('id_pengiriman').value;
 
-                // Validation
                 if (!idToko && !idPengiriman) {
                     showToast('Pilih toko atau jenis pengiriman terlebih dahulu', 'danger');
-                    // Reset button state
                     resetButtonState();
                     return;
                 }
 
-                // Create FormData object
                 const formData = new FormData();
                 formData.append('id_toko', idToko);
                 formData.append('id_pengiriman', idPengiriman);
 
-                // Send data to server
                 fetch(`${API_BASE_URL}/pesanan?cart_ids=${cartIds}`, {
                         method: 'POST',
                         headers: {
@@ -607,19 +601,15 @@ $apiBaseUrl = env('API_BASE_URL');
                     .then(response => response.json())
                     .then(data => {
                         if (data.status === 'success') {
-                            // reset storage carg
                             const cartIds = localStorage.getItem('cart_ids');
                             localStorage.removeItem('cart_ids');
                             showToast(data.message || 'Pesanan berhasil dibuat', 'success');
-                            // cek disini
                             setTimeout(() => {
                                 window.location.href = data.redirect_url || '/pembayaran';
                             }, 1500);
                         } else {
-                            // Reset button state on error
                             resetButtonState();
 
-                            // Check if we need to redirect to cart page
                             if (data.message === 'Return to keranjang') {
                                 showToast('Keranjang kosong, silakan pilih produk terlebih dahulu', 'danger');
                                 setTimeout(() => {
@@ -639,7 +629,6 @@ $apiBaseUrl = env('API_BASE_URL');
                         console.error('Error:', error);
                     });
 
-                // Function to reset button state
                 function resetButtonState() {
                     payButton.removeAttribute('data-loading');
                     payButton.classList.remove('disabled');
@@ -698,45 +687,30 @@ $apiBaseUrl = env('API_BASE_URL');
                         return;
                     }
 
-                    // Fill user data
                     populateUserData(data.user);
 
-                    // Render products
                     renderProducts(data.products);
 
-                    // Set up delivery methods
                     setupDeliveryMethods(data.jenisPengiriman, data.toko, data.subtotal - data.total_diskon);
 
-                    // Update payment summary
                     updatePaymentSummary(data.subtotal, data.total_diskon, data.total_pembayaran);
                 })
                 .catch(error => {
                     console.error("FETCH ERROR:", error.message);
                 });
 
-            // Handle form submission
             document.getElementById('formBayar').addEventListener('submit', function(e) {
                 e.preventDefault();
 
                 const idToko = document.getElementById('id_toko').value;
                 const idPengiriman = document.getElementById('id_pengiriman').value;
 
-                // if (!idToko && !idPengiriman) {
-                //     alert('Silakan pilih metode pengiriman terlebih dahulu');
-                //     return;
-                // }
 
-                // Submit payment logic here
-                // Add your payment processing code
             });
         });
 
         function populateUserData(user) {
-            // document.getElementById('display_detail').textContent = user.detail ? ucFirst(user.detail) : '';
-            // document.getElementById('display_nama').textContent = user.nama || '';
-            // document.getElementById('display_hp').textContent = user.no_hp || '';
-            // document.getElementById('display_alamat').textContent = user.alamat || '';
-            // document.getElementById('display_email').textContent = user.email || '';
+
         }
 
         function renderProducts(products) {
@@ -879,10 +853,9 @@ $apiBaseUrl = env('API_BASE_URL');
             const ongkirEl = document.getElementById('total-ongkir');
             const totalPembayaranEl = document.getElementById('total-pembayaran');
 
-            // Simpan seleksi yang dipilih user
             let selectedPengirimanId = '';
             let selectedTokoId = '';
-            let currentMode = 'antar'; // Default mode
+            let currentMode = 'antar'; 
 
             function renderContent(type) {
                 currentMode = type;
@@ -910,7 +883,6 @@ $apiBaseUrl = env('API_BASE_URL');
                     });
                     content.innerHTML = html;
 
-                    // Jika ada pengiriman yang sudah dipilih sebelumnya, update total
                     if (selectedPengirimanId) {
                         const selectedPengiriman = jenisPengiriman.find(p => p.id.toString() === selectedPengirimanId);
                         if (selectedPengiriman) {
@@ -936,7 +908,6 @@ $apiBaseUrl = env('API_BASE_URL');
                     });
                     content.innerHTML = html;
 
-                    // Jika ada toko yang sudah dipilih sebelumnya, update total
                     if (selectedTokoId) {
                         ongkirEl.innerText = '0';
                         totalPembayaranEl.innerText = formatNumber(baseTotal);
@@ -949,7 +920,7 @@ $apiBaseUrl = env('API_BASE_URL');
                 selectedPengirimanId = el.value;
                 idPengirimanInput.value = el.value;
                 idTokoInput.value = '';
-                selectedTokoId = ''; // Reset toko selection when pengiriman is selected
+                selectedTokoId = ''; 
                 ongkirEl.innerText = formatNumber(harga);
                 totalPembayaranEl.innerText = formatNumber(baseTotal + harga);
             };
@@ -958,7 +929,7 @@ $apiBaseUrl = env('API_BASE_URL');
                 selectedTokoId = el.value;
                 idTokoInput.value = el.value;
                 idPengirimanInput.value = '';
-                selectedPengirimanId = ''; // Reset pengiriman selection when toko is selected
+                selectedPengirimanId = ''; 
                 ongkirEl.innerText = '0';
                 totalPembayaranEl.innerText = formatNumber(baseTotal);
             };
@@ -969,7 +940,6 @@ $apiBaseUrl = env('API_BASE_URL');
                     btnAntar.classList.add('active');
                     btnAmbil.classList.remove('active');
 
-                    // Jika tidak ada pengiriman yang dipilih, reset nilainya
                     if (!selectedPengirimanId) {
                         idTokoInput.value = '';
                         idPengirimanInput.value = '';
@@ -985,7 +955,6 @@ $apiBaseUrl = env('API_BASE_URL');
                     btnAmbil.classList.add('active');
                     btnAntar.classList.remove('active');
 
-                    // Jika tidak ada toko yang dipilih, reset nilainya
                     if (!selectedTokoId) {
                         idTokoInput.value = '';
                         idPengirimanInput.value = '';
@@ -995,7 +964,6 @@ $apiBaseUrl = env('API_BASE_URL');
                 }
             });
 
-            // Render default antar saat load
             renderContent('antar');
         }
 
@@ -1013,96 +981,6 @@ $apiBaseUrl = env('API_BASE_URL');
             return string.charAt(0).toUpperCase() + string.slice(1);
         }
     </script>
-
-
-    <!-- <script>
-        $('#formEditUser').on('submit', function(e) {
-            e.preventDefault();
-
-            const nama = $('#nama_user').val().trim();
-            const email = $('#email').val().trim();
-            const no_hp = $('#no_telpon').val().trim();
-            const alamat = $('#Alamat').val().trim();
-            const detail = $('#detail').val().trim();
-
-            if (!nama || !email || !no_hp || !alamat || !detail) {
-                showToast('Semua field wajib diisi.', 'danger');
-                return;
-            }
-
-            if (!/^8[0-9]{7,12}$/.test(no_hp)) {
-                showToast('Nomor HP harus dimulai dengan angka 8 dan berisi 8-13 digit.', 'danger');
-                return;
-            }
-
-            const formData = $(this).serialize();
-
-            $.ajax({
-                url: '/user/update',
-                method: 'POST',
-                data: formData,
-                success: function(response) {
-                    try {
-                        const res = JSON.parse(response);
-                        if (res.status === 'success') {
-                            // Ambil data dari form
-                            const nama = $('#nama_user').val();
-                            const email = $('#email').val();
-                            const no_hp = $('#no_telpon').val();
-                            const alamat = $('#Alamat').val();
-                            const detail = $('#detail').val();
-
-
-                            $('#editAlamatModal').modal('hide');
-                            // $('#formEditUser')[0].reset();
-                            showToast(res.message, 'success');
-
-                            // Update tampilan data di luar modal
-                            // $('#display_nama').text(nama);
-                            // $('#display_email').text(email);
-                            // $('#display_hp').text('+62' + no_hp.replace(/^0+/, '')); // hapus 0 di depan
-                            // $('#display_alamat').text(alamat);
-                            // $('#display_detail').text(detail);
-                        } else {
-                            showToast(res.message || 'Gagal update.', 'danger');
-                        }
-                    } catch (err) {
-                        console.error(err);
-                        showToast('Terjadi kesalahan pada server.', 'danger');
-                    }
-                },
-                error: function() {
-                    showToast('Gagal terhubung ke server.', 'danger');
-                }
-            });
-
-
-        });
-
-        const input = document.getElementById('no_telpon');
-        // Batasi hanya angka
-        input.addEventListener('input', function() {
-            this.value = this.value.replace(/\D/g, ''); // hapus karakter non-angka
-        });
-
-        function showToast(message, type = 'danger') {
-            const toastId = 'toast-' + Date.now();
-            const toastHTML = `
-                <div id="${toastId}" class="toast align-items-center text-bg-${type} border-0 shadow" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="3000">
-                    <div class="d-flex">
-                        <div class="toast-body">${message}</div>
-                        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-                    </div>
-                </div>
-            `;
-
-            const toastContainer = document.getElementById('toastContainer');
-            toastContainer.insertAdjacentHTML('beforeend', toastHTML);
-
-            const toastElement = new bootstrap.Toast(document.getElementById(toastId));
-            toastElement.show();
-        }
-    </script> -->
 </body>
 
 </html>

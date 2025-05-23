@@ -269,12 +269,10 @@ $apiBaseUrl = env('API_BASE_URL');
             const offcanvasToggler = document.getElementById('offcanvasToggler');
             const offcanvasNavbar = document.getElementById('offcanvasNavbar');
 
-            // Mencegah pembuatan backdrop
             offcanvasNavbar.addEventListener('show.bs.offcanvas', function() {
                 document.querySelectorAll('.offcanvas-backdrop').forEach(el => el.remove());
             });
 
-            // Alternatif: nonaktifkan backdrop sepenuhnya
             offcanvasNavbar.addEventListener('shown.bs.offcanvas', function() {
                 const backdrops = document.querySelectorAll('.offcanvas-backdrop');
                 backdrops.forEach(backdrop => {
@@ -283,7 +281,6 @@ $apiBaseUrl = env('API_BASE_URL');
                 });
             });
 
-            // Pastikan backdrop dihapus saat menutup
             offcanvasNavbar.addEventListener('hidden.bs.offcanvas', function() {
                 document.querySelectorAll('.offcanvas-backdrop').forEach(el => el.remove());
             });
@@ -294,19 +291,15 @@ $apiBaseUrl = env('API_BASE_URL');
 
             hotspots.forEach(hotspot => {
                 hotspot.addEventListener('mouseenter', function() {
-                    // Store the tooltip element
                     const tooltip = this.querySelector('.hotspot-tooltip');
 
-                    // Clear any existing timeout
                     if (this.tooltipTimeout) {
                         clearTimeout(this.tooltipTimeout);
                     }
 
-                    // Make tooltip visible
                     tooltip.style.opacity = '1';
                     tooltip.style.visibility = 'visible';
 
-                    // Set timeout to hide tooltip after 5 seconds
                     this.tooltipTimeout = setTimeout(() => {
                         tooltip.style.opacity = '0';
                         tooltip.style.visibility = 'hidden';
@@ -315,7 +308,6 @@ $apiBaseUrl = env('API_BASE_URL');
             });
         });
 
-        // Add focus event to automatically open modal when clicking the search field
         document.addEventListener('DOMContentLoaded', function() {
             const searchModal = document.getElementById('searchModal');
             searchModal.addEventListener('shown.bs.modal', function() {
@@ -323,7 +315,6 @@ $apiBaseUrl = env('API_BASE_URL');
             });
         });
 
-        // Data produk (untuk contoh)
     </script>
 </body>
 

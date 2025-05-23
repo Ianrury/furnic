@@ -254,7 +254,7 @@ $apiBaseUrl = env('API_BASE_URL');
                 <div class="row">
                     <div class="col-12 wow fadeInDown mb-0" data-wow-delay=".25s">
                         <div class="site-heading-inline">
-                            <h2 class="site-title">Rekomendasi Product</h2>
+                            <h2 class="site-title">Rekomendasi Produk</h2>
                         </div>
                     </div>
                 </div>
@@ -281,7 +281,6 @@ $apiBaseUrl = env('API_BASE_URL');
     <script src="assets/js/jquery-3.7.1.min.js"></script>
     <script src="assets/js/modernizr.min.js"></script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
-    <!-- <script src="assets/js/imagesloaded.pkgd.min.js"></script> -->
     <script src="assets/js/jquery.magnific-popup.min.js"></script>
     <script src="assets/js/isotope.pkgd.min.js"></script>
     <script src="assets/js/jquery.appear.min.js"></script>
@@ -303,12 +302,10 @@ $apiBaseUrl = env('API_BASE_URL');
             const offcanvasToggler = document.getElementById('offcanvasToggler');
             const offcanvasNavbar = document.getElementById('offcanvasNavbar');
 
-            // Mencegah pembuatan backdrop
             offcanvasNavbar.addEventListener('show.bs.offcanvas', function() {
                 document.querySelectorAll('.offcanvas-backdrop').forEach(el => el.remove());
             });
 
-            // Alternatif: nonaktifkan backdrop sepenuhnya
             offcanvasNavbar.addEventListener('shown.bs.offcanvas', function() {
                 const backdrops = document.querySelectorAll('.offcanvas-backdrop');
                 backdrops.forEach(backdrop => {
@@ -317,7 +314,6 @@ $apiBaseUrl = env('API_BASE_URL');
                 });
             });
 
-            // Pastikan backdrop dihapus saat menutup
             offcanvasNavbar.addEventListener('hidden.bs.offcanvas', function() {
                 document.querySelectorAll('.offcanvas-backdrop').forEach(el => el.remove());
             });
@@ -326,22 +322,18 @@ $apiBaseUrl = env('API_BASE_URL');
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            const API_BASE_URL = "<?= $apiBaseUrl ?>"; // This will be replaced with the actual base URL in your PHP
+            const API_BASE_URL = "<?= $apiBaseUrl ?>"; 
 
-            // Variable to store selected product IDs
             let selectedProductIds = [];
 
-            // Format currency in Rupiah
             function formatRupiah(angka) {
                 return angka.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
             }
 
-            // Format number with thousand separator
             function formatNumber(number) {
                 return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
             }
 
-            // Truncate text to specific number of words
             function truncateWords(text, wordLimit) {
                 if (!text) return '';
                 const words = text.trim().split(/\s+/);
@@ -349,7 +341,6 @@ $apiBaseUrl = env('API_BASE_URL');
                 return words.slice(0, wordLimit).join(' ') + '...';
             }
 
-            // Show toast notification
             function showToast(message, type = 'success') {
                 let toastHTML = `
             <div class="toast align-items-center text-bg-${type} border-0 shadow" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="3000">
@@ -363,7 +354,6 @@ $apiBaseUrl = env('API_BASE_URL');
                 new bootstrap.Toast(document.querySelector('.toast:last-child')).show();
             }
 
-            // Fetch cart data from API
             function fetchCartData() {
                 const token = localStorage.getItem('auth_token');
                 if (!token) {
@@ -383,12 +373,9 @@ $apiBaseUrl = env('API_BASE_URL');
                             return;
                         }
 
-                        // Render products from API response
                         renderProducts(result.data);
-                        // Set up event listeners after rendering products
                         setupEventListeners();
 
-                        // Initialize the UI state
                         updateTotalPembayaran();
                     })
                     .catch(error => {
@@ -397,7 +384,6 @@ $apiBaseUrl = env('API_BASE_URL');
                     });
             }
 
-            // Render products in cart
             function renderProducts(products) {
                 const productListElement = document.getElementById('product-list');
 
@@ -408,7 +394,6 @@ $apiBaseUrl = env('API_BASE_URL');
 
                 let html = '';
                 products.forEach(item => {
-                    // Calculate price with discount
                     const hargaNormal = parseFloat(item.harga);
                     const diskon = parseFloat(item.diskon);
                     let hargaSetelahDiskon = hargaNormal;
@@ -419,10 +404,8 @@ $apiBaseUrl = env('API_BASE_URL');
                         hargaSetelahDiskon = hargaNormal - nominalDiskon;
                     }
 
-                    // Determine valid quantity
                     const qty = (item.qty_cart > item.qty_motif) ? item.qty_motif : item.qty_cart;
 
-                    // Calculate total price for this item
                     const total = qty * hargaSetelahDiskon;
                     html += `
                         <div class="d-flex flex-column flex-md-row gap-3 align-items-start w-100">
@@ -521,12 +504,11 @@ $apiBaseUrl = env('API_BASE_URL');
                 productListElement.innerHTML = html;
             }
 
-            // Calculate and update the total payment
             function updateTotalPembayaran() {
                 let subtotal = 0;
                 let totalDiskon = 0;
                 let total = 0;
-                selectedProductIds = []; // Reset selected products
+                selectedProductIds = []; 
 
                 document.querySelectorAll('.item-checkbox').forEach(function(checkbox) {
                     if (checkbox.id === 'checkAll') return; // Skip the "Select All" checkbox
@@ -536,29 +518,25 @@ $apiBaseUrl = env('API_BASE_URL');
                     const diskonPersen = parseFloat(checkbox.dataset.discount);
                     const qtyElement = document.getElementById('qty-' + id);
 
-                    // Skip if element doesn't exist
                     if (!qtyElement) return;
 
                     const qty = parseInt(qtyElement.textContent);
                     const diskonNominal = (diskonPersen / 100) * harga;
                     const hargaSetelahDiskon = harga - diskonNominal;
 
-                    // If product is checked, calculate and display its total
                     if (checkbox.checked) {
                         subtotal += harga * qty;
                         totalDiskon += diskonNominal * qty;
                         total += hargaSetelahDiskon * qty;
-                        selectedProductIds.push(id); // Add ID to selected products array
+                        selectedProductIds.push(id); 
                     }
 
-                    // Always update the display of individual product totals
                     const elTotalProduk = document.getElementById('total-' + id);
                     if (elTotalProduk) {
                         elTotalProduk.innerHTML = `<sup class="fw-normal">Rp</sup> ${formatRupiah(hargaSetelahDiskon * qty)}`;
                     }
                 });
 
-                // Update totals in the summary section
                 const subtotalElement = document.getElementById('subtotal-harga');
                 const diskonElement = document.getElementById('diskon-produk');
                 const totalElement = document.getElementById('total-pembayaran');
@@ -575,11 +553,9 @@ $apiBaseUrl = env('API_BASE_URL');
                     totalElement.innerHTML = '<sup class="fw-normal">Rp</sup> ' + formatRupiah(total);
                 }
 
-                // Show or hide delete button based on selections
                 toggleDeleteButton();
             }
 
-            // Toggle visibility of delete button
             function toggleDeleteButton() {
                 const deleteContainer = document.getElementById('deleteSelectedContainer');
                 if (deleteContainer) {
@@ -591,7 +567,6 @@ $apiBaseUrl = env('API_BASE_URL');
                 }
             }
 
-            // Set up all event listeners
             function setupEventListeners() {
                 // Handle "Select All" checkbox
                 const checkAllBox = document.getElementById('checkAll');
@@ -607,7 +582,6 @@ $apiBaseUrl = env('API_BASE_URL');
                     });
                 }
 
-                // Handle individual checkboxes
                 document.querySelectorAll('.item-checkbox').forEach(function(checkbox) {
                     if (checkbox.id !== 'checkAll') {
                         checkbox.addEventListener('change', function() {
@@ -624,7 +598,6 @@ $apiBaseUrl = env('API_BASE_URL');
                     }
                 });
 
-                // Handle quantity increase buttons
                 document.querySelectorAll('.increase-qty').forEach(function(btn) {
                     btn.addEventListener('click', function() {
                         const id = btn.dataset.id;
@@ -633,14 +606,11 @@ $apiBaseUrl = env('API_BASE_URL');
                         const max = parseInt(qtyEl.dataset.max);
 
                         if (qty < max) {
-                            // Update UI first for better UX
                             qty++;
                             qtyEl.textContent = qty;
 
-                            // Update totals
                             updateTotalPembayaran();
 
-                            // Send AJAX request to update quantity
                             updateCartQuantity(id, 'increase');
                         } else {
                             showToast('Jumlah maksimal tercapai', 'warning');
@@ -648,7 +618,6 @@ $apiBaseUrl = env('API_BASE_URL');
                     });
                 });
 
-                // Handle quantity decrease buttons
                 document.querySelectorAll('.decrease-qty').forEach(function(btn) {
                     btn.addEventListener('click', function() {
                         const id = btn.dataset.id;
@@ -656,14 +625,11 @@ $apiBaseUrl = env('API_BASE_URL');
                         let qty = parseInt(qtyEl.textContent);
 
                         if (qty > 1) {
-                            // Update UI first for better UX
                             qty--;
                             qtyEl.textContent = qty;
 
-                            // Update totals
                             updateTotalPembayaran();
 
-                            // Send AJAX request to update quantity
                             updateCartQuantity(id, 'decrease');
                         } else {
                             showToast('Jumlah minimal adalah 1', 'warning');
@@ -671,18 +637,15 @@ $apiBaseUrl = env('API_BASE_URL');
                     });
                 });
 
-                // Handle delete selected products
                 const btnDeleteSelected = document.getElementById('btnDeleteSelected');
                 if (btnDeleteSelected) {
                     btnDeleteSelected.addEventListener('click', function() {
                         if (selectedProductIds.length > 0) {
-                            // Directly call deleteSelectedProducts without confirmation
                             deleteSelectedProducts();
                         }
                     });
                 }
 
-                // Handle "Buat Pesanan" button
                 const btnBuatPesanan = document.getElementById('btnbuatpesanan');
                 if (btnBuatPesanan) {
                     btnBuatPesanan.addEventListener('click', function() {
@@ -710,16 +673,12 @@ $apiBaseUrl = env('API_BASE_URL');
                             .then(response => response.json())
                             .then(data => {
                                 if (data.status === 'success') {
-                                    // Cek apakah cart_ids sudah ada di localStorage
                                     if (localStorage.getItem('cart_ids')) {
-                                        // Hapus cart_ids lama dari localStorage
                                         localStorage.removeItem('cart_ids');
                                     }
 
-                                    // Simpan cart_ids yang baru ke localStorage
                                     localStorage.setItem('cart_ids', JSON.stringify(data.cart_ids));
 
-                                    // Redirect ke halaman pesanan
                                     window.location.href = '/buat-pesanan';
                                 } else {
                                     showToast(data.message, 'danger');
@@ -734,7 +693,6 @@ $apiBaseUrl = env('API_BASE_URL');
 
             }
 
-            // Function to update cart quantity via AJAX
             function updateCartQuantity(cartId, action) {
                 const token = localStorage.getItem('auth_token');
                 if (!token) {
@@ -742,14 +700,11 @@ $apiBaseUrl = env('API_BASE_URL');
                     return;
                 }
 
-                // Determine endpoint URL based on action
                 const url = action === 'increase' ? '/pleskeranjang' : '/minuskeranjang';
 
-                // Set consistent method to send data
                 const formData = new FormData();
                 formData.append('product_ids', JSON.stringify([cartId]));
 
-                // Send request to server
                 fetch(API_BASE_URL + url, {
                         method: 'POST',
                         body: formData,
@@ -776,9 +731,7 @@ $apiBaseUrl = env('API_BASE_URL');
                     });
             }
 
-            // Delete selected products via AJAX
             function deleteSelectedProducts() {
-                // Create form data for AJAX request
                 const formData = new FormData();
                 formData.append('product_ids', JSON.stringify(selectedProductIds));
                 const token = localStorage.getItem('auth_token');
@@ -797,22 +750,17 @@ $apiBaseUrl = env('API_BASE_URL');
                     .then(response => response.json())
                     .then(data => {
                         if (data.success) {
-                            // Apply fade-out animation to deleted items
                             selectedProductIds.forEach(id => {
                                 const productElement = document.getElementById('checkbox-' + id).closest('.d-flex.gap-3.align-items-start');
                                 if (productElement) {
-                                    // Apply animation
                                     productElement.style.transition = 'opacity 0.5s ease';
                                     productElement.style.opacity = '0';
 
-                                    // Remove element after animation completes
                                     setTimeout(() => {
                                         productElement.remove();
 
-                                        // Update UI elements if cart is now empty
                                         const remainingProducts = document.querySelectorAll('.item-checkbox:not(#checkAll)');
                                         if (remainingProducts.length === 0) {
-                                            // If no products left, display empty cart message or redirect
                                             const cartContainer = document.querySelector('#product-list');
                                             if (cartContainer) {
                                                 cartContainer.innerHTML = `
@@ -828,16 +776,13 @@ $apiBaseUrl = env('API_BASE_URL');
                                 }
                             });
 
-                            // Reset selected products
                             selectedProductIds = [];
                             toggleDeleteButton();
 
-                            // Update total payment after deletion
                             setTimeout(() => {
                                 updateTotalPembayaran();
                             }, 600);
 
-                            // Show success message
                             showToast('Produk berhasil dihapus dari keranjang', 'success');
                         } else {
                             showToast('Gagal menghapus produk: ' + (data.message || 'Terjadi kesalahan'), 'danger');
@@ -849,7 +794,6 @@ $apiBaseUrl = env('API_BASE_URL');
                     });
             }
 
-            // Initialize by fetching cart data
             fetchCartData();
         });
     </script>
@@ -862,7 +806,7 @@ $apiBaseUrl = env('API_BASE_URL');
                 .then(result => {
                     if (result.status === 'success' && result.data.length > 0) {
                         const container = document.getElementById('expensif');
-                        container.innerHTML = ''; // kosongkan container
+                        container.innerHTML = '';
 
                         result.data.forEach(product => {
                             const qty = parseInt(product.qty);
@@ -871,7 +815,6 @@ $apiBaseUrl = env('API_BASE_URL');
                             const today = new Date();
                             const diffDays = Math.floor((today - createdAt) / (1000 * 60 * 60 * 24));
 
-                            // Ribbon logic
                             let ribbon = '',
                                 bgColor = '',
                                 textColor = '';
@@ -893,7 +836,6 @@ $apiBaseUrl = env('API_BASE_URL');
                             const diskon_nominal = (promoPersen > 0) ? (harga * (promoPersen / 100)) : 0;
                             const harga_setelah_diskon = harga - diskon_nominal;
 
-                            // document.getElementById('id_product').value = product.id_product;
                             const card = `
                         <div class="col-6 col-md-4 col-lg-3">
                             <div class="card shadow position-relative rounded-4 p-2 product-card" data-id="${product.id_product}" data-slug="${product.slug}" 

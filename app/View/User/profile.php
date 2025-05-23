@@ -22,8 +22,9 @@ $apiBaseUrl = env('API_BASE_URL');
     <base href="/">
 
     <link rel="icon" type="image/x-icon" href="assets/img/logo/favicon.png">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
-        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-5-theme/1.3.0/select2-bootstrap-5-theme.min.css" rel="stylesheet">
 
 
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
@@ -39,9 +40,6 @@ $apiBaseUrl = env('API_BASE_URL');
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
-    <!-- Select2 Bootstrap 5 Theme -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -209,7 +207,7 @@ $apiBaseUrl = env('API_BASE_URL');
                     <div class="profile-header">
                         <div class="row align-items-center">
                             <div class="col-md-2 text-center">
-                                <img src="assets/img/product/UT M01 2.png" alt="Profile Picture" class="profile-avatar">
+                                <img src="assets/img/fotouser/icondummi.png" alt="Profile Picture" class="profile-avatar">
 
                             </div>
                             <div class="col-md-6">
@@ -232,8 +230,8 @@ $apiBaseUrl = env('API_BASE_URL');
                             </div>
                             <div class="col-md-4 text-md-end mt-3 mt-md-0">
                                 <div class="mb-2">
-                                    <span class="badge badge-status me-2"><i class="fas fa-award me-1"></i>Member
-                                        Silver</span>
+                                    <!-- <span class="badge badge-status me-2"><i class="fas fa-award me-1"></i>Member
+                                        Silver</span> -->
                                 </div>
                                 <p class="mb-2" id="count-order">
                                     <i class="fas fa-shopping-bag me-1"></i><span id="successful-payment-count">0</span> Transaksi Berhasil
@@ -544,7 +542,6 @@ $apiBaseUrl = env('API_BASE_URL');
         </div>
     </main>
 
-    <!-- editalamat -->
     <div class="modal fade bd-example-modal-lg" id="editAlamatModal" tabindex="-1" role="dialog"
         aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -556,45 +553,64 @@ $apiBaseUrl = env('API_BASE_URL');
                 <div class="modal-body">
                     <form id="formeditAlamat" method="post">
                         <input type="hidden" name="id_alamat" id="id_alamat">
-                        <div>
-                            <label for="provinsi-edit" class="form-label">Provinsi <span class="required">*</span></label>
-                            <input type="text" class="form-control form-login" id="provinsi-edit" name="provinsi-edit" placeholder="Contoh: Jawa Tengah">
+
+                        <input type="hidden" id="provinsi-id-edit" name="provinsi">
+                        <input type="hidden" id="kabupaten-id-edit" name="kabupaten">
+                        <input type="hidden" id="kecamatan-id-edit" name="kecamatan">
+                        <input type="hidden" id="kelurahan-id-edit" name="kelurahan">
+
+                        <input type="hidden" id="id_provinsi-id-edit" name="id_provinsi">
+                        <input type="hidden" id="id_kabupaten-id-edit" name="id_kabupaten">
+                        <input type="hidden" id="id_kecamatan-id-edit" name="id_kecamatan">
+                        <input type="hidden" id="id_kelurahan-id-edit" name="id_kelurahan">
+
+                        <div class="mb-3">
+                            <label for="select2-provinsi-edit" class="form-label">Provinsi <span class="required">*</span></label>
+                            <select class="form-control" id="select2-provinsi-edit" name="select2-provinsi-edit">
+                                <option value="">Pilih Provinsi</option>
+                            </select>
                         </div>
 
-                        <div>
-                            <label for="kabupaten-edit" class="form-label">Kabupaten <span class="required">*</span></label>
-                            <input type="text" class="form-control form-login" id="kabupaten-edit" name="kabupaten-edit" placeholder="Contoh: Kabupaten Semarang">
+                        <div class="mb-3">
+                            <label for="select2-kabupaten-edit" class="form-label">Kabupaten <span class="required">*</span></label>
+                            <select class="form-control" id="select2-kabupaten-edit" name="select2-kabupaten-edit">
+                                <option value="">Pilih Kabupaten</option>
+                            </select>
                         </div>
 
-                        <div>
-                            <label for="kecamatan-edit" class="form-label">Kecamatan <span class="required">*</span></label>
-                            <input type="text" class="form-control form-login" id="kecamatan-edit" name="kecamatan-edit" placeholder="Contoh: Ungaran Barat">
+                        <div class="mb-3">
+                            <label for="select2-kecamatan-edit" class="form-label">Kecamatan <span class="required">*</span></label>
+                            <select class="form-control" id="select2-kecamatan-edit" name="select2-kecamatan-edit">
+                                <option value="">Pilih Kecamatan</option>
+                            </select>
                         </div>
 
-                        <div>
-                            <label for="kelurahan-edit" class="form-label">Kelurahan <span class="required">*</span></label>
-                            <input type="text" class="form-control form-login" id="kelurahan-edit" name="kelurahan-edit" placeholder="Contoh: Leyangan">
+                        <div class="mb-3">
+                            <label for="select2-kelurahan-edit" class="form-label">Kelurahan <span class="required">*</span></label>
+                            <select class="form-control" id="select2-kelurahan-edit" name="select2-kelurahan-edit">
+                                <option value="">Pilih Kelurahan</option>
+                            </select>
                         </div>
 
-                        <div>
+                        <div class="mb-3">
                             <label for="detail_rumah-edit" class="form-label">Detail Rumah <span class="required">*</span></label>
-                            <input type="text" class="form-control form-login" id="detail_rumah-edit" name="detail_rumah-edit" placeholder="Contoh: Rumah warna biru, dekat masjid">
+                            <input type="text" class="form-control" id="detail_rumah-edit" name="detail_rumah-edit"
+                                placeholder="Contoh: Rumah warna biru, dekat masjid">
                         </div>
 
-                        <div>
+                        <div class="mb-3">
                             <label for="detail_alamat-edit" class="form-label">Alamat Lengkap <span class="required">*</span></label>
-                            <textarea class="form-control form-login p-1" id="detail_alamat-edit" name="detail_alamat-edit" rows="3"
+                            <textarea class="form-control p-1" id="detail_alamat-edit" name="detail_alamat-edit" rows="3"
                                 placeholder="Contoh: Jl. Raya Salatiga No. 15, RT 02 RW 01, Leyangan, Ungaran Barat, Kab. Semarang, Jawa Tengah"></textarea>
                         </div>
 
                         <button type="submit" class="btn btn-masuk mt-2 w-100" id="submit-btn-alamat-edit">Submit</button>
                     </form>
-
                 </div>
             </div>
         </div>
     </div>
-
+    <!-- Modal -->
     <div class="modal fade bd-example-modal-lg" id="tambahAlamatModal" tabindex="-1" role="dialog"
         aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -605,48 +621,58 @@ $apiBaseUrl = env('API_BASE_URL');
                 </div>
                 <div class="modal-body">
                     <form id="formTambahAlamat" method="post">
-                        <!-- Hidden inputs to store the actual text values -->
+
                         <input type="hidden" id="provinsi" name="provinsi">
                         <input type="hidden" id="kabupaten" name="kabupaten">
                         <input type="hidden" id="kecamatan" name="kecamatan">
                         <input type="hidden" id="kelurahan" name="kelurahan">
 
-                        <div>
+                        <input type="hidden" id="id_provinsi" name="id_provinsi">
+                        <input type="hidden" id="id_kabupaten" name="id_kabupaten">
+                        <input type="hidden" id="id_kecamatan" name="id_kecamatan">
+                        <input type="hidden" id="id_kelurahan" name="id_kelurahan">
+
+                        <div class="mb-3">
                             <label for="select2-provinsi" class="form-label">Provinsi <span class="required">*</span></label>
-                            <select class="form-control form-login" id="select2-provinsi">
+                            <select class="form-control" id="select2-provinsi">
+                                <option disabled selected>Pilih Provinsi</option>
                                 <!-- Options will be loaded dynamically -->
                             </select>
                         </div>
 
-                        <div>
+                        <div class="mb-3">
                             <label for="select2-kabupaten" class="form-label">Kabupaten <span class="required">*</span></label>
-                            <select class="form-control form-login" id="select2-kabupaten">
+                            <select class="form-control" id="select2-kabupaten">
+                                <option disabled selected>Pilih Kabupaten</option>
                                 <!-- Options will be loaded dynamically -->
                             </select>
                         </div>
 
-                        <div>
+                        <div class="mb-3">
                             <label for="select2-kecamatan" class="form-label">Kecamatan <span class="required">*</span></label>
-                            <select class="form-control form-login" id="select2-kecamatan">
+                            <select class="form-control" id="select2-kecamatan">
+                                <option disabled selected>Pilih Kecamatan</option>
                                 <!-- Options will be loaded dynamically -->
                             </select>
                         </div>
 
-                        <div>
+                        <div class="mb-3">
                             <label for="select2-kelurahan" class="form-label">Kelurahan <span class="required">*</span></label>
-                            <select class="form-control form-login" id="select2-kelurahan">
+                            <select class="form-control" id="select2-kelurahan">
+                                <option disabled selected>Pilih Kelurahan</option>
                                 <!-- Options will be loaded dynamically -->
                             </select>
                         </div>
 
-                        <div>
+                        <div class="mb-3">
                             <label for="detail_rumah" class="form-label">Detail Rumah <span class="required">*</span></label>
-                            <input type="text" class="form-control form-login" id="detail_rumah" name="detail_rumah" placeholder="Contoh: Rumah warna biru, dekat masjid">
+                            <input type="text" class="form-control" id="detail_rumah" name="detail_rumah"
+                                placeholder="Contoh: Rumah warna biru, dekat masjid">
                         </div>
 
-                        <div>
+                        <div class="mb-3">
                             <label for="detail_alamat" class="form-label">Alamat Lengkap <span class="required">*</span></label>
-                            <textarea class="form-control form-login p-1" id="detail_alamat" name="detail_alamat" rows="3"
+                            <textarea class="form-control p-1" id="detail_alamat" name="detail_alamat" rows="3"
                                 placeholder="Contoh: Jl. Raya Salatiga No. 15, RT 02 RW 01, Leyangan, Ungaran Barat, Kab. Semarang, Jawa Tengah"></textarea>
                         </div>
 
@@ -675,9 +701,10 @@ $apiBaseUrl = env('API_BASE_URL');
     <script src="assets/js/countdown.min.js"></script>
     <script src="assets/js/wow.min.js"></script>
     <script src="assets/js/main.js"></script>
-    <!-- jQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
 
     <script>
         $(document).ready(function() {
@@ -821,102 +848,6 @@ $apiBaseUrl = env('API_BASE_URL');
         });
 
 
-        $(document).on('click', '.tombol-edit', function() {
-            const alamatId = $(this).data('id');
-            const token = localStorage.getItem('auth_token');
-            const productList = document.getElementById('product-list');
-
-            if (!token) {
-                productList.innerHTML = '<div class="alert alert-warning">Silakan login terlebih dahulu</div>';
-                return;
-            }
-
-            document.getElementById('id_alamat').value = alamatId;
-            $.ajax({
-                url: `${API_BASE_URL}/alamat/edit/${alamatId}`,
-                method: 'GET',
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json'
-                },
-                contentType: 'application/json',
-                success: function(response) {
-                    if (response.status === 'success') {
-                        const alamat = response.data;
-
-                        $('#provinsi-edit').val(alamat.provinsi);
-                        $('#kabupaten-edit').val(alamat.kabupaten);
-                        $('#kecamatan-edit').val(alamat.kecamatan);
-                        $('#kelurahan-edit').val(alamat.kelurahan);
-                        $('#detail_rumah-edit').val(alamat.detail_rumah);
-                        $('#detail_alamat-edit').val(alamat.detail_alamat);
-
-                        $('#editAlamatModal .modal-title').text('Edit Alamat');
-                    } else {
-                        alert(response.message || 'Gagal memuat data alamat');
-                    }
-                },
-                error: function() {
-                    alert('Terjadi kesalahan saat menghubungi server');
-                }
-            });
-        });
-
-        document.addEventListener("DOMContentLoaded", function() {
-            const form = document.getElementById('formeditAlamat');
-            const submitButton = document.getElementById('submit-btn-alamat-edit');
-
-            form.addEventListener('submit', function(event) {
-                event.preventDefault();
-
-                const token = localStorage.getItem('auth_token');
-
-                const provinsi = document.getElementById('provinsi-edit').value;
-                const kabupaten = document.getElementById('kabupaten-edit').value;
-                const kecamatan = document.getElementById('kecamatan-edit').value;
-                const kelurahan = document.getElementById('kelurahan-edit').value;
-                const detail_rumah = document.getElementById('detail_rumah-edit').value;
-                const detail_alamat = document.getElementById('detail_alamat-edit').value;
-
-
-                if (!provinsi || !kabupaten || !kecamatan || !kelurahan || !detail_alamat || !detail_rumah) {
-                    alert('Semua field wajib diisi!');
-                    return;
-                }
-
-                const dataToSend = {
-                    provinsi,
-                    kabupaten,
-                    kecamatan,
-                    kelurahan,
-                    detail_rumah,
-                    detail_alamat,
-                    utama: 0
-                };
-                const alamatId = document.getElementById('id_alamat').value;
-                fetch(`${API_BASE_URL}/alamat/update/${alamatId}`, {
-                        method: 'POST',
-                        headers: {
-                            'Authorization': `Bearer ${token}`,
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(dataToSend)
-                    })
-                    .then(response => response.json())
-                    .then(result => {
-                        if (result.status === 'success') {
-                            alert('Alamat Berhasil Diupdate');
-                            window.location.reload();
-                        } else {
-                            alert('Gagal mengupdate alamat: ' + result.message);
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        alert('Terjadi kesalahan saat mengupdate alamat');
-                    });
-            });
-        });
 
         document.addEventListener("DOMContentLoaded", function() {
             const token = localStorage.getItem('auth_token');
@@ -1565,249 +1496,715 @@ $apiBaseUrl = env('API_BASE_URL');
             }
         });
     </script>
-
     <script>
-        var urlProvinsi = "https://ibnux.github.io/data-indonesia/provinsi.json";
-        var urlKabupaten = "https://ibnux.github.io/data-indonesia/kabupaten/";
-        var urlKecamatan = "https://ibnux.github.io/data-indonesia/kecamatan/";
-        var urlKelurahan = "https://ibnux.github.io/data-indonesia/kelurahan/";
+        function initializeEditSelect2() {
+            $('#select2-provinsi-edit').select2({
+                theme: 'bootstrap-5',
+                dropdownParent: $('#editAlamatModal'),
+                placeholder: 'Pilih Provinsi',
+                allowClear: true,
+                width: '100%'
+            });
 
-        function clearOptions(id) {
-            $('#' + id).empty().trigger('change');
-        }
+            $('#select2-kabupaten-edit').select2({
+                theme: 'bootstrap-5',
+                dropdownParent: $('#editAlamatModal'),
+                placeholder: 'Pilih Kabupaten',
+                allowClear: true,
+                width: '100%'
+            });
 
-        function loadProvinsi(selectId) {
-            console.log('Load Provinsi...');
-            $.getJSON(urlProvinsi, function(res) {
-                res = $.map(res, function(obj) {
-                    obj.text = obj.nama;
-                    return obj;
-                });
+            $('#select2-kecamatan-edit').select2({
+                theme: 'bootstrap-5',
+                dropdownParent: $('#editAlamatModal'),
+                placeholder: 'Pilih Kecamatan',
+                allowClear: true,
+                width: '100%'
+            });
 
-                var data = [{
-                    id: "",
-                    text: "- Pilih Provinsi -",
-                }].concat(res);
-
-                $("#" + selectId).select2({
-                    dropdownAutoWidth: true,
-                    width: '100%',
-                    data: data,
-                    dropdownParent: $("#tambahAlamatModal") // Fix untuk modal
-                });
+            $('#select2-kelurahan-edit').select2({
+                theme: 'bootstrap-5',
+                dropdownParent: $('#editAlamatModal'),
+                placeholder: 'Pilih Kelurahan',
+                allowClear: true,
+                width: '100%'
             });
         }
 
-        function loadKabupaten(provinsiId, selectId) {
-            console.log('Load Kabupaten di provinsi ' + provinsiId + '...');
-            $.getJSON(urlKabupaten + provinsiId + ".json", function(res) {
-                res = $.map(res, function(obj) {
-                    obj.text = obj.nama;
-                    return obj;
-                });
+        function loadProvinsiEdit() {
+            fetch('https://www.emsifa.com/api-wilayah-indonesia/api/provinces.json')
+                .then(response => response.json())
+                .then(provinces => {
+                    const provinsiSelect = $('#select2-provinsi-edit');
+                    provinsiSelect.empty();
+                    provinsiSelect.append('<option value="">Pilih Provinsi</option>');
 
-                var data = [{
-                    id: "",
-                    text: "- Pilih Kabupaten -"
-                }].concat(res);
-
-                $("#" + selectId).select2({
-                    dropdownAutoWidth: true,
-                    width: '100%',
-                    data: data,
-                    dropdownParent: $("#tambahAlamatModal") // Fix untuk modal
+                    provinces.forEach(function(provinsi) {
+                        provinsiSelect.append(`<option value="${provinsi.id}">${provinsi.name}</option>`);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error loading provinces:', error);
+                    alert('Gagal memuat data provinsi');
                 });
+        }
+
+        function loadKabupatenEdit(provinsiId) {
+            fetch(`https://www.emsifa.com/api-wilayah-indonesia/api/regencies/${provinsiId}.json`)
+                .then(response => response.json())
+                .then(regencies => {
+                    const kabupatenSelect = $('#select2-kabupaten-edit');
+                    kabupatenSelect.empty();
+                    kabupatenSelect.append('<option value="">Pilih Kabupaten</option>');
+
+                    regencies.forEach(function(kabupaten) {
+                        kabupatenSelect.append(`<option value="${kabupaten.id}">${kabupaten.name}</option>`);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error loading regencies:', error);
+                    alert('Gagal memuat data kabupaten');
+                });
+        }
+
+        function loadKecamatanEdit(kabupatenId) {
+            fetch(`https://www.emsifa.com/api-wilayah-indonesia/api/districts/${kabupatenId}.json`)
+                .then(response => response.json())
+                .then(districts => {
+                    const kecamatanSelect = $('#select2-kecamatan-edit');
+                    kecamatanSelect.empty();
+                    kecamatanSelect.append('<option value="">Pilih Kecamatan</option>');
+
+                    districts.forEach(function(kecamatan) {
+                        kecamatanSelect.append(`<option value="${kecamatan.id}">${kecamatan.name}</option>`);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error loading districts:', error);
+                    alert('Gagal memuat data kecamatan');
+                });
+        }
+
+        function loadKelurahanEdit(kecamatanId) {
+            fetch(`https://www.emsifa.com/api-wilayah-indonesia/api/villages/${kecamatanId}.json`)
+                .then(response => response.json())
+                .then(villages => {
+                    const kelurahanSelect = $('#select2-kelurahan-edit');
+                    kelurahanSelect.empty();
+                    kelurahanSelect.append('<option value="">Pilih Kelurahan</option>');
+
+                    villages.forEach(function(kelurahan) {
+                        kelurahanSelect.append(`<option value="${kelurahan.id}">${kelurahan.name}</option>`);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error loading villages:', error);
+                    alert('Gagal memuat data kelurahan');
+                });
+        }
+
+        $(document).ready(function() {
+            $(document).on('change', '#select2-provinsi-edit', function() {
+                const provinsiId = $(this).val();
+                const provinsiText = $(this).find('option:selected').text();
+
+                $('#select2-kabupaten-edit').empty().append('<option value="">Pilih Kabupaten</option>');
+                $('#select2-kecamatan-edit').empty().append('<option value="">Pilih Kecamatan</option>');
+                $('#select2-kelurahan-edit').empty().append('<option value="">Pilih Kelurahan</option>');
+
+                $('#id_provinsi-id-edit').val(provinsiId);
+                $('#provinsi-id-edit').val(provinsiText);
+
+                if (provinsiId) {
+                    loadKabupatenEdit(provinsiId);
+                }
             });
-        }
 
-        function loadKecamatan(kabupatenId, selectId) {
-            console.log('Load Kecamatan di kabupaten ' + kabupatenId + '...');
-            $.getJSON(urlKecamatan + kabupatenId + ".json", function(res) {
-                res = $.map(res, function(obj) {
-                    obj.text = obj.nama;
-                    return obj;
-                });
+            $(document).on('change', '#select2-kabupaten-edit', function() {
+                const kabupatenId = $(this).val();
+                const kabupatenText = $(this).find('option:selected').text();
 
-                var data = [{
-                    id: "",
-                    text: "- Pilih Kecamatan -"
-                }].concat(res);
+                $('#select2-kecamatan-edit').empty().append('<option value="">Pilih Kecamatan</option>');
+                $('#select2-kelurahan-edit').empty().append('<option value="">Pilih Kelurahan</option>');
 
-                $("#" + selectId).select2({
-                    dropdownAutoWidth: true,
-                    width: '100%',
-                    data: data,
-                    dropdownParent: $("#tambahAlamatModal") // Fix untuk modal
-                });
+                $('#id_kabupaten-id-edit').val(kabupatenId);
+                $('#kabupaten-id-edit').val(kabupatenText);
+
+                if (kabupatenId) {
+                    loadKecamatanEdit(kabupatenId);
+                }
             });
-        }
 
-        function loadKelurahan(kecamatanId, selectId) {
-            console.log('Load Kelurahan di kecamatan ' + kecamatanId + '...');
-            $.getJSON(urlKelurahan + kecamatanId + ".json", function(res) {
-                res = $.map(res, function(obj) {
-                    obj.text = obj.nama;
-                    return obj;
-                });
+            $(document).on('change', '#select2-kecamatan-edit', function() {
+                const kecamatanId = $(this).val();
+                const kecamatanText = $(this).find('option:selected').text();
 
-                var data = [{
-                    id: "",
-                    text: "- Pilih Kelurahan -"
-                }].concat(res);
+                $('#select2-kelurahan-edit').empty().append('<option value="">Pilih Kelurahan</option>');
 
-                $("#" + selectId).select2({
-                    dropdownAutoWidth: true,
-                    width: '100%',
-                    data: data,
-                    dropdownParent: $("#tambahAlamatModal") // Fix untuk modal
-                });
+                $('#id_kecamatan-id-edit').val(kecamatanId);
+                $('#kecamatan-id-edit').val(kecamatanText);
+
+                if (kecamatanId) {
+                    loadKelurahanEdit(kecamatanId);
+                }
             });
-        }
 
-        function updateAlamatLengkap() {
-            const provinsi = $("#select2-provinsi option:selected").text();
-            const kabupaten = $("#select2-kabupaten option:selected").text();
-            const kecamatan = $("#select2-kecamatan option:selected").text();
-            const kelurahan = $("#select2-kelurahan option:selected").text();
-            const detailRumah = $("#detail_rumah").val();
+            $(document).on('change', '#select2-kelurahan-edit', function() {
+                const kelurahanId = $(this).val();
+                const kelurahanText = $(this).find('option:selected').text();
 
-            // Update hidden fields with the text values
-            if (provinsi && provinsi !== "- Pilih Provinsi -") {
-                $("#provinsi").val(provinsi);
-            }
+                $('#id_kelurahan-id-edit').val(kelurahanId);
+                $('#kelurahan-id-edit').val(kelurahanText);
+            });
+        });
 
-            if (kabupaten && kabupaten !== "- Pilih Kabupaten -") {
-                $("#kabupaten").val(kabupaten);
-            }
+        function setSelect2ValueById(selectId, valueId, callback) {
+            const select = $(selectId);
 
-            if (kecamatan && kecamatan !== "- Pilih Kecamatan -") {
-                $("#kecamatan").val(kecamatan);
-            }
-
-            if (kelurahan && kelurahan !== "- Pilih Kelurahan -") {
-                $("#kelurahan").val(kelurahan);
-            }
-
-            // Only update if all fields are selected (not the default "- Pilih X -" options)
-            if (provinsi && kabupaten && kecamatan && kelurahan &&
-                provinsi !== "- Pilih Provinsi -" &&
-                kabupaten !== "- Pilih Kabupaten -" &&
-                kecamatan !== "- Pilih Kecamatan -" &&
-                kelurahan !== "- Pilih Kelurahan -") {
-
-                let alamatLengkap = `${detailRumah ? detailRumah + ', ' : ''}${kelurahan}, ${kecamatan}, ${kabupaten}, ${provinsi}`;
-                $("#detail_alamat").val(alamatLengkap);
+            if (select.find(`option[value="${valueId}"]`).length > 0) {
+                select.val(valueId).trigger('change');
+                if (callback) callback();
+            } else {
+                setTimeout(() => {
+                    if (select.find(`option[value="${valueId}"]`).length > 0) {
+                        select.val(valueId).trigger('change');
+                        if (callback) callback();
+                    }
+                }, 500);
             }
         }
 
-        // Inisialisasi Select2 setelah modal terbuka
-        $('#tambahAlamatModal').on('shown.bs.modal', function() {
-            // Initialize Select2 dropdowns
-            loadProvinsi('select2-provinsi');
+        function getProvinsiNameById(provinsiId, callback) {
+            fetch('https://www.emsifa.com/api-wilayah-indonesia/api/provinces.json')
+                .then(response => response.json())
+                .then(provinces => {
+                    const provinsi = provinces.find(p => p.id === provinsiId);
+                    callback(provinsi ? provinsi.name : '');
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    callback('');
+                });
+        }
+
+        function getKabupatenNameById(provinsiId, kabupatenId, callback) {
+            fetch(`https://www.emsifa.com/api-wilayah-indonesia/api/regencies/${provinsiId}.json`)
+                .then(response => response.json())
+                .then(regencies => {
+                    const kabupaten = regencies.find(k => k.id === kabupatenId);
+                    callback(kabupaten ? kabupaten.name : '');
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    callback('');
+                });
+        }
+
+        function getKecamatanNameById(kabupatenId, kecamatanId, callback) {
+            fetch(`https://www.emsifa.com/api-wilayah-indonesia/api/districts/${kabupatenId}.json`)
+                .then(response => response.json())
+                .then(districts => {
+                    const kecamatan = districts.find(k => k.id === kecamatanId);
+                    callback(kecamatan ? kecamatan.name : '');
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    callback('');
+                });
+        }
+
+        function getKelurahanNameById(kecamatanId, kelurahanId, callback) {
+            fetch(`https://www.emsifa.com/api-wilayah-indonesia/api/villages/${kecamatanId}.json`)
+                .then(response => response.json())
+                .then(villages => {
+                    const kelurahan = villages.find(k => k.id === kelurahanId);
+                    callback(kelurahan ? kelurahan.name : '');
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    callback('');
+                });
+        }
+
+        $(document).on('click', '.tombol-edit', function() {
+            const alamatId = $(this).data('id');
+            const token = localStorage.getItem('auth_token');
+            const productList = document.getElementById('product-list');
+
+            if (!token) {
+                if (productList) {
+                    productList.innerHTML = '<p>Silakan login terlebih dahulu</p>';
+                }
+                return;
+            }
+
+            document.getElementById('id_alamat').value = alamatId;
+
+            initializeEditSelect2();
+
+            loadProvinsiEdit();
+
+            $.ajax({
+                url: `${API_BASE_URL}/alamat/edit/${alamatId}`,
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                },
+                success: function(response) {
+                    if (response.status === 'success') {
+                        const alamat = response.data;
+                        console.log("alamat:", alamat);
+
+                        $('#detail_rumah-edit').val(alamat.detail_rumah);
+                        $('#detail_alamat-edit').val(alamat.detail_alamat);
+
+                        $('#id_provinsi-id-edit').val(alamat.id_provinsi);
+                        $('#id_kabupaten-id-edit').val(alamat.id_kabupaten);
+                        $('#id_kecamatan-id-edit').val(alamat.id_kecamatan);
+                        $('#id_kelurahan-id-edit').val(alamat.id_kelurahan);
+
+                        $('#provinsi-id-edit').val(alamat.provinsi);
+                        $('#kabupaten-id-edit').val(alamat.kabupaten);
+                        $('#kecamatan-id-edit').val(alamat.kecamatan);
+                        $('#kelurahan-id-edit').val(alamat.kelurahan);
+
+                        setTimeout(() => {
+                            setSelect2ValueById('#select2-provinsi-edit', alamat.id_provinsi, () => {
+                                loadKabupatenEdit(alamat.id_provinsi);
+                                setTimeout(() => {
+                                    setSelect2ValueById('#select2-kabupaten-edit', alamat.id_kabupaten, () => {
+                                        loadKecamatanEdit(alamat.id_kabupaten);
+                                        setTimeout(() => {
+                                            setSelect2ValueById('#select2-kecamatan-edit', alamat.id_kecamatan, () => {
+                                                loadKelurahanEdit(alamat.id_kecamatan);
+                                                setTimeout(() => {
+                                                    setSelect2ValueById('#select2-kelurahan-edit', alamat.id_kelurahan);
+                                                }, 500);
+                                            });
+                                        }, 500);
+                                    });
+                                }, 500);
+                            });
+                        }, 1000);
+
+                        $('#editAlamatModal .modal-title').text('Edit Alamat');
+
+                        $('#editAlamatModal').modal('show');
+                    } else {
+                        alert(response.message || 'Gagal memuat data alamat');
+                    }
+                },
+                error: function() {
+                    alert('Terjadi kesalahan saat menghubungi server');
+                }
+            });
         });
 
         document.addEventListener("DOMContentLoaded", function() {
-            // Set up event listeners
-            $(document).on('change', '#select2-provinsi', function() {
-                var provinsi = $(this).val();
-                clearOptions('select2-kabupaten');
-                clearOptions('select2-kecamatan');
-                clearOptions('select2-kelurahan');
+            const form = document.getElementById('formeditAlamat');
+            const submitButton = document.getElementById('submit-btn-alamat-edit');
 
-                if (provinsi) {
-                    loadKabupaten(provinsi, 'select2-kabupaten');
+            if (form) {
+                form.addEventListener('submit', function(event) {
+                    event.preventDefault();
+
+                    const token = localStorage.getItem('auth_token');
+
+                    const id_provinsi = document.getElementById('id_provinsi-id-edit').value;
+                    const id_kabupaten = document.getElementById('id_kabupaten-id-edit').value;
+                    const id_kecamatan = document.getElementById('id_kecamatan-id-edit').value;
+                    const id_kelurahan = document.getElementById('id_kelurahan-id-edit').value;
+
+                    const provinsi = document.getElementById('provinsi-id-edit').value;
+                    const kabupaten = document.getElementById('kabupaten-id-edit').value;
+                    const kecamatan = document.getElementById('kecamatan-id-edit').value;
+                    const kelurahan = document.getElementById('kelurahan-id-edit').value;
+
+                    const detail_rumah = document.getElementById('detail_rumah-edit').value;
+                    const detail_alamat = document.getElementById('detail_alamat-edit').value;
+
+                    if (!id_provinsi || !id_kabupaten || !id_kecamatan || !id_kelurahan || !detail_alamat || !detail_rumah) {
+                        alert('Semua field wajib diisi!');
+                        return;
+                    }
+
+                    const dataToSend = {
+                        id_provinsi,
+                        id_kabupaten,
+                        id_kecamatan,
+                        id_kelurahan,
+                        provinsi,
+                        kabupaten,
+                        kecamatan,
+                        kelurahan,
+                        detail_rumah,
+                        detail_alamat,
+                    };
+
+                    const alamatId = document.getElementById('id_alamat').value;
+
+                    if (submitButton) {
+                        submitButton.disabled = true;
+                        submitButton.textContent = 'Memproses...';
+                    }
+
+                    fetch(`${API_BASE_URL}/alamat/update/${alamatId}`, {
+                            method: 'POST',
+                            headers: {
+                                'Authorization': `Bearer ${token}`,
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(dataToSend)
+                        })
+                        .then(response => response.json())
+                        .then(result => {
+                            if (result.status === 'success') {
+                                alert('Alamat Berhasil Diupdate');
+                                $('#editAlamatModal').modal('hide');
+                                window.location.reload();
+                            } else {
+                                alert('Gagal mengupdate alamat: ' + result.message);
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            alert('Terjadi kesalahan saat mengupdate alamat');
+                        })
+                        .finally(() => {
+                            if (submitButton) {
+                                submitButton.disabled = false;
+                                submitButton.textContent = 'Submit';
+                            }
+                        });
+                });
+            }
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('#tambahAlamatModal').on('shown.bs.modal', function() {
+                $('#select2-provinsi').select2({
+                    theme: 'bootstrap-5',
+                    dropdownParent: $('#tambahAlamatModal'),
+                    placeholder: 'Pilih Provinsi',
+                    allowClear: true,
+                    width: '100%'
+                });
+
+                $('#select2-kabupaten').select2({
+                    theme: 'bootstrap-5',
+                    dropdownParent: $('#tambahAlamatModal'),
+                    placeholder: 'Pilih Kabupaten',
+                    allowClear: true,
+                    width: '100%'
+                });
+
+                $('#select2-kecamatan').select2({
+                    theme: 'bootstrap-5',
+                    dropdownParent: $('#tambahAlamatModal'),
+                    placeholder: 'Pilih Kecamatan',
+                    allowClear: true,
+                    width: '100%'
+                });
+
+                $('#select2-kelurahan').select2({
+                    theme: 'bootstrap-5',
+                    dropdownParent: $('#tambahAlamatModal'),
+                    placeholder: 'Pilih Kelurahan',
+                    allowClear: true,
+                    width: '100%'
+                });
+
+                if ($('#select2-provinsi option').length <= 1) {
+                    loadProvinsi();
                 }
-
-                updateAlamatLengkap();
             });
 
-            $(document).on('change', '#select2-kabupaten', function() {
-                var kabupaten = $(this).val();
-                clearOptions('select2-kecamatan');
-                clearOptions('select2-kelurahan');
+            $('#tambahAlamatModal').on('hidden.bs.modal', function() {
+                $('#select2-provinsi, #select2-kabupaten, #select2-kecamatan, #select2-kelurahan').select2('destroy');
+                resetForm();
+            });
 
-                if (kabupaten) {
-                    loadKecamatan(kabupaten, 'select2-kecamatan');
+            const inputNama = {
+                provinsi: document.getElementById('provinsi'),
+                kabupaten: document.getElementById('kabupaten'),
+                kecamatan: document.getElementById('kecamatan'),
+                kelurahan: document.getElementById('kelurahan'),
+            };
+            const inputID = {
+                provinsi: document.getElementById('id_provinsi'),
+                kabupaten: document.getElementById('id_kabupaten'),
+                kecamatan: document.getElementById('id_kecamatan'),
+                kelurahan: document.getElementById('id_kelurahan'),
+            };
+
+            function loadProvinsi() {
+                fetch('https://www.emsifa.com/api-wilayah-indonesia/api/provinces.json')
+                    .then(res => res.json())
+                    .then(data => {
+                        const provinsiSelect = $('#select2-provinsi');
+                        provinsiSelect.empty();
+                        provinsiSelect.append('<option disabled selected>Pilih Provinsi</option>');
+
+                        data.forEach(item => {
+                            provinsiSelect.append(new Option(item.name, item.id));
+                        });
+
+                        provinsiSelect.trigger('change');
+                    })
+                    .catch(error => {
+                        console.error('Error loading provinsi:', error);
+                        alert('Error loading provinsi data');
+                    });
+            }
+
+            $('#select2-provinsi').on('change', function() {
+                const provID = this.value;
+                const provName = $(this).find('option:selected').text();
+
+                if (provID && provID !== 'Pilih Provinsi') {
+                    inputID.provinsi.value = provID;
+                    inputNama.provinsi.value = provName;
+
+                    resetKabupaten();
+                    resetKecamatan();
+                    resetKelurahan();
+
+                    loadKabupaten(provID);
                 }
-
-                updateAlamatLengkap();
             });
 
-            $(document).on('change', '#select2-kecamatan', function() {
-                var kecamatan = $(this).val();
-                clearOptions('select2-kelurahan');
+            function loadKabupaten(provID) {
+                const kabupatenSelect = $('#select2-kabupaten');
+                kabupatenSelect.empty();
+                kabupatenSelect.append('<option>Loading...</option>');
+                kabupatenSelect.prop('disabled', true);
 
-                if (kecamatan) {
-                    loadKelurahan(kecamatan, 'select2-kelurahan');
+                fetch(`https://www.emsifa.com/api-wilayah-indonesia/api/regencies/${provID}.json`)
+                    .then(res => res.json())
+                    .then(data => {
+                        kabupatenSelect.empty();
+                        kabupatenSelect.append('<option disabled selected>Pilih Kabupaten</option>');
+
+                        data.forEach(item => {
+                            kabupatenSelect.append(new Option(item.name, item.id));
+                        });
+
+                        kabupatenSelect.prop('disabled', false);
+                        kabupatenSelect.trigger('change');
+                    })
+                    .catch(error => {
+                        console.error('Error loading kabupaten:', error);
+                        kabupatenSelect.empty();
+                        kabupatenSelect.append('<option disabled selected>Error loading data</option>');
+                    });
+            }
+
+            $('#select2-kabupaten').on('change', function() {
+                const kabID = this.value;
+                const kabName = $(this).find('option:selected').text();
+
+                if (kabID && kabID !== 'Pilih Kabupaten') {
+                    inputID.kabupaten.value = kabID;
+                    inputNama.kabupaten.value = kabName;
+
+                    resetKecamatan();
+                    resetKelurahan();
+
+                    loadKecamatan(kabID);
                 }
-
-                updateAlamatLengkap();
             });
 
-            $(document).on('change', '#select2-kelurahan', function() {
-                updateAlamatLengkap();
+            function loadKecamatan(kabID) {
+                const kecamatanSelect = $('#select2-kecamatan');
+                kecamatanSelect.empty();
+                kecamatanSelect.append('<option>Loading...</option>');
+                kecamatanSelect.prop('disabled', true);
+
+                fetch(`https://www.emsifa.com/api-wilayah-indonesia/api/districts/${kabID}.json`)
+                    .then(res => res.json())
+                    .then(data => {
+                        kecamatanSelect.empty();
+                        kecamatanSelect.append('<option disabled selected>Pilih Kecamatan</option>');
+
+                        data.forEach(item => {
+                            kecamatanSelect.append(new Option(item.name, item.id));
+                        });
+
+                        kecamatanSelect.prop('disabled', false);
+                        kecamatanSelect.trigger('change');
+                    })
+                    .catch(error => {
+                        console.error('Error loading kecamatan:', error);
+                        kecamatanSelect.empty();
+                        kecamatanSelect.append('<option disabled selected>Error loading data</option>');
+                    });
+            }
+
+            $('#select2-kecamatan').on('change', function() {
+                const kecID = this.value;
+                const kecName = $(this).find('option:selected').text();
+
+                if (kecID && kecID !== 'Pilih Kecamatan') {
+                    inputID.kecamatan.value = kecID;
+                    inputNama.kecamatan.value = kecName;
+
+                    resetKelurahan();
+
+                    loadKelurahan(kecID);
+                }
             });
 
-            $('#detail_rumah').on('input', function() {
-                updateAlamatLengkap();
+            function loadKelurahan(kecID) {
+                const kelurahanSelect = $('#select2-kelurahan');
+                kelurahanSelect.empty();
+                kelurahanSelect.append('<option>Loading...</option>');
+                kelurahanSelect.prop('disabled', true);
+
+                fetch(`https://www.emsifa.com/api-wilayah-indonesia/api/villages/${kecID}.json`)
+                    .then(res => res.json())
+                    .then(data => {
+                        kelurahanSelect.empty();
+                        kelurahanSelect.append('<option disabled selected>Pilih Kelurahan</option>');
+
+                        data.forEach(item => {
+                            kelurahanSelect.append(new Option(item.name, item.id));
+                        });
+
+                        kelurahanSelect.prop('disabled', false);
+                        kelurahanSelect.trigger('change');
+                    })
+                    .catch(error => {
+                        console.error('Error loading kelurahan:', error);
+                        kelurahanSelect.empty();
+                        kelurahanSelect.append('<option disabled selected>Error loading data</option>');
+                    });
+            }
+
+            $('#select2-kelurahan').on('change', function() {
+                const kelID = this.value;
+                const kelName = $(this).find('option:selected').text();
+
+                if (kelID && kelID !== 'Pilih Kelurahan') {
+                    inputID.kelurahan.value = kelID;
+                    inputNama.kelurahan.value = kelName;
+                }
             });
 
-            // Form submission
+            function resetKabupaten() {
+                const kabupatenSelect = $('#select2-kabupaten');
+                kabupatenSelect.empty();
+                kabupatenSelect.append('<option disabled selected>Pilih Kabupaten</option>');
+                kabupatenSelect.prop('disabled', true);
+                kabupatenSelect.trigger('change');
+                inputID.kabupaten.value = '';
+                inputNama.kabupaten.value = '';
+            }
+
+            function resetKecamatan() {
+                const kecamatanSelect = $('#select2-kecamatan');
+                kecamatanSelect.empty();
+                kecamatanSelect.append('<option disabled selected>Pilih Kecamatan</option>');
+                kecamatanSelect.prop('disabled', true);
+                kecamatanSelect.trigger('change');
+                inputID.kecamatan.value = '';
+                inputNama.kecamatan.value = '';
+            }
+
+            function resetKelurahan() {
+                const kelurahanSelect = $('#select2-kelurahan');
+                kelurahanSelect.empty();
+                kelurahanSelect.append('<option disabled selected>Pilih Kelurahan</option>');
+                kelurahanSelect.prop('disabled', true);
+                kelurahanSelect.trigger('change');
+                inputID.kelurahan.value = '';
+                inputNama.kelurahan.value = '';
+            }
+
+            function resetForm() {
+                document.getElementById('formTambahAlamat').reset();
+                Object.values(inputID).forEach(input => input.value = '');
+                Object.values(inputNama).forEach(input => input.value = '');
+            }
+
             $('#formTambahAlamat').on('submit', function(e) {
                 e.preventDefault();
 
-                const token = localStorage.getItem('auth_token');
+                const requiredFields = ['id_provinsi', 'id_kabupaten', 'id_kecamatan', 'id_kelurahan', 'detail_rumah', 'detail_alamat'];
+                let isValid = true;
 
-                // Get values from hidden input fields (which contain actual text values)
-                const provinsi = $("#provinsi").val().trim();
-                const kabupaten = $("#kabupaten").val().trim();
-                const kecamatan = $("#kecamatan").val().trim();
-                const kelurahan = $("#kelurahan").val().trim();
-                const detail_alamat = $("#detail_alamat").val().trim();
-                const detail_rumah = $("#detail_rumah").val().trim();
+                requiredFields.forEach(field => {
+                    const input = document.getElementById(field);
+                    if (!input.value.trim()) {
+                        isValid = false;
+                        input.classList.add('is-invalid');
+                    } else {
+                        input.classList.remove('is-invalid');
+                    }
+                });
 
-                if (!provinsi || !kabupaten || !kecamatan || !kelurahan || !detail_alamat || !detail_rumah) {
-                    alert('Semua field wajib diisi!');
-                    return;
+                if (isValid) {
+                    const formData = {
+                        provinsi: inputNama.provinsi.value,
+                        kabupaten: inputNama.kabupaten.value,
+                        kecamatan: inputNama.kecamatan.value,
+                        kelurahan: inputNama.kelurahan.value,
+                        id_provinsi: inputID.provinsi.value,
+                        id_kabupaten: inputID.kabupaten.value,
+                        id_kecamatan: inputID.kecamatan.value,
+                        id_kelurahan: inputID.kelurahan.value,
+                        detail_rumah: document.getElementById('detail_rumah').value,
+                        detail_alamat: document.getElementById('detail_alamat').value
+                    };
+
+                    console.log('Form data to be sent:', formData);
+
+                    const submitBtn = document.getElementById('submit-btn-alamat');
+                    const originalText = submitBtn.textContent;
+                    submitBtn.textContent = 'Mengirim...';
+                    submitBtn.disabled = true;
+
+                    fetch(API_BASE_URL + '/alamat/create', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Authorization': `Bearer ${token}`,
+                            },
+                            body: JSON.stringify(formData)
+                        })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error(`HTTP error! status: ${response.status}`);
+                            }
+                            return response.json();
+                        })
+                        .then(result => {
+                            console.log('API Response:', result);
+
+                            if (result.status === 'success') {
+                                alert('Alamat berhasil ditambahkan');
+                                $('#tambahAlamatModal').modal('hide');
+                                resetForm();
+                                window.location.reload();
+
+                            } else {
+                                alert('Gagal menambahkan alamat: ' + (result.message || 'Unknown error'));
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            alert('Terjadi kesalahan saat mengirim data: ' + error.message);
+                        })
+                        .finally(() => {
+                            submitBtn.textContent = originalText;
+                            submitBtn.disabled = false;
+                        });
+
+
+                } else {
+                    alert('Mohon lengkapi semua field yang wajib diisi.');
                 }
-
-                const dataToSend = {
-                    provinsi,
-                    kabupaten,
-                    kecamatan,
-                    kelurahan,
-                    detail_alamat,
-                    detail_rumah,
-                    utama: 0
-                };
-
-                fetch(`${API_BASE_URL}/alamat/create`, {
-                        method: 'POST',
-                        headers: {
-                            'Authorization': `Bearer ${token}`,
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(dataToSend)
-                    })
-                    .then(response => response.json())
-                    .then(result => {
-                        if (result.status === 'success') {
-                            alert('Alamat Berhasil Ditambahkan');
-                            window.location.reload();
-                        } else {
-                            alert('Gagal menambahkan alamat: ' + result.message);
-                        }
-                    })
-                    .catch(error => {
-                        if (error.message.includes('Token tidak ditemukan') || error.message.includes('Token tidak valid, silakan login ulang')) {
-                            localStorage.removeItem('auth_token');
-                            alert("Sesi Anda telah habis. Silakan login ulang.");
-                            window.location.href = '/login';
-                            return;
-                        }
-                        console.error('Error:', error);
-                        alert('Terjadi kesalahan saat mengupdate data');
-                    });
             });
         });
     </script>

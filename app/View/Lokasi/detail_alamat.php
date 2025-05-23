@@ -281,7 +281,6 @@ $lokasi_store = $_GET['lokasi'];
     <script src="assets/js/countdown.min.js"></script>
     <script src="assets/js/wow.min.js"></script>
     <script src="assets/js/main.js"></script>
-    <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         const API_BASE_URL = "<?= $apiBaseUrl ?>";
@@ -291,12 +290,10 @@ $lokasi_store = $_GET['lokasi'];
             const offcanvasToggler = document.getElementById('offcanvasToggler');
             const offcanvasNavbar = document.getElementById('offcanvasNavbar');
 
-            // Mencegah pembuatan backdrop
             offcanvasNavbar.addEventListener('show.bs.offcanvas', function() {
                 document.querySelectorAll('.offcanvas-backdrop').forEach(el => el.remove());
             });
 
-            // Alternatif: nonaktifkan backdrop sepenuhnya
             offcanvasNavbar.addEventListener('shown.bs.offcanvas', function() {
                 const backdrops = document.querySelectorAll('.offcanvas-backdrop');
                 backdrops.forEach(backdrop => {
@@ -305,7 +302,6 @@ $lokasi_store = $_GET['lokasi'];
                 });
             });
 
-            // Pastikan backdrop dihapus saat menutup
             offcanvasNavbar.addEventListener('hidden.bs.offcanvas', function() {
                 document.querySelectorAll('.offcanvas-backdrop').forEach(el => el.remove());
             });
@@ -316,19 +312,15 @@ $lokasi_store = $_GET['lokasi'];
 
             hotspots.forEach(hotspot => {
                 hotspot.addEventListener('mouseenter', function() {
-                    // Store the tooltip element
                     const tooltip = this.querySelector('.hotspot-tooltip');
 
-                    // Clear any existing timeout
                     if (this.tooltipTimeout) {
                         clearTimeout(this.tooltipTimeout);
                     }
 
-                    // Make tooltip visible
                     tooltip.style.opacity = '1';
                     tooltip.style.visibility = 'visible';
 
-                    // Set timeout to hide tooltip after 5 seconds
                     this.tooltipTimeout = setTimeout(() => {
                         tooltip.style.opacity = '0';
                         tooltip.style.visibility = 'hidden';
@@ -337,7 +329,6 @@ $lokasi_store = $_GET['lokasi'];
             });
         });
 
-        // Add focus event to automatically open modal when clicking the search field
         document.addEventListener('DOMContentLoaded', function() {
             const searchModal = document.getElementById('searchModal');
             searchModal.addEventListener('shown.bs.modal', function() {
@@ -345,7 +336,6 @@ $lokasi_store = $_GET['lokasi'];
             });
         });
 
-        // Data produk (untuk contoh)
     </script>
 </body>
 

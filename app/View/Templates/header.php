@@ -51,7 +51,7 @@ function is_active($route)
                         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                     </div>
                     <div class="offcanvas-body">
-                        <ul class="navbar-nav mx-4 justify-content-center gap-xl-5 flex-grow-1 text-center">
+                        <ul class="navbar-nav mx-4 justify-content-evenly flex-grow-1 text-center">
                             <li class="nav-item">
                                 <a class="d-flex justify-content-center home-link align-items-center w-100 h-100 custom-nav-link <?= is_active('/') ?>"
                                     href="/" style="font-size: 14px;">Utama</a>
@@ -79,10 +79,6 @@ function is_active($route)
                                 <a class="d-flex justify-content-center align-items-center w-100 h-100 custom-nav-link <?= is_active('pesanan') ?>"
                                     href="/pesanan/detail" style="font-size: 14px;">Pesanan</a>
                             </li>
-                            <li class="nav-item navbar-toggler" style="visibility: hidden;">
-                                <a class="d-flex justify-content-center align-items-center w-100 h-100 custom-nav-link <?= is_active('wishlist') ?>"
-                                    href="/product/wishlist" style="font-size: 14px;">Wishlist</a>
-                            </li>
                             <li class="nav-item navbar-toggler">
                                 <a class="d-flex justify-content-center align-items-center w-100 h-100 custom-nav-link <?= is_active('keranjang') ?>"
                                     href="/keranjang" style="font-size: 14px;">Keranjang</a>
@@ -92,14 +88,14 @@ function is_active($route)
                                     href="/logout" style="font-size: 14px;">Keluar</a>
                             </li>
                         </ul>
-                        <div class="nav-right">
+                        <div class="">
                             <ul class="nav-right-list">
                                 <li class="me-3">
                                     <form class="d-flex w-100" action="/product/hasil" role="search">
                                         <div class="input-group">
                                             <input type="search" name="search" class="form-control custom-search-input"
                                                 placeholder="Cari" aria-label="Search"
-                                                style="height: 30px; font-size: 14px;">
+                                                style="height: 30px; font-size: 14px; width: 200px;">
                                             <button class="btn custom-search-button" type="submit"
                                                 style="height: 30px; padding: 0 10px; display: flex; align-items: center;">
                                                 <i class="fa fa-search" style="font-size: 14px;"></i>
