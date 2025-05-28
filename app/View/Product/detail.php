@@ -66,30 +66,39 @@ $apiBaseUrl = env('API_BASE_URL');
             font-size: 0.75rem;
             font-weight: 500;
             letter-spacing: 0.03em;
+            white-space: nowrap;
         }
 
-        /* Ensuring the badge is responsive */
         @media (max-width: 576px) {
-            .store-name {
-                display: none;
+            .store-availability-badge .badge {
+                font-size: 0.7rem;
+                padding: 0.4rem 0.8rem !important;
             }
 
-            .store-availability-badge .badge {
-                padding: 0.25rem !important;
-                width: 32px;
-                height: 32px;
-                border-radius: 50% !important;
-                display: flex;
-                justify-content: center;
-                align-items: center;
+            .store-availability-badge .badge .store-name {
+                display: inline-block;
             }
 
             .store-availability-badge .badge i {
-                margin-right: 0 !important;
+                margin-right: 0.4rem !important;
+                font-size: 0.75rem;
             }
         }
 
-        /* Medium hover effect */
+        @media (max-width: 480px) {
+            .store-availability-badge .badge {
+                font-size: 0.65rem;
+                padding: 0.35rem 0.7rem !important;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .store-availability-badge .badge {
+                font-size: 0.6rem;
+                padding: 0.3rem 0.6rem !important;
+            }
+        }
+
         .store-availability-badge:hover {
             transform: translateY(-2px);
         }
@@ -138,7 +147,7 @@ $apiBaseUrl = env('API_BASE_URL');
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0">
                     <li class="breadcrumb-item"><a href="/">Beranda</a></li>
-                    <li class="breadcrumb-item"><a href="/product">Product</a></li>
+                    <li class="breadcrumb-item"><a href="/product">Produk</a></li>
                     <li class="breadcrumb-item active" aria-current="page" id="nama_breadcrumb">Clover Chair</li>
                 </ol>
             </nav>
@@ -175,7 +184,7 @@ $apiBaseUrl = env('API_BASE_URL');
                                 <div class="store-availability-badge d-flex align-items-center">
                                     <span class="badge bg-success px-3 py-2 rounded-pill shadow-sm d-flex align-items-center">
                                         <i class="fas fa-store me-2"></i>
-                                        <span class="store-name"></span>
+                                        <span class="store-name">Toko Elektronik ABC</span>
                                     </span>
                                 </div>
                             </div>
@@ -196,7 +205,7 @@ $apiBaseUrl = env('API_BASE_URL');
                         <h1 class="text-black fw-bold mb-1" style="font-size: 25px;" id="nama_product">
 
                         </h1>
-                   
+
 
                         <div class="mb-4">
                             <p class="mb-2 fw-normal text-black" style="font-size: 14px;">Warna</p>
@@ -312,7 +321,7 @@ $apiBaseUrl = env('API_BASE_URL');
                 <div class="row">
                     <div class="col-12 wow fadeInDown mb-0" data-wow-delay=".25s">
                         <div class="site-heading-inline">
-                            <h2 class="site-title">Detail Product</h2>
+                            <h2 class="site-title">Detail Produk</h2>
                         </div>
                     </div>
                 </div>
@@ -723,7 +732,7 @@ $apiBaseUrl = env('API_BASE_URL');
                 .then(result => {
                     if (result.status === 'success' && result.data.length > 0) {
                         const container = document.getElementById('expensif');
-                        container.innerHTML = ''; 
+                        container.innerHTML = '';
 
                         result.data.forEach(product => {
                             const qty = parseInt(product.qty);
@@ -818,7 +827,7 @@ $apiBaseUrl = env('API_BASE_URL');
                 .then(result => {
                     if (result.status === 'success' && result.data.length > 0) {
                         const container = document.getElementById('bestseller');
-                        container.innerHTML = ''; 
+                        container.innerHTML = '';
 
                         result.data.forEach(product => {
                             const qty = parseInt(product.qty);
@@ -1260,7 +1269,7 @@ $apiBaseUrl = env('API_BASE_URL');
                 }
             });
 
-            let randomPhoto = 'assets/img/product/decorasi/ruang-santai.jpg'; 
+            let randomPhoto = 'assets/img/product/decorasi/ruang-santai.jpg';
             for (const review of reviewData) {
                 if (review.foto_review && review.foto_review.length > 0) {
                     randomPhoto = review.foto_review[Math.floor(Math.random() * review.foto_review.length)];
@@ -1276,7 +1285,7 @@ $apiBaseUrl = env('API_BASE_URL');
 
             const starRatings = ratingSummaryContainer.querySelectorAll('.star-rating');
             starRatings.forEach((starRating, index) => {
-                const ratingNumber = 5 - index; 
+                const ratingNumber = 5 - index;
                 const starCount = starRating.querySelector('.star-count');
                 if (starCount) {
                     starCount.textContent = ratingCounts[ratingNumber];
@@ -1489,6 +1498,7 @@ $apiBaseUrl = env('API_BASE_URL');
     <script>
         const filterCheckboxes = document.querySelectorAll('.form-check-input');
         const resetButton = document.getElementById('resetFilter');
+
         function checkFilters() {
             let isAnyChecked = false;
             filterCheckboxes.forEach(cb => {
@@ -1537,7 +1547,7 @@ $apiBaseUrl = env('API_BASE_URL');
         let $model = {
             detail: {
                 harga: 0,
-                diskon: 0, 
+                diskon: 0,
                 details: []
             }
         };
@@ -1606,7 +1616,7 @@ $apiBaseUrl = env('API_BASE_URL');
         function initProductUI() {
             let currentHarga = $model.detail.harga;
             let maxQty = 0;
-            let currentMotif = null; 
+            let currentMotif = null;
 
             const titleElement = document.getElementById('product-title');
             if (titleElement) {
@@ -2054,8 +2064,7 @@ $apiBaseUrl = env('API_BASE_URL');
                         icon.src = 'assets/img/icon/love.svg';
                     }
                 })
-                .catch(error => {
-                });
+                .catch(error => {});
 
         });
         document.getElementById('wishlistBtn').addEventListener('click', function() {
@@ -2144,7 +2153,7 @@ $apiBaseUrl = env('API_BASE_URL');
 
             if (stockAvailable === 0) {
                 showToast('Produk tidak tersedia', 'danger');
-                return; 
+                return;
             }
 
             if (qty > stockAvailable) {
@@ -2250,7 +2259,7 @@ $apiBaseUrl = env('API_BASE_URL');
 
             if (stockAvailable === 0) {
                 showToast('Produk tidak tersedia', 'danger');
-                return; 
+                return;
             }
             const token = localStorage.getItem('auth_token');
             if (!token) {

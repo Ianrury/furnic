@@ -417,7 +417,7 @@ class UserController
             $user = $stmt->fetch(\PDO::FETCH_ASSOC);
 
             if (!$user) {
-                echo json_encode(['success' => false, 'message' => 'Token tidak valid atau sudah digunakan.']);
+                echo json_encode(['success' => false, 'message' => 'Gagal Ubah Sandi Silahkan Coba Lagi Dengan Kirim Email Ulang.']);
                 exit;
             }
 

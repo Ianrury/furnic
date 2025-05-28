@@ -18,15 +18,21 @@ function is_active($route)
         <nav class="navbar navbar-expand-lg  d-flex justify-content-between align-items-center">
             <div class="container position-relative px-0">
                 <a class="navbar-brand" href="/">
-                    <img src="assets/img/logo/Logo%20Furnice.png" alt="logo">
+                    <img src="assets/img/logo/Logo%20Furnice.png" class="ms-2" alt="logo">
                 </a>
                 <div class="mobile-menu-right">
                     <div class="d-flex justify-content-between align-items-center gap-3 gap-sm-3 gap-md-4 gap-lg-5">
+                        <a href="#" class="list-link position-relative auth-link" data-url="/keranjang">
+                            <i class="fas fa-shopping-cart fa-sm" style="font-size: 17px; margin-top: 20px;color: #5c86b8"></i>
+                            <span id="cart-badge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                0
+                            </span>
+                        </a>
 
                         <div class="search-button-container" data-bs-toggle="modal" data-bs-target="#searchModal">
                             <div class="search-button d-flex align-items-center justify-content-center">
                                 <div class="search-icon-wrapper">
-                                    <i class="fa fa-search"></i>
+                                    <i class="fa fa-search" style="color: #5c86b8;"></i>
                                 </div>
                             </div>
                         </div>
@@ -54,42 +60,42 @@ function is_active($route)
                         <ul class="navbar-nav mx-4 justify-content-evenly flex-grow-1 text-center">
                             <li class="nav-item">
                                 <a class="d-flex justify-content-center home-link align-items-center w-100 h-100 custom-nav-link <?= is_active('/') ?>"
-                                    href="/" style="font-size: 14px;">Utama</a>
+                                    href="/" style="font-size: 14px;">Beranda</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="d-flex justify-content-center align-items-center w-100 h-100 custom-nav-link <?= is_active('product') ?>"
+                                <a class="d-flex justify-content-center home-link align-items-center w-100 h-100 custom-nav-link <?= is_active('product') ?>"
                                     href="/product" style="font-size: 14px;">Produk</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="d-flex justify-content-center align-items-center w-100 h-100 custom-nav-link <?= is_active('promo') ?>"
+                                <a class="d-flex justify-content-center home-link align-items-center w-100 h-100 custom-nav-link <?= is_active('promo') ?>"
                                     href="/promo" style="font-size: 14px;">Promo</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="d-flex justify-content-center align-items-center w-100 h-100 custom-nav-link <?= is_active('lokasi') ?>"
+                                <a class="d-flex justify-content-center home-link align-items-center w-100 h-100 custom-nav-link <?= is_active('lokasi') ?>"
                                     href="/lokasi" style="font-size: 14px;">Lokasi Toko</a>
                             </li>
-                            <li class="nav-item navbar-toggler">
-                                <a class="d-flex justify-content-center align-items-center w-100 h-100 custom-nav-link <?= is_active('profile') ?>"
+                            <li class="nav-item navbar-toggler" style="margin-top: 10px;">
+                                <a class="d-flex justify-content-center home-link align-items-center w-100 h-100 custom-nav-link <?= is_active('profile') ?>"
                                     href="/profile" style="font-size: 14px;">Profile</a>
                             </li>
-                            <li class="nav-item navbar-toggler">
-                                <a class="d-flex justify-content-center align-items-center w-100 h-100 custom-nav-link <?= is_active('pesanan') ?>"
+                            <li class="nav-item navbar-toggler" style="margin-top: 10px;">
+                                <a class="d-flex justify-content-center home-link align-items-center w-100 h-100 custom-nav-link <?= is_active('pesanan') ?>"
                                     href="/pesanan/detail" style="font-size: 14px;">Pesanan</a>
                             </li>
-                            <li class="nav-item navbar-toggler">
-                                <a class="d-flex justify-content-center align-items-center w-100 h-100 custom-nav-link <?= is_active('keranjang') ?>"
+                            <li class="nav-item navbar-toggler" style="margin-top: 10px;">
+                                <a class="d-flex justify-content-center home-link align-items-center w-100 h-100 custom-nav-link <?= is_active('keranjang') ?>"
                                     href="/keranjang" style="font-size: 14px;">Keranjang</a>
                             </li>
-                            <li class="nav-item navbar-toggler">
-                                <a class="d-flex justify-content-center align-items-center w-100 h-100 custom-nav-link <?= is_active('logout') ?>"
+                            <li class="nav-item navbar-toggler" style="margin-top: 10px;">
+                                <a class="d-flex justify-content-center home-link align-items-center w-100 h-100 custom-nav-link <?= is_active('logout') ?>"
                                     href="/logout" style="font-size: 14px;">Keluar</a>
                             </li>
                         </ul>
-                        <div class="">
-                            <ul class="nav-right-list">
+                        <div class="d-none d-md-block hide-on-930">
+                            <ul class=" nav-right-list">
                                 <li class="me-3">
                                     <form class="d-flex w-100" action="/product/hasil" role="search">
                                         <div class="input-group">
@@ -136,7 +142,7 @@ function is_active($route)
                                 <li style="position: relative;">
                                     <a href="#" class="list-link position-relative auth-link" data-url="/keranjang">
                                         <i class="far fa-shopping-cart text-dark fa-sm"></i>
-                                        <span id="cart-badge">0</span>
+                                        <span id="cart-badge" class="cart-badge-count">0</span>
                                     </a>
                                 </li>
                                 <li class="auth-login-container" style="position: relative;">
@@ -194,7 +200,6 @@ function is_active($route)
         const token = localStorage.getItem('auth_token');
         if (!token) return;
 
-        // Fetch nominal keranjang
         fetch(API_BASE_URL + '/nominal-keranjang', {
                 method: 'GET',
                 headers: {
@@ -205,7 +210,14 @@ function is_active($route)
             .then(data => {
                 if (data.status === 'success') {
                     const nominal = data.total_nominal || 0;
-                    document.getElementById('cart-badge').innerText = nominal;
+
+                    const cartBadge = document.getElementById('cart-badge');
+                    if (cartBadge) cartBadge.innerText = nominal;
+
+                    const badgeElements = document.getElementsByClassName('cart-badge-count');
+                    for (let el of badgeElements) {
+                        el.innerText = nominal;
+                    }
                 } else {
                     console.error('Gagal ambil nominal keranjang:', data.message);
                 }
@@ -213,6 +225,7 @@ function is_active($route)
             .catch(err => {
                 console.error('Error fetch nominal keranjang:', err);
             });
+
 
 
     });
@@ -252,15 +265,14 @@ function is_active($route)
             }
         }
     });
+
     document.addEventListener('DOMContentLoaded', function() {
         const logoutButton = document.getElementById('logoutButton');
 
         if (logoutButton) {
             logoutButton.addEventListener('click', function(e) {
                 e.preventDefault();
-                localStorage.removeItem('auth_token');
-
-
+                localStorage.clear();
                 window.location.href = '/login';
             });
         }

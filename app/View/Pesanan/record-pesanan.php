@@ -379,6 +379,7 @@ $apiBaseUrl = env('API_BASE_URL');
 
 <script>
     const token = localStorage.getItem('auth_token');
+
     function formatRupiah(angka) {
         return 'Rp ' + new Intl.NumberFormat('id-ID').format(angka);
     }
@@ -520,7 +521,7 @@ $apiBaseUrl = env('API_BASE_URL');
             </div>
         </div>
     </div>
-`;
+  `;
     }
 
     function batalPembayaran(nomorPesanan) {
@@ -555,7 +556,7 @@ $apiBaseUrl = env('API_BASE_URL');
                     }
                 });
             } else {
-          
+
                 if (confirm('Apakah Anda yakin ingin membatalkan pesanan ' + nomorPesanan + '?')) {
                     lanjutkanPembatalan(nomorPesanan);
                 }
@@ -640,15 +641,25 @@ $apiBaseUrl = env('API_BASE_URL');
         const containerPesanan = $('#pemesanan_list');
         containerPesanan.empty();
 
-        const pesananDibatalkan = dataPesanan.semua.filter(pesanan => pesanan.isbatal === 1 || pesanan.isbatal === true);
+        // Fungsi untuk mengecek apakah pesanan dibatalkan
+        const isPesananBatal = (pesanan) => {
+            return pesanan.isbatal === 1 ||
+                pesanan.isbatal === true ||
+                pesanan.isbatal === "1" ||
+                pesanan.isbatal === "true";
+        };
 
-        const filterBatal = pesanan => pesanan.isbatal !== 1 && pesanan.isbatal !== true;
+        // Pisahkan pesanan yang dibatalkan dari semua data
+        const pesananDibatalkan = dataPesanan.semua.filter(isPesananBatal);
+
+        // Filter untuk pesanan yang tidak dibatalkan
+        const filterTidakBatal = pesanan => !isPesananBatal(pesanan);
 
         const kategoriBaru = {
-            menunggu: dataPesanan.menunggu.filter(filterBatal),
-            konfirmasi: dataPesanan.konfirmasi.filter(filterBatal),
-            dikirim: dataPesanan.dikirim.filter(filterBatal),
-            selesai: dataPesanan.selesai.filter(filterBatal),
+            menunggu: dataPesanan.menunggu.filter(filterTidakBatal),
+            konfirmasi: dataPesanan.konfirmasi.filter(filterTidakBatal),
+            dikirim: dataPesanan.dikirim.filter(filterTidakBatal),
+            selesai: dataPesanan.selesai.filter(filterTidakBatal),
             batal: pesananDibatalkan
         };
 
@@ -707,16 +718,64 @@ $apiBaseUrl = env('API_BASE_URL');
         startCountdowns();
     }
 
+    function startCountdowns() {
+        if (window.countdownIntervals) {
+            window.countdownIntervals.forEach(interval => clearInterval(interval));
+        }
+        window.countdownIntervals = [];
+
+        $('.countdown-timer[data-limit]').each(function() {
+            const $timer = $(this);
+            const limitTime = $timer.data('limit');
+
+            if (!limitTime) return;
+
+            const interval = setInterval(() => {
+                const sisaWaktu = hitungSisaWaktuPembayaran(limitTime);
+
+                if (sisaWaktu.isExpired) {
+                    $timer.text('00:00:00').addClass('text-danger');
+                    $timer.closest('.alert')
+                        .removeClass('alert-danger')
+                        .addClass('alert-danger')
+                        .find('i').removeClass('fa-clock').addClass('fa-times-circle');
+                    $timer.closest('.alert').find('small').html(
+                        '<i class="fas fa-times-circle me-1"></i> Waktu pembayaran telah habis: ' +
+                        '<span class="countdown-timer fw-bold text-danger">00:00:00</span>'
+                    );
+
+                    const $card = $timer.closest('.card');
+                    $card.find('a[href*="/pembayaran/"]').addClass('disabled').attr('disabled', true);
+                    $card.find('button[onclick*="batalkanPesanan"]').addClass('disabled').attr('disabled', true);
+
+                    clearInterval(interval);
+
+                    $timer.removeAttr('data-limit');
+                } else {
+                    $timer.text(sisaWaktu.formatted);
+                }
+            }, 1000);
+
+            window.countdownIntervals.push(interval);
+        });
+    }
+
     function buatKartuPesanan(pesanan) {
         let badgeClass = 'bg-primary';
         let badgeText = 'Menunggu Pembayaran';
         let countdownHtml = '';
 
-        if (pesanan.isbatal === 1 || pesanan.isbatal === true) {
+        const isPesananBatal = (pesanan) => {
+            return pesanan.isbatal === 1 ||
+                pesanan.isbatal === true ||
+                pesanan.isbatal === "1" ||
+                pesanan.isbatal === "true";
+        };
+
+        if (isPesananBatal(pesanan)) {
             badgeClass = 'bg-danger';
             badgeText = 'Dibatalkan';
-        }
-        else {
+        } else {
             switch (pesanan.status_pesanan) {
                 case 'waiting':
                     badgeClass = 'bg-primary';
@@ -741,29 +800,42 @@ $apiBaseUrl = env('API_BASE_URL');
             }
         }
 
-        if (pesanan.status_pesanan === 'waiting' && pesanan.status_pembayaran === 'belum bayar' && pesanan.limit_payment) {
+        if (isPesananBatal(pesanan)) {
+            countdownHtml = '';
+        } else if (pesanan.status_pesanan === 'waiting' && pesanan.status_pembayaran === 'belum bayar' && pesanan.limit_payment) {
+            const sisaWaktu = hitungSisaWaktuPembayaran(pesanan.limit_payment);
+
+            if (sisaWaktu.isExpired) {
+                countdownHtml = `
+        <div class="alert alert-danger mt-2" role="alert">
+            <small>
+                <i class="fas fa-clock me-1"></i> Waktu pembayaran telah habis: 
+                <span class="countdown-timer fw-bold text-danger">
+                    00:00:00
+                </span>
+            </small>
+        </div>
+     `;
+            } else {
+                countdownHtml = `
+        <div class="alert alert-danger mt-2" role="alert">
+            <small>
+                <i class="fas fa-clock me-1"></i> Bayar sebelum: 
+                <span class="countdown-timer fw-bold" data-limit="${pesanan.limit_payment}">
+                    ${sisaWaktu.formatted}
+                </span>
+            </small>
+        </div>
+     `;
+            }
+        } else if (pesanan.status_pesanan === 'menunggu verifikasi' && pesanan.status_pembayaran === 'sudah bayar') {
             countdownHtml = `
-            <div class="alert alert-danger mt-2" role="alert">
-                <small>
-                    <i class="fas fa-clock me-1"></i> Bayar sebelum: 
-                    <span class="countdown-timer fw-bold" data-limit="${pesanan.limit_payment}">
-                        ${hitungSisaWaktuPembayaran(pesanan.limit_payment).formatted}
-                    </span>
-                </small>
-            </div>
-        `;
-        }
-        else if (pesanan.status_pesanan === 'menunggu verifikasi' && pesanan.status_pembayaran === 'sudah bayar') {
-            countdownHtml = `
-            <div class="alert alert-info mt-2" role="alert">
-                <small>
-                    <i class="fas fa-check-circle me-1"></i> Pembayaran sedang diverifikasi 
-                    <span class="countdown-timer fw-bold" data-limit="${pesanan.tanggal_pesanan}">
-                        00:00:00
-                    </span>
-                </small>
-            </div>
-        `;
+    <div class="alert alert-info mt-2" role="alert">
+        <small>
+            <i class="fas fa-check-circle me-1"></i> Pembayaran sedang diverifikasi
+        </small>
+    </div>
+ `;
         }
 
         const tanggalPesanan = formatTanggal(pesanan.tanggal_pesanan);
@@ -780,72 +852,64 @@ $apiBaseUrl = env('API_BASE_URL');
 
         let tombolTindakan = '';
 
-        if (pesanan.isbatal === 1 || pesanan.isbatal === true) {
+        if (isPesananBatal(pesanan)) {
             tombolTindakan = `
-            <a href="/detail/pesanan/${pesanan.payment_token}" class="btn btn-outline-secondary btn-sm w-100 mb-2">
-                Lihat Detail
-            </a>
-        `;
-        }
-        else if (pesanan.status_pesanan === 'waiting' && pesanan.status_pembayaran === 'belum bayar') {
+    <a href="/detail/pesanan/${pesanan.payment_token}" class="btn btn-outline-secondary btn-sm w-100 mb-2">
+        Lihat Detail
+    </a>
+ `;
+        } else if (pesanan.status_pesanan === 'waiting' && pesanan.status_pembayaran === 'belum bayar') {
             const isTimeExpired = hitungSisaWaktuPembayaran(pesanan.limit_payment).isExpired;
 
-
             tombolTindakan = `
-            <a href="/pembayaran/${pesanan.payment_token}" class="btn btn-primary btn-sm w-100 mb-2" ${isTimeExpired ? 'disabled' : ''}>
-                Bayar Sekarang
-            </a>
-            <a href="/detail/pesanan/${pesanan.payment_token}" class="btn btn-outline-secondary btn-sm w-100 mb-2">
-                Lihat Detail
-            </a>
-            <button onclick="batalkanPesanan('${pesanan.payment_token}')" class="btn btn-outline-danger btn-sm w-100" ${isTimeExpired ? 'disabled' : ''}>
-                Batalkan
-            </button>
-        `;
-        }
-        else if (pesanan.status_pesanan === 'menunggu verifikasi' && pesanan.status_pembayaran === 'sudah bayar') {
+    <a href="/pembayaran/${pesanan.payment_token}" class="btn btn-primary btn-sm w-100 mb-2" ${isTimeExpired ? 'disabled' : ''}>
+        Bayar Sekarang
+    </a>
+    <a href="/detail/pesanan/${pesanan.payment_token}" class="btn btn-outline-secondary btn-sm w-100 mb-2">
+        Lihat Detail
+    </a>
+    <button onclick="batalkanPesanan('${pesanan.payment_token}')" class="btn btn-outline-danger btn-sm w-100" ${isTimeExpired ? 'disabled' : ''}>
+        Batalkan
+    </button>
+ `;
+        } else if (pesanan.status_pesanan === 'menunggu verifikasi' && pesanan.status_pembayaran === 'sudah bayar') {
             tombolTindakan = `
-       
-            <a href="/detail/pesanan/${pesanan.payment_token}" class="btn btn-outline-secondary btn-sm w-100 mb-2">
-                Lihat Detail
-            </a>
-         
-        `;
-        }
-        else if (pesanan.status_pesanan === 'konfirmasi') {
+    <a href="/detail/pesanan/${pesanan.payment_token}" class="btn btn-outline-secondary btn-sm w-100 mb-2">
+        Lihat Detail
+    </a>
+ `;
+        } else if (pesanan.status_pesanan === 'konfirmasi') {
             tombolTindakan = `
-            <a href="/detail/pesanan/${pesanan.payment_token}" class="btn btn-outline-secondary btn-sm w-100 mb-2">
-                Lihat Detail
-            </a>
-        `;
-        }
-        else if (pesanan.status_pesanan === 'dikirim') {
+    <a href="/detail/pesanan/${pesanan.payment_token}" class="btn btn-outline-secondary btn-sm w-100 mb-2">
+        Lihat Detail
+    </a>
+ `;
+        } else if (pesanan.status_pesanan === 'dikirim') {
             tombolTindakan = `
-            <button onclick="terimaBarang('${pesanan.payment_token}')" class="btn btn-success btn-sm w-100 mb-2">
-                Terima Barang
-            </button>
-            <a href="/detail/pesanan/${pesanan.payment_token}" class="btn btn-outline-secondary btn-sm w-100">
-                Lihat Detail
-            </a>
-        `;
-        }
-        else if (pesanan.status_pesanan === 'completed') {
+    <button onclick="terimaBarang('${pesanan.payment_token}')" class="btn btn-success btn-sm w-100 mb-2">
+        Terima Barang
+    </button>
+    <a href="/detail/pesanan/${pesanan.payment_token}" class="btn btn-outline-secondary btn-sm w-100">
+        Lihat Detail
+    </a>
+ `;
+        } else if (pesanan.status_pesanan === 'completed') {
             let tombolUlasan = '';
 
-            if (pesanan.is_review === 0) {
+            if (pesanan.is_review === 0 || pesanan.is_review === "0") {
                 tombolUlasan = `
-                <a href="/review/${pesanan.payment_token}" class="btn btn-outline-primary btn-sm w-100 mb-2">
-                    Beri Ulasan
-                </a>
-            `;
+        <a href="/review/${pesanan.payment_token}" class="btn btn-outline-primary btn-sm w-100 mb-2">
+            Beri Ulasan
+        </a>
+    `;
             }
 
             tombolTindakan = `
-            ${tombolUlasan}
-            <a href="/detail/pesanan/${pesanan.payment_token}" class="btn btn-outline-secondary btn-sm w-100">
-                Lihat Detail
-            </a>
-        `;
+    ${tombolUlasan}
+    <a href="/detail/pesanan/${pesanan.payment_token}" class="btn btn-outline-secondary btn-sm w-100">
+        Lihat Detail
+    </a>
+ `;
         }
 
         return `
@@ -973,6 +1037,7 @@ $apiBaseUrl = env('API_BASE_URL');
     }
 
     function batalkanPesanan(token) {
+        const token_login = localStorage.getItem('auth_token');
         Swal.fire({
             title: 'Batalkan Pesanan',
             text: 'Apakah Anda yakin ingin membatalkan pesanan ini?',
@@ -994,14 +1059,15 @@ $apiBaseUrl = env('API_BASE_URL');
                 });
 
                 $.ajax({
-                    url: API_BASE_URL + '/batalkanPesanan',
+                    url: API_BASE_URL + '/batal-pembayaran',
                     type: 'POST',
+                    contentType: 'application/json',
                     dataType: 'json',
-                    data: {
+                    data: JSON.stringify({
                         payment_token: token
-                    },
+                    }),
                     headers: {
-                        'Authorization': 'Bearer ' + token
+                        'Authorization': 'Bearer ' + token_login
                     },
                     success: function(response) {
                         if (response.status === 'success') {
@@ -1153,7 +1219,7 @@ $apiBaseUrl = env('API_BASE_URL');
 
     $(document).ready(function() {
         if (typeof API_BASE_URL === 'undefined') {
-            window.API_BASE_URL = '/api'; 
+            window.API_BASE_URL = '/api';
         }
 
         const token = localStorage.getItem('auth_token');

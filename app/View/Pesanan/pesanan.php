@@ -134,13 +134,7 @@ $apiBaseUrl = env('API_BASE_URL');
                                             <h4 class="text-black text-header-informasi">Alamat Penerima</h4>
                                         </div>
                                         <div class="text-alamat-rumah my-2">
-                                            <!-- <p id="display_detail"></p>
-                                            <p id="display_nama"></p>
-                                            <p id="display_hp"></p>
-                                            <p id="display_alamat"></p>
-                                            <p id="display_email" class="d-none"></p> -->
                                             <div id="alamat-content">
-                                                <!-- Delivery content will be loaded here -->
                                             </div>
                                         </div>
                                         <div>
@@ -423,19 +417,16 @@ $apiBaseUrl = env('API_BASE_URL');
             totalPembayaranEl.innerText = formatRupiah(baseTotal);
         });
 
-  
+
         renderContent('antar');
     </script>
     <script>
-        
         function displayAddresses(addresses) {
-         
-            addresses.sort((a, b) => {
-                return b.utama - a.utama;
-            });
+            addresses.sort((a, b) => b.utama - a.utama); // Prioritaskan alamat utama
 
             const alamatContentElement = document.getElementById('alamat-content');
-            alamatContentElement.innerHTML = ''; 
+            alamatContentElement.innerHTML = '';
+
             addresses.forEach(address => {
                 const addressElement = document.createElement('div');
                 addressElement.className = 'd-flex align-items-start gap-2 w-100 mt-2';
@@ -445,12 +436,11 @@ $apiBaseUrl = env('API_BASE_URL');
                 radioInput.name = 'lokasi_alamat';
                 radioInput.value = address.id;
                 radioInput.style.marginTop = '4px';
-                radioInput.checked = address.utama === 1;
+                radioInput.checked = parseInt(address.utama) === 1; // pastikan ini angka
                 radioInput.onchange = function() {
                     selectAlamat(this);
                 };
 
-            
                 const textContainer = document.createElement('div');
                 textContainer.className = 'd-flex flex-column';
 
@@ -462,7 +452,6 @@ $apiBaseUrl = env('API_BASE_URL');
                 addressLine2.className = 'text-detail-jasa';
                 addressLine2.textContent = `${address.kelurahan}, ${address.kecamatan}, ${address.kabupaten}, ${address.provinsi}`;
 
-     
                 textContainer.appendChild(addressLine1);
                 textContainer.appendChild(addressLine2);
 
@@ -472,6 +461,7 @@ $apiBaseUrl = env('API_BASE_URL');
                 alamatContentElement.appendChild(addressElement);
             });
         }
+
 
         function selectAlamat(radioElement) {
             const addressId = radioElement.value;
@@ -496,19 +486,19 @@ $apiBaseUrl = env('API_BASE_URL');
                 })
                 .then(response => response.json())
                 .then(result => {
-                 
+
                     const allRadios = document.querySelectorAll('input[name="lokasi_alamat"]');
                     allRadios.forEach(radio => {
                         const parentDiv = radio.closest('.d-flex');
                         if (radio.value === addressId) {
-                         
+
                             radio.checked = true;
                         }
                     });
                 })
                 .catch(error => {
                     if (error.message.includes('Token tidak ditemukan') || error.message.includes('Token tidak valid, silakan login ulang')) {
-                
+
                         localStorage.removeItem('auth_token');
                         alert("Sesi Anda telah habis. Silakan login ulang.");
                         window.location.href = '/login';
@@ -519,7 +509,7 @@ $apiBaseUrl = env('API_BASE_URL');
                 });
         }
 
-    
+
         document.addEventListener('DOMContentLoaded', function() {
             const token = localStorage.getItem('auth_token');
             if (!token) {
@@ -540,7 +530,7 @@ $apiBaseUrl = env('API_BASE_URL');
                 })
                 .catch(error => {
                     if (error.message.includes('Token tidak ditemukan') || error.message.includes('Token tidak valid, silakan login ulang')) {
-            
+
                         localStorage.removeItem('auth_token');
                         alert("Sesi Anda telah habis. Silakan login ulang.");
                         window.location.href = '/login';
@@ -553,7 +543,7 @@ $apiBaseUrl = env('API_BASE_URL');
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('formBayar').addEventListener('submit', function(e) {
-                e.preventDefault(); 
+                e.preventDefault();
                 const payButton = document.getElementById('payButton');
                 const buttonText = document.getElementById('buttonText');
                 const buttonSpinner = document.getElementById('buttonSpinner');
@@ -728,7 +718,7 @@ $apiBaseUrl = env('API_BASE_URL');
                     hargaSetelahDiskon = hargaNormal - nominalDiskon;
                 }
 
-        
+
                 const validQty = (parseInt(item.qty_cart) > parseInt(item.qty_motif)) ?
                     parseInt(item.qty_motif) : parseInt(item.qty_cart);
                 const totalItemPrice = validQty * hargaSetelahDiskon;
@@ -855,7 +845,7 @@ $apiBaseUrl = env('API_BASE_URL');
 
             let selectedPengirimanId = '';
             let selectedTokoId = '';
-            let currentMode = 'antar'; 
+            let currentMode = 'antar';
 
             function renderContent(type) {
                 currentMode = type;
@@ -920,7 +910,7 @@ $apiBaseUrl = env('API_BASE_URL');
                 selectedPengirimanId = el.value;
                 idPengirimanInput.value = el.value;
                 idTokoInput.value = '';
-                selectedTokoId = ''; 
+                selectedTokoId = '';
                 ongkirEl.innerText = formatNumber(harga);
                 totalPembayaranEl.innerText = formatNumber(baseTotal + harga);
             };
@@ -929,7 +919,7 @@ $apiBaseUrl = env('API_BASE_URL');
                 selectedTokoId = el.value;
                 idTokoInput.value = el.value;
                 idPengirimanInput.value = '';
-                selectedPengirimanId = ''; 
+                selectedPengirimanId = '';
                 ongkirEl.innerText = '0';
                 totalPembayaranEl.innerText = formatNumber(baseTotal);
             };

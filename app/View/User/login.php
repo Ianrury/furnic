@@ -58,7 +58,7 @@ $apiBaseUrl = env('API_BASE_URL');
             margin: auto 5px;
         }
 
-      
+
 
         .eye-icon {
             position: absolute;
@@ -213,7 +213,6 @@ $apiBaseUrl = env('API_BASE_URL');
             }
         }
 
-        // Add CSS for the hidden class
         const style = document.createElement('style');
         style.textContent = `
             .hidden {
@@ -247,14 +246,17 @@ $apiBaseUrl = env('API_BASE_URL');
                         setTimeout(() => {
                             const referrer = document.referrer;
                             const currentHost = window.location.origin;
+
                             if (referrer && referrer.startsWith(currentHost)) {
                                 const referrerPath = new URL(referrer).pathname;
 
-                                if (referrerPath.includes('/register') ||
-                                    referrerPath.includes('/user/verifikasi')) {
+                                if (
+                                    referrerPath.includes('/register') ||
+                                    referrerPath.includes('/user/verifikasi') ||
+                                    referrerPath.includes('/reset-password')
+                                ) {
                                     window.location.href = "/";
                                 } else {
-                                    
                                     window.history.back();
                                 }
                             } else {

@@ -959,11 +959,11 @@ $apiBaseUrl = env('API_BASE_URL');
                 progressBarElement.style.width = `${progressPercentage}%`;
 
                 if (progressPercentage < 25) {
-                    progressBarElement.style.backgroundColor = '#FF5252'; 
+                    progressBarElement.style.backgroundColor = '#FF5252';
                 } else if (progressPercentage < 50) {
-                    progressBarElement.style.backgroundColor = '#FFC107'; 
+                    progressBarElement.style.backgroundColor = '#FFC107';
                 } else {
-                    progressBarElement.style.backgroundColor = '#4CAF50'; 
+                    progressBarElement.style.backgroundColor = '#4CAF50';
                 }
             };
 
@@ -1061,7 +1061,12 @@ $apiBaseUrl = env('API_BASE_URL');
                             const statusElement = document.getElementById('payment-status');
                             if (statusElement) {
                                 statusElement.className = 'status-badge ' + result.data.status;
-                                statusElement.textContent = result.data.status === 'waiting' ? 'Menunggu Pembayaran' : result.data.status;
+                                console.log(result.data.isbatal);
+                                if (result.data.isbatal == 1) {
+                                    statusElement.textContent = 'Pembayaran Dibatalkan';
+                                } else {
+                                    statusElement.textContent = result.data.status === 'waiting' ? 'Menunggu Pembayaran' : result.data.status;
+                                }
                             }
 
                             const confirmButton = document.querySelector('.cek-bayar');
@@ -1071,7 +1076,7 @@ $apiBaseUrl = env('API_BASE_URL');
                                 deadlineInfo.style.display = 'none';
                                 bankinfo.style.display = 'none';
                             }
-                         
+
                         }
                     } else {
                         throw new Error(result.message || 'Gagal memuat data pembayaran.');

@@ -53,14 +53,10 @@ $apiBaseUrl = env('API_BASE_URL');
         .password-form {
             width: 100%;
             max-width: 350px;
-            /* Lebih kecil dari 450px */
             background-color: white;
             border-radius: 8px;
             border: 1px solid #95a5a6 !important;
-
-            /* Lebih kecil dari 12px */
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-            /* Shadow lebih tipis */
             overflow: hidden;
             animation: fadeIn 0.5s ease-in-out;
         }
@@ -69,33 +65,25 @@ $apiBaseUrl = env('API_BASE_URL');
             background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
             color: white;
             padding: 15px;
-            /* Lebih kecil dari 25px */
             text-align: center;
             position: relative;
         }
 
         .password-body {
             padding: 18px;
-            /* Lebih kecil dari 30px */
         }
 
         .password-input-group {
             position: relative;
             margin-bottom: 15px;
-            /* Lebih kecil dari 20px */
         }
 
         .password-input {
             height: 40px;
-            /* Lebih kecil dari 60px */
             padding-right: 40px;
-            /* Lebih kecil dari 50px */
             font-size: 14px;
-            /* Lebih kecil dari 16px */
             border: 1px solid #e2e8f0;
-            /* Lebih tipis dari 2px */
             border-radius: 6px;
-            /* Lebih kecil dari 10px */
             transition: all 0.3s;
         }
 
@@ -114,7 +102,6 @@ $apiBaseUrl = env('API_BASE_URL');
             color: #6b7280;
             cursor: pointer;
             font-size: 14px;
-            /* Lebih kecil dari 18px */
             padding: 3px;
             transition: color 0.3s;
         }
@@ -128,22 +115,18 @@ $apiBaseUrl = env('API_BASE_URL');
             color: white;
             border: none;
             border-radius: 6px;
-            /* Lebih kecil dari 10px */
             padding: 10px;
-            /* Lebih kecil dari 15px */
             font-weight: 600;
             letter-spacing: 0.5px;
             width: 100%;
             margin-top: 8px;
             transition: all 0.3s;
             font-size: 14px;
-            /* Tambahan untuk ukuran font lebih kecil */
         }
 
         .password-submit:hover {
             background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
             transform: translateY(-1px);
-            /* Lebih kecil dari -2px */
             box-shadow: 0 3px 10px rgba(79, 70, 229, 0.3);
         }
 
@@ -155,7 +138,6 @@ $apiBaseUrl = env('API_BASE_URL');
             background-color: white;
             border-radius: 25px;
             padding: 3px 10px;
-            /* Lebih kecil dari 5px 15px */
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
         }
 
@@ -163,31 +145,25 @@ $apiBaseUrl = env('API_BASE_URL');
             color: #4f46e5;
             font-weight: 600;
             font-size: 12px;
-            /* Lebih kecil dari 14px */
         }
 
         .password-icon-bg {
             width: 60px;
-            /* Lebih kecil dari 90px */
             height: 60px;
-            /* Lebih kecil dari 90px */
             background-color: rgba(255, 255, 255, 0.1);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 10px;
-            /* Lebih kecil dari 15px margin-bottom */
         }
 
         .password-icon-bg i {
             font-size: 28px;
-            /* Lebih kecil dari 40px */
         }
 
         .password-strength {
             height: 4px;
-            /* Lebih kecil dari 5px */
             border-radius: 4px;
             margin-top: 4px;
             transition: all 0.3s;
@@ -196,19 +172,15 @@ $apiBaseUrl = env('API_BASE_URL');
 
         .password-hint {
             font-size: 12px;
-            /* Lebih kecil dari 14px */
             color: #6b7280;
             margin-top: 8px;
             margin-bottom: 15px;
-            /* Lebih kecil dari 20px */
         }
 
         .strength-text {
             font-size: 11px;
-            /* Lebih kecil dari 12px */
             color: #6b7280;
             margin-top: 3px;
-            /* Lebih kecil dari 5px */
             transition: all 0.3s;
         }
 
@@ -216,7 +188,6 @@ $apiBaseUrl = env('API_BASE_URL');
             from {
                 opacity: 0;
                 transform: translateY(8px);
-                /* Lebih kecil dari 10px */
             }
 
             to {
@@ -229,7 +200,6 @@ $apiBaseUrl = env('API_BASE_URL');
             display: none;
             animation: fadeIn 0.3s ease-in-out;
             font-size: 11px;
-            /* Tambahan untuk ukuran font lebih kecil */
         }
 
         .success-animation {
@@ -241,63 +211,50 @@ $apiBaseUrl = env('API_BASE_URL');
 
         .success-icon {
             width: 60px;
-            /* Lebih kecil dari 80px */
             height: 60px;
-            /* Lebih kecil dari 80px */
             background-color: #10b981;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 15px auto;
-            /* Lebih kecil dari 20px */
             position: relative;
         }
 
         .success-icon i {
             font-size: 30px;
-            /* Lebih kecil dari 40px */
             color: white;
         }
 
         .success-message {
             margin-top: 15px;
-            /* Lebih kecil dari 20px */
             color: #10b981;
             font-weight: 600;
             font-size: 14px;
-            /* Tambahan untuk ukuran font lebih kecil */
         }
 
-        /* Mengubah ukuran heading */
         .password-header h2 {
             font-size: 1.25rem;
-            /* Lebih kecil */
             margin-bottom: 5px;
         }
 
         .password-header p {
             font-size: 0.85rem;
-            /* Lebih kecil */
         }
 
-        /* Ukuran lebih kecil untuk label */
         .form-label {
             font-size: 0.85rem;
             margin-bottom: 0.25rem;
         }
 
-        /* Spasi kecil untuk checklist */
         .password-feedback .d-flex {
             margin-bottom: 0.25rem !important;
         }
 
-        /* Ukuran font untuk pesan sukses */
         .success-animation p {
             font-size: 0.85rem;
         }
 
-        /* Toast styling */
         .toast-container {
             position: fixed;
             top: 20px;
@@ -388,7 +345,6 @@ $apiBaseUrl = env('API_BASE_URL');
 </head>
 
 <body>
-    <!-- Toast container -->
     <div class="toast-container" id="toastContainer"></div>
 
     <div class="password-form">
@@ -460,7 +416,6 @@ $apiBaseUrl = env('API_BASE_URL');
         </form>
     </div>
 
-    <!-- Bootstrap JS dan Popper.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
     <script>
         const API_BASE_URL = "<?= $apiBaseUrl ?>";
@@ -480,7 +435,6 @@ $apiBaseUrl = env('API_BASE_URL');
             const form = document.getElementById('changePasswordForm');
             const successAnimation = document.getElementById('successAnimation');
 
-            // Toast function
             function showToast(message, type = 'success') {
                 const toastContainer = document.getElementById('toastContainer');
 
@@ -525,7 +479,6 @@ $apiBaseUrl = env('API_BASE_URL');
 
                 toastContainer.appendChild(toast);
 
-                // Auto close after 5 seconds
                 setTimeout(() => {
                     toast.classList.add('fade-out');
                     setTimeout(() => {
@@ -536,30 +489,25 @@ $apiBaseUrl = env('API_BASE_URL');
                 }, 5000);
             }
 
-            // Toggle password visibility
             toggleButton.addEventListener('click', function() {
                 const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
                 passwordInput.setAttribute('type', type);
 
-                // Toggle eye icon
                 const eyeIcon = toggleButton.querySelector('i');
                 eyeIcon.classList.toggle('fa-eye');
                 eyeIcon.classList.toggle('fa-eye-slash');
             });
 
-            // Password strength check
             passwordInput.addEventListener('input', function() {
                 const password = passwordInput.value;
                 passwordFeedback.style.display = 'block';
 
-                // Check password strength
                 let strength = 0;
                 const hasLength = password.length >= 8;
                 const hasUpperCase = /[A-Z]/.test(password);
                 const hasNumber = /[0-9]/.test(password);
                 const hasSpecial = /[!@#$%^&*(),.?":{}|<>]/.test(password);
 
-                // Update checklist
                 lengthCheck.style.color = hasLength ? '#10b981' : '#cbd5e0';
                 upperCheck.style.color = hasUpperCase ? '#10b981' : '#cbd5e0';
                 numberCheck.style.color = hasNumber ? '#10b981' : '#cbd5e0';
@@ -570,23 +518,22 @@ $apiBaseUrl = env('API_BASE_URL');
                 if (hasNumber) strength += 25;
                 if (hasSpecial) strength += 25;
 
-                // Update strength bar
                 strengthBar.style.width = strength + '%';
 
                 if (strength < 25) {
-                    strengthBar.style.backgroundColor = '#ef4444'; // red
+                    strengthBar.style.backgroundColor = '#ef4444'; 
                     strengthText.textContent = 'Sangat Lemah';
                     strengthText.style.color = '#ef4444';
                 } else if (strength < 50) {
-                    strengthBar.style.backgroundColor = '#f59e0b'; // yellow
+                    strengthBar.style.backgroundColor = '#f59e0b'; 
                     strengthText.textContent = 'Lemah';
                     strengthText.style.color = '#f59e0b';
                 } else if (strength < 75) {
-                    strengthBar.style.backgroundColor = '#3b82f6'; // blue
+                    strengthBar.style.backgroundColor = '#3b82f6'; 
                     strengthText.textContent = 'Sedang';
                     strengthText.style.color = '#3b82f6';
                 } else {
-                    strengthBar.style.backgroundColor = '#10b981'; // green
+                    strengthBar.style.backgroundColor = '#10b981'; 
                     strengthText.textContent = 'Kuat';
                     strengthText.style.color = '#10b981';
                 }
@@ -598,19 +545,15 @@ $apiBaseUrl = env('API_BASE_URL');
                 }
             });
 
-            // Form submission with AJAX
             form.addEventListener('submit', function(e) {
                 e.preventDefault();
 
-                // Show loading state
                 const submitButton = document.getElementById('submitButton');
                 submitButton.disabled = true;
                 submitButton.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> Memproses...';
 
-                // Get form data
                 const formData = new FormData(form);
 
-                // Send AJAX request
                 fetch(API_BASE_URL + '/reset-password', {
                         method: 'POST',
                         body: formData
@@ -618,25 +561,16 @@ $apiBaseUrl = env('API_BASE_URL');
                     .then(response => response.json())
                     .then(data => {
                         if (data.success) {
-                            // Show success toast
                             showToast('Anda berhasil update sandi, lakukan login ulang', 'success');
 
-                            // Hide the form content
                             passwordInput.parentElement.parentElement.style.display = 'none';
                             document.querySelector('.d-grid').style.display = 'none';
-
-                            // Show success animation
                             successAnimation.style.display = 'block';
-
-                            // Optional: redirect to login page after delay
                             setTimeout(function() {
                                 window.location.href = '/login';
                             }, 5000);
                         } else {
-                            // Show error toast
                             showToast(data.message, 'error');
-
-                            // Reset button
                             submitButton.disabled = false;
                             submitButton.innerHTML = '<i class="fas fa-save me-2"></i> Simpan Kata Sandi';
                         }
@@ -644,8 +578,6 @@ $apiBaseUrl = env('API_BASE_URL');
                     .catch(error => {
                         console.error('Error:', error);
                         showToast('Terjadi kesalahan. Silakan coba lagi.', 'error');
-
-                        // Reset button
                         submitButton.disabled = false;
                         submitButton.innerHTML = '<i class="fas fa-save me-2"></i> Simpan Kata Sandi';
                     });

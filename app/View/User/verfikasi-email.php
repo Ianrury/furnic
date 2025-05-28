@@ -5,17 +5,14 @@ $apiBaseUrl = env('API_BASE_URL');
 $path = $_SERVER['REQUEST_URI'];
 $segments = explode('/', trim($path, '/'));
 
-// Inisialisasi variabel
 $token = null;
 $verified = false;
 $error = null;
 
-// Hanya ambil token jika URL mengandung 3 segmen (misal: /user/verifikasi/{token})
 if (count($segments) >= 3 && $segments[0] === 'user' && $segments[1] === 'verifikasi') {
     $token = $segments[2];
 }
 
-// Jika token ada, lakukan verifikasi dengan API
 if (!empty($token)) {
     $apiEndpoint = $apiBaseUrl . "/user/verifikasi/" . $token;
 
@@ -130,11 +127,10 @@ if (!empty($token)) {
         }
     </style>
     <script>
-        // Script untuk redirect ke halaman login jika verifikasi berhasil
         function redirectToLogin() {
             setTimeout(function() {
                 window.location.href = "/login";
-            }, 3000); // Redirect setelah 3 detik
+            }, 3000);
         }
     </script>
 </head>

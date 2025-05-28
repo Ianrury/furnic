@@ -157,7 +157,6 @@ $apiBaseUrl = env('API_BASE_URL');
         <div id="toastContainer" class="position-fixed top-0 end-0 p-3" style="z-index: 9999;">
             <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
                 <div class="toast-header">
-                    <!-- <img src="..." class="rounded me-2" alt="..."> -->
                     <strong class="me-auto">Bootstrap</strong>
                     <small>11 mins ago</small>
                     <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
@@ -230,17 +229,14 @@ $apiBaseUrl = env('API_BASE_URL');
             const confirm = $('#password_confirmation').val();
             const formatRegex = /^[a-zA-Z0-9]{2,8}$/;
 
-            // Cek apakah password memiliki kombinasi huruf dan angka
             const hasLetter = /[a-zA-Z]/.test(password);
             const hasNumber = /[0-9]/.test(password);
 
-            // Validasi format password
             if (password) {
                 if (!formatRegex.test(password)) {
                     $('#password').addClass('is-invalid');
                     $('#error-password').text('Password harus 2-8 karakter, hanya huruf dan angka.');
                 } else if (!(hasLetter && hasNumber)) {
-                    // Pastikan password mengandung minimal satu huruf dan satu angka
                     $('#password').addClass('is-invalid');
                     $('#error-password').text('Password harus mengandung minimal satu huruf dan satu angka.');
                 } else {
@@ -249,7 +245,6 @@ $apiBaseUrl = env('API_BASE_URL');
                 }
             }
 
-            // Validasi konfirmasi password
             if (confirm && password !== confirm) {
                 $('#password_confirmation').addClass('is-invalid');
                 $('#error-password_confirmation').text('Password tidak sama');
@@ -271,7 +266,6 @@ $apiBaseUrl = env('API_BASE_URL');
             const password = $('#password').val();
             const confirm = $('#password_confirmation').val();
 
-            // Validasi minimal 8 karakter
             if (password.length < 8) {
                 $('#password').addClass('is-invalid');
                 $('#error-password').text('Password minimal 8 karakter.');
@@ -279,14 +273,12 @@ $apiBaseUrl = env('API_BASE_URL');
                 return;
             }
 
-            // Hitung kombinasi jenis karakter
             let combinationCount = 0;
-            if (/[a-z]/.test(password)) combinationCount++; // huruf kecil
-            if (/[A-Z]/.test(password)) combinationCount++; // huruf besar
-            if (/[0-9]/.test(password)) combinationCount++; // angka
-            if (/[^a-zA-Z0-9]/.test(password)) combinationCount++; // simbol
+            if (/[a-z]/.test(password)) combinationCount++; 
+            if (/[A-Z]/.test(password)) combinationCount++; 
+            if (/[0-9]/.test(password)) combinationCount++; 
+            if (/[^a-zA-Z0-9]/.test(password)) combinationCount++; 
 
-            // Validasi kombinasi minimal 2 jenis
             if (combinationCount < 2) {
                 $('#password').addClass('is-invalid');
                 $('#error-password').text('Password harus mengandung minimal 2 jenis karakter (huruf besar, huruf kecil, angka, simbol).');
@@ -294,7 +286,6 @@ $apiBaseUrl = env('API_BASE_URL');
                 return;
             }
 
-            // Validasi password confirmation
             if (password !== confirm) {
                 $('#password_confirmation').addClass('is-invalid');
                 $('#error-password_confirmation').text('Password tidak sama.');
@@ -302,7 +293,6 @@ $apiBaseUrl = env('API_BASE_URL');
                 return;
             }
 
-            // Jika validasi lolos, lanjut submit
             $('#btnSubmit').attr('disabled', true);
             $('#btnSpinner').removeClass('d-none');
 

@@ -60,7 +60,7 @@
                                 <ul class="footer-list" style="font-size: 11px;">
                                     <li><a href="/product/hasil?search=Bedroom">Bedroom</a></li>
                                     <li><a href="/product/hasil?search=Office">Office</a></li>
-                                    <li><a href="/product/hasil?search=Living ">Living Room</a></li>
+                                    <li><a href="/product/hasil?search=Living">Living Room</a></li>
                                     <li><a href="/product/hasil?search=Bathroom">Bathroom</a></li>
                                     <li><a href="/product/hasil?search=Decoration">Decoration</a></li>
                                     <li><a href="/product/hasil?search=Kitchen">Kitchen</a></li>

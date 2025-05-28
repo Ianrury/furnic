@@ -644,7 +644,6 @@ $apiBaseUrl = env('API_BASE_URL');
                             <label for="select2-kabupaten" class="form-label">Kabupaten <span class="required">*</span></label>
                             <select class="form-control" id="select2-kabupaten">
                                 <option disabled selected>Pilih Kabupaten</option>
-                                <!-- Options will be loaded dynamically -->
                             </select>
                         </div>
 
@@ -652,7 +651,6 @@ $apiBaseUrl = env('API_BASE_URL');
                             <label for="select2-kecamatan" class="form-label">Kecamatan <span class="required">*</span></label>
                             <select class="form-control" id="select2-kecamatan">
                                 <option disabled selected>Pilih Kecamatan</option>
-                                <!-- Options will be loaded dynamically -->
                             </select>
                         </div>
 
@@ -660,7 +658,6 @@ $apiBaseUrl = env('API_BASE_URL');
                             <label for="select2-kelurahan" class="form-label">Kelurahan <span class="required">*</span></label>
                             <select class="form-control" id="select2-kelurahan">
                                 <option disabled selected>Pilih Kelurahan</option>
-                                <!-- Options will be loaded dynamically -->
                             </select>
                         </div>
 
@@ -705,6 +702,13 @@ $apiBaseUrl = env('API_BASE_URL');
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 
+    <script>
+        const tokenlogin = localStorage.getItem('auth_token');
+        if (!tokenlogin) {
+            window.location.href = '/login';
+            return;
+        }
+    </script>
 
     <script>
         $(document).ready(function() {
@@ -815,7 +819,6 @@ $apiBaseUrl = env('API_BASE_URL');
 
                         alamatItem.innerHTML = `
             <div class="card alamat-item h-100">
-                ${alamat.utama ? '<span class="label-utama">Utama</span>' : ''}
                 <div class="row g-0">
                     <div class="col-12">
                         <div class="card-body">

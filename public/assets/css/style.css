@@ -10142,6 +10142,13 @@ label {
   text-decoration: none;
 }
 
+@media (max-width: 930px) {
+    .hide-on-930 {
+        display: none !important;
+    }
+}
+
+
 .breadcrumb-item.active {
   color: #2b4779;
   text-decoration: underline;
